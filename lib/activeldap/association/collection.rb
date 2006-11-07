@@ -45,26 +45,6 @@ module ActiveLDAP
         entry[@options[:foreign_key_name]] = @owner[@options[:local_key_name]]
         entry.save
       end
-
-      def load_target
-        foreign_key_name = @options[:foreign_key_name]
-        filter = @owner[@options[:local_key_name], false].collect do |value|
-          key = val = nil
-          if foreign_key_name == "dn"
-            key, val = value.split(",")[0].split("=") unless value.empty?
-          else
-            key, val = foreign_key_name, value
-          end
-          [key, val]
-        end.reject do |key, val|
-          key.nil? or val.nil?
-        end.collect do |key, val|
-          "(#{key}=#{val})"
-        end.join
-        klass = @owner.class.has_many_association(@options[:association_id])
-        klass = @owner.class.module_eval("#{klass}") if klass.is_a?(String)
-        @target = klass.find(:all, :filter => "(|#{filter})")
-      end
     end
   end
 end

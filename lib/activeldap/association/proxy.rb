@@ -1,9 +1,22 @@
 module ActiveLDAP
   module Association
     class Proxy
+      alias_method :proxy_respond_to?, :respond_to?
+      alias_method :proxy_extend, :extend
+
       def initialize(owner, options)
         @owner = owner
         @options = options
+        reset
+      end
+
+      def respond_to?(symbol, include_priv=false)
+        proxy_respond_to?(symbol, include_priv) or
+          (load_target && @target.respond_to?(symbol, include_priv))
+      end
+
+      def ===(other)
+        load_target and other === @target
       end
 
       def reset
@@ -34,14 +47,36 @@ module ActiveLDAP
       end
 
       private
+      def method_missing(method, *args, &block)
+        load_target
+        @target.send(method, *args, &block)
+      end
+
       def foreign_class
-        klass = @owner.class.has_many_association(@options[:association_id])
+        klass = @owner.class.associated_class(@options[:association_id])
         klass = @owner.class.module_eval("#{klass}") if klass.is_a?(String)
         klass
       end
 
+      def have_foreign_key?
+        false
+      end
+
       def primary_key
         @options[:primary_key_name] || foreign_class.dn_attribute
+      end
+
+      def load_target
+        if !@owner.new_entry? or have_foreign_key?
+          begin
+            @target = find_target unless loaded?
+          rescue ActiveLDAP::EntryNotFound
+            reset
+          end
+        end
+
+        loaded if target
+        target
       end
     end
   end

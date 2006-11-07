@@ -171,12 +171,16 @@ module AlTestUtils
     end
 
     def populate_associations
+      @user_class.belongs_to :primary_group,
+                             :foreign_key => "gidNumber",
+                             :primary_key => "gidNumber"
       @group_class.has_many :members, :wrap => "memberUid"
       @group_class.has_many :primary_members,
-                            :primary_key => "gidNumber",
-                            :foreign_key => "gidNumber"
-      @group_class.insert_has_many_association(:members, @user_class)
-      @group_class.insert_has_many_association(:primary_members, @user_class)
+                            :foreign_key => "gidNumber",
+                            :primary_key => "gidNumber"
+      @user_class.set_associated_class(:primary_group, @group_class)
+      @group_class.set_associated_class(:members, @user_class)
+      @group_class.set_associated_class(:primary_members, @user_class)
     end
   end
 

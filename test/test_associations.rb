@@ -4,6 +4,37 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to
+    make_temporary_group do |group|
+      gid_number = group.gid_number.to_i + 1
+      make_temporary_user(:gid_number => group.gid_number) do |user_in_group,|
+        make_temporary_user(:gid_number => gid_number) do |user_not_in_group,|
+          assert(user_in_group.primary_group.reload)
+          assert(user_in_group.primary_group.loaded?)
+          assert_equal(group.gid_number, user_in_group.gid_number)
+          assert_equal(group.gid_number, user_in_group.primary_group.gid_number)
+
+
+          assert(!user_not_in_group.primary_group.loaded?)
+
+          assert_equal(gid_number, user_not_in_group.gid_number.to_i)
+          assert_not_equal(group.gid_number, user_not_in_group.gid_number)
+
+          user_not_in_group.primary_group = group
+          assert(user_not_in_group.primary_group.loaded?)
+          assert(user_not_in_group.primary_group.updated?)
+          assert_equal(group.gid_number, user_not_in_group.gid_number)
+          assert_equal(group.gid_number,
+                       user_not_in_group.primary_group.gid_number)
+          assert_not_equal(gid_number, user_not_in_group.gid_number.to_i)
+
+          assert_equal(group.gid_number, user_in_group.gid_number)
+          assert_equal(group.gid_number, user_in_group.primary_group.gid_number)
+        end
+      end
+    end
+  end
+
   def test_has_many_wrap
     make_temporary_group do |group|
       gid_number1 = group.gid_number.to_i + 1

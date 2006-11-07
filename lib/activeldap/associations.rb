@@ -1,3 +1,4 @@
+require 'activeldap/association/belongs_to'
 require 'activeldap/association/has_many'
 require 'activeldap/association/has_many_wrap'
 
@@ -14,18 +15,13 @@ module ActiveLDAP
    end
 
    module ClassMethods
-     def insert_belongs_to_association(name, klass)
-       @belongs_to_associations ||= {}
-       @belongs_to_associations[name.to_s] = klass
+     def set_associated_class(name, klass)
+       @associated_classes ||= {}
+       @associated_classes[name.to_s] = klass
      end
 
-     def insert_has_many_association(name, klass)
-       @has_many_associations ||= {}
-       @has_many_associations[name.to_s] = klass
-     end
-
-     def has_many_association(name)
-       @has_many_associations[name.to_s]
+     def associated_class(name)
+       @associated_classes[name.to_s]
      end
 
      # belongs_to
@@ -38,22 +34,44 @@ module ActiveLDAP
      #  belongs_to :groups, :class_name => Group, :foreign_key => memberUid,
      #             :local_key => 'uid'
      #
-     def belongs_to(association_id, options = {})
+     def belongs_to(association_id, options={})
        klass = options[:class_name] || association_id.to_s
-       key = options[:foreign_key]  || association_id.to_s + "_id"
-       local_key = options[:local_key] || ''
-       class_eval <<-"end_eval"
-         def #{association_id}(objects = nil)
-           objects = @@config[:return_objects] if objects.nil?
-           local_key = "#{local_key}"
-           local_key = dnattr() if local_key.empty?
-           results = []
-           #{klass}.find_all(:attribute => "#{key}", :value => send(local_key.to_sym), :objects => objects).each do |o|
-             results << o
-           end
-           return results
+       foreign_key = options[:foreign_key] || association_id.to_s + "_id"
+       primary_key = options[:primary_key]
+       set_associated_class(association_id, klass)
+
+       make_association = Proc.new do |target|
+         opts = {
+           :association_id => association_id,
+           :foreign_key_name => foreign_key,
+           :primary_key_name => primary_key,
+         }
+         association = Association::BelongsTo.new(target, opts)
+       end
+
+       define_method(association_id) do
+         association = instance_variable_get("@#{association_id}")
+         unless association
+           association = make_association.call(self)
+           instance_variable_set("@#{association_id}", association)
          end
-       end_eval
+         association
+       end
+
+       define_method("#{association_id}=") do |new_value|
+         association = instance_variable_get("@#{association_id}")
+         association ||= make_association.call(self)
+
+         association.replace(new_value)
+
+         if new_value.nil?
+           instance_variable_set("@#{association_id}", nil)
+         else
+           instance_variable_set("@#{association_id}", association)
+         end
+
+         instance_variable_get("@#{association_id}")
+       end
      end
 
 
@@ -76,7 +94,7 @@ module ActiveLDAP
        klass = options[:class_name] || association_id.to_s
        foreign_key = options[:foreign_key] || association_id.to_s + "_id"
        primary_key = options[:primary_key]
-       insert_has_many_association(association_id, klass)
+       set_associated_class(association_id, klass)
 
        define_method(association_id) do
          association = instance_variable_get("@#{association_id}")

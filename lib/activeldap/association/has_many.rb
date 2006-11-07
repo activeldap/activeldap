@@ -9,7 +9,7 @@ module ActiveLDAP
         entry.save
       end
 
-      def load_target
+      def find_target
         foreign_base_key = primary_key
         filter = @owner[@options[:foreign_key_name], false].collect do |value|
           key = val = nil
@@ -24,7 +24,7 @@ module ActiveLDAP
         end.collect do |key, val|
           "(#{key}=#{val})"
         end.join
-        @target = foreign_class.find(:all, :filter => "(|#{filter})")
+        foreign_class.find(:all, :filter => "(|#{filter})")
       end
     end
   end
