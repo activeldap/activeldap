@@ -1,0 +1,41 @@
+#!/usr/bin/ruby -w 
+$: << "../lib"
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+
+(printf($stderr, "Usage:\n%s <group>\n\n", $0);exit 1) if ARGV[0].nil?
+
+require 'log4r'
+Log4r::Logger.root.level = Log4r::DEBUG
+log = Log4r::Logger.new("groupls")
+Log4r::StderrOutputter.new 'console'
+log.add('console')
+
+
+ActiveLDAP::Base.connect(:logger => log)
+group = Group.new(ARGV[0])
+exit 1 unless group.exists?
+
+printf("%s(%d): ", group.send(Group.dnattr.to_sym), group.gidNumber[0])
+
+members = []
+unless group.members.nil?
+  group.members.each do |mem|
+    if mem.exists?
+      members << "#{mem.uid}[#{mem.uidNumber}]"
+    else
+      members << "#{mem.uid}[????]"
+    end
+  end
+end
+
+unless group.primary_members.nil?
+  group.primary_members.each do |mem|
+    members << "#{mem.uid}[#{mem.uidNumber}]"
+  end
+end
+
+
+
+printf("%s\n\n", members.join(', '))

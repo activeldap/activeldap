@@ -1,0 +1,45 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+
+(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
+require 'time'
+class Time
+  def time_with_usecs
+    return self.strftime('%F %H:%M:%S') + ':' + self.usec.to_s
+  end
+end
+
+puts "Adding user #{ARGV[0]}"
+pwb = Proc.new {
+  Password.get('Password: ')
+}
+log = Log4r::Logger.new 'mylog'
+log.trace = true
+log.outputters = Log4r::Outputter.stdout
+log.level = Log4r::DEBUG
+
+pf = Log4r::PatternFormatter.new(:pattern => "[%l] (%d) %t: %m", :date_method => "time_with_usecs")
+Log4r::Outputter.stdout.formatter = pf
+
+ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb, :allow_anonymous => false, :logger => log)
+user = User.new(ARGV[0])
+user.objectClass = user.objectClass  << 'posixAccount' << 'shadowAccount'
+p user.objectClass
+user.cn = ARGV[1]
+user.uidNumber = ARGV[2]
+user.gidNumber = ARGV[2]
+user.homeDirectory = "/home/#{ARGV[0]}"
+user.objectClass = user.objectClass << 'strongAuthenticationUser'
+user.userCertificate = File.read('example.der')
+p user.objectClass
+user.validate
+user.write
+puts "success"
+exit 0
+
+

@@ -1,0 +1,27 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+
+if ARGV.size != 2
+  puts "Usage:\n#{$0} <name> <gid number>\n"
+  exit 1
+end
+
+puts "Changing group #{ARGV[0]}"
+pwb = Proc.new {
+  Password.get('Password: ')
+}
+ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb,
+                         :allow_anonymous => false)
+group = Group.new(ARGV[0])
+group.gidNumber = ARGV[1]
+p group
+group.validate
+group.write
+exit 0
+
+

@@ -1,0 +1,12 @@
+* Fix writes of ''
+* More and better unittests
+* Use LDAP::err2exception
+* Overhaul value handling in attribute_method and attribute_method=
+* Fix case sensitivity in object classes
+* Add result pagination via LDAP::Controls
+* Proper ActiveRecord duck-typing
+* Schema2 overhaul - push for integration to Ruby/LDAP
+* Add seamless delete/add when required
+  - structural objectclass change
+  - dn change
+* Figure out how to deal with Relative DNs

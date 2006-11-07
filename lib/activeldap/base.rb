@@ -1,0 +1,1443 @@
+# === activeldap - an OO-interface to LDAP objects inspired by ActiveRecord
+# Author: Will Drewry <will@alum.bu.edu>
+# License: See LICENSE and COPYING.txt
+# Copyright 2004-2006 Will Drewry <will@alum.bu.edu>
+# Some portions Copyright 2006 Google Inc
+#
+# == Summary
+# ActiveLDAP lets you read and update LDAP entries in a completely object
+# oriented fashion, even handling attributes with multiple names seamlessly.
+# It was inspired by ActiveRecord so extending it to deal with custom
+# LDAP schemas is as effortless as knowing the 'ou' of the objects, and the
+# primary key. (fix this up some)
+#
+# == Example
+#   irb> require 'activeldap'
+#   > true
+#   irb> user = ActiveLDAP::User.new("drewry")
+#   > #<ActiveLDAP::User:0x402e...
+#   irb> user.cn
+#   > "foo"
+#   irb> user.commonname
+#   > "foo"
+#   irb> user.cn = "Will Drewry"
+#   > "Will Drewry"
+#   irb> user.cn
+#   > "Will Drewry"
+#   irb> user.validate
+#   > nil
+#   irb> user.write
+#
+#
+
+require 'English'
+
+require 'log4r'
+
+module ActiveLDAP
+  # OO-interface to LDAP assuming pam/nss_ldap-style organization with
+  # Active specifics
+  # Each subclass does a ldapsearch for the matching entry.
+  # If no exact match, raise an error.
+  # If match, change all LDAP attributes in accessor attributes on the object.
+  # -- these are ACTUALLY populated from schema - see subschema.rb example
+  # -- @conn.schema2().each{|k,vs| vs.each{|v| print("#{k}: #{v}\n")}}
+  # -- extract objectClasses from match and populate
+  # Multiple entries become lists.
+  # If this isn't read-only then lists become multiple entries, etc.
+
+  class Error < StandardError
+  end
+
+  # AttributeEmpty
+  #
+  # An exception raised when a required attribute is found to be empty
+  class AttributeEmpty < Error
+  end
+
+  # ConfigurationError
+  #
+  # An exception raised when there is a problem with Base.connect arguments
+  class ConfigurationError < Error
+  end
+
+  # DeleteError
+  #
+  # An exception raised when an ActiveLDAP delete action fails
+  class DeleteError < Error
+  end
+
+  # WriteError
+  #
+  # An exception raised when an ActiveLDAP write action fails
+  class WriteError < Error
+  end
+
+  # SaveError
+  # 
+  # An exception raised when an ActiveLDAP save action failes
+  # It is a subclass of Write for API transition support
+  class SaveError < WriteError
+  end
+
+  # AuthenticationError
+  #
+  # An exception raised when user authentication fails
+  class AuthenticationError < Error
+  end
+
+  # ConnectionError
+  #
+  # An exception raised when the LDAP conenction fails
+  class ConnectionError < Error
+  end
+
+  # ObjectClassError
+  #
+  # An exception raised when an objectClass is not defined in the schema
+  class ObjectClassError < Error
+  end
+
+  # AttributeAssignmentError
+  #
+  # An exception raised when there is an issue assigning a value to
+  # an attribute
+  class AttributeAssignmentError < Error
+  end
+
+  # TimeoutError
+  #
+  # An exception raised when a connection action fails due to a timeout
+  class TimeoutError < Error
+  end
+
+  class EntryNotFound < Error
+  end
+
+  class EntryAlreadyExist < Error
+  end
+
+  class StrongAuthenticationRequired < Error
+  end
+
+  class DistinguishedNameInvalid < Error
+    attr_reader :dn
+    def initialize(dn)
+      @dn = dn
+      super("#{@dn} is invalid distinguished name (dn).")
+    end
+  end
+
+  class DistinguishedNameNotSetError < Error
+  end
+
+  class EntryNotSaved < Error
+  end
+
+  class RequiredObjectClassMissed < Error
+  end
+
+  # Base
+  #
+  # Base is the primary class which contains all of the core
+  # ActiveLDAP functionality. It is meant to only ever be subclassed
+  # by extension classes.
+  class Base
+    class << self
+      # Hide new in Base
+      private :new
+
+      @@logger = nil
+      def logger
+        @@logger
+      end
+
+      # Driver generator
+      #
+      # TODO add type checking
+      # This let's you call this method to create top-level extension object.
+      # This is really just a proof of concept and has not truly useful purpose.
+      # example: Base.create_object(:class => "user", :dnattr => "uid",
+      #                             :classes => ['top'])
+      #
+      # THIS METHOD IS DANGEROUS. INPUT IS NOT SANITIZED.
+      def create_object(config={})
+        # Just upcase the first letter of the new class name
+        str = config[:class]
+        class_name = str[0].chr.upcase + str[1..-1]
+
+        attr = config[:dnattr] # "uid"
+        prefix = config[:base] # "ou=People"
+        # [ 'top', 'posixAccount' ]
+        classes_array = config[:classes] || []
+        # [ [ :groups, {:class_name => "Group", :foreign_key => "memberUid"}] ]
+        belongs_to_array = config[:belongs_to] || []
+        # [ [ :members, {:class_name => "User", :foreign_key => "uid", :local_key => "memberUid"}] ]
+        has_many_array = config[:has_many] || []
+
+        raise TypeError, ":objectclasses must be an array" unless classes_array.respond_to? :size
+        raise TypeError, ":belongs_to must be an array" unless belongs_to_array.respond_to? :size
+        raise TypeError, ":has_many must be an array" unless has_many_array.respond_to? :size
+
+        # Build classes array
+        classes = '['
+        classes_array.map! {|x| x = "'#{x}'"}
+        classes << classes_array.join(', ')
+        classes << ']'
+
+        # Build belongs_to
+        belongs_to = []
+        if belongs_to_array.size > 0
+          belongs_to_array.each do |bt|
+            line = [ "belongs_to :#{bt[0]}" ]
+            bt[1].keys.each do |key|
+              line << ":#{key} => '#{bt[1][key]}'"
+            end
+            belongs_to << line.join(', ')
+          end
+        end
+
+        # Build has_many
+        has_many = []
+        if has_many_array.size > 0
+          has_many_array.each do |hm|
+            line = [ "has_many :#{hm[0]}" ]
+            hm[1].keys.each do |key|
+              line << ":#{key} => '#{hm[1][key]}'"
+            end
+            has_many << line.join(', ')
+          end
+        end
+
+        module_eval <<-"end_eval"
+          class ::#{class_name} < ActiveLDAP::Base
+            ldap_mapping :dnattr => "#{attr}", :prefix => "#{prefix}", :classes => #{classes}
+            #{belongs_to.join("\n")}
+            #{has_many.join("\n")}
+          end
+        end_eval
+      end
+
+      # Connect and bind to LDAP creating a class variable for use by
+      #  all ActiveLDAP objects.
+      # 
+      # == +config+
+      # +config+ must be a hash that may contain any of the following fields:
+      # :user, :password_block, :logger, :host, :port, :base, :bind_format,
+      # :try_sasl, :allow_anonymous
+      # :user specifies the username to bind with.
+      # :bind_format specifies the string to substitute the username into on
+      #   bind.  e.g. uid=%s,ou=People,dc=dataspill,dc=org. Overrides
+      #   @@bind_format.
+      # :password_block specifies a Proc object that will yield a String to
+      #   be used as the password when called.
+      # :logger specifies a preconfigured Log4r::Logger to be used for all
+      #   logging
+      # :host sets the LDAP server hostname
+      # :port sets the LDAP server port
+      # :base overwrites Base.base - this affects EVERYTHING
+      # :try_sasl indicates that a SASL bind should be attempted when binding
+      #   to the server (default: false)
+      # :allow_anonymous indicates that a true anonymous bind is allowed when
+      #   trying to bind to the server (default: true)
+      # :retries - indicates the number of attempts to reconnect that will be
+      #   undertaken when a stale connection occurs. -1 means infinite.
+      # :sasl_quiet - if true, sets @sasl_quiet on the Ruby/LDAP connection
+      # :method - whether to use :ssl, :tls, or :plain (unencrypted)
+      # :retry_wait - seconds to wait before retrying a connection
+      # :ldap_scope - dictates how to find objects. ONELEVEL by default to
+      #   avoid dn_attr collisions across OUs. Think before changing.
+      # :return_objects - indicates whether find/find_all will return objects
+      #   or just the distinguished name attribute value of the matches
+      # :timeout - time in seconds - defaults to disabled. This CAN interrupt
+      #   search() requests. Be warned.
+      # :retry_on_timeout - whether to reconnect when timeouts occur. Defaults
+      #   to true
+      # See lib/configuration.rb for defaults for each option
+      def connect(config={})
+        if config[:logger]
+          config[:logger].warn {'Base.connect is deprecated. ' +
+                                'Please use Base.establish_connection'}
+        end
+        establish_connection(config)
+      end
+      def establish_connection(config={})
+        super
+        ensure_logger
+        connection.connect
+        # Make irb users happy with a 'true'
+        true
+      end # establish_connection
+
+      # Return the schema object
+      def schema
+        connection.schema
+      end
+
+      def search(options={}, &block)
+        attr = options[:attribute]
+        value = options[:value] || '*'
+        filter = options[:filter]
+        prefix = options[:prefix]
+
+        value = value.first if value.is_a?(Array) and value.first.size == 1
+        if filter.nil? and !value.is_a?(String)
+          raise ArgumentError, "Search value must be a String"
+        end
+
+        _attr, value, _prefix = split_search_value(value)
+        attr ||= _attr || dn_attribute || "objectClass"
+        prefix ||= _prefix
+        filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
+        connection.search(:base => [prefix, base].compact.join(","),
+                          :scope => options[:scope] || ldap_scope,
+                          :filter => filter,
+                          :limit => options[:limit],
+                          &block)
+      end
+
+      # This class function is used to setup all mappings between the subclass
+      # and ldap for use in activeldap
+      #
+      # Example:
+      #   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', 
+      #                :classes => ['top', 'posixAccount'],
+      #                :scope => :sub,
+      #                :parent => String
+      def ldap_mapping(options={})
+        dn_attribute = options[:dn_attribute] || options[:dnattr] || 'cn'
+        prefix = options[:prefix]
+        non_anonymous_class = ancestors.find {|x| !x.name.empty?}
+        prefix ||= "ou=#{non_anonymous_class.name.split('::').last}"
+        classes = options[:classes]
+        scope = options[:scope]
+        # When used, instantiates parent objects from the "parent dn". This
+        # can be a String or a real ActiveLDAP class. This just adds the helper 
+        # Base#parent.
+        parent = options[:parent_class] || nil
+
+        @dn_attribute = dn_attribute
+        @prefix = prefix
+        @ldap_scope = scope
+        @required_classes = classes
+        @parent = parent
+
+        public_class_method :new
+        public_class_method :dn_attribute, :dnattr
+
+        if parent
+          class_eval(<<-EOC, __FILE__, __LINE__ + 1)
+          def parent
+            parent_class = self.class.instance_variable_get("@parent")
+            if parent_class.is_a?(String)
+              parent_class = eval(parent_class, __FILE__, __LINE__)
+            end
+            parent_class.new(base)
+          end
+          EOC
+        end
+      end
+
+      # Base.base
+      # 
+      # This method when included into Base provides
+      # an inheritable, overwritable configuration setting
+      #
+      # This should be a string with the base of the
+      # ldap server such as 'dc=example,dc=com', and
+      # it should be overwritten by including
+      # configuration.rb into this class.
+      # When subclassing, the specified prefix will be concatenated.
+      def base
+        [@prefix, @base || superclass.base].find_all do |component|
+          component and !component.empty?
+        end.join(",")
+      end
+      @prefix = nil
+      @base = ""
+
+      # Base.required_classes
+      #
+      # This method when included into Base provides
+      # an inheritable, overwritable configuration setting
+      #
+      # The value should be the minimum required objectClasses
+      # to make an object in the LDAP server, or an empty array [].
+      # This should be overwritten by configuration.rb.
+      # Note that subclassing does not cause concatenation of
+      # arrays to occurs.
+      def required_classes
+        ancestors.each do |ancestor|
+          classes = ancestor.instance_variable_get("@required_classes")
+          return classes if classes
+        end
+        nil
+      end
+      @required_classes = ['top']
+
+      # Base.ldap_scope
+      #
+      # This method when included into Base provides
+      # an inheritable, overwritable configuration setting
+      #
+      # This value should be the default LDAP scope behavior
+      # desired.
+      def ldap_scope
+        ancestors.each do |ancestor|
+          scope = ancestor.instance_variable_get("@ldap_scope")
+          return scope if scope
+        end
+        nil
+      end
+      @ldap_scope = :sub
+
+      def dump(options={})
+        ldifs = []
+        options = {:base => base, :scope => ldap_scope}.merge(options)
+        connection.search(options).each do |dn, attributes|
+          ldifs << connection.to_ldif(dn, attributes)
+        end
+        ldifs.join("\n")
+      end
+
+      def load(ldifs)
+        connection.load(ldifs)
+      end
+
+      def destroy(targets, options={})
+        targets = [targets] unless targets.is_a?(Array)
+        targets.each do |target|
+          find(target, options).destroy
+        end
+      end
+
+      def destroy_all(filter=nil, options={})
+        targets = []
+        if filter.is_a?(Hash)
+          options = options.merge(filter)
+          filter = nil
+        end
+        options = options.merge(:filter => filter) if filter
+        find(:all, options).sort_by do |target|
+          target.dn.reverse
+        end.reverse.each do |target|
+          target.destroy
+        end
+      end
+
+      def delete(targets, options={})
+        connection.delete(targets, options)
+      end
+
+      def delete_all(filter=nil, options={})
+        options = {:base => base, :scope => ldap_scope}.merge(options)
+        options = options.merge(:filter => filter) if filter
+        targets = connection.search(options).collect do |dn, attributes|
+          dn
+        end.sort_by do |dn|
+          dn.reverse
+        end.reverse
+
+        connection.delete(targets)
+      end
+
+      def add(dn, entries, options={})
+        connection.add(dn, entries, options)
+      end
+
+      def modify(dn, entries, options={})
+        connection.modify(dn, entries, options)
+      end
+
+      def to_rubyish_name(name)
+        return name if name.empty?
+        name[0,1].downcase + name[1..-1].gsub(/([A-Z]+)/) do |s|
+          if s.size > 1
+            "_#{s[0..-2]}_#{s[-1, 1].downcase}"
+          else
+            "_#{s.downcase}"
+          end
+        end
+      end
+
+      def to_class_name(name)
+        name.gsub(/(^[a-z]|_[a-z])/) {|s| s.upcase}
+      end
+
+      # find
+      #
+      # Finds the first match for value where |value| is the value of some 
+      # |field|, or the wildcard match. This is only useful for derived classes.
+      # usage: Subclass.find(:attribute => "cn", :value => "some*val")
+      #        Subclass.find('some*val')
+      def find(*args)
+        options = extract_options_from_args!(args)
+        case args.first
+        when :first
+          find_initial(options)
+        when :all
+          find_every(options)
+        else
+          find_from_dns(args, options)
+        end
+      end
+
+      # find_all
+      #
+      # Use find(:all).
+      #
+      # Finds all matches for value where |value| is the value of some
+      # |field|, or the wildcard match. This is only useful
+      # for derived classes.
+      def find_all(*args)
+        find(:all, *args)
+      end
+
+      def exists?(dn, options={})
+        begin
+          not find(dn, options).nil?
+        rescue EntryNotFound
+          false
+        end
+      end
+
+      def update(dn, attributes, options={})
+        if dn.is_a?(Array)
+          i = -1
+          dns = dn
+          dns.collect do |dn|
+            i += 1
+            update(dn, attributes[i], options)
+          end
+        else
+          object = find(dn, options)
+          object.update_attributes(attributes)
+          object
+        end
+      end
+
+      def update_all(attributes, filter=nil, options={})
+        search_options = options
+        if filter
+          if /[=\(\)&\|]/ =~ filter
+            search_options = search_options.merge(:filter => filter)
+          else
+            search_options = search_options.merge(:value => filter)
+          end
+        end
+        targets = search(search_options).collect do |dn, attrs|
+          dn
+        end
+
+        entries = attributes.collect do |name, value|
+          [:replace, *normalize_attribute(name, value)]
+        end
+        targets.each do |dn|
+          connection.modify(dn, entries, options)
+        end
+      end
+
+      def base_class
+        if self == Base or superclass == Base
+          self
+        else
+          superclass.base_class
+        end
+      end
+
+      private
+      # Base.dn_attribute
+      #
+      # This is a placeholder for the class method that will
+      # be overridden on calling ldap_mapping in a subclass.
+      # Using a class method allows for clean inheritance from
+      # classes that already have a ldap_mapping.
+      def dn_attribute
+        ancestors.each do |ancestor|
+          name = ancestor.instance_variable_get("@dn_attribute")
+          return name if name
+        end
+        nil
+      end
+      alias_method :dnattr, :dn_attribute
+      @dn_attribute = nil
+
+      def extract_options_from_args!(args)
+        args.last.is_a?(Hash) ? args.pop : {}
+      end
+
+      def find_initial(options)
+        find_every(options.merge(:limit => 1)).first
+      end
+
+      def find_every(options)
+        search(options).collect do |dn, attrs|
+          instantiate(dn, attrs)
+        end
+      end
+
+      def find_from_dns(dns, options)
+        expects_array = dns.first.is_a?(Array)
+        return [] if expects_array and dns.first.empty?
+
+        dns = dns.flatten.compact.uniq
+
+        case dns.size
+        when 0
+          raise EntryNotFound, "Couldn't find #{name} without a DN"
+        when 1
+          result = find_one(dns.first, options)
+          expects_array ? [result] : result
+        else
+          find_some(dns, options)
+        end
+      end
+
+      def find_one(dn, options)
+        attr, value, prefix = split_search_value(dn)
+        filter = "(#{attr || dn_attribute}=#{escape_filter_value(value, true)})"
+        filter = "(&#{filter}#{options[:filter]})" if options[:filter]
+        options = {:prefix => prefix}.merge(options.merge(:filter => filter))
+        result = find_initial(options)
+        if result
+          result
+        else
+          message = "Couldn't find #{name} with DN=#{dn}"
+          message << " #{options[:filter]}" if options[:filter]
+          raise EntryNotFound, message
+        end
+      end
+
+      def find_some(dns, options)
+        dn_filters = dns.collect do |dn|
+          attr, value, prefix = split_search_value(dn)
+          attr ||= dn_attribute
+          filter = "(#{attr}=#{escape_filter_value(value, true)})"
+          if prefix
+            filter = "(&#{filter}(dn=*,#{escape_filter_value(prefix)},#{base}))"
+          end
+          filter
+        end
+        filter = "(|#{dn_filters.join('')})"
+        filter = "(&#{filter}#{options[:filter]})" if options[:filter]
+        result = find_every(options.merge(:filter => filter))
+        if result.size == dns.size
+          result
+        else
+          message = "Couldn't find all #{name} with DNs (#{dns.join(', ')})"
+          message << " #{options[:filter]}"if options[:filter]
+          raise EntryNotFound, message
+        end
+      end
+
+      def split_search_value(value)
+        value, prefix = value.split(/,/, 2)
+        attr, value = value.split(/=/, 2)
+        attr, value = value, attr if value.nil?
+        prefix = nil if prefix == base
+        prefix = prefix.sub(/,#{Regexp.escape(base)}$/, '') if prefix
+        [attr, value, prefix]
+      end
+
+      def escape_filter_value(value, without_asterisk=false)
+        value.gsub(/[\*\(\)\\\0]/) do |x|
+          if without_asterisk and x == "*"
+            x
+          else
+            "\\%02x" % x[0]
+          end
+        end
+      end
+
+      def ensure_logger
+        @@logger ||= configuration[:logger]
+        # Setup default logger to console
+        if @@logger.nil?
+          @@logger = Log4r::Logger.new('activeldap')
+          @@logger.level = Log4r::OFF
+          Log4r::StderrOutputter.new 'console'
+          @@logger.add('console')
+        end
+        configuration[:logger] ||= @@logger
+      end
+
+      def init_configuration(config)
+        configuration = default_configuration
+        config.each do |key, value|
+          case key
+          when :base
+            # Scrub before inserting
+            base = value.gsub(/['}{#]/, '')
+            @base = base
+          when :ldap_scope
+            if value.is_a?(Fixnum)
+              backward_compatibility_scope_map = {
+                0 => :base,
+                1 => :one,
+                2 => :sub,
+              }
+              unless backward_compatibility_scope_map.has_key?(value)
+                raise ConfigurationError, 'invalid :ldap_scope value'
+              end
+              value = backward_compatibility_scope_map[value]
+            end
+            unless value.is_a?(Symbol)
+              raise ConfigurationError, ':ldap_scope must be a Symbol'
+            end
+            @ldap_scope = base
+          else
+            configuration[key] = value
+          end
+        end
+        @configuration = configuration
+      end
+
+      def configuration
+        @configuration
+      end
+
+      def instantiate(dn, attributes)
+        if self.class == Class
+          klass = self.ancestors[0].to_s.split(':').last
+          real_klass = self.ancestors[0]
+        else
+          klass = self.class.to_s.split(':').last
+          real_klass = self.class
+        end
+
+        obj = real_klass.allocate
+        obj.instance_eval do
+          initialize_by_ldap_data(attributes)
+        end
+        suffix = dn.split(/,/, 2)[1]
+        prefix = suffix.sub(/#{Regexp.escape(base)}$/, '').chomp(',')
+        obj.instance_variable_set("@base", prefix) unless prefix.empty?
+        obj
+      end
+
+      def singleton_class
+        class << self
+          self
+        end
+      end
+    end
+
+    ### All instance methods, etc
+
+    # new
+    #
+    # Creates a new instance of Base initializing all class and all
+    # initialization.  Defines local defaults. See examples If multiple values
+    # exist for dn_attribute, the first one put here will be authoritative 
+    # TODO: Add # support for relative distinguished names 
+    # val can be a dn attribute value, a full DN, or a LDAP::Entry.  The use
+    # with a LDAP::Entry is primarily meant for internal use by find and
+    # find_all.
+    #
+    def initialize(attributes=nil)
+      init_base
+      @new_entry = true
+      apply_objectclass(required_classes)
+      if attributes.is_a?(String) or
+          (attributes.is_a?(Array) and
+           attributes.collect {|attr| attr.class} == [String])
+        attributes = {dn_attribute => attributes}
+      end
+      self.attributes = attributes unless attributes.nil?
+      yield self if block_given?
+    end
+
+    def may
+      ensure_apply_object_class
+      @may
+    end
+
+    def must
+      ensure_apply_object_class
+      @must
+    end
+
+    # attributes
+    #
+    # Return attribute methods so that a program can determine available
+    # attributes dynamically without schema awareness
+    def attribute_names
+      @@logger.debug {"stub: attribute_names called"}
+      ensure_apply_object_class
+      return @attr_methods.keys
+    end
+
+    def attribute_present?(name)
+      values = get_attribute(name, false)
+      !values.empty? or values.any? {|x| not (x and x.empty?)}
+    end
+
+    # exists?
+    #
+    # Return whether the entry exists in LDAP or not
+    def exists?
+      @@logger.debug {"stub: exists? called"}
+      not new_entry?
+    end
+
+    def new_entry?
+      @new_entry
+    end
+
+    # dn
+    #
+    # Return the authoritative dn
+    def dn
+      @@logger.debug {"stub: dn called"}
+      dn_value = id
+      if dn_value.nil?
+        raise DistinguishedNameNotSetError.new,
+                "#{dn_attribute} value of #{self} doesn't set"
+      end
+      "#{dn_attribute}=#{dn_value},#{base}"
+    end
+
+    def id
+      get_attribute(dn_attribute, true)
+    end
+
+    def dn=(value)
+      set_attribute(dn_attribute, value)
+    end
+
+    # validate
+    #
+    # Basic validation:
+    # - Verify that every 'MUST' specified in the schema has a value defined
+    # - Enforcement of undefined attributes is handled in the objectClass= method
+    # Must call enforce_types() first before enforcement can be guaranteed
+    def validate
+      @@logger.debug {"stub: validate called"}
+      # Clean up attr values, etc
+      enforce_types
+
+      # Validate objectclass settings
+      @data['objectClass'].each do |klass|
+        unless klass.class == String
+          raise TypeError, "Value in objectClass array is not a String. " +
+                           "(#{klass.class}:#{klass.inspect})"
+        end
+        unless schema.exist_name?("objectClasses", klass)
+          raise ObjectClassError, "objectClass '#{klass}' unknown to " +
+                                  "LDAP server."
+        end
+      end
+
+      # make sure this doesn't drop any of the required objectclasses
+      required_classes().each do |oc|
+        unless @data['objectClass'].member? oc.to_s
+          raise ObjectClassError, "'#{oc}' must be a defined objectClass " +
+                                  "for class '#{self.class}' as set in the" +
+                                  " ldap_mapping"
+        end
+      end
+
+      # Make sure all MUST attributes have a value
+      @data['objectClass'].each do |objc|
+        @must.each do |req_attr|
+          # Downcase to ensure we catch schema problems
+          deref = to_real_attribute_name(req_attr)
+          # Set default if it wasn't yet set.
+          @data[deref] = [] if @data[deref].nil?
+          # Check for missing requirements.
+          if @data[deref].empty?
+            aliases = schema.attribute_aliases(req_attr).join(', ')
+            raise AttributeEmpty,
+              "objectClass '#{objc}' requires attribute '#{aliases}'"
+          end
+        end
+      end
+      @@logger.debug {"stub: validate finished"}
+    end
+
+    # destroy
+    #
+    # Delete this entry from LDAP
+    def destroy
+      @@logger.debug {"stub: delete called"}
+      begin
+        self.class.delete(dn)
+        @new_entry = true
+      rescue Error
+        raise DeleteError.new("Failed to delete LDAP entry: '#{dn}'")
+      end
+    end
+
+    def write
+      @@logger.warn {'Base#write is deprecated. Please use Base#Save'}
+      save
+    end
+
+    # save
+    #
+    # Save and validate this object into LDAP
+    # either adding or replacing attributes
+    # TODO: Relative DN support
+    def save
+      save_internal
+      true
+    rescue SaveError, AttributeEmpty
+      false
+    end
+
+    def save!
+      save_internal
+    rescue SaveError, AttributeEmpty
+      raise EntryNotSaved, "entry #{dn} isn't saved: #{$!.message}(#{$!.class})"
+    end
+
+    # method_missing
+    #
+    # If a given method matches an attribute or an attribute alias
+    # then call the appropriate method.
+    # TODO: Determine if it would be better to define each allowed method
+    #       using class_eval instead of using method_missing.  This would
+    #       give tab completion in irb.
+    def method_missing(name, *args, &block)
+      @@logger.debug {"stub: called method_missing" +
+                      "(#{name.inspect}, #{args.inspect})"}
+      ensure_apply_object_class
+
+      key = name.to_s
+      case key
+      when /=$/
+        real_key = $PREMATCH
+        @@logger.debug {"method_missing: have_attribute? #{real_key}"}
+        if have_attribute?(real_key, ['objectClass'])
+          if args.size != 1
+            raise ArgumentError,
+                    "wrong number of arguments (#{args.size} for 1)"
+          end
+          @@logger.debug {"method_missing: calling set_attribute" +
+                          "(#{real_key}, #{args.inspect})"}
+          return set_attribute(real_key, *args, &block)
+        end
+      when /(?:(_before_type_cast)|(\?))?$/
+        real_key = $PREMATCH
+        before_type_cast = !$1.nil?
+        query = !$2.nil?
+        @@logger.debug {"method_missing: have_attribute? #{real_key}"}
+        if have_attribute?(real_key, ['objectClass'])
+          if args.size > 1
+            raise ArgumentError,
+              "wrong number of arguments (#{args.size} for 1)"
+          end
+          if before_type_cast
+            return get_attribute_before_type_cast(real_key, *args)
+          elsif query
+            return get_attribute_as_query(real_key, *args)
+          else
+            return get_attribute(real_key, *args)
+          end
+        end
+      end
+      super
+    end
+
+    # Add available attributes to the methods
+    def methods(inherited_too=true)
+      ensure_apply_object_class
+      target_names = @attr_methods.keys + @attr_aliases.keys - ['objectClass']
+      super + target_names.uniq.collect do |x|
+        [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
+      end.flatten
+    end
+
+    def respond_to?(name, include_priv=false)
+      have_attribute?(name.to_s) or
+        (/(?:=|\?|_before_type_cast)$/ =~ name.to_s and
+         have_attribute?($PREMATCH)) or
+        super
+    end
+
+    # Updates a given attribute and saves immediately
+    def update_attribute(name, value)
+      set_attribute(name, value) if have_attribute?(name)
+      save
+    end
+
+    # This performs a bulk update of attributes and immediately
+    # calls #save.
+    def update_attributes(attrs)
+      self.attributes = attrs
+      save
+    end
+
+    # This returns the key value pairs in @data with all values
+    # cloned
+    def attributes
+      Marshal.load(Marshal.dump(@data))
+    end
+
+    # This allows a bulk update to the attributes of a record
+    # without forcing an immediate save or validation.
+    #
+    # It is unwise to attempt objectClass updates this way.
+    # Also be sure to only pass in key-value pairs of your choosing.
+    # Do not let URL/form hackers supply the keys.
+    def attributes=(hash_or_assoc)
+      targets = remove_attributes_protected_from_mass_assignment(hash_or_assoc)
+      targets.each do |key, value|
+        set_attribute(key, value) if have_attribute?(key)
+      end
+    end
+
+    def to_ldif
+      connection.to_ldif(dn, normalize_data(@data))
+    end
+
+    def to_xml(options={})
+      root = options[:root] || self.class.to_rubyish_name(self.class.name)
+      result = "<#{root}>\n"
+      result << "  <dn>#{dn}</dn>\n"
+      normalize_data(@data).sort_by {|key, values| key}.each do |key, values|
+        targets = []
+        values.each do |value|
+          if value.is_a?(Hash)
+            value.each do |option, real_value|
+              targets << [real_value, " #{option}=\"true\""]
+            end
+          else
+            targets << [value]
+          end
+        end
+        targets.sort_by {|value, attr| value}.each do |value, attr|
+          result << "  <#{key}#{attr}>#{value}</#{key}>\n"
+        end
+      end
+      result << "</#{root}>\n"
+      result
+    end
+
+    def have_attribute?(name, except=[])
+      real_name = to_real_attribute_name(name)
+      real_name and !except.include?(real_name)
+    end
+    alias_method :has_attribute?, :have_attribute?
+
+    def reload
+      ldap_data = self.class.find(dn).instance_variable_get("@ldap_data")
+      @ldap_data.update(ldap_data)
+      self.attributes = ldap_data
+      self
+    end
+
+    def [](name, not_array=true)
+      get_attribute(name, not_array)
+    end
+
+    def []=(name, value)
+      set_attribute(name, value)
+    end
+
+    private
+    def init_base
+      check_configuration
+      init_instance_variables
+    end
+
+    def initialize_by_ldap_data(attributes)
+      init_base
+      @new_entry = false
+      @ldap_data = attributes
+      apply_objectclass(@ldap_data['objectClass'])
+      self.attributes = attributes
+      yield self if block_given?
+    end
+
+    def to_real_attribute_name(name)
+      ensure_apply_object_class
+      name = name.to_s
+      @attr_methods[name] ||
+        @attr_aliases[self.class.normalize_attribute_name(name)] ||
+        @attr_aliases[self.class.to_rubyish_name(name)]
+    end
+
+    def ensure_apply_object_class
+      current_object_class = @data['objectClass']
+      if current_object_class != @last_oc
+        apply_objectclass(current_object_class)
+      end
+    end
+
+    def init_instance_variables
+      @data = {} # where the r/w entry data is stored
+      @ldap_data = {} # original ldap entry data
+      @attr_methods = {} # list of valid method calls for attributes used for
+                         # dereferencing
+      @attr_aliases = {} # aliases of @attr_methods
+      @last_oc = false # for use in other methods for "caching"
+      @base = nil
+    end
+
+    # enforce_types
+    #
+    # enforce_types applies your changes without attempting to write to LDAP.
+    # This means that if you set userCertificate to somebinary value, it will
+    # wrap it up correctly.
+    def enforce_types
+      @@logger.debug {"stub: enforce_types called"}
+      ensure_apply_object_class
+      # Enforce attribute value formatting
+      @data.keys.each do |key|
+        @data[key] = self.class.normalize_attribute(key, @data[key])[1]
+      end
+      @@logger.debug {"stub: enforce_types done"}
+      return true
+    end
+
+    # apply_objectclass
+    #
+    # objectClass= special case for updating appropriately
+    # This updates the objectClass entry in @data. It also
+    # updating all required and allowed attributes while
+    # removing defined attributes that are no longer valid
+    # given the new objectclasses.
+    def apply_objectclass(val)
+      @@logger.debug {"stub: objectClass=(#{val.inspect}) called"}
+      new_oc = val
+      new_oc = [val] if new_oc.class != Array
+      return new_oc if @last_oc == new_oc
+
+      # Store for caching purposes
+      @last_oc = new_oc.dup
+
+      # Set the actual objectClass data
+      define_attribute_methods('objectClass')
+      @data['objectClass'] = new_oc.uniq
+
+      # Build |data| from schema
+      # clear attr_method mapping first
+      @attr_methods = {}
+      @attr_aliases = {}
+      @must = []
+      @may = []
+      new_oc.each do |objc|
+        # get all attributes for the class
+        attributes = schema.class_attributes(objc.to_s)
+        @must += attributes[:must]
+        @may += attributes[:may]
+      end
+      @must.uniq!
+      @may.uniq!
+      (@must+@may).each do |attr|
+        # Update attr_method with appropriate
+        define_attribute_methods(attr)
+      end
+    end
+
+    def base
+      @@logger.debug {"stub: called base"}
+      [@base, self.class.base].compact.join(",")
+    end
+
+    # ldap_scope
+    #
+    # Returns the value of self.class.ldap_scope
+    # This is just syntactic sugar
+    def ldap_scope
+      @@logger.debug {"stub: called ldap_scope"}
+      self.class.ldap_scope
+    end
+
+    # required_classes
+    #
+    # Returns the value of self.class.required_classes
+    # This is just syntactic sugar
+    def required_classes
+      @@logger.debug {"stub: called required_classes"}
+      self.class.required_classes
+    end
+
+    # dn_attribute
+    #
+    # Returns the value of self.class.dn_attribute
+    # This is just syntactic sugar
+    def dn_attribute
+      @@logger.debug {"stub: called dn_attribute"}
+      self.class.dn_attribute
+    end
+    alias_method :dnattr, :dn_attribute
+
+    # schema
+    #
+    # Returns the value of self.class.schema
+    # This is just syntactic sugar
+    def schema
+      @@logger.debug {"stub: called schema"}
+      self.class.schema
+    end
+
+    # get_attribute
+    #
+    # Return the value of the attribute called by method_missing?
+    def get_attribute(name, not_array=true)
+      @@logger.debug {"stub: called get_attribute" +
+                      "(#{name.inspect}, #{not_array.inspect}"}
+      get_attribute_before_type_cast(name, not_array)
+    end
+
+    def get_attribute_as_query(name, not_array=true)
+      @@logger.debug {"stub: called get_attribute_as_query" +
+                      "(#{name.inspect}, #{not_array.inspect}"}
+      value = get_attribute_before_type_cast(name, not_array)
+      if not_array
+        !false_value?(value)
+      else
+        value.collect? {|x| !false_value?(x)}
+      end
+    end
+
+    def false_value?(value)
+      value.nil? or value == false or
+        value == "false" or value == "FALSE" or value == ""
+    end
+
+    def get_attribute_before_type_cast(name, not_array=true)
+      @@logger.debug {"stub: called get_attribute_before_type_cast" +
+                      "(#{name.inspect}, #{not_array.inspect}"}
+      attr = to_real_attribute_name(name)
+
+      value = @data[attr] || []
+      # Return a copy of the stored data
+      if not_array
+        array_of(value.dup, false)
+      else
+        value.dup
+      end
+    end
+
+    # set_attribute
+    #
+    # Set the value of the attribute called by method_missing?
+    def set_attribute(name, value)
+      @@logger.debug {"stub: called set_attribute" +
+                      "(#{name.inspect}, #{value.inspect})"}
+
+      # Get the attr and clean up the input
+      attr = to_real_attribute_name(name)
+
+      if attr == dn_attribute and value.is_a?(String)
+        value, @base = value.split(/,/, 2)
+        value = $POSTMATCH if /^#{dn_attribute}=/ =~ value
+      end
+
+      @@logger.debug {"set_attribute(#{name.inspect}, #{value.inspect}): " +
+                      "method maps to #{attr}"}
+
+      # Enforce LDAP-pleasing values
+      @@logger.debug {"value = #{value.inspect}, value.class = #{value.class}"}
+      real_value = value
+      # Squash empty values
+      if value.class == Array
+        real_value = value.collect {|c| (c.nil? or c.empty?) ? [] : c}.flatten
+      end
+      real_value = [] if real_value.nil?
+      real_value = [] if real_value == ''
+      real_value = [real_value] if real_value.class == String
+      real_value = [real_value.to_s] if real_value.class == Fixnum
+      # NOTE: Hashes are allowed for subtyping.
+
+      # Assign the value
+      @data[attr] = real_value
+
+      # Return the passed in value
+      @@logger.debug {"stub: exiting set_attribute"}
+      return @data[attr]
+    end
+
+
+    # define_attribute_methods
+    #
+    # Make a method entry for _every_ alias of a valid attribute and map it
+    # onto the first attribute passed in.
+    def define_attribute_methods(attr)
+      @@logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
+      return if @attr_methods.has_key? attr
+      aliases = schema.attribute_aliases(attr)
+      aliases.each do |ali|
+        @@logger.debug {"associating #{ali} --> #{attr}"}
+        @attr_methods[ali] = attr
+        @@logger.debug {"associating #{ali.downcase} --> #{attr}"}
+        @attr_aliases[ali.downcase] = attr
+        @@logger.debug {"associating #{self.class.to_rubyish_name(ali)}" +
+                        " --> #{attr}"}
+        @attr_aliases[self.class.to_rubyish_name(ali)] = attr
+      end
+      @@logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
+    end
+
+    # array_of
+    #
+    # Returns the array form of a value, or not an array if
+    # false is passed in.
+    def array_of(value, to_a = true)
+      @@logger.debug {"stub: called array_of" +
+                      "(#{value.inspect}, #{to_a.inspect})"}
+      case value
+      when Array
+        if to_a
+          value
+        else
+          value.size <= 1 ? value.first : value
+        end
+      when Hash
+        to_a ? [value] : value
+      else
+        to_a ? [value.to_s] : value.to_s
+      end
+    end
+
+    def normalize_data(data, except=[])
+      result = {}
+      data.each do |key, values|
+        next if except.include?(key)
+        real_name = to_real_attribute_name(key)
+        next if real_name and except.include?(real_name)
+        real_name ||= key
+        result[real_name] ||= []
+        result[real_name].concat(values)
+      end
+      result
+    end
+
+    def collect_modified_entries(ldap_data, data)
+      entries = []
+      replaceable = []
+      # Now that all the subtypes will be treated as unique attributes
+      # we can see what's changed and add anything that is brand-spankin'
+      # new.
+      @@logger.debug {'#collect_modified_entries: traversing ldap_data ' +
+                      'determining replaces and deletes'}
+      ldap_data.each do |k, v|
+        value = data[k] || []
+
+        replaceable.push(k)
+        next if v == value
+
+        # Create mod entries
+        if value.empty?
+          # Since some types do not have equality matching rules,
+          # delete doesn't work
+          # Replacing with nothing is equivalent.
+          @@logger.debug {"#save: removing attribute from existing entry: " +
+                          "#{new_key}"}
+        else
+          # Ditched delete then replace because attribs with no equality
+          # match rules will fails
+          @@logger.debug {"#collect_modified_entries: updating attribute of" +
+                          " existing entry: #{k}: #{value.inspect}"}
+        end
+        entries.push([:replace, k, value])
+      end
+      @@logger.debug {'#collect_modified_entries: finished traversing' +
+                      ' ldap_data'}
+      @@logger.debug {'#collect_modified_entries: traversing data ' +
+                      'determining adds'}
+      data.each do |k, v|
+        value = v || []
+        next if replaceable.include?(k) or value.empty?
+
+        # Detect subtypes and account for them
+        @@logger.debug {"#save: adding attribute to existing entry: " +
+                        "#{k}: #{value.inspect}"}
+        # REPLACE will function like ADD, but doesn't hit EQUALITY problems
+        # TODO: Added equality(attr) to Schema2
+        entries.push([:replace, k, value])
+      end
+
+      entries
+    end
+
+    def collect_all_entries(data)
+      dn_attr = to_real_attribute_name(dn_attribute)
+      dn_value = data[dn_attr]
+      @@logger.debug {'#collect_all_entries: adding all attribute value pairs'}
+      @@logger.debug {"#collect_all_entries: adding " +
+                      "#{dn_attr.inspect} = #{dn_value.inspect}"}
+
+      entries = []
+      entries.push([:add, dn_attr, dn_value])
+
+      oc_value = data['objectClass']
+      @@logger.debug {"#collect_all_entries: adding objectClass = " +
+                      "#{oc_value.inspect}"}
+      entries.push([:add, 'objectClass', oc_value])
+      data.each do |key, value|
+        next if value.empty? or key == 'objectClass' or key == dn_attr
+
+        @@logger.debug {"#collect_all_entries: adding attribute to new " +
+                        "entry: #{key.inspect}: #{value.inspect}"}
+        entries.push([:add, key, value])
+      end
+
+      entries
+    end
+
+    def check_configuration
+      unless dn_attribute
+        raise ConfigurationError,
+                "dn_attribute not set for this class: #{self.class}"
+      end
+    end
+
+    def save_internal
+      @@logger.debug {"stub: save called"}
+      # Validate against the objectClass requirements
+      validate
+
+      # Expand subtypes to real ldap_data entries
+      # We can't reuse @ldap_data because an exception would leave
+      # an object in an unknown state
+      @@logger.debug {"#save: expanding subtypes in @ldap_data"}
+      ldap_data = normalize_data(@ldap_data)
+      @@logger.debug {'#save: subtypes expanded for @ldap_data'}
+
+      # Expand subtypes to real data entries, but leave @data alone
+      @@logger.debug {'#save: expanding subtypes for @data'}
+      bad_attrs = @data.keys - (@must + @may)
+      data = normalize_data(@data, bad_attrs)
+      @@logger.debug {'#save: subtypes expanded for @data'}
+
+      if new_entry? # add everything!
+        entries = collect_all_entries(data)
+        begin
+          @@logger.debug {"#save: adding #{dn}"}
+          self.class.add(dn, entries)
+          @@logger.debug {"#write: add successful"}
+          @new_entry = false
+        rescue DistinguishedNameInvalid, EntryAlreadyExist,
+          StrongAuthenticationRequired
+          raise SaveError, "Failed to add (#{$!.message}): '#{entries}'"
+        end
+      else
+        entries = collect_modified_entries(ldap_data, data)
+        @@logger.debug {'#save: traversing data complete'}
+        begin
+          @@logger.debug {"#save: modifying #{dn}"}
+          self.class.modify(dn, entries)
+          @@logger.debug {'#save: modify successful'}
+#         rescue Error
+#           raise SaveError.new("Failed to modify: '#{entries}'")
+        end
+      end
+      @@logger.debug {"#save: resetting @ldap_data to a dup of @data"}
+      @ldap_data = Marshal.load(Marshal.dump(data))
+      # Delete items disallowed by objectclasses.
+      # They should have been removed from ldap.
+      @@logger.debug {'#save: removing attributes from @ldap_data not ' +
+                      'sent in data'}
+      bad_attrs.each do |remove_me|
+        @ldap_data.delete(remove_me)
+      end
+      @@logger.debug {'#save: @ldap_data reset complete'}
+      @@logger.debug {'stub: save exited'}
+      self
+    end
+  end # Base
+end # ActiveLDAP

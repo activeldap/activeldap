@@ -1,0 +1,35 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+
+(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
+
+puts "Changing user #{ARGV[0]}"
+pwb = Proc.new {
+  Password.get('Password: ')
+}
+log = Log4r::Logger.new 'mylog'
+log.outputters = Log4r::Outputter.stdout
+log.level = Log4r::DEBUG
+ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb, :allow_anonymous => false, :logger => log)
+user = User.new(ARGV[0])
+user.cn = ARGV[1]
+user.uidNumber = ARGV[2]
+user.gidNumber = ARGV[2]
+if user.objectClass.member? 'strongAuthenticationUser'
+  user.userCertificate = nil 
+  # This is super clunky...
+  # I need to add some passthrough
+  oc = user.objectClass
+  oc.delete('strongAuthenticationUser')
+  user.objectClass = oc
+end
+user.write
+puts "success"
+exit 0
+
+

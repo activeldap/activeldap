@@ -1,0 +1,21 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+
+(printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
+
+puts "Changing user #{ARGV[0]}"
+pwb = Proc.new {
+  Password.get('Password: ')
+}
+ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
+user = User.new(ARGV[0])
+user.delete
+puts "success"
+exit 0
+
+

@@ -1,0 +1,56 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+require 'log4r'
+require 'base64'
+
+(printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
+
+pwb = Proc.new {
+    Password.get('Password:')
+}
+logger = Log4r::Logger.new('userls')
+logger.outputters = Log4r::StderrOutputter.new('')
+#logger.level = Log4r::DEBUG
+logger.level = Log4r::FATAL
+ActiveLDAP::Base.connect(:password_block => pwb, :logger => logger)
+user = User.new(ARGV[0])
+exit 1 unless user.exists?
+puts "DN: #{user.dn}"
+user.attributes.each do |attr|
+  binary = false
+  value = user.send(attr.to_sym)
+  value.map! do |x| 
+    if x.class == Hash and x.keys[0] == 'binary'
+      binary = true
+      foo = []
+      x['binary'].each do |v|
+        foo.push(Base64::encode64(v))
+      end
+      foo
+    else
+      x
+    end
+  end
+  value = "[ " + value.join(', ') + " ]"
+  attr += ";binary" if binary
+  printf("%s: \n%s\n", attr, value) unless value.to_s.empty?
+end
+
+pgrp = Group.find(:attribute => 'gidNumber',
+                  :value => user.gidNumber[0],
+                  :objects => true)
+grps = []
+unless pgrp.nil?
+  grps << "#{pgrp.cn}[#{pgrp.gidNumber}]"
+end
+user.groups.each do |grp|
+ grps << "#{grp.cn}[#{grp.gidNumber}]"
+end
+printf("Groups: %s\n", grps.join(', '))
+exit 0
+
+

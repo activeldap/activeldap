@@ -1,0 +1,28 @@
+#!/usr/bin/ruby -W0
+$: << "../lib"
+
+require 'activeldap'
+require 'objects/user'
+require 'objects/group'
+require 'password'
+
+(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
+
+puts "Adding user #{ARGV[0]}"
+pwb = Proc.new {
+  Password.get('Password: ')
+}
+ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
+user = User.new(ARGV[0])
+user.objectClass = user.objectClass  << 'posixAccount' << 'shadowAccount'
+user.cn = ARGV[1]
+user.uidNumber = ARGV[2]
+user.gidNumber = ARGV[2]
+user.homeDirectory = "/home/#{ARGV[0]}"
+user.sn = "somesn"
+user.validate
+user.write
+puts "success"
+exit 0
+
+
