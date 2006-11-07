@@ -61,32 +61,8 @@ module ActiveLDAP
           opts[:foreign_key_name] ||= "#{association_id}_id"
         end
 
-        make_association = Proc.new do |target|
+        association_accessor(association_id) do |target|
           association_class.new(target, opts)
-        end
-
-        define_method(association_id) do
-          association = instance_variable_get("@#{association_id}")
-          unless association
-            association = make_association.call(self)
-            instance_variable_set("@#{association_id}", association)
-          end
-          association
-        end
-
-        define_method("#{association_id}=") do |new_value|
-          association = instance_variable_get("@#{association_id}")
-          association ||= make_association.call(self)
-
-          association.replace(new_value)
-
-          if new_value.nil?
-            instance_variable_set("@#{association_id}", nil)
-          else
-            instance_variable_set("@#{association_id}", association)
-          end
-
-          instance_variable_get("@#{association_id}")
         end
       end
 
@@ -122,32 +98,42 @@ module ActiveLDAP
           association_class = Association::HasMany
         end
 
-        make_association = Proc.new do |target|
+        association_accessor(association_id) do |target|
           association_class.new(target, opts)
         end
+      end
 
-        define_method(association_id) do
-          association = instance_variable_get("@#{association_id}")
+      private
+      def association_accessor(name, &make_association)
+        association_reader(name, &make_association)
+        association_writer(name, &make_association)
+      end
+
+      def association_reader(name, &make_association)
+        define_method(name) do
+          association = instance_variable_get("@#{name}")
           unless association
             association = make_association.call(self)
-            instance_variable_set("@#{association_id}", association)
+            instance_variable_set("@#{name}", association)
           end
           association
         end
+      end
 
-        define_method("#{association_id}=") do |new_value|
-          association = instance_variable_get("@#{association_id}")
+      def association_writer(name, &make_association)
+        define_method("#{name}=") do |new_value|
+          association = instance_variable_get("@#{name}")
           association ||= make_association.call(self)
 
           association.replace(new_value)
 
           if new_value.nil?
-            instance_variable_set("@#{association_id}", nil)
+            instance_variable_set("@#{name}", nil)
           else
-            instance_variable_set("@#{association_id}", association)
+            instance_variable_set("@#{name}", association)
           end
 
-          instance_variable_get("@#{association_id}")
+          instance_variable_get("@#{name}")
         end
       end
     end
