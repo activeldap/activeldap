@@ -1,4 +1,5 @@
 require 'activeldap/association/belongs_to'
+require 'activeldap/association/belongs_to_many'
 require 'activeldap/association/has_many'
 require 'activeldap/association/has_many_wrap'
 
@@ -31,22 +32,37 @@ module ActiveLDAP
      # |:foreign_key| in the other LDAP entry covered by class |:class_name|.
      #
      # Example:
-     #  belongs_to :groups, :class_name => Group, :foreign_key => memberUid,
-     #             :local_key => 'uid'
+     #  belongs_to :groups, :class_name => "Group",
+     #             :many => "memberUid" # Group#memberUid
+     #             # :foreign_key => "uid" # User#uid
+     #             # dn attribute value is used by default
+     #  belongs_to :primary_group, :class_name => "Group",
+     #             :foreign_key => "gidNumber", # User#gidNumber
+     #             :primary_key => "gidNumber"  # Group#gidNumber
      #
      def belongs_to(association_id, options={})
        klass = options[:class_name] || association_id.to_s
-       foreign_key = options[:foreign_key] || association_id.to_s + "_id"
+       foreign_key = options[:foreign_key]
        primary_key = options[:primary_key]
+       many = options[:many]
        set_associated_class(association_id, klass)
 
+       opts = {
+         :association_id => association_id,
+         :foreign_key_name => foreign_key,
+         :primary_key_name => primary_key,
+         :many => many,
+       }
+       if opts[:many]
+         association_class = Association::BelongsToMany
+         opts[:foreign_key_name] ||= dn_attribute
+       else
+         association_class = Association::BelongsTo
+         opts[:foreign_key_name] ||= "#{association_id}_id"
+       end
+
        make_association = Proc.new do |target|
-         opts = {
-           :association_id => association_id,
-           :foreign_key_name => foreign_key,
-           :primary_key_name => primary_key,
-         }
-         association = Association::BelongsTo.new(target, opts)
+         association = association_class.new(target, opts)
        end
 
        define_method(association_id) do

@@ -4,6 +4,31 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_many
+    make_temporary_group do |group1|
+      make_temporary_group do |group2|
+        make_temporary_user do |user,|
+          user.update_attribute(:cn, "new #{user.cn}")
+
+          assert_equal([], user.groups.to_a)
+          assert_equal([], group1.member_uid(false))
+          assert_equal([], group2.member_uid(false))
+
+          user.groups << group1
+          assert_equal([group1.id].sort, user.groups.collect {|g| g.id}.sort)
+          assert_equal([user.id].sort, group1.member_uid(false))
+          assert_equal([].sort, group2.member_uid(false))
+
+          user.groups << group2
+          assert_equal([group1.id, group2.id].sort,
+                       user.groups.collect {|g| g.id}.sort)
+          assert_equal([user.id].sort, group1.member_uid(false))
+          assert_equal([user.id].sort, group2.member_uid(false))
+        end
+      end
+    end
+  end
+
   def test_belongs_to
     make_temporary_group do |group|
       gid_number = group.gid_number.to_i + 1
