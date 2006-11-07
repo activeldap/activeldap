@@ -137,6 +137,9 @@ module ActiveLDAP
   class RequiredObjectClassMissed < Error
   end
 
+  class RequiredAttributeMissed < Error
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core

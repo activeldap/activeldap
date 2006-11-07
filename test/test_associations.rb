@@ -4,6 +4,45 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_has_many_assign
+    make_temporary_group do |group|
+      gid_number1 = group.gid_number.to_i + 1
+      gid_number2 = group.gid_number.to_i + 2
+      make_temporary_user(:gid_number => gid_number1) do |user1, password1|
+        make_temporary_user(:gid_number => gid_number2) do |user2, password2|
+          assert_equal(gid_number1, user1.gid_number.to_i)
+          group.primary_members = [user1]
+          assert_equal([user1.uid].sort,
+                       group.primary_members.collect {|x| x.uid}.sort)
+          assert_equal(group.gid_number, user1.gid_number)
+
+          assert_equal(gid_number2, user2.gid_number.to_i)
+          group.primary_members = [user1, user2]
+          assert_equal([user1.uid, user2.uid].sort,
+                       group.primary_members.collect {|x| x.uid}.sort)
+          assert_equal(group.gid_number, user2.gid_number)
+
+
+          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+            group.primary_members = []
+          end
+
+          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+            group.primary_members = [user1]
+          end
+
+          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+            group.primary_members = [user2]
+          end
+
+          assert_nothing_raised do
+            group.primary_members = [user1, user2]
+          end
+        end
+      end
+    end
+  end
+
   def test_belongs_to_many
     make_temporary_group do |group1|
       make_temporary_group do |group2|

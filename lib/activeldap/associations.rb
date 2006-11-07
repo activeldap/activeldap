@@ -62,7 +62,7 @@ module ActiveLDAP
         end
 
         make_association = Proc.new do |target|
-          association = association_class.new(target, opts)
+          association_class.new(target, opts)
         end
 
         define_method(association_id) do
@@ -99,36 +99,55 @@ module ActiveLDAP
       # don't exist in LDAP!
       #
       # Example:
-      #   has_many :primary_members, :class_name => User,
+      #   has_many :primary_members, :class_name => "User",
       #            :primary_key => "gidNumber", # User#gidNumber
-      #            :foreign_key => 'gidNumber'  # Group#gidNumber
-      #   has_many :members, :class_name => User,
+      #            :foreign_key => "gidNumber"  # Group#gidNumber
+      #   has_many :members, :class_name => "User",
       #            :wrap => "memberUid" # Group#memberUid
-      #
-      # TODO[ENH]: def #{...}=(val) to redefine group membership
       def has_many(association_id, options = {})
         klass = options[:class_name] || association_id.to_s
         foreign_key = options[:foreign_key] || association_id.to_s + "_id"
         primary_key = options[:primary_key]
         set_associated_class(association_id, klass)
 
+        opts = {
+          :association_id => association_id,
+          :foreign_key_name => foreign_key,
+          :primary_key_name => primary_key,
+          :wrap => options[:wrap],
+        }
+        if opts[:wrap]
+          association_class = Association::HasManyWrap
+        else
+          association_class = Association::HasMany
+        end
+
+        make_association = Proc.new do |target|
+          association_class.new(target, opts)
+        end
+
         define_method(association_id) do
           association = instance_variable_get("@#{association_id}")
           unless association
-            opts = {
-              :association_id => association_id,
-              :foreign_key_name => foreign_key,
-              :primary_key_name => primary_key,
-              :wrap => options[:wrap],
-            }
-            if opts[:wrap]
-              association = Association::HasManyWrap.new(self, opts)
-            else
-              association = Association::HasMany.new(self, opts)
-            end
+            association = make_association.call(self)
             instance_variable_set("@#{association_id}", association)
           end
           association
+        end
+
+        define_method("#{association_id}=") do |new_value|
+          association = instance_variable_get("@#{association_id}")
+          association ||= make_association.call(self)
+
+          association.replace(new_value)
+
+          if new_value.nil?
+            instance_variable_set("@#{association_id}", nil)
+          else
+            instance_variable_set("@#{association_id}", association)
+          end
+
+          instance_variable_get("@#{association_id}")
         end
       end
     end

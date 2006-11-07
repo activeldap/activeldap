@@ -283,12 +283,21 @@ module ActiveLDAP
           raise EntryAlreadyExist, "#{$!.message}: #{dn}"
         rescue LDAP::StrongAuthRequired
           raise StrongAuthenticationRequired, "#{$!.message}: #{dn}"
+        rescue LDAP::ObjectClassViolation
+          raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
         end
       end
 
       def modify(dn, entries, options={})
-        operation(options) do
-          @connection.modify(dn, parse_entries(entries))
+        begin
+          operation(options) do
+            @connection.modify(dn, parse_entries(entries))
+          end
+        rescue LDAP::UndefinedType
+          p [dn, parse_entries(entries)]
+          raise
+        rescue LDAP::ObjectClassViolation
+          raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
         end
       end
 
@@ -423,8 +432,10 @@ module ActiveLDAP
         result = []
         entries.each do |type, key, value|
           mod_type = ensure_mod_type(type)
-          mod_type |= LDAP::LDAP_MOD_BVALUES if schema.binary?(key)
+          binary = schema.binary?(key)
+          mod_type |= LDAP::LDAP_MOD_BVALUES if binary
           unnormalize_attribute(key, value).each do |name, values|
+            next if binary and values.empty?
             result << LDAP.mod(mod_type, name, values)
           end
         end

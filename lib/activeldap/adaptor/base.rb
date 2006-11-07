@@ -60,15 +60,19 @@ module ActiveLDAP
       end
 
       def unnormalize_attribute(name, values, result={})
-        values.each do |value|
-          if value.is_a?(Hash)
-            suffix, real_value = extract_subtypes(value)
-            new_name = name + suffix
-            result[new_name] ||= []
-            result[new_name].concat(real_value)
-          else
-            result[name] ||= []
-            result[name] << value.dup
+        if values.empty?
+          result[name] = []
+        else
+          values.each do |value|
+            if value.is_a?(Hash)
+              suffix, real_value = extract_subtypes(value)
+              new_name = name + suffix
+              result[new_name] ||= []
+              result[new_name].concat(real_value)
+            else
+              result[name] ||= []
+              result[name] << value.dup
+            end
           end
         end
         result

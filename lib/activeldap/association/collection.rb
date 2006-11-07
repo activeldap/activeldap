@@ -34,6 +34,28 @@ module ActiveLDAP
         to_ary.each(&block)
       end
 
+      def delete(*entries)
+        entries = flatten_deeper(entries).reject do |entry|
+          @target.delete(entry) if entry.new_entry?
+          entry.new_entry?
+        end
+        return if entries.empty?
+
+        delete_entries(entries)
+        entries.each do |entry|
+          @target.delete(entry)
+        end
+      end
+
+      def replace(others)
+        load_target
+        deleted_entries = @target - others
+        added_entries = others - @target
+
+        delete(deleted_entries)
+        concat(added_entries)
+      end
+
       private
       def flatten_deeper(array)
         array.collect do |element|
