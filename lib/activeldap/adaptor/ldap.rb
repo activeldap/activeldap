@@ -316,6 +316,7 @@ module ActiveLDAP
             block.call
           rescue LDAP::ResultError
             raise *LDAP::err2exception(@connection.err) if @connection.err != 0
+            raise
           end
         end
       end
