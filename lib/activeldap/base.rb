@@ -278,11 +278,6 @@ module ActiveLDAP
         true
       end # establish_connection
 
-      # Return the schema object
-      def schema
-        connection.schema
-      end
-
       def search(options={}, &block)
         attr = options[:attribute]
         value = options[:value] || '*'
@@ -1159,15 +1154,6 @@ module ActiveLDAP
       self.class.dn_attribute
     end
     alias_method :dnattr, :dn_attribute
-
-    # schema
-    #
-    # Returns the value of self.class.schema
-    # This is just syntactic sugar
-    def schema
-      logger.debug {"stub: called schema"}
-      self.class.schema
-    end
 
     # get_attribute
     #

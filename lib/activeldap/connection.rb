@@ -53,6 +53,7 @@ module ActiveLDAP
 
       def connection=(adaptor)
         if adaptor.is_a?(Adaptor::Base)
+          @schema = nil
           active_connections[active_connection_key] = adaptor
         elsif adaptor.is_a?(Hash)
           config = adaptor
@@ -103,6 +104,11 @@ module ActiveLDAP
         @@defined_configurations[key] = configuration
       end
 
+      # Return the schema object
+      def schema
+        @schema ||= connection.schema
+      end
+
       private
       def active_connection_key(k=self)
         k.name.empty? ? k.object_id : k.name
@@ -111,6 +117,15 @@ module ActiveLDAP
 
     def connection
       self.class.connection
+    end
+
+    # schema
+    #
+    # Returns the value of self.class.schema
+    # This is just syntactic sugar
+    def schema
+      logger.debug {"stub: called schema"}
+      self.class.schema
     end
   end
 end
