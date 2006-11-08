@@ -4,7 +4,6 @@
 - schema mgmt - how does AR handle it?
 - columns() -- ?
 http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
-- validations?
 exceptions:
 * ActiveRecordError -- ActiveLdapError as base
 * AssociationTypeMismatch
@@ -51,6 +50,8 @@ done:
     - disallow direct objectclass access?
     # - e.g. Person.reset_column_information
     #   - this would mean cleaner loading I think
+  * support ActiveRecord::Validations.
+  * support ActiveRecord::Callbacks.
 0.7.4:
   * Bugfix: do not base LDAP::PrettyError on RuntimeError due to rescue evaluation.
   * Bugfix: :return_objects was overriding :objects in find and find_all
