@@ -1026,9 +1026,8 @@ module ActiveLDAP
 
     def ensure_apply_object_class
       current_object_class = @data['objectClass']
-      if current_object_class != @last_oc
-        apply_objectclass(current_object_class)
-      end
+      return if current_object_class.nil? or current_object_class == @last_oc
+      apply_objectclass(current_object_class)
     end
 
     # enforce_type
@@ -1066,6 +1065,7 @@ module ActiveLDAP
       logger.debug {"stub: objectClass=(#{val.inspect}) called"}
       new_oc = val
       new_oc = [val] if new_oc.class != Array
+      new_oc = new_oc.uniq
       return new_oc if @last_oc == new_oc
 
       # Store for caching purposes
@@ -1073,7 +1073,7 @@ module ActiveLDAP
 
       # Set the actual objectClass data
       define_attribute_methods('objectClass')
-      @data['objectClass'] = new_oc.uniq
+      replace_class(*new_oc)
 
       # Build |data| from schema
       # clear attr_method mapping first
@@ -1083,9 +1083,9 @@ module ActiveLDAP
       @mays = {}
       new_oc.each do |objc|
         # get all attributes for the class
-        attributes = schema.class_attributes(objc.to_s)
-        @musts[objc.to_s] = attributes[:must]
-        @mays[objc.to_s] = attributes[:may]
+        attributes = schema.class_attributes(objc)
+        @musts[objc] = attributes[:must]
+        @mays[objc] = attributes[:may]
       end
       @must = @musts.values.flatten.uniq
       @may = @mays.values.flatten.uniq
