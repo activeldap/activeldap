@@ -737,6 +737,8 @@ module ActiveLDAP
       end
     end
 
+    include Enumerable
+
     ### All instance methods, etc
 
     # new
@@ -998,6 +1000,12 @@ module ActiveLDAP
 
     def []=(name, value)
       set_attribute(name, value)
+    end
+
+    def each
+      @data.each do |key, values|
+        yield(key.dup, values.dup)
+      end
     end
 
     private
