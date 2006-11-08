@@ -229,11 +229,12 @@ module ActiveLDAP
           end
         rescue LDAP::Error
           # Do nothing on failure
-          @logger.debug {"Ignore error #{$!.name}(#{$!.message}) " +
-                         "for #{filter} and attrs #{attrs}"}
+          @logger.debug {"Ignore error #{$!.class}(#{$!.message}) " +
+                         "for #{filter} and attrs #{attrs.inspect}"}
         rescue RuntimeError
           if $!.message == "no result returned by search"
-            @logger.debug {"No matches for #{filter} and attrs #{attrs}"}
+            @logger.debug {"No matches for #{filter} and attrs " +
+                           "#{attrs.inspect}"}
           else
             raise
           end
@@ -285,6 +286,8 @@ module ActiveLDAP
           raise StrongAuthenticationRequired, "#{$!.message}: #{dn}"
         rescue LDAP::ObjectClassViolation
           raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
+        rescue LDAP::UnwillingToPerform
+          raise UnwillingToPerform, "#{$!.message}: #{dn}"
         end
       end
 

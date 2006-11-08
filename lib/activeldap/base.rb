@@ -143,6 +143,9 @@ module ActiveLDAP
   class EntryInvalid < Error
   end
 
+  class UnwillingToPerform < Error
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -295,7 +298,8 @@ module ActiveLDAP
         attr ||= _attr || dn_attribute || "objectClass"
         prefix ||= _prefix
         filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
-        connection.search(:base => [prefix, base].compact.join(","),
+        _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
+        connection.search(:base => _base,
                           :scope => options[:scope] || ldap_scope,
                           :filter => filter,
                           :limit => options[:limit],
@@ -805,7 +809,9 @@ module ActiveLDAP
         raise DistinguishedNameNotSetError.new,
                 "#{dn_attribute} value of #{self} doesn't set"
       end
-      "#{dn_attribute}=#{dn_value},#{base}"
+      _base = base
+      _base = nil if _base.empty?
+      ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
     end
 
     def id
@@ -1389,33 +1395,26 @@ module ActiveLDAP
     def create
       prepare_data_for_saving do |data, ldap_data|
         entries = collect_all_entries(data)
+        logger.debug {"#caret: adding #{dn}"}
         begin
-          logger.debug {"#save: adding #{dn}"}
           self.class.add(dn, entries)
-          logger.debug {"#write: add successful"}
+          logger.debug {"#create: add successful"}
           @new_entry = false
-          true
-        rescue DistinguishedNameInvalid, EntryAlreadyExist,
-          StrongAuthenticationRequired
-          logger.warn {"Failed to add (#{$!.message}): '#{entries}'"}
-          false
+        rescue UnwillingToPerform
+          logger.warn {"#create: didn't perform: #{$!.message}"}
         end
+        true
       end
     end
 
     def update
       prepare_data_for_saving do |data, ldap_data|
         entries = collect_modified_entries(ldap_data, data)
-        logger.debug {'#save: traversing data complete'}
-        begin
-          logger.debug {"#save: modifying #{dn}"}
-          self.class.modify(dn, entries)
-          logger.debug {'#save: modify successful'}
-          true
-#         rescue Error
-#           raise SaveError.new("Failed to modify: '#{entries}'")
-#           false
-        end
+        logger.debug {'#update: traversing data complete'}
+        logger.debug {"#update: modifying #{dn}"}
+        self.class.modify(dn, entries)
+        logger.debug {'#update: modify successful'}
+        true
       end
     end
   end # Base
