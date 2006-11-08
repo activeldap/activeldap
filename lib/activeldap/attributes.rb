@@ -76,28 +76,28 @@ module ActiveLDAP
       end
 
       def normalize_attribute_value_of_string(name, value, single, binary)
-        [binary ? {'binary' => value} : value]
+        [binary ? {'binary' => [value]} : value]
       end
 
       def normalize_attribute_value_of_date(name, value, single, binary)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, 0, 0, 0,
                             '+0000')
-        [binary ? {'binary' => new_value} : new_value]
+        normalize_attribute_value_of_string(name, new_value, single, binary)
       end
 
       def normalize_attribute_value_of_time(name, value, single, binary)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             0, 0, 0, value.hour, value.min, value.sec,
                             value.zone)
-        [binary ? {'binary' => new_value} : new_value]
+        normalize_attribute_value_of_string(name, new_value, single, binary)
       end
 
       def normalize_attribute_value_of_date_time(name, value, single, binary)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, value.hour,
                             value.min, value.sec, value.zone)
-        [binary ? {'binary' => new_value} : new_value]
+        normalize_attribute_value_of_string(name, new_value, single, binary)
       end
     end
 

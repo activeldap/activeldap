@@ -4,6 +4,8 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_has_many_assign
     make_temporary_group do |group|
       gid_number1 = group.gid_number.to_i + 1
@@ -152,6 +154,4 @@ class AssociationsTest < Test::Unit::TestCase
       end
     end
   end
-
-  priority :normal
 end

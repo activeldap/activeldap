@@ -935,6 +935,8 @@ require 'activeldap/attributes'
 require 'activeldap/object_class'
 require 'activeldap/adaptor/ldap'
 
+require 'activeldap/validations'
+
 module ActiveLDAP
   VERSION = "0.8.0"
 end
@@ -945,6 +947,7 @@ ActiveLDAP::Base.class_eval do
   include ActiveLDAP::Attributes
   include ActiveLDAP::ObjectClass
   include ActiveLDAP::Associations
+  include ActiveLDAP::Validations
 end
 
 $VERBOSE = verbose

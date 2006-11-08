@@ -27,65 +27,66 @@ class UserTest < Test::Unit::TestCase
 
       cn = {'lang-en-us' => 'Test User (EN-US Language)'}
       user.cn = cn
-      assert_raise(ActiveLDAP::AttributeEmpty) { user.validate }
       # Test subtypes
       assert_equal(cn, user.cn, 'user.cn should match')
 
       cn = ['Test User (Default Language)',
             {'lang-en-us' => ['Test User (EN-US Language)', 'Foo']}]
       user.cn = cn
-      assert_raise(ActiveLDAP::AttributeEmpty) { user.validate }
       # Test multiple entries with subtypes
       assert_equal(cn, user.cn,
                    'This should have returned an array of a ' +
                    'normal cn and a lang-en-us cn.')
 
-      assert_raise(ActiveLDAP::AttributeEmpty,
-                   'This should have raised an error!') do
-        user.validate
-      end
-
       uid_number = 9000
-      user.uidNumber = uid_number
+      user.uid_number = uid_number
       # Test to_s on Fixnums
-      assert_equal(uid_number.to_s, user.uidNumber,
+      assert_equal(uid_number.to_s, user.uid_number,
                    'uidNumber did not get set correctly.')
-      assert_raise(ActiveLDAP::AttributeEmpty) { user.validate }
-      assert_equal([uid_number.to_s], user.uidNumber(false),
-                   'uidNumber did not get changed to an array by #validate().')
+      assert_equal([uid_number.to_s], user.uid_number(false),
+                   'uidNumber did not get changed to an array' +
+                   ' by #validate_ldap().')
 
       gid_number = 9000
-      user.gidNumber = gid_number
+      user.gid_number = gid_number
       # Test to_s on Fixnums
-      assert_equal(gid_number.to_s, user.gidNumber,
+      assert_equal(gid_number.to_s, user.gid_number,
                    'gidNumber did not get set correctly.')
-      assert_raise(ActiveLDAP::AttributeEmpty) { user.validate }
-      assert_equal([gid_number.to_s], user.gidNumber(false),
+      assert_equal([gid_number.to_s], user.gid_number(false),
                    'not_array argument failed')
 
       home_directory = '/home/foo'
-      user.homeDirectory = home_directory
+      user.home_directory = home_directory
       # just for sanity's sake
-      assert_equal(home_directory, user.homeDirectory,
-                   'This should be [#{home_directory.dump}].')
-      assert_raise(ActiveLDAP::AttributeEmpty) { user.validate }
-      assert_equal(home_directory, user.homeDirectory(true),
+      assert_equal(home_directory, user.home_directory,
                    'This should be #{home_directory.dump}.')
+      assert_equal(home_directory, user.home_directory(true),
+                   'This should be [#{home_directory.dump}].')
 
 
+      assert(!user.valid?)
+      assert(user.errors.invalid?(:sn))
+      errors = %w(person organizationalPerson
+                  inetOrgPerson).collect do |object_class|
+        "is required attribute (aliases: surname) by " +
+          "objectClass '#{object_class}'"
+      end
+      assert_equal(errors.sort, user.errors.on(:sn).sort)
       user.sn = ['User']
+      assert(user.valid?)
+      assert_equal(0, user.errors.size)
 
-      user.userCertificate = certificate
-      user.jpegPhoto = jpeg_photo
-      assert_nothing_raised {user.validate}
+      assert_nothing_raised {user.save!}
+
+      user.user_certificate = certificate
+      user.jpeg_photo = jpeg_photo
 
       assert(ActiveLDAP::Base.schema.binary?('jpegPhoto'),
              'jpegPhoto is binary?')
 
       assert(ActiveLDAP::Base.schema.binary?('userCertificate'),
              'userCertificate is binary?')
-
-      assert_nothing_raised { user.write }
+      assert_nothing_raised {user.save!}
     end
   end
 
@@ -95,24 +96,29 @@ class UserTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       # validate add
       assert_equal({'binary' => [certificate]},
-                   user.userCertificate,
+                   user.user_certificate,
                    'This should have been forced to be a binary subtype.')
 
       # now test modify
-      user.userCertificate = ''
-      assert_nothing_raised() { user.write }
+      user.user_certificate = nil
+      assert_nil(user.user_certificate)
+      assert_nothing_raised() { user.save! }
+      assert_nil(user.user_certificate)
 
-      user.userCertificate = certificate
-      assert_nothing_raised() { user.write }
+      user.user_certificate = certificate
+      assert_equal({'binary' => [certificate]},
+                   user.user_certificate,
+                   'This should have been forced to be a binary subtype.')
+      assert_nothing_raised() { user.save! }
 
       # validate modify
       user = @user_class.find(user.uid(true))
       assert_equal({'binary' => [certificate]},
-                   user.userCertificate,
+                   user.user_certificate,
                    'This should have been forced to be a binary subtype.')
 
       expected_cert = OpenSSL::X509::Certificate.new(certificate)
-      actual_cert = user.userCertificate['binary'][0]
+      actual_cert = user.user_certificate['binary'][0]
       actual_cert = OpenSSL::X509::Certificate.new(actual_cert)
       assert_equal(expected_cert.subject.to_s,
                    actual_cert.subject.to_s,
@@ -124,36 +130,39 @@ class UserTest < Test::Unit::TestCase
   def test_binary
     make_temporary_user do |user, password|
       # reload and see what happens
-      assert_equal(jpeg_photo, user.jpegPhoto,
+      assert_equal(jpeg_photo, user.jpeg_photo,
                    "This should have been equal to #{jpeg_photo_path.dump}")
 
       # now test modify
-      user.jpegPhoto = ''
-      assert_nothing_raised() { user.write }
-      user.jpegPhoto = jpeg_photo
-      assert_nothing_raised() { user.write }
+      user.jpeg_photo = nil
+      assert_nil(user.jpeg_photo)
+      assert_nothing_raised() { user.save! }
+      assert_nil(user.jpeg_photo)
+
+      user.jpeg_photo = jpeg_photo
+      assert_equal(jpeg_photo, user.jpeg_photo)
+      assert_nothing_raised() { user.save! }
 
       # now validate modify
       user = @user_class.find(user.uid(true))
-      assert_equal(jpeg_photo, user.jpegPhoto,
-                   "This should have been equal to #{jpeg_photo_path.dump}")
+      assert_equal(jpeg_photo, user.jpeg_photo)
     end
   end
 
   # This tests the removal of a objectclass
   def test_remove_object_class
     make_temporary_user do |user, password|
-      assert_equal(nil, user.shadowMax,
-                   'Should get the default nil value for shadowMax')
+      assert_nil(user.shadow_max,
+                 'Should get the default nil value for shadowMax')
 
       # Remove shadowAccount
       user.remove_class('shadowAccount')
-      assert_nothing_raised() { user.validate }
-      assert_nothing_raised() { user.write }
+      assert(user.valid?)
+      assert_nothing_raised() { user.save! }
 
       assert_raise(NoMethodError,
                    'shadowMax should not be defined anymore' ) do
-        user.shadowMax
+        user.shadow_max
       end
     end
   end
@@ -164,7 +173,7 @@ class UserTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       cn = ['Test User', {'lang-en-us' => ['Test User', 'wad']}]
       user.cn = cn
-      assert_nothing_raised() { user.write }
+      assert_nothing_raised() { user.save! }
 
       user = @user_class.find(user.uid)
       assert_equal(cn, user.cn,

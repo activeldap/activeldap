@@ -52,7 +52,7 @@ EOX
     make_temporary_user do |user, password|
       user.sn = nil
       assert(!user.save)
-      assert_raises(ActiveLDAP::EntryNotSaved) do
+      assert_raises(ActiveLDAP::EntryInvalid) do
         user.save!
       end
 

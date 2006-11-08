@@ -140,6 +140,9 @@ module ActiveLDAP
   class RequiredAttributeMissed < Error
   end
 
+  class EntryInvalid < Error
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -548,6 +551,10 @@ module ActiveLDAP
         end
       end
 
+      def human_attribute_name(attribute_key_name)
+        attribute_key_name.humanize
+      end
+
       private
       # Base.dn_attribute
       #
@@ -575,7 +582,7 @@ module ActiveLDAP
 
       def find_every(options)
         search(options).collect do |dn, attrs|
-          instantiate(dn, attrs)
+          instantiate([dn, attrs])
         end
       end
 
@@ -699,7 +706,8 @@ module ActiveLDAP
         @configuration
       end
 
-      def instantiate(dn, attributes)
+      def instantiate(entry)
+        dn, attributes = entry
         if self.class == Class
           klass = self.ancestors[0].to_s.split(':').last
           real_klass = self.ancestors[0]
@@ -765,7 +773,7 @@ module ActiveLDAP
     # Return attribute methods so that a program can determine available
     # attributes dynamically without schema awareness
     def attribute_names
-      @@logger.debug {"stub: attribute_names called"}
+      logger.debug {"stub: attribute_names called"}
       ensure_apply_object_class
       return @attr_methods.keys
     end
@@ -779,7 +787,7 @@ module ActiveLDAP
     #
     # Return whether the entry exists in LDAP or not
     def exists?
-      @@logger.debug {"stub: exists? called"}
+      logger.debug {"stub: exists? called"}
       not new_entry?
     end
 
@@ -791,7 +799,7 @@ module ActiveLDAP
     #
     # Return the authoritative dn
     def dn
-      @@logger.debug {"stub: dn called"}
+      logger.debug {"stub: dn called"}
       dn_value = id
       if dn_value.nil?
         raise DistinguishedNameNotSetError.new,
@@ -808,61 +816,11 @@ module ActiveLDAP
       set_attribute(dn_attribute, value)
     end
 
-    # validate
-    #
-    # Basic validation:
-    # - Verify that every 'MUST' specified in the schema has a value defined
-    # - Enforcement of undefined attributes is handled in the objectClass= method
-    # Must call enforce_types() first before enforcement can be guaranteed
-    def validate
-      @@logger.debug {"stub: validate called"}
-      # Clean up attr values, etc
-      enforce_types
-
-      # Validate objectclass settings
-      @data['objectClass'].each do |klass|
-        unless klass.class == String
-          raise TypeError, "Value in objectClass array is not a String. " +
-                           "(#{klass.class}:#{klass.inspect})"
-        end
-        unless schema.exist_name?("objectClasses", klass)
-          raise ObjectClassError, "objectClass '#{klass}' unknown to " +
-                                  "LDAP server."
-        end
-      end
-
-      # make sure this doesn't drop any of the required objectclasses
-      required_classes().each do |oc|
-        unless @data['objectClass'].member? oc.to_s
-          raise ObjectClassError, "'#{oc}' must be a defined objectClass " +
-                                  "for class '#{self.class}' as set in the" +
-                                  " ldap_mapping"
-        end
-      end
-
-      # Make sure all MUST attributes have a value
-      @data['objectClass'].each do |objc|
-        @must.each do |req_attr|
-          # Downcase to ensure we catch schema problems
-          deref = to_real_attribute_name(req_attr)
-          # Set default if it wasn't yet set.
-          @data[deref] = [] if @data[deref].nil?
-          # Check for missing requirements.
-          if @data[deref].empty?
-            aliases = schema.attribute_aliases(req_attr).join(', ')
-            raise AttributeEmpty,
-              "objectClass '#{objc}' requires attribute '#{aliases}'"
-          end
-        end
-      end
-      @@logger.debug {"stub: validate finished"}
-    end
-
     # destroy
     #
     # Delete this entry from LDAP
     def destroy
-      @@logger.debug {"stub: delete called"}
+      logger.debug {"stub: delete called"}
       begin
         self.class.delete(dn)
         @new_entry = true
@@ -872,7 +830,7 @@ module ActiveLDAP
     end
 
     def write
-      @@logger.warn {'Base#write is deprecated. Please use Base#Save'}
+      logger.warn {'Base#write is deprecated. Please use Base#Save'}
       save
     end
 
@@ -902,7 +860,7 @@ module ActiveLDAP
     #       using class_eval instead of using method_missing.  This would
     #       give tab completion in irb.
     def method_missing(name, *args, &block)
-      @@logger.debug {"stub: called method_missing" +
+      logger.debug {"stub: called method_missing" +
                       "(#{name.inspect}, #{args.inspect})"}
       ensure_apply_object_class
 
@@ -910,13 +868,13 @@ module ActiveLDAP
       case key
       when /=$/
         real_key = $PREMATCH
-        @@logger.debug {"method_missing: have_attribute? #{real_key}"}
+        logger.debug {"method_missing: have_attribute? #{real_key}"}
         if have_attribute?(real_key, ['objectClass'])
           if args.size != 1
             raise ArgumentError,
                     "wrong number of arguments (#{args.size} for 1)"
           end
-          @@logger.debug {"method_missing: calling set_attribute" +
+          logger.debug {"method_missing: calling set_attribute" +
                           "(#{real_key}, #{args.inspect})"}
           return set_attribute(real_key, *args, &block)
         end
@@ -924,7 +882,7 @@ module ActiveLDAP
         real_key = $PREMATCH
         before_type_cast = !$1.nil?
         query = !$2.nil?
-        @@logger.debug {"method_missing: have_attribute? #{real_key}"}
+        logger.debug {"method_missing: have_attribute? #{real_key}"}
         if have_attribute?(real_key, ['objectClass'])
           if args.size > 1
             raise ArgumentError,
@@ -951,6 +909,7 @@ module ActiveLDAP
       end.flatten
     end
 
+    alias_method :respond_to_without_attributes?, :respond_to?
     def respond_to?(name, include_priv=false)
       have_attribute?(name.to_s) or
         (/(?:=|\?|_before_type_cast)$/ =~ name.to_s and
@@ -1039,6 +998,10 @@ module ActiveLDAP
     end
 
     private
+    def logger
+      @@logger
+    end
+
     def init_base
       check_configuration
       init_instance_variables
@@ -1068,6 +1031,20 @@ module ActiveLDAP
       end
     end
 
+    # enforce_type
+    #
+    # enforce_type applies your changes without attempting to write to LDAP.
+    # This means that if you set userCertificate to somebinary value, it will
+    # wrap it up correctly.
+    def enforce_type(key, value)
+      logger.debug {"stub: enforce_type called"}
+      ensure_apply_object_class
+      # Enforce attribute value formatting
+      result = self.class.normalize_attribute(key, value)[1]
+      logger.debug {"stub: enforce_types done"}
+      result
+    end
+
     def init_instance_variables
       @data = {} # where the r/w entry data is stored
       @ldap_data = {} # original ldap entry data
@@ -1078,22 +1055,6 @@ module ActiveLDAP
       @base = nil
     end
 
-    # enforce_types
-    #
-    # enforce_types applies your changes without attempting to write to LDAP.
-    # This means that if you set userCertificate to somebinary value, it will
-    # wrap it up correctly.
-    def enforce_types
-      @@logger.debug {"stub: enforce_types called"}
-      ensure_apply_object_class
-      # Enforce attribute value formatting
-      @data.keys.each do |key|
-        @data[key] = self.class.normalize_attribute(key, @data[key])[1]
-      end
-      @@logger.debug {"stub: enforce_types done"}
-      return true
-    end
-
     # apply_objectclass
     #
     # objectClass= special case for updating appropriately
@@ -1102,7 +1063,7 @@ module ActiveLDAP
     # removing defined attributes that are no longer valid
     # given the new objectclasses.
     def apply_objectclass(val)
-      @@logger.debug {"stub: objectClass=(#{val.inspect}) called"}
+      logger.debug {"stub: objectClass=(#{val.inspect}) called"}
       new_oc = val
       new_oc = [val] if new_oc.class != Array
       return new_oc if @last_oc == new_oc
@@ -1118,24 +1079,24 @@ module ActiveLDAP
       # clear attr_method mapping first
       @attr_methods = {}
       @attr_aliases = {}
-      @must = []
-      @may = []
+      @musts = {}
+      @mays = {}
       new_oc.each do |objc|
         # get all attributes for the class
         attributes = schema.class_attributes(objc.to_s)
-        @must += attributes[:must]
-        @may += attributes[:may]
+        @musts[objc.to_s] = attributes[:must]
+        @mays[objc.to_s] = attributes[:may]
       end
-      @must.uniq!
-      @may.uniq!
-      (@must+@may).each do |attr|
+      @must = @musts.values.flatten.uniq
+      @may = @mays.values.flatten.uniq
+      (@must + @may).uniq.each do |attr|
         # Update attr_method with appropriate
         define_attribute_methods(attr)
       end
     end
 
     def base
-      @@logger.debug {"stub: called base"}
+      logger.debug {"stub: called base"}
       [@base, self.class.base].compact.join(",")
     end
 
@@ -1144,7 +1105,7 @@ module ActiveLDAP
     # Returns the value of self.class.ldap_scope
     # This is just syntactic sugar
     def ldap_scope
-      @@logger.debug {"stub: called ldap_scope"}
+      logger.debug {"stub: called ldap_scope"}
       self.class.ldap_scope
     end
 
@@ -1153,7 +1114,7 @@ module ActiveLDAP
     # Returns the value of self.class.required_classes
     # This is just syntactic sugar
     def required_classes
-      @@logger.debug {"stub: called required_classes"}
+      logger.debug {"stub: called required_classes"}
       self.class.required_classes
     end
 
@@ -1162,7 +1123,7 @@ module ActiveLDAP
     # Returns the value of self.class.dn_attribute
     # This is just syntactic sugar
     def dn_attribute
-      @@logger.debug {"stub: called dn_attribute"}
+      logger.debug {"stub: called dn_attribute"}
       self.class.dn_attribute
     end
     alias_method :dnattr, :dn_attribute
@@ -1172,7 +1133,7 @@ module ActiveLDAP
     # Returns the value of self.class.schema
     # This is just syntactic sugar
     def schema
-      @@logger.debug {"stub: called schema"}
+      logger.debug {"stub: called schema"}
       self.class.schema
     end
 
@@ -1180,13 +1141,13 @@ module ActiveLDAP
     #
     # Return the value of the attribute called by method_missing?
     def get_attribute(name, not_array=true)
-      @@logger.debug {"stub: called get_attribute" +
+      logger.debug {"stub: called get_attribute" +
                       "(#{name.inspect}, #{not_array.inspect}"}
       get_attribute_before_type_cast(name, not_array)
     end
 
     def get_attribute_as_query(name, not_array=true)
-      @@logger.debug {"stub: called get_attribute_as_query" +
+      logger.debug {"stub: called get_attribute_as_query" +
                       "(#{name.inspect}, #{not_array.inspect}"}
       value = get_attribute_before_type_cast(name, not_array)
       if not_array
@@ -1202,7 +1163,7 @@ module ActiveLDAP
     end
 
     def get_attribute_before_type_cast(name, not_array=true)
-      @@logger.debug {"stub: called get_attribute_before_type_cast" +
+      logger.debug {"stub: called get_attribute_before_type_cast" +
                       "(#{name.inspect}, #{not_array.inspect}"}
       attr = to_real_attribute_name(name)
 
@@ -1219,7 +1180,7 @@ module ActiveLDAP
     #
     # Set the value of the attribute called by method_missing?
     def set_attribute(name, value)
-      @@logger.debug {"stub: called set_attribute" +
+      logger.debug {"stub: called set_attribute" +
                       "(#{name.inspect}, #{value.inspect})"}
 
       # Get the attr and clean up the input
@@ -1230,11 +1191,11 @@ module ActiveLDAP
         value = $POSTMATCH if /^#{dn_attribute}=/ =~ value
       end
 
-      @@logger.debug {"set_attribute(#{name.inspect}, #{value.inspect}): " +
+      logger.debug {"set_attribute(#{name.inspect}, #{value.inspect}): " +
                       "method maps to #{attr}"}
 
       # Enforce LDAP-pleasing values
-      @@logger.debug {"value = #{value.inspect}, value.class = #{value.class}"}
+      logger.debug {"value = #{value.inspect}, value.class = #{value.class}"}
       real_value = value
       # Squash empty values
       if value.class == Array
@@ -1247,10 +1208,10 @@ module ActiveLDAP
       # NOTE: Hashes are allowed for subtyping.
 
       # Assign the value
-      @data[attr] = real_value
+      @data[attr] = enforce_type(attr, real_value)
 
       # Return the passed in value
-      @@logger.debug {"stub: exiting set_attribute"}
+      logger.debug {"stub: exiting set_attribute"}
       return @data[attr]
     end
 
@@ -1260,19 +1221,19 @@ module ActiveLDAP
     # Make a method entry for _every_ alias of a valid attribute and map it
     # onto the first attribute passed in.
     def define_attribute_methods(attr)
-      @@logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
+      logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
       return if @attr_methods.has_key? attr
       aliases = schema.attribute_aliases(attr)
       aliases.each do |ali|
-        @@logger.debug {"associating #{ali} --> #{attr}"}
+        logger.debug {"associating #{ali} --> #{attr}"}
         @attr_methods[ali] = attr
-        @@logger.debug {"associating #{ali.downcase} --> #{attr}"}
+        logger.debug {"associating #{ali.downcase} --> #{attr}"}
         @attr_aliases[ali.downcase] = attr
-        @@logger.debug {"associating #{self.class.to_rubyish_name(ali)}" +
+        logger.debug {"associating #{self.class.to_rubyish_name(ali)}" +
                         " --> #{attr}"}
         @attr_aliases[self.class.to_rubyish_name(ali)] = attr
       end
-      @@logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
+      logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
     end
 
     # array_of
@@ -1280,7 +1241,7 @@ module ActiveLDAP
     # Returns the array form of a value, or not an array if
     # false is passed in.
     def array_of(value, to_a = true)
-      @@logger.debug {"stub: called array_of" +
+      logger.debug {"stub: called array_of" +
                       "(#{value.inspect}, #{to_a.inspect})"}
       case value
       when Array
@@ -1315,7 +1276,7 @@ module ActiveLDAP
       # Now that all the subtypes will be treated as unique attributes
       # we can see what's changed and add anything that is brand-spankin'
       # new.
-      @@logger.debug {'#collect_modified_entries: traversing ldap_data ' +
+      logger.debug {'#collect_modified_entries: traversing ldap_data ' +
                       'determining replaces and deletes'}
       ldap_data.each do |k, v|
         value = data[k] || []
@@ -1328,26 +1289,26 @@ module ActiveLDAP
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
-          @@logger.debug {"#save: removing attribute from existing entry: " +
+          logger.debug {"#save: removing attribute from existing entry: " +
                           "#{new_key}"}
         else
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
-          @@logger.debug {"#collect_modified_entries: updating attribute of" +
+          logger.debug {"#collect_modified_entries: updating attribute of" +
                           " existing entry: #{k}: #{value.inspect}"}
         end
         entries.push([:replace, k, value])
       end
-      @@logger.debug {'#collect_modified_entries: finished traversing' +
+      logger.debug {'#collect_modified_entries: finished traversing' +
                       ' ldap_data'}
-      @@logger.debug {'#collect_modified_entries: traversing data ' +
+      logger.debug {'#collect_modified_entries: traversing data ' +
                       'determining adds'}
       data.each do |k, v|
         value = v || []
         next if replaceable.include?(k) or value.empty?
 
         # Detect subtypes and account for them
-        @@logger.debug {"#save: adding attribute to existing entry: " +
+        logger.debug {"#save: adding attribute to existing entry: " +
                         "#{k}: #{value.inspect}"}
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema2
@@ -1360,21 +1321,21 @@ module ActiveLDAP
     def collect_all_entries(data)
       dn_attr = to_real_attribute_name(dn_attribute)
       dn_value = data[dn_attr]
-      @@logger.debug {'#collect_all_entries: adding all attribute value pairs'}
-      @@logger.debug {"#collect_all_entries: adding " +
+      logger.debug {'#collect_all_entries: adding all attribute value pairs'}
+      logger.debug {"#collect_all_entries: adding " +
                       "#{dn_attr.inspect} = #{dn_value.inspect}"}
 
       entries = []
       entries.push([:add, dn_attr, dn_value])
 
       oc_value = data['objectClass']
-      @@logger.debug {"#collect_all_entries: adding objectClass = " +
+      logger.debug {"#collect_all_entries: adding objectClass = " +
                       "#{oc_value.inspect}"}
       entries.push([:add, 'objectClass', oc_value])
       data.each do |key, value|
         next if value.empty? or key == 'objectClass' or key == dn_attr
 
-        @@logger.debug {"#collect_all_entries: adding attribute to new " +
+        logger.debug {"#collect_all_entries: adding attribute to new " +
                         "entry: #{key.inspect}: #{value.inspect}"}
         entries.push([:add, key, value])
       end
@@ -1390,29 +1351,27 @@ module ActiveLDAP
     end
 
     def save_internal
-      @@logger.debug {"stub: save called"}
-      # Validate against the objectClass requirements
-      validate
+      logger.debug {"stub: save called"}
 
       # Expand subtypes to real ldap_data entries
       # We can't reuse @ldap_data because an exception would leave
       # an object in an unknown state
-      @@logger.debug {"#save: expanding subtypes in @ldap_data"}
+      logger.debug {"#save: expanding subtypes in @ldap_data"}
       ldap_data = normalize_data(@ldap_data)
-      @@logger.debug {'#save: subtypes expanded for @ldap_data'}
+      logger.debug {'#save: subtypes expanded for @ldap_data'}
 
       # Expand subtypes to real data entries, but leave @data alone
-      @@logger.debug {'#save: expanding subtypes for @data'}
-      bad_attrs = @data.keys - (@must + @may)
+      logger.debug {'#save: expanding subtypes for @data'}
+      bad_attrs = @data.keys - attribute_names
       data = normalize_data(@data, bad_attrs)
-      @@logger.debug {'#save: subtypes expanded for @data'}
+      logger.debug {'#save: subtypes expanded for @data'}
 
       if new_entry? # add everything!
         entries = collect_all_entries(data)
         begin
-          @@logger.debug {"#save: adding #{dn}"}
+          logger.debug {"#save: adding #{dn}"}
           self.class.add(dn, entries)
-          @@logger.debug {"#write: add successful"}
+          logger.debug {"#write: add successful"}
           @new_entry = false
         rescue DistinguishedNameInvalid, EntryAlreadyExist,
           StrongAuthenticationRequired
@@ -1420,26 +1379,26 @@ module ActiveLDAP
         end
       else
         entries = collect_modified_entries(ldap_data, data)
-        @@logger.debug {'#save: traversing data complete'}
+        logger.debug {'#save: traversing data complete'}
         begin
-          @@logger.debug {"#save: modifying #{dn}"}
+          logger.debug {"#save: modifying #{dn}"}
           self.class.modify(dn, entries)
-          @@logger.debug {'#save: modify successful'}
+          logger.debug {'#save: modify successful'}
 #         rescue Error
 #           raise SaveError.new("Failed to modify: '#{entries}'")
         end
       end
-      @@logger.debug {"#save: resetting @ldap_data to a dup of @data"}
+      logger.debug {"#save: resetting @ldap_data to a dup of @data"}
       @ldap_data = Marshal.load(Marshal.dump(data))
       # Delete items disallowed by objectclasses.
       # They should have been removed from ldap.
-      @@logger.debug {'#save: removing attributes from @ldap_data not ' +
+      logger.debug {'#save: removing attributes from @ldap_data not ' +
                       'sent in data'}
       bad_attrs.each do |remove_me|
         @ldap_data.delete(remove_me)
       end
-      @@logger.debug {'#save: @ldap_data reset complete'}
-      @@logger.debug {'stub: save exited'}
+      logger.debug {'#save: @ldap_data reset complete'}
+      logger.debug {'stub: save exited'}
       self
     end
   end # Base
