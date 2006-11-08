@@ -2,6 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.add_dependency('log4r', '>= 1.0.4')
+  s.add_dependency('activerecord')
   s.name = 'ruby-activeldap'
   s.version = "0.8.0"
   s.platform = Gem::Platform::RUBY

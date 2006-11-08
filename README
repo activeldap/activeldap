@@ -23,6 +23,7 @@ PREREQUISITES
   * Ruby 1.8.x [1]
   * Ruby/LDAP [0]
   * Log4r [5]
+  * ActiveRecord [2]
   * (Optional) Ruby/LDAP+GSSAPI [3]
   * An LDAP server compatible with Ruby/LDAP: OpenLDAP, etc
   * Examples also require: Ruby/Password [4]
