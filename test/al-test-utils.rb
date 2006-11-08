@@ -130,14 +130,13 @@ module AlTestUtils
         dc_class = Class.new(ActiveLDAP::Base)
         dc_class.ldap_mapping :dnattr => "dc",
                               :prefix => "",
+                              :scope => :base,
                               :classes => ["top", "dcObject", "organization"]
         dc_class.instance_variable_set("@base", prefix)
-        begin
-          dc = dc_class.new(value)
-          dc.o = dc.dc
-          dc.save
-        rescue ActiveLDAP::SaveError
-        end
+        next if dc_class.exists?(value, :prefix => "dc=#{value}")
+        dc = dc_class.new(value)
+        dc.o = dc.dc
+        dc.save
       end
     end
 
