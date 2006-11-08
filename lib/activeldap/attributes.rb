@@ -35,17 +35,15 @@ module ActiveLDAP
         rubyish_class_name = to_rubyish_name(value.class.name)
         handler = "normalize_attribute_value_of_#{rubyish_class_name}"
         if respond_to?(handler, true)
-          [name, send(handler, name, value,
-                      schema.single_value?(name),
-                      schema.binary_required?(name))]
+          [name, send(handler, name, value)]
         else
           [name, [value.to_s]]
         end
       end
 
       private
-      def normalize_attribute_value_of_array(name, value, single, binary)
-        if single and value.size > 1
+      def normalize_attribute_value_of_array(name, value)
+        if value.size > 1 and schema.single_value?(name)
           raise TypeError, "Attribute #{name} can only have a single value"
         end
         value.collect do |entry|
@@ -59,7 +57,7 @@ module ActiveLDAP
         end
       end
 
-      def normalize_attribute_value_of_hash(name, value, single, binary)
+      def normalize_attribute_value_of_hash(name, value)
         if value.keys.size > 1
           raise TypeError, "Hashes must have one key-value pair only."
         end
@@ -68,36 +66,112 @@ module ActiveLDAP
                        "#{value.keys[0]}"}
         end
         # Contents MUST be a String or an Array
-        if value.keys[0] != 'binary' and binary
+        if value.keys[0] != 'binary' and schema.binary_required?(name)
           suffix, real_value = extract_subtypes(value)
-          value = make_subtypes(name + suffix + ';binary', real_value)
+          name, values = make_subtypes(name + suffix + ';binary', real_value)
+          values
+        else
+          [value]
         end
-        [value]
       end
 
-      def normalize_attribute_value_of_string(name, value, single, binary)
-        [binary ? {'binary' => [value]} : value]
+      def normalize_attribute_value_of_string(name, value)
+        [schema.binary_required?(name) ? {'binary' => [value]} : value]
       end
 
-      def normalize_attribute_value_of_date(name, value, single, binary)
+      def normalize_attribute_value_of_date(name, value)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, 0, 0, 0,
                             '+0000')
-        normalize_attribute_value_of_string(name, new_value, single, binary)
+        normalize_attribute_value_of_string(name, new_value)
       end
 
-      def normalize_attribute_value_of_time(name, value, single, binary)
+      def normalize_attribute_value_of_time(name, value)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             0, 0, 0, value.hour, value.min, value.sec,
                             value.zone)
-        normalize_attribute_value_of_string(name, new_value, single, binary)
+        normalize_attribute_value_of_string(name, new_value)
       end
 
-      def normalize_attribute_value_of_date_time(name, value, single, binary)
+      def normalize_attribute_value_of_date_time(name, value)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, value.hour,
                             value.min, value.sec, value.zone)
-        normalize_attribute_value_of_string(name, new_value, single, binary)
+        normalize_attribute_value_of_string(name, new_value)
+      end
+
+
+      # make_subtypes
+      #
+      # Makes the Hashized value from the full attributename
+      # e.g. userCertificate;binary => "some_bin"
+      #      becomes userCertificate => {"binary" => "some_bin"}
+      def make_subtypes(attr, value)
+        logger.debug {"stub: called make_subtypes(#{attr.inspect}, " +
+                      "#{value.inspect})"}
+        return [attr, value] unless attr.match(/;/)
+
+        ret_attr, *subtypes = attr.split(/;/)
+        return [ret_attr, [make_subtypes_helper(subtypes, value)]]
+      end
+
+      # make_subtypes_helper
+      #
+      # This is a recursive function for building
+      # nested hashed from multi-subtyped values
+      def make_subtypes_helper(subtypes, value)
+        logger.debug {"stub: called make_subtypes_helper" +
+                      "(#{subtypes.inspect}, #{value.inspect})"}
+        return value if subtypes.size == 0
+        return {subtypes[0] => make_subtypes_helper(subtypes[1..-1], value)}
+      end
+
+      def unnormalize_attributes(attributes)
+        result = {}
+        attributes.each do |name, values|
+          unnormalize_attribute(name, values, result)
+        end
+        result
+      end
+
+      def unnormalize_attribute(name, values, result={})
+        if values.empty?
+          result[name] = []
+        else
+          values.each do |value|
+            if value.is_a?(Hash)
+              suffix, real_value = extract_subtypes(value)
+              new_name = name + suffix
+              result[new_name] ||= []
+              result[new_name].concat(real_value)
+            else
+              result[name] ||= []
+              result[name] << value.dup
+            end
+          end
+        end
+        result
+      end
+
+      # extract_subtypes
+      #
+      # Extracts all of the subtypes from a given set of nested hashes
+      # and returns the attribute suffix and the final true value
+      def extract_subtypes(value)
+        logger.debug {"stub: called extract_subtypes(#{value.inspect})"}
+        subtype = ''
+        ret_val = value
+        if value.class == Hash
+          subtype = ';' + value.keys[0]
+          ret_val = value[value.keys[0]]
+          subsubtype = ''
+          if ret_val.class == Hash
+            subsubtype, ret_val = extract_subtypes(ret_val)
+          end
+          subtype += subsubtype
+        end
+        ret_val = [ret_val] unless ret_val.class == Array
+        return subtype, ret_val
       end
     end
 

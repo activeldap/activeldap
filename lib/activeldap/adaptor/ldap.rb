@@ -214,16 +214,11 @@ module ActiveLDAP
               i += 1
               attributes = {}
               m.attrs.each do |attr|
-                normalized_attr, normalized_value =
-                  make_subtypes(attr, m.vals(attr))
-                if attrs.empty? or attrs.member?(normalized_attr)
-                  attributes[normalized_attr] ||= []
-                  attributes[normalized_attr].concat(normalized_value)
-                end
+                attributes[attr] = m.vals(attr)
               end
-              value = [m.dn.dup, attributes]
+              value = [m.dn, attributes]
+              value = yield(value) if block_given?
               values.push(value)
-              yield(value) if block_given?
               break if limit and limit >= i
             end
           end
@@ -245,7 +240,7 @@ module ActiveLDAP
 
       def to_ldif(dn, attributes)
         ldif = LDAP::LDIF.to_ldif("dn", [dn.dup])
-        unnormalize_attributes(attributes).sort_by do |key, value|
+        attributes.sort_by do |key, value|
           key
         end.each do |key, values|
           ldif << LDAP::LDIF.to_ldif(key, values)
@@ -297,7 +292,6 @@ module ActiveLDAP
             @connection.modify(dn, parse_entries(entries))
           end
         rescue LDAP::UndefinedType
-          p [dn, parse_entries(entries)]
           raise
         rescue LDAP::ObjectClassViolation
           raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
@@ -433,11 +427,11 @@ module ActiveLDAP
 
       def parse_entries(entries)
         result = []
-        entries.each do |type, key, value|
+        entries.each do |type, key, attributes|
           mod_type = ensure_mod_type(type)
           binary = schema.binary?(key)
           mod_type |= LDAP::LDAP_MOD_BVALUES if binary
-          unnormalize_attribute(key, value).each do |name, values|
+          attributes.each do |name, values|
             next if binary and values.empty?
             result << LDAP.mod(mod_type, name, values)
           end

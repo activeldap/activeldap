@@ -302,8 +302,17 @@ module ActiveLDAP
         connection.search(:base => _base,
                           :scope => options[:scope] || ldap_scope,
                           :filter => filter,
-                          :limit => options[:limit],
-                          &block)
+                          :limit => options[:limit]) do |dn, attrs|
+          attributes = {}
+          attrs.each do |key, value|
+            normalized_attr, normalized_value = make_subtypes(key, value)
+            attributes[normalized_attr] ||= []
+            attributes[normalized_attr].concat(normalized_value)
+          end
+          value = [dn, attributes]
+          value = yield(value) if block_given?
+          value
+        end
       end
 
       # This class function is used to setup all mappings between the subclass
@@ -404,10 +413,14 @@ module ActiveLDAP
       def dump(options={})
         ldifs = []
         options = {:base => base, :scope => ldap_scope}.merge(options)
-        connection.search(options).each do |dn, attributes|
-          ldifs << connection.to_ldif(dn, attributes)
+        connection.search(options) do |dn, attributes|
+          ldifs << to_ldif(dn, attributes)
         end
         ldifs.join("\n")
+      end
+
+      def to_ldif(dn, attributes)
+        connection.to_ldif(dn, unnormalize_attributes(attributes))
       end
 
       def load(ldifs)
@@ -452,11 +465,17 @@ module ActiveLDAP
       end
 
       def add(dn, entries, options={})
-        connection.add(dn, entries, options)
+        unnormalized_entries = entries.collect do |type, key, value|
+          [type, key, unnormalize_attribute(key, value)]
+        end
+        connection.add(dn, unnormalized_entries, options)
       end
 
       def modify(dn, entries, options={})
-        connection.modify(dn, entries, options)
+        unnormalized_entries = entries.collect do |type, key, value|
+          [type, key, unnormalize_attribute(key, value)]
+        end
+        connection.modify(dn, unnormalized_entries, options)
       end
 
       def to_rubyish_name(name)
@@ -540,7 +559,9 @@ module ActiveLDAP
         end
 
         entries = attributes.collect do |name, value|
-          [:replace, *normalize_attribute(name, value)]
+          normalized_name, normalized_value = normalize_attribute(name, value)
+          [:replace, normalized_name,
+           unnormalize_attribute(normalized_name, normalized_value)]
         end
         targets.each do |dn|
           connection.modify(dn, entries, options)
@@ -955,7 +976,7 @@ module ActiveLDAP
     end
 
     def to_ldif
-      connection.to_ldif(dn, normalize_data(@data))
+      self.class.to_ldif(dn, normalize_data(@data))
     end
 
     def to_xml(options={})
@@ -1223,7 +1244,7 @@ module ActiveLDAP
 
       # Return the passed in value
       logger.debug {"stub: exiting set_attribute"}
-      return @data[attr]
+      @data[attr]
     end
 
 

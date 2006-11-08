@@ -210,19 +210,19 @@ module ActiveLDAP
     end
 
     def attribute_type(name, attribute_name)
-      cache([:attribute_type, [name, attribute_name]]) do
+      cache([:attribute_type, name, attribute_name]) do
         attribute("attributeTypes", name, attribute_name)
       end
     end
 
     def ldap_syntax(name, attribute_name)
-      cache([:ldap_syntax, [name, attribute_name]]) do
+      cache([:ldap_syntax, name, attribute_name]) do
         attribute("ldapSyntaxes", name, attribute_name)
       end
     end
 
     def object_class(name, attribute_name)
-      cache([:object_class, [name, attribute_name]]) do
+      cache([:object_class, name, attribute_name]) do
         attribute("objectClasses", name, attribute_name)
       end
     end
