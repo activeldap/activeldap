@@ -754,7 +754,7 @@ module ActiveLDAP
     def initialize(attributes=nil)
       init_base
       @new_entry = true
-      apply_objectclass(required_classes)
+      apply_object_class(required_classes)
       if attributes.is_a?(String) or
           (attributes.is_a?(Array) and
            attributes.collect {|attr| attr.class} == [String])
@@ -1022,7 +1022,7 @@ module ActiveLDAP
       init_base
       @new_entry = false
       @ldap_data = attributes
-      apply_objectclass(@ldap_data['objectClass'])
+      apply_object_class(@ldap_data['objectClass'])
       self.attributes = attributes
       yield self if block_given?
     end
@@ -1038,7 +1038,7 @@ module ActiveLDAP
     def ensure_apply_object_class
       current_object_class = @data['objectClass']
       return if current_object_class.nil? or current_object_class == @last_oc
-      apply_objectclass(current_object_class)
+      apply_object_class(current_object_class)
     end
 
     # enforce_type
@@ -1065,14 +1065,14 @@ module ActiveLDAP
       @base = nil
     end
 
-    # apply_objectclass
+    # apply_object_class
     #
     # objectClass= special case for updating appropriately
     # This updates the objectClass entry in @data. It also
     # updating all required and allowed attributes while
     # removing defined attributes that are no longer valid
     # given the new objectclasses.
-    def apply_objectclass(val)
+    def apply_object_class(val)
       logger.debug {"stub: objectClass=(#{val.inspect}) called"}
       new_oc = val
       new_oc = [val] if new_oc.class != Array
