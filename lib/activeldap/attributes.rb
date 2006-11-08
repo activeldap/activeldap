@@ -47,12 +47,6 @@ module ActiveLDAP
           raise TypeError, "Attribute #{name} can only have a single value"
         end
         value.collect do |entry|
-          if entry.class != Hash
-            logger.debug {"coercing value for #{name} into a string " +
-                          "because nested values exceeds a useful depth: " +
-                          "#{entry.inspect} -> #{entry.to_s}"}
-            entry = entry.to_s
-          end
           normalize_attribute(name, entry)[1][0]
         end
       end

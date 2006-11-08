@@ -161,7 +161,7 @@ module ActiveLDAP
 
     private
     def cache(key)
-      @cache[key] ||= yield
+      (@cache[key] ||= [yield])[0]
     end
 
     def ensure_schema_info(group)
