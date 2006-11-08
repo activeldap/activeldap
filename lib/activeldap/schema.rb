@@ -4,6 +4,7 @@ module ActiveLDAP
       @entries = entries
       @schema_info = {}
       @class_attributes_info = {}
+      @cache = {}
     end
 
     def names(group)
@@ -67,7 +68,9 @@ module ActiveLDAP
     # Returns all names from the LDAP schema for the
     # attribute given.
     def attribute_aliases(name)
-      attribute_type(name, 'NAME')
+      cache([:attribute_aliases, name]) do
+        attribute_type(name, 'NAME')
+      end
     end
 
     # read_only?
@@ -75,7 +78,9 @@ module ActiveLDAP
     # Returns true if an attribute is read-only
     # NO-USER-MODIFICATION
     def read_only?(name)
-      attribute_type(name, 'NO-USER-MODIFICATION')[0] == 'TRUE'
+      cache([:read_only?, name]) do
+        attribute_type(name, 'NO-USER-MODIFICATION')[0] == 'TRUE'
+      end
     end
 
     # single_value?
@@ -84,7 +89,9 @@ module ActiveLDAP
     # value defined
     # SINGLE-VALUE
     def single_value?(name)
-      attribute_type(name, 'SINGLE-VALUE')[0] == 'TRUE'
+      cache([:single_value?, name]) do
+        attribute_type(name, 'SINGLE-VALUE')[0] == 'TRUE'
+      end
     end
 
     # binary?
@@ -92,21 +99,25 @@ module ActiveLDAP
     # Returns true if the given attribute's syntax
     # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
     def binary?(name)
-      # Get syntax OID
-      syntax = attribute_type(name, 'SYNTAX')[0]
-      !syntax.nil? and
-        (ldap_syntax(syntax, 'X-NOT-HUMAN-READABLE') == ["TRUE"] or
-         ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"])
+      cache([:binary?, name]) do
+        # Get syntax OID
+        syntax = attribute_type(name, 'SYNTAX')[0]
+        !syntax.nil? and
+          (ldap_syntax(syntax, 'X-NOT-HUMAN-READABLE') == ["TRUE"] or
+           ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"])
+      end
     end
 
     # binary_required?
     #
     # Returns true if the value MUST be transferred in binary
     def binary_required?(name)
-      # Get syntax OID
-      syntax = attribute_type(name, 'SYNTAX')[0]
-      !syntax.nil? and
-        ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"]
+      cache([:binary_required?, name]) do
+        # Get syntax OID
+        syntax = attribute_type(name, 'SYNTAX')[0]
+        !syntax.nil? and
+          ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"]
+      end
     end
 
     # class_attributes
@@ -114,46 +125,45 @@ module ActiveLDAP
     # Returns an Array of all the valid attributes (but not with full aliases)
     # for the given objectClass
     def class_attributes(objc)
-      if @class_attributes_info.has_key?(objc)
-        return @class_attributes_info[objc].dup
-      end
+      cache([:class_attributes, objc]) do
+        # First get all the current level attributes
+        must = object_class(objc, 'MUST')
+        may = object_class(objc, 'MAY')
 
-      # First get all the current level attributes
-      must = object_class(objc, 'MUST')
-      may = object_class(objc, 'MAY')
+        # Now add all attributes from the parent object (SUPerclasses)
+        # Hopefully an iterative approach will be pretty speedy
+        # 1. build complete list of SUPs
+        # 2. Add attributes from each
+        sups = object_class(objc, 'SUP')
+        loop do
+          start_size = sups.size
+          new_sups = []
+          sups.each do |sup|
+            new_sups.concat(object_class(sup, 'SUP'))
+          end
 
-      # Now add all attributes from the parent object (SUPerclasses)
-      # Hopefully an iterative approach will be pretty speedy
-      # 1. build complete list of SUPs
-      # 2. Add attributes from each
-      sups = object_class(objc, 'SUP')
-      loop do
-        start_size = sups.size
-	new_sups = []
+          sups.concat(new_sups)
+          sups.uniq!
+          break if sups.size == start_size
+        end
         sups.each do |sup|
-          new_sups.concat(object_class(sup, 'SUP'))
+          must.concat(object_class(sup, 'MUST'))
+          may.concat(object_class(sup, 'MAY'))
         end
 
-	sups.concat(new_sups)
-	sups.uniq!
-        break if sups.size == start_size
-      end
-      sups.each do |sup|
-        must.concat(object_class(sup, 'MUST'))
-	may.concat(object_class(sup, 'MAY'))
-      end
+        # Clean out the dupes.
+        must.uniq!
+        may.uniq!
 
-      # Clean out the dupes.
-      must.uniq!
-      may.uniq!
-
-      @class_attributes_info[objc] = info = {:must => must, :may => may}
-
-      # Return the cached value
-      return info.dup
+        {:must => must, :may => may}
+      end.dup
     end
 
     private
+    def cache(key)
+      @cache[key] ||= yield
+    end
+
     def ensure_schema_info(group)
       @schema_info[group] ||= {:ids => {}, :aliases => {}}
       info = @schema_info[group]
@@ -200,15 +210,21 @@ module ActiveLDAP
     end
 
     def attribute_type(name, attribute_name)
-      attribute("attributeTypes", name, attribute_name)
+      cache([:attribute_type, [name, attribute_name]]) do
+        attribute("attributeTypes", name, attribute_name)
+      end
     end
 
     def ldap_syntax(name, attribute_name)
-      attribute("ldapSyntaxes", name, attribute_name)
+      cache([:ldap_syntax, [name, attribute_name]]) do
+        attribute("ldapSyntaxes", name, attribute_name)
+      end
     end
 
     def object_class(name, attribute_name)
-      attribute("objectClasses", name, attribute_name)
+      cache([:object_class, [name, attribute_name]]) do
+        attribute("objectClasses", name, attribute_name)
+      end
     end
 
     def alias_map(group)

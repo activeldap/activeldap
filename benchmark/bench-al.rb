@@ -1,13 +1,13 @@
 base = File.dirname(__FILE__)
 $LOAD_PATH.unshift(File.expand_path(base))
-$LOAD_PATH.unshift(File.expand_path(File.join(base, "..", "..", "lib")))
+$LOAD_PATH.unshift(File.expand_path(File.join(base, "..", "lib")))
 
 require "activeldap"
 require "benchmark"
 
 LDAP_SERVER = "127.0.0.1"
 LDAP_PORT = 389
-LDAP_BASE = "dc=localdomain"
+LDAP_BASE = ENV["LDAP_BASE"] || "dc=localdomain"
 LDAP_PREFIX = "ou=People"
 LDAP_USER = nil
 LDAP_PASSWORD = nil
