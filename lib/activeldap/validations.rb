@@ -23,7 +23,7 @@ module ActiveLDAP
           def evaluate_condition(condition, entry)
             evaluate_condition_for_active_record(condition, entry)
           rescue ActiveRecord::ActiveRecordError
-            raise Error, $!.message, $@
+            raise Error, $!.message
           end
         end
 
@@ -32,7 +32,7 @@ module ActiveLDAP
         def save_with_validation!
           save_with_validation_for_active_record!
         rescue ActiveRecord::RecordInvalid
-          raise EntryInvalid, $!.message, $@
+          raise EntryInvalid, $!.message
         end
         alias_method :save!, :save_with_validation!
 
@@ -74,7 +74,7 @@ module ActiveLDAP
         def run_validations(validation_method)
           run_validations_for_active_record(validation_method)
         rescue ActiveRecord::ActiveRecordError
-          raise Error, $!.message, $@
+          raise Error, $!.message
         end
       end
     end

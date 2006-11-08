@@ -4,6 +4,8 @@ class ValidationTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_save!
     make_temporary_group do |group|
       group.description = ""
@@ -33,6 +35,4 @@ class ValidationTest < Test::Unit::TestCase
       assert_equal(1, group.errors.size)
     end
   end
-
-  priority :normal
 end

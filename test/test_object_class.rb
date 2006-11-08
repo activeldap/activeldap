@@ -4,6 +4,8 @@ class ObjectClassTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_unknown_object_class
     make_temporary_group do |group|
       assert_raises(ActiveLDAP::ObjectClassError) do

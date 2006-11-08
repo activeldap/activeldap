@@ -840,16 +840,13 @@ module ActiveLDAP
     # either adding or replacing attributes
     # TODO: Relative DN support
     def save
-      save_internal
-      true
-    rescue SaveError, AttributeEmpty
-      false
+      create_or_update
     end
 
     def save!
-      save_internal
-    rescue SaveError, AttributeEmpty
-      raise EntryNotSaved, "entry #{dn} isn't saved: #{$!.message}(#{$!.class})"
+      unless create_or_update
+        raise EntryNotSaved, "entry #{dn} can't saved"
+      end
     end
 
     # method_missing
@@ -1350,7 +1347,11 @@ module ActiveLDAP
       end
     end
 
-    def save_internal
+    def create_or_update
+      new_entry? ? create : update
+    end
+
+    def prepare_data_for_saving
       logger.debug {"stub: save called"}
 
       # Expand subtypes to real ldap_data entries
@@ -1366,40 +1367,56 @@ module ActiveLDAP
       data = normalize_data(@data, bad_attrs)
       logger.debug {'#save: subtypes expanded for @data'}
 
-      if new_entry? # add everything!
+      success = yield(data, ldap_data)
+
+      if success
+        logger.debug {"#save: resetting @ldap_data to a dup of @data"}
+        @ldap_data = Marshal.load(Marshal.dump(data))
+        # Delete items disallowed by objectclasses.
+        # They should have been removed from ldap.
+        logger.debug {'#save: removing attributes from @ldap_data not ' +
+                      'sent in data'}
+        bad_attrs.each do |remove_me|
+          @ldap_data.delete(remove_me)
+        end
+        logger.debug {'#save: @ldap_data reset complete'}
+      end
+
+      logger.debug {'stub: save exited'}
+      success
+    end
+
+    def create
+      prepare_data_for_saving do |data, ldap_data|
         entries = collect_all_entries(data)
         begin
           logger.debug {"#save: adding #{dn}"}
           self.class.add(dn, entries)
           logger.debug {"#write: add successful"}
           @new_entry = false
+          true
         rescue DistinguishedNameInvalid, EntryAlreadyExist,
           StrongAuthenticationRequired
-          raise SaveError, "Failed to add (#{$!.message}): '#{entries}'"
+          logger.warn {"Failed to add (#{$!.message}): '#{entries}'"}
+          false
         end
-      else
+      end
+    end
+
+    def update
+      prepare_data_for_saving do |data, ldap_data|
         entries = collect_modified_entries(ldap_data, data)
         logger.debug {'#save: traversing data complete'}
         begin
           logger.debug {"#save: modifying #{dn}"}
           self.class.modify(dn, entries)
           logger.debug {'#save: modify successful'}
+          true
 #         rescue Error
 #           raise SaveError.new("Failed to modify: '#{entries}'")
+#           false
         end
       end
-      logger.debug {"#save: resetting @ldap_data to a dup of @data"}
-      @ldap_data = Marshal.load(Marshal.dump(data))
-      # Delete items disallowed by objectclasses.
-      # They should have been removed from ldap.
-      logger.debug {'#save: removing attributes from @ldap_data not ' +
-                      'sent in data'}
-      bad_attrs.each do |remove_me|
-        @ldap_data.delete(remove_me)
-      end
-      logger.debug {'#save: @ldap_data reset complete'}
-      logger.debug {'stub: save exited'}
-      self
     end
   end # Base
 end # ActiveLDAP

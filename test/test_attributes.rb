@@ -4,6 +4,8 @@ class AttributesTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_attr_protected
     user = @user_class.new(:uid => "XXX")
     assert_equal("XXX", user.uid)
