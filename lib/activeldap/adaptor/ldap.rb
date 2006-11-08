@@ -133,8 +133,6 @@ module ActiveLDAP
             @logger.error {"Reconnect to server failed backtrace: " +
                             detail.backtrace.join("\n")}
             # Do not loop if forced
-            p detail
-            puts detail
             raise ConnectionError, detail.message if force
           end
 
@@ -318,9 +316,6 @@ module ActiveLDAP
             block.call
           rescue LDAP::ResultError
             raise *LDAP::err2exception(@connection.err) if @connection.err != 0
-            p "unknown error: #{$!.class}: #{$!}"
-            puts $@
-            raise
           end
         end
       end
