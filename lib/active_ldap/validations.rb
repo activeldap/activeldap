@@ -1,10 +1,4 @@
-begin
-  require 'active_record/validations'
-rescue LoadError
-  require 'rubygems'
-  require_gem 'activerecord'
-  require 'active_record/validations'
-end
+require 'active_record/validations'
 
 module ActiveLdap
   module Validations

@@ -927,6 +927,18 @@ if RUBY_PLATFORM.match('linux')
 else
   require 'active_ldap/timeout_stub'
 end
+
+require_gem_if_need = Proc.new do |library_name, gem_name|
+  begin
+    require library_name
+  rescue LoadError
+    require 'rubygems'
+    require_gem gem_name
+    require library_name
+  end
+end
+
+require_gem_if_need.call("active_support", "activesupport")
 require 'active_ldap/base'
 require 'active_ldap/associations'
 require 'active_ldap/configuration'
@@ -935,6 +947,7 @@ require 'active_ldap/attributes'
 require 'active_ldap/object_class'
 require 'active_ldap/adaptor/ldap'
 
+require_gem_if_need.call("active_record/base", "activerecord")
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
 
