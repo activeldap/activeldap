@@ -1,42 +1,49 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
-
-require 'time'
-class Time
-  def time_with_usecs
-    return self.strftime('%F %H:%M:%S') + ':' + self.usec.to_s
-  end
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME CN UID"
 end
 
-puts "Changing user #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-log = Log4r::Logger.new 'mylog'
-log.trace = true
-log.outputters = Log4r::Outputter.stdout
-log.level = Log4r::DEBUG
+if argv.size == 3
+  name, cn, uid = argv
+else
+  $stderr.puts opts
+  exit 1
+end
 
-pf = Log4r::PatternFormatter.new(:pattern => "[%l] (%d) %t: %m", :date_method => "time_with_usecs")
-Log4r::Outputter.stdout.formatter = pf
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
 
-ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb, :allow_anonymous => false, :logger => log)
-user = User.new(ARGV[0])
-user.cn = ARGV[1]
-user.uidNumber = ARGV[2]
-user.gidNumber = ARGV[2]
-user.homeDirectory = "/home/foo"
-user.objectClass = user.objectClass << 'strongAuthenticationUser'
-user.userCertificate = File.read('example.der')
-user.write
-puts "success"
-exit 0
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+unless User.exists?(name)
+  $stderr.puts("User #{name} doesn't exist.")
+  exit 1
+end
+
+user = User.find(name)
+user.cn = cn
+user.uid_number = uid
+user.gid_number = uid
+
+user.add_class('strongAuthenticationUser')
+cert_file = File.join(File.dirname(__FILE__), 'example.der')
+user.user_certificate = File.read(cert_file)
+
+unless user.save
+  puts "failed"
+  puts user.errors.full_messages
+  exit 1
+end
 
 
