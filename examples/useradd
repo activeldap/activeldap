@@ -1,28 +1,44 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
 
-require 'activeldap'
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME CN UID"
+end
 
-puts "Adding user #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
-user = User.new(ARGV[0])
-user.objectClass = user.objectClass  << 'posixAccount' << 'shadowAccount'
-user.cn = ARGV[1]
-user.uidNumber = ARGV[2]
-user.gidNumber = ARGV[2]
-user.homeDirectory = "/home/#{ARGV[0]}"
+if argv.size == 3
+  name, cn, uid = argv
+else
+  $stderr.puts opts
+  exit 1
+end
+
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+if User.exists?(name)
+  $stderr.puts("User #{name} already exists.")
+  exit 1
+end
+
+user = User.new(name)
+user.add_class('shadowAccount')
+user.cn = cn
+user.uid_number = uid
+user.gid_number = uid
+user.home_directory = "/home/#{name}"
 user.sn = "somesn"
-user.validate
-user.write
-puts "success"
-exit 0
-
-
+unless user.save
+  puts "failed"
+  puts user.errors.full_messages
+  exit 1
+end

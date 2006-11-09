@@ -15,25 +15,25 @@ class ConnectionTest < Test::Unit::TestCase
   def test_can_reconnect?
     assert(!ActiveLdap::Base.connected?)
 
-    config = connect_config.merge({:retry_limit => 10})
+    config = establish_connection_config.merge({:retry_limit => 10})
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     connection.instance_variable_set("@reconnect_attempts", 10)
     assert(!connection.can_reconnect?)
 
-    config = connect_config.merge({:retry_limit => 10})
+    config = establish_connection_config.merge({:retry_limit => 10})
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     connection.instance_variable_set("@reconnect_attempts", 9)
     assert(!connection.can_reconnect?)
 
-    config = connect_config.merge({:retry_limit => 10})
+    config = establish_connection_config.merge({:retry_limit => 10})
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     connection.instance_variable_set("@reconnect_attempts", 8)
     assert(connection.can_reconnect?)
 
-    config = connect_config.merge({:retry_limit => -1})
+    config = establish_connection_config.merge({:retry_limit => -1})
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     connection.instance_variable_set("@reconnect_attempts", -10)

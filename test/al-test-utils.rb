@@ -4,8 +4,11 @@ require 'test-unit-ext'
 require 'yaml'
 require 'socket'
 require 'openssl'
+require 'rbconfig'
 
 require 'active_ldap'
+
+require File.join(File.expand_path(File.dirname(__FILE__)), "command")
 
 module AlTestUtils
   def self.included(base)
@@ -14,6 +17,7 @@ module AlTestUtils
       include Connection
       include Populate
       include TemporaryEntry
+      include CommandSupport
     end
   end
 
@@ -40,7 +44,7 @@ module AlTestUtils
       YAML.load(File.read(config_file))
     end
 
-    def connect_config
+    def establish_connection_config
       config = {}
       %w(user bind_format password password_block logger host port
          base try_sasl allow_anonymous retries sasl_quiet method
@@ -78,7 +82,7 @@ module AlTestUtils
   module Connection
     def setup
       super
-      ActiveLdap::Base.establish_connection(connect_config)
+      ActiveLdap::Base.establish_connection(establish_connection_config)
     end
 
     def teardown
@@ -101,7 +105,7 @@ module AlTestUtils
 
     def teardown
       if @dumped_data
-        ActiveLdap::Base.establish_connection(connect_config)
+        ActiveLdap::Base.establish_connection(establish_connection_config)
         ActiveLdap::Base.delete_all(nil, :scope => :sub)
         ActiveLdap::Base.load(@dumped_data)
       end
@@ -149,9 +153,13 @@ module AlTestUtils
     end
 
     def populate_ou
-      %w(Users Groups).each do |ou_name|
-        ou_class.new(ou_name).save
+      %w(Users Groups).each do |name|
+        make_ou(name)
       end
+    end
+
+    def make_ou(name)
+      ou_class.new(name).save
     end
 
     def populate_user_class
@@ -320,6 +328,34 @@ module AlTestUtils
 
     def jpeg_photo
       File.read(jpeg_photo_path)
+    end
+  end
+
+  module CommandSupport
+    def setup
+      super
+      @fakeroot = "fakeroot"
+      @ruby = File.join(::Config::CONFIG["bindir"],
+                        ::Config::CONFIG["RUBY_INSTALL_NAME"])
+      @top_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+      @examples_dir = File.join(@top_dir, "examples")
+      @lib_dir = File.join(@top_dir, "lib")
+      @ruby_args = [
+                    "-I", @examples_dir,
+                    "-I", @lib_dir,
+                   ]
+    end
+
+    def run_ruby(*ruby_args, &block)
+      args = [@ruby, *@ruby_args]
+      args.concat(ruby_args)
+      Command.run(*args, &block)
+    end
+
+    def run_ruby_with_fakeroot(*ruby_args, &block)
+      args = [@fakeroot, @ruby, *@ruby_args]
+      args.concat(ruby_args)
+      Command.run(*args, &block)
     end
   end
 end
