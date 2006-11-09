@@ -42,7 +42,7 @@ class BindTest < Test::Unit::TestCase
 
   def test_failed_bind
     assert(!ActiveLdap::Base.connected?)
-    assert_raises(LDAP::InvalidCredentials) do
+    assert_raises(ActiveLdap::AuthenticationError) do
       config = establish_connection_config
       config.delete(:user)
       config[:allow_anonymous] = false

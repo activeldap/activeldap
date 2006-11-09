@@ -46,6 +46,11 @@ module ActiveLdap
         loaded
       end
 
+      def exists?
+        load_target
+        not @target.nil?
+      end
+
       private
       def method_missing(method, *args, &block)
         load_target

@@ -167,8 +167,12 @@ module ActiveLdap
         elsif @allow_anonymous and bind_as_anonymous(options)
           @logger.info {'Bound anonymous'}
         else
-          raise *LDAP::err2exception(@connection.err) if @connection.err != 0
-          raise AuthenticationError, 'All authentication methods exhausted.'
+          if @connection.err.zero?
+            message = 'All authentication methods exhausted.'
+          else
+            message = LDAP.err2string(@connection.err)
+          end
+          raise AuthenticationError, message
         end
 
         bound?

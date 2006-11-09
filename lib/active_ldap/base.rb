@@ -374,6 +374,10 @@ module ActiveLdap
         end.join(",")
       end
 
+      def prefix
+        @prefix
+      end
+
       # Base.required_classes
       #
       # This method when included into Base provides
@@ -758,7 +762,7 @@ module ActiveLdap
         if name.empty?
           nil
         else
-          "ou=#{Inflector.pluralize(Infletor.demodulize(name))}"
+          "ou=#{Inflector.pluralize(Inflector.demodulize(name))}"
         end
       end
     end

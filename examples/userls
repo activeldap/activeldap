@@ -1,56 +1,49 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
-require 'activeldap'
+
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
-require 'log4r'
+
 require 'base64'
 
-(printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
-
-pwb = Proc.new {
-    Password.get('Password:')
-}
-logger = Log4r::Logger.new('userls')
-logger.outputters = Log4r::StderrOutputter.new('')
-#logger.level = Log4r::DEBUG
-logger.level = Log4r::FATAL
-ActiveLDAP::Base.connect(:password_block => pwb, :logger => logger)
-user = User.new(ARGV[0])
-exit 1 unless user.exists?
-puts "DN: #{user.dn}"
-user.attributes.each do |attr|
-  binary = false
-  value = user.send(attr.to_sym)
-  value.map! do |x| 
-    if x.class == Hash and x.keys[0] == 'binary'
-      binary = true
-      foo = []
-      x['binary'].each do |v|
-        foo.push(Base64::encode64(v))
-      end
-      foo
-    else
-      x
-    end
-  end
-  value = "[ " + value.join(', ') + " ]"
-  attr += ";binary" if binary
-  printf("%s: \n%s\n", attr, value) unless value.to_s.empty?
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME"
 end
 
-pgrp = Group.find(:attribute => 'gidNumber',
-                  :value => user.gidNumber[0],
-                  :objects => true)
-grps = []
-unless pgrp.nil?
-  grps << "#{pgrp.cn}[#{pgrp.gidNumber}]"
+if argv.size == 1
+  name = argv.shift
+else
+  $stderr.puts opts
+  exit 1
 end
-user.groups.each do |grp|
- grps << "#{grp.cn}[#{grp.gidNumber}]"
+
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
 end
-printf("Groups: %s\n", grps.join(', '))
-exit 0
 
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
 
+unless User.exists?(name)
+  $stderr.puts("User #{name} doesn't exist.")
+  exit 1
+end
+
+user = User.find(name)
+puts user.to_ldif
+
+groups = []
+primary_group = user.primary_group
+if primary_group.exists?
+  groups << "#{primary_group.cn}[#{primary_group.gid_number}]"
+end
+user.groups.sort_by do |group|
+  group.id
+end.collect do |group|
+  groups << "#{group.cn}[#{group.gid_number}]"
+end
+puts "Groups: #{groups.join(', ')}"

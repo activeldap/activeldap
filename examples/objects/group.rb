@@ -1,7 +1,6 @@
 class Group < ActiveLdap::Base
   ldap_mapping :dn_attribute => "cn",
-               :classes => ['posixGroup'],
-               :prefix => 'ou=Groups'
+               :classes => ['posixGroup']
   # Inspired by ActiveRecord, this tells ActiveLDAP that the
   # LDAP entry has a attribute which contains one or more of
   # some class |:class_name| where the attributes name is

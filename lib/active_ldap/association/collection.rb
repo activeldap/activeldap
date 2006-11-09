@@ -56,6 +56,11 @@ module ActiveLdap
         concat(added_entries)
       end
 
+      def exists?
+        load_target
+        not @target.empty?
+      end
+
       private
       def flatten_deeper(array)
         array.collect do |element|
