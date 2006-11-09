@@ -1,21 +1,36 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-(printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME"
+end
 
-puts "Changing user #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
-user = User.new(ARGV[0])
-user.delete
-puts "success"
-exit 0
+if argv.size == 1
+  name = argv.shift
+else
+  $stderr.puts opts
+  exit 1
+end
+
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+unless User.exists?(name)
+  $stderr.puts("User #{name} doesn't exist.")
+  exit 1
+end
+
+User.destroy(name)
 
 

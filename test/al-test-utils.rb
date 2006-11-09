@@ -346,6 +346,14 @@ module AlTestUtils
                    ]
     end
 
+    def run_command(*args, &block)
+      file = Tempfile.new("al-command-support")
+      file.open
+      file.puts(establish_connection_config.to_yaml)
+      file.close
+      run_ruby(*[@command, "--config", file.path, *args], &block)
+    end
+
     def run_ruby(*ruby_args, &block)
       args = [@ruby, *@ruby_args]
       args.concat(ruby_args)
