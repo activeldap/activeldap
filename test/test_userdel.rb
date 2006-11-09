@@ -11,6 +11,8 @@ class UserDelTest < Test::Unit::TestCase
   end
 
   priority :must
+
+  priority :normal
   def test_non_exist_user
     ensure_delete_user("test-user") do |uid,|
       assert(!@user_class.exists?(uid))

@@ -32,5 +32,3 @@ unless User.exists?(name)
 end
 
 User.destroy(name)
-
-
