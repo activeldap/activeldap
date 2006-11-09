@@ -101,11 +101,11 @@ class UserTest < Test::Unit::TestCase
       assert_nil(user.user_certificate)
 
       user.user_certificate = {"binary" => [certificate]}
-      assert_equal({'binary' => [certificate]},
+      assert_equal({'binary' => certificate},
                    user.user_certificate,
                    'This should have been forced to be a binary subtype.')
       assert_nothing_raised() { user.save! }
-      assert_equal({'binary' => [certificate]},
+      assert_equal({'binary' => certificate},
                    user.user_certificate,
                    'This should have been forced to be a binary subtype.')
 
@@ -116,19 +116,19 @@ class UserTest < Test::Unit::TestCase
       assert_nil(user.user_certificate)
 
       user.user_certificate = certificate
-      assert_equal({'binary' => [certificate]},
+      assert_equal({'binary' => certificate},
                    user.user_certificate,
                    'This should have been forced to be a binary subtype.')
       assert_nothing_raised() { user.save! }
 
       # validate modify
       user = @user_class.find(user.uid(true))
-      assert_equal({'binary' => [certificate]},
+      assert_equal({'binary' => certificate},
                    user.user_certificate,
                    'This should have been forced to be a binary subtype.')
 
       expected_cert = OpenSSL::X509::Certificate.new(certificate)
-      actual_cert = user.user_certificate['binary'][0]
+      actual_cert = user.user_certificate['binary']
       actual_cert = OpenSSL::X509::Certificate.new(actual_cert)
       assert_equal(expected_cert.subject.to_s,
                    actual_cert.subject.to_s,
@@ -139,10 +139,10 @@ class UserTest < Test::Unit::TestCase
   def test_binary_required_nested
     make_temporary_user do |user, password|
       user.user_certificate = {"lang-en" => [certificate]}
-      assert_equal({'lang-en' => {'binary' => [certificate]}},
+      assert_equal({'lang-en' => {'binary' => certificate}},
                    user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_equal({'lang-en' => {'binary' => [certificate]}},
+      assert_equal({'lang-en' => {'binary' => certificate}},
                    user.user_certificate)
     end
   end

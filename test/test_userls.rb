@@ -12,7 +12,7 @@ class UserLsTest < Test::Unit::TestCase
 
   priority :must
 
-#   priority :normal
+  priority :normal
   def test_non_exist_user
     ensure_delete_user("test-user") do |uid,|
       assert(!@user_class.exists?(uid))

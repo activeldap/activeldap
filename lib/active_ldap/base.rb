@@ -1277,13 +1277,23 @@ module ActiveLdap
                       "(#{value.inspect}, #{to_a.inspect})"}
       case value
       when Array
-        if to_a
-          value
+        if to_a or value.size > 1
+          value.collect {|v| array_of(v, to_a)}
         else
-          value.size <= 1 ? value.first : value
+          if value.empty?
+            nil
+          else
+            array_of(value.first, to_a)
+          end
         end
       when Hash
-        to_a ? [value] : value
+        if to_a
+          [value]
+        else
+          result = {}
+          value.each {|k, v| result[k] = array_of(v, to_a)}
+          result
+        end
       else
         to_a ? [value.to_s] : value.to_s
       end
