@@ -1,35 +1,48 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-(printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
-
-puts "Changing user #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-log = Log4r::Logger.new 'mylog'
-log.outputters = Log4r::Outputter.stdout
-log.level = Log4r::DEBUG
-ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb, :allow_anonymous => false, :logger => log)
-user = User.new(ARGV[0])
-user.cn = ARGV[1]
-user.uidNumber = ARGV[2]
-user.gidNumber = ARGV[2]
-if user.objectClass.member? 'strongAuthenticationUser'
-  user.userCertificate = nil 
-  # This is super clunky...
-  # I need to add some passthrough
-  oc = user.objectClass
-  oc.delete('strongAuthenticationUser')
-  user.objectClass = oc
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME CN UID"
 end
-user.write
-puts "success"
-exit 0
 
+if argv.size == 3
+  name, cn, uid = argv
+else
+  $stderr.puts opts
+  exit 1
+end
 
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+unless User.exists?(name)
+  $stderr.puts("User #{name} doesn't exist.")
+  exit 1
+end
+
+user = User.find(name)
+user.cn = cn
+user.uid_number = uid
+user.gid_number = uid
+
+if user.classes.include?('strongAuthenticationUser')
+  user.user_certificate = nil
+  user.remove_class('strongAuthenticationUser')
+end
+
+unless user.save
+  puts "failed"
+  puts user.errors.full_messages
+  exit 1
+end

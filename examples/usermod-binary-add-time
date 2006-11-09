@@ -42,12 +42,10 @@ end
   user.user_certificate = File.read(cert_file)
 
   unless user.save
-    puts "failed"
+    puts "failed #{i}"
     puts user.errors.full_messages
     exit 1
   end
 
   # puts "success [#{i}]"
 end
-
-

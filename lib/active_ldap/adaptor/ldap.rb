@@ -432,8 +432,11 @@ module ActiveLdap
           binary = schema.binary?(key)
           mod_type |= LDAP::LDAP_MOD_BVALUES if binary
           attributes.each do |name, values|
-            next if binary and values.empty?
-            result << LDAP.mod(mod_type, name, values)
+            if binary and values.empty? and /;binary/ !~ name
+              result << LDAP.mod(mod_type, "#{name};binary", values)
+            else
+              result << LDAP.mod(mod_type, name, values)
+            end
           end
         end
         result
