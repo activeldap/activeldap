@@ -1,4 +1,4 @@
-module ActiveLDAP
+module ActiveLdap
   module Adaptor
     class Base
       def initialize(config={})

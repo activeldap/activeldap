@@ -1,4 +1,4 @@
-module ActiveLDAP
+module ActiveLdap
   module ObjectClass
     def self.included(base)
       base.extend(ClassMethods)

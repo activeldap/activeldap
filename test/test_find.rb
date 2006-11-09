@@ -31,6 +31,6 @@ class FindTest < Test::Unit::TestCase
 
   private
   def assert_split_search_value(expected, value)
-    assert_equal(expected, ActiveLDAP::Base.send(:split_search_value, value))
+    assert_equal(expected, ActiveLdap::Base.send(:split_search_value, value))
   end
 end

@@ -52,6 +52,8 @@ done:
     #   - this would mean cleaner loading I think
   * support ActiveRecord::Validations.
   * support ActiveRecord::Callbacks.
+  * rename to ActiveLdap from ActiveLDAP to integrate RoR easily and enforce
+    many API changes.
 0.7.4:
   * Bugfix: do not base LDAP::PrettyError on RuntimeError due to rescue evaluation.
   * Bugfix: :return_objects was overriding :objects in find and find_all

@@ -1,4 +1,4 @@
-Ruby/ActiveLDAP -- ruby library for object-oriented LDAP interction
+Ruby/ActiveLdap -- ruby library for object-oriented LDAP interction
 Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>
 Contributors:
  * Dick Davies <rasputnik@hellooperator.net>
@@ -7,7 +7,7 @@ Contributors:
  * Google Inc.
 
 DESCRIPTION
-'Ruby/ActiveLDAP' is a ruby extension library which provides a clean objected
+'Ruby/ActiveLdap' is a ruby extension library which provides a clean objected
 oriented interface to the Ruby/LDAP[0] library.  It was inspired by
 ActivRecord[2]. This is not nearly as clean or as flexible as ActiveRecord, but
 it is still trivial to define new objects and manipulate them with minimal
@@ -37,7 +37,7 @@ NOTES
 
 INSTALL
 
-  - Edit activeldap/configuration.rb with your LDAP preferences
+  - Edit active_ldap/configuration.rb with your LDAP preferences
   - Run -
     ruby setup.rb config
     ruby setup.rb setup

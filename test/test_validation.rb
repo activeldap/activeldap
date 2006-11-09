@@ -15,7 +15,7 @@ class ValidationTest < Test::Unit::TestCase
       end
 
       @group_class.validates_presence_of(:description)
-      assert_raises(ActiveLDAP::EntryInvalid) do
+      assert_raises(ActiveLdap::EntryInvalid) do
         group.save!
       end
     end

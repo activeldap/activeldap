@@ -25,15 +25,15 @@ class AssociationsTest < Test::Unit::TestCase
           assert_equal(group.gid_number, user2.gid_number)
 
 
-          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+          assert_raises(ActiveLdap::RequiredAttributeMissed) do
             group.primary_members = []
           end
 
-          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+          assert_raises(ActiveLdap::RequiredAttributeMissed) do
             group.primary_members = [user1]
           end
 
-          assert_raises(ActiveLDAP::RequiredAttributeMissed) do
+          assert_raises(ActiveLdap::RequiredAttributeMissed) do
             group.primary_members = [user2]
           end
 

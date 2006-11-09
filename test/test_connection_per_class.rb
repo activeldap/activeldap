@@ -18,7 +18,7 @@ class ConnectionPerClassTest < Test::Unit::TestCase
     assert(non_anon_class.connection.bound?)
     assert(anon_class.connection.bound?)
 
-    assert_raises(ActiveLDAP::AuthenticationError) do
+    assert_raises(ActiveLdap::AuthenticationError) do
       non_anon_class.establish_connection(:bind_format => nil,
                                           :allow_anonymous => false,
                                           :retry_limit => 0)

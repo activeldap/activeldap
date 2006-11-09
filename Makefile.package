@@ -17,7 +17,7 @@ tests:
 		cd tests/;(for i in *.rb; do ruby $$i; done) || exit 1; cd ..
 
 stamp: version
-		ruby -pi -e 'sub!(/".*?"/, %{"$(VERSION)"}) if /VERSION/' lib/activeldap.rb
+		ruby -pi -e 'sub!(/".*?"/, %{"$(VERSION)"}) if /VERSION/' lib/active_ldap.rb
 		cvs commit -m 'Create release $(VERSION)'
 		cvs rtag $(TAG) ruby-activeldap
 

@@ -1,4 +1,4 @@
-module ActiveLDAP
+module ActiveLdap
   class Schema
     def initialize(entries)
       @entries = entries

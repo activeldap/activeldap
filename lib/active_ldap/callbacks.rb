@@ -1,6 +1,6 @@
 require 'active_record/callbacks'
 
-module ActiveLDAP
+module ActiveLdap
   module Callbacks
     def self.append_features(base)
       super

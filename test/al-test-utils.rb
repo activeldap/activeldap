@@ -5,7 +5,7 @@ require 'yaml'
 require 'socket'
 require 'openssl'
 
-require 'activeldap'
+require 'active_ldap'
 
 module AlTestUtils
   def self.included(base)
@@ -78,11 +78,11 @@ module AlTestUtils
   module Connection
     def setup
       super
-      ActiveLDAP::Base.establish_connection(connect_config)
+      ActiveLdap::Base.establish_connection(connect_config)
     end
 
     def teardown
-      ActiveLDAP::Base.clear_active_connections!
+      ActiveLdap::Base.clear_active_connections!
       super
     end
   end
@@ -92,18 +92,18 @@ module AlTestUtils
       @dumped_data = nil
       super
       begin
-        @dumped_data = ActiveLDAP::Base.dump(:scope => :sub)
-      rescue ActiveLDAP::ConnectionError
+        @dumped_data = ActiveLdap::Base.dump(:scope => :sub)
+      rescue ActiveLdap::ConnectionError
       end
-      ActiveLDAP::Base.delete_all(nil, :scope => :sub)
+      ActiveLdap::Base.delete_all(nil, :scope => :sub)
       populate
     end
 
     def teardown
       if @dumped_data
-        ActiveLDAP::Base.establish_connection(connect_config)
-        ActiveLDAP::Base.delete_all(nil, :scope => :sub)
-        ActiveLDAP::Base.load(@dumped_data)
+        ActiveLdap::Base.establish_connection(connect_config)
+        ActiveLdap::Base.delete_all(nil, :scope => :sub)
+        ActiveLdap::Base.load(@dumped_data)
       end
       super
     end
@@ -117,17 +117,17 @@ module AlTestUtils
     end
 
     def populate_base
-      unless ActiveLDAP::Base.search(:scope => :base).empty?
+      unless ActiveLdap::Base.search(:scope => :base).empty?
         return
       end
 
       suffixes = []
-      ActiveLDAP::Base.base.split(/,/).reverse_each do |suffix|
+      ActiveLdap::Base.base.split(/,/).reverse_each do |suffix|
         prefix = suffixes.join(",")
         suffixes.unshift(suffix)
         name, value = suffix.split(/=/, 2)
         next unless name == "dc"
-        dc_class = Class.new(ActiveLDAP::Base)
+        dc_class = Class.new(ActiveLdap::Base)
         dc_class.ldap_mapping :dnattr => "dc",
                               :prefix => "",
                               :scope => :base,
@@ -141,7 +141,7 @@ module AlTestUtils
     end
 
     def ou_class(prefix="")
-      ou_class = Class.new(ActiveLDAP::Base)
+      ou_class = Class.new(ActiveLdap::Base)
       ou_class.ldap_mapping :dnattr => "ou",
                             :prefix => prefix,
                             :classes => ["top", "organizationalUnit"]
@@ -155,7 +155,7 @@ module AlTestUtils
     end
 
     def populate_user_class
-      @user_class = Class.new(ActiveLDAP::Base)
+      @user_class = Class.new(ActiveLdap::Base)
       @user_class.ldap_mapping :dn_attribute => "uid",
                                :prefix => "ou=Users",
                                :scope => :sub,
@@ -163,7 +163,7 @@ module AlTestUtils
     end
 
     def populate_group_class
-      @group_class = Class.new(ActiveLDAP::Base)
+      @group_class = Class.new(ActiveLdap::Base)
       @group_class.ldap_mapping :prefix => "ou=Groups",
                                 :scope => :sub,
                                 :classes => ["posixGroup"]
@@ -202,7 +202,7 @@ module AlTestUtils
         gid_number = config[:gid_number] || default_gid
         home_directory = config[:home_directory] || "/nonexistent"
         _wrap_assertion do
-          assert_raise(ActiveLDAP::EntryNotFound) do
+          assert_raise(ActiveLdap::EntryNotFound) do
             @user_class.find(uid)
           end
           user = @user_class.new(uid)
@@ -231,7 +231,7 @@ module AlTestUtils
       ensure_delete_group(cn) do
         gid_number = config[:gid_number] || default_gid
         _wrap_assertion do
-          assert_raise(ActiveLDAP::EntryNotFound) do
+          assert_raise(ActiveLdap::EntryNotFound) do
             @group_class.find(cn)
           end
           group = @group_class.new(cn)
@@ -249,7 +249,7 @@ module AlTestUtils
     ensure
       begin
         @user_class.destroy(uid)
-      rescue ActiveLDAP::EntryNotFound
+      rescue ActiveLdap::EntryNotFound
       end
     end
 
@@ -258,7 +258,7 @@ module AlTestUtils
     ensure
       begin
         @group_class.destroy(cn)
-      rescue ActiveLDAP::EntryNotFound
+      rescue ActiveLdap::EntryNotFound
       end
     end
 

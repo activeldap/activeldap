@@ -1,14 +1,14 @@
 #!/usr/bin/ruby
-# = Ruby/ActiveLDAP 
+# = Ruby/ActiveLdap 
 #
-# "Ruby/ActiveLDAP" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
+# "Ruby/ActiveLdap" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
 #
 # == Introduction
 # 
-# Ruby/ActiveLDAP is a novel way of interacting with LDAP.  Most interaction with
+# Ruby/ActiveLdap is a novel way of interacting with LDAP.  Most interaction with
 # LDAP is done using clunky LDIFs, web interfaces, or with painful APIs that
-# required a thick reference manual nearby. Ruby/ActiveLDAP aims to fix that.
-# Inspired by ActiveRecord[http://activerecord.rubyonrails.org], Ruby/ActiveLDAP provides an
+# required a thick reference manual nearby. Ruby/ActiveLdap aims to fix that.
+# Inspired by ActiveRecord[http://activerecord.rubyonrails.org], Ruby/ActiveLdap provides an
 # object oriented interface to LDAP entries.
 # 
 # The target audience is system administrators and LDAP users everywhere that
@@ -29,22 +29,22 @@
 # * RFC1777[http://www.faqs.org/rfcs/rfc1777.html] - Lightweight Directory Access Protocol
 # * OpenLDAP[http://www.openldap.org]
 # 
-# === So why use Ruby/ActiveLDAP?
+# === So why use Ruby/ActiveLdap?
 # 
 # Well if you like to fumble around in the dark, dank innards of LDAP, you can
 # quit reading now.  However, if you'd like a cleaner way to integrate LDAP in to
-# your existing code, hopefully that's why you'll want to use Ruby/ActiveLDAP.
+# your existing code, hopefully that's why you'll want to use Ruby/ActiveLdap.
 # 
 # Using LDAP directly (even with the excellent Ruby/LDAP), leaves you bound to
 # the world of the predefined LDAP API.  While this API is important for many
 # reasons, having to extract code out of LDAP search blocks and create huge
 # arrays of LDAP.mod entries make code harder to read, less intuitive, and just
-# less fun to write.  Hopefully, Ruby/ActiveLDAP will remedy all of these
+# less fun to write.  Hopefully, Ruby/ActiveLdap will remedy all of these
 # problems!
 # 
 # == Getting Started
 # 
-# Ruby/ActiveLDAP does have some overhead when you get started.  You must not
+# Ruby/ActiveLdap does have some overhead when you get started.  You must not
 # only install the package and all of it's requirements, but you must also make
 # customizations that will let it work in your environment.
 # 
@@ -63,12 +63,12 @@
 # Assuming all the requirements are installed, you can install by grabbing the latest tgz file from
 # the download site[http://projects.dataspill.org/libraries/ruby/activeldap/download.html].
 # 
-# The following steps will get the Ruby/ActiveLDAP installed in no time!
+# The following steps will get the Ruby/ActiveLdap installed in no time!
 # 
 #   $ tar -xzvf ruby-activeldap-current.tgz
 #   $ cd ruby-activeldap-VERSION
 # 
-# Edit lib/activeldap/configuration.rb replacing values to match what will work
+# Edit lib/active_ldap/configuration.rb replacing values to match what will work
 # with your LDAP servers. Please note that those variables are required, but can
 # be overridden in any program  as detailed later in this document. Also make
 # sure that "ROOT" stays all upcase.
@@ -93,7 +93,7 @@
 # 
 # === Customizations
 # 
-# Now that Ruby/ActiveLDAP is installed and working, we still have a few more
+# Now that Ruby/ActiveLdap is installed and working, we still have a few more
 # steps to make it useful for programming.
 # 
 # Let's say that you are writing a Ruby program for managing user and group
@@ -119,7 +119,7 @@
 # 
 # == Usage
 # 
-# This section covers using Ruby/ActiveLDAP from writing extension classes to
+# This section covers using Ruby/ActiveLdap from writing extension classes to
 # writing applications that use them.
 # 
 # Just to give a taste of what's to come, here is a quick example using irb:
@@ -128,7 +128,7 @@
 # 
 # Here's an extension class that maps to the LDAP Group objects:
 # 
-#   irb> class Group < ActiveLDAP::Base
+#   irb> class Group < ActiveLdap::Base
 #   irb* ldap_mapping
 #   irb* end
 # 
@@ -153,12 +153,12 @@
 #
 # === Extension Classes
 # 
-# Extension classes are classes that are subclassed from ActiveLDAP::Base.  They
+# Extension classes are classes that are subclassed from ActiveLdap::Base.  They
 # are used to represent objects in your LDAP server abstractly.
 # 
 # ==== Why do I need them?
 # 
-# Extension classes are what make Ruby/ActiveLDAP "active"! They do all the
+# Extension classes are what make Ruby/ActiveLdap "active"! They do all the
 # background work to make easy-to-use objects by mapping the LDAP object's
 # attributes on to a Ruby class.
 # 
@@ -172,11 +172,11 @@
 # ===== ldap_mapping
 # 
 # ldap_mapping is the only required method to setup an extension class for use
-# with Ruby/ActiveLDAP. It must be called inside of a subclass as shown above.
+# with Ruby/ActiveLdap. It must be called inside of a subclass as shown above.
 # 
 # Below is a much more realistic Group class:
 # 
-#   class Group < ActiveLDAP::Base
+#   class Group < ActiveLdap::Base
 #     ldap_mapping :dnattr => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']<
 #                  :scope => LDAP::LDAP_SCOPE_ONELEVEL
 #   end
@@ -206,12 +206,12 @@
 #              :prefix     |
 #                :base from configuration.rb
 # 
-# :scope tells ActiveLDAP to only search under ou=Groups, and not to look deeper
+# :scope tells ActiveLdap to only search under ou=Groups, and not to look deeper
 # for dnattr matches. (e.g. cn=develop,ou=DevGroups,ou=Groups,dc=dataspill,dc=org)
 # 
-# Something's missing: :classes.  :classes is used to tell Ruby/ActiveLDAP what
+# Something's missing: :classes.  :classes is used to tell Ruby/ActiveLdap what
 # the minimum requirement is when creating a new object. LDAP uses objectClasses
-# to define what attributes a LDAP object may have. Ruby/ActiveLDAP needs to know
+# to define what attributes a LDAP object may have. Ruby/ActiveLdap needs to know
 # what classes are required when creating a new object.  Of course, you can leave
 # that field out to default to ['top'] only.  Then you can let each application
 # choose what objectClasses their objects should have by calling the method e.g.
@@ -257,7 +257,7 @@
 # If we look at the LDAP entry for 'drewry', we do not see any references to
 # group 'develop'. In order to remedy that, we can use belongs_to
 # 
-#   irb> class User < ActiveLDAP::Base
+#   irb> class User < ActiveLdap::Base
 #   irb*   ldap_mapping :dnattr => 'uid', :prefix => 'People', :classes => ['top','account']
 #   irb*   belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid', :local_key => 'uid'
 #   irb* end
@@ -303,7 +303,7 @@
 # it is assumed to be the dnattr. With this in mind, the above definition could
 # become:
 # 
-#   irb> class User < ActiveLDAP::Base
+#   irb> class User < ActiveLdap::Base
 #   irb*   ldap_mapping :dnattr => 'uid', :prefix => 'People', :classes => ['top','account']
 #   irb*   belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid'
 #   irb* end
@@ -322,7 +322,7 @@
 # objects from other trees listed in your object. To show this, we can just
 # invert the example from above:
 # 
-#   class Group < ActiveLDAP::Base
+#   class Group < ActiveLdap::Base
 #     ldap_mapping :dnattr => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
 #     has_many :members, :class_name => "User", :local_key => "memberUid", :foreign_key => 'uid'
 #   end
@@ -427,15 +427,15 @@
 #  => false
 # 
 # 
-# === ActiveLDAP::Base
+# === ActiveLdap::Base
 # 
-# ActiveLDAP::Base has come up a number of times in the examples above.  Every
+# ActiveLdap::Base has come up a number of times in the examples above.  Every
 # time, it was being used as the super class for the wrapper objects. While this
 # is it's main purpose, it also handles quite a bit more in the background.
 # 
 # ==== What is it?
 # 
-# ActiveLDAP::Base is the heart of Ruby/ActiveLDAP.  It does all the schema
+# ActiveLdap::Base is the heart of Ruby/ActiveLdap.  It does all the schema
 # parsing for validation and attribute-to-method mangling as well as manage the
 # connection to LDAP.
 # 
@@ -493,7 +493,7 @@
 #   whether the :password_block should be called on each reconnect.
 # * :allow_anonymous determines whether anonymous binding is allowed if other
 #   bind methods fail
-# * :try_sasl, when true, tells ActiveLDAP to attempt a SASL-GSSAPI bind
+# * :try_sasl, when true, tells ActiveLdap to attempt a SASL-GSSAPI bind
 # * :sasl_quiet, when true, tells the SASL libraries to not spew messages to STDOUT
 # * :method indicates whether to use :ssl, :tls, or :plain
 # * :retries - indicates the number of attempts to reconnect that will be undertaken when a stale connection occurs. -1 means infinite.
@@ -527,7 +527,7 @@
 # 
 # === Exceptions
 # 
-# There are a few custom exceptions used in Ruby/ActiveLDAP. They are detailed below.
+# There are a few custom exceptions used in Ruby/ActiveLdap. They are detailed below.
 # 
 # ==== AttributeEmpty
 # 
@@ -572,7 +572,7 @@
 # 
 # === Putting it all together
 # 
-# Now that all of the components of Ruby/ActiveLDAP have been covered, it's time
+# Now that all of the components of Ruby/ActiveLdap have been covered, it's time
 # to put it all together! The rest of this section will show the steps to setup
 # example user and group management scripts for use with the LDAP tree described
 # above.
@@ -583,7 +583,7 @@
 # 
 # In ldapadmin/lib/ create the file user.rb:
 #   cat <<EOF
-#   class User < ActiveLDAP::Base
+#   class User < ActiveLdap::Base
 #     ldap_mapping :dnattr => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
 #     belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid'
 #   end
@@ -591,7 +591,7 @@
 # 
 # In ldapadmin/lib/ create the file group.rb:
 #   cat <<EOF
-#   class Group < ActiveLDAP::Base
+#   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
 #     has_many :members, :class_name => "User", :local_key => "memberUid"
 #     belongs_to :primary_members, :class_name => 'User', :foreign_key => 'gidNumber', :local_key => 'gidNumber'
@@ -617,7 +617,7 @@
 #   pwb = Proc.new {
 #     Password.get('Password: ')
 #   }
-#   ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
+#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
 #   user = User.new(ARGV[0])
 #   user.objectClass = user.objectClass  << 'posixAccount' << 'shadowAccount'
 #   user.cn = ARGV[1]
@@ -646,7 +646,7 @@
 #   pwb = Proc.new {
 #     Password.get('Password: ')
 #   }
-#   ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
+#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
 #   user = User.new(ARGV[0])
 #   user.cn = ARGV[1]
 #   user.uidNumber = ARGV[2]
@@ -675,7 +675,7 @@
 #   pwb = Proc.new {
 #     Password.get('Password: ')
 #   }
-#   ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
+#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
 #   user = User.new(ARGV[0])
 #   user.delete
 #   puts "User has been delete"
@@ -683,7 +683,7 @@
 # 
 # === Advanced Topics
 # 
-# Below are some situation tips and tricks to get the most out of Ruby/ActiveLDAP.
+# Below are some situation tips and tricks to get the most out of Ruby/ActiveLdap.
 # 
 #
 # ==== Binary data and other subtypes
@@ -718,7 +718,7 @@
 #
 # You should note that some binary data does not use the binary subtype all the time.
 # One example is jpegPhoto. You can use it as jpegPhoto;binary or just as jpegPhoto.
-# Since the schema dictates that it is a binary value, Ruby/ActiveLDAP will write
+# Since the schema dictates that it is a binary value, Ruby/ActiveLdap will write
 # it as binary, but the subtype will not be automatically appended as above. The
 # use of the subtype on attributes like jpegPhoto is ultimately decided by the 
 # LDAP site policy and not by any programmatic means.
@@ -753,7 +753,7 @@
 # 
 #   ./myldap/user.rb:
 #   module MyLDAP
-#   class User < ActiveLDAP::Base
+#   class User < ActiveLdap::Base
 #     ldap_mapping :dnattr => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
 #     belongs_to :groups, :class_name => 'MyLDAP::Group', :foreign_key => 'memberUid'
 #   end
@@ -761,7 +761,7 @@
 # 
 #   ./myldap/group.rb:
 #   module MyLDAP
-#   class Group < ActiveLDAP::Base
+#   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
 #     has_many :members, :class_name => 'MyLDAP::User', :local_key => 'memberUid'
 #     belongs_to :primary_members, :class_name => 'MyLDAP::User', :foreign_key => 'gidNumber', :local_key => 'gidNumber'
@@ -780,7 +780,7 @@
 #
 # ==== Non-array results for single values
 #
-# Even though Ruby/ActiveLDAP attempts to maintain programmatic ease by 
+# Even though Ruby/ActiveLdap attempts to maintain programmatic ease by 
 # returning Array values only. By specifying 'false' as an argument to 
 # any attribute method you will get back a String if it is single value.
 # This is useful when you are just dumping values for human reading.
@@ -813,7 +813,7 @@
 # If that's still not enough, you can access the
 # Ruby/LDAP connection object using the class method Base.connection.  You can
 # do all of your LDAP specific calls here and then continue about your normal
-# Ruby/ActiveLDAP business afterward.
+# Ruby/ActiveLdap business afterward.
 #
 #
 # ==== Reusing LDAP::Entry objects without reusing the LDAP connection
@@ -858,7 +858,7 @@
 # experiment. That's exactly how I ended up with this package. If you come up
 # with something cool, please share it!
 #
-# The internal structure of ActiveLDAP::Base, and thus all its subclasses, is
+# The internal structure of ActiveLdap::Base, and thus all its subclasses, is
 # still in flux. I've tried to minimize the changes to the overall API, but
 # the internals are still rough around the edges.
 #
@@ -907,7 +907,7 @@
 #
 # === Speed
 # 
-# Currently, Ruby/ActiveLDAP could be faster.  I have some recursive type
+# Currently, Ruby/ActiveLdap could be faster.  I have some recursive type
 # checking going on which slows object creation down, and I'm sure there
 # are many, many other places optimizations can be done.  Feel free
 # to send patches, or just hang in there until I can optimize away the
@@ -923,33 +923,33 @@
 $VERBOSE, verbose = false, $VERBOSE
 
 if RUBY_PLATFORM.match('linux')
-  require 'activeldap/timeout'
+  require 'active_ldap/timeout'
 else
-  require 'activeldap/timeout_stub'
+  require 'active_ldap/timeout_stub'
 end
-require 'activeldap/base'
-require 'activeldap/associations'
-require 'activeldap/configuration'
-require 'activeldap/connection'
-require 'activeldap/attributes'
-require 'activeldap/object_class'
-require 'activeldap/adaptor/ldap'
+require 'active_ldap/base'
+require 'active_ldap/associations'
+require 'active_ldap/configuration'
+require 'active_ldap/connection'
+require 'active_ldap/attributes'
+require 'active_ldap/object_class'
+require 'active_ldap/adaptor/ldap'
 
-require 'activeldap/validations'
-require 'activeldap/callbacks'
+require 'active_ldap/validations'
+require 'active_ldap/callbacks'
 
-module ActiveLDAP
+module ActiveLdap
   VERSION = "0.8.0"
 end
 
-ActiveLDAP::Base.class_eval do
-  include ActiveLDAP::Configuration
-  include ActiveLDAP::Connection
-  include ActiveLDAP::Attributes
-  include ActiveLDAP::ObjectClass
-  include ActiveLDAP::Associations
-  include ActiveLDAP::Validations
-  include ActiveLDAP::Callbacks
+ActiveLdap::Base.class_eval do
+  include ActiveLdap::Configuration
+  include ActiveLdap::Connection
+  include ActiveLdap::Attributes
+  include ActiveLdap::ObjectClass
+  include ActiveLdap::Associations
+  include ActiveLdap::Validations
+  include ActiveLdap::Callbacks
 end
 
 $VERBOSE = verbose

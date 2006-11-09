@@ -1,6 +1,6 @@
-require 'activeldap/association/proxy'
+require 'active_ldap/association/proxy'
 
-module ActiveLDAP
+module ActiveLdap
   module Association
     class BelongsTo < Proxy
       def replace(entry)

@@ -5,7 +5,7 @@
 # Some portions Copyright 2006 Google Inc
 #
 # == Summary
-# ActiveLDAP lets you read and update LDAP entries in a completely object
+# ActiveLdap lets you read and update LDAP entries in a completely object
 # oriented fashion, even handling attributes with multiple names seamlessly.
 # It was inspired by ActiveRecord so extending it to deal with custom
 # LDAP schemas is as effortless as knowing the 'ou' of the objects, and the
@@ -14,8 +14,8 @@
 # == Example
 #   irb> require 'activeldap'
 #   > true
-#   irb> user = ActiveLDAP::User.new("drewry")
-#   > #<ActiveLDAP::User:0x402e...
+#   irb> user = ActiveLdap::User.new("drewry")
+#   > #<ActiveLdap::User:0x402e...
 #   irb> user.cn
 #   > "foo"
 #   irb> user.commonname
@@ -34,7 +34,7 @@ require 'English'
 
 require 'log4r'
 
-module ActiveLDAP
+module ActiveLdap
   # OO-interface to LDAP assuming pam/nss_ldap-style organization with
   # Active specifics
   # Each subclass does a ldapsearch for the matching entry.
@@ -63,19 +63,19 @@ module ActiveLDAP
 
   # DeleteError
   #
-  # An exception raised when an ActiveLDAP delete action fails
+  # An exception raised when an ActiveLdap delete action fails
   class DeleteError < Error
   end
 
   # WriteError
   #
-  # An exception raised when an ActiveLDAP write action fails
+  # An exception raised when an ActiveLdap write action fails
   class WriteError < Error
   end
 
   # SaveError
   # 
-  # An exception raised when an ActiveLDAP save action failes
+  # An exception raised when an ActiveLdap save action failes
   # It is a subclass of Write for API transition support
   class SaveError < WriteError
   end
@@ -149,7 +149,7 @@ module ActiveLDAP
   # Base
   #
   # Base is the primary class which contains all of the core
-  # ActiveLDAP functionality. It is meant to only ever be subclassed
+  # ActiveLdap functionality. It is meant to only ever be subclassed
   # by extension classes.
   class Base
     class << self
@@ -219,7 +219,7 @@ module ActiveLDAP
         end
 
         module_eval <<-"end_eval"
-          class ::#{class_name} < ActiveLDAP::Base
+          class ::#{class_name} < ActiveLdap::Base
             ldap_mapping :dnattr => "#{attr}", :prefix => "#{prefix}", :classes => #{classes}
             #{belongs_to.join("\n")}
             #{has_many.join("\n")}
@@ -228,7 +228,7 @@ module ActiveLDAP
       end
 
       # Connect and bind to LDAP creating a class variable for use by
-      #  all ActiveLDAP objects.
+      #  all ActiveLdap objects.
       # 
       # == +config+
       # +config+ must be a hash that may contain any of the following fields:
@@ -326,7 +326,7 @@ module ActiveLDAP
         classes = options[:classes]
         scope = options[:scope]
         # When used, instantiates parent objects from the "parent dn". This
-        # can be a String or a real ActiveLDAP class. This just adds the helper 
+        # can be a String or a real ActiveLdap class. This just adds the helper 
         # Base#parent.
         parent = options[:parent_class] || nil
 
@@ -1433,4 +1433,4 @@ module ActiveLDAP
       end
     end
   end # Base
-end # ActiveLDAP
+end # ActiveLdap

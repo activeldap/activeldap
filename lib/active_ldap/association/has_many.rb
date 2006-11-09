@@ -1,6 +1,6 @@
-require 'activeldap/association/collection'
+require 'active_ldap/association/collection'
 
-module ActiveLDAP
+module ActiveLdap
   module Association
     class HasMany < Collection
       private

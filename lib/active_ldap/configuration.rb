@@ -1,9 +1,9 @@
 
-module ActiveLDAP
+module ActiveLdap
   # Configuration
   #
   # Configuration provides the default settings required for
-  # ActiveLDAP to work with your LDAP server. All of these
+  # ActiveLdap to work with your LDAP server. All of these
   # settings can be passed in at initialization time.
   module Configuration
     def self.included(base)

@@ -1,4 +1,4 @@
-module ActiveLDAP
+module ActiveLdap
   module Connection
     def self.included(base)
       base.extend(ClassMethods)
@@ -17,7 +17,7 @@ module ActiveLDAP
         key = active_connection_key
         if active_connections[key] or @@defined_configurations[key]
           @active_connection_name = key
-        elsif self == ActiveLDAP::Base
+        elsif self == ActiveLdap::Base
           @active_connection_name = nil
         else
           @active_connection_name = superclass.active_connection_name

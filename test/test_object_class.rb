@@ -8,7 +8,7 @@ class ObjectClassTest < Test::Unit::TestCase
   priority :normal
   def test_unknown_object_class
     make_temporary_group do |group|
-      assert_raises(ActiveLDAP::ObjectClassError) do
+      assert_raises(ActiveLdap::ObjectClassError) do
         group.add_class("unknownObjectClass")
       end
     end
@@ -16,7 +16,7 @@ class ObjectClassTest < Test::Unit::TestCase
 
   def test_remove_required_class
     make_temporary_group do |group|
-      assert_raises(ActiveLDAP::RequiredObjectClassMissed) do
+      assert_raises(ActiveLdap::RequiredObjectClassMissed) do
         group.remove_class("posixGroup")
       end
     end

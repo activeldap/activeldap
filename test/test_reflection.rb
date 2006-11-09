@@ -7,7 +7,7 @@ class ReflectionTest < Test::Unit::TestCase
 
   priority :normal
   def test_base_class
-    assert_equal(ActiveLDAP::Base, ActiveLDAP::Base.base_class)
+    assert_equal(ActiveLdap::Base, ActiveLdap::Base.base_class)
     assert_equal(@user_class, @user_class.base_class)
     sub_user_class = Class.new(@user_class)
     assert_equal(@user_class, sub_user_class.base_class)
@@ -93,14 +93,14 @@ class ReflectionTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       attributes = user.must + user.may - ["objectClass"]
       attributes = attributes.collect do |x|
-        ActiveLDAP::Base.to_rubyish_name(x)
+        ActiveLdap::Base.to_rubyish_name(x)
       end
       assert_equal(["x500unique_identifier"], attributes - user.methods)
       assert_equal(["x500unique_identifier"], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| ActiveLDAP::Base.to_rubyish_name(x)}
+          attrs.collect {|x| ActiveLdap::Base.to_rubyish_name(x)}
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
@@ -111,14 +111,14 @@ class ReflectionTest < Test::Unit::TestCase
       user.remove_class("inetOrgPerson")
       attributes = user.must + user.may - ["objectClass"]
       attributes = attributes.collect do |x|
-        ActiveLDAP::Base.to_rubyish_name(x)
+        ActiveLdap::Base.to_rubyish_name(x)
       end
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| ActiveLDAP::Base.to_rubyish_name(x)}
+          attrs.collect {|x| ActiveLdap::Base.to_rubyish_name(x)}
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
@@ -149,7 +149,7 @@ class ReflectionTest < Test::Unit::TestCase
 
   private
   def assert_rubyish_name(expected, name)
-    assert_equal(expected, ActiveLDAP::Base.to_rubyish_name(name))
+    assert_equal(expected, ActiveLdap::Base.to_rubyish_name(name))
   end
 
   def assert_methods_with_only_required_classes(object, attributes)
@@ -177,10 +177,10 @@ class ReflectionTest < Test::Unit::TestCase
   def collect_attributes(object_classes, with_aliases=true)
     attributes = []
     object_classes.each do |object_class|
-      attrs = ActiveLDAP::Base.schema.class_attributes(object_class)
+      attrs = ActiveLdap::Base.schema.class_attributes(object_class)
       if with_aliases
         (attrs[:must] + attrs[:may]).each do |name|
-          attributes.concat(ActiveLDAP::Base.schema.attribute_aliases(name))
+          attributes.concat(ActiveLdap::Base.schema.attribute_aliases(name))
         end
       else
         attributes.concat(attrs[:must] + attrs[:may])

@@ -81,10 +81,10 @@ class UserTest < Test::Unit::TestCase
       user.user_certificate = certificate
       user.jpeg_photo = jpeg_photo
 
-      assert(ActiveLDAP::Base.schema.binary?('jpegPhoto'),
+      assert(ActiveLdap::Base.schema.binary?('jpegPhoto'),
              'jpegPhoto is binary?')
 
-      assert(ActiveLDAP::Base.schema.binary?('userCertificate'),
+      assert(ActiveLdap::Base.schema.binary?('userCertificate'),
              'userCertificate is binary?')
       assert_nothing_raised {user.save!}
     end

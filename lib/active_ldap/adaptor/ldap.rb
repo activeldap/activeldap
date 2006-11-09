@@ -2,10 +2,10 @@ require 'ldap'
 require 'ldap/ldif'
 require 'ldap/schema'
 
-require 'activeldap/ldap'
-require 'activeldap/schema'
+require 'active_ldap/ldap'
+require 'active_ldap/schema'
 
-require 'activeldap/adaptor/base'
+require 'active_ldap/adaptor/base'
 
 class LDAP::Mod
   unless instance_method(:to_s).arity.zero?
@@ -23,7 +23,7 @@ class LDAP::Mod
   end
 end
 
-module ActiveLDAP
+module ActiveLdap
   module Adaptor
     class Ldap < Base
       module Method

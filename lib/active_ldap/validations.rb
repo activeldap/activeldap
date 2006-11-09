@@ -6,7 +6,7 @@ rescue LoadError
   require 'active_record/validations'
 end
 
-module ActiveLDAP
+module ActiveLdap
   module Validations
     def self.append_features(base)
       super

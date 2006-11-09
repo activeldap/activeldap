@@ -1,4 +1,4 @@
-module ActiveLDAP
+module ActiveLdap
   module Association
     class Proxy
       alias_method :proxy_respond_to?, :respond_to?
@@ -70,7 +70,7 @@ module ActiveLDAP
         if !@owner.new_entry? or have_foreign_key?
           begin
             @target = find_target unless loaded?
-          rescue ActiveLDAP::EntryNotFound
+          rescue EntryNotFound
             reset
           end
         end

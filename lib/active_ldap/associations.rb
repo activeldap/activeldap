@@ -1,9 +1,9 @@
-require 'activeldap/association/belongs_to'
-require 'activeldap/association/belongs_to_many'
-require 'activeldap/association/has_many'
-require 'activeldap/association/has_many_wrap'
+require 'active_ldap/association/belongs_to'
+require 'active_ldap/association/belongs_to_many'
+require 'active_ldap/association/has_many'
+require 'active_ldap/association/has_many_wrap'
 
-module ActiveLDAP
+module ActiveLdap
   # Associations
   #
   # Associations provides the class methods needed for
@@ -70,7 +70,7 @@ module ActiveLDAP
       # has_many
       #
       # This defines a method for an extension class expand an 
-      # existing multi-element attribute into ActiveLDAP objects.
+      # existing multi-element attribute into ActiveLdap objects.
       # This discards any calls which result in entries that
       # don't exist in LDAP!
       #

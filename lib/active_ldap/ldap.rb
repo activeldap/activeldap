@@ -1,4 +1,4 @@
-# Extensions to Rubu/LDAP to make ActiveLDAP behave better
+# Extensions to Rubu/LDAP to make ActiveLdap behave better
 #
 # Copyright 2006 Will Drewry <will@alum.bu.edu>
 # Some portions Copyright 2006 Google Inc

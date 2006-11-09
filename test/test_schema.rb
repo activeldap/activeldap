@@ -144,7 +144,7 @@ class SchemaTest < Test::Unit::TestCase
     }
     assert_schema(expect, "1.3.6.1.4.1.1466.115.121.1.28", jpeg_schema)
 
-    schema = ActiveLDAP::Schema.new({"attributeTypes" => [jpeg_photo_schema],
+    schema = ActiveLdap::Schema.new({"attributeTypes" => [jpeg_photo_schema],
                                      "ldapSyntaxes" => [jpeg_schema]})
     assert(schema.binary?("jpegPhoto"))
   end
@@ -153,7 +153,7 @@ class SchemaTest < Test::Unit::TestCase
   def assert_schema(expect, name, schema)
     sub = "objectClass"
     entry = {sub => [schema]}
-    schema = ActiveLDAP::Schema.new(entry)
+    schema = ActiveLdap::Schema.new(entry)
     actual = {}
     normalized_expect = {}
     expect.each do |key, value|
