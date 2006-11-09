@@ -1,5 +1,6 @@
 0.8.0:
 * TODO: 
+- fix Makefile.package to use svn.
 - serialize & serialized_attributes
 - schema mgmt - how does AR handle it?
 - columns() -- ?
