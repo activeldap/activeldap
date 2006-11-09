@@ -402,7 +402,7 @@ module ActiveLdap
                            '@password_block not nil or Proc object. Ignoring.'}
             return false
           end
-          password = @password_block.call
+          password = @password_block.call(bind_dn)
         end
 
         # Store the password for quick reference later

@@ -152,6 +152,12 @@ module ActiveLdap
   # ActiveLdap functionality. It is meant to only ever be subclassed
   # by extension classes.
   class Base
+    @prefix = nil
+    @base = nil
+    @required_classes = ['top']
+    @ldap_scope = :sub
+    @dn_attribute = nil
+
     class << self
       # Hide new in Base
       private :new
@@ -319,10 +325,9 @@ module ActiveLdap
       #                :scope => :sub,
       #                :parent => String
       def ldap_mapping(options={})
-        dn_attribute = options[:dn_attribute] || options[:dnattr] || 'cn'
-        prefix = options[:prefix]
-        non_anonymous_class = ancestors.find {|x| !x.name.empty?}
-        prefix ||= "ou=#{non_anonymous_class.name.split('::').last}"
+        dn_attribute = options[:dn_attribute] || options[:dnattr]
+        dn_attribute ||= default_dn_attribute
+        prefix = options[:prefix] || default_prefix
         classes = options[:classes]
         scope = options[:scope]
         # When used, instantiates parent objects from the "parent dn". This
@@ -363,12 +368,11 @@ module ActiveLdap
       # configuration.rb into this class.
       # When subclassing, the specified prefix will be concatenated.
       def base
-        [@prefix, @base || superclass.base].find_all do |component|
+        _base = @base || configuration[:base] || superclass.base
+        [@prefix, _base].find_all do |component|
           component and !component.empty?
         end.join(",")
       end
-      @prefix = nil
-      @base = ""
 
       # Base.required_classes
       #
@@ -387,7 +391,6 @@ module ActiveLdap
         end
         nil
       end
-      @required_classes = ['top']
 
       # Base.ldap_scope
       #
@@ -403,7 +406,6 @@ module ActiveLdap
         end
         nil
       end
-      @ldap_scope = :sub
 
       def dump(options={})
         ldifs = []
@@ -590,7 +592,6 @@ module ActiveLdap
         nil
       end
       alias_method :dnattr, :dn_attribute
-      @dn_attribute = nil
 
       def extract_options_from_args!(args)
         args.last.is_a?(Hash) ? args.pop : {}
@@ -697,8 +698,7 @@ module ActiveLdap
           case key
           when :base
             # Scrub before inserting
-            base = value.gsub(/['}{#]/, '')
-            @base = base
+            @base = value.gsub(/['}{#]/, '')
           when :ldap_scope
             if value.is_a?(Fixnum)
               backward_compatibility_scope_map = {
@@ -723,7 +723,7 @@ module ActiveLdap
       end
 
       def configuration
-        @configuration
+        @configuration || {}
       end
 
       def instantiate(entry)
@@ -746,9 +746,19 @@ module ActiveLdap
         obj
       end
 
-      def singleton_class
-        class << self
-          self
+      def default_dn_attribute
+        if name.empty?
+          "cn"
+        else
+          Inflector.underscore(Inflector.demodulize(name))
+        end
+      end
+
+      def default_prefix
+        if name.empty?
+          nil
+        else
+          "ou=#{Inflector.pluralize(Infletor.demodulize(name))}"
         end
       end
     end

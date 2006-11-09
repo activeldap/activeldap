@@ -41,7 +41,7 @@ module ActiveLdap
       #             :primary_key => "gidNumber"  # Group#gidNumber
       #
       def belongs_to(association_id, options={})
-        klass = options[:class_name] || association_id.to_s
+        klass = options[:class_name] || Inflector.classify(association_id)
         foreign_key = options[:foreign_key]
         primary_key = options[:primary_key]
         many = options[:many]
@@ -81,7 +81,7 @@ module ActiveLdap
       #   has_many :members, :class_name => "User",
       #            :wrap => "memberUid" # Group#memberUid
       def has_many(association_id, options = {})
-        klass = options[:class_name] || association_id.to_s
+        klass = options[:class_name] || Inflector.classify(association_id)
         foreign_key = options[:foreign_key] || association_id.to_s + "_id"
         primary_key = options[:primary_key]
         set_associated_class(association_id, klass)
