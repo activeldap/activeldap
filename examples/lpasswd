@@ -1,45 +1,55 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " USER_NAME"
+end
 
-(printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
-
-pwb = Proc.new { |x|
-  if x.nil?
-    Password.get("[#{ENV['USER']}] Password: ")
-  else
-    Password.get("[#{x}] Password: ")
-  end
-}
-ActiveLDAP::Base.connect(:password_block => pwb, :allow_anonymous => false)
-user = User.new(ARGV[0])
-unless user.exists?
-  printf($stderr, "User #{ARGV[0]} does not exist.\n\n")
+if argv.size == 1
+  name = argv.shift
+else
+  $stderr.puts opts
   exit 1
 end
 
-puts "-- Setting new user password -- "
+pwb = Proc.new do |user|
+  user ||= ENV["USER"]
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+unless User.exists?(name)
+  $stderr.puts("User #{name} doesn't exist.")
+  exit 1
+end
+
 class PasswordMismatch < RuntimeError
 end
 
+user = User.find(name)
 count = 0
 begin
-  pw1 = pwb.call("#{ARGV[0]}")
-  pw2 = pwb.call("#{ARGV[0]}")
+  count += 1
+  pw1 = pwb.call(user.dn)
+  pw2 = pwb.call(user.dn)
   raise PasswordMismatch if pw1 != pw2
 rescue PasswordMismatch
   puts "Password mismatch!"
   exit 1 if count == 3
   retry
 end
-user.userPassword = '{CRYPT}' + pw1.crypt(Password::MD5)
-user.write
-puts "success"
-exit 0
 
-
+user.user_password = ActiveLdap::UserPassword.ssha(pw1)
+unless user.save
+  puts "failed"
+  puts user.errors.full_messages
+  exit 1
+end

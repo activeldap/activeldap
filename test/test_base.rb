@@ -56,6 +56,7 @@ EOX
   <uid>#{user.uid}</uid>
   <uidNumber>#{user.uid_number}</uidNumber>
   <userCertificate binary="true">#{certificate}</userCertificate>
+  <userPassword>#{user.user_password}</userPassword>
 </user>
 EOX
     end

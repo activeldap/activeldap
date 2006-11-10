@@ -220,6 +220,7 @@ module AlTestUtils
           user.uid_number = uid_number
           user.gid_number = gid_number
           user.home_directory = home_directory
+          user.user_password = ActiveLdap::UserPassword.ssha(password)
           unless config[:simple]
             user.add_class('shadowAccount', 'inetOrgPerson',
                            'organizationalPerson')
