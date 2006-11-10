@@ -93,14 +93,14 @@ class ReflectionTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       attributes = user.must + user.may - ["objectClass"]
       attributes = attributes.collect do |x|
-        ActiveLdap::Base.to_rubyish_name(x)
+        Inflector.underscore(x)
       end
       assert_equal(["x500unique_identifier"], attributes - user.methods)
       assert_equal(["x500unique_identifier"], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| ActiveLdap::Base.to_rubyish_name(x)}
+          attrs.collect {|x| Inflector.underscore(x)}
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
@@ -111,14 +111,14 @@ class ReflectionTest < Test::Unit::TestCase
       user.remove_class("inetOrgPerson")
       attributes = user.must + user.may - ["objectClass"]
       attributes = attributes.collect do |x|
-        ActiveLdap::Base.to_rubyish_name(x)
+        Inflector.underscore(x)
       end
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| ActiveLdap::Base.to_rubyish_name(x)}
+          attrs.collect {|x| Inflector.underscore(x)}
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
