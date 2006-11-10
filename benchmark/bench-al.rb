@@ -13,7 +13,7 @@ LDAP_USER = nil
 LDAP_PASSWORD = nil
 
 class ALUser < ActiveLdap::Base
-  ldap_mapping :dnattr => 'uid', :prefix => LDAP_PREFIX,
+  ldap_mapping :dn_attribute => 'uid', :prefix => LDAP_PREFIX,
                :classes => ['posixAccount', 'person']
 end
 
@@ -21,11 +21,19 @@ end
 #
 def search_al
   count = 0
-  ALUser.find_all.each do |e|
+  ALUser.find(:all).each do |e|
     count += 1
   end
   return count
 end # -- search_al
+
+def search_al_without_object_creation
+  count = 0
+  ALUser.search.each do |e|
+    count += 1
+  end
+  return count
+end
 
 # === search_ldap
 #
@@ -117,12 +125,18 @@ def main(argv)
   #
   conn = LDAP::Conn.new(LDAP_SERVER, LDAP_PORT)
   al_count = 0
+  al_count_without_object_creation = 0
   ldap_count = 0
   Benchmark.bm(10) do |x|
     x.report("AL") { al_count = search_al }
+    x.report("AL(No Obj)") do
+      al_count_without_object_creation = search_al_without_object_creation
+    end
     x.report("LDAP") { ldap_count = search_ldap(conn) }
   end
   print "Entries processed by Ruby/ActiveLdap: #{al_count}\n"
+  print "Entries processed by Ruby/ActiveLdap (without object creation)" +
+        ": #{al_count_without_object_creation}\n"
   print "Entries processed by Ruby/LDAP: #{ldap_count}\n"
 
   0
