@@ -1,27 +1,42 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-if ARGV.size != 2
-  puts "Usage:\n#{$0} <name> <gid number>\n"
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " GROUP_NAME GID_NUMBER"
+end
+
+if argv.size == 2
+  name, gid = argv
+else
+  $stderr.puts opts
   exit 1
 end
 
-puts "Changing group #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb,
-                         :allow_anonymous => false)
-group = Group.new(ARGV[0])
-group.gidNumber = ARGV[1]
-p group
-group.validate
-group.write
-exit 0
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
 
 
+unless Group.exists?(name)
+  $stderr.puts("Group #{name} doesn't exist.")
+  exit 1
+end
+
+group = Group.find(name)
+group.gid_number = gid
+
+unless group.save
+  puts "failed"
+  puts group.errors.full_messages
+  exit 1
+end
