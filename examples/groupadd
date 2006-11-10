@@ -1,27 +1,43 @@
 #!/usr/bin/ruby -W0
-$: << "../lib"
 
-require 'activeldap'
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
-require 'password'
 
-if ARGV.size != 1
-  puts "Usage:\n#{$0} <name>\n"
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " GROUP_NAME"
+end
+
+if argv.size == 1
+  name = argv.shift
+else
+  $stderr.puts opts
   exit 1
 end
 
-puts "Adding group #{ARGV[0]}"
-pwb = Proc.new {
-  Password.get('Password: ')
-}
-ActiveLDAP::Base.connect(:user => 'root', :password_block => pwb, :allow_anonymous => false)
-group = Group.new(ARGV[0])
-p group
-group.gidNumber = 9000
-p group
-group.validate
-group.write
-exit 0
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+if Group.exists?(name)
+  $stderr.puts("Group #{name} already exists.")
+  exit 1
+end
+
+group = Group.new(name)
+group.gid_number = 9000
+
+unless group.save
+  puts "failed"
+  puts group.errors.full_messages
+  exit 1
+end
 
 

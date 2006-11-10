@@ -41,5 +41,3 @@ unless user.save
   puts user.errors.full_messages
   exit 1
 end
-
-
