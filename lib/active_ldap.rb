@@ -82,7 +82,7 @@
 # Now as a quick test, you can run:
 # 
 #   $ irb
-#   irb> require 'activeldap'
+#   irb> require 'active_ldap'
 #   => true
 #   irb> exit
 # 
@@ -124,7 +124,7 @@
 # 
 # Just to give a taste of what's to come, here is a quick example using irb:
 # 
-#   irb> require 'activeldap'
+#   irb> require 'active_ldap'
 # 
 # Here's an extension class that maps to the LDAP Group objects:
 # 
@@ -134,19 +134,19 @@
 # 
 # Here is the Group class in use:
 # 
-#   irb> all_groups = Group.find_all('*')
+#   irb> all_groups = Group.find(:all, '*').collect {|group| group.cn}
 #   => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
 #  
-#   irb> group = Group.new("develop")
+#   irb> group = Group.find("develop")
 #   => #<Group:0x..........>
 #  
-#   irb> group.members
+#   irb> group.members.collect {|member| member.uid}
 #   => ["drewry"]
 #  
 #   irb> group.cn
 #   => "develop"
 # 
-#   irb> group.gidNumber
+#   irb> group.gid_number
 #   => "1003"
 # 
 # That's it! No let's get back in to it.
@@ -177,7 +177,8 @@
 # Below is a much more realistic Group class:
 # 
 #   class Group < ActiveLdap::Base
-#     ldap_mapping :dnattr => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']<
+#     ldap_mapping :dn_attribute => 'cn',
+#                  :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
 #                  :scope => LDAP::LDAP_SCOPE_ONELEVEL
 #   end
 # 
@@ -202,7 +203,7 @@
 # 
 #   cn=develop,ou=Groups,dc=dataspill,dc=org
 #   ^^         ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^
-#  :dnattr       |         |
+#  :dn_attribute |         |
 #              :prefix     |
 #                :base from configuration.rb
 # 
@@ -215,16 +216,15 @@
 # what classes are required when creating a new object.  Of course, you can leave
 # that field out to default to ['top'] only.  Then you can let each application
 # choose what objectClasses their objects should have by calling the method e.g.
-# Group#objectClass=(value) or by modifying the value returned by the accessor, 
-# e.g. Group#objectClass.
+# Group#add_class(*values).
 #
 # Note that is can be very important to define the default :classes value. Due to
 # implementation choices with most LDAP servers, once an object is created, its
 # structural objectclasses may not be removed (or replaced).  Setting a sane default
 # may help avoid programmer error later.
 # 
-# :classes isn't the only optional argument.  If :dnattr is left off, it defaults
-# to 'cn'.  If :prefix is left off, it will default to 'ou=CLASSNAME'. In this
+# :classes isn't the only optional argument.  If :dn_attribute is left off,
+# it defaults to underscored class name or 'cn'.  If :prefix is left off, it will default to 'ou=CLASSNAME'. In this
 # case, it would be 'ou=Group'. There is also a :parent_class option which, when
 # specified, adds a method call parent() which will return the 
 # parent_class.new(parent_dn). The parent_dn is the objects dn without the dnattr

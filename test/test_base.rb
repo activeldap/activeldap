@@ -91,9 +91,9 @@ EOX
     make_temporary_user do |user, password|
       assert(user.have_attribute?(:cn))
       assert(user.have_attribute?(:commonName))
-      assert(user.have_attribute?(:commonname))
       assert(user.have_attribute?(:common_name))
-      assert(user.have_attribute?(:COMMONNAME))
+      assert(!user.have_attribute?(:commonname))
+      assert(!user.have_attribute?(:COMMONNAME))
 
       assert(!user.have_attribute?(:unknown_attribute))
     end

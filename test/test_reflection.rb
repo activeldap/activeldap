@@ -60,8 +60,8 @@ class ReflectionTest < Test::Unit::TestCase
 
     make_temporary_user do |user, password|
       attributes = user.must + user.may - ["objectClass"]
-      assert_equal(["x500uniqueIdentifier"], attributes - user.methods)
-      assert_equal(["x500uniqueIdentifier"], attributes - user.methods(false))
+      assert_equal([], attributes - user.methods)
+      assert_equal([], attributes - user.methods(false))
 
       assert_methods_with_only_required_classes(user, attributes)
     end
@@ -78,8 +78,8 @@ class ReflectionTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       attributes = user.must + user.may - ["objectClass"]
       attributes = attributes.collect {|x| x.downcase}
-      assert_equal([], attributes - user.methods)
-      assert_equal([], attributes - user.methods(false))
+      assert_not_equal([], attributes - user.methods)
+      assert_not_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
@@ -95,8 +95,8 @@ class ReflectionTest < Test::Unit::TestCase
       attributes = attributes.collect do |x|
         Inflector.underscore(x)
       end
-      assert_equal(["x500unique_identifier"], attributes - user.methods)
-      assert_equal(["x500unique_identifier"], attributes - user.methods(false))
+      assert_equal([], attributes - user.methods)
+      assert_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|

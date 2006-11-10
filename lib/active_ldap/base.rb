@@ -18,7 +18,7 @@
 #   > #<ActiveLdap::User:0x402e...
 #   irb> user.cn
 #   > "foo"
-#   irb> user.commonname
+#   irb> user.common_name
 #   > "foo"
 #   irb> user.cn = "Will Drewry"
 #   > "Will Drewry"
@@ -948,9 +948,7 @@ module ActiveLdap
     def to_real_attribute_name(name)
       ensure_apply_object_class
       name = name.to_s
-      @attr_methods[name] ||
-        @attr_aliases[self.class.normalize_attribute_name(name)] ||
-        @attr_aliases[Inflector.underscore(name)]
+      @attr_methods[name] || @attr_aliases[Inflector.underscore(name)]
     end
 
     def ensure_apply_object_class
@@ -1146,8 +1144,6 @@ module ActiveLdap
       aliases.each do |ali|
         logger.debug {"associating #{ali} --> #{attr}"}
         @attr_methods[ali] = attr
-        logger.debug {"associating #{ali.downcase} --> #{attr}"}
-        @attr_aliases[ali.downcase] = attr
         logger.debug {"associating #{Inflector.underscore(ali)}" +
                         " --> #{attr}"}
         @attr_aliases[Inflector.underscore(ali)] = attr

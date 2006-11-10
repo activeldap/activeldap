@@ -154,9 +154,18 @@ module ActiveLdap
         # Clean out the dupes.
         must.uniq!
         may.uniq!
+        if objc == "inetOrgPerson"
+          may.collect! do |name|
+            if name == "x500uniqueIdentifier"
+              "x500UniqueIdentifier"
+            else
+              name
+            end
+          end
+        end
 
         {:must => must, :may => may}
-      end.dup
+      end
     end
 
     private
