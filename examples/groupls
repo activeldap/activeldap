@@ -1,41 +1,49 @@
-#!/usr/bin/ruby -w 
-$: << "../lib"
-require 'activeldap'
+#!/usr/bin/ruby -W0
+
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
 
-(printf($stderr, "Usage:\n%s <group>\n\n", $0);exit 1) if ARGV[0].nil?
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " GROUP_NAME"
+end
 
-require 'log4r'
-Log4r::Logger.root.level = Log4r::DEBUG
-log = Log4r::Logger.new("groupls")
-Log4r::StderrOutputter.new 'console'
-log.add('console')
+if argv.size == 1
+  name = argv.shift
+else
+  $stderr.puts opts
+  exit 1
+end
 
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
 
-ActiveLDAP::Base.connect(:logger => log)
-group = Group.new(ARGV[0])
-exit 1 unless group.exists?
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
 
-printf("%s(%d): ", group.send(Group.dnattr.to_sym), group.gidNumber[0])
+unless Group.exists?(name)
+  $stderr.puts("Group #{name} doesn't exist.")
+  exit 1
+end
+
+group = Group.find(name)
 
 members = []
-unless group.members.nil?
-  group.members.each do |mem|
-    if mem.exists?
-      members << "#{mem.uid}[#{mem.uidNumber}]"
-    else
-      members << "#{mem.uid}[????]"
-    end
-  end
+group.primary_members.each do |mem|
+  members << "#{mem.uid}[#{mem.uidNumber}]"
 end
 
-unless group.primary_members.nil?
-  group.primary_members.each do |mem|
+group.members.each do |mem|
+  if mem.exists?
     members << "#{mem.uid}[#{mem.uidNumber}]"
+  else
+    members << "#{mem.uid}[????]"
   end
 end
 
-
-
-printf("%s\n\n", members.join(', '))
+puts("#{group.id}(#{group.gid_number}): #{members.join(', ')}")

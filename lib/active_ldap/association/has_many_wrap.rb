@@ -13,7 +13,8 @@ module ActiveLdap
 
       def find_target
         foreign_base_key = primary_key
-        filter = @owner[@options[:wrap], true].collect do |value|
+        requested_targets = @owner[@options[:wrap], true]
+        filter = requested_targets.collect do |value|
           key = val = nil
           if foreign_base_key == "dn"
             key, val = value.split(",")[0].split("=") unless value.empty?
@@ -26,7 +27,17 @@ module ActiveLdap
         end.collect do |key, val|
           "(#{key}=#{val})"
         end.join
-        foreign_class.find(:all, :filter => "(|#{filter})")
+        klass = foreign_class
+        found_targets = {}
+        klass.find(:all, :filter => "(|#{filter})").each do |target|
+          found_targets[target.send(foreign_base_key)] ||= target
+        end
+
+        result = []
+        requested_targets.each do |name|
+          result << (found_targets[name] || klass.new(name))
+        end
+        result
       end
     end
   end

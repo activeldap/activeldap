@@ -105,6 +105,26 @@ class AssociationsTest < Test::Unit::TestCase
     end
   end
 
+  def test_belongs_to_many_non_exist
+    make_temporary_group do |group|
+      ensure_delete_user("temp-user1") do |user1,|
+        options = {:uid => "temp-user2", :gid_number => group.gid_number.succ}
+        make_temporary_user(options) do |user2,|
+          ensure_delete_user("temp-user3") do |user3,|
+            group.members << user2
+            group.member_uid = [user1, group.member_uid, user3]
+            assert(group.save)
+            group.members.reload
+            assert_equal([user1, user2.id, user3],
+                         group.members.collect {|g| g.id})
+            assert_equal([true, false, true],
+                         group.members.collect {|g| g.new_entry?})
+          end
+        end
+      end
+    end
+  end
+
   def test_belongs_to
     make_temporary_group do |group|
       gid_number = group.gid_number.to_i + 1
