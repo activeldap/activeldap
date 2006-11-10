@@ -356,10 +356,8 @@ module ActiveLdap
       def ensure_scope(scope)
         value = SCOPE[scope || :sub]
         if value.nil?
-          available_scopes = SCOPE.keys.collect do |scope|
-            scope.inspect
-          end.join(", ")
-          raise ArgumentError, "#{scope} is not one of the available " +
+          available_scopes = SCOPE.keys.collect {|s| s.inspect}
+          raise ArgumentError, "#{scope.inspect} is not one of the available " +
                                "LDAP scope #{available_scopes}"
         end
         value
