@@ -11,7 +11,7 @@ module ActiveLdap
 
       def find_target
         foreign_base_key = primary_key
-        filter = @owner[@options[:foreign_key_name], false].collect do |value|
+        filter = @owner[@options[:foreign_key_name], true].collect do |value|
           key = val = nil
           if foreign_base_key == "dn"
             key, val = value.split(",")[0].split("=") unless value.empty?
@@ -30,7 +30,7 @@ module ActiveLdap
       def delete_entries(entries)
         key = primary_key
         dn_attribute = foreign_class.dn_attribute
-        filter = @owner[@options[:foreign_key_name], false].reject do |value|
+        filter = @owner[@options[:foreign_key_name], true].reject do |value|
           value.nil?
         end.collect do |value|
           "(#{key}=#{value})"

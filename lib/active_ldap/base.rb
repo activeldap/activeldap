@@ -723,7 +723,7 @@ module ActiveLdap
     end
 
     def attribute_present?(name)
-      values = get_attribute(name, false)
+      values = get_attribute(name, true)
       !values.empty? or values.any? {|x| not (x and x.empty?)}
     end
 
@@ -755,7 +755,7 @@ module ActiveLdap
     end
 
     def id
-      get_attribute(dn_attribute, true)
+      get_attribute(dn_attribute)
     end
 
     def dn=(value)
@@ -927,8 +927,8 @@ module ActiveLdap
       self
     end
 
-    def [](name, not_array=true)
-      get_attribute(name, not_array)
+    def [](name, force_array=false)
+      get_attribute(name, force_array)
     end
 
     def []=(name, value)
@@ -1074,39 +1074,39 @@ module ActiveLdap
     # get_attribute
     #
     # Return the value of the attribute called by method_missing?
-    def get_attribute(name, not_array=true)
+    def get_attribute(name, force_array=false)
       logger.debug {"stub: called get_attribute" +
-                      "(#{name.inspect}, #{not_array.inspect}"}
-      get_attribute_before_type_cast(name, not_array)
+                      "(#{name.inspect}, #{force_array.inspect}"}
+      get_attribute_before_type_cast(name, force_array)
     end
 
-    def get_attribute_as_query(name, not_array=true)
+    def get_attribute_as_query(name, force_array=false)
       logger.debug {"stub: called get_attribute_as_query" +
-                      "(#{name.inspect}, #{not_array.inspect}"}
-      value = get_attribute_before_type_cast(name, not_array)
-      if not_array
-        !false_value?(value)
+                      "(#{name.inspect}, #{force_array.inspect}"}
+      value = get_attribute_before_type_cast(name, force_array)
+      if force_array
+        value.collect {|x| !false_value?(x)}
       else
-        value.collect? {|x| !false_value?(x)}
+        !false_value?(value)
       end
     end
 
     def false_value?(value)
-      value.nil? or value == false or
+      value.nil? or value == false or value == [] or
         value == "false" or value == "FALSE" or value == ""
     end
 
-    def get_attribute_before_type_cast(name, not_array=true)
+    def get_attribute_before_type_cast(name, force_array=false)
       logger.debug {"stub: called get_attribute_before_type_cast" +
-                      "(#{name.inspect}, #{not_array.inspect}"}
+                      "(#{name.inspect}, #{force_array.inspect}"}
       attr = to_real_attribute_name(name)
 
       value = @data[attr] || []
       # Return a copy of the stored data
-      if not_array
-        array_of(value.dup, false)
-      else
+      if force_array
         value.dup
+      else
+        array_of(value.dup, false)
       end
     end
 
@@ -1174,7 +1174,7 @@ module ActiveLdap
     #
     # Returns the array form of a value, or not an array if
     # false is passed in.
-    def array_of(value, to_a = true)
+    def array_of(value, to_a=true)
       logger.debug {"stub: called array_of" +
                       "(#{value.inspect}, #{to_a.inspect})"}
       case value
@@ -1216,7 +1216,6 @@ module ActiveLdap
 
     def collect_modified_entries(ldap_data, data)
       entries = []
-      replaceable = []
       # Now that all the subtypes will be treated as unique attributes
       # we can see what's changed and add anything that is brand-spankin'
       # new.
@@ -1225,7 +1224,6 @@ module ActiveLdap
       ldap_data.each do |k, v|
         value = data[k] || []
 
-        replaceable.push(k)
         next if v == value
 
         # Create mod entries
@@ -1235,6 +1233,9 @@ module ActiveLdap
           # Replacing with nothing is equivalent.
           logger.debug {"#save: removing attribute from existing entry: " +
                           "#{new_key}"}
+          if !data.has_key?(k) and schema.binary_required?(k)
+            value = [{'binary' => []}]
+          end
         else
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
@@ -1249,13 +1250,13 @@ module ActiveLdap
                       'determining adds'}
       data.each do |k, v|
         value = v || []
-        next if replaceable.include?(k) or value.empty?
+        next if ldap_data.has_key?(k) or value.empty?
 
         # Detect subtypes and account for them
         logger.debug {"#save: adding attribute to existing entry: " +
                         "#{k}: #{value.inspect}"}
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
-        # TODO: Added equality(attr) to Schema2
+        # TODO: Added equality(attr) to Schema
         entries.push([:replace, k, value])
       end
 

@@ -21,7 +21,7 @@ class FindTest < Test::Unit::TestCase
       make_temporary_user do |user2, password2|
         assert_equal(user2.uid, @user_class.find(user2.uid).uid)
         assert_equal([user2.uid],
-                     @user_class.find(user2.uid(false)).collect {|u| u.uid})
+                     @user_class.find(user2.uid(true)).collect {|u| u.uid})
         assert_equal(user2.to_ldif, @user_class.find(user2.uid).to_ldif)
         assert_equal([user.uid, user2.uid].sort,
                      @user_class.find(:all).collect {|u| u.uid}.sort)

@@ -87,19 +87,19 @@ class AssociationsTest < Test::Unit::TestCase
           user.update_attribute(:cn, "new #{user.cn}")
 
           assert_equal([], user.groups.to_a)
-          assert_equal([], group1.member_uid(false))
-          assert_equal([], group2.member_uid(false))
+          assert_equal([], group1.member_uid(true))
+          assert_equal([], group2.member_uid(true))
 
           user.groups << group1
           assert_equal([group1.id].sort, user.groups.collect {|g| g.id}.sort)
-          assert_equal([user.id].sort, group1.member_uid(false))
-          assert_equal([].sort, group2.member_uid(false))
+          assert_equal([user.id].sort, group1.member_uid(true))
+          assert_equal([].sort, group2.member_uid(true))
 
           user.groups << group2
           assert_equal([group1.id, group2.id].sort,
                        user.groups.collect {|g| g.id}.sort)
-          assert_equal([user.id].sort, group1.member_uid(false))
-          assert_equal([user.id].sort, group2.member_uid(false))
+          assert_equal([user.id].sort, group1.member_uid(true))
+          assert_equal([user.id].sort, group2.member_uid(true))
         end
       end
     end
@@ -146,7 +146,7 @@ class AssociationsTest < Test::Unit::TestCase
           user2.update_attribute(:cn, "new #{user2.cn}")
 
           assert_equal([], group.members.to_a)
-          assert_equal([], group.member_uid(false))
+          assert_equal([], group.member_uid(true))
 
           assert_equal(gid_number1, user1.gid_number.to_i)
           group.members << user1

@@ -5,15 +5,15 @@ module ActiveLdap
     class HasManyWrap < Collection
       private
       def insert_entry(entry)
-        new_value = @owner[@options[:wrap], false]
-        new_value += entry[primary_key, false]
+        new_value = @owner[@options[:wrap], true]
+        new_value += entry[primary_key, true]
         @owner[@options[:wrap]] = new_value.uniq
         @owner.save
       end
 
       def find_target
         foreign_base_key = primary_key
-        filter = @owner[@options[:wrap], false].collect do |value|
+        filter = @owner[@options[:wrap], true].collect do |value|
           key = val = nil
           if foreign_base_key == "dn"
             key, val = value.split(",")[0].split("=") unless value.empty?

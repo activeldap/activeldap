@@ -22,8 +22,9 @@ class UserTest < Test::Unit::TestCase
       user.cn = cn
       assert_equal(cn, user.cn, 'user.cn should have returned "#{cn}"')
 
-      # test not_array
-      assert_equal([cn], user.cn(false), 'user.cn should have returned "#{cn}"')
+      # test force_array
+      assert_equal([cn], user.cn(true),
+                   'user.cn(true) should have returned "[#{cn}]"')
 
       cn = {'lang-en-us' => 'Test User (EN-US Language)'}
       user.cn = cn
@@ -41,26 +42,19 @@ class UserTest < Test::Unit::TestCase
       uid_number = 9000
       user.uid_number = uid_number
       # Test to_s on Fixnums
-      assert_equal(uid_number.to_s, user.uid_number,
-                   'uidNumber did not get set correctly.')
-      assert_equal([uid_number.to_s], user.uid_number(false),
-                   'uidNumber did not get changed to an array' +
-                   ' by #validate_ldap().')
+      assert_equal(uid_number.to_s, user.uid_number)
 
       gid_number = 9000
       user.gid_number = gid_number
       # Test to_s on Fixnums
-      assert_equal(gid_number.to_s, user.gid_number,
-                   'gidNumber did not get set correctly.')
-      assert_equal([gid_number.to_s], user.gid_number(false),
-                   'not_array argument failed')
+      assert_equal(gid_number.to_s, user.gid_number)
 
       home_directory = '/home/foo'
       user.home_directory = home_directory
       # just for sanity's sake
       assert_equal(home_directory, user.home_directory,
                    'This should be #{home_directory.dump}.')
-      assert_equal(home_directory, user.home_directory(true),
+      assert_equal([home_directory], user.home_directory(true),
                    'This should be [#{home_directory.dump}].')
 
 
@@ -96,9 +90,9 @@ class UserTest < Test::Unit::TestCase
     make_temporary_user do |user, password|
       # validate add
       user.user_certificate = nil
-      assert_nil(user.user_certificate)
+      assert_equal({'binary' => nil}, user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_nil(user.user_certificate)
+      assert_equal({'binary' => nil}, user.user_certificate)
 
       user.user_certificate = {"binary" => [certificate]}
       assert_equal({'binary' => certificate},
@@ -111,9 +105,9 @@ class UserTest < Test::Unit::TestCase
 
       # now test modify
       user.user_certificate = nil
-      assert_nil(user.user_certificate)
+      assert_equal({"binary" => nil}, user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_nil(user.user_certificate)
+      assert_equal({"binary" => nil}, user.user_certificate)
 
       user.user_certificate = certificate
       assert_equal({'binary' => certificate},
@@ -122,7 +116,7 @@ class UserTest < Test::Unit::TestCase
       assert_nothing_raised() { user.save! }
 
       # validate modify
-      user = @user_class.find(user.uid(true))
+      user = @user_class.find(user.uid)
       assert_equal({'binary' => certificate},
                    user.user_certificate,
                    'This should have been forced to be a binary subtype.')
@@ -165,7 +159,7 @@ class UserTest < Test::Unit::TestCase
       assert_nothing_raised() { user.save! }
 
       # now validate modify
-      user = @user_class.find(user.uid(true))
+      user = @user_class.find(user.uid)
       assert_equal(jpeg_photo, user.jpeg_photo)
     end
   end

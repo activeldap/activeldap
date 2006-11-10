@@ -41,13 +41,40 @@ module ActiveLdap
         end
       end
 
+      def unnormalize_attributes(attributes)
+        result = {}
+        attributes.each do |name, values|
+          unnormalize_attribute(name, values, result)
+        end
+        result
+      end
+
+      def unnormalize_attribute(name, values, result={})
+        if values.empty?
+          result[name] = []
+        else
+          values.each do |value|
+            if value.is_a?(Hash)
+              suffix, real_value = extract_subtypes(value)
+              new_name = name + suffix
+              result[new_name] ||= []
+              result[new_name].concat(real_value)
+            else
+              result[name] ||= []
+              result[name] << value.dup
+            end
+          end
+        end
+        result
+      end
+
       private
       def normalize_attribute_value_of_array(name, value)
         if value.size > 1 and schema.single_value?(name)
           raise TypeError, "Attribute #{name} can only have a single value"
         end
         if value.empty?
-          schema.binary_required?(name) ? [{'binary' => []}] : []
+          schema.binary_required?(name) ? [{'binary' => value}] : value
         else
           value.collect do |entry|
             normalize_attribute(name, entry)[1][0]
@@ -64,13 +91,17 @@ module ActiveLdap
                        "#{value.keys[0]}"}
         end
         # Contents MUST be a String or an Array
-        if value.keys[0] != 'binary' and schema.binary_required?(name)
+        if !value.has_key?('binary') and schema.binary_required?(name)
           suffix, real_value = extract_subtypes(value)
           name, values = make_subtypes(name + suffix + ';binary', real_value)
           values
         else
           [value]
         end
+      end
+
+      def normalize_attribute_value_of_nil_class(name, value)
+        schema.binary_required?(name) ? [{'binary' => []}] : []
       end
 
       def normalize_attribute_value_of_string(name, value)
@@ -122,33 +153,6 @@ module ActiveLdap
                       "(#{subtypes.inspect}, #{value.inspect})"}
         return value if subtypes.size == 0
         return {subtypes[0] => make_subtypes_helper(subtypes[1..-1], value)}
-      end
-
-      def unnormalize_attributes(attributes)
-        result = {}
-        attributes.each do |name, values|
-          unnormalize_attribute(name, values, result)
-        end
-        result
-      end
-
-      def unnormalize_attribute(name, values, result={})
-        if values.empty?
-          result[name] = []
-        else
-          values.each do |value|
-            if value.is_a?(Hash)
-              suffix, real_value = extract_subtypes(value)
-              new_name = name + suffix
-              result[new_name] ||= []
-              result[new_name].concat(real_value)
-            else
-              result[name] ||= []
-              result[name] << value.dup
-            end
-          end
-        end
-        result
       end
 
       # extract_subtypes

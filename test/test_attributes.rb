@@ -4,6 +4,18 @@ class AttributesTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_normalize_attribute
+    assert_equal(["usercertificate", [{"binary" => []}]],
+                 ActiveLdap::Base.normalize_attribute("userCertificate", []))
+    assert_equal(["usercertificate", [{"binary" => []}]],
+                 ActiveLdap::Base.normalize_attribute("userCertificate", nil))
+  end
+
+  def test_unnormalize_attribute
+    assert_equal({"userCertificate;binary" => []},
+                 ActiveLdap::Base.unnormalize_attribute("userCertificate",
+                                                        [{"binary" => []}]))
+  end
 
   priority :normal
   def test_attr_protected

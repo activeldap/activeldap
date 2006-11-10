@@ -24,7 +24,7 @@ module ActiveLdap
     end
 
     def classes
-      (get_attribute('objectClass', false) || []).dup
+      (get_attribute('objectClass', true) || []).dup
     end
 
     private
