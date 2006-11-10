@@ -6,6 +6,41 @@ class AssociationsTest < Test::Unit::TestCase
   priority :must
 
   priority :normal
+  def test_has_many_validation
+    group_class = Class.new(ActiveLdap::Base)
+    group_class.ldap_mapping :prefix => "ou=Groups",
+                             :scope => :sub,
+                             :classes => ["posixGroup"]
+    assert_raises(ArgumentError) do
+      group_class.has_many :members, :class_name => "User"
+    end
+
+    assert_nothing_raised do
+      group_class.has_many :members, :class => "User", :wrap => "memberUid"
+      group_class.has_many :primary_members, :class => "User",
+                           :foreign_key => "gidNumber",
+                           :primary_key => "gidNumber"
+    end
+  end
+
+  def test_belongs_to_validation
+    user_class = Class.new(ActiveLdap::Base)
+    user_class.ldap_mapping :dn_attribute => "uid",
+                            :prefix => "ou=Users",
+                            :scope => :sub,
+                            :classes => ["posixAccount", "person"]
+    assert_raises(ArgumentError) do
+      user_class.belongs_to :groups, :class_name => "Group"
+    end
+
+    assert_nothing_raised do
+      user_class.belongs_to :groups, :class => "Group", :many => "memberUid"
+      user_class.belongs_to :primary_group, :class => "Group",
+                            :foreign_key => "gidNumber",
+                            :primary_key => "gidNumber"
+    end
+  end
+
   def test_has_many_assign
     make_temporary_group do |group|
       gid_number1 = group.gid_number.to_i + 1

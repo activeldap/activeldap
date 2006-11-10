@@ -132,7 +132,7 @@ module AlTestUtils
         name, value = suffix.split(/=/, 2)
         next unless name == "dc"
         dc_class = Class.new(ActiveLdap::Base)
-        dc_class.ldap_mapping :dnattr => "dc",
+        dc_class.ldap_mapping :dn_attribute => "dc",
                               :prefix => "",
                               :scope => :base,
                               :classes => ["top", "dcObject", "organization"]
@@ -146,7 +146,7 @@ module AlTestUtils
 
     def ou_class(prefix="")
       ou_class = Class.new(ActiveLdap::Base)
-      ou_class.ldap_mapping :dnattr => "ou",
+      ou_class.ldap_mapping :dn_attribute => "ou",
                             :prefix => prefix,
                             :classes => ["top", "organizationalUnit"]
       ou_class

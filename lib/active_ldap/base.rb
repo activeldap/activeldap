@@ -12,7 +12,7 @@
 # primary key. (fix this up some)
 #
 # == Example
-#   irb> require 'activeldap'
+#   irb> require 'active_ldap'
 #   > true
 #   irb> user = ActiveLdap::User.new("drewry")
 #   > #<ActiveLdap::User:0x402e...
@@ -24,9 +24,7 @@
 #   > "Will Drewry"
 #   irb> user.cn
 #   > "Will Drewry"
-#   irb> user.validate
-#   > nil
-#   irb> user.write
+#   irb> user.save
 #
 #
 
@@ -40,8 +38,8 @@ module ActiveLdap
   # Each subclass does a ldapsearch for the matching entry.
   # If no exact match, raise an error.
   # If match, change all LDAP attributes in accessor attributes on the object.
-  # -- these are ACTUALLY populated from schema - see subschema.rb example
-  # -- @conn.schema2().each{|k,vs| vs.each{|v| print("#{k}: #{v}\n")}}
+  # -- these are ACTUALLY populated from schema - see active_ldap/schema.rb
+  #    example
   # -- extract objectClasses from match and populate
   # Multiple entries become lists.
   # If this isn't read-only then lists become multiple entries, etc.
@@ -67,17 +65,10 @@ module ActiveLdap
   class DeleteError < Error
   end
 
-  # WriteError
-  #
-  # An exception raised when an ActiveLdap write action fails
-  class WriteError < Error
-  end
-
   # SaveError
-  # 
+  #
   # An exception raised when an ActiveLdap save action failes
-  # It is a subclass of Write for API transition support
-  class SaveError < WriteError
+  class SaveError < Error
   end
 
   # AuthenticationError
@@ -146,6 +137,9 @@ module ActiveLdap
   class UnwillingToPerform < Error
   end
 
+  class ConnectionNotEstablished < Error
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -167,75 +161,9 @@ module ActiveLdap
         @@logger
       end
 
-      # Driver generator
-      #
-      # TODO add type checking
-      # This let's you call this method to create top-level extension object.
-      # This is really just a proof of concept and has not truly useful purpose.
-      # example: Base.create_object(:class => "user", :dnattr => "uid",
-      #                             :classes => ['top'])
-      #
-      # THIS METHOD IS DANGEROUS. INPUT IS NOT SANITIZED.
-      def create_object(config={})
-        # Just upcase the first letter of the new class name
-        str = config[:class]
-        class_name = str[0].chr.upcase + str[1..-1]
-
-        attr = config[:dnattr] # "uid"
-        prefix = config[:base] # "ou=People"
-        # [ 'top', 'posixAccount' ]
-        classes_array = config[:classes] || []
-        # [ [ :groups, {:class_name => "Group", :foreign_key => "memberUid"}] ]
-        belongs_to_array = config[:belongs_to] || []
-        # [ [ :members, {:class_name => "User", :foreign_key => "uid", :local_key => "memberUid"}] ]
-        has_many_array = config[:has_many] || []
-
-        raise TypeError, ":objectclasses must be an array" unless classes_array.respond_to? :size
-        raise TypeError, ":belongs_to must be an array" unless belongs_to_array.respond_to? :size
-        raise TypeError, ":has_many must be an array" unless has_many_array.respond_to? :size
-
-        # Build classes array
-        classes = '['
-        classes_array.map! {|x| x = "'#{x}'"}
-        classes << classes_array.join(', ')
-        classes << ']'
-
-        # Build belongs_to
-        belongs_to = []
-        if belongs_to_array.size > 0
-          belongs_to_array.each do |bt|
-            line = [ "belongs_to :#{bt[0]}" ]
-            bt[1].keys.each do |key|
-              line << ":#{key} => '#{bt[1][key]}'"
-            end
-            belongs_to << line.join(', ')
-          end
-        end
-
-        # Build has_many
-        has_many = []
-        if has_many_array.size > 0
-          has_many_array.each do |hm|
-            line = [ "has_many :#{hm[0]}" ]
-            hm[1].keys.each do |key|
-              line << ":#{key} => '#{hm[1][key]}'"
-            end
-            has_many << line.join(', ')
-          end
-        end
-
-        module_eval <<-"end_eval"
-          class ::#{class_name} < ActiveLdap::Base
-            ldap_mapping :dnattr => "#{attr}", :prefix => "#{prefix}", :classes => #{classes}
-            #{belongs_to.join("\n")}
-            #{has_many.join("\n")}
-          end
-        end_eval
-      end
-
       # Connect and bind to LDAP creating a class variable for use by
-      #  all ActiveLdap objects.
-      # 
+      # all ActiveLdap objects.
+      #
       # == +config+
       # +config+ must be a hash that may contain any of the following fields:
       # :user, :password_block, :logger, :host, :port, :base, :bind_format,
@@ -262,27 +190,18 @@ module ActiveLdap
       # :retry_wait - seconds to wait before retrying a connection
       # :ldap_scope - dictates how to find objects. ONELEVEL by default to
       #   avoid dn_attr collisions across OUs. Think before changing.
-      # :return_objects - indicates whether find/find_all will return objects
-      #   or just the distinguished name attribute value of the matches
       # :timeout - time in seconds - defaults to disabled. This CAN interrupt
       #   search() requests. Be warned.
       # :retry_on_timeout - whether to reconnect when timeouts occur. Defaults
       #   to true
       # See lib/configuration.rb for defaults for each option
-      def connect(config={})
-        if config[:logger]
-          config[:logger].warn {'Base.connect is deprecated. ' +
-                                'Please use Base.establish_connection'}
-        end
-        establish_connection(config)
-      end
       def establish_connection(config={})
         super
         ensure_logger
         connection.connect
         # Make irb users happy with a 'true'
         true
-      end # establish_connection
+      end
 
       def search(options={}, &block)
         attr = options[:attribute]
@@ -325,8 +244,8 @@ module ActiveLdap
       #                :scope => :sub,
       #                :parent => String
       def ldap_mapping(options={})
-        dn_attribute = options[:dn_attribute] || options[:dnattr]
-        dn_attribute ||= default_dn_attribute
+        validate_ldap_mapping_options(options)
+        dn_attribute = options[:dn_attribute] || default_dn_attribute
         prefix = options[:prefix] || default_prefix
         classes = options[:classes]
         scope = options[:scope]
@@ -342,7 +261,7 @@ module ActiveLdap
         @parent = parent
 
         public_class_method :new
-        public_class_method :dn_attribute, :dnattr
+        public_class_method :dn_attribute
 
         if parent
           class_eval(<<-EOC, __FILE__, __LINE__ + 1)
@@ -358,7 +277,7 @@ module ActiveLdap
       end
 
       # Base.base
-      # 
+      #
       # This method when included into Base provides
       # an inheritable, overwritable configuration setting
       #
@@ -512,17 +431,6 @@ module ActiveLdap
         end
       end
 
-      # find_all
-      #
-      # Use find(:all).
-      #
-      # Finds all matches for value where |value| is the value of some
-      # |field|, or the wildcard match. This is only useful
-      # for derived classes.
-      def find_all(*args)
-        find(:all, *args)
-      end
-
       def exists?(dn, options={})
         begin
           not find(dn, options).nil?
@@ -595,7 +503,12 @@ module ActiveLdap
         end
         nil
       end
-      alias_method :dnattr, :dn_attribute
+
+      VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
+                                    :scope, :parent]
+      def validate_ldap_mapping_options(options)
+        options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
+      end
 
       def extract_options_from_args!(args)
         args.last.is_a?(Hash) ? args.pop : {}
@@ -775,12 +688,7 @@ module ActiveLdap
     #
     # Creates a new instance of Base initializing all class and all
     # initialization.  Defines local defaults. See examples If multiple values
-    # exist for dn_attribute, the first one put here will be authoritative 
-    # TODO: Add # support for relative distinguished names 
-    # val can be a dn attribute value, a full DN, or a LDAP::Entry.  The use
-    # with a LDAP::Entry is primarily meant for internal use by find and
-    # find_all.
-    #
+    # exist for dn_attribute, the first one put here will be authoritative
     def initialize(attributes=nil)
       init_base
       @new_entry = true
@@ -865,11 +773,6 @@ module ActiveLdap
       rescue Error
         raise DeleteError.new("Failed to delete LDAP entry: '#{dn}'")
       end
-    end
-
-    def write
-      logger.warn {'Base#write is deprecated. Please use Base#Save'}
-      save
     end
 
     # save
@@ -1167,7 +1070,6 @@ module ActiveLdap
       logger.debug {"stub: called dn_attribute"}
       self.class.dn_attribute
     end
-    alias_method :dnattr, :dn_attribute
 
     # get_attribute
     #

@@ -6,6 +6,19 @@ class BaseTest < Test::Unit::TestCase
   priority :must
 
   priority :normal
+  def test_ldap_mapping_validation
+    ou_class = Class.new(ActiveLdap::Base)
+    assert_raises(ArgumentError) do
+      ou_class.ldap_mapping :dnattr => "ou"
+    end
+
+    assert_nothing_raised do
+      ou_class.ldap_mapping :dn_attribute => "ou",
+                            :prefix => prefix,
+                            :classes => ["top", "organizationalUnit"]
+    end
+  end
+
   def test_to_xml
     ou = ou_class.new("Sample")
     assert_equal(<<-EOX, ou.to_xml(:root => "ou"))

@@ -30,9 +30,6 @@ module ActiveLdap
     # Whether or not to retry on timeouts
     DEFAULT_CONFIG[:retry_on_timeout] = true
 
-    # Whether to return objects by default from find/find_all
-    DEFAULT_CONFIG[:return_objects] = false
-
     DEFAULT_CONFIG[:logger] = nil
 
     module ClassMethods
