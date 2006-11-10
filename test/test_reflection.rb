@@ -134,24 +134,6 @@ class ReflectionTest < Test::Unit::TestCase
     end
   end
 
-  def test_to_rubyish_name
-    assert_rubyish_name("o", "o")
-    assert_rubyish_name("uid", "uid")
-    assert_rubyish_name("dc_object", "dcObject")
-    assert_rubyish_name("object_class", "objectClass")
-    assert_rubyish_name("uid_number", "uidNumber")
-    assert_rubyish_name("x500_unique_identifier", "x500UniqueIdentifier")
-    assert_rubyish_name("array", "Array")
-    assert_rubyish_name("date_time", "DateTime")
-    assert_rubyish_name("internationali_SDN_number",
-                        "internationaliSDNNumber")
-  end
-
-  private
-  def assert_rubyish_name(expected, name)
-    assert_equal(expected, ActiveLdap::Base.to_rubyish_name(name))
-  end
-
   def assert_methods_with_only_required_classes(object, attributes)
     old_classes = (object.classes - object.class.required_classes).uniq
     old_attributes = collect_attributes(old_classes, false).uniq.sort

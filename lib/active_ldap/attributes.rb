@@ -32,7 +32,7 @@ module ActiveLdap
         end
 
         name = normalize_attribute_name(name)
-        rubyish_class_name = to_rubyish_name(value.class.name)
+        rubyish_class_name = Inflector.underscore(value.class.name)
         handler = "normalize_attribute_value_of_#{rubyish_class_name}"
         if respond_to?(handler, true)
           [name, send(handler, name, value)]

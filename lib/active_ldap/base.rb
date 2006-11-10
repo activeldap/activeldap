@@ -398,21 +398,6 @@ module ActiveLdap
         connection.modify(dn, unnormalized_entries, options)
       end
 
-      def to_rubyish_name(name)
-        return name if name.empty?
-        name[0,1].downcase + name[1..-1].gsub(/([A-Z]+)/) do |s|
-          if s.size > 1
-            "_#{s[0..-2]}_#{s[-1, 1].downcase}"
-          else
-            "_#{s.downcase}"
-          end
-        end
-      end
-
-      def to_class_name(name)
-        name.gsub(/(^[a-z]|_[a-z])/) {|s| s.upcase}
-      end
-
       # find
       #
       # Finds the first match for value where |value| is the value of some 
@@ -892,7 +877,7 @@ module ActiveLdap
     end
 
     def to_xml(options={})
-      root = options[:root] || self.class.to_rubyish_name(self.class.name)
+      root = options[:root] || Inflector.underscore(self.class.name)
       result = "<#{root}>\n"
       result << "  <dn>#{dn}</dn>\n"
       normalize_data(@data).sort_by {|key, values| key}.each do |key, values|
@@ -965,7 +950,7 @@ module ActiveLdap
       name = name.to_s
       @attr_methods[name] ||
         @attr_aliases[self.class.normalize_attribute_name(name)] ||
-        @attr_aliases[self.class.to_rubyish_name(name)]
+        @attr_aliases[Inflector.underscore(name)]
     end
 
     def ensure_apply_object_class
@@ -1163,9 +1148,9 @@ module ActiveLdap
         @attr_methods[ali] = attr
         logger.debug {"associating #{ali.downcase} --> #{attr}"}
         @attr_aliases[ali.downcase] = attr
-        logger.debug {"associating #{self.class.to_rubyish_name(ali)}" +
+        logger.debug {"associating #{Inflector.underscore(ali)}" +
                         " --> #{attr}"}
-        @attr_aliases[self.class.to_rubyish_name(ali)] = attr
+        @attr_aliases[Inflector.underscore(ali)] = attr
       end
       logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
     end
