@@ -85,6 +85,10 @@ module ActiveLdap
         conn
       end
 
+      def close
+        remove_connection
+      end
+
       def remove_connection(klass=self)
         key = active_connection_key(klass)
         config = @@defined_configurations[key]
