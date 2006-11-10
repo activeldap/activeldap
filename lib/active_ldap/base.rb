@@ -146,6 +146,8 @@ module ActiveLdap
     @ldap_scope = :sub
     @dn_attribute = nil
 
+    VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
+                                  :scope, :parent]
     class << self
       # Hide new in Base
       private :new
@@ -484,8 +486,6 @@ module ActiveLdap
         nil
       end
 
-      VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
-                                    :scope, :parent]
       def validate_ldap_mapping_options(options)
         options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
       end
