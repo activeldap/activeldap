@@ -47,12 +47,6 @@ module ActiveLdap
   class Error < StandardError
   end
 
-  # AttributeEmpty
-  #
-  # An exception raised when a required attribute is found to be empty
-  class AttributeEmpty < Error
-  end
-
   # ConfigurationError
   #
   # An exception raised when there is a problem with Base.connect arguments
@@ -222,7 +216,8 @@ module ActiveLdap
         connection.search(:base => _base,
                           :scope => options[:scope] || ldap_scope,
                           :filter => filter,
-                          :limit => options[:limit]) do |dn, attrs|
+                          :limit => options[:limit],
+                          :attributes => options[:attributes]) do |dn, attrs|
           attributes = {}
           attrs.each do |key, value|
             normalized_attr, normalized_value = make_subtypes(key, value)
@@ -746,6 +741,7 @@ module ActiveLdap
     def dn=(value)
       set_attribute(dn_attribute, value)
     end
+    alias_method(:id=, :dn=)
 
     # destroy
     #

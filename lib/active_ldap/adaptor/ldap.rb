@@ -200,7 +200,7 @@ module ActiveLdap
       # specific data without cracking open Base.connection
       def search(options={})
         filter = options[:filter] || 'objectClass=*'
-        attrs = options[:attrs] || []
+        attrs = options[:attributes] || []
         scope = ensure_scope(options[:scope])
         base = options[:base]
         limit = options[:limit] || 0

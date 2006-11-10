@@ -224,13 +224,15 @@
 # may help avoid programmer error later.
 # 
 # :classes isn't the only optional argument.  If :dn_attribute is left off,
-# it defaults to underscored class name or 'cn'.  If :prefix is left off, it will default to 'ou=CLASSNAME'. In this
-# case, it would be 'ou=Group'. There is also a :parent_class option which, when
-# specified, adds a method call parent() which will return the 
-# parent_class.new(parent_dn). The parent_dn is the objects dn without the dnattr
-# pair.
+# it defaults to underscored class name or 'cn'.  If :prefix is left off,
+# it will default to 'ou=PLURALIZED_CLASSNAME'. In this
+# case, it would be 'ou=Groups'. There is also a :parent_class option which,
+# when specified, adds a method call parent() which will return the
+# parent_class.new(parent_dn). The parent_dn is the objects dn without the
+# dn_attrribute pair.
 # 
-# :classes should be an Array. :dnattr should be a String and so should :prefix.
+# :classes should be an Array. :dn_attribute should be a String and so should
+# :prefix.
 # 
 # 
 # ===== belongs_to
@@ -249,7 +251,7 @@
 # In the above tree, one such example would be user 'drewry' who is a part of the
 # group 'develop'. You can see this by looking at the 'memberUid' field of 'develop'.
 # 
-#   irb> develop = Group.new('develop')
+#   irb> develop = Group.find('develop')
 #   => ...
 #   irb> develop.memberUid
 #   => ['drewry', 'builder']
@@ -258,34 +260,27 @@
 # group 'develop'. In order to remedy that, we can use belongs_to
 # 
 #   irb> class User < ActiveLdap::Base
-#   irb*   ldap_mapping :dnattr => 'uid', :prefix => 'People', :classes => ['top','account']
-#   irb*   belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid', :local_key => 'uid'
+#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
+#   irb*   belongs_to :groups, :class => 'Group', :many => 'memberUid', :foreign_key => 'uid'
 #   irb* end
 # 
 # Now, class User will have a method called 'groups' which will retrieve all
 # Group objects that a user is in.
 # 
-#   irb> me = User.new('drewry')
+#   irb> me = User.find('drewry')
 #   irb> me.groups
 #   => [#<Group:0x000001 ...>, #<Group:0x000002 ...>, ...]
-#   irb> me.groups(true).each { |group| p group.cn };nil
+#   irb> me.groups.each { |group| p group.cn };nil
 #   "cdrom"
 #   "audio"
 #   "develop"
 #   => nil
 #   (Note: nil is just there to make the output cleaner...)
 # 
-# Methods created with belongs_to also take an optional argument: objects. This
-# argument specifies whether it will return the value of the 'dnattr' of the
-# objects, or whether it will return Group objects. 
-# 
-#   irb> me.groups(false)
-#   => ["cdrom", "audio", "develop"]
-# 
 # TIP: If you weren't sure what the distinguished name attribute was for Group,
 # you could also do the following:
 # 
-#   irb> me.groups.each { |group| p group.dnattr };nil
+#   irb> me.groups.each { |group| p group.id };nil
 #   "cdrom"
 #   "audio"
 #   "develop"
@@ -294,18 +289,18 @@
 # Now let's talk about the arguments.  The first argument is the name of the
 # method you wish to create. In this case, we created a method called groups
 # using the symbol :groups. The next collection of arguments are actually a Hash
-# (as with ldap_mapping). :class_name should be a string that has the name of a
+# (as with ldap_mapping). :class should be a string that has the name of a
 # class you've already included. If you class is inside of a module, be sure to
-# put the whole name, e.g. :class_name => "MyLdapModule::Group". :foreign_key
-# tells belongs_to what attribute Group objects have that match the :local_key.
-# :local_key is the name of the local attribute whose value should be looked up
-# in Group under the foreign key. If :local_key is left off of the argument list,
-# it is assumed to be the dnattr. With this in mind, the above definition could
-# become:
+# put the whole name, e.g. :class => "MyLdapModule::Group". :primary_key
+# tells belongs_to what attribute Group objects have that match the
+# :many. :many is the name of the local attribute whose value
+# should be looked up in Group under the primary key. If :foreign_key is left
+# off of the argument list, it is assumed to be the dn_attribute. With this in
+# mind, the above definition could become:
 # 
 #   irb> class User < ActiveLdap::Base
 #   irb*   ldap_mapping :dnattr => 'uid', :prefix => 'People', :classes => ['top','account']
-#   irb*   belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid'
+#   irb*   belongs_to :groups, :class => 'Group', :many => 'memberUid'
 #   irb* end
 # 
 # In addition, you can do simple membership tests by doing the following:
@@ -323,25 +318,23 @@
 # invert the example from above:
 # 
 #   class Group < ActiveLdap::Base
-#     ldap_mapping :dnattr => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
-#     has_many :members, :class_name => "User", :local_key => "memberUid", :foreign_key => 'uid'
+#     ldap_mapping :dn_attribute => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
+#     has_many :members, :class => "User", :wrap => "memberUid", :primary_key => 'uid'
 #   end
 # 
 # Now we can see that group develop has user 'drewry' as a member, and it can
 # even return all responses in object form just like belongs_to methods.
 # 
-#   irb> develop = Group.new('develop')
+#   irb> develop = Group.find('develop')
 #   => ...
 #   irb> develop.members
 #   => [#<User:0x000001 ...>, #<User:...>]
-#   irb> develop.members(false)
-#   => ["drewry", "builder"]
 # 
 # 
 # The arguments for has_many follow the exact same idea that belongs_to's
-# arguments followed. :local_key's contents are used to search for matching
-# :foreign_key content.  If :foreign_key is not specified, it defaults to the
-# dnattr of the specified :class_name.
+# arguments followed. :wrap's contents are used to search for matching
+# :primary_key content.  If :primary_key is not specified, it defaults to the
+# dn_attribute of the specified :class.
 # 
 # === Using these new classes
 # 
@@ -351,37 +344,32 @@
 # methods that do not fall in to these categories.
 # 
 # 
-# ==== .find and .find_all
+# ==== .find
 # 
 # .find is a class method that is accessible from any subclass of Base that has
 # 'ldap_mapping' called. When called it returns the first match of the given
 # class.
 # 
-#   irb> Group.find('*')
+#   irb> Group.find('*').cn
 #   => "root"
 # 
 # In this simple example, Group.find took the search string of 'deve*' and
 # searched for the first match in Group where the dnattr matched the query. This
 # is the simplest example of .find.
 # 
-#   irb> Group.find_all('*')
+#   irb> Group.find(:all, '*').collect {|group| group.cn}
 #   => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
 # 
-# Here .find_all returns all matches to the same query.  Both .find and .find_all
-# also can take more expressive arguments:
+# Here .find(:all) returns all matches to the same query.  Both .find and
+# .find(:all) also can take more expressive arguments:
 # 
-#   irb> Group.find_all(:attribute => 'gidNumber', :value => '1003', :objects => false)
+#   irb> Group.find(:all, :attribute => 'gidNumber', :value => '1003').collect {|group| group.cn}
 #   => ["develop"]
 # 
 # So it is pretty clear what :attribute and :value do - they are used to query as
-# :attribute=:value. :objects is used to return precreated objects of the given
-# Class when it is set to true.
+# :attribute=:value.
 # 
-#   irb> Group.find_all(:attribute => 'gidNumber', :value => '1003', :objects => false)
-#   => [#<Group:0x40674a70 ..>]
-# 
-# If :objects is unspecified, it defaults to false. If :attribute is unspecified,
-# it defaults to the dnattr.
+# If :attribute is unspecified, it defaults to the dn_attribute.
 #
 # It is also possible to override :attribute and :value by specifying :filter. This
 # argument allows the direct specification of a LDAP filter to retrieve objects by.
@@ -393,37 +381,31 @@
 # to cover 80% of the cases where a user would want to use Base.connection directly.
 #
 #   irb> Base.search(:base => 'dc=example,dc=com', :filter => '(uid=roo*)',
-#                    :scope => LDAP::LDAP_SCOPE_SUBTREE, :attrs => ['uid', 'cn'])
-#   =>  [{"dn"=>"uid=root,ou=People,dc=dataspill,dc=org","cn"=>["root"], "uidNumber"=>["0"]}]
-# You can specify the :filter, :base, :scope, and :attrs, but they all have defaults --
+#                    :scope => :sub, :attributes => ['uid', 'cn'])
+#   =>  [["uid=root,ou=People,dc=dataspill,dc=org",{"cn"=>["root"], "uidNumber"=>["0"]}]
+# You can specify the :filter, :base, :scope, and :attributes, but they all have defaults --
 #  * :filter defaults to objectClass=* - usually this isn't what you want
 #  * :base defaults to the base of the class this is executed from (as set in ldap_mapping)
-#  * :scope defaults to LDAP::LDAP_SCOPE_SUBTREE. Usually you won't need to change it
-#  * :attrs defaults to [] and is the list of attrs you want back. Empty means all of them.
+#  * :scope defaults to :sub. Usually you won't need to change it
+#  * :attributes defaults to [] and is the list of attributes you want back. Empty means all of them.
 #
-# ==== #validate
+# ==== #valid?
 # 
-# validate is a method that verifies that all attributes that are required by the
-# objects current objectClasses are populated. This also will call the
-# private "#enforce_types" method. This will make sure that all values defined are
-# valid to be written to LDAP.  #validate is called by #write prior to
-# performing any action. Its explicit use in an application is unnecessary, and
-# it may become a private method in the future.
+# valid? is a method that verifies that all attributes that are required by the
+# objects current objectClasses are populated.
 # 
-# ==== #write
+# ==== #save
 # 
-# write is a method that writes any changes to an object back to the LDAP server.
+# save is a method that writes any changes to an object back to the LDAP server.
 # It automatically handles the addition of new objects, and the modification of
 # existing ones.
 # 
-# ==== #exists?
+# ==== .exists?
 # 
 # exists? is a simple method which returns true is the current object exists in
 # LDAP, or false if it does not.
 # 
-#  irb> newuser = User.new("dshadsadsa")
-#  => ...
-#  irb> newuser.exists?
+#  irb> User.exists?("dshadsadsa")
 #  => false
 # 
 # 
@@ -439,17 +421,19 @@
 # parsing for validation and attribute-to-method mangling as well as manage the
 # connection to LDAP.
 # 
-# ===== connect
+# ===== establish_connection
 # 
-# Base.connect takes many (optional) arguments and is used to connect to the LDAP
-# server. Sometimes you will want to connect anonymously and other times over TLS
-# with user credentials. Base.connect is here to do all of that for you.
+# Base.establish_connection takes many (optional) arguments and is used to
+# connect to the LDAP server. Sometimes you will want to connect anonymously
+# and other times over TLS with user credentials. Base.connect is here to do
+# all of that for you.
 # 
 # 
-# By default, if you call any subclass of Base, such as Group, it will call 
-# Base.connect() if these is no active LDAP connection. If your server allows
-# anonymous binding, and you only want to access data in a read-only fashion, you
-# won't need to call Base.connect. Here is a fully parameterized call:
+# By default, if you call any subclass of Base, such as Group, it will call
+# Base.establish_connection() if these is no active LDAP connection. If your
+# server allows anonymous binding, and you only want to access data in a
+# read-only fashion, you won't need to call Base.establish_connection. Here
+# is a fully parameterized call:
 # 
 #   Base.connect(
 #     :host => 'ldap.dataspill.org',
@@ -499,12 +483,12 @@
 # * :retries - indicates the number of attempts to reconnect that will be undertaken when a stale connection occurs. -1 means infinite.
 # * :retry_wait - seconds to wait before retrying a connection
 # * :ldap_scope - dictates how to find objects. (Default: ONELEVEL)
-# * :return_objects - indicates whether find/find_all will return objects or just the distinguished name attribute value of the matches. Rails users will find this useful.
 # * :timeout - time in seconds - defaults to disabled. This CAN interrupt search() requests. Be warned.
 # * :retry_on_timeout - whether to reconnect when timeouts occur. Defaults to true
 # See lib/configuration.rb for defaults for each option
 # 
-# Base.connect both connects and binds in one step. It follows roughly the following approach:
+# Base.establish_connection both connects and binds in one step. It follows
+# roughly the following approach:
 # 
 # * Connect to host:port using :method
 # 
@@ -514,41 +498,32 @@
 # * If that fails, error out.
 #
 # On connect, the configuration options passed in are stored in an internal class variable
-# @@config which is used to cache the information without ditching the defaults passed in
+# @configuration which is used to cache the information without ditching the defaults passed in
 # from configuration.rb
-# 
-# ===== close
-# 
-# Base.close discards the current LDAP connection.
 # 
 # ===== connection
 # 
-# Base.connection returns the raw LDAP connection object.
+# Base.connection returns the ActiveLdap::Connection object.
 # 
 # === Exceptions
 # 
 # There are a few custom exceptions used in Ruby/ActiveLdap. They are detailed below.
-# 
-# ==== AttributeEmpty
-# 
-# This exception is raised when a required attribute is empty. It is only raised
-# by #validate, and by proxy, #write.
 # 
 # ==== DeleteError
 # 
 # This exception is raised when #delete fails. It will include LDAP error
 # information that was passed up during the error.
 # 
-# ==== WriteError
+# ==== SaveError
 # 
-# This exception is raised when there is a problem in #write updating or creating
+# This exception is raised when there is a problem in #save updating or creating
 # an LDAP entry.  Often the error messages are cryptic. Looking at the server
 # logs or doing an Ethereal[http://www.ethereal.com] dump of the connection will
 # often provide better insight.
 # 
 # ==== AuthenticationError
 # 
-# This exception is raised during Base.connect if no valid authentication methods
+# This exception is raised during Base.establish_connection if no valid authentication methods
 # succeeded.
 # 
 # ==== ConnectionError
@@ -584,8 +559,8 @@
 # In ldapadmin/lib/ create the file user.rb:
 #   cat <<EOF
 #   class User < ActiveLdap::Base
-#     ldap_mapping :dnattr => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
-#     belongs_to :groups, :class_name => 'Group', :foreign_key => 'memberUid'
+#     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
+#     belongs_to :groups, :class => 'Group', :wrap => 'memberUid'
 #   end
 #   EOF
 # 
@@ -593,8 +568,8 @@
 #   cat <<EOF
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
-#     has_many :members, :class_name => "User", :local_key => "memberUid"
-#     belongs_to :primary_members, :class_name => 'User', :foreign_key => 'gidNumber', :local_key => 'gidNumber'
+#     has_many :members, :class => "User", :many => "memberUid"
+#     has_many :primary_members, :class => 'User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
 #   end # Group
 #   EOF
 # 
@@ -606,57 +581,90 @@
 # 
 #   #!/usr/bin/ruby -W0
 # 
-#   require 'activeldap'
+#   require 'active_ldap'
 #   require 'lib/user'
 #   require 'lib/group'
 #   require 'password'
 # 
-#   (printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
-# 
-#   puts "Adding user #{ARGV[0]}"
-#   pwb = Proc.new {
-#     Password.get('Password: ')
-#   }
-#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
-#   user = User.new(ARGV[0])
-#   user.objectClass = user.objectClass  << 'posixAccount' << 'shadowAccount'
-#   user.cn = ARGV[1]
-#   user.uidNumber = ARGV[2]
-#   user.gidNumber = ARGV[2]
-#   user.homeDirectory = "/home/#{ARGV[0]}"
-#   user.write
-#   puts "User created!"
-#   exit 0
-# 
-# 
+#   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+#     opts.banner += " USER_NAME CN UID"
+#   end
+#
+#   if argv.size == 3
+#     name, cn, uid = argv
+#   else
+#     $stderr.puts opts
+#     exit 1
+#   end
+#
+#   pwb = Proc.new do |user|
+#     ActiveLdap::Command.read_password("[#{user}] Password: ")
+#   end
+#
+#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#                                         :allow_anonymous => false)
+#
+#   if User.exists?(name)
+#     $stderr.puts("User #{name} already exists.")
+#     exit 1
+#   end
+#
+#   user = User.new(name)
+#   user.add_class('shadowAccount')
+#   user.cn = cn
+#   user.uid_number = uid
+#   user.gid_number = uid
+#   user.home_directory = "/home/#{name}"
+#   user.sn = "somesn"
+#   unless user.save
+#     puts "failed"
+#     puts user.errors.full_messages
+#     exit 1
+#   end
+#
 # ==== Managing LDAP entries
 # 
 # Now let's create another dumb script for modifying users - ldapadmin/usermod:
 # 
 #   #!/usr/bin/ruby -W0
 # 
-#   require 'activeldap'
+#   require 'active_ldap'
 #   require 'lib/user'
 #   require 'lib/group'
-#   require 'password'
 # 
-#   (printf($stderr, "Usage:\n%s name cn uid\n", $0); exit 1) if ARGV.size != 3
-# 
-#   puts "Changing user #{ARGV[0]}"
-#   pwb = Proc.new {
-#     Password.get('Password: ')
-#   }
-#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
-#   user = User.new(ARGV[0])
-#   user.cn = ARGV[1]
-#   user.uidNumber = ARGV[2]
-#   user.gidNumber = ARGV[2]
-#   user.write
-#   puts "Modification successful!"
-#   exit 0
-# 
-# 
-# 
+#   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+#     opts.banner += " USER_NAME CN UID"
+#   end
+#
+#   if argv.size == 3
+#     name, cn, uid = argv
+#   else
+#     $stderr.puts opts
+#     exit 1
+#   end
+#
+#   pwb = Proc.new do |user|
+#     ActiveLdap::Command.read_password("[#{user}] Password: ")
+#   end
+#
+#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#                                         :allow_anonymous => false)
+#
+#   unless User.exists?(name)
+#     $stderr.puts("User #{name} doesn't exist.")
+#     exit 1
+#   end
+#
+#   user = User.find(name)
+#   user.cn = cn
+#   user.uid_number = uid
+#   user.gid_number = uid
+#   unless user.save
+#     puts "failed"
+#     puts user.errors.full_messages
+#     exit 1
+#   end
+#
 # ==== Removing LDAP entries
 # 
 # And finally, a dumb script for removing user - ldapadmin/userdel:
@@ -664,23 +672,35 @@
 # 
 #   #!/usr/bin/ruby -W0
 # 
-#   require 'activeldap'
+#   require 'active_ldap'
 #   require 'lib/user'
 #   require 'lib/group'
-#   require 'password'
 # 
-#   (printf($stderr, "Usage:\n%s name\n", $0); exit 1) if ARGV.size != 1
-# 
-#   puts "Changing user #{ARGV[0]}"
-#   pwb = Proc.new {
-#     Password.get('Password: ')
-#   }
-#   ActiveLdap::Base.connect(:password_block => pwb, :allow_anonymous => false)
-#   user = User.new(ARGV[0])
-#   user.delete
-#   puts "User has been delete"
-#   exit 0
-# 
+#   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+#     opts.banner += " USER_NAME"
+#   end
+#
+#   if argv.size == 1
+#     name = argv.shift
+#   else
+#     $stderr.puts opts
+#     exit 1
+#   end
+#
+#   pwb = Proc.new do |user|
+#     ActiveLdap::Command.read_password("[#{user}] Password: ")
+#   end
+#
+#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#                                         :allow_anonymous => false)
+#
+#   unless User.exists?(name)
+#     $stderr.puts("User #{name} doesn't exist.")
+#     exit 1
+#   end
+#
+#   User.destroy(name)
+#
 # === Advanced Topics
 # 
 # Below are some situation tips and tricks to get the most out of Ruby/ActiveLdap.
@@ -700,9 +720,9 @@
 #   irb> user.cn
 #   => ["wad", {"lang-en-us" => ["wad", "Will Drewry"]}]
 #   # Now let's add a binary X.509 certificate (assume objectClass is correct)
-#   irb> user.userCertificate = File.read('example.der')
+#   irb> user.user_certificate = File.read('example.der')
 #   => ...
-#   irb> user.write
+#   irb> user.save
 #
 # So that's a lot to take in. Here's what is going on. I just set the LDAP 
 # object's cn to "wad" and cn:lang-en-us to ["wad", "Will Drewry"].
@@ -714,7 +734,7 @@
 # from breaking, and my code from crying.  For correctness, I could have easily 
 # done the following:
 #
-#   irb>  user.userCertificate = {'binary' => File.read('example.der')}
+#   irb>  user.user_certificate = {'binary' => File.read('example.der')}
 #
 # You should note that some binary data does not use the binary subtype all the time.
 # One example is jpegPhoto. You can use it as jpegPhoto;binary or just as jpegPhoto.
@@ -745,7 +765,7 @@
 # Example:
 # 
 #   ./myldap.rb:
-#   require 'activeldap'
+#   require 'active_ldap'
 #   require 'myldap/user'
 #   require 'myldap/group'
 #   module MyLDAP
@@ -754,8 +774,8 @@
 #   ./myldap/user.rb:
 #   module MyLDAP
 #   class User < ActiveLdap::Base
-#     ldap_mapping :dnattr => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
-#     belongs_to :groups, :class_name => 'MyLDAP::Group', :foreign_key => 'memberUid'
+#     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
+#     belongs_to :groups, :class => 'MyLDAP::Group', :many => 'memberUid'
 #   end
 #   end
 # 
@@ -763,8 +783,8 @@
 #   module MyLDAP
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
-#     has_many :members, :class_name => 'MyLDAP::User', :local_key => 'memberUid'
-#     belongs_to :primary_members, :class_name => 'MyLDAP::User', :foreign_key => 'gidNumber', :local_key => 'gidNumber'
+#     has_many :members, :class => 'MyLDAP::User', :wrap => 'memberUid'
+#     has_many :primary_members, :class => 'MyLDAP::User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
 #   end
 #   end
 # 
@@ -778,68 +798,43 @@
 # and everything should work well.
 # 
 #
-# ==== Non-array results for single values
+# ==== force array results for single values
 #
 # Even though Ruby/ActiveLdap attempts to maintain programmatic ease by 
-# returning Array values only. By specifying 'false' as an argument to 
-# any attribute method you will get back a String if it is single value.
-# This is useful when you are just dumping values for human reading.
+# returning Array values only. By specifying 'true' as an argument to 
+# any attribute method you will get back a Array if it is single value.
 # Here's an example:
 #
 #   irb> user = User.new('drewry')
 #   => ...
-#   irb> user.cn(false)
-#   => "Will Drewry"
+#   irb> user.cn(true)
+#   => ["Will Drewry"]
 #
-# That's it. Now you can make human-readable output faster.
-# 
 # ==== Dynamic attribute crawling
 # 
 # If you use tab completion in irb, you'll notice that you /can/ tab complete the dynamic 
 # attribute methods. You can still see which methods are for attributes using 
-# Base#attributes:
+# Base#attribute_names:
 # 
 #   irb> d = Group.new('develop')
 #   => ...
-#   irb> d.attributes
+#   irb> d.attribute_names
 #   => ["gidNumber", "cn", "memberUid", "commonName", "description", "userPassword", "objectClass"]
 # 
-# 
-# ==== Advanced LDAP queries
-# 
-# With the addition of Base.search, you can do arbitrary queries against LDAP
-# without needed to understand how to use Ruby/LDAP.
-#
-# If that's still not enough, you can access the
-# Ruby/LDAP connection object using the class method Base.connection.  You can
-# do all of your LDAP specific calls here and then continue about your normal
-# Ruby/ActiveLdap business afterward.
-#
-#
-# ==== Reusing LDAP::Entry objects without reusing the LDAP connection
-#
-# You can call Klass.new(entry) where Klass is some subclass of Base and
-# enty is an LDAP::entry. This use of 'new' is is meant for use from
-# within find_all and find, but you can also use it in tandem with advanced
-# LDAP queries.
-#
-# See tests/benchmark for more insight.
 # 
 # ==== Juggling multiple LDAP connections
 # 
 # In the same vein as the last tip, you can use multiple LDAP connections by
-# saving old connections and then resetting them as follows:
+# per class as follows:
 # 
-#   irb> Base.connect()
+#   irb> anon_class = Class.new(Base)
 #   => ...
-#   irb> anon_conn = Base.connection
+#   irb> anon_class.establish_connection
 #   => ...
-#   irb> Base.connect(password_block => {'mypass'})
+#   irb> auth_class = Class.new(Base)
 #   => ...
-#   irb> auth_conn = Base.connection
+#   irb> auth_class.establish_connection(password_block => {'mypass'})
 #   => ...
-#   irb> Base.connection = anon_conn
-#   ...
 # 
 # This can be useful for doing authentication tests and other such tricks.
 # 
@@ -868,37 +863,37 @@
 # from Base:
 #   * Base.base()
 #   * Base.required_classes()
-#   * Base.dnattr()
+#   * Base.dn_attribute()
 # You can access these from custom class methods by calling MyClass.base(),
 # or whatever. There are predefined instance methods for getting to these
 # from any new instance methods you define:
 #  * Base#base()
 #  * Base#required_classes()
-#  * Base#dnattr()
+#  * Base#dn_attribute()
 #
 # ===== What else?
 #
 # Well if you want to use the LDAP connection for anything, I'd suggest still
 # calling Base.connection to get it. There really aren't many other internals
-# that need to be worried about.  You could rebind with Base.do_bind, and get
-# the LDAP schema with Base.schema.
+# that need to be worried about.  You could get the LDAP schema with
+# Base.schema.
 #
 # The only other useful tricks are dereferencing and accessing the stored
 # data. Since LDAP attributes can have multiple names, e.g. cn or commonName,
 # any methods you write might need to figure it out. I'd suggest just
-# calling self.[attribname] to get the value, but if that's not good enough,
-# you can call look up the stored name in the @attr_method Array as follows:
-#    irb> @attr_method['commonName']
+# calling self[attribname] to get the value, but if that's not good enough,
+# you can call look up the stored name by #to_real_attribute_name as follows:
+#    irb> to_real_attribute_name('commonName')
 #    => 'cn'
 #
 # This tells you the name the attribute is stored in behind the scenes (@data).
-# Again, self.[attribname] should be enough for most extensions, but if not,
+# Again, self[attribname] should be enough for most extensions, but if not,
 # it's probably safe to dabble here.
 #
 # Also, if you like to look up all aliases for an attribute, you can call the
 # following:
 #
-#  irb> attribute_aliases('cn')
+#  irb> schema.attribute_aliases('cn')
 #  => ['cn','commonName']
 #
 # This is discovered automagically from the LDAP server's schema.
