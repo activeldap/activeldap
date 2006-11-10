@@ -46,8 +46,12 @@ module ActiveLdap
         if value.size > 1 and schema.single_value?(name)
           raise TypeError, "Attribute #{name} can only have a single value"
         end
-        value.collect do |entry|
-          normalize_attribute(name, entry)[1][0]
+        if value.empty?
+          schema.binary_required?(name) ? [{'binary' => []}] : []
+        else
+          value.collect do |entry|
+            normalize_attribute(name, entry)[1][0]
+          end
         end
       end
 

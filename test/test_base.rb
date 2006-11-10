@@ -14,7 +14,7 @@ class BaseTest < Test::Unit::TestCase
 
     assert_nothing_raised do
       ou_class.ldap_mapping :dn_attribute => "ou",
-                            :prefix => prefix,
+                            :prefix => "",
                             :classes => ["top", "organizationalUnit"]
     end
   end
