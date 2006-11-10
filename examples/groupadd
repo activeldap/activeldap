@@ -39,5 +39,3 @@ unless group.save
   puts group.errors.full_messages
   exit 1
 end
-
-
