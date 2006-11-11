@@ -203,7 +203,7 @@ class UserTest < Test::Unit::TestCase
   def test_destroy
     make_temporary_user do |user, password|
       user.destroy
-      assert(!user.new_entry?, 'user should no longer exist')
+      assert(user.new_entry?, 'user should no longer exist')
     end
   end
 end
