@@ -148,14 +148,13 @@ module ActiveLdap
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
                                   :scope, :parent]
+
+    @@logger = nil
+    cattr_accessor :logger
+
     class << self
       # Hide new in Base
       private :new
-
-      @@logger = nil
-      def logger
-        @@logger
-      end
 
       # Connect and bind to LDAP creating a class variable for use by
       # all ActiveLdap objects.
