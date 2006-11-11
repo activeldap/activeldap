@@ -38,7 +38,7 @@ puts user.to_ldif
 
 groups = []
 primary_group = user.primary_group
-if primary_group.exists?
+unless primary_group.new_entry?
   groups << "#{primary_group.cn}[#{primary_group.gid_number}]"
 end
 user.groups.sort_by do |group|

@@ -213,8 +213,9 @@ module AlTestUtils
           assert_raise(ActiveLdap::EntryNotFound) do
             @user_class.find(uid)
           end
+          assert(!@user_class.exists?(uid))
           user = @user_class.new(uid)
-          assert(!user.exists?)
+          assert(user.new_entry?)
           user.cn = user.uid
           user.sn = user.uid
           user.uid_number = uid_number
@@ -228,7 +229,7 @@ module AlTestUtils
             user.jpeg_photo = jpeg_photo
           end
           user.save
-          assert(user.exists?)
+          assert(!user.new_entry?)
           yield(@user_class.find(user.uid), password)
         end
       end
@@ -240,14 +241,15 @@ module AlTestUtils
       ensure_delete_group(cn) do
         gid_number = config[:gid_number] || default_gid
         _wrap_assertion do
+          assert(!@group_class.exists?(cn))
           assert_raise(ActiveLdap::EntryNotFound) do
             @group_class.find(cn)
           end
           group = @group_class.new(cn)
-          assert(!group.exists?)
+          assert(group.new_entry?)
           group.gid_number = gid_number
           group.save
-          assert(group.exists?)
+          assert(!group.new_entry?)
           yield(@group_class.find(group.cn))
         end
       end

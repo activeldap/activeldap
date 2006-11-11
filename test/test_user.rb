@@ -8,8 +8,7 @@ class UserTest < Test::Unit::TestCase
     ensure_delete_user("test-user") do |uid|
       user = @user_class.new(uid)
 
-      assert_equal(false, user.exists?,
-                   "#{uid} must not exist in LDAP prior to testing")
+      assert(user.new_entry?, "#{uid} must not exist in LDAP prior to testing")
 
       assert_equal(['posixAccount', 'person'].sort, user.classes.sort,
                    "Class User's ldap_mapping should specify " +
@@ -204,7 +203,7 @@ class UserTest < Test::Unit::TestCase
   def test_destroy
     make_temporary_user do |user, password|
       user.destroy
-      assert(!user.exists?, 'user should no longer exist')
+      assert(!user.new_entry?, 'user should no longer exist')
     end
   end
 end

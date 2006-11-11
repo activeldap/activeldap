@@ -39,10 +39,10 @@ group.primary_members.each do |mem|
 end
 
 group.members.each do |mem|
-  if mem.exists?
-    members << "#{mem.uid}[#{mem.uidNumber}]"
-  else
+  if mem.new_entry?
     members << "#{mem.uid}[????]"
+  else
+    members << "#{mem.uid}[#{mem.uidNumber}]"
   end
 end
 
