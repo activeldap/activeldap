@@ -34,8 +34,10 @@ module ActiveLdap
 
       def clear_active_connection_name
         @active_connection_name = nil
-        ObjectSpace.each_object(Class) do |k|
-          k.clear_active_connection_name if k < self
+        ObjectSpace.each_object(Class) do |klass|
+          if klass < self and !klass.name.empty?
+            klass.clear_active_connection_name
+          end
         end
       end
 
