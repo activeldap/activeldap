@@ -707,14 +707,9 @@ module ActiveLdap
       !values.empty? or values.any? {|x| not (x and x.empty?)}
     end
 
-    # exists?
+    # new_entry?
     #
-    # Return whether the entry exists in LDAP or not
-    def exists?
-      logger.debug {"stub: exists? called"}
-      not new_entry?
-    end
-
+    # Return whether the entry is new entry in LDAP or not
     def new_entry?
       @new_entry
     end
