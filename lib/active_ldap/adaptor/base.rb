@@ -5,7 +5,6 @@ module ActiveLdap
         @connection = nil
         @config = config.dup
         @logger = @config.delete(:logger)
-        @reconnect_attempts = 0
         %w(host port method timeout retry_on_timeout
            retry_limit retry_wait bind_format user password
            password_block try_sasl allow_anonymous

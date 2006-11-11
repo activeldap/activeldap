@@ -14,7 +14,7 @@ class ConnectionPerClassTest < Test::Unit::TestCase
     assert(!non_anon_class.connection.bound?)
     assert(!anon_class.connection.bound?)
 
-    anon_class.connection.bind
+    anon_class.connection.rebind
     assert(non_anon_class.connection.bound?)
     assert(anon_class.connection.bound?)
 
@@ -31,7 +31,7 @@ class ConnectionPerClassTest < Test::Unit::TestCase
     assert(!non_anon_class.connection.bound?)
     assert(!anon_class.connection.bound?)
 
-    anon_class.connection.bind
+    anon_class.connection.rebind
     assert(!non_anon_class.connection.bound?)
     assert(anon_class.connection.bound?)
 
