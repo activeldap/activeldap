@@ -4,6 +4,28 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_many_delete
+    make_temporary_group do |group1|
+      make_temporary_group do |group2|
+        make_temporary_user do |user,|
+          user.update_attribute(:cn, "new #{user.cn}")
+
+          user.groups = [group1, group2]
+          assert_equal([group1.id, group2.id].sort,
+                       user.groups.collect {|g| g.id}.sort)
+          assert_equal([user.id].sort, group1.member_uid(true))
+          assert_equal([user.id].sort, group2.member_uid(true))
+
+          user.groups = []
+          assert_equal([], user.groups.to_a)
+          assert_equal([], group1.member_uid(true))
+          assert_equal([], group2.member_uid(true))
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_belongs_to_before_save
     make_temporary_group do |group1|
       make_temporary_group do |group2|
@@ -44,7 +66,6 @@ class AssociationsTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_extend
     mod = Module.new
     mod.__send__(:mattr_accessor, :called)
