@@ -406,6 +406,7 @@ module ActiveLdap
       #        Subclass.find('some*val')
       def find(*args)
         options = extract_options_from_args!(args)
+        args = [:first] if args.empty? and !options.empty?
         case args.first
         when :first
           find_initial(options)
