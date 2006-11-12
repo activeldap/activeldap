@@ -56,7 +56,7 @@ module ActiveLdap
       def connection=(adaptor)
         if adaptor.is_a?(Adaptor::Base)
           @schema = nil
-          active_connections[active_connection_key] = adaptor
+          active_connections[active_connection_name] = adaptor
         elsif adaptor.is_a?(Hash)
           config = adaptor
           adaptor = Inflector.camelize(config[:adaptor] || "ldap")
@@ -121,7 +121,7 @@ module ActiveLdap
         init_configuration(config)
         clear_active_connection_name
         key = active_connection_key
-        @action_connection_name = key
+        @active_connection_name = key
         @@defined_configurations[key] = configuration
       end
 
