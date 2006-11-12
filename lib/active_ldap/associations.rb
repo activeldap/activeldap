@@ -61,6 +61,14 @@ module ActiveLdap
         else
           association_class = Association::BelongsTo
           opts[:foreign_key_name] ||= "#{association_id}_id"
+
+          before_save do |entry|
+            association = entry.instance_variable_get("@#{association_id}")
+            if association and association.updated?
+              entry[association.__send__(:primary_key)] =
+                association[opts[:foreign_key_name]]
+            end
+          end
         end
 
         association_accessor(association_id) do |target|

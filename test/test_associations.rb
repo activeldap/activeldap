@@ -4,6 +4,47 @@ class AssociationsTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_before_save
+    make_temporary_group do |group1|
+      make_temporary_group do |group2|
+        ensure_delete_group(group2.cn.succ) do |group3_name|
+          group3 = @group_class.new(group3_name)
+          group3.gid_number = group2.gid_number.succ
+          make_temporary_user(:gid_number => group1.gid_number) do |user,|
+            assert_equal(group1.gid_number, user.primary_group.gid_number)
+            assert_equal(group1.gid_number, user.gid_number)
+
+            user.primary_group = group2
+            assert_equal(group2.gid_number, user.primary_group.gid_number)
+            assert_equal(group2.gid_number, user.gid_number)
+
+            user_in_ldap = @user_class.find(user.id)
+            assert_equal(group1.gid_number,
+                         user_in_ldap.primary_group.gid_number)
+            assert_equal(group1.gid_number, user_in_ldap.gid_number)
+
+            assert(group3.new_entry?)
+            user.primary_group = group3
+            assert_equal(group3.gid_number, user.primary_group.gid_number)
+            assert_equal(group2.gid_number, user.gid_number)
+
+            assert(user.save)
+            assert_equal(group3.gid_number, user.gid_number)
+
+            user_in_ldap = @user_class.find(user.id)
+            assert(!user_in_ldap.primary_group.exists?)
+
+            assert(group3.save)
+            assert(user_in_ldap.primary_group.exists?)
+            assert_equal(group3.gid_number,
+                         user_in_ldap.primary_group.gid_number)
+          end
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_extend
     mod = Module.new
     mod.__send__(:mattr_accessor, :called)
@@ -100,7 +141,6 @@ class AssociationsTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_has_many_assign
     make_temporary_group do |group|
       gid_number1 = group.gid_number.to_i + 1
