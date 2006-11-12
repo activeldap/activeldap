@@ -16,17 +16,8 @@ module ActiveLdap
       end
 
       def <<(*entries)
-        result = true
-        load_target
-
-        flatten_deeper(entries).each do |entry|
-          result &&= insert_entry(entry) unless @owner.new_entry?
-          @target << entry
-        end
-
-        result && self
+        add_entries(*entries)
       end
-
       alias_method(:push, :<<)
       alias_method(:concat, :<<)
 
@@ -71,6 +62,18 @@ module ActiveLdap
       def insert_entry(entry)
         entry[@options[:foreign_key_name]] = @owner[@options[:local_key_name]]
         entry.save
+      end
+
+      def add_entries(*entries)
+        result = true
+        load_target
+
+        flatten_deeper(entries).each do |entry|
+          result &&= insert_entry(entry) unless @owner.new_entry?
+          @target << entry
+        end
+
+        result && self
       end
     end
   end
