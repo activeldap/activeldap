@@ -143,6 +143,8 @@ module ActiveLdap
   # ActiveLdap functionality. It is meant to only ever be subclassed
   # by extension classes.
   class Base
+    include Reloadable::Subclasses
+
     @prefix = nil
     @base = nil
     @required_classes = ['top']
