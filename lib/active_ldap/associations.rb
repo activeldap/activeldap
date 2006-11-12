@@ -53,6 +53,7 @@ module ActiveLdap
           :foreign_key_name => foreign_key,
           :primary_key_name => primary_key,
           :many => many,
+          :extend => options[:extend],
         }
         if opts[:many]
           association_class = Association::BelongsToMany
@@ -93,6 +94,7 @@ module ActiveLdap
           :foreign_key_name => foreign_key,
           :primary_key_name => primary_key,
           :wrap => options[:wrap],
+          :extend => options[:extend],
         }
         if opts[:wrap]
           association_class = Association::HasManyWrap
@@ -139,12 +141,14 @@ module ActiveLdap
         end
       end
 
-      VALID_BELONGS_TO_OPTIONS = [:class, :foreign_key, :primary_key, :many]
+      VALID_BELONGS_TO_OPTIONS = [:class, :foreign_key, :primary_key, :many,
+                                  :extend]
       def validate_belongs_to_options(options)
         options.assert_valid_keys(VALID_BELONGS_TO_OPTIONS)
       end
 
-      VALID_HAS_MANY_OPTIONS = [:class, :foreign_key, :primary_key, :wrap]
+      VALID_HAS_MANY_OPTIONS = [:class, :foreign_key, :primary_key, :wrap,
+                                :extend]
       def validate_has_many_options(options)
         options.assert_valid_keys(VALID_HAS_MANY_OPTIONS)
       end

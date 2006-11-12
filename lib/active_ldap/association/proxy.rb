@@ -7,6 +7,7 @@ module ActiveLdap
       def initialize(owner, options)
         @owner = owner
         @options = options
+        extend(options[:extend]) if options[:extend]
         reset
       end
 
@@ -59,7 +60,7 @@ module ActiveLdap
 
       def foreign_class
         klass = @owner.class.associated_class(@options[:association_id])
-        klass = @owner.class.module_eval("#{klass}") if klass.is_a?(String)
+        klass = @owner.class.module_eval(klass) if klass.is_a?(String)
         klass
       end
 

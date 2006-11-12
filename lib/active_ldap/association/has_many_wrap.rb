@@ -5,10 +5,22 @@ module ActiveLdap
     class HasManyWrap < Collection
       private
       def insert_entry(entry)
-        new_value = @owner[@options[:wrap], true]
-        new_value += entry[primary_key, true]
-        @owner[@options[:wrap]] = new_value.uniq
-        @owner.save
+        old_value = @owner[@options[:wrap], true]
+        new_value = (old_value + entry[primary_key, true]).uniq.sort
+        if old_value != new_value
+          @owner[@options[:wrap]] = new_value
+          @owner.save
+        end
+      end
+
+      def delete_entries(entries)
+        old_value = @owner[@options[:wrap], true]
+        new_value = old_value - entries.collect {|entry| entry[primary_key]}
+        new_value = new_value.uniq.sort
+        if old_value != new_value
+          @owner[@options[:wrap]] = new_value
+          @owner.save
+        end
       end
 
       def find_target
