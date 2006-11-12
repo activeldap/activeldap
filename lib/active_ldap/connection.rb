@@ -36,7 +36,7 @@ module ActiveLdap
         @active_connection_name = nil
         ObjectSpace.each_object(Class) do |klass|
           if klass < self and !klass.name.empty?
-            klass.clear_active_connection_name
+            klass.instance_variable_set("@active_connection_name", nil)
           end
         end
       end
