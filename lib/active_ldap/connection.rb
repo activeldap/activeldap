@@ -98,8 +98,27 @@ module ActiveLdap
       end
 
       def establish_connection(config=nil)
+        if config.nil?
+          if defined?(LDAP_ENV)
+            config = LDAP_ENV
+          elsif defined?(RAILS_ENV)
+            config = RAILS_ENV
+          else
+            config = {}
+          end
+        end
+
+        if config.is_a?(Symbol) or config.is_a?(String)
+          _config = configurations[config.to_s]
+          unless _config
+            raise ConnectionError, "#{config} connection is not configured"
+          end
+          config = _config
+        end
+
         remove_connection
-        init_configuration(config || {})
+
+        init_configuration(config)
         clear_active_connection_name
         key = active_connection_key
         @action_connection_name = key

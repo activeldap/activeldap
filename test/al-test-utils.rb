@@ -1,6 +1,7 @@
 require 'test/unit'
 require 'test-unit-ext'
 
+require 'erb'
 require 'yaml'
 require 'socket'
 require 'openssl'
@@ -9,6 +10,8 @@ require 'rbconfig'
 require 'active_ldap'
 
 require File.join(File.expand_path(File.dirname(__FILE__)), "command")
+
+LDAP_ENV = "test" unless defined?(LDAP_ENV)
 
 module AlTestUtils
   def self.included(base)
@@ -27,62 +30,30 @@ module AlTestUtils
       @base_dir = File.expand_path(File.dirname(__FILE__))
       @top_dir = File.expand_path(File.join(@base_dir, ".."))
       @example_dir = File.join(@top_dir, "examples")
-      @config = read_config
+      @config_file = File.join(File.dirname(__FILE__), "config.yaml")
+      ActiveLdap::Base.configurations = read_config
     end
 
     def teardown
       super
     end
 
-    module_function
+    def current_configuration
+      ActiveLdap::Base.configurations[LDAP_ENV]
+    end
+
     def read_config
-      config_file = File.join(File.dirname(__FILE__), "config.yaml")
-
-      unless File.exist?(config_file)
-        raise "config file for testing doesn't exist: #{config_file}"
+      unless File.exist?(@config_file)
+        raise "config file for testing doesn't exist: #{@config_file}"
       end
-      YAML.load(File.read(config_file))
-    end
-
-    def establish_connection_config
-      config = {}
-      %w(user bind_format password password_block logger host port
-         base try_sasl allow_anonymous retries sasl_quiet method
-         retry_wait ldap_scope return_objects timeout
-         retry_on_timeout).each do |field|
-        name = "connect_#{field}"
-        value = nil
-        if respond_to?(name)
-          value = __send__(name)
-        else
-          value = connection_config[field]
-        end
-        config[field.to_sym] = value unless value.nil?
-      end
-      config
-    end
-
-    def connection_config
-      @config["connection"] ||= {}
-    end
-
-    def connect_host
-      connection_config["host"] || "localhost"
-    end
-
-    def connect_port
-      connection_config["port"] || 389
-    end
-
-    def connect_base
-      connection_config["base"] || "dc=localdomain"
+      YAML.load(ERB.new(File.read(@config_file)).result)
     end
   end
 
   module Connection
     def setup
       super
-      ActiveLdap::Base.establish_connection(establish_connection_config)
+      ActiveLdap::Base.establish_connection
     end
 
     def teardown
@@ -105,7 +76,7 @@ module AlTestUtils
 
     def teardown
       if @dumped_data
-        ActiveLdap::Base.establish_connection(establish_connection_config)
+        ActiveLdap::Base.establish_connection
         ActiveLdap::Base.delete_all(nil, :scope => :sub)
         ActiveLdap::Base.load(@dumped_data)
       end
@@ -352,7 +323,7 @@ module AlTestUtils
     def run_command(*args, &block)
       file = Tempfile.new("al-command-support")
       file.open
-      file.puts(establish_connection_config.to_yaml)
+      file.puts(ActiveLdap::Base.configurations["test"].to_yaml)
       file.close
       run_ruby(*[@command, "--config", file.path, *args], &block)
     end

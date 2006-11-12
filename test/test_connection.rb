@@ -15,22 +15,22 @@ class ConnectionTest < Test::Unit::TestCase
   def test_can_reconnect?
     assert(!ActiveLdap::Base.connected?)
 
-    config = establish_connection_config.merge({:retry_limit => 10})
+    config = current_configuration.merge("retry_limit" => 10)
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     assert(!connection.send(:can_reconnect?, :reconnect_attempts => 10))
 
-    config = establish_connection_config.merge({:retry_limit => 10})
+    config = current_configuration.merge("retry_limit" => 10)
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     assert(!connection.send(:can_reconnect?, :reconnect_attempts => 9))
 
-    config = establish_connection_config.merge({:retry_limit => 10})
+    config = current_configuration.merge("retry_limit" => 10)
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     assert(connection.send(:can_reconnect?, :reconnect_attempts => 8))
 
-    config = establish_connection_config.merge({:retry_limit => -1})
+    config = current_configuration.merge("retry_limit" => -1)
     ActiveLdap::Base.establish_connection(config)
     connection = ActiveLdap::Base.connection
     assert(connection.send(:can_reconnect?, :reconnect_attempts => -10))

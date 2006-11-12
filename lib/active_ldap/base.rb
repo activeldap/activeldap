@@ -134,6 +134,9 @@ module ActiveLdap
   class ConnectionNotEstablished < Error
   end
 
+  class AdapterNotSpecified < Error
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -149,8 +152,9 @@ module ActiveLdap
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
                                   :scope, :parent]
 
-    @@logger = nil
     cattr_accessor :logger
+    cattr_accessor :configurations
+    @@configurations = {}
 
     class << self
       # Hide new in Base
@@ -190,7 +194,7 @@ module ActiveLdap
       # :retry_on_timeout - whether to reconnect when timeouts occur. Defaults
       #   to true
       # See lib/configuration.rb for defaults for each option
-      def establish_connection(config={})
+      def establish_connection(config=nil)
         super
         ensure_logger
         connection.connect
@@ -590,27 +594,17 @@ module ActiveLdap
 
       def init_configuration(config)
         configuration = default_configuration
-        config.each do |key, value|
+        config.symbolize_keys.each do |key, value|
           case key
           when :base
             # Scrub before inserting
             @base = value.gsub(/['}{#]/, '')
           when :ldap_scope
-            if value.is_a?(Fixnum)
-              backward_compatibility_scope_map = {
-                0 => :base,
-                1 => :one,
-                2 => :sub,
-              }
-              unless backward_compatibility_scope_map.has_key?(value)
-                raise ConfigurationError, 'invalid :ldap_scope value'
-              end
-              value = backward_compatibility_scope_map[value]
-            end
+            value = value.to_sym if value.is_a?(String)
             unless value.is_a?(Symbol)
               raise ConfigurationError, ':ldap_scope must be a Symbol'
             end
-            @ldap_scope = base
+            @ldap_scope = value
           else
             configuration[key] = value
           end

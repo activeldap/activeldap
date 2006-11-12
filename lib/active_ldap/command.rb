@@ -16,11 +16,8 @@ module ActiveLdap
         opts.on_tail("--config=CONFIG",
                      "Specify configuration file written as YAML") do |file|
           require 'yaml'
-          normalized_config = {}
-          YAML.load(File.read(file)).each do |key, value|
-            normalized_config[key.to_sym] = value
-          end
-          Configuration::DEFAULT_CONFIG.update(normalized_config)
+          config = YAML.load(File.read(file)).symbolize_keys
+          Configuration::DEFAULT_CONFIG.update(config)
         end
 
         opts.on_tail("-h", "--help", "Show this message") do
