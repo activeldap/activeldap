@@ -678,6 +678,28 @@ module ActiveLdap
       yield self if block_given?
     end
 
+    # Returns true if the +comparison_object+ is the same object, or is of
+    # the same type and has the same dn.
+    def ==(comparison_object)
+      comparison_object.equal?(self) or
+        (comparison_object.instance_of?(self.class) and
+         comparison_object.dn == dn and
+         !comparison_object.new_entry?)
+    end
+
+    # Delegates to ==
+    def eql?(comparison_object)
+      self == (comparison_object)
+    end
+
+    # Delegates to id in order to allow two records of the same type and id
+    # to work with something like:
+    #   [ User.find("a"), User.find("b"), User.find("c") ] &
+    #     [ User.find("a"), User.find("d") ] # => [ User.find("a") ]
+    def hash
+      dn.hash
+    end
+
     def may
       ensure_apply_object_class
       @may

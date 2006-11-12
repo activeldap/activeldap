@@ -4,6 +4,19 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_compare
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        make_temporary_user do |user3,|
+          make_temporary_user do |user4,|
+            actual = ([user1, user2, user3] & [user1, user4])
+            assert_equal([user1].collect {|user| user.id},
+                         actual.collect {|user| user.id})
+          end
+        end
+      end
+    end
+  end
 
   priority :normal
   def test_ldap_mapping_validation
