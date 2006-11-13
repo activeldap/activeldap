@@ -62,7 +62,7 @@ module ActiveLdap
       end
 
       def configuration(key=nil)
-        @@defined_configurations[key || active_connection_key]
+        @@defined_configurations[key || active_connection_name]
       end
 
       def define_configuration(key, config)
