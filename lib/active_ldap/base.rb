@@ -153,15 +153,19 @@ module ActiveLdap
     def self.class_local_attr_accessor(search_ancestors, *syms)
       syms.flatten.each do |sym|
         class_eval(<<-EOS, __FILE__, __LINE__ + 1)
-          def self.#{sym}(search_ancestors=#{search_ancestors})
+          def self.#{sym}(search_superclasses=#{search_ancestors})
             @#{sym} ||= nil
             return @#{sym} if @#{sym}
-            if search_ancestors
-              ancestors[1..-1].each do |ancestor|
-                return nil unless ancestor.respond_to?("#{sym}")
-                value = ancestor.#{sym}
-                return value if value
+            if search_superclasses
+              target = superclass
+              value = nil
+              loop do
+                break nil unless target.respond_to?("#{sym}")
+                value = target.#{sym}
+                break if value
+                target = target.superclass
               end
+              value
             else
               nil
             end

@@ -4,6 +4,21 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_inherit_base
+    sub_user_class = Class.new(@user_class)
+    sub_user_class.ldap_mapping :prefix => "ou=Sub"
+    assert_equal("ou=Sub,#{@user_class.base}", sub_user_class.base)
+    sub_user_class.send(:include, Module.new)
+    assert_equal("ou=Sub,#{@user_class.base}", sub_user_class.base)
+
+    sub_sub_user_class = Class.new(sub_user_class)
+    sub_sub_user_class.ldap_mapping :prefix => "ou=SubSub"
+    assert_equal("ou=SubSub,#{sub_user_class.base}", sub_sub_user_class.base)
+    sub_sub_user_class.send(:include, Module.new)
+    assert_equal("ou=SubSub,#{sub_user_class.base}", sub_sub_user_class.base)
+  end
+
+  priority :normal
   def test_compare
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|
@@ -18,7 +33,6 @@ class BaseTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_ldap_mapping_validation
     ou_class = Class.new(ActiveLdap::Base)
     assert_raises(ArgumentError) do
