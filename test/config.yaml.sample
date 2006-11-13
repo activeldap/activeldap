@@ -1,13 +1,6 @@
 test:
-  host:
-    127.0.0.1
-  base:
-    dc=test,dc=localdomain
-#  method:
-#    :tls
-  bind_format:
-    cn=%s,dc=localdomain
-  user:
-    user-name
-  password:
-    secret
+  host: 127.0.0.1
+  base: dc=test,dc=localdomain
+  method: :tls
+  bind_dn: cn=user-name,dc=localdomain
+  password: secret

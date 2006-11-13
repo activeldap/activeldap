@@ -6,7 +6,7 @@ module ActiveLdap
         @config = config.dup
         @logger = @config.delete(:logger)
         %w(host port method timeout retry_on_timeout
-           retry_limit retry_wait bind_format user password
+           retry_limit retry_wait bind_dn password
            password_block try_sasl allow_anonymous
            store_password).each do |name|
           instance_variable_set("@#{name}", config[name.to_sym])

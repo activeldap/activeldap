@@ -15,8 +15,7 @@ module ActiveLdap
     DEFAULT_CONFIG[:port] = 389
     DEFAULT_CONFIG[:method] = :plain  # :ssl, :tls, :plain allowed
 
-    DEFAULT_CONFIG[:bind_format] = "cn=%s,dc=localdomain"
-    DEFAULT_CONFIG[:user] = ENV['USER']
+    DEFAULT_CONFIG[:bind_dn] = "cn=admin,dc=localdomain"
     DEFAULT_CONFIG[:password_block] = nil
     DEFAULT_CONFIG[:password] = nil
     DEFAULT_CONFIG[:store_password] = true
@@ -67,6 +66,10 @@ module ActiveLdap
 
       def define_configuration(key, config)
         @@defined_configurations[key] = config
+      end
+
+      def defined_configurations
+        @@defined_configurations
       end
 
       def remove_configuration_by_configuration(config)

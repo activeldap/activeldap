@@ -16,7 +16,7 @@ class BindTest < Test::Unit::TestCase
     assert(!ActiveLdap::Base.connected?)
     assert_nothing_raised do
       config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
-      config.delete(:user)
+      config.delete(:bind_dn)
       config[:allow_anonymous] = true
       ActiveLdap::Base.establish_connection(config)
     end
@@ -27,7 +27,7 @@ class BindTest < Test::Unit::TestCase
   def test_bind
     assert(!ActiveLdap::Base.connected?)
     config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
-    if config[:user].nil? or config[:bind_format].nil? or config[:password].nil?
+    if config[:bind_dn].nil?
       puts "pass this test for no user configuration"
       return
     end
@@ -44,7 +44,7 @@ class BindTest < Test::Unit::TestCase
     assert(!ActiveLdap::Base.connected?)
     assert_raises(ActiveLdap::AuthenticationError) do
       config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
-      config.delete(:user)
+      config.delete(:bind_dn)
       config[:allow_anonymous] = false
       ActiveLdap::Base.establish_connection(config)
     end

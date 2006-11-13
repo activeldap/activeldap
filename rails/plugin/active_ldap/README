@@ -8,24 +8,21 @@ You need to write RAILS_ROOT/config/ldap.yml like the following:
     host: 127.0.0.1
     port: 389
     base: dc=devel,dc=local,dc=net
-    bind_format: cn=%s,dc=local,dc=net
-    user: admin
+    bind_dn: cn=admin,dc=local,dc=net
     password: secret
 
   test:
     host: 127.0.0.1
     port: 389
     base: dc=test,dc=local,dc=net
-    bind_format: cn=%s,dc=local,dc=net
-    user: admin
+    bind_dn: cn=admin,dc=local,dc=net
     password: secret
 
   production:
     host: 127.0.0.1
     port: 389
     base: dc=production,dc=local,dc=net
-    bind_format: cn=%s,dc=local,dc=net
-    user: admin
+    bind_dn: cn=admin,dc=local,dc=net
     password: secret
 
 == Model

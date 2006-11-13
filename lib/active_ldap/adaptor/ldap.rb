@@ -119,8 +119,7 @@ module ActiveLdap
       end
 
       def bind(options={})
-        bind_format = options[:bind_format] || @bind_format
-        user = options[:user] || @user
+        bind_dn = options[:bind_dn] || @bind_dn
         try_sasl = options.has_key?(:try_sasl) ? options[:try_sasl] : @try_sasl
         if options.has_key?(:allow_anonymous)
           allow_anonymous = options[:allow_anonymous]
@@ -128,11 +127,6 @@ module ActiveLdap
           allow_anonymous = @allow_anonymous
         end
 
-        if @bind_format
-          bind_dn = @bind_format % @user
-        else
-          bind_dn = nil
-        end
         # Rough bind loop:
         # Attempt 1: SASL if available
         # Attempt 2: SIMPLE with credentials if password block

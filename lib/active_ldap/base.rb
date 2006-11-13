@@ -167,12 +167,9 @@ module ActiveLdap
       #
       # == +config+
       # +config+ must be a hash that may contain any of the following fields:
-      # :user, :password_block, :logger, :host, :port, :base, :bind_format,
+      # :password_block, :logger, :host, :port, :base, :bind_dn,
       # :try_sasl, :allow_anonymous
-      # :user specifies the username to bind with.
-      # :bind_format specifies the string to substitute the username into on
-      #   bind.  e.g. uid=%s,ou=People,dc=dataspill,dc=org. Overrides
-      #   @@bind_format.
+      # :bind_dn specifies the DN to bind with.
       # :password_block specifies a Proc object that will yield a String to
       #   be used as the password when called.
       # :logger specifies a preconfigured Log4r::Logger to be used for all
