@@ -5,7 +5,6 @@ module ActiveLdap
     end
 
     module ClassMethods
-      @@defined_configurations = {}
       @@active_connections = {}
 
       def active_connections
@@ -15,7 +14,7 @@ module ActiveLdap
       def active_connection_name
         return @active_connection_name if @active_connection_name
         key = active_connection_key
-        if active_connections[key] or @@defined_configurations[key]
+        if active_connections[key] or configuration(key)
           @active_connection_name = key
         elsif self == ActiveLdap::Base
           @active_connection_name = nil
@@ -78,7 +77,7 @@ module ActiveLdap
         raise ConnectionNotEstablished unless name
         conn = active_connections[name]
         if conn.nil?
-          config = @@defined_configurations[name]
+          config = configuration(name)
           raise ConnectionNotEstablished unless config
           self.connection = config
           conn = active_connections[name]
@@ -89,40 +88,22 @@ module ActiveLdap
 
       def remove_connection(klass=self)
         key = active_connection_key(klass)
-        config = @@defined_configurations[key]
+        config = configuration(key)
         conn = active_connections[key]
-        @@defined_configurations.delete_if {|key, value| value == config}
+        remove_configuration_by_configuration(config)
         active_connections.delete_if {|key, value| value == conn}
         conn.disconnect! if conn
         config
       end
 
       def establish_connection(config=nil)
-        if config.nil?
-          if defined?(LDAP_ENV)
-            config = LDAP_ENV
-          elsif defined?(RAILS_ENV)
-            config = RAILS_ENV
-          else
-            config = {}
-          end
-        end
-
-        if config.is_a?(Symbol) or config.is_a?(String)
-          _config = configurations[config.to_s]
-          unless _config
-            raise ConnectionError, "#{config} connection is not configured"
-          end
-          config = _config
-        end
-
+        config = ensure_configuration(config)
         remove_connection
 
-        init_configuration(config)
         clear_active_connection_name
         key = active_connection_key
         @active_connection_name = key
-        @@defined_configurations[key] = configuration
+        define_configuration(key, merge_configuration(config))
       end
 
       # Return the schema object

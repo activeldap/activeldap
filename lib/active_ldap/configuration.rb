@@ -33,8 +33,64 @@ module ActiveLdap
     DEFAULT_CONFIG[:logger] = nil
 
     module ClassMethods
+      @@defined_configurations = {}
+
       def default_configuration
         DEFAULT_CONFIG.dup
+      end
+
+      def ensure_configuration(config=nil)
+        if config.nil?
+          if defined?(LDAP_ENV)
+            config = LDAP_ENV
+          elsif defined?(RAILS_ENV)
+            config = RAILS_ENV
+          else
+            config = {}
+          end
+        end
+
+        if config.is_a?(Symbol) or config.is_a?(String)
+          _config = configurations[config.to_s]
+          unless _config
+            raise ConnectionError, "#{config} connection is not configured"
+          end
+          config = _config
+        end
+
+        config
+      end
+
+      def configuration(key=nil)
+        @@defined_configurations[key || active_connection_key]
+      end
+
+      def define_configuration(key, config)
+        @@defined_configurations[key] = config
+      end
+
+      def remove_configuration_by_configuration(config)
+        @@defined_configurations.delete_if {|key, value| value == config}
+      end
+
+      def merge_configuration(config)
+        configuration = default_configuration
+        config.symbolize_keys.each do |key, value|
+          case key
+          when :base
+            # Scrub before inserting
+            self.base = value.gsub(/['}{#]/, '')
+          when :ldap_scope
+            value = value.to_sym if value.is_a?(String)
+            unless value.is_a?(Symbol)
+              raise ConfigurationError, ':ldap_scope must be a Symbol'
+            end
+            self.ldap_scope = value
+          else
+            configuration[key] = value
+          end
+        end
+        configuration
       end
     end
   end

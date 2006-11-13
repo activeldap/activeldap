@@ -289,14 +289,24 @@ module ActiveLdap
       # configuration.rb into this class.
       # When subclassing, the specified prefix will be concatenated.
       def base
-        _base = @base || configuration[:base] || superclass.base
+        _base = @base
+        _base = configuration[:base] if _base.nil? and configuration
+        _base = superclass.base if _base.nil? and superclass.respond_to?(:base)
         [@prefix, _base].find_all do |component|
           component and !component.empty?
         end.join(",")
       end
 
+      def base=(base)
+        @base = base
+      end
+
       def prefix
         @prefix
+      end
+
+      def prefix=(prefix)
+        @prefix = prefix
       end
 
       # Base.required_classes
@@ -330,6 +340,10 @@ module ActiveLdap
           return scope if scope
         end
         nil
+      end
+
+      def ldap_scope=(scope)
+        @ldap_scope = scope
       end
 
       def dump(options={})
@@ -477,6 +491,10 @@ module ActiveLdap
         attribute_key_name.humanize
       end
 
+      def dn_attribute=(attribute)
+        @dn_attribute = attribute
+      end
+
       private
       # Base.dn_attribute
       #
@@ -593,30 +611,6 @@ module ActiveLdap
           @@logger.add('console')
         end
         configuration[:logger] ||= @@logger
-      end
-
-      def init_configuration(config)
-        configuration = default_configuration
-        config.symbolize_keys.each do |key, value|
-          case key
-          when :base
-            # Scrub before inserting
-            @base = value.gsub(/['}{#]/, '')
-          when :ldap_scope
-            value = value.to_sym if value.is_a?(String)
-            unless value.is_a?(Symbol)
-              raise ConfigurationError, ':ldap_scope must be a Symbol'
-            end
-            @ldap_scope = value
-          else
-            configuration[key] = value
-          end
-        end
-        @configuration = configuration
-      end
-
-      def configuration
-        @configuration || {}
       end
 
       def instantiate(entry)
