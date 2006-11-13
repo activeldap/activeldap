@@ -75,6 +75,7 @@ class AssociationsTest < Test::Unit::TestCase
     end
     mod.called = false
 
+    @group_class.send(:undef_method, :members, :members=)
     @group_class.has_many :members, :wrap => "memberUid",
                           :extend => mod
     @group_class.set_associated_class(:members, @user_class)

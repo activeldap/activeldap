@@ -30,8 +30,6 @@
 
 require 'English'
 
-require 'log4r'
-
 module ActiveLdap
   # OO-interface to LDAP assuming pam/nss_ldap-style organization with
   # Active specifics
@@ -145,12 +143,6 @@ module ActiveLdap
   class Base
     include Reloadable::Subclasses
 
-    @prefix = nil
-    @base = nil
-    @required_classes = ['top']
-    @ldap_scope = :sub
-    @dn_attribute = nil
-
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
                                   :scope, :parent]
 
@@ -158,9 +150,36 @@ module ActiveLdap
     cattr_accessor :configurations
     @@configurations = {}
 
+    def self.class_local_attr_accessor(search_ancestors, *syms)
+      syms.flatten.each do |sym|
+        class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+          def self.#{sym}(search_ancestors=#{search_ancestors})
+            @#{sym} ||= nil
+            return @#{sym} if @#{sym}
+            if search_ancestors
+              ancestors[1..-1].each do |ancestor|
+                return nil unless ancestor.respond_to?("#{sym}")
+                value = ancestor.#{sym}
+                return value if value
+              end
+            else
+              nil
+            end
+          end
+          def #{sym}; self.class.#{sym}; end
+          def self.#{sym}=(value); @#{sym} = value; end
+          def #{sym}=(value); self.class.#{sym} = value; end
+        EOS
+      end
+    end
+
+    class_local_attr_accessor false, :prefix, :base, :dn_attribute
+    class_local_attr_accessor true, :ldap_scope, :required_classes
+
     class << self
       # Hide new in Base
       private :new
+      private :dn_attribute
 
       # Connect and bind to LDAP creating a class variable for use by
       # all ActiveLdap objects.
@@ -253,10 +272,10 @@ module ActiveLdap
         # Base#parent.
         parent = options[:parent_class] || nil
 
-        @dn_attribute = dn_attribute
-        @prefix = prefix
-        @ldap_scope = scope
-        @required_classes = classes
+        self.dn_attribute = dn_attribute
+        self.prefix = prefix
+        self.ldap_scope = scope
+        self.required_classes = classes
         @parent = parent
 
         public_class_method :new
@@ -275,6 +294,7 @@ module ActiveLdap
         end
       end
 
+      alias_method :base_inheritable, :base
       # Base.base
       #
       # This method when included into Base provides
@@ -286,61 +306,23 @@ module ActiveLdap
       # configuration.rb into this class.
       # When subclassing, the specified prefix will be concatenated.
       def base
-        _base = @base
+        _base = base_inheritable
         _base = configuration[:base] if _base.nil? and configuration
-        _base = superclass.base if _base.nil? and superclass.respond_to?(:base)
-        [@prefix, _base].find_all do |component|
+        _base ||= base_inheritable(true)
+        [prefix, _base].find_all do |component|
           component and !component.empty?
         end.join(",")
       end
 
-      def base=(base)
-        @base = base
-      end
-
-      def prefix
-        @prefix
-      end
-
-      def prefix=(prefix)
-        @prefix = prefix
-      end
-
-      # Base.required_classes
-      #
-      # This method when included into Base provides
-      # an inheritable, overwritable configuration setting
-      #
-      # The value should be the minimum required objectClasses
-      # to make an object in the LDAP server, or an empty array [].
-      # This should be overwritten by configuration.rb.
-      # Note that subclassing does not cause concatenation of
-      # arrays to occurs.
-      def required_classes
-        ancestors.each do |ancestor|
-          classes = ancestor.instance_variable_get("@required_classes")
-          return classes if classes
-        end
-        nil
-      end
-
-      # Base.ldap_scope
-      #
-      # This method when included into Base provides
-      # an inheritable, overwritable configuration setting
-      #
-      # This value should be the default LDAP scope behavior
-      # desired.
-      def ldap_scope
-        ancestors.each do |ancestor|
-          scope = ancestor.instance_variable_get("@ldap_scope")
-          return scope if scope
-        end
-        nil
-      end
-
+      alias_method :ldap_scope_without_validation=, :ldap_scope=
       def ldap_scope=(scope)
-        @ldap_scope = scope
+        scope = scope.to_sym if scope.is_a?(String)
+        if scope.nil? or scope.is_a?(Symbol)
+          self.ldap_scope_without_validation = scope
+        else
+          raise ConfigurationError,
+                  ":ldap_scope '#{scope.inspect}' must be a Symbol"
+        end
       end
 
       def dump(options={})
@@ -488,25 +470,7 @@ module ActiveLdap
         attribute_key_name.humanize
       end
 
-      def dn_attribute=(attribute)
-        @dn_attribute = attribute
-      end
-
       private
-      # Base.dn_attribute
-      #
-      # This is a placeholder for the class method that will
-      # be overridden on calling ldap_mapping in a subclass.
-      # Using a class method allows for clean inheritance from
-      # classes that already have a ldap_mapping.
-      def dn_attribute
-        ancestors.each do |ancestor|
-          name = ancestor.instance_variable_get("@dn_attribute")
-          return name if name
-        end
-        nil
-      end
-
       def validate_ldap_mapping_options(options)
         options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
       end
@@ -602,6 +566,7 @@ module ActiveLdap
         @@logger ||= configuration[:logger]
         # Setup default logger to console
         if @@logger.nil?
+          require 'log4r'
           @@logger = Log4r::Logger.new('activeldap')
           @@logger.level = Log4r::OFF
           Log4r::StderrOutputter.new 'console'
@@ -622,11 +587,8 @@ module ActiveLdap
 
         obj = real_klass.allocate
         obj.instance_eval do
-          initialize_by_ldap_data(attributes)
+          initialize_by_ldap_data(dn, attributes)
         end
-        suffix = dn.split(/,/, 2)[1]
-        prefix = suffix.sub(/#{Regexp.escape(base)}$/, '').chomp(',')
-        obj.instance_variable_set("@base", prefix) unless prefix.empty?
         obj
       end
 
@@ -647,6 +609,9 @@ module ActiveLdap
       end
     end
 
+    self.ldap_scope = :sub
+    self.required_classes = ['top']
+
     include Enumerable
 
     ### All instance methods, etc
@@ -660,12 +625,13 @@ module ActiveLdap
       init_base
       @new_entry = true
       apply_object_class(required_classes)
-      if attributes.is_a?(String) or
-          (attributes.is_a?(Array) and
-           attributes.collect {|attr| attr.class} == [String])
-        attributes = {dn_attribute => attributes}
+      if attributes.is_a?(String) or attributes.is_a?(Array)
+        self.dn = attributes
+      elsif attributes.is_a?(Hash) and attributes.keys == [dn_attribute]
+        self.dn = attributes[dn_attribute]
+      elsif attributes
+        self.attributes = attributes
       end
-      self.attributes = attributes unless attributes.nil?
       yield self if block_given?
     end
 
@@ -936,12 +902,13 @@ module ActiveLdap
       init_instance_variables
     end
 
-    def initialize_by_ldap_data(attributes)
+    def initialize_by_ldap_data(dn, attributes)
       init_base
       @new_entry = false
       @ldap_data = attributes
       apply_object_class(@ldap_data['objectClass'])
       self.attributes = attributes
+      set_attribute(dn_attribute, dn)
       yield self if block_given?
     end
 
@@ -1022,36 +989,15 @@ module ActiveLdap
       end
     end
 
+    alias_method :base_of_class, :base
     def base
       logger.debug {"stub: called base"}
-      [@base, self.class.base].compact.join(",")
+      [@base, base_of_class].compact.join(",")
     end
 
-    # ldap_scope
-    #
-    # Returns the value of self.class.ldap_scope
-    # This is just syntactic sugar
-    def ldap_scope
-      logger.debug {"stub: called ldap_scope"}
-      self.class.ldap_scope
-    end
-
-    # required_classes
-    #
-    # Returns the value of self.class.required_classes
-    # This is just syntactic sugar
-    def required_classes
-      logger.debug {"stub: called required_classes"}
-      self.class.required_classes
-    end
-
-    # dn_attribute
-    #
-    # Returns the value of self.class.dn_attribute
-    # This is just syntactic sugar
-    def dn_attribute
-      logger.debug {"stub: called dn_attribute"}
-      self.class.dn_attribute
+    undef_method :base=
+    def base=(object_local_base)
+      @base = object_local_base
     end
 
     # get_attribute
@@ -1104,6 +1050,7 @@ module ActiveLdap
       attr = to_real_attribute_name(name)
 
       if attr == dn_attribute and value.is_a?(String)
+        value = value.gsub(/,#{Regexp.escape(base_of_class)}$/, '')
         value, @base = value.split(/,/, 2)
         value = $POSTMATCH if /^#{dn_attribute}=/ =~ value
       end

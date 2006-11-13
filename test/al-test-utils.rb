@@ -107,7 +107,7 @@ module AlTestUtils
                               :prefix => "",
                               :scope => :base,
                               :classes => ["top", "dcObject", "organization"]
-        dc_class.instance_variable_set("@base", prefix)
+        dc_class.base = prefix
         next if dc_class.exists?(value, :prefix => "dc=#{value}")
         dc = dc_class.new(value)
         dc.o = dc.dc
@@ -219,7 +219,7 @@ module AlTestUtils
           group = @group_class.new(cn)
           assert(group.new_entry?)
           group.gid_number = gid_number
-          group.save
+          assert(group.save)
           assert(!group.new_entry?)
           yield(@group_class.find(group.cn))
         end

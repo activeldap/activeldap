@@ -48,7 +48,7 @@ class UserLsTest < Test::Unit::TestCase
     end
   end
 
-  def test_list_user_have_primary_group
+  def test_list_user_have_groups_and_primary_group
     make_temporary_group do |group1|
       make_temporary_user(:gid_number => group1.gid_number) do |user, password|
         make_temporary_group do |group2|

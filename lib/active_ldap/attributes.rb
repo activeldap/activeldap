@@ -11,8 +11,8 @@ module ActiveLdap
       end
 
       def protected_attributes
-        ancestors.inject([]) do |result, ancestor|
-          result + (ancestor.instance_variable_get("@attr_protected") || [])
+        ancestors[0..(ancestors.index(Base))].inject([]) do |result, ancestor|
+          result + ancestor.instance_eval {@attr_protected ||= []}
         end
       end
 
@@ -180,7 +180,8 @@ module ActiveLdap
     private
     def remove_attributes_protected_from_mass_assignment(targets)
       needless_attributes = {}
-      self.class.protected_attributes.each do |name|
+      (attributes_protected_by_default +
+       (self.class.protected_attributes || [])).each do |name|
         needless_attributes[to_real_attribute_name(name)] = true
       end
 
@@ -189,6 +190,10 @@ module ActiveLdap
       end.reject do |key, value|
         key.nil? or needless_attributes[key]
       end
+    end
+
+    def attributes_protected_by_default
+      [dn_attribute]
     end
   end
 end

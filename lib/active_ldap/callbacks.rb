@@ -10,7 +10,7 @@ module ActiveLdap
 
         def callback(method)
           super
-        rescue ActiveRecored::ActiveRecoredError
+        rescue ActiveRecord::ActiveRecordError
           raise Error, $!.message
         end
       end

@@ -84,10 +84,6 @@ module ActiveLdap
             # Scrub before inserting
             self.base = value.gsub(/['}{#]/, '')
           when :ldap_scope
-            value = value.to_sym if value.is_a?(String)
-            unless value.is_a?(Symbol)
-              raise ConfigurationError, ':ldap_scope must be a Symbol'
-            end
             self.ldap_scope = value
           else
             configuration[key] = value

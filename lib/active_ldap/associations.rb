@@ -62,13 +62,15 @@ module ActiveLdap
           association_class = Association::BelongsTo
           opts[:foreign_key_name] ||= "#{association_id}_id"
 
-          before_save do |entry|
-            association = entry.instance_variable_get("@#{association_id}")
-            if association and association.updated?
-              entry[association.__send__(:primary_key)] =
-                association[opts[:foreign_key_name]]
+          before_save(<<-EOC)
+            if defined?(@#{association_id})
+              association = @#{association_id}
+              if association and association.updated?
+                self[association.__send__(:primary_key)] =
+                  association[#{opts[:foreign_key_name].dump}]
+              end
             end
-          end
+          EOC
         end
 
         association_accessor(association_id) do |target|
@@ -117,36 +119,31 @@ module ActiveLdap
 
       private
       def association_accessor(name, &make_association)
+        define_method("__make_#{name}") do
+          make_association.call(self)
+        end
         association_reader(name, &make_association)
         association_writer(name, &make_association)
       end
 
       def association_reader(name, &make_association)
-        define_method(name) do
-          association = instance_variable_get("@#{name}")
-          unless association
-            association = make_association.call(self)
-            instance_variable_set("@#{name}", association)
+        class_eval(<<-EOM, __FILE__, __LINE__ + 1)
+          def #{name}
+            @#{name} ||= __make_#{name}
           end
-          association
-        end
+        EOM
       end
 
       def association_writer(name, &make_association)
-        define_method("#{name}=") do |new_value|
-          association = instance_variable_get("@#{name}")
-          association ||= make_association.call(self)
-
-          association.replace(new_value)
-
-          if new_value.nil?
-            instance_variable_set("@#{name}", nil)
-          else
-            instance_variable_set("@#{name}", association)
+        class_eval(<<-EOM, __FILE__, __LINE__ + 1)
+          def #{name}=(new_value)
+            association = defined?(@#{name}) ? @#{name} : nil
+            association ||= __make_#{name}
+            association.replace(new_value)
+            @#{name} = new_value.nil? ? nil : association
+            @#{name}
           end
-
-          instance_variable_get("@#{name}")
-        end
+        EOM
       end
 
       VALID_BELONGS_TO_OPTIONS = [:class, :foreign_key, :primary_key, :many,

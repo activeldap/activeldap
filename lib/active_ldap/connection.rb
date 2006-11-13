@@ -12,15 +12,7 @@ module ActiveLdap
       end
 
       def active_connection_name
-        return @active_connection_name if @active_connection_name
-        key = active_connection_key
-        if active_connections[key] or configuration(key)
-          @active_connection_name = key
-        elsif self == ActiveLdap::Base
-          @active_connection_name = nil
-        else
-          @active_connection_name = superclass.active_connection_name
-        end
+        @active_connection_name ||= determine_active_connection_name
       end
 
       def clear_active_connections!
@@ -42,6 +34,7 @@ module ActiveLdap
 
       def connection
         conn = nil
+        @active_connection_name ||= nil
         if @active_connection_name
           conn = active_connections[@active_connection_name]
         end
@@ -114,6 +107,17 @@ module ActiveLdap
       private
       def active_connection_key(k=self)
         k.name.empty? ? k.object_id : k.name
+      end
+
+      def determine_active_connection_name
+        key = active_connection_key
+        if active_connections[key] or configuration(key)
+          key
+        elsif self == ActiveLdap::Base
+          nil
+        else
+          superclass.active_connection_name
+        end
       end
     end
 
