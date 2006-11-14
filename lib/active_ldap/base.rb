@@ -143,8 +143,7 @@ module ActiveLdap
   class Base
     include Reloadable::Subclasses
 
-    VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes,
-                                  :scope, :parent]
+    VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes, :scope]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -261,41 +260,23 @@ module ActiveLdap
       # and ldap for use in activeldap
       #
       # Example:
-      #   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', 
+      #   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People',
       #                :classes => ['top', 'posixAccount'],
-      #                :scope => :sub,
-      #                :parent => String
+      #                :scope => :sub
       def ldap_mapping(options={})
         validate_ldap_mapping_options(options)
         dn_attribute = options[:dn_attribute] || default_dn_attribute
         prefix = options[:prefix] || default_prefix
         classes = options[:classes]
         scope = options[:scope]
-        # When used, instantiates parent objects from the "parent dn". This
-        # can be a String or a real ActiveLdap class. This just adds the helper 
-        # Base#parent.
-        parent = options[:parent_class] || nil
 
         self.dn_attribute = dn_attribute
         self.prefix = prefix
         self.ldap_scope = scope
         self.required_classes = classes
-        @parent = parent
 
         public_class_method :new
         public_class_method :dn_attribute
-
-        if parent
-          class_eval(<<-EOC, __FILE__, __LINE__ + 1)
-          def parent
-            parent_class = self.class.instance_variable_get("@parent")
-            if parent_class.is_a?(String)
-              parent_class = eval(parent_class, __FILE__, __LINE__)
-            end
-            parent_class.new(base)
-          end
-          EOC
-        end
       end
 
       alias_method :base_inheritable, :base

@@ -226,10 +226,7 @@
 # :classes isn't the only optional argument.  If :dn_attribute is left off,
 # it defaults to underscored class name or 'cn'.  If :prefix is left off,
 # it will default to 'ou=PLURALIZED_CLASSNAME'. In this
-# case, it would be 'ou=Groups'. There is also a :parent_class option which,
-# when specified, adds a method call parent() which will return the
-# parent_class.new(parent_dn). The parent_dn is the objects dn without the
-# dn_attrribute pair.
+# case, it would be 'ou=Groups'.
 # 
 # :classes should be an Array. :dn_attribute should be a String and so should
 # :prefix.
