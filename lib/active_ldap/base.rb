@@ -349,6 +349,10 @@ module ActiveLdap
       end
 
       def delete(targets, options={})
+        targets = [targets] unless targets.is_a?(Array)
+        targets = targets.collect do |target|
+          ensure_dn_attribute(ensure_base(target))
+        end
         connection.delete(targets, options)
       end
 
@@ -545,6 +549,15 @@ module ActiveLdap
             "\\%02x" % x[0]
           end
         end
+      end
+
+      def ensure_dn_attribute(target)
+        "#{dn_attribute}=" +
+          target.gsub(/^#{Regexp.escape(dn_attribute)}\s*=\s*/, '')
+      end
+
+      def ensure_base(target)
+        [target.gsub(/,#{Regexp.escape(base)}$/, ''),  base].join(',')
       end
 
       def ensure_logger

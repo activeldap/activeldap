@@ -4,6 +4,41 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_delete
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        make_temporary_user do |user3,|
+          assert(@user_class.exists?(user1.uid))
+          @user_class.delete(user1.dn)
+          assert(!@user_class.exists?(user1.uid))
+
+          assert(@user_class.exists?(user2.dn))
+          @user_class.delete(user2.uid)
+          assert(!@user_class.exists?(user2.dn))
+
+          assert(@user_class.exists?(user3.dn))
+          @user_class.delete("uid=#{user3.uid}")
+          assert(!@user_class.exists?(user3.dn))
+        end
+      end
+    end
+
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        make_temporary_user do |user3,|
+          assert(@user_class.exists?(user1.uid))
+          assert(@user_class.exists?(user2.uid))
+          assert(@user_class.exists?(user3.uid))
+          @user_class.delete([user1.dn, user2.uid, "uid=#{user3.uid}"])
+          assert(!@user_class.exists?(user1.uid))
+          assert(!@user_class.exists?(user2.uid))
+          assert(!@user_class.exists?(user3.uid))
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_inherit_base
     sub_user_class = Class.new(@user_class)
     sub_user_class.ldap_mapping :prefix => "ou=Sub"
@@ -18,7 +53,6 @@ class BaseTest < Test::Unit::TestCase
     assert_equal("ou=SubSub,#{sub_user_class.base}", sub_sub_user_class.base)
   end
 
-  priority :normal
   def test_compare
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|
