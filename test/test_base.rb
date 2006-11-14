@@ -4,6 +4,32 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_reload
+    make_temporary_user do |user1,|
+      user2 = @user_class.find(user1.uid)
+      assert_equal(user1.attributes, user2.attributes)
+
+      user1.cn = "new #{user1.cn}"
+      assert_not_equal(user1.attributes, user2.attributes)
+      assert_equal(user1.attributes.reject {|k, v| k == "cn"},
+                   user2.attributes.reject {|k, v| k == "cn"})
+
+      user2.reload
+      assert_not_equal(user1.attributes, user2.attributes)
+      assert_equal(user1.attributes.reject {|k, v| k == "cn"},
+                   user2.attributes.reject {|k, v| k == "cn"})
+
+      assert(user1.save)
+      assert_not_equal(user1.attributes, user2.attributes)
+      assert_equal(user1.attributes.reject {|k, v| k == "cn"},
+                   user2.attributes.reject {|k, v| k == "cn"})
+
+      user2.reload
+      assert_equal(user1.attributes, user2.attributes)
+    end
+  end
+
+  priority :normal
   def test_delete
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|
@@ -38,7 +64,6 @@ class BaseTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_inherit_base
     sub_user_class = Class.new(@user_class)
     sub_user_class.ldap_mapping :prefix => "ou=Sub"
@@ -135,17 +160,6 @@ EOX
       assert(user.save)
       user.sn = "Surname2"
       assert_nothing_raised {user.save!}
-    end
-  end
-
-  def test_reload
-    make_temporary_user do |user, password|
-      sn = user.sn
-      new_sn = "New #{sn}"
-      user.sn = new_sn
-      assert_equal(new_sn, user.sn)
-      user.reload
-      assert_equal(sn, user.sn)
     end
   end
 

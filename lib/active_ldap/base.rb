@@ -537,7 +537,7 @@ module ActiveLdap
         attr, value = value.split(/=/, 2)
         attr, value = value, attr if value.nil?
         prefix = nil if prefix == base
-        prefix = prefix.sub(/,#{Regexp.escape(base)}$/, '') if prefix
+        prefix = truncate_base(prefix) if prefix
         [attr, value, prefix]
       end
 
@@ -557,7 +557,11 @@ module ActiveLdap
       end
 
       def ensure_base(target)
-        [target.gsub(/,#{Regexp.escape(base)}$/, ''),  base].join(',')
+        [truncate_base(target),  base].join(',')
+      end
+
+      def truncate_base(target)
+        target.sub(/,#{Regexp.escape(base)}$/, '')
       end
 
       def ensure_logger
@@ -870,9 +874,17 @@ module ActiveLdap
     alias_method :has_attribute?, :have_attribute?
 
     def reload
-      ldap_data = self.class.find(dn).instance_variable_get("@ldap_data")
-      @ldap_data.update(ldap_data)
-      self.attributes = ldap_data
+      attributes = nil
+      self.class.search(:value => id).each do |_dn, _attributes|
+        if dn == _dn
+          attributes = _attributes
+          break
+        end
+      end
+      if attributes
+        @ldap_data.update(attributes)
+        self.attributes = attributes
+      end
       self
     end
 
