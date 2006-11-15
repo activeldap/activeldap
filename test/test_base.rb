@@ -4,6 +4,8 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_reload_of_not_exists_entry
     make_temporary_user do |user,|
       assert_nothing_raised do
@@ -56,7 +58,6 @@ class BaseTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_exists_without_required_object_class
     make_temporary_user do |user,|
       @user_class.required_classes -= ["posixAccount"]

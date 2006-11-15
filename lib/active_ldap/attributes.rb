@@ -193,7 +193,7 @@ module ActiveLdap
     end
 
     def attributes_protected_by_default
-      [dn_attribute]
+      [dn_attribute, 'objectClass']
     end
   end
 end

@@ -631,13 +631,19 @@ module ActiveLdap
     def initialize(attributes=nil)
       init_base
       @new_entry = true
-      apply_object_class(required_classes)
       if attributes.is_a?(String) or attributes.is_a?(Array)
+        apply_object_class(required_classes)
         self.dn = attributes
-      elsif attributes.is_a?(Hash) and attributes.keys == [dn_attribute]
-        self.dn = attributes[dn_attribute]
-      elsif attributes
-        self.attributes = attributes
+      elsif attributes.is_a?(Hash)
+        classes, attributes = extract_object_class(attributes)
+        apply_object_class(classes | required_classes)
+        normalized_attributes = {}
+        attributes.each do |key, value|
+          real_key = to_real_attribute_name(key)
+          normalized_attributes[real_key] = value if real_key
+        end
+        self.dn = normalized_attributes[dn_attribute]
+        self.attributes = normalized_attributes
       end
       yield self if block_given?
     end
@@ -892,7 +898,8 @@ module ActiveLdap
       raise EntryNotFound, "Can't find dn '#{dn}' to reload" if attributes.nil?
 
       @ldap_data.update(attributes)
-      apply_object_class(attributes["objectClass"])
+      classes, attributes = extract_object_class(attributes)
+      apply_object_class(classes)
       self.attributes = attributes
       @new_entry = false
       self
@@ -917,6 +924,20 @@ module ActiveLdap
       @@logger
     end
 
+    def extract_object_class(attributes)
+      classes = []
+      attrs = attributes.reject do |key, value|
+        if key.to_s == 'objectClass' or
+            Inflector.underscore(key) == 'object_class'
+          classes |= [value].flatten
+          true
+        else
+          false
+        end
+      end
+      [classes, attrs]
+    end
+
     def init_base
       check_configuration
       init_instance_variables
@@ -926,9 +947,10 @@ module ActiveLdap
       init_base
       @new_entry = false
       @ldap_data = attributes
-      apply_object_class(@ldap_data['objectClass'])
+      classes, attributes = extract_object_class(attributes)
+      apply_object_class(classes)
+      self.dn = dn
       self.attributes = attributes
-      set_attribute(dn_attribute, dn)
       yield self if block_given?
     end
 
