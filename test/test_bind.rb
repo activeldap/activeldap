@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class BindTest < Test::Unit::TestCase
+class TestBind < Test::Unit::TestCase
   include AlTestUtils::Config
 
   def setup

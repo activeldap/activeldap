@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class CallbackTest < Test::Unit::TestCase
+class TestCallback < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must

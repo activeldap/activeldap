@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class ObjectClassTest < Test::Unit::TestCase
+class TestObjectClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must

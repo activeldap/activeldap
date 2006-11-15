@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class UserModBinaryAddTest < Test::Unit::TestCase
+class TestUsermodBinaryAdd < Test::Unit::TestCase
   include AlTestUtils
 
   def setup

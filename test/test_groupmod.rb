@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class GroupModTest < Test::Unit::TestCase
+class TestGroupmod < Test::Unit::TestCase
   include AlTestUtils
 
   def setup

@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class UserTest < Test::Unit::TestCase
+class TestUser < Test::Unit::TestCase
   include AlTestUtils
 
   # This adds all required attributes and writes

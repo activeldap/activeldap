@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class AssociationsTest < Test::Unit::TestCase
+class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must

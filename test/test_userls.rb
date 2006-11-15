@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class UserLsTest < Test::Unit::TestCase
+class TestUserls < Test::Unit::TestCase
   include AlTestUtils
 
   def setup

@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class ConnectionPerClassTest < Test::Unit::TestCase
+class TestConnectionPerClass < Test::Unit::TestCase
   include AlTestUtils
 
   def test_bind

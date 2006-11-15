@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class ConnectionTest < Test::Unit::TestCase
+class TestConnection < Test::Unit::TestCase
   include AlTestUtils::Config
 
   def setup

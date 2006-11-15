@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class FindTest < Test::Unit::TestCase
+class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   def test_split_search_value

@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class ReflectionTest < Test::Unit::TestCase
+class TestReflection < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must

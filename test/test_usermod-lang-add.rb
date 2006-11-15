@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class UserModLangAddTest < Test::Unit::TestCase
+class TestUsermodLangAdd < Test::Unit::TestCase
   include AlTestUtils
 
   def setup

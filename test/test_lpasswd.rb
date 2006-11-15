@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class LPasswdTest < Test::Unit::TestCase
+class TestLPasswd < Test::Unit::TestCase
   include AlTestUtils
 
   def setup

@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class SchemaTest < Test::Unit::TestCase
+class TestSchema < Test::Unit::TestCase
   def test_name_as_key
     top_schema = "( 2.5.6.0 NAME 'top' DESC 'top of the superclass chain' " +
                  "ABSTRACT MUST objectClass )"

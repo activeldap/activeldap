@@ -1,6 +1,6 @@
 require 'al-test-utils'
 
-class UserPasswordTest < Test::Unit::TestCase
+class TestUserPassword < Test::Unit::TestCase
   priority :must
 
   priority :normal
