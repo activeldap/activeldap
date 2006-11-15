@@ -181,10 +181,10 @@ module AlTestUtils
         gid_number = config[:gid_number] || default_gid
         home_directory = config[:home_directory] || "/nonexistent"
         _wrap_assertion do
-          assert_raise(ActiveLdap::EntryNotFound) do
-            @user_class.find(uid)
-          end
           assert(!@user_class.exists?(uid))
+          assert_raise(ActiveLdap::EntryNotFound) do
+            @user_class.find(uid).dn
+          end
           user = @user_class.new(uid)
           assert(user.new_entry?)
           user.cn = user.uid

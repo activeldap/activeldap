@@ -4,7 +4,60 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
-  def test_exists_with_invalid_required_class
+  def test_reload_of_not_exists_entry
+    make_temporary_user do |user,|
+      assert_nothing_raised do
+        user.reload
+      end
+
+      user.destroy
+
+      assert_raises(ActiveLdap::EntryNotFound) do
+        user.reload
+      end
+    end
+  end
+
+  def test_reload_and_new_entry
+    make_temporary_user do |user1,|
+      user2 = @user_class.new(user1.uid)
+      assert_equal(user1.attributes["uid"], user2.attributes["uid"])
+      assert_not_equal(user1.attributes["objectClass"],
+                       @user_class.required_classes)
+      assert_equal(@user_class.required_classes,
+                   user2.attributes["objectClass"])
+      assert_not_equal(user1.attributes["objectClass"],
+                       user2.attributes["objectClass"])
+      assert(user2.exists?)
+      assert(user2.new_entry?)
+
+      user2.reload
+      assert(user2.exists?)
+      assert(!user2.new_entry?)
+      assert_equal(user1.attributes, user2.attributes)
+    end
+  end
+
+  def test_exists_for_instance
+    make_temporary_user do |user,|
+      assert(user.exists?)
+      assert(!user.new_entry?)
+
+      new_user = @user_class.new(user.uid)
+      assert(new_user.exists?)
+      assert(new_user.new_entry?)
+
+      user.destroy
+      assert(!user.exists?)
+      assert(user.new_entry?)
+
+      assert(!new_user.exists?)
+      assert(new_user.new_entry?)
+    end
+  end
+
+  priority :normal
+  def test_exists_without_required_object_class
     make_temporary_user do |user,|
       @user_class.required_classes -= ["posixAccount"]
       user.remove_class("posixAccount")
@@ -19,7 +72,6 @@ class BaseTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_reload
     make_temporary_user do |user1,|
       user2 = @user_class.find(user1.uid)

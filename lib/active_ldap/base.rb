@@ -402,9 +402,10 @@ module ActiveLdap
       end
 
       def exists?(dn, options={})
-        _dn = ensure_dn(dn)
-        not search({:value => dn}.merge(options)).find do |__dn,|
-          _dn == __dn
+        prefix = /^#{Regexp.escape(truncate_base(ensure_dn_attribute(dn)))}/
+        suffix = /,#{Regexp.escape(base)}$/
+        not search({:value => dn}.merge(options)).find do |_dn,|
+          prefix.match(_dn) and suffix.match(_dn)
         end.nil?
       end
 
@@ -688,6 +689,13 @@ module ActiveLdap
       !values.empty? or values.any? {|x| not (x and x.empty?)}
     end
 
+    # exists?
+    #
+    # Return whether the entry exists in LDAP or not
+    def exists?
+      self.class.exists?(dn)
+    end
+
     # new_entry?
     #
     # Return whether the entry is new entry in LDAP or not
@@ -878,17 +886,15 @@ module ActiveLdap
     alias_method :has_attribute?, :have_attribute?
 
     def reload
-      attributes = nil
-      self.class.search(:value => id).each do |_dn, _attributes|
-        if dn == _dn
-          attributes = _attributes
-          break
-        end
+      _, attributes = self.class.search(:value => id).find do |_dn, _attributes|
+        dn == _dn
       end
-      if attributes
-        @ldap_data.update(attributes)
-        self.attributes = attributes
-      end
+      raise EntryNotFound, "Can't find dn '#{dn}' to reload" if attributes.nil?
+
+      @ldap_data.update(attributes)
+      apply_object_class(attributes["objectClass"])
+      self.attributes = attributes
+      @new_entry = false
       self
     end
 
@@ -1279,7 +1285,7 @@ module ActiveLdap
     def create
       prepare_data_for_saving do |data, ldap_data|
         entries = collect_all_entries(data)
-        logger.debug {"#caret: adding #{dn}"}
+        logger.debug {"#create: adding #{dn}"}
         begin
           self.class.add(dn, entries)
           logger.debug {"#create: add successful"}
