@@ -232,10 +232,15 @@ module ActiveLdap
       def delete(targets, options={})
         targets = [targets] unless targets.is_a?(Array)
         return if targets.empty?
-        operation(options) do
-          targets.each do |target|
-            @connection.delete(target)
+        target = nil
+        begin
+          operation(options) do
+            targets.each do |target|
+              @connection.delete(target)
+            end
           end
+        rescue LDAP::NoSuchObject
+          raise EntryNotFound, "No such entry: #{target}"
         end
       end
 

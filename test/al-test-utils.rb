@@ -229,19 +229,13 @@ module AlTestUtils
     def ensure_delete_user(uid)
       yield(uid)
     ensure
-      begin
-        @user_class.destroy(uid)
-      rescue ActiveLdap::EntryNotFound
-      end
+      @user_class.delete(uid) if @user_class.exists?(uid)
     end
 
     def ensure_delete_group(cn)
       yield(cn)
     ensure
-      begin
-        @group_class.destroy(cn)
-      rescue ActiveLdap::EntryNotFound
-      end
+      @group_class.delete(cn) if @group_class.exists?(cn)
     end
 
     def default_uid

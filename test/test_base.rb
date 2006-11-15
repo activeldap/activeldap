@@ -4,6 +4,22 @@ class BaseTest < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_exists_with_invalid_required_class
+    make_temporary_user do |user,|
+      @user_class.required_classes -= ["posixAccount"]
+      user.remove_class("posixAccount")
+      assert(user.save)
+
+      assert(@user_class.exists?(user.dn))
+      @user_class.required_classes += ["posixAccount"]
+      assert(@user_class.exists?(user.dn))
+      assert_raises(ActiveLdap::RequiredObjectClassMissed) do
+        @user_class.find(user.dn)
+      end
+    end
+  end
+
+  priority :normal
   def test_reload
     make_temporary_user do |user1,|
       user2 = @user_class.find(user1.uid)
@@ -29,7 +45,6 @@ class BaseTest < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_delete
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|
@@ -225,20 +240,6 @@ EOX
         assert_equal(new_sns, [new_user.sn, new_user2.sn])
         assert_equal(new_cn2, new_user2.cn)
       end
-    end
-  end
-
-  def test_exists
-    assert(!@user_class.exists?("unknown-user"))
-    assert(!@user_class.exists?("uid=unknown-user,#{@user_class.base}"))
-    make_temporary_user do |user, password|
-      assert(@user_class.exists?(user.dn))
-      assert(@user_class.exists?("uid=#{user.uid}"))
-      assert(@user_class.exists?(user.uid))
-      user.destroy
-      assert(!@user_class.exists?(user.dn))
-      assert(!@user_class.exists?("uid=#{user.uid}"))
-      assert(!@user_class.exists?(user.uid))
     end
   end
 end

@@ -402,11 +402,10 @@ module ActiveLdap
       end
 
       def exists?(dn, options={})
-        begin
-          not find(dn, options).nil?
-        rescue EntryNotFound
-          false
-        end
+        _dn = ensure_dn(dn)
+        not search({:value => dn}.merge(options)).find do |__dn,|
+          _dn == __dn
+        end.nil?
       end
 
       def update(dn, attributes, options={})
@@ -549,6 +548,11 @@ module ActiveLdap
             "\\%02x" % x[0]
           end
         end
+      end
+
+      def ensure_dn(target)
+        attr, value, prefix = split_search_value(target)
+        "#{attr || dn_attribute}=#{value},#{prefix || base}"
       end
 
       def ensure_dn_attribute(target)
