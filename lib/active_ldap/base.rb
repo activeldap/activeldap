@@ -223,6 +223,16 @@ module ActiveLdap
         true
       end
 
+      def create(attributes=nil, &block)
+        if attributes.is_a?(Array)
+          attributes.collect {|attrs| create(attrs, &block)}
+        else
+          object = new(attributes, &block)
+          object.save
+          object
+        end
+      end
+
       def search(options={}, &block)
         attr = options[:attribute]
         value = options[:value] || '*'

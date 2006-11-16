@@ -4,6 +4,53 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_create_multiple
+    ensure_delete_user("temp-user1") do |uid1,|
+      ensure_delete_user("temp-user2") do |uid2,|
+        attributes = {
+          :uid => uid2,
+          :sn => uid2,
+          :cn => uid2,
+          :uid_number => "1000",
+          :gid_number => "1000",
+          :home_directory => "/home/#{uid2}",
+        }
+
+        user1, user2 = @user_class.create([{:uid => uid1}, attributes])
+        assert(!user1.errors.empty?)
+        assert(!@user_class.exists?(uid1))
+
+        assert_equal([], user2.errors.to_a)
+        assert(@user_class.exists?(uid2))
+        attributes.each do |key, value|
+          assert_equal(value, user2[key])
+        end
+      end
+    end
+  end
+
+  def test_create
+    ensure_delete_user("temp-user") do |uid,|
+      user = @user_class.create(:uid => uid)
+      assert(!user.errors.empty?)
+      assert(!@user_class.exists?(uid))
+
+      attributes = {
+        :uid => uid,
+        :sn => uid,
+        :cn => uid,
+        :uid_number => "1000",
+        :gid_number => "1000",
+        :home_directory => "/home/#{uid}",
+      }
+      user = @user_class.create(attributes)
+      assert_equal([], user.errors.to_a)
+      assert(@user_class.exists?(uid))
+      attributes.each do |key, value|
+        assert_equal(value, user[key])
+      end
+    end
+  end
 
   priority :normal
   def test_reload_of_not_exists_entry

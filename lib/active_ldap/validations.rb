@@ -52,11 +52,13 @@ module ActiveLdap
               value = @data[real_name] || []
               # Check for missing requirements.
               if value.empty?
-                aliases = schema.attribute_aliases(real_name)
-                aliases = (aliases - [real_name]).join(', ')
-                errors.add(real_name,
-                           "is required attribute (aliases: #{aliases}) by " +
-                           "objectClass '#{object_class}'")
+                aliases = schema.attribute_aliases(real_name) - [real_name]
+                message = "is required attribute "
+                unless aliases.empty?
+                  message << "(aliases: #{aliases.join(', ')}) "
+                end
+                message << "by objectClass '#{object_class}'"
+                errors.add(real_name, message)
               end
             end
           end
