@@ -1,12 +1,31 @@
-* Fix writes of ''
-* More and better unittests
-* Use LDAP::err2exception
-* Overhaul value handling in attribute_method and attribute_method=
-* Fix case sensitivity in object classes
-* Add result pagination via LDAP::Controls
-* Proper ActiveRecord duck-typing
-* Schema2 overhaul - push for integration to Ruby/LDAP
-* Add seamless delete/add when required
-  - structural objectclass change
-  - dn change
-* Figure out how to deal with Relative DNs
+- Fix case sensitivity in object classes
+- Add result pagination via LDAP::Controls
+- serialize & serialized_attributes
+- schema mgmt - how does AR handle it?
+- columns() -- ?
+http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
+- provide full documentation for new API.
+- handle all exception raised from Ruby/LDAP and wrap as
+  ActiveLdap exception. I think we need to develop an
+  application using ActiveLdap.
+- support Reloadable::Subclasses. I think we need to
+  develop a Rails + ActiveLdap application to improve
+  Rails support.
+- support Ruby/GetText.
+- support Net::LDAP as LDAP backend after Net::LDAP
+  supports START_TLS. (I made a patch and submitted to the
+  bug tracker of Net::LDAP)
+- Add locking around Timeout.alarm() to ensure a multithreaded ruby
+  app doesn't hit any race conditions
+- Add AR matching exceptions:
+* ActiveRecordError -- ActiveLdapError as base
+* AssociationTypeMismatch
+* SerializationTypeMismatch
+* ConnectionNotEstablished
+* RecordNotFound
+* LdapActionInvalid - like StatementInvalid
+* MultiparameterAssignmentErrors
+* AttributeAssignmentError
+* RecordNotSaved
+
+

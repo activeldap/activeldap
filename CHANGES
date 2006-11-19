@@ -1,20 +1,4 @@
 0.8.0:
-* TODO: 
-- serialize & serialized_attributes
-- schema mgmt - how does AR handle it?
-- columns() -- ?
-http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
-exceptions:
-* ActiveRecordError -- ActiveLdapError as base
-* AssociationTypeMismatch
-* SerializationTypeMismatch
-* ConnectionNotEstablished
-* RecordNotFound
-* LdapActionInvalid - like StatementInvalid
-* MultiparameterAssignmentErrors
-* AttributeAssignmentError
-* RecordNotSaved
-done:
   * Makefile/gemspec system replaced with Rakefile + Hoe
   * Bugfix: Allow base to be empty
   * Add support for Date, DateTime, and Time objects (patch from Patrick Cole)
