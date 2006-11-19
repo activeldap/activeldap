@@ -1,6 +1,5 @@
 0.8.0:
 * TODO: 
-- fix Makefile.package to use svn.
 - serialize & serialized_attributes
 - schema mgmt - how does AR handle it?
 - columns() -- ?
@@ -16,6 +15,7 @@ exceptions:
 * AttributeAssignmentError
 * RecordNotSaved
 done:
+  * Makefile/gemspec system replaced with Rakefile + Hoe
   * Bugfix: Allow base to be empty
   * Add support for Date, DateTime, and Time objects (patch from Patrick Cole)
   * Add support for a :filter argument to override the default attr=val LDAP search filter in find_all() and find() (patch from Patrick Cole)
@@ -55,6 +55,7 @@ done:
   * support ActiveRecord::Callbacks.
   * rename to ActiveLdap from ActiveLDAP to integrate RoR easily and enforce
     many API changes.
+
 0.7.4:
   * Bugfix: do not base LDAP::PrettyError on RuntimeError due to rescue evaluation.
   * Bugfix: :return_objects was overriding :objects in find and find_all
@@ -107,6 +108,7 @@ done:
   * Added LDAP::err2exception(errno) which is the groundwork of a coming overhaul in user friendly error handling.
   * Added support for Base::connect(.., :password => String, ...) to avoid stupid Proc.new {'foo'} crap
   * Add :store_password option. When this is set, :password is not cleared and :password_block is not re-evaluated on each rebind.
+
 0.6.0:
   * Disallow blank DN attribute values on initialization
   * Fix bug reported by Maik Schmidt regarding object creation
@@ -116,6 +118,7 @@ done:
   * Added error condition if connection fails inside initialize()
   * Changes examples and tests to use "dc=localdomain"
   * has_many() entries no longer return nil when empty
+
 0.5.9: 
   * Change default base to dc=localdomain (as per Debian default).
   * schema2.rb:attr() now returns [] instead of '' when empty.
@@ -126,19 +129,24 @@ done:
   * Fixed find and find_all for the case - find_all('*').
   * Fixed broken creation of objects from anonymous classes.
   * Fixed broken use of ldap_mapping with anonymous classes.
+
 0.5.8: Bugfix galore
   * Allow nil "prefix"
   * Fixed the dup bug with Anonymous patch.
   * (maybe) Fixed stale connection problems by attempting reconn/bind.
   * Hiding redefine warnings (for now)
+
 0.5.7:
   * Fixed the @data.default = [] bug that daniel@nightrunner.com pointed out
     (and partially patched).
+
 0.5.6:
   * Added support for foreign_key => 'dn' in has_many.
+
 0.5.5:
   * Remove @@logger.debug entries during build
   * Building -debug and regular gems and tarballs
+
 0.5.4:
   * Added Base#import to streamline the Base.find and Base.find_all methods
     - Speeds up find and find_all by not accessing LDAP multiple times
@@ -146,14 +154,18 @@ done:
   * Added tests/benchmark which is a slightly modified version of excellent
     benchmarking code contributed by 
     Ollivier Robert <roberto -_-AT-_- keltia.freenix.fr>.
+
 0.5.3:
   * Changed attribute_method to send in associations
     - fixes belongs_to (with local_kay) and inheritance around that
+
 0.5.2:
   * Make sure values are .dup'd when they come from LDAP
+
 0.5.1:
   * Changed Schema2#class_attributes to return {:must => [], :may => []}
   * Fixed Base#must and Base#may to return with full SUPerclass requirements
+
 0.5.0:
   * API CHANGE (as with all 0.x.0 changes) (towards ActiveRecord duck typing)
     - Base#ldapattribute now always returns an array
@@ -181,6 +193,7 @@ done:
     a pre-emptive #validate. This goes for all attribute errors though.
     This also makes it possible to "break" objects by removing the 'top'
     objectclass and therefore the #objectClass method...
+
 0.4.4:
   * Fixed binary subtype forcing:
     - was setting data as subtype ;binary even when not required
@@ -190,9 +203,11 @@ done:
     - cn and cn;lang-blah: the last loaded won
   * Fixed multivalued subtypes from being shoved into a string (unittest!)
     - an error with attribute_input_value
+
 0.4.3:
   * Fixed write (add) bugs introduced with last change
     - only bug fixes until unittests are in place
+
 0.4.2:
   * Added ruby-activeldap.gemspec
   * Integrated building a gem of 'ruby-activeldap' into Makefile.package
@@ -206,9 +221,11 @@ done:
         real    1m0.416s
         user    0m28.390s
         sys     0m2.380s
+
 0.4.1:
   * Schema2 was not correctly parsing objectClass entries.
     - This is fixed for now but must be revisited.
+
 0.4.0:
   * Added #<attribute>(arrays) argument which when true
     always returns arrays. e.g.
@@ -229,6 +246,7 @@ done:
   * Updated rdoc in activeldap.rb
   * Updated examples (poorly) to reflect new functionality
   * Added several private helper functions
+
 0.3.6:
   * Fixed dn attribute value extraction on find and find_all
     - these may have grabbed the wrong value if a DN attr has
@@ -236,20 +254,26 @@ done:
   * Fixed Base.search to return all values as arrays and update
     multivalued ones correctly
   * Lowered the amount of default logging to FATAL only
+
 0.3.5:
   * Moved to rubyforge.org!
+
 0.3.4:
   * Changed license to Ruby's
+
 0.3.3:
   * Changed Base.search to return an array instead of a hash of hashes
   * Change Base.search to take in a hash as its arguments
+
 0.3.2:
   * Bug fix - fixed support for module'd extension classes (again!)
+
 0.3.1:
   * Updated the documentation
   * Fixed ignoring of attrs argument in Base.search
   * Fixed mistake in groupls (using dnattr directly)
   * Fixed a mistake with overzealous dup'ing
+
 0.3.0:
   * MORE API CHANGES (configuration.rb, etc)
   * Major overhaul to the internals!
@@ -263,6 +287,7 @@ done:
   * Added Base.search to wrap normal LDAP search for convenience.
     - This returns a hash of hashes with the results indexed first by
       full dn, then by attribute.
+
 0.2.0:
   * API CHANGES:
     - Extension classes must be defined using map_to_ldap instead of setting
@@ -283,31 +308,40 @@ done:
   * Added a manual to activeldap.rb which covers most usage of Ruby/ActiveLDAP
   * Base.connect(:try_sasl => true) should now work with GSSAPI if you are
     using OpenLDAP >= 2.1.29
+
 0.1.8:
   * .dup all returned attribute values to avoid weirdness
   * .dup all assigned values to avoid weirdness
   * Changed default configuration.rb to use example.com
+
 0.1.7:
   * Added support for non-unique DN attributes
   * Added authoritative DN retrieval with 'object.dn'
+
 0.1.6:
   * Added Base.close method for clearing the existing connection (despite Ruby/LDAP's lack of .close)
+
 0.1.5:
   * Fixed incorrect usage of @klass in .find (should .find be a class method?)
+
 0.1.4:
   * Change WARN to INFO in associations.rb for has_many
+
 0.1.3:
   * Fixed class name mangling
   * Added support for classes to take DNs as the initialization value
+
 0.1.2:
   * Patch from Dick Davies: Try SSL before TLS
   * Log4r support
   * Better packaging (automated)
   * Work-around for SSL stupidity
     - SSLConn doesn't check if the port it connected to is really using SSL!
+
 0.1.1:
   * Dynamic table class creation
   * SASL/GSSAPI disabled by default - doesn't work consistently
+
 0.1.0:
   * Added foreign_key to has_many
   * Added local_key to belongs_to
@@ -315,29 +349,39 @@ done:
   * Added "nil" filtering to has_many
   * Packaged up with setup.rb
   * Added RDocs and better comments
+
 0.0.9:
   * Separated extension classes from ActiveLDAP module
   * Cleaned up examples with new requires
+
 0.0.8:
   * Added user and group scripting examples
     - usermod, userls, useradd, userdel
     - groupmod, groupls
+
 0.0.7:
   * Cleaner authentication loop:
     - SASL (GSSAPI only), simple, anonymous
   * Added allow_anonymous option added (default: false)
+
 0.0.6:
   * Write support cleaned up
   * Exception classes added
+
 0.0.5:
   * LDAP write support added
+
 0.0.4:
   * MUST and MAY data validation against schema using objectClasses
+
 0.0.3:
   * LDAP attributes alias resolution and data mapping
+
 0.0.2:
   * Associations: has_many and belongs_to Class methods added for Base
+
 0.0.1:
   * Extension approach in place with example User and Group classes
+
 0.0.0:
   * Basic LDAP read support in place with hard-coded OUs

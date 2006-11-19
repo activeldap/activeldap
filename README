@@ -1,5 +1,5 @@
 Ruby/ActiveLdap -- ruby library for object-oriented LDAP interction
-Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>
+Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>, Kouhei Sutou <kou@cozmixng.org>
 Contributors:
  * Dick Davies <rasputnik@hellooperator.net>
  * Nathan Kinder <quicksilver02@mac.com>
@@ -38,9 +38,7 @@ INSTALL
 
   - Edit active_ldap/configuration.rb with your LDAP preferences
   - Run -
-    ruby setup.rb config
-    ruby setup.rb setup
-    (root) ruby setup.rb install
+    sudo rake install
 
 
 LICENCE
