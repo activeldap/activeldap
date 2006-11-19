@@ -1,0 +1,38 @@
+#!/usr/bin/ruby -W0
+
+base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+$LOAD_PATH << File.join(base, "lib")
+$LOAD_PATH << File.join(base, "examples")
+
+require 'active_ldap'
+require 'objects/ou'
+
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  opts.banner += " name"
+end
+
+if argv.size == 1
+  name = argv[0]
+else
+  $stderr.puts opts
+  exit 1
+end
+
+pwb = Proc.new do |user|
+  ActiveLdap::Command.read_password("[#{user}] Password: ")
+end
+
+ActiveLdap::Base.establish_connection(:password_block => pwb,
+                                      :allow_anonymous => false)
+
+if Ou.exists?(name)
+  $stderr.puts("Ou #{name} already exists.")
+  exit 1
+end
+
+ou = Ou.new(name)
+unless ou.save
+  puts "failed"
+  puts ou.errors.full_messages
+  exit 1
+end
