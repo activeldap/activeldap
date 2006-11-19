@@ -60,9 +60,11 @@ done:
   * Bugfix: do not base LDAP::PrettyError on RuntimeError due to rescue evaluation.
   * Bugfix: :return_objects was overriding :objects in find and find_all
   * Rollup exception code into smaller space reusing similar code.
+
 0.7.3:
   * Made has_many and belongs_to use :return_objects value
   * Force generation of LDAP constants on import - currently broken
+
 0.7.2:
   * Stopped overriding Conn.schema in ldap/schema - now use schema2
   * Fix attributes being deleted when changing between objectclasses with shared attributes
@@ -84,11 +86,13 @@ done:
   * Added TimeoutError
   * Added(*) a forking timeout using SIGALRM to interrupt handling.
   * (*) Only works when RUBY_PLATFORM has "linux" in it
+
 0.7.1:
   * Fix broken -W0 arg in activeldap.rb
   * attribute_method=: '' and nil converted to ldap-pleasing [] values
   * Added checks in write and search for connection down (to reconnect)
   * Fixed broken idea of LDAP::err2string exceptions. Instead took errcodes from ldap.c in Ruby/LDAP.
+
 0.7.0:
   * ConnectionError thrown from #initialize when there is no connection and retry limit was exceeded
   * ConnectionError thrown when retries exceeded when no connection was created
