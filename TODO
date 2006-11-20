@@ -8,9 +8,6 @@ http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
 - handle all exception raised from Ruby/LDAP and wrap as
   ActiveLdap exception. I think we need to develop an
   application using ActiveLdap.
-- support Reloadable::Subclasses. I think we need to
-  develop a Rails + ActiveLdap application to improve
-  Rails support.
 - support Ruby/GetText.
 - support Net::LDAP as LDAP backend after Net::LDAP
   supports START_TLS. (I made a patch and submitted to the
