@@ -16,7 +16,7 @@ difficulty.
 For example and usage - read the rdoc in doc/ from lib/activeldap.rb.
 It is also available on the web at:
 
-http://static.dataspill.org/projects/libraries/ruby/activeldap/rdoc/
+http://ruby-activeldap.rubyforge.org/
 
 PREREQUISITES
 
