@@ -41,6 +41,7 @@ primary_group = user.primary_group
 if primary_group.exists?
   groups << "#{primary_group.cn}[#{primary_group.gid_number}]"
 end
+puts "Groups by name only: #{user.groups(false).join(', ')}"
 user.groups.sort_by do |group|
   group.id
 end.collect do |group|
