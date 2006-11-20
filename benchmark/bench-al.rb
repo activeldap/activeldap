@@ -55,7 +55,7 @@ def populate_base
     name, value = suffix.split(/=/, 2)
     next unless name == "dc"
     dc_class = Class.new(ActiveLdap::Base)
-    dc_class.ldap_mapping :dnattr => "dc",
+    dc_class.ldap_mapping :dn_attribute => "dc",
                           :prefix => "",
                           :scope => :base,
                           :classes => ["top", "dcObject", "organization"]
@@ -73,7 +73,7 @@ end
 
 def populate_users
   ou_class = Class.new(ActiveLdap::Base)
-  ou_class.ldap_mapping :dnattr => "ou",
+  ou_class.ldap_mapping :dn_attribute => "ou",
                         :prefix => "",
                         :classes => ["top", "organizationalUnit"]
   ou_class.new(LDAP_PREFIX.split(/=/)[1]).save!
@@ -109,7 +109,7 @@ def main(argv)
   do_populate = LDAP_USER && LDAP_PASSWORD
 
   if do_populate
-    config[:bind_format] = LDAP_USER
+    config[:bind_dn] = LDAP_USER
     config[:password] = LDAP_PASSWORD
   end
   ActiveLdap::Base.establish_connection(config)
