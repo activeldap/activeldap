@@ -11,11 +11,10 @@ class User < ActiveLdap::Base
   # new ActiveRecord-style API.
   alias groups_mapping groups
   def groups(return_objects=true)
-    return self.groups_mapping if return_objects
+    return groups_mapping if return_objects
     attr = 'cn'
-    return Group.search(:attribute => 'memberUid',
-                        :value => self.send(self.dn_attribute),
-                        :attributes => [attr]).map {|x|x[1][attr]}.flatten
-
+    Group.search(:attribute => 'memberUid',
+                 :value => id,
+                 :attributes => [attr]).map {|dn, attrs| attrs[attr]}.flatten
   end
 end

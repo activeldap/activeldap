@@ -23,14 +23,14 @@ class TestUserls < Test::Unit::TestCase
 
   def test_list_user_no_group
     make_temporary_user do |user, password|
-      assert_userls_successfully(user.uid, [])
+      assert_userls_successfully(user.uid, [], [])
     end
   end
 
   def test_list_user_have_primary_group
     make_temporary_group do |group|
       make_temporary_user(:gid_number => group.gid_number) do |user, password|
-        assert_userls_successfully(user.uid, [group])
+        assert_userls_successfully(user.uid, [group], [])
       end
     end
   end
@@ -42,7 +42,7 @@ class TestUserls < Test::Unit::TestCase
         make_temporary_user(options) do |user, password|
           user.groups << group1
           user.groups << group2
-          assert_userls_successfully(user.uid, [group1, group2])
+          assert_userls_successfully(user.uid, [], [group1, group2])
         end
       end
     end
@@ -55,7 +55,7 @@ class TestUserls < Test::Unit::TestCase
           make_temporary_group do |group3|
             user.groups << group2
             user.groups << group3
-            assert_userls_successfully(user.uid, [group1, group2, group3])
+            assert_userls_successfully(user.uid, [group1], [group2, group3])
           end
         end
       end
@@ -63,13 +63,18 @@ class TestUserls < Test::Unit::TestCase
   end
 
   private
-  def assert_userls_successfully(name, groups, *args, &block)
+  def assert_userls_successfully(name, primary_groups, groups, *args, &block)
     _wrap_assertion do
       assert(@user_class.exists?(name))
       args.concat([name])
       user = @user_class.find(name)
-      groups = groups.collect {|g| "#{g.cn}[#{g.gid_number}]"}
-      result = "#{user.to_ldif}Groups: #{groups.join(', ')}\n"
+      group_names = groups.collect {|g| "#{g.cn}"}
+      group_infos = (primary_groups + groups).collect do |g|
+        "#{g.cn}[#{g.gid_number}]"
+      end
+      result = user.to_ldif
+      result << "Groups by name only: #{group_names.join(', ')}\n"
+      result << "Groups: #{group_infos.join(', ')}\n"
       assert_equal([true, result], run_command(*args, &block))
       assert(@user_class.exists?(name))
     end
