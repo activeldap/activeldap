@@ -916,7 +916,11 @@ module ActiveLdap
     end
 
     def [](name, force_array=false)
-      get_attribute(name, force_array)
+      if name == "dn"
+        array_of(dn, force_array)
+      else
+        get_attribute(name, force_array)
+      end
     end
 
     def []=(name, value)

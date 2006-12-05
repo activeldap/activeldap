@@ -4,6 +4,13 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_dn_by_index_getter
+    make_temporary_user do |user,|
+      assert_equal(user.dn, user["dn"])
+    end
+  end
+
+  priority :normal
   def test_create_multiple
     ensure_delete_user("temp-user1") do |uid1,|
       ensure_delete_user("temp-user2") do |uid2,|
@@ -52,7 +59,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_reload_of_not_exists_entry
     make_temporary_user do |user,|
       assert_nothing_raised do
