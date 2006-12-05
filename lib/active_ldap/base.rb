@@ -1037,11 +1037,17 @@ module ActiveLdap
         @musts[objc] = attributes[:must]
         @mays[objc] = attributes[:may]
       end
-      @must = @musts.values.flatten.uniq
-      @may = @mays.values.flatten.uniq
+      @must = normalize_attribute_names(@musts.values)
+      @may = normalize_attribute_names(@mays.values)
       (@must + @may).uniq.each do |attr|
         # Update attr_method with appropriate
         define_attribute_methods(attr)
+      end
+    end
+
+    def normalize_attribute_names(names)
+      names.flatten.uniq.collect do |may|
+        schema.attribute_aliases(may).first
       end
     end
 
@@ -1143,8 +1149,7 @@ module ActiveLdap
     def define_attribute_methods(attr)
       logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
       return if @attr_methods.has_key? attr
-      aliases = schema.attribute_aliases(attr)
-      aliases.each do |ali|
+      schema.attribute_aliases(attr).each do |ali|
         logger.debug {"associating #{ali} --> #{attr}"}
         @attr_methods[ali] = attr
         logger.debug {"associating #{Inflector.underscore(ali)}" +

@@ -4,13 +4,29 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_save_for_dNSDomain
+    domain_class = Class.new(ActiveLdap::Base)
+    domain_class.ldap_mapping :dn_attribute => "dc", :prefix => "",
+                              :classes => ['top', 'dcObject', 'dNSDomain']
+    name = "ftp"
+    a_record = "192.168.1.1"
+
+    domain = domain_class.new('ftp')
+    domain.a_record = a_record
+    assert(domain.save)
+    assert_equal(a_record, domain.a_record)
+    assert_equal(a_record, domain_class.find(name).a_record)
+  ensure
+    domain_class.delete(name) if domain_class.exists?(name)
+  end
+
+  priority :normal
   def test_dn_by_index_getter
     make_temporary_user do |user,|
       assert_equal(user.dn, user["dn"])
     end
   end
 
-  priority :normal
   def test_create_multiple
     ensure_delete_user("temp-user1") do |uid1,|
       ensure_delete_user("temp-user2") do |uid2,|
