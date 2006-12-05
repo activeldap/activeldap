@@ -130,7 +130,6 @@ module ActiveLdap
     # Returns the value of self.class.schema
     # This is just syntactic sugar
     def schema
-      logger.debug {"stub: called schema"}
       self.class.schema
     end
   end
