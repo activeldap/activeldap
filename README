@@ -43,10 +43,10 @@ INSTALL
 
 LICENCE
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
+This program is free software; you can redistribute it and/or modify it.  It is
+dual licensed under Ruby's license and under the terms of the GNU General
+Public License as published by the Free Software Foundation; either version 2,
+or (at your option) any later version.
 
 Please see the file LICENSE for the terms of the licence.
 
