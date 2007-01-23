@@ -15,6 +15,8 @@ class TestFind < Test::Unit::TestCase
     make_temporary_user do |user, password|
       assert_equal(user.uid, @user_class.find(:first).uid)
       assert_equal(user.uid, @user_class.find(user.uid).uid)
+      options = {:attribute => "cn", :value => user.cn}
+      assert_equal(user.uid, @user_class.find(:first, options).uid)
       assert_equal(user.to_ldif, @user_class.find(:first).to_ldif)
       assert_equal([user.uid], @user_class.find(:all).collect {|u| u.uid})
 
