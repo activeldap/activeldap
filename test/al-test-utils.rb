@@ -10,6 +10,8 @@ require 'tempfile'
 
 require 'active_ldap'
 
+require File.join(File.expand_path(File.dirname(__FILE__)), "command")
+
 LDAP_ENV = "test" unless defined?(LDAP_ENV)
 
 module AlTestUtils

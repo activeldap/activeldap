@@ -4,6 +4,16 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_new_without_class
+    no_class_class = Class.new(ActiveLdap::Base)
+    no_class_class.ldap_mapping :dn_attribute => "dc", :prefix => "",
+                                :classes => []
+    assert_raises(ActiveLdap::UnknownAttribute) do
+      no_class_class.new("xxx")
+    end
+  end
+
+  priority :normal
   def test_save_for_dNSDomain
     domain_class = Class.new(ActiveLdap::Base)
     domain_class.ldap_mapping :dn_attribute => "dc", :prefix => "",
@@ -20,7 +30,6 @@ class TestBase < Test::Unit::TestCase
     domain_class.delete(name) if domain_class.exists?(name)
   end
 
-  priority :normal
   def test_dn_by_index_getter
     make_temporary_user do |user,|
       assert_equal(user.dn, user["dn"])

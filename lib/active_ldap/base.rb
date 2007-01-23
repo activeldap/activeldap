@@ -135,6 +135,14 @@ module ActiveLdap
   class AdapterNotSpecified < Error
   end
 
+  class UnknownAttribute < Error
+    attr_reader :name
+    def initialize(name)
+      @name = name
+      super("#{@name} is unknown attribute")
+    end
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -1114,6 +1122,7 @@ module ActiveLdap
 
       # Get the attr and clean up the input
       attr = to_real_attribute_name(name)
+      raise UnknownAttribute.new(name) if attr.nil?
 
       if attr == dn_attribute and value.is_a?(String)
         value = value.gsub(/,#{Regexp.escape(base_of_class)}$/, '')
