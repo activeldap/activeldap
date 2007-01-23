@@ -943,6 +943,9 @@ require_gem_if_need.call("active_record/base", "activerecord")
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
 
+require 'active_ldap/user_password'
+require 'active_ldap/command'
+
 module ActiveLdap
   VERSION = "0.8.0"
 end
