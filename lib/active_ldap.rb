@@ -931,6 +931,11 @@ require_gem_if_need = Proc.new do |library_name, gem_name|
 end
 
 require_gem_if_need.call("active_support", "activesupport")
+
+if Dependencies.respond_to?(:load_paths)
+  Dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
+end
+
 require 'active_ldap/base'
 require 'active_ldap/associations'
 require 'active_ldap/configuration'
@@ -942,9 +947,6 @@ require 'active_ldap/adaptor/ldap'
 require_gem_if_need.call("active_record/base", "activerecord")
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
-
-require 'active_ldap/user_password'
-require 'active_ldap/command'
 
 module ActiveLdap
   VERSION = "0.8.0"
