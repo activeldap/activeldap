@@ -949,7 +949,7 @@ require 'active_ldap/validations'
 require 'active_ldap/callbacks'
 
 module ActiveLdap
-  VERSION = "0.8.0"
+  VERSION = "0.8.1"
 end
 
 ActiveLdap::Base.class_eval do

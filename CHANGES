@@ -1,3 +1,20 @@
+0.8.1:
+  * used Dependencies.load_paths.
+  * check whether attribute name is available or not.
+  * added test for find(:first, :attribute => 'xxx', :value => 'yyy').
+  * supported ActiveSupport 1.4.0.
+  * make the dual licensing of ruby-activeldap clear in the README.
+  * followed edge Rails: don't use Reloadable::Subclasses if doesn't need.
+  * added examples/.
+  * removed debug code.
+  * normalized attribute name to support wrong attribute names in MUST/MAY.
+  * supported getting dn value by Base#[].
+  * test/test_userls.rb: followed userls changes.
+  * update the doc href.
+  * provide a dumb example of how to use the old association(return_objects) style API with the new awesome API.
+  * followed new API.
+  * removed a finished task: support Reloadable::Subclasses.
+
 0.8.0:
   * Makefile/gemspec system replaced with Rakefile + Hoe
   * Bugfix: Allow base to be empty
