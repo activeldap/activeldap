@@ -3,6 +3,7 @@ require 'al-test-utils'
 class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
+  priority :must
   def test_split_search_value
     assert_split_search_value([nil, "test-user", nil], "test-user")
     assert_split_search_value([nil, "test-user", "ou=Sub"], "test-user,ou=Sub")
@@ -17,6 +18,7 @@ class TestFind < Test::Unit::TestCase
       assert_equal(user.uid, @user_class.find(user.uid).uid)
       options = {:attribute => "cn", :value => user.cn}
       assert_equal(user.uid, @user_class.find(:first, options).uid)
+      assert_equal(user.uid, @user_class.find(options).uid)
       assert_equal(user.to_ldif, @user_class.find(:first).to_ldif)
       assert_equal([user.uid], @user_class.find(:all).collect {|u| u.uid})
 
