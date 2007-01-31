@@ -104,10 +104,13 @@ module ActiveLdap
   end
 
   class DistinguishedNameInvalid < Error
-    attr_reader :dn
-    def initialize(dn)
+    attr_reader :dn, :reason
+    def initialize(dn, reason=nil)
       @dn = dn
-      super("#{@dn} is invalid distinguished name (dn).")
+      @reason = reason
+      message = "#{@dn} is invalid distinguished name (dn)"
+      message << ": #{@reason}"if @reason
+      super(message)
     end
   end
 

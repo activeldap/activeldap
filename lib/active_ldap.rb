@@ -942,6 +942,7 @@ require 'active_ldap/configuration'
 require 'active_ldap/connection'
 require 'active_ldap/attributes'
 require 'active_ldap/object_class'
+require 'active_ldap/distinguished_name'
 require 'active_ldap/adaptor/ldap'
 
 require_gem_if_need.call("active_record/base", "activerecord")
