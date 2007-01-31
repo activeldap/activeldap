@@ -1233,8 +1233,7 @@ module ActiveLdap
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
-          logger.debug {"#save: removing attribute from existing entry: " +
-                          "#{new_key}"}
+          logger.debug {"#save: removing attribute from existing entry: #{k}"}
           if !data.has_key?(k) and schema.binary_required?(k)
             value = [{'binary' => []}]
           end
