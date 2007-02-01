@@ -344,7 +344,7 @@ module ActiveLdap
         # TODO: Investigate further SASL support
         return false unless (mechanisms || []).include?('GSSAPI')
         operation do
-          @connection.sasl_quiet = @sasl_quiet unless @sasl_quit.nil?
+          @connection.sasl_quiet = @sasl_quiet unless @sasl_quiet.nil?
           @connection.sasl_bind(bind_dn, 'GSSAPI')
           true
         end
