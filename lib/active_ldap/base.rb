@@ -427,10 +427,20 @@ module ActiveLdap
       end
 
       def exists?(dn, options={})
-        prefix = /^#{Regexp.escape(truncate_base(ensure_dn_attribute(dn)))}/
-        suffix = /,#{Regexp.escape(base)}$/
+        prefix = /^#{Regexp.escape(truncate_base(ensure_dn_attribute(dn)))}/ #
+        dn_suffix = nil
         not search({:value => dn}.merge(options)).find do |_dn,|
-          prefix.match(_dn) and suffix.match(_dn)
+          if prefix.match(_dn)
+            begin
+              dn_suffix ||= DN.parse(base)
+              DN.parse(_dn) - dn_suffix
+              true
+            rescue DistinguishedNameInvalid, ArgumentError
+              false
+            end
+          else
+            false
+          end
         end.nil?
       end
 
@@ -558,9 +568,22 @@ module ActiveLdap
       end
 
       def split_search_value(value)
-        value, prefix = value.split(/,/, 2)
-        attr, value = value.split(/=/, 2)
-        attr, value = value, attr if value.nil?
+        attr = prefix = nil
+        begin
+          dn = DN.parse(value)
+          attr, value = dn.rdns.first.to_a.first
+          rest = dn.rdns[1..-1]
+          prefix = DN.new(*rest).to_s unless rest.empty?
+        rescue DistinguishedNameInvalid
+          begin
+            dn = DN.parse("DUMMY=#{value}")
+            _, value = dn.rdns.first.to_a.first
+            rest = dn.rdns[1..-1]
+            prefix = DN.new(*rest).to_s unless rest.empty?
+          rescue DistinguishedNameInvalid
+          end
+        end
+
         prefix = nil if prefix == base
         prefix = truncate_base(prefix) if prefix
         [attr, value, prefix]
@@ -583,7 +606,7 @@ module ActiveLdap
 
       def ensure_dn_attribute(target)
         "#{dn_attribute}=" +
-          target.gsub(/^#{Regexp.escape(dn_attribute)}\s*=\s*/, '')
+          target.gsub(/^\s*#{Regexp.escape(dn_attribute)}\s*=\s*/i, '')
       end
 
       def ensure_base(target)
@@ -591,7 +614,15 @@ module ActiveLdap
       end
 
       def truncate_base(target)
-        target.sub(/,#{Regexp.escape(base)}$/, '')
+        if /,/ =~ target
+          begin
+            (DN.parse(target) - DN.parse(base)).to_s
+          rescue DistinguishedNameInvalid, ArgumentError
+            target
+          end
+        else
+          target
+        end
       end
 
       def ensure_logger

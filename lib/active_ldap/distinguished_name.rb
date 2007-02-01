@@ -91,10 +91,10 @@ module ActiveLdap
       def scan_not_quoted_attribute_value(scanner)
         result = ""
         until scanner.eos?
+          prev_size = result.size
           pairs = collect_pairs(scanner)
           strings = scanner.scan(STRING_CHARS_RE)
-          break if strings.blank? and pairs.blank?
-          result << pairs unless pairs.nil? or pairs.empty?
+          result << pairs if !pairs.nil? and !pairs.empty?
           unless strings.nil?
             if scanner.peek(1) == ","
               result << strings.rstrip
@@ -102,6 +102,7 @@ module ActiveLdap
               result << strings
             end
           end
+          break if prev_size == result.size
         end
         result
       end
@@ -149,8 +150,6 @@ module ActiveLdap
       end
     end
 
-    include Comparable
-
     attr_reader :rdns
     def initialize(*rdns)
       @rdns = rdns.collect do |rdn|
@@ -186,11 +185,12 @@ module ActiveLdap
     end
 
     def eql?(other)
-      self == other
+      other.is_a?(self.class) and
+        normalize(@rdns).to_s.eql?(normalize(other.rdns).to_s)
     end
 
     def hash
-      normalize(@rdns).hash
+      normalize(@rdns).to_s.hash
     end
 
     def inspect
@@ -199,7 +199,9 @@ module ActiveLdap
 
     def to_s
       @rdns.collect do |rdn|
-        rdn.collect do |type, value|
+        rdn.sort_by do |type, value|
+          type.upcase
+        end.collect do |type, value|
           "#{type}=#{escape(value)}"
         end.join("+")
       end.join(",")
@@ -217,7 +219,11 @@ module ActiveLdap
     end
 
     def escape(value)
-      value.gsub(/([,=\+<>#;\\\"])/, '\\\\\1')
+      if /(\A | \z)/.match(value)
+        '"' + value.gsub(/([\\\"])/, '\\\\\1') + '"'
+      else
+        value.gsub(/([,=\+<>#;\\\"])/, '\\\\\1')
+      end
     end
   end
 

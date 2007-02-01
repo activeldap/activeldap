@@ -4,6 +4,14 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_loose_dn
+    make_temporary_user do |user,|
+      assert(user.class.exists?(user.dn))
+      assert(user.class.exists?(user.dn.gsub(/,/, " , ")))
+      assert(user.class.exists?(user.dn.gsub(/=/, " = ")))
+    end
+  end
+
   def test_new_without_class
     no_class_class = Class.new(ActiveLdap::Base)
     no_class_class.ldap_mapping :dn_attribute => "dc", :prefix => "",

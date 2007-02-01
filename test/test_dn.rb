@@ -10,11 +10,22 @@ class TestDN < Test::Unit::TestCase
   end
 
   priority :must
+  def test_dn_hash
+    dn1 = ActiveLdap::DN.parse("o=xxx,dc=local,dc=net")
+    dn2 = ActiveLdap::DN.parse("O = xxx , DC = local , DC = net")
+    assert_equal(dn1.hash, dn2.hash)
+
+    hash = {dn1 => :dn}
+    assert_equal(:dn, hash[dn2])
+  end
+
   def test_dn_to_s
     assert_dn_to_s("dc=xxx,dc=local,dc=net",
                    "dc = xxx, dc = \"local\",dc=net")
     assert_dn_to_s("dc=l\\,o\\=c\\+a\\<l\\>,dc=\\#n\\;e\\\\t",
                    "dc = \"l,o=c+a<l>\" , dc=\"#n;e\\\\t\"")
+    assert_dn_to_s("dc=\" l\\\"o c\\\\a l \",dc=\" n e t \"",
+                   "dc = \" l\\\"o c\\\\a l \" , dc= \\20n\\20e\\20t\\20")
   end
 
   def test_dn_minus
