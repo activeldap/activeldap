@@ -10,6 +10,18 @@ class TestDN < Test::Unit::TestCase
   end
 
   priority :must
+  def test_dn_to_s
+    assert_dn_to_s("dc=xxx,dc=local,dc=net",
+                   "dc = xxx, dc = \"local\",dc=net")
+    assert_dn_to_s("dc=l\\,o\\=c\\+a\\<l\\>,dc=\\#n\\;e\\\\t",
+                   "dc = \"l,o=c+a<l>\" , dc=\"#n;e\\\\t\"")
+  end
+
+  def test_dn_minus
+    assert_dn_minus("dc=xxx", "dc=xxx,dc=local,dc=net", "dc=local,dc=net")
+    assert_dn_minus_raise("dc=xxx,dc=net", "dc=local,dc=net")
+  end
+
   def test_parse_good_manner_dn
     assert_dn([["dc", "local"], ["dc", "net"]], "dc=local,dc=net")
     assert_dn([["dc", "net"]], "dc=net")
@@ -28,6 +40,11 @@ class TestDN < Test::Unit::TestCase
               "dc = #6C6f63616C , dc = net")
     assert_dn([["dc", "lo cal "], ["dc", "net"]],
               "dc = #6C6f2063616C20 ,dc=net")
+  end
+
+  def test_parse_dn_with_quoted_attribute_value
+    assert_dn([["dc", " l o c a l "], ["dc", "+n,\"e\";t"]],
+              "dc = \" l o c a l \" , dc = \"+n,\\\"e\\\";t\"")
   end
 
   def test_parse_dn_in_rfc2253
@@ -71,6 +88,8 @@ class TestDN < Test::Unit::TestCase
     assert_invalid_dn("attribute type is missing", "=local,dc=net")
     assert_invalid_dn("name component is missing", ",dc=net")
     assert_invalid_dn("name component is missing", "dc=local,")
+    assert_invalid_dn("found unmatched quotation", "dc=\"local")
+    assert_invalid_dn("found unmatched quotation", "dc=\"loc\\al\"")
   end
 
   def test_parse_quoted_comma_dn
@@ -107,5 +126,20 @@ class TestDN < Test::Unit::TestCase
     parser = ActiveLdap::DN::Parser.new(source)
     assert_equal(expected,
                  parser.send(:collect_pairs, StringScanner.new(source)))
+  end
+
+  def assert_dn_minus(expected, subtrahend, minuend)
+    result = ActiveLdap::DN.parse(subtrahend) - ActiveLdap::DN.parse(minuend)
+    assert_equal(ActiveLdap::DN.parse(expected), result)
+  end
+
+  def assert_dn_minus_raise(subtrahend, minuend)
+    assert_raise(ArgumentError) do
+      ActiveLdap::DN.parse(subtrahend) - ActiveLdap::DN.parse(minuend)
+    end
+  end
+
+  def assert_dn_to_s(expected, dn)
+    assert_equal(expected, ActiveLdap::DN.parse(dn).to_s)
   end
 end

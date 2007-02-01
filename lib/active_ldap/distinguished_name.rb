@@ -74,12 +74,16 @@ module ActiveLdap
       def scan_quoted_attribute_value(scanner)
         result = ""
         until scanner.scan(/\"/)
-          if scanner.scan(/([^\\\"]*)/)
-            result << scanner[1]
-          end
-          result << collect_pairs(scanner)
+          scanner.scan(/([^\\\"]*)/)
+          quoted_strings = scanner[1]
+          pairs = collect_pairs(scanner)
 
-          raise found_unmatched_quotation if scanner.eos?
+          if scanner.eos? or (quoted_strings.empty? and pairs.empty?)
+            raise found_unmatched_quotation
+          end
+
+          result << quoted_strings
+          result << pairs
         end
         result
       end
@@ -155,6 +159,19 @@ module ActiveLdap
       end
     end
 
+    def -(other)
+      rdns = @rdns.dup
+      normalized_rdns = normalize(@rdns)
+      normalize(other.rdns).reverse_each do |rdn|
+        if rdn == normalized_rdns.pop
+          rdns.pop
+        else
+          raise ArgumentError, "#{other} isn't sub DN of #{self}"
+        end
+      end
+      self.class.new(*rdns)
+    end
+
     def <<(rdn)
       @rdns << rdn
     end
@@ -168,6 +185,26 @@ module ActiveLdap
         normalize(@rdns) == normalize(other.rdns)
     end
 
+    def eql?(other)
+      self == other
+    end
+
+    def hash
+      normalize(@rdns).hash
+    end
+
+    def inspect
+      super
+    end
+
+    def to_s
+      @rdns.collect do |rdn|
+        rdn.collect do |type, value|
+          "#{type}=#{escape(value)}"
+        end.join("+")
+      end.join(",")
+    end
+
     private
     def normalize(rdns)
       rdns.collect do |rdn|
@@ -177,6 +214,10 @@ module ActiveLdap
         end
         normalized_rdn
       end
+    end
+
+    def escape(value)
+      value.gsub(/([,=\+<>#;\\\"])/, '\\\\\1')
     end
   end
 
