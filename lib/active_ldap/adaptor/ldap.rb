@@ -331,54 +331,41 @@ module ActiveLdap
       # Bind to LDAP with the given DN using any available SASL methods
       def sasl_bind(bind_dn, options={})
         # Get all SASL mechanisms
-        #
-        mechanisms = nil
-        exc = ConnectionError.new('Root DSE query failed')
         mechanisms = operation do
           @connection.root_dse[0]['supportedSASLMechanisms']
         end
         mechanisms ||= []
 
-        # Use GSSAPI if available
-        # Currently only GSSAPI is supported with Ruby/LDAP from
-        # http://caliban.org/files/redhat/RPMS/i386/ruby-ldap-0.8.2-4.i386.rpm
-        # TODO: Investigate further SASL support
-        return false unless mechanisms.include?('GSSAPI')
-        operation do
-          @connection.sasl_quiet = @sasl_quiet unless @sasl_quiet.nil?
-          @connection.sasl_bind(bind_dn, 'GSSAPI')
-          true
+        if options.has_key?(:sasl_quiet)
+          sasl_quiet = options[:sasl_quiet]
+        else
+          sasl_quiet = @sasl_quiet
         end
+
+        sasl_mechanisms = options[:sasl_mechanisms] || @sasl_mechanisms
+        sasl_mechanisms.each do |mechanism|
+          next unless mechanisms.include?(mechanism)
+          operation do
+            @connection.sasl_quiet = sasl_quiet unless sasl_quiet.nil?
+            args = [bind_dn, mechanism]
+            if need_credential_sasl_mechanism?(mechanism)
+              args << password(bind_dn, options)
+            end
+            @connection.sasl_bind(*args)
+            return true if @connection.bound?
+          end
+        end
+        false
       end
 
       # Bind to LDAP with the given DN and password
       def simple_bind(bind_dn, options={})
-        # Bail if we have no password or password block
-        if @password.nil? and @password_block.nil?
-          @logger.error {'Skipping simple bind: ' +
-                         '@password_block and @password options are empty.'}
-          return false
-        end
-
-        if @password
-          password = @password
-        else
-          # TODO: Give a warning to reconnect users with password clearing
-          # Get the passphrase for the first time, or anew if we aren't storing
-          unless @password_block.respond_to?(:call)
-            @logger.error {'Skipping simple bind: ' +
-                           '@password_block not nil or Proc object. Ignoring.'}
-            return false
-          end
-          password = @password_block.call(bind_dn)
-        end
-
-        # Store the password for quick reference later
-        @password = @store_password ? password : nil
+        passwd = password(bind_dn, options)
+        return false unless passwd
 
         begin
           operation do
-            @connection.bind(bind_dn, password)
+            @connection.bind(bind_dn, passwd)
             true
           end
         rescue LDAP::InvalidDnSyntax

@@ -216,6 +216,8 @@ module ActiveLdap
       # :base overwrites Base.base - this affects EVERYTHING
       # :try_sasl indicates that a SASL bind should be attempted when binding
       #   to the server (default: false)
+      # :sasl_mechanisms is an array of SASL mechanism to try
+      #   (default: ["GSSAPI", "CRAM-MD5", "EXTERNAL"])
       # :allow_anonymous indicates that a true anonymous bind is allowed when
       #   trying to bind to the server (default: true)
       # :retries - indicates the number of attempts to reconnect that will be
