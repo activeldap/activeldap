@@ -337,12 +337,13 @@ module ActiveLdap
         mechanisms = operation do
           @connection.root_dse[0]['supportedSASLMechanisms']
         end
+        mechanisms ||= []
 
         # Use GSSAPI if available
         # Currently only GSSAPI is supported with Ruby/LDAP from
         # http://caliban.org/files/redhat/RPMS/i386/ruby-ldap-0.8.2-4.i386.rpm
         # TODO: Investigate further SASL support
-        return false unless (mechanisms || []).include?('GSSAPI')
+        return false unless mechanisms.include?('GSSAPI')
         operation do
           @connection.sasl_quiet = @sasl_quiet unless @sasl_quiet.nil?
           @connection.sasl_bind(bind_dn, 'GSSAPI')
