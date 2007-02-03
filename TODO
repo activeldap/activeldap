@@ -1,3 +1,4 @@
+- Test  SASL bind.
 - Fix case sensitivity in object classes
 - Add result pagination via LDAP::Controls
 - serialize & serialized_attributes
