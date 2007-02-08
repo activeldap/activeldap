@@ -28,6 +28,8 @@
   * API TRANSITION: Base#write is now deprecated. Please use Base#save
   * API TRANSITION: Added SaveError exception (which is a subclass of WriteError for now)
   * API TRANSITION: Base.connect() is now deprecated. Please use Base.establish_connection()
+  * API TRANSITION: Base.close() is now deprecated. Please use Base.remove_connection()
+  * API TRANSITION: :bind_format and :user of Base.establish_connection() are now deprecated. Please use :bind_dn
   * Added update_attribute(name, value) to update one attribute and save immediately
   * #delete -> #destroy
   * Base.destroy_all
