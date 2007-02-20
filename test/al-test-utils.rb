@@ -136,10 +136,11 @@ module AlTestUtils
 
     def populate_user_class
       @user_class = Class.new(ActiveLdap::Base)
+      @user_class_classes = ["posixAccount", "person"]
       @user_class.ldap_mapping :dn_attribute => "uid",
                                :prefix => "ou=Users",
                                :scope => :sub,
-                               :classes => ["posixAccount", "person"]
+                               :classes => @user_class_classes
     end
 
     def populate_group_class

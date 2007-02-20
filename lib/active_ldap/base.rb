@@ -689,7 +689,9 @@ module ActiveLdap
     def initialize(attributes=nil)
       init_base
       @new_entry = true
-      if attributes.is_a?(String) or attributes.is_a?(Array)
+      if attributes.nil?
+        apply_object_class(required_classes)
+      elsif attributes.is_a?(String) or attributes.is_a?(Array)
         apply_object_class(required_classes)
         self.dn = attributes
       elsif attributes.is_a?(Hash)
@@ -702,6 +704,10 @@ module ActiveLdap
         end
         self.dn = normalized_attributes[dn_attribute]
         self.attributes = normalized_attributes
+      else
+        message = "'#{attributes.inspect}' must be either "
+        message << "nil, String or Array as DN value or Hash as attributes"
+        raise ArgumentError, message
       end
       yield self if block_given?
     end

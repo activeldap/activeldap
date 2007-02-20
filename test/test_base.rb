@@ -4,6 +4,20 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_new_without_argument
+    user = @user_class.new
+    assert_equal(@user_class_classes, user.classes)
+    assert(user.respond_to?(:cn))
+  end
+
+  def test_new_with_invalid_argument
+    user = @user_class.new
+    assert_raises(ArgumentError) do
+      @user_class.new(100)
+    end
+  end
+
+  priority :normal
   def test_loose_dn
     make_temporary_user do |user,|
       assert(user.class.exists?(user.dn))
@@ -21,7 +35,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_save_for_dNSDomain
     domain_class = Class.new(ActiveLdap::Base)
     domain_class.ldap_mapping :dn_attribute => "dc", :prefix => "",
