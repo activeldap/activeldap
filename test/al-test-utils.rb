@@ -22,6 +22,7 @@ module AlTestUtils
       include Populate
       include TemporaryEntry
       include CommandSupport
+      include MockLogger
     end
   end
 
@@ -334,6 +335,39 @@ module AlTestUtils
       args = [@fakeroot, @ruby, *@ruby_args]
       args.concat(ruby_args)
       Command.run(*args, &block)
+    end
+  end
+
+  module MockLogger
+    def make_mock_logger
+      logger = Object.new
+      class << logger
+        def messages(type)
+          @messages ||= {}
+          @messages[type] ||= []
+          @messages[type]
+        end
+
+        def info(content=nil)
+          messages(:info) << (block_given? ? yield : content)
+        end
+        def warn(content=nil)
+          messages(:warn) << (block_given? ? yield : content)
+        end
+        def error(content=nil)
+          messages(:error) << (block_given? ? yield : content)
+        end
+      end
+      logger
+    end
+
+    def with_mock_logger
+      original_logger = ActiveLdap::Base.logger
+      mock_logger = make_mock_logger
+      ActiveLdap::Base.logger = mock_logger
+      yield(mock_logger)
+    ensure
+      ActiveLdap::Base.logger = original_logger
     end
   end
 end

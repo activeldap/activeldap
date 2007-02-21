@@ -330,6 +330,8 @@ module ActiveLdap
 
       # Bind to LDAP with the given DN using any available SASL methods
       def sasl_bind(bind_dn, options={})
+        return false unless bind_dn
+
         # Get all SASL mechanisms
         mechanisms = operation do
           @connection.root_dse[0]['supportedSASLMechanisms']
@@ -360,6 +362,8 @@ module ActiveLdap
 
       # Bind to LDAP with the given DN and password
       def simple_bind(bind_dn, options={})
+        return false unless bind_dn
+
         passwd = password(bind_dn, options)
         return false unless passwd
 

@@ -2,6 +2,7 @@ require 'al-test-utils'
 
 class TestConnection < Test::Unit::TestCase
   include AlTestUtils::Config
+  include AlTestUtils::MockLogger
 
   def setup
     super
@@ -12,6 +13,21 @@ class TestConnection < Test::Unit::TestCase
     super
   end
 
+  priority :must
+  def test_bind_format_warning
+    with_mock_logger do |logger|
+      connector = Class.new(ActiveLdap::Base)
+      assert(!connector.connected?)
+      assert_raises(ActiveLdap::AuthenticationError) do
+        connector.establish_connection(:bind_format => "uid=%s,dc=test",
+                                       :allow_anonymous => false)
+      end
+      assert_equal([":bind_format is deprecated. Use :bind_dn instead."],
+                   logger.messages(:warn))
+    end
+  end
+
+  priority :normal
   def test_can_reconnect?
     assert(!ActiveLdap::Base.connected?)
 

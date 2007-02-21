@@ -11,6 +11,9 @@ module ActiveLdap
            allow_anonymous store_password).each do |name|
           instance_variable_set("@#{name}", config[name.to_sym])
         end
+        if config[:bind_format] and config[:bind_dn].nil?
+          @logger.warn {':bind_format is deprecated. Use :bind_dn instead.'}
+        end
       end
 
       private
