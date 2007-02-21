@@ -706,7 +706,7 @@ module ActiveLdap
         self.attributes = normalized_attributes
       else
         message = "'#{attributes.inspect}' must be either "
-        message << "nil, String or Array as DN value or Hash as attributes"
+        message << "nil, DN value as String or Array or attributes as Hash"
         raise ArgumentError, message
       end
       yield self if block_given?
