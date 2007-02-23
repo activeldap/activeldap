@@ -1167,9 +1167,7 @@ module ActiveLdap
       raise UnknownAttribute.new(name) if attr.nil?
 
       if attr == dn_attribute and value.is_a?(String)
-        value = value.gsub(/,#{Regexp.escape(base_of_class)}$/, '')
-        value, @base = value.split(/,/, 2)
-        value = $POSTMATCH if /^#{dn_attribute}=/ =~ value
+        value, @base = split_dn_value(value)
       end
 
       logger.debug {"set_attribute(#{name.inspect}, #{value.inspect}): " +
@@ -1196,6 +1194,20 @@ module ActiveLdap
       @data[attr]
     end
 
+    def split_dn_value(value)
+      dn_value = nil
+      begin
+        dn_value = DN.parse(value)
+      rescue DistinguishedNameInvalid
+        dn_value = DN.parse("#{dn_attribute}=#{value}")
+      end
+      begin
+        dn_value -= DN.parse(base_of_class)
+      rescue ArgumentError
+      end
+      val, *bases = dn_value.rdns
+      [val.values[0], bases.empty? ? nil : DN.new(*bases).to_s]
+    end
 
     # define_attribute_methods
     #

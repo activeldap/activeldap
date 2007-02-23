@@ -3,9 +3,22 @@ require 'al-test-utils'
 class TestBasePerInstance < Test::Unit::TestCase
   include AlTestUtils
 
+  def setup
+    super
+    ou_class("ou=Users").new("Sub").save!
+  end
+
   priority :must
+  def test_loose_dn
+    user = @user_class.new("test-user , ou = Sub")
+    assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)
+
+    user = @user_class.new("test-user , ou = Sub, #{@user_class.base}")
+    assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)
+  end
+
+  priority :normal
   def test_exists?
-    ou_class("ou=Users").new("Sub").save
     make_temporary_user(:uid => "test-user,ou=Sub") do |user, password|
       assert(@user_class.exists?(user.uid))
       assert(@user_class.exists?("uid=#{user.uid}"))
@@ -16,9 +29,7 @@ class TestBasePerInstance < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_add
-    ou_class("ou=Users").new("Sub").save
     make_temporary_user(:uid => "test-user,ou=Sub") do |user, password|
       assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)
       assert_equal("test-user", user.uid)
