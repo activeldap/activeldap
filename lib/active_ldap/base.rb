@@ -1027,8 +1027,9 @@ module ActiveLdap
       name = name.to_s
       real_name = @attr_methods[name]
       real_name ||= @attr_aliases[Inflector.underscore(name)]
-      return real_name if real_name
-      if allow_normalized_name
+      if real_name
+        real_name
+      elsif allow_normalized_name
         @attr_methods[@normalized_attr_names[normalize_attribute_name(name)]]
       else
         nil
