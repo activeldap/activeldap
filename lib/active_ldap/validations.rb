@@ -46,7 +46,8 @@ module ActiveLdap
           @musts.each do |object_class, attributes|
             attributes.each do |required_attribute|
               # Normalize to ensure we catch schema problems
-              real_name = to_real_attribute_name(required_attribute)
+              real_name = to_real_attribute_name(required_attribute, true)
+              raise UnknownAttribute.new(required_attribute) if real_name.nil?
               # # Set default if it wasn't yet set.
               # @data[real_name] ||= [] # need?
               value = @data[real_name] || []

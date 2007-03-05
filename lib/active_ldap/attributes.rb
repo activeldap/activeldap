@@ -195,5 +195,9 @@ module ActiveLdap
     def attributes_protected_by_default
       [dn_attribute, 'objectClass']
     end
+
+    def normalize_attribute_name(name)
+      self.class.normalize_attribute_name(name)
+    end
   end
 end

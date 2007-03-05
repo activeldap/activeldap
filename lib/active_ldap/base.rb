@@ -1022,10 +1022,17 @@ module ActiveLdap
       yield self if block_given?
     end
 
-    def to_real_attribute_name(name)
+    def to_real_attribute_name(name, allow_normalized_name=false)
       ensure_apply_object_class
       name = name.to_s
-      @attr_methods[name] || @attr_aliases[Inflector.underscore(name)]
+      real_name = @attr_methods[name]
+      real_name ||= @attr_aliases[Inflector.underscore(name)]
+      return real_name if real_name
+      if allow_normalized_name
+        @attr_methods[@normalized_attr_names[normalize_attribute_name(name)]]
+      else
+        nil
+      end
     end
 
     def ensure_apply_object_class
@@ -1053,6 +1060,7 @@ module ActiveLdap
       @ldap_data = {} # original ldap entry data
       @attr_methods = {} # list of valid method calls for attributes used for
                          # dereferencing
+      @normalized_attr_names = {} # list of normalized attribute name
       @attr_aliases = {} # aliases of @attr_methods
       @last_oc = false # for use in other methods for "caching"
       @base = nil
@@ -1082,6 +1090,7 @@ module ActiveLdap
       # Build |data| from schema
       # clear attr_method mapping first
       @attr_methods = {}
+      @normalized_attr_names = {}
       @attr_aliases = {}
       @musts = {}
       @mays = {}
@@ -1222,6 +1231,9 @@ module ActiveLdap
         logger.debug {"associating #{Inflector.underscore(ali)}" +
                         " --> #{attr}"}
         @attr_aliases[Inflector.underscore(ali)] = attr
+        logger.debug {"associating #{normalize_attribute_name(ali)}" +
+                        " --> #{attr}"}
+        @normalized_attr_names[normalize_attribute_name(ali)] = attr
       end
       logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
     end

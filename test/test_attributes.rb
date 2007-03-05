@@ -4,6 +4,14 @@ class TestAttributes < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_to_real_attribute_name
+    user = @user_class.new("user")
+    assert_nil(user.__send__(:to_real_attribute_name, "objectclass"))
+    assert_equal("objectClass",
+                 user.__send__(:to_real_attribute_name, "objectclass", true))
+  end
+
+  priority :normal
   def test_protect_object_class_from_mass_assignment
     classes = @user_class.required_classes + ["inetOrgPerson"]
     user = @user_class.new(:uid => "XXX", :object_class => classes)
@@ -20,7 +28,6 @@ class TestAttributes < Test::Unit::TestCase
     assert_equal([], user.classes -  @user_class.required_classes)
   end
 
-  priority :normal
   def test_normalize_attribute
     assert_equal(["usercertificate", [{"binary" => []}]],
                  ActiveLdap::Base.normalize_attribute("userCertificate", []))
