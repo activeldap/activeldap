@@ -14,17 +14,20 @@ class TestConnection < Test::Unit::TestCase
   end
 
   priority :must
-  def test_bind_format_warning
-    with_mock_logger do |logger|
-      connector = Class.new(ActiveLdap::Base)
-      assert(!connector.connected?)
-      assert_raises(ActiveLdap::AuthenticationError) do
+  def test_bind_format_check
+    connector = Class.new(ActiveLdap::Base)
+    assert(!connector.connected?)
+    exception = nil
+    assert_raises(ArgumentError) do
+      begin
         connector.establish_connection(:bind_format => "uid=%s,dc=test",
                                        :allow_anonymous => false)
+      rescue Exception
+        exception = $!
+        raise
       end
-      assert_equal([":bind_format is deprecated. Use :bind_dn instead."],
-                   logger.messages(:warn))
     end
+    assert_equal("Unknown key(s): bind_format", exception.message)
   end
 
   priority :normal

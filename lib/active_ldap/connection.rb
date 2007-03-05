@@ -52,6 +52,7 @@ module ActiveLdap
         elsif adaptor.is_a?(Hash)
           config = adaptor
           adaptor = Inflector.camelize(config[:adaptor] || "ldap")
+          config = remove_connection_related_configuration(config)
           self.connection = Adaptor.const_get(adaptor).new(config)
         elsif adaptor.nil?
           raise ConnectionNotEstablished

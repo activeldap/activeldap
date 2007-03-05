@@ -1,18 +1,19 @@
 module ActiveLdap
   module Adaptor
     class Base
-      def initialize(config={})
+      VALID_ADAPTOR_CONFIGURATION_KEYS = [:host, :port, :method, :timeout,
+                                          :retry_on_timeout, :retry_limit,
+                                          :retry_wait, :bind_dn, :password,
+                                          :password_block, :try_sasl,
+                                          :sasl_mechanisms, :sasl_quiet,
+                                          :allow_anonymous, :store_password]
+      def initialize(configuration={})
         @connection = nil
-        @config = config.dup
-        @logger = @config.delete(:logger)
-        %w(host port method timeout retry_on_timeout
-           retry_limit retry_wait bind_dn password
-           password_block try_sasl sasl_mechanisms
-           allow_anonymous store_password).each do |name|
-          instance_variable_set("@#{name}", config[name.to_sym])
-        end
-        if config[:bind_format] and config[:bind_dn].nil?
-          @logger.warn {':bind_format is deprecated. Use :bind_dn instead.'}
+        @configuration = configuration.dup
+        @logger = @configuration.delete(:logger)
+        @configuration.assert_valid_keys(VALID_ADAPTOR_CONFIGURATION_KEYS)
+        VALID_ADAPTOR_CONFIGURATION_KEYS.each do |name|
+          instance_variable_set("@#{name}", configuration[name])
         end
       end
 

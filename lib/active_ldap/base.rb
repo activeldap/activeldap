@@ -266,11 +266,14 @@ module ActiveLdap
         prefix ||= _prefix
         filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
-        connection.search(:base => _base,
-                          :scope => options[:scope] || ldap_scope,
-                          :filter => filter,
-                          :limit => options[:limit],
-                          :attributes => options[:attributes]) do |dn, attrs|
+        search_options = {
+          :base => _base,
+          :scope => options[:scope] || ldap_scope,
+          :filter => filter,
+          :limit => options[:limit],
+          :attributes => options[:attributes]
+        }
+        connection.search(search_options) do |dn, attrs|
           attributes = {}
           attrs.each do |key, value|
             normalized_attr, normalized_value = make_subtypes(key, value)
