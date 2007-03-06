@@ -4,6 +4,28 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_search_with_object_class
+    ou_class = Class.new(ActiveLdap::Base)
+    ou_class.ldap_mapping :dn_attribute => "ou",
+                          :prefix => "",
+                          :scope => :one,
+                          :classes => ["organizationalUnit"]
+
+    name = "sample"
+    ou = ou_class.new(name)
+    assert(ou.save)
+    assert_equal(name, ou.ou)
+
+    assert_equal([ou.dn],
+                 ou_class.search(:value => name).collect {|dn, attrs| dn})
+    ou_class.required_classes += ["organization"]
+    assert_equal([],
+                 ou_class.search(:value => name).collect {|dn, attrs| dn})
+  ensure
+    ou_class.delete(name) if ou_class.exists?(name)
+  end
+
+  priority :normal
   def test_new_without_argument
     user = @user_class.new
     assert_equal(@user_class_classes, user.classes)
@@ -17,7 +39,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_loose_dn
     make_temporary_user do |user,|
       assert(user.class.exists?(user.dn))

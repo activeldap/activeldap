@@ -255,6 +255,7 @@ module ActiveLdap
         value = options[:value] || '*'
         filter = options[:filter]
         prefix = options[:prefix]
+        classes = options[:classes] || required_classes
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
         if filter.nil? and !value.is_a?(String)
@@ -264,7 +265,15 @@ module ActiveLdap
         _attr, value, _prefix = split_search_value(value)
         attr ||= _attr || dn_attribute || "objectClass"
         prefix ||= _prefix
-        filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
+        if filter.nil?
+          filter = "(#{attr}=#{escape_filter_value(value, true)})"
+          unless classes.empty?
+            object_class_filter = classes.collect do |name|
+              "(objectClass=#{escape_filter_value(name, true)})"
+            end.join("")
+            filter = "(&#{filter}#{object_class_filter})"
+          end
+        end
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
         search_options = {
           :base => _base,
