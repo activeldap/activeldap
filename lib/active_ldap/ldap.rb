@@ -94,19 +94,17 @@ module LDAP
   def LDAP.err2exception(errno=0)
     need_to_rebuild = true
     begin
-     exc = LDAP.const_get(@@error_map[errno])
+      exc = LDAP.const_get(@@error_map[errno])
     rescue NameError
-     if need_to_rebuild
-       generate_err2exceptions()
-       need_to_rebuild = false
-       retry
-     end
-     exc = RuntimeError
+      if need_to_rebuild
+        generate_err2exceptions()
+        need_to_rebuild = false
+        retry
+      end
+      exc = RuntimeError
     end
-    return [exc, err2string(errno)]
+    [exc, err2string(errno)]
   end
-
-
 end
 
 # Generate LDAP constants
