@@ -178,6 +178,7 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
+  priority :must
   def test_exists_without_required_object_class
     make_temporary_user do |user,|
       @user_class.required_classes -= ["posixAccount"]
@@ -186,8 +187,8 @@ class TestBase < Test::Unit::TestCase
 
       assert(@user_class.exists?(user.dn))
       @user_class.required_classes += ["posixAccount"]
-      assert(@user_class.exists?(user.dn))
-      assert_raises(ActiveLdap::RequiredObjectClassMissed) do
+      assert(!@user_class.exists?(user.dn))
+      assert_raises(ActiveLdap::EntryNotFound) do
         @user_class.find(user.dn)
       end
     end

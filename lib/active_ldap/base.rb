@@ -255,7 +255,7 @@ module ActiveLdap
         value = options[:value] || '*'
         filter = options[:filter]
         prefix = options[:prefix]
-        classes = options[:classes] || required_classes
+        classes = options[:classes]
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
         if filter.nil? and !value.is_a?(String)
@@ -267,12 +267,7 @@ module ActiveLdap
         prefix ||= _prefix
         if filter.nil?
           filter = "(#{attr}=#{escape_filter_value(value, true)})"
-          unless classes.empty?
-            object_class_filter = classes.collect do |name|
-              "(objectClass=#{escape_filter_value(name, true)})"
-            end.join("")
-            filter = "(&#{filter}#{object_class_filter})"
-          end
+          filter = "(&#{filter}#{object_class_filters(classes)})"
         end
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
         search_options = {
@@ -517,6 +512,12 @@ module ActiveLdap
         args.last.is_a?(Hash) ? args.pop : {}
       end
 
+      def object_class_filters(classes=nil)
+        (classes || required_classes).collect do |name|
+          "(objectClass=#{escape_filter_value(name, true)})"
+        end.join("")
+      end
+
       def find_initial(options)
         find_every(options.merge(:limit => 1)).first
       end
@@ -546,8 +547,12 @@ module ActiveLdap
 
       def find_one(dn, options)
         attr, value, prefix = split_search_value(dn)
-        filter = "(#{attr || dn_attribute}=#{escape_filter_value(value, true)})"
-        filter = "(&#{filter}#{options[:filter]})" if options[:filter]
+        filters = [
+          "(#{attr || dn_attribute}=#{escape_filter_value(value, true)})",
+          object_class_filters(options[:classes]),
+          options[:filter],
+        ]
+        filter = "(&#{filters.compact.join('')})"
         options = {:prefix => prefix}.merge(options.merge(:filter => filter))
         result = find_initial(options)
         if result
