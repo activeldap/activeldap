@@ -4,6 +4,49 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_initialize_with_recommended_classes
+    mapping = {
+      :dn_attribute => "cn",
+      :prefix => "",
+      :scope => :one,
+      :classes => ["person"],
+    }
+    person_class = Class.new(ActiveLdap::Base)
+    person_class.ldap_mapping mapping
+
+    person_with_uid_class = Class.new(ActiveLdap::Base)
+    person_with_uid_mapping =
+      mapping.merge(:recommended_classes => ["uidObject"])
+    person_with_uid_class.ldap_mapping person_with_uid_mapping
+
+    name = "sample"
+    name_with_uid = "sample-with-uid"
+    uid = "1000"
+
+    person = person_class.new(name)
+    person.sn = name
+    assert(person.save)
+    assert_equal([name, name], [person.cn, person.sn])
+
+    person_with_uid = person_with_uid_class.new(name_with_uid)
+    person_with_uid.sn = name_with_uid
+    assert(!person_with_uid.save)
+    person_with_uid.uid = uid
+    assert(person_with_uid.save)
+    assert_equal([name_with_uid, name_with_uid],
+                 [person_with_uid.cn, person_with_uid.sn])
+    assert_equal(uid, person_with_uid.uid)
+
+    assert_equal([person.dn, person_with_uid.dn],
+                 person_class.search.collect {|dn, attrs| dn})
+    person_class.required_classes += ["uidObject"]
+    assert_equal([person_with_uid.dn],
+                 person_class.search.collect {|dn, attrs| dn})
+
+    assert_equal([person.dn, person_with_uid.dn],
+                 person_with_uid_class.search.collect {|dn, attrs| dn})
+  end
+
   def test_search_with_object_class
     ou_class = Class.new(ActiveLdap::Base)
     ou_class.ldap_mapping :dn_attribute => "ou",
@@ -21,8 +64,6 @@ class TestBase < Test::Unit::TestCase
     ou_class.required_classes += ["organization"]
     assert_equal([],
                  ou_class.search(:value => name).collect {|dn, attrs| dn})
-  ensure
-    ou_class.delete(name) if ou_class.exists?(name)
   end
 
   priority :normal

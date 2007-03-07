@@ -158,7 +158,8 @@ module ActiveLdap
       include Reloadable::Subclasses
     end
 
-    VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :classes, :scope]
+    VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
+                                  :classes, :recommended_classes]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -192,7 +193,8 @@ module ActiveLdap
     end
 
     class_local_attr_accessor false, :prefix, :base, :dn_attribute
-    class_local_attr_accessor true, :ldap_scope, :required_classes
+    class_local_attr_accessor true, :ldap_scope
+    class_local_attr_accessor true, :required_classes, :recommended_classes
 
     class << self
       # Hide new in Base
@@ -302,12 +304,14 @@ module ActiveLdap
         dn_attribute = options[:dn_attribute] || default_dn_attribute
         prefix = options[:prefix] || default_prefix
         classes = options[:classes]
+        recommended_classes = options[:recommended_classes]
         scope = options[:scope]
 
         self.dn_attribute = dn_attribute
         self.prefix = prefix
         self.ldap_scope = scope
         self.required_classes = classes
+        self.recommended_classes = recommended_classes
 
         public_class_method :new
         public_class_method :dn_attribute
@@ -697,6 +701,7 @@ module ActiveLdap
 
     self.ldap_scope = :sub
     self.required_classes = ['top']
+    self.recommended_classes = []
 
     include Enumerable
 
@@ -710,14 +715,15 @@ module ActiveLdap
     def initialize(attributes=nil)
       init_base
       @new_entry = true
+      initial_classes = required_classes | recommended_classes
       if attributes.nil?
-        apply_object_class(required_classes)
+        apply_object_class(initial_classes)
       elsif attributes.is_a?(String) or attributes.is_a?(Array)
-        apply_object_class(required_classes)
+        apply_object_class(initial_classes)
         self.dn = attributes
       elsif attributes.is_a?(Hash)
         classes, attributes = extract_object_class(attributes)
-        apply_object_class(classes | required_classes)
+        apply_object_class(classes | initial_classes)
         normalized_attributes = {}
         attributes.each do |key, value|
           real_key = to_real_attribute_name(key)
