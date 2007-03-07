@@ -178,7 +178,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :must
   def test_exists_without_required_object_class
     make_temporary_user do |user,|
       @user_class.required_classes -= ["posixAccount"]
@@ -190,6 +189,25 @@ class TestBase < Test::Unit::TestCase
       assert(!@user_class.exists?(user.dn))
       assert_raises(ActiveLdap::EntryNotFound) do
         @user_class.find(user.dn)
+      end
+    end
+  end
+
+  def test_find_dns_without_required_object_class
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        make_temporary_user do |user3,|
+          @user_class.required_classes -= ["posixAccount"]
+          user1.remove_class("posixAccount")
+          assert(user1.save)
+
+          @user_class.required_classes += ["posixAccount"]
+          assert_raises(ActiveLdap::EntryNotFound) do
+            @user_class.find(user1.dn, user2.dn, user3.dn)
+          end
+          assert_equal([user2.dn, user3.dn],
+                       @user_class.find(user2.dn, user3.dn).collect {|u| u.dn})
+        end
       end
     end
   end

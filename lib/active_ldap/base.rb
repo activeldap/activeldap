@@ -574,8 +574,12 @@ module ActiveLdap
           end
           filter
         end
-        filter = "(|#{dn_filters.join('')})"
-        filter = "(&#{filter}#{options[:filter]})" if options[:filter]
+        filters = [
+          "(|#{dn_filters.join('')})",
+          object_class_filters(options[:classes]),
+          options[:filter],
+        ]
+        filter = "(&#{filters.compact.join('')})"
         result = find_every(options.merge(:filter => filter))
         if result.size == dns.size
           result
