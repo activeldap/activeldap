@@ -1,3 +1,4 @@
+- Support ActiveDirectory's ldapSyntaxes. How can we retrieve them?
 - Test  SASL bind.
 - Fix case sensitivity in object classes
 - Add result pagination via LDAP::Controls

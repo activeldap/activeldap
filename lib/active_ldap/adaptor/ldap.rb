@@ -87,6 +87,7 @@ module ActiveLdap
           result = @connection.search2(base, LDAP::LDAP_SCOPE_BASE,
                                        '(objectClass=subschema)', attrs, false,
                                        sec, usec).first
+          result["ldapSyntaxes"] ||= [] # For ActiveDirectory
           Schema.new(result)
         end
 #       rescue
