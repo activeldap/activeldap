@@ -47,12 +47,12 @@ module ActiveLdap
         passwd
       end
 
-      def with_timeout(try_reconnect=true, &block)
+      def with_timeout(try_reconnect=true, options={}, &block)
         begin
           Timeout.alarm(@timeout, &block)
         rescue Timeout::Error => e
           @logger.error {'Requested action timed out.'}
-          retry if try_reconnect and @retry_on_timeout and reconnect
+          retry if try_reconnect and @retry_on_timeout and reconnect(options)
           @logger.error {e.message}
           raise TimeoutError, e.message
         end

@@ -281,7 +281,7 @@ module ActiveLdap
         reconnect_if_need
         try_reconnect = !options.has_key?(:try_reconnect) ||
                            options[:try_reconnect]
-        with_timeout(try_reconnect) do
+        with_timeout(try_reconnect, options) do
           begin
             block.call
           rescue LDAP::ResultError
@@ -291,14 +291,12 @@ module ActiveLdap
         end
       end
 
-      def with_timeout(try_reconnect=true, &block)
+      def with_timeout(try_reconnect=true, options={}, &block)
         begin
           super
         rescue LDAP::ServerDown => e
-          @logger.error {"#{e.class} exception occurred in with_timeout block"}
-          @logger.error {"Exception message: #{e.message}"}
-          @logger.error {"Exception backtrace: #{e.backtrace}"}
-          retry if try_reconnect and reconnect
+          @logger.error {"LDAP server is down: #{e.message}"}
+          retry if try_reconnect and reconnect(options)
           raise ConnectionError.new(e.message)
         end
       end
@@ -428,7 +426,7 @@ module ActiveLdap
             break
           rescue => detail
             @logger.error {"Reconnect to server failed: #{detail.exception}"}
-            @logger.error {"Reconnect to server failed backtrace: " +
+            @logger.error {"Reconnect to server failed backtrace:\n" +
                             detail.backtrace.join("\n")}
             # Do not loop if forced
             raise ConnectionError, detail.message if force
