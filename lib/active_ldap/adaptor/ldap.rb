@@ -67,7 +67,7 @@ module ActiveLdap
       def schema(options={})
         @schema ||= operation(options) do
           base = options[:base]
-          attrs = options[:attrs]
+          attrs = options[:attributes]
           sec = options[:sec] || 0
           usec = options[:usec] || 0
 
