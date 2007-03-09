@@ -79,6 +79,10 @@ module Test
         def run_priority_low?(test_name)
           rand > 0.75
         end
+
+        def run_priority_never?(test_name)
+          false
+        end
       end
 
       def need_to_run?
