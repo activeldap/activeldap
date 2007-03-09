@@ -34,6 +34,10 @@ module ActiveLdap
     def attributes(group, id_or_name)
       return {} if group.empty? or id_or_name.empty?
 
+      unless @entries.has_key?(group)
+        raise ArgumentError, "Unknown schema group: #{group}"
+      end
+
       # Initialize anything that is required
       info, ids, aliases = ensure_schema_info(group)
       id, name = determine_id_or_name(id_or_name, aliases)
@@ -225,6 +229,7 @@ module ActiveLdap
     end
 
     def ldap_syntax(name, attribute_name)
+      return [] unless @entries.has_key?["ldapSyntaxes"]
       cache([:ldap_syntax, name, attribute_name]) do
         attribute("ldapSyntaxes", name, attribute_name)
       end

@@ -80,6 +80,7 @@ module ActiveLdap
             'dITContentRules',
             'nameForms',
             'ldapSyntaxes',
+            #'extendedAttributeInfo', # if we need RANGE-LOWER/UPPER.
           ]
           key = 'subschemaSubentry'
           base ||= @connection.root_dse([key], sec, usec)[0][key][0]
@@ -87,7 +88,6 @@ module ActiveLdap
           result = @connection.search2(base, LDAP::LDAP_SCOPE_BASE,
                                        '(objectClass=subschema)', attrs, false,
                                        sec, usec).first
-          result["ldapSyntaxes"] ||= [] # For ActiveDirectory
           Schema.new(result)
         end
 #       rescue
