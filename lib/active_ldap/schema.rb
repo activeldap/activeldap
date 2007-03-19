@@ -229,7 +229,7 @@ module ActiveLdap
     end
 
     def ldap_syntax(name, attribute_name)
-      return [] unless @entries.has_key?["ldapSyntaxes"]
+      return [] unless @entries.has_key?("ldapSyntaxes")
       cache([:ldap_syntax, name, attribute_name]) do
         attribute("ldapSyntaxes", name, attribute_name)
       end
