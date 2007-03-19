@@ -4,6 +4,7 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  priority :normal
   def test_initialize_with_recommended_classes
     mapping = {
       :dn_attribute => "cn",
@@ -66,7 +67,6 @@ class TestBase < Test::Unit::TestCase
                  ou_class.search(:value => name).collect {|dn, attrs| dn})
   end
 
-  priority :normal
   def test_new_without_argument
     user = @user_class.new
     assert_equal(@user_class_classes, user.classes)

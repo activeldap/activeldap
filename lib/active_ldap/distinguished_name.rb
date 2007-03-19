@@ -179,6 +179,11 @@ module ActiveLdap
       @rdns.unshift(rdn)
     end
 
+    def <=>(other)
+      normalize_for_comparing(@rdns) <=>
+        normalize_for_comparing(other.rdns)
+    end
+
     def ==(other)
       other.is_a?(self.class) and
         normalize(@rdns) == normalize(other.rdns)
@@ -215,6 +220,16 @@ module ActiveLdap
           normalized_rdn[key.upcase] = value
         end
         normalized_rdn
+      end
+    end
+
+    def normalize_for_comparing(rdns)
+      normalize(rdns).collect do |rdn|
+        rdn.sort_by do |key, value|
+          key
+        end
+      end.collect do |key, value|
+        [key, value]
       end
     end
 

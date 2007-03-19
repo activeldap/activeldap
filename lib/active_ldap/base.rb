@@ -160,6 +160,9 @@ module ActiveLdap
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
                                   :classes, :recommended_classes]
+    VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
+                            :classes, :scope, :limit, :attributes,
+                            :sort_by, :order]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -253,6 +256,7 @@ module ActiveLdap
       end
 
       def search(options={}, &block)
+        validate_search_options(options)
         attr = options[:attribute]
         value = options[:value] || '*'
         filter = options[:filter]
@@ -277,7 +281,9 @@ module ActiveLdap
           :scope => options[:scope] || ldap_scope,
           :filter => filter,
           :limit => options[:limit],
-          :attributes => options[:attributes]
+          :attributes => options[:attributes],
+          :sort_by => options[:sort_by],
+          :order => options[:order],
         }
         connection.search(search_options) do |dn, attrs|
           attributes = {}
@@ -512,6 +518,10 @@ module ActiveLdap
         options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
       end
 
+      def validate_search_options(options)
+        options.assert_valid_keys(VALID_SEARCH_OPTIONS)
+      end
+
       def extract_options_from_args!(args)
         args.last.is_a?(Hash) ? args.pop : {}
       end
@@ -526,10 +536,38 @@ module ActiveLdap
         find_every(options.merge(:limit => 1)).first
       end
 
+      def normalize_sort_order(value)
+        case value.to_s
+        when /\Aasc(?:end)?\z/i
+          :ascend
+        when /\Adesc(?:end)?\z/i
+          :descend
+        else
+          raise ArgumentError, "Invalid order: #{value.inspect}"
+        end
+      end
+
       def find_every(options)
-        search(options).collect do |dn, attrs|
+        options = options.dup
+        sort_by = options.delete(:sort_by)
+        order = options.delete(:order)
+        limit = options.delete(:limit) if sort_by or order
+
+        results = search(options).collect do |dn, attrs|
           instantiate([dn, attrs])
         end
+        return results if sort_by.nil? and order.nil?
+
+        sort_by ||= "dn"
+        if sort_by.downcase == "dn"
+          results = results.sort_by {|result| DN.parse(result.dn)}
+        else
+          results = results.sort_by {|result| result.send(sort_by)}
+        end
+
+        results.reverse! if normalize_sort_order(order || "ascend") == :descend
+        results = results[0, limit] if limit
+        results
       end
 
       def find_from_dns(dns, options)
