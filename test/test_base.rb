@@ -4,7 +4,23 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
-  priority :normal
+  def test_nested_ou
+    make_ou("units")
+    units = ou_class("ou=units")
+    units.new("one").save!
+    units.new("two").save!
+    units.new("three").save!
+
+    assert_equal(["one", "two", "three", "units"].sort,
+                 units.find(:all, :scope => :sub).collect {|unit| unit.ou}.sort)
+
+    assert_equal(["units"].sort,
+                 units.find(:all, :scope => :base).collect {|unit| unit.ou}.sort)
+
+    assert_equal(["one", "two", "three"].sort,
+                 units.find(:all, :scope => :one).collect {|unit| unit.ou}.sort)
+  end
+
   def test_initialize_with_recommended_classes
     mapping = {
       :dn_attribute => "cn",

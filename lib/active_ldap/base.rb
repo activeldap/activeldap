@@ -1270,17 +1270,21 @@ module ActiveLdap
     end
 
     def split_dn_value(value)
-      dn_value = nil
+      dn_value = relative_dn_value = nil
       begin
         dn_value = DN.parse(value)
       rescue DistinguishedNameInvalid
         dn_value = DN.parse("#{dn_attribute}=#{value}")
       end
+
       begin
-        dn_value -= DN.parse(base_of_class)
+        relative_dn_value = dn_value - DN.parse(base_of_class)
+        relative_dn_value = dn_value if relative_dn_value.rdns.empty?
       rescue ArgumentError
+        relative_dn_value = dn_value
       end
-      val, *bases = dn_value.rdns
+
+      val, *bases = relative_dn_value.rdns
       [val.values[0], bases.empty? ? nil : DN.new(*bases).to_s]
     end
 
