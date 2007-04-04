@@ -1,6 +1,34 @@
 require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
+  def test_text_oid
+    text_oid_schema = "( mysite-oid NAME 'mysite' " +
+                      "SUP groupofuniquenames STRUCTURAL " +
+                      "MUST ( mysitelang $ mysiteurl ) " +
+                      "MAY ( mysitealias $ mysitecmsurl ) " +
+                      "X-ORIGIN 'user defined' )"
+    expect = {
+      :name => ["mysite"],
+      :sup => ["groupofuniquenames"],
+      :structural => ["TRUE"],
+      :must => %w(mysitelang mysiteurl),
+      :may => %w(mysitealias mysitecmsurl),
+      :x_origin => ["user defined"]
+    }
+    assert_schema(expect, "mysite", text_oid_schema)
+
+    text_oid_attribute_schema = "( mysiteurl-oid NAME 'mysiteurl' " +
+                                "SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 " +
+                                "SINGLE-VALUE X-ORIGIN 'user defined' )"
+    expect = {
+      :name => ["mysiteurl"],
+      :syntax => ["1.3.6.1.4.1.1466.115.121.1.15"],
+      :single_value => ["TRUE"],
+      :x_origin => ["user defined"]
+    }
+    assert_schema(expect, "mysiteurl", text_oid_attribute_schema)
+  end
+
   def test_name_as_key
     top_schema = "( 2.5.6.0 NAME 'top' DESC 'top of the superclass chain' " +
                  "ABSTRACT MUST objectClass )"

@@ -31,6 +31,9 @@ module ActiveLdap
     alias_method :[], :attribute
     alias_method :attr, :attribute
 
+    NUMERIC_OID_RE = "\\d[\\d\\.]+"
+    DESCRIPTION_RE = "[a-zA-Z][a-zA-Z\\d\\-]*"
+    OID_RE = "(?:#{NUMERIC_OID_RE}|#{DESCRIPTION_RE}-oid)"
     def attributes(group, id_or_name)
       return {} if group.empty? or id_or_name.empty?
 
@@ -46,7 +49,7 @@ module ActiveLdap
       return ids[id] if ids.has_key?(id)
 
       while schema = @entries[group].shift
-        next unless /\A\s*\(\s*([\d\.]+)\s*(.*)\s*\)\s*\z/ =~ schema
+        next unless /\A\s*\(\s*(#{OID_RE})\s*(.*)\s*\)\s*\z/ =~ schema
         schema_id = $1
         rest = $2
         next if ids.has_key?(schema_id)
