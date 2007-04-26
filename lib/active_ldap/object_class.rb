@@ -52,7 +52,7 @@ module ActiveLdap
         schema.exist_name?("objectClasses", new_class)
       end
       unless invalid_classes.empty?
-        message = "unknown objectClass to LDAP server"
+        message = "unknown objectClass in LDAP server"
         message = "#{message}: #{invalid_classes.join(', ')}"
         raise ObjectClassError, message
       end
