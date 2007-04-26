@@ -11,14 +11,14 @@ class TestBase < Test::Unit::TestCase
     units.new("two").save!
     units.new("three").save!
 
-    assert_equal(["one", "two", "three", "units"].sort,
-                 units.find(:all, :scope => :sub).collect {|unit| unit.ou}.sort)
+    ous = units.find(:all, :scope => :sub).collect {|unit| unit.ou}
+    assert_equal(["one", "two", "three", "units"].sort,  ous.sort)
 
-    assert_equal(["units"].sort,
-                 units.find(:all, :scope => :base).collect {|unit| unit.ou}.sort)
+    ous = units.find(:all, :scope => :base).collect {|unit| unit.ou}
+    assert_equal(["units"].sort, ous.sort)
 
-    assert_equal(["one", "two", "three"].sort,
-                 units.find(:all, :scope => :one).collect {|unit| unit.ou}.sort)
+    ous = units.find(:all, :scope => :one).collect {|unit| unit.ou}
+    assert_equal(["one", "two", "three"].sort, ous.sort)
   end
 
   def test_initialize_with_recommended_classes
