@@ -268,10 +268,12 @@ module ActiveLdap
 
     def alias_map(group)
       ensure_parse(group)
-      @schema_info[group][:aliases]
+      return {} if @schema_info[group].nil?
+      @schema_info[group][:aliases] || {}
     end
 
     def ensure_parse(group)
+      return if @entries[group].nil?
       unless @entries[group].empty?
         attribute(group, 'nonexistent', 'nonexistent')
       end
