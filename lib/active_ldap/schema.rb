@@ -16,7 +16,7 @@ module ActiveLdap
     end
 
     # attribute
-    # 
+    #
     # This is just like LDAP::Schema#attribute except that it allows
     # look up in any of the given keys.
     # e.g.
@@ -197,12 +197,34 @@ module ActiveLdap
       [id, name]
     end
 
+    # from RFC 2252
+    attribute_type_description_reserved_names =
+      ["NAME", "DESC", "OBSOLETE", "SUP", "EQUALITY", "ORDERING", "SUBSTR",
+       "SYNTAX", "SINGLE-VALUE", "COLLECTIVE", "NO-USER-MODIFICATION", "USAGE"]
+    syntax_description_reserved_names = ["DESC"]
+    object_class_description_reserved_names =
+      ["NAME", "DESC", "OBSOLETE", "SUP", "ABSTRACT", "STRUCTURAL",
+       "AUXILIARY", "MUST", "MAY"]
+    matching_rule_description_reserved_names =
+      ["NAME", "DESC", "OBSOLETE", "SYNTAX"]
+    matching_rule_use_description_reserved_names =
+      ["NAME", "DESC", "OBSOLETE", "APPLIES"]
+    private_experiment_reserved_names = ["X-[A-Z\\-_]+"]
+    reserved_names =
+      (attribute_type_description_reserved_names +
+       syntax_description_reserved_names +
+       object_class_description_reserved_names +
+       matching_rule_description_reserved_names +
+       matching_rule_use_description_reserved_names +
+       private_experiment_reserved_names).uniq
+    RESERVED_NAMES_RE = /(?:#{reserved_names.join('|')})/
+
     def parse_attributes(str, attributes)
-      str.scan(/([A-Z\-]+)\s+
+      str.scan(/([A-Z\-_]+)\s+
                 (?:\(\s*([\w\-]+(?:\s+\$\s+[\w\-]+)+)\s*\)|
                    \(\s*([^\)]*)\s*\)|
                    '([^\']*)'|
-                   ([a-z][\w\-]*)|
+                   ((?!#{RESERVED_NAMES_RE})[a-zA-Z][a-zA-Z\d\-;]*)|
                    (\d[\d\.\{\}]+)|
                    ()
                 )/x
@@ -221,7 +243,7 @@ module ActiveLdap
         when no_value
           values = ["TRUE"]
         end
-        attributes[name] = values
+        attributes[normalize_attribute_name(name)] = values
       end
     end
 
@@ -260,7 +282,7 @@ module ActiveLdap
     end
 
     def normalize_attribute_name(name)
-      name.upcase
+      name.upcase.gsub(/_/, "-")
     end
   end # Schema
 end

@@ -4,6 +4,8 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_nested_ou
     make_ou("units")
     units = ou_class("ou=units")

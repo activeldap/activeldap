@@ -1,6 +1,65 @@
 require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
+  priority :must
+  def test_attribute_name_with_under_score
+    top_schema =
+      "( 2.5.6.0 NAME 'Top' STRUCTURAL MUST objectClass MAY ( " +
+      "cAPublicKey $ cAPrivateKey $ certificateValidityInterval $ " +
+      "authorityRevocation $ lastReferencedTime $ " +
+      "equivalentToMe $ ACL $ backLink $ binderyProperty $ " +
+      "Obituary $ Reference $ revision $ " +
+      "ndsCrossCertificatePair $ certificateRevocation $ " +
+      "usedBy $ GUID $ otherGUID $ DirXML-Associations $ " +
+      "creatorsName $ modifiersName $ unknownBaseClass $ " +
+      "unknownAuxiliaryClass $ auditFileLink $ " +
+      "masvProposedLabelel $ masvDefaultRange $ " +
+      "masvAuthorizedRange $ objectVersion $ " +
+      "auxClassCompatibility $ rbsAssignedRoles $ " +
+      "rbsOwnedCollections $ rbsAssignedRoles2 $ " +
+      "rbsOwnedCollections2 ) X-NDS_NONREMOVABLE '1' " +
+      "X-NDS_ACL_TEMPLATES '16#subtree#[Creator]#[Entry Rights]' )"
+
+    expect = {
+      :name => ["Top"],
+      :structural => ["TRUE"],
+      :must => ["objectClass"],
+      :x_nds_nonremovable => ["1"],
+      :x_nds_acl_templates => ['16#subtree#[Creator]#[Entry Rights]'],
+    }
+    assert_schema(expect, "Top", top_schema)
+  end
+
+  def test_sup_with_oid_start_with_upper_case
+    organizational_person_schema =
+      "( 2.5.6.7 NAME 'organizationalPerson' SUP Person STRUCTURAL MAY " +
+      "( facsimileTelephoneNumber $ l $ eMailAddress $ ou $ " +
+      "physicalDeliveryOfficeName $ postalAddress $ postalCode $ " +
+      "postOfficeBox $ st $ street $ title $ mailboxLocation $ " +
+      "mailboxID $ uid $ mail $ employeeNumber $ destinationIndicator $ " +
+      "internationaliSDNNumber $ preferredDeliveryMethod $ " +
+      "registeredAddress $ teletexTerminalIdentifier $ telexNumber $ " +
+      "x121Address $ businessCategory $ roomNumber $ x500UniqueIdentifier " +
+      ") X-NDS_NAMING ( 'cn' 'ou' 'uid' ) X-NDS_CONTAINMENT ( " +
+      "'Organization' 'organizationalUnit' 'domain' ) X-NDS_NAME " +
+      "'Organizational Person' X-NDS_NOT_CONTAINER '1' " +
+      "X-NDS_NONREMOVABLE '1' )"
+
+    expect = {
+      :name => ["organizationalPerson"],
+      :sup => ["Person"],
+      :structural => ["TRUE"],
+      :x_nds_naming => ["cn", "ou", "uid"],
+      :x_nds_containment => ["Organization", "organizationalUnit", "domain"],
+      :x_nds_name => ["Organizational Person"],
+      :x_nds_not_container => ["1"],
+      :x_nds_nonremovable => ["1"],
+    }
+    assert_schema(expect, "organizationalPerson",
+                  organizational_person_schema)
+  end
+
+  priority :normal
   def test_text_oid
     text_oid_schema = "( mysite-oid NAME 'mysite' " +
                       "SUP groupofuniquenames STRUCTURAL " +
@@ -187,7 +246,7 @@ class TestSchema < Test::Unit::TestCase
     expect.each do |key, value|
       normalized_key = key.to_s.gsub(/_/, "-")
       normalized_expect[normalized_key] = value
-      actual[normalized_key] = schema.attr(sub, name, normalized_key)
+      actual[normalized_key] = schema[sub, name, normalized_key]
     end
     assert_equal(normalized_expect, actual)
   end
