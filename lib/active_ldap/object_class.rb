@@ -11,16 +11,20 @@ module ActiveLdap
       replace_class((classes + target_classes.flatten).uniq)
     end
 
+    def ensure_recommended_classes
+      add_class(self.class.recommended_classes)
+    end
+
     def remove_class(*target_classes)
-      new_classes = (classes - target_classes.flatten).uniq
-      assert_object_classes(new_classes)
-      set_attribute('objectClass', new_classes)
+      replace_class((classes - target_classes.flatten).uniq)
     end
 
     def replace_class(*target_classes)
       new_classes = target_classes.flatten.uniq
       assert_object_classes(new_classes)
-      set_attribute('objectClass', new_classes)
+      if new_classes.sort != classes.sort
+        set_attribute('objectClass', new_classes)
+      end
     end
 
     def classes
