@@ -306,14 +306,7 @@ module ActiveLdap
       #                :scope => :sub
       def ldap_mapping(options={})
         validate_ldap_mapping_options(options)
-        dn_attribute = options[:dn_attribute]
-        if dn_attribute.nil?
-          parent_class = ancestors[1]
-          if parent_class.respond_to?(:dn_attribute)
-            dn_attribute = parent_class.dn_attribute
-          end
-          dn_attribute ||= default_dn_attribute
-        end
+        dn_attribute = options[:dn_attribute] || default_dn_attribute
         prefix = options[:prefix] || default_prefix
         classes = options[:classes]
         recommended_classes = options[:recommended_classes]
@@ -727,7 +720,12 @@ module ActiveLdap
 
       def default_dn_attribute
         if name.empty?
-          "cn"
+          dn_attribute = nil
+          parent_class = ancestors[1]
+          if parent_class.respond_to?(:dn_attribute)
+            dn_attribute = parent_class.dn_attribute
+          end
+          dn_attribute || "cn"
         else
           Inflector.underscore(Inflector.demodulize(name))
         end
