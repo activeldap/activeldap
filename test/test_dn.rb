@@ -10,6 +10,11 @@ class TestDN < Test::Unit::TestCase
   end
 
   priority :must
+  def test_case_insensitive_dn_minus
+    assert_dn_minus("dc=xxx", "dc=xxx,dc=LoCaL,dc=net", "dc=LOCAL,dc=net")
+  end
+
+  priority :normal
   def test_dn_hash
     dn1 = ActiveLdap::DN.parse("o=xxx,dc=local,dc=net")
     dn2 = ActiveLdap::DN.parse("O = xxx , DC = local , DC = net")

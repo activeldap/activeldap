@@ -4,6 +4,15 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_case_insensitive_nested_ou
+    ou_class("ou=Users").new("Sub").save!
+    make_temporary_user(:uid => "test-user,ou=SUB") do |user, password|
+      sub_user_class = Class.new(@user_class)
+      sub_user_class.ldap_mapping :prefix => "ou=sub"
+      assert_equal("uid=test-user,ou=sub,#{@user_class.base}",
+                   sub_user_class.find(user.uid).dn)
+    end
+  end
 
   priority :normal
   def test_nested_ou

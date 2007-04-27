@@ -217,7 +217,7 @@ module ActiveLdap
       rdns.collect do |rdn|
         normalized_rdn = {}
         rdn.each do |key, value|
-          normalized_rdn[key.upcase] = value
+          normalized_rdn[key.upcase] = value.upcase
         end
         normalized_rdn
       end
