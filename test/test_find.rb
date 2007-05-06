@@ -4,6 +4,28 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_with_sort
+    make_temporary_user(:uid => "user1") do |user1,|
+      make_temporary_user(:uid => "user2") do |user2,|
+        users = @user_class.find(:all, :sort_by => "uid", :order => 'asc')
+        assert_equal(["user1", "user2"], users.collect {|u| u.uid})
+        users = @user_class.find(:all, :sort_by => "uid", :order => 'desc')
+        assert_equal(["user2", "user1"], users.collect {|u| u.uid})
+
+        users = @user_class.find(:all, :order => 'asc')
+        assert_equal(["user1", "user2"], users.collect {|u| u.uid})
+        users = @user_class.find(:all, :order => 'desc')
+        assert_equal(["user2", "user1"], users.collect {|u| u.uid})
+
+        users = @user_class.find(:all, :order => 'asc', :limit => 1)
+        assert_equal(["user1"], users.collect {|u| u.uid})
+        users = @user_class.find(:all, :order => 'desc', :limit => 1)
+        assert_equal(["user2"], users.collect {|u| u.uid})
+      end
+    end
+  end
+
+  priority :normal
   def test_split_search_value
     assert_split_search_value([nil, "test-user", nil], "test-user")
     assert_split_search_value([nil, "test-user", "ou=Sub"], "test-user,ou=Sub")
