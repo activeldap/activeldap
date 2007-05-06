@@ -6,10 +6,10 @@ class TestObjectClass < Test::Unit::TestCase
   priority :must
   def test_ensure_recommended_classes
     make_temporary_group do |group|
-      added_class = "room"
+      added_class = "labeledURIObject"
 
       assert_equal([], group.class.recommended_classes)
-      group.class.recommended_classes << added_class
+      group.class.recommended_classes += [added_class]
       assert_equal([added_class], group.class.recommended_classes)
 
       assert_equal([added_class],
