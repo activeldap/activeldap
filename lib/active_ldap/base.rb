@@ -944,7 +944,8 @@ module ActiveLdap
     # Add available attributes to the methods
     def methods(inherited_too=true)
       ensure_apply_object_class
-      target_names = @attr_methods.keys + @attr_aliases.keys - ['objectClass']
+      target_names = @attr_methods.keys + @attr_aliases.keys
+      target_names -= ['objectClass', Inflector.underscore('objectClass')]
       super + target_names.uniq.collect do |x|
         [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
       end.flatten
