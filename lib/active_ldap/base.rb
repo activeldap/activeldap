@@ -860,6 +860,10 @@ module ActiveLdap
       get_attribute(dn_attribute)
     end
 
+    def to_param
+      id
+    end
+
     def dn=(value)
       set_attribute(dn_attribute, value)
     end
