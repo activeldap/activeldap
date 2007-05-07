@@ -1,30 +1,18 @@
-require 'ldap'
-require 'ldap/ldif'
-require 'ldap/schema'
-
-require 'active_ldap/ldap'
-require 'active_ldap/schema'
-
 require 'active_ldap/adapter/base'
-
-class LDAP::Mod
-  unless instance_method(:to_s).arity.zero?
-    def to_s
-      inspect
-    end
-  end
-
-  alias_method :_initialize, :initialize
-  def initialize(op, type, vals)
-    if (LDAP::VERSION.split(/\./).collect {|x| x.to_i} <=> [0, 9, 7]) <= 0
-      @op, @type, @vals = op, type, vals # to protect from GC
-    end
-    _initialize(op, type, vals)
-  end
-end
 
 module ActiveLdap
   module Adapter
+    class Base
+      class << self
+        def ldap_connection(options)
+          unless defined?(::LDAP)
+            require 'active_ldap/adapter/ldap_ext'
+          end
+          Ldap.new(options)
+        end
+      end
+    end
+
     class Ldap < Base
       module Method
         class SSL
@@ -45,12 +33,6 @@ module ActiveLdap
           end
         end
       end
-
-      SCOPE = {
-        :base => LDAP::LDAP_SCOPE_BASE,
-        :sub => LDAP::LDAP_SCOPE_SUBTREE,
-        :one => LDAP::LDAP_SCOPE_ONELEVEL,
-      }
 
       def connect(options={})
         method = ensure_method(options[:method] || @method)
@@ -85,7 +67,7 @@ module ActiveLdap
           key = 'subschemaSubentry'
           base ||= @connection.root_dse([key], sec, usec)[0][key][0]
           base ||= 'cn=schema'
-          result = @connection.search2(base, LDAP::LDAP_SCOPE_BASE,
+          result = @connection.search2(base, ensure_scope(:base),
                                        '(objectClass=subschema)', attrs, false,
                                        sec, usec).first
           Schema.new(result)
@@ -139,11 +121,8 @@ module ActiveLdap
         elsif allow_anonymous and bind_as_anonymous(options)
           @logger.info {'Bound anonymous'}
         else
-          if @connection.err.zero?
-            message = 'All authentication methods exhausted.'
-          else
-            message = LDAP.err2string(@connection.err)
-          end
+          message = @connection.error_message
+          message ||= 'All authentication methods exhausted.'
           raise AuthenticationError, message
         end
 
@@ -196,7 +175,7 @@ module ActiveLdap
               break if limit and limit >= i
             end
           end
-        rescue LDAP::Error
+        rescue LdapError
           # Do nothing on failure
           @logger.debug {"Ignore error #{$!.class}(#{$!.message}) " +
                          "for #{filter} and attrs #{attrs.inspect}"}
@@ -240,7 +219,7 @@ module ActiveLdap
               @connection.delete(target)
             end
           end
-        rescue LDAP::NoSuchObject
+        rescue LdapError::NoSuchObject
           raise EntryNotFound, "No such entry: #{target}"
         end
       end
@@ -250,18 +229,18 @@ module ActiveLdap
           operation(options) do
             @connection.add(dn, parse_entries(entries))
           end
-        rescue LDAP::NoSuchObject
+        rescue LdapError::NoSuchObject
           raise EntryNotFound, "No such entry: #{dn}"
-        rescue LDAP::InvalidDnSyntax
+        rescue LdapError::InvalidDnSyntax
           raise DistinguishedNameInvalid.new(dn)
-        rescue LDAP::AlreadyExists
+        rescue LdapError::AlreadyExists
           raise EntryAlreadyExist, "#{$!.message}: #{dn}"
-        rescue LDAP::StrongAuthRequired
+        rescue LdapError::StrongAuthRequired
           raise StrongAuthenticationRequired, "#{$!.message}: #{dn}"
-        rescue LDAP::ObjectClassViolation
+        rescue LdapError::ObjectClassViolation
           raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
-        rescue LDAP::UnwillingToPerform
-          raise UnwillingToPerform, "#{$!.message}: #{dn}"
+        rescue LdapError::UnwillingToPerform
+          raise OperationNotPermitted, "#{$!.message}: #{dn}"
         end
       end
 
@@ -270,9 +249,9 @@ module ActiveLdap
           operation(options) do
             @connection.modify(dn, parse_entries(entries))
           end
-        rescue LDAP::UndefinedType
+        rescue LdapError::UndefinedType
           raise
-        rescue LDAP::ObjectClassViolation
+        rescue LdapError::ObjectClassViolation
           raise RequiredAttributeMissed, "#{$!.message}: #{dn}"
         end
       end
@@ -286,8 +265,8 @@ module ActiveLdap
           begin
             block.call
           rescue LDAP::ResultError
-            raise *LDAP::err2exception(@connection.err) if @connection.err != 0
-            raise
+            @connection.assert_error_code
+            raise $!.message
           end
         end
       end
@@ -318,9 +297,14 @@ module ActiveLdap
       end
 
       def ensure_scope(scope)
-        value = SCOPE[scope || :sub]
+        scope_map = {
+          :base => LDAP::LDAP_SCOPE_BASE,
+          :sub => LDAP::LDAP_SCOPE_SUBTREE,
+          :one => LDAP::LDAP_SCOPE_ONELEVEL,
+        }
+        value = scope_map[scope || :sub]
         if value.nil?
-          available_scopes = SCOPE.keys.collect {|s| s.inspect}
+          available_scopes = scope_map.keys.collect {|s| s.inspect}
           raise ArgumentError, "#{scope.inspect} is not one of the available " +
                                "LDAP scope #{available_scopes}"
         end
@@ -371,10 +355,10 @@ module ActiveLdap
             @connection.bind(bind_dn, passwd)
             true
           end
-        rescue LDAP::InvalidDnSyntax
+        rescue LdapError::InvalidDnSyntax
           @logger.debug {"DN is invalid: #{bind_dn}"}
           raise DistinguishedNameInvalid.new(bind_dn)
-        rescue LDAP::InvalidCredentials
+        rescue LdapError::InvalidCredentials
           false
         end
       end

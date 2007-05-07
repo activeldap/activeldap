@@ -1,3 +1,6 @@
+require 'active_ldap/schema'
+require 'active_ldap/ldap_error'
+
 module ActiveLdap
   module Adapter
     class Base

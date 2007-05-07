@@ -51,9 +51,14 @@ module ActiveLdap
           active_connections[active_connection_name] = adapter
         elsif adapter.is_a?(Hash)
           config = adapter
-          adapter = Inflector.camelize(config[:adapter] || "ldap")
+          adapter = (config[:adapter] || "ldap")
+          normalized_adapter = adapter.downcase.gsub(/-/, "_")
+          adapter_method = "#{normalized_adapter}_connection"
+          unless Adapter::Base.respond_to?(adapter_method)
+            raise AdapterNotFound.new(adapter)
+          end
           config = remove_connection_related_configuration(config)
-          self.connection = Adapter.const_get(adapter).new(config)
+          self.connection = Adapter::Base.send(adapter_method, config)
         elsif adapter.nil?
           raise ConnectionNotEstablished
         else

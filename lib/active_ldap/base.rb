@@ -129,13 +129,21 @@ module ActiveLdap
   class EntryInvalid < Error
   end
 
-  class UnwillingToPerform < Error
+  class OperationNotPermitted < Error
   end
 
   class ConnectionNotEstablished < Error
   end
 
   class AdapterNotSpecified < Error
+  end
+
+  class AdapterNotFound < Error
+    attr_reader :adapter
+    def initialize(adapter)
+      @adapter = adapter
+      super("LDAP configuration specifies nonexistent #{@adapter} adapter")
+    end
   end
 
   class UnknownAttribute < Error
@@ -1483,13 +1491,9 @@ module ActiveLdap
       prepare_data_for_saving do |data, ldap_data|
         entries = collect_all_entries(data)
         logger.debug {"#create: adding #{dn}"}
-        begin
-          self.class.add(dn, entries)
-          logger.debug {"#create: add successful"}
-          @new_entry = false
-        rescue UnwillingToPerform
-          logger.warn {"#create: didn't perform: #{$!.message}"}
-        end
+        self.class.add(dn, entries)
+        logger.debug {"#create: add successful"}
+        @new_entry = false
         true
       end
     end

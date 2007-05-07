@@ -113,7 +113,10 @@ module AlTestUtils
         next if dc_class.exists?(value, :prefix => "dc=#{value}")
         dc = dc_class.new(value)
         dc.o = dc.dc
-        dc.save
+        begin
+          dc.save
+        rescue ActiveLdap::OperationNotPermitted
+        end
       end
     end
 

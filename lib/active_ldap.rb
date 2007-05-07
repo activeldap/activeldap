@@ -939,7 +939,6 @@ require 'active_ldap/connection'
 require 'active_ldap/attributes'
 require 'active_ldap/object_class'
 require 'active_ldap/distinguished_name'
-require 'active_ldap/adapter/ldap'
 
 require_gem_if_need.call("active_record/base", "activerecord")
 require 'active_ldap/validations'
@@ -957,6 +956,14 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Associations
   include ActiveLdap::Validations
   include ActiveLdap::Callbacks
+end
+
+unless defined?(ACTIVE_LDAP_CONNECTION_ADAPTERS)
+  ACTIVE_LDAP_CONNECTION_ADAPTERS = %w(ldap)
+end
+
+ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
+  require "active_ldap/adapter/#{adapter}"
 end
 
 $VERBOSE = verbose
