@@ -45,19 +45,19 @@ module ActiveLdap
         conn
       end
 
-      def connection=(adaptor)
-        if adaptor.is_a?(Adaptor::Base)
+      def connection=(adapter)
+        if adapter.is_a?(Adapter::Base)
           @schema = nil
-          active_connections[active_connection_name] = adaptor
-        elsif adaptor.is_a?(Hash)
-          config = adaptor
-          adaptor = Inflector.camelize(config[:adaptor] || "ldap")
+          active_connections[active_connection_name] = adapter
+        elsif adapter.is_a?(Hash)
+          config = adapter
+          adapter = Inflector.camelize(config[:adapter] || "ldap")
           config = remove_connection_related_configuration(config)
-          self.connection = Adaptor.const_get(adaptor).new(config)
-        elsif adaptor.nil?
+          self.connection = Adapter.const_get(adapter).new(config)
+        elsif adapter.nil?
           raise ConnectionNotEstablished
         else
-          establish_connection(adaptor)
+          establish_connection(adapter)
         end
       end
 

@@ -5,7 +5,7 @@ require 'ldap/schema'
 require 'active_ldap/ldap'
 require 'active_ldap/schema'
 
-require 'active_ldap/adaptor/base'
+require 'active_ldap/adapter/base'
 
 class LDAP::Mod
   unless instance_method(:to_s).arity.zero?
@@ -24,7 +24,7 @@ class LDAP::Mod
 end
 
 module ActiveLdap
-  module Adaptor
+  module Adapter
     class Ldap < Base
       module Method
         class SSL

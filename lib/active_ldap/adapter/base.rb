@@ -1,7 +1,7 @@
 module ActiveLdap
-  module Adaptor
+  module Adapter
     class Base
-      VALID_ADAPTOR_CONFIGURATION_KEYS = [:host, :port, :method, :timeout,
+      VALID_ADAPTER_CONFIGURATION_KEYS = [:host, :port, :method, :timeout,
                                           :retry_on_timeout, :retry_limit,
                                           :retry_wait, :bind_dn, :password,
                                           :password_block, :try_sasl,
@@ -11,8 +11,8 @@ module ActiveLdap
         @connection = nil
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
-        @configuration.assert_valid_keys(VALID_ADAPTOR_CONFIGURATION_KEYS)
-        VALID_ADAPTOR_CONFIGURATION_KEYS.each do |name|
+        @configuration.assert_valid_keys(VALID_ADAPTER_CONFIGURATION_KEYS)
+        VALID_ADAPTER_CONFIGURATION_KEYS.each do |name|
           instance_variable_set("@#{name}", configuration[name])
         end
       end

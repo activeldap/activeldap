@@ -78,7 +78,7 @@ module ActiveLdap
         @@defined_configurations.delete_if {|key, value| value == config}
       end
 
-      CONNECTION_CONFIGURATION_KEYS = [:base, :ldap_scope, :adaptor]
+      CONNECTION_CONFIGURATION_KEYS = [:base, :ldap_scope, :adapter]
       def remove_connection_related_configuration(config)
         config.reject do |key, value|
           CONNECTION_CONFIGURATION_KEYS.include?(key)
