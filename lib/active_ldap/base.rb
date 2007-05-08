@@ -487,10 +487,10 @@ module ActiveLdap
       def update_all(attributes, filter=nil, options={})
         search_options = options
         if filter
-          if /[=\(\)&\|]/ =~ filter
-            search_options = search_options.merge(:filter => filter)
-          else
+          if filter.is_a?(String) and /[=\(\)&\|]/ !~ filter
             search_options = search_options.merge(:value => filter)
+          else
+            search_options = search_options.merge(:filter => filter)
           end
         end
         targets = search(search_options).collect do |dn, attrs|
@@ -1076,8 +1076,10 @@ module ActiveLdap
     def extract_object_class(attributes)
       classes = []
       attrs = attributes.reject do |key, value|
-        if key.to_s == 'objectClass' or
-            Inflector.underscore(key) == 'object_class'
+        key = key.to_s
+        if key == 'objectClass' or
+            key.underscore == 'object_class' or
+            key.downcase == 'objectclass'
           classes |= [value].flatten
           true
         else
