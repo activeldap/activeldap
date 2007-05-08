@@ -28,12 +28,11 @@ module ActiveLdap
 
       def find_target
         key = @options[:many]
-        filter = @owner[@options[:foreign_key_name], true].reject do |value|
-          value.nil?
-        end.collect do |value|
+        values = @owner[@options[:foreign_key_name], true].compact
+        components = values.collect do |value|
           "(#{key}=#{value})"
-        end.join
-        foreign_class.find(:all, :filter => "(|#{filter})")
+        end
+        foreign_class.find(:all, :filter => [:or, *components])
       end
     end
   end

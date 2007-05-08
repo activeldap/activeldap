@@ -28,7 +28,9 @@ module ActiveLdap
       end
 
       def find_target
-        filter = "(#{primary_key}=#{@owner[@options[:foreign_key_name]]})"
+        value = @owner[@options[:foreign_key_name]]
+        raise EntryNotFound if value.nil?
+        filter = "(#{primary_key}=#{value})"
         result = foreign_class.find(:all, :filter => filter, :limit => 1)
         raise EntryNotFound if result.empty?
         result.first
