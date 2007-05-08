@@ -2,3 +2,4 @@ host: 127.0.0.1
 method: :tls
 base: dc=localdomain
 bind_dn: cn=admin,dc=localdomain
+#adapter: net-ldap

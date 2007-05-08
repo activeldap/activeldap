@@ -4,3 +4,4 @@ test:
   method: :tls
   bind_dn: cn=user-name,dc=localdomain
   password: secret
+#  adapter: net-ldap
