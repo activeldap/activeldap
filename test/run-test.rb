@@ -10,8 +10,20 @@ $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
 require 'test-unit-ext'
 
-if Test::Unit::AutoRunner.respond_to?(:standalone?)
-  exit Test::Unit::AutoRunner.run($0, File.dirname($0))
-else
-  exit Test::Unit::AutoRunner.run(false, File.dirname($0))
+test_file = "test/test_*.rb"
+Dir.glob(test_file) do |file|
+  require file
+end
+
+[nil, "ldap", "net-ldap"].each do |adapter|
+  ENV["ACTIVE_LDAP_TEST_ADAPTER"] = adapter
+  puts "using adapter: #{adapter ? adapter : 'default'}"
+  args = [File.dirname($0), ARGV.dup]
+  if Test::Unit::AutoRunner.respond_to?(:standalone?)
+    args.unshift(false)
+  else
+    args.unshift($0)
+  end
+  Test::Unit::AutoRunner.run(*args)
+  puts
 end
