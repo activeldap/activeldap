@@ -1,4 +1,4 @@
-require 'ldap'
+require_library_or_gem 'ldap'
 require 'ldap/ldif'
 require 'ldap/schema'
 
