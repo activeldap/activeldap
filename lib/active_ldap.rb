@@ -907,9 +907,6 @@
 # package, and I'd like to see it prove helpful to more people than just myself.
 #
 
-# Blanket warning hiding. Remove for debugging
-$VERBOSE, verbose = false, $VERBOSE
-
 if RUBY_PLATFORM.match('linux')
   require 'active_ldap/timeout'
 else
@@ -965,5 +962,3 @@ end
 ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
   require "active_ldap/adapter/#{adapter}"
 end
-
-$VERBOSE = verbose
