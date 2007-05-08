@@ -60,6 +60,46 @@ module ActiveLdap
           raise TimeoutError, e.message
         end
       end
+
+      # FIXME: should cleanup!!!
+      def parse_filter(filter)
+        return nil if filter.nil?
+        if !filter.is_a?(String) and !filter.respond_to?(:collect)
+          filter = filter.to_s
+        end
+
+        if filter.is_a?(String)
+          if filter.empty?
+            nil
+          else
+            filter
+          end
+        else
+          type, *components = filter
+          unless [:and, :or, :&, :|].include?(type)
+            components.unshift(type)
+            type = :and
+          end
+          if type == :&
+            type = :and
+          elsif type == :|
+            type = :or
+          end
+
+          components = components.collect do |component|
+            parse_filter(component)
+          end.compact
+
+          case components.size
+          when 0
+            nil
+          when 1
+            components.join
+          else
+            "(#{type == :and ? '&' : '|'}#{components.join})"
+          end
+        end
+      end
     end
   end
 end

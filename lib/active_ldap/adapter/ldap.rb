@@ -150,7 +150,7 @@ module ActiveLdap
       # Wraps Ruby/LDAP connection.search to make it easier to search for
       # specific data without cracking open Base.connection
       def search(options={})
-        filter = options[:filter] || 'objectClass=*'
+        filter = parse_filter(options[:filter] || 'objectClass=*')
         attrs = options[:attributes] || []
         scope = ensure_scope(options[:scope])
         base = options[:base]
