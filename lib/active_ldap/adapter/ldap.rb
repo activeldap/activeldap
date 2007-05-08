@@ -304,7 +304,7 @@ module ActiveLdap
         }
         value = scope_map[scope || :sub]
         if value.nil?
-          available_scopes = scope_map.keys.collect {|s| s.inspect}
+          available_scopes = scope_map.keys.inspect
           raise ArgumentError, "#{scope.inspect} is not one of the available " +
                                "LDAP scope #{available_scopes}"
         end
