@@ -61,43 +61,89 @@ module ActiveLdap
         end
       end
 
-      # FIXME: should cleanup!!!
       def parse_filter(filter)
         return nil if filter.nil?
         if !filter.is_a?(String) and !filter.respond_to?(:collect)
           filter = filter.to_s
         end
 
-        if filter.is_a?(String)
-          if filter.empty?
-            nil
-          else
-            filter
+        case filter
+        when String
+          parse_filter_string(filter)
+        when Hash
+          components = filter.sort_by {|k, v| k.to_s}.collect do |key, value|
+            construct_component(key, value)
           end
+          construct_filter(components)
         else
-          type, *components = filter
-          unless [:and, :or, :&, :|].include?(type)
-            components.unshift(type)
-            type = :and
-          end
-          if type == :&
-            type = :and
-          elsif type == :|
-            type = :or
+          operator, *components = filter
+          unless operator.is_a?(Symbol)
+            components.unshift(operator)
+            operator = nil
           end
 
-          components = components.collect do |component|
-            parse_filter(component)
-          end.compact
+          components = components.collect do |key, value, *others|
+            if value.nil?
+              parse_filter(key)
+            elsif !others.empty?
+              parse_filter([key, value, *others])
+            else
+              construct_component(key, value)
+            end
+          end
+          construct_filter(components, operator)
+        end
+      end
 
-          case components.size
-          when 0
-            nil
-          when 1
-            components.join
+      def parse_filter_string(filter)
+        if /\A\s*\z/.match(filter)
+          nil
+        else
+          if filter[0, 1] == "("
+            filter
           else
-            "(#{type == :and ? '&' : '|'}#{components.join})"
+            "(#{filter})"
           end
+        end
+      end
+
+      def construct_component(key, value)
+        if !value.is_a?(String) and value.respond_to?(:collect)
+          values = value.collect {|v| [key, v]}
+          if values[0][1].is_a?(Symbol)
+            _, operator = values.shift
+            values.unshift(operator)
+          end
+          parse_filter(values)
+        else
+          "(#{key}=#{value})"
+        end
+      end
+
+      def construct_filter(components, operator=nil)
+        operator = normalize_filter_logical_operator(operator)
+        components = components.compact
+        case components.size
+        when 0
+          nil
+        when 1
+          components.join
+        else
+          "(#{operator == :and ? '&' : '|'}#{components.join})"
+        end
+      end
+
+      def normalize_filter_logical_operator(type)
+        case (type || :and)
+        when :and, :&
+          :and
+        when :or, :|
+          :or
+        else
+          operators = [:and, :or, :&, :|]
+          raise ArgumentError,
+                "invalid logical operator: #{type.inspect}: " +
+                "available operators: #{operators.inspect}"
         end
       end
     end
