@@ -61,7 +61,7 @@ module ActiveLdap
         end
       end
 
-      def parse_filter(filter)
+      def parse_filter(filter, operator=nil)
         return nil if filter.nil?
         if !filter.is_a?(String) and !filter.respond_to?(:collect)
           filter = filter.to_s
@@ -72,23 +72,25 @@ module ActiveLdap
           parse_filter_string(filter)
         when Hash
           components = filter.sort_by {|k, v| k.to_s}.collect do |key, value|
-            construct_component(key, value)
+            construct_component(key, value, operator)
           end
-          construct_filter(components)
+          construct_filter(components, operator)
         else
-          operator, *components = filter
-          unless operator.is_a?(Symbol)
-            components.unshift(operator)
-            operator = nil
-          end
+          operator, components = normalize_array_filter(filter, operator)
 
-          components = components.collect do |key, value, *others|
-            if value.nil?
-              parse_filter(key)
-            elsif !others.empty?
-              parse_filter([key, value, *others])
+          components = components.collect do |component|
+            if component.is_a?(Array) and component.size == 2
+              key, value = component
+              if filter_logical_operator?(key) or value.is_a?(Hash)
+                parse_filter(value, key)
+              else
+                construct_component(key, value, operator)
+              end
+            elsif component.is_a?(Symbol)
+              assert_filter_logical_operator(component)
+              nil
             else
-              construct_component(key, value)
+              parse_filter(component, operator)
             end
           end
           construct_filter(components, operator)
@@ -107,14 +109,28 @@ module ActiveLdap
         end
       end
 
-      def construct_component(key, value)
-        if !value.is_a?(String) and value.respond_to?(:collect)
-          values = value.collect {|v| [key, v]}
-          if values[0][1].is_a?(Symbol)
-            _, operator = values.shift
-            values.unshift(operator)
+      def normalize_array_filter(filter, operator=nil)
+        filter_operator, *components = filter
+        if filter_logical_operator?(filter_operator)
+          operator = filter_operator
+        else
+          components.unshift(filter_operator)
+        end
+        [operator, components]
+      end
+
+      def construct_component(key, value, operator=nil)
+        if collection?(value)
+          values = []
+          value.each do |val|
+            if collection?(val)
+              values.concat(val.collect {|v| [key, v]})
+            else
+              values << [key, val]
+            end
           end
-          parse_filter(values)
+          values[0] = values[0][1] if filter_logical_operator?(values[0][1])
+          parse_filter(values, operator)
         else
           "(#{key}=#{value})"
         end
@@ -133,17 +149,31 @@ module ActiveLdap
         end
       end
 
-      def normalize_filter_logical_operator(type)
-        case (type || :and)
+      def collection?(object)
+        !object.is_a?(String) and object.respond_to?(:each)
+      end
+
+      LOGICAL_OPERATORS = [:and, :or, :&, :|]
+      def filter_logical_operator?(operator)
+        LOGICAL_OPERATORS.include?(operator)
+      end
+
+      def normalize_filter_logical_operator(operator)
+        assert_filter_logical_operator(operator)
+        case (operator || :and)
         when :and, :&
           :and
-        when :or, :|
-          :or
         else
-          operators = [:and, :or, :&, :|]
+          :or
+        end
+      end
+
+      def assert_filter_logical_operator(operator)
+        return if operator.nil?
+        unless filter_logical_operator?(operator)
           raise ArgumentError,
-                "invalid logical operator: #{type.inspect}: " +
-                "available operators: #{operators.inspect}"
+                "invalid logical operator: #{operator.inspect}: " +
+                "available operators: #{LOGICAL_OPERATORS.inspect}"
         end
       end
     end

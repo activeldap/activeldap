@@ -21,27 +21,19 @@ module ActiveLdap
           [key, val]
         end.reject do |key, val|
           key.nil? or val.nil?
-        end.collect do |key, val|
-          "(#{key}=#{val})"
         end
         foreign_class.find(:all, :filter => [:or, *components])
       end
 
       def delete_entries(entries)
         key = primary_key
-        dn_attribute = foreign_class.dn_attribute
         components = @owner[@options[:foreign_key_name], true].reject do |value|
           value.nil?
-        end.collect do |value|
-          "(#{key}=#{value})"
         end
-        filter = [:and, *components]
-        entry_components = entries.collect do |entry|
-          "(#{dn_attribute}=#{entry.id})"
-        end
-        entry_filter = [:or, *entry_components]
-        foreign_class.update_all({primary_key => []},
-                                 [:and, filter, entry_filter])
+        filter = [:and,
+                  [:and, {key => components}],
+                  [:or, {foreign_class.dn_attribute => entries.collect(&:id)}]]
+        foreign_class.update_all({key => []}, filter)
       end
     end
   end

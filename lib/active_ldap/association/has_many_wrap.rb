@@ -27,7 +27,7 @@ module ActiveLdap
         foreign_base_key = primary_key
         requested_targets = @owner[@options[:wrap], true]
 
-        component_targets = requested_targets.collect do |value|
+        components = requested_targets.collect do |value|
           key = val = nil
           if foreign_base_key == "dn"
             key, val = value.split(",")[0].split("=") unless value.empty?
@@ -38,11 +38,7 @@ module ActiveLdap
         end.reject do |key, val|
           key.nil? or val.nil?
         end
-        return [] if component_targets.empty?
-
-        components = component_targets.collect do |key, val|
-          "(#{key}=#{val})"
-        end
+        return [] if components.empty?
 
         klass = foreign_class
         found_targets = {}

@@ -30,7 +30,7 @@ module ActiveLdap
         key = @options[:many]
         values = @owner[@options[:foreign_key_name], true].compact
         components = values.collect do |value|
-          "(#{key}=#{value})"
+          [key, value]
         end
         foreign_class.find(:all, :filter => [:or, *components])
       end
