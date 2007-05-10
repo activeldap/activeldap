@@ -1069,10 +1069,6 @@ module ActiveLdap
     end
 
     private
-    def logger
-      @@logger
-    end
-
     def extract_object_class(attributes)
       classes = []
       attrs = attributes.reject do |key, value|
