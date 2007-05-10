@@ -12,23 +12,20 @@ module ActiveLdap
         validate :validate_required_values
 
         class << self
-          alias_method :evaluate_condition_for_active_record,
-                       :evaluate_condition
-          def evaluate_condition(condition, entry)
-            evaluate_condition_for_active_record(condition, entry)
+          def evaluate_condition_with_active_ldap_support(condition, entry)
+            evaluate_condition_without_active_ldap_support(condition, entry)
           rescue ActiveRecord::ActiveRecordError
             raise Error, $!.message
           end
+          alias_method_chain :evaluate_condition, :active_ldap_support
         end
 
-        alias_method :save_with_validation_for_active_record!,
-                     :save_with_validation!
-        def save_with_validation!
-          save_with_validation_for_active_record!
+        def save_with_active_ldap_support!
+          save_without_active_ldap_support!
         rescue ActiveRecord::RecordInvalid
           raise EntryInvalid, $!.message
         end
-        alias_method :save!, :save_with_validation!
+        alias_method_chain :save!, :active_ldap_support
 
         def valid?
           ensure_apply_object_class
@@ -67,12 +64,12 @@ module ActiveLdap
         end
 
         private
-        alias_method :run_validations_for_active_record, :run_validations
-        def run_validations(validation_method)
-          run_validations_for_active_record(validation_method)
+        def run_validations_with_active_ldap_support(validation_method)
+          run_validations_without_active_ldap_support(validation_method)
         rescue ActiveRecord::ActiveRecordError
           raise Error, $!.message
         end
+        alias_method_chain :run_validations, :active_ldap_support
       end
     end
   end

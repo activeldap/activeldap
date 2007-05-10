@@ -5,6 +5,7 @@ require 'ldap/schema'
 module LDAP
   class Mod
     unless instance_method(:to_s).arity.zero?
+      alias_method :original_to_s, :to_s
       def to_s
         inspect
       end

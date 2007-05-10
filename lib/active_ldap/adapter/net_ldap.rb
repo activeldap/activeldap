@@ -244,7 +244,6 @@ module ActiveLdap
 
       CHARS = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
       def generate_client_nonce(size=32)
-        return "RMrXWLEpnxIn+QrYjhocwbvHfo8Dx3Se6aFxmPwTF00="
         nonce = ""
         size.times do |i|
           nonce << CHARS[rand(CHARS.size)]

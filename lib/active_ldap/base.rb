@@ -458,7 +458,7 @@ module ActiveLdap
           if prefix.match(_dn)
             begin
               dn_suffix ||= DN.parse(base)
-              DN.parse(_dn) - dn_suffix
+              dn_prefix = DN.parse(_dn) - dn_suffix
               true
             rescue DistinguishedNameInvalid, ArgumentError
               false
