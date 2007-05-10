@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 require 'active_ldap/adapter/base'
 
 module ActiveLdap
@@ -176,20 +178,78 @@ module ActiveLdap
 
       def sasl_bind(bind_dn, options={})
         super do |bind_dn, mechanism, quiet|
+          normalized_mechanism = mechanism.downcase.gsub(/-/, '_')
+          sasl_bind_setup = "sasl_bind_setup_#{normalized_mechanism}"
+          next unless respond_to?(sasl_bind_setup, true)
+          initial_credential, challenge_response =
+            send(sasl_bind_setup, bind_dn, options)
           args = {
             :method => :sasl,
-            :initial_credential => bind_dn,
+            :initial_credential => initial_credential,
             :mechanism => mechanism,
+            :challenge_response => challenge_response,
           }
-          if need_credential_sasl_mechanism?(mechanism)
-            args[:challenge_response] = Proc.new do |cred|
-              password(cred, options)
-            end
-          end
           @bound = false
           execute(:bind, args)
           @bound = true
         end
+      end
+
+      def sasl_bind_setup_digest_md5(bind_dn, options)
+        initial_credential = ""
+        nonce_count = 1
+        challenge_response = Proc.new do |cred|
+          params = parse_sasl_digest_md5_credential(cred)
+          qops = params["qop"].split(/,/)
+          return "unsupported qops: #{qops.inspect}" unless qops.include?("auth")
+          qop = "auth"
+          server = @connection.instance_variable_get("@conn").addr[2]
+          realm = params['realm']
+          uri = "ldap/#{server}"
+          nc = "%08x" % nonce_count
+          nonce = params["nonce"]
+          cnonce = generate_client_nonce
+          requests = {
+            :username => bind_dn.inspect,
+            :realm => realm.inspect,
+            :nonce => nonce.inspect,
+            :cnonce => cnonce.inspect,
+            :nc => nc,
+            :qop => qop,
+            :maxbuf => "65536",
+            "digest-uri" => uri.inspect,
+          }
+          a1 = "#{bind_dn}:#{realm}:#{password(cred, options)}"
+          a1 = "#{Digest::MD5.digest(a1)}:#{nonce}:#{cnonce}"
+          ha1 = Digest::MD5.hexdigest(a1)
+          a2 = "AUTHENTICATE:#{uri}"
+          ha2 = Digest::MD5.hexdigest(a2)
+          response = "#{ha1}:#{nonce}:#{nc}:#{cnonce}:#{qop}:#{ha2}"
+          requests["response"] = Digest::MD5.hexdigest(response)
+          nonce_count += 1
+          requests.collect do |key, value|
+            "#{key}=#{value}"
+          end.join(",")
+        end
+        [initial_credential, challenge_response]
+      end
+
+      def parse_sasl_digest_md5_credential(cred)
+        params = {}
+        cred.scan(/(\w+)=(\"?)(.+?)\2(?:,|$)/) do |name, sep, value|
+          params[name] = value
+        end
+        params
+      end
+
+      CHARS = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+      def generate_client_nonce(size=32)
+        return "RMrXWLEpnxIn+QrYjhocwbvHfo8Dx3Se6aFxmPwTF00="
+        nonce = ""
+        size.times do |i|
+          nonce << CHARS[rand(CHARS.size)]
+        end
+        nonce
       end
 
       def simple_bind(bind_dn, options={})

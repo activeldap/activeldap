@@ -23,7 +23,8 @@ module ActiveLdap
     DEFAULT_CONFIG[:sasl_quiet] = false
     DEFAULT_CONFIG[:try_sasl] = false
     # See http://www.iana.org/assignments/sasl-mechanisms
-    DEFAULT_CONFIG[:sasl_mechanisms] = ["GSSAPI", "CRAM-MD5", "EXTERNAL"]
+    DEFAULT_CONFIG[:sasl_mechanisms] = ["GSSAPI", "DIGEST-MD5",
+                                        "CRAM-MD5", "EXTERNAL"]
 
     DEFAULT_CONFIG[:retry_limit] = 3
     DEFAULT_CONFIG[:retry_wait] = 3
