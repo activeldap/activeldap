@@ -11,9 +11,9 @@ project = Hoe.new('ruby-activeldap', ActiveLdap::VERSION) do |project|
   project.email = ['will@alum.bu.edu', 'kou@cozmixng.org']
   project.summary = 'Ruby/ActiveLdap is a object-oriented API to LDAP'
   project.url = 'http://rubyforge.org/projects/ruby-activeldap/'
-  project.test_globs = ['test/**']
+  project.test_globs = ['test/test_*.rb']
   project.changes = project.paragraphs_of('CHANGES', 0..1).join("\n\n")
-  project.extra_deps = [['log4r','>= 1.0.4'], 'activerecord']
+  project.extra_deps = [['log4r', '>= 1.0.4'], 'activerecord']
   project.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap'
