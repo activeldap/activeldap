@@ -1,5 +1,4 @@
 - Test  SASL bind.
-- Fix case sensitivity in object classes
 - Add result pagination via LDAP::Controls
 - serialize & serialized_attributes
 - schema mgmt - how does AR handle it?
@@ -10,9 +9,6 @@ http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
   ActiveLdap exception. I think we need to develop an
   application using ActiveLdap.
 - support Ruby/GetText.
-- support Net::LDAP as LDAP backend after Net::LDAP
-  supports START_TLS. (I made a patch and submitted to the
-  bug tracker of Net::LDAP)
 - Add locking around Timeout.alarm() to ensure a multithreaded ruby
   app doesn't hit any race conditions
 - Add AR matching exceptions:
@@ -25,5 +21,3 @@ http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
 * MultiparameterAssignmentErrors
 * AttributeAssignmentError
 * RecordNotSaved
-
-
