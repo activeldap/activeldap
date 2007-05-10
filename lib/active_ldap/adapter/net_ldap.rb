@@ -28,8 +28,8 @@ module ActiveLdap
           config = {
             :host => host,
             :port => port,
-            :encryption => {:method => method},
           }
+          config[:encryption] = {:method => method} if method
           Net::LDAP::Connection.new(config)
         end
       end
