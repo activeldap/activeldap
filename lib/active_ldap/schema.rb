@@ -1,7 +1,7 @@
 module ActiveLdap
   class Schema
     def initialize(entries)
-      @entries = entries
+      @entries = default_entries.merge(entries || {})
       @schema_info = {}
       @class_attributes_info = {}
       @cache = {}
@@ -48,7 +48,8 @@ module ActiveLdap
       # Check already parsed options first
       return ids[id] if ids.has_key?(id)
 
-      while schema = @entries[group].shift
+      schemata = @entries[group] || []
+      while schema = schemata.shift
         next unless /\A\s*\(\s*(#{OID_RE})\s*(.*)\s*\)\s*\z/ =~ schema
         schema_id = $1
         rest = $2
@@ -285,6 +286,14 @@ module ActiveLdap
 
     def normalize_attribute_name(name)
       name.upcase.gsub(/_/, "-")
+    end
+
+    def default_entries
+      {
+        "objectClasses" => [],
+        "attributeTypes" => [],
+        "ldapSyntaxes" => [],
+      }
     end
   end # Schema
 end

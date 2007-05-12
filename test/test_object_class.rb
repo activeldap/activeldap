@@ -42,6 +42,4 @@ class TestObjectClass < Test::Unit::TestCase
       assert_raises(TypeError) {group.add_class(:posixAccount)}
     end
   end
-
-  priority :normal
 end

@@ -2,6 +2,18 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_empty_schema
+    assert_make_schema_with_empty_entries(nil)
+    assert_make_schema_with_empty_entries({})
+    assert_make_schema_with_empty_entries({"someValues" => ["aValue"]})
+  end
+
+  def test_empty_schema_value
+    schema = ActiveLdap::Schema.new({"attributeTypes" => nil})
+    assert_equal([], schema["attributeTypes", "cn", "DESC"])
+  end
+
+  priority :normal
   def test_attribute_name_with_under_score
     top_schema =
       "( 2.5.6.0 NAME 'Top' STRUCTURAL MUST objectClass MAY ( " +
@@ -59,7 +71,6 @@ class TestSchema < Test::Unit::TestCase
                   organizational_person_schema)
   end
 
-  priority :normal
   def test_text_oid
     text_oid_schema = "( mysite-oid NAME 'mysite' " +
                       "SUP groupofuniquenames STRUCTURAL " +
@@ -249,5 +260,14 @@ class TestSchema < Test::Unit::TestCase
       actual[normalized_key] = schema[sub, name, normalized_key]
     end
     assert_equal(normalized_expect, actual)
+  end
+
+  def assert_make_schema_with_empty_entries(entries)
+    schema = ActiveLdap::Schema.new(entries)
+    assert_equal([], schema["attributeTypes", "cn", "DESC"])
+    assert_equal([], schema["ldapSyntaxes",
+                            "1.3.6.1.4.1.1466.115.121.1.5",
+                            "DESC"])
+    assert_equal([], schema["objectClasses", "posixAccount", "MUST"])
   end
 end
