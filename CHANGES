@@ -1,3 +1,6 @@
+0.8.2:
+  * Added Net::LDAP support!
+  * Loads of bug fixes and enhancements -- see SVN for a complete history!
 0.8.1:
   * used Dependencies.load_paths.
   * check whether attribute name is available or not.
