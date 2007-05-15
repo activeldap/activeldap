@@ -16,7 +16,8 @@ project = Hoe.new('ruby-activeldap', ActiveLdap::VERSION) do |project|
   project.extra_deps = [['log4r', '>= 1.0.4'], 'activerecord']
   project.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
-    :autorequire => 'active_ldap'
+    :autorequire => 'active_ldap',
+    :executables => [],
   }
   project.description = String.new(<<-EOF)
     'Ruby/ActiveLdap' is a ruby extension library which provides a clean
@@ -66,4 +67,4 @@ task :tag do
   system "svn copy -m 'New release tag' https://ruby-activeldap.googlecode.com/svn/trunk https://ruby-activeldap.googlecode.com/svn/tags/r#{ActiveLdap::VERSION}"
 end
 
-# vim: syntax=Ruby
+# vim: syntax=ruby
