@@ -28,6 +28,18 @@ project = Hoe.new('ruby-activeldap', ActiveLdap::VERSION) do |project|
   EOF
 end
 
+publish_docs_actions = task(:publish_docs).instance_variable_get("@actions")
+original_project_name = nil
+before_publish_docs = Proc.new do
+  original_project_name = project.name
+  project.name = "doc"
+end
+after_publish_docs = Proc.new do
+  project.name = original_project_name
+end
+publish_docs_actions.unshift(before_publish_docs)
+publish_docs_actions.push(after_publish_docs)
+
 # fix Hoe's incorrect guess.
 project.spec.executables.clear
 project.bin_files = project.spec.files.grep(/^bin/)
