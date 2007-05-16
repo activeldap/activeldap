@@ -1,6 +1,31 @@
 0.8.2:
   * Added Net::LDAP support!
-  * Loads of bug fixes and enhancements -- see SVN for a complete history!
+    * supported SASL Digest-MD5 authentication with Net::LDAP.
+  * improved LDAP server support:
+    * improved Sun DS support.
+    * improved ActiveDirectory support. Thanks to Ernie Miller!
+    * improved Fedora-DS support. Thanks to by Daniel Pfile!
+  * improved existing functions:
+    * improved DN handling. Thanks to James Hughes!
+    * improved SASL bind.
+    * improved old API check.
+    * improved schema handling. Thanks to Christoph Lipp!
+    * improved filter notification.
+  * updated documents:
+    * updated Rails realted documenation. Thanks to James Hughes!
+    * updated documentation for the changes between 0.7.1 and 0.8.0.
+      Thanks to Buzz Chopra!
+  * added new features:
+    * added scaffold_al generator for Rails.
+    * added required_classes to default filter value. Thanks to Jeff Hall!
+    * added :recommended_classes option to ldap_mapping.
+    * added :sort_by and :order options to find.
+    * added ActiveLdap::Base#to_param for ActionController.
+  * fixed some bugs:
+    * fixed rake install/uninstall.
+    * fixed typos. Thanks to Nobody!
+    * fixed required_classes initialization. Thanks to James Hughes!
+
 0.8.1:
   * used Dependencies.load_paths.
   * check whether attribute name is available or not.
