@@ -1180,8 +1180,8 @@ module ActiveLdap
         @musts[objc] = attributes[:must]
         @mays[objc] = attributes[:may]
       end
-      @must = normalize_attribute_names(@musts.values)
-      @may = normalize_attribute_names(@mays.values)
+      @must = normalize_attribute_names(@musts.values).compact
+      @may = normalize_attribute_names(@mays.values).compact
       (@must + @may).uniq.each do |attr|
         # Update attr_method with appropriate
         define_attribute_methods(attr)
