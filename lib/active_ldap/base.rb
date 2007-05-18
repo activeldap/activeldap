@@ -1189,8 +1189,8 @@ module ActiveLdap
     end
 
     def normalize_attribute_names(names)
-      names.flatten.uniq.collect do |may|
-        schema.attribute_aliases(may).first
+      names.flatten.uniq.collect do |name|
+        schema.attribute_aliases(name).first
       end
     end
 
