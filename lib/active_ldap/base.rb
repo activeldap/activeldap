@@ -278,10 +278,8 @@ module ActiveLdap
         _attr, value, _prefix = split_search_value(value)
         attr ||= _attr || dn_attribute || "objectClass"
         prefix ||= _prefix
-        if filter.nil?
-          filter = "(#{attr}=#{escape_filter_value(value, true)})"
-          filter = "(&#{filter}#{object_class_filters(classes)})"
-        end
+        filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
+        filter = [:and, filter, *object_class_filters(classes)]
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
         search_options = {
           :base => _base,
@@ -534,8 +532,8 @@ module ActiveLdap
 
       def object_class_filters(classes=nil)
         (classes || required_classes).collect do |name|
-          "(objectClass=#{escape_filter_value(name, true)})"
-        end.join("")
+          ["objectClass", escape_filter_value(name, true)]
+        end
       end
 
       def find_initial(options)
@@ -595,12 +593,8 @@ module ActiveLdap
 
       def find_one(dn, options)
         attr, value, prefix = split_search_value(dn)
-        filters = [
-          "(#{attr || dn_attribute}=#{escape_filter_value(value, true)})",
-          object_class_filters(options[:classes]),
-          options[:filter],
-        ]
-        filter = "(&#{filters.compact.join('')})"
+        filter = [attr || dn_attribute, escape_filter_value(value, true)]
+        filter = [:and, filter, options[:filter]] if options[:filter]
         options = {:prefix => prefix}.merge(options.merge(:filter => filter))
         result = find_initial(options)
         if result
@@ -616,18 +610,16 @@ module ActiveLdap
         dn_filters = dns.collect do |dn|
           attr, value, prefix = split_search_value(dn)
           attr ||= dn_attribute
-          filter = "(#{attr}=#{escape_filter_value(value, true)})"
+          filter = [attr, escape_filter_value(value, true)]
           if prefix
-            filter = "(&#{filter}(dn=*,#{escape_filter_value(prefix)},#{base}))"
+            filter = [:and,
+                      filter,
+                      [dn, "*,#{escape_filter_value(prefix)},#{base}"]]
           end
           filter
         end
-        filters = [
-          "(|#{dn_filters.join('')})",
-          object_class_filters(options[:classes]),
-          options[:filter],
-        ]
-        filter = "(&#{filters.compact.join('')})"
+        filter = [:or, *dn_filters]
+        filter = [:and, filter, options[:filter]] if options[:filter]
         result = find_every(options.merge(:filter => filter))
         if result.size == dns.size
           result

@@ -64,6 +64,12 @@ class TestAdapter < Test::Unit::TestCase
                         [:and,
                          [:and, {"gidNumber"=>["100001"]}],
                          [:or, {"uid"=>["temp-user1", "temp-user2"]}]])
+    assert_parse_filter("(&(gidNumber=100001)" +
+                        "(objectClass=person)(objectClass=posixAccount))",
+                        [:and,
+                         [:or, ["gidNumber", "100001"]],
+                         ["objectClass", "person"],
+                         ["objectClass", "posixAccount"]])
   end
 
   def test_invalid_operator

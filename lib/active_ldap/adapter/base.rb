@@ -309,7 +309,9 @@ module ActiveLdap
           components = components.collect do |component|
             if component.is_a?(Array) and component.size == 2
               key, value = component
-              if filter_logical_operator?(key) or value.is_a?(Hash)
+              if filter_logical_operator?(key)
+                parse_filter(component)
+              elsif value.is_a?(Hash)
                 parse_filter(value, key)
               else
                 construct_component(key, value, operator)
