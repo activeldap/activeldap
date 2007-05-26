@@ -53,10 +53,13 @@ module ActiveLdap
         next unless /\A\s*\(\s*(#{OID_RE})\s*(.*)\s*\)\s*\z/ =~ schema
         schema_id = $1
         rest = $2
-        next if ids.has_key?(schema_id)
 
-        attributes = {}
-        ids[schema_id] = attributes
+        if ids.has_key?(schema_id)
+          attributes = ids[schema_id]
+        else
+          attributes = {}
+          ids[schema_id] = attributes
+        end
 
         parse_attributes(rest, attributes)
         (attributes["NAME"] || []).each do |v|
@@ -244,7 +247,8 @@ module ActiveLdap
         when no_value
           values = ["TRUE"]
         end
-        attributes[normalize_attribute_name(name)] = values
+        attributes[normalize_attribute_name(name)] ||= []
+        attributes[normalize_attribute_name(name)].concat(values)
       end
     end
 

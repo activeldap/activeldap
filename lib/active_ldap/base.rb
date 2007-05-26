@@ -1180,8 +1180,8 @@ module ActiveLdap
         @musts[objc] = attributes[:must]
         @mays[objc] = attributes[:may]
       end
-      @must = normalize_attribute_names(@musts.values).compact
-      @may = normalize_attribute_names(@mays.values).compact
+      @must = normalize_attribute_names(@musts.values)
+      @may = normalize_attribute_names(@mays.values)
       (@must + @may).uniq.each do |attr|
         # Update attr_method with appropriate
         define_attribute_methods(attr)
@@ -1190,7 +1190,7 @@ module ActiveLdap
 
     def normalize_attribute_names(names)
       names.flatten.uniq.collect do |name|
-        schema.attribute_aliases(name).first
+        schema.attribute_aliases(name).first || name
       end
     end
 
@@ -1308,7 +1308,7 @@ module ActiveLdap
     # onto the first attribute passed in.
     def define_attribute_methods(attr)
       logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
-      return if @attr_methods.has_key? attr
+      return if @attr_methods.has_key?(attr)
       schema.attribute_aliases(attr).each do |ali|
         logger.debug {"associating #{ali} --> #{attr}"}
         @attr_methods[ali] = attr

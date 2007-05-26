@@ -2,6 +2,77 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_duplicate_schema
+    sasNMASProductOptions_schema =
+      "( 2.16.840.1.113719.1.39.42.1.0.38 NAME 'sasNMASProductOptions' " +
+      "SYNTAX 1.3.6.1.4.1.1466.115.121.1.40{64512} SINGLE-VALUE " +
+      "X-NDS_PUBLIC_READ '1' )"
+    rADIUSActiveConnections_schema =
+      "( 2.16.840.1.113719.1.39.42.1.0.38 NAME 'rADIUSActiveConnections' " +
+      "SYNTAX 1.3.6.1.4.1.1466.115.121.1.40{64512} X-NDS_NAME " +
+      "'RADIUS:ActiveConnections' X-NDS_NOT_SCHED_SYNC_IMMEDIATE '1' )"
+
+    sasNMASProductOptions = 'sasNMASProductOptions'
+    rADIUSActiveConnections = 'rADIUSActiveConnections'
+    sasNMASProductOptions_aliases =
+      [sasNMASProductOptions, [sasNMASProductOptions]]
+    rADIUSActiveConnections_aliases =
+      [rADIUSActiveConnections, [rADIUSActiveConnections]]
+    sas__sas_radius_aliases =
+      [sasNMASProductOptions, [sasNMASProductOptions,
+                               rADIUSActiveConnections]]
+    radius__sas_radius_aliases =
+      [rADIUSActiveConnections, [sasNMASProductOptions,
+                                 rADIUSActiveConnections]]
+    sas__radius_sas_aliases =
+      [sasNMASProductOptions, [rADIUSActiveConnections,
+                               sasNMASProductOptions]]
+    radius__radius_sas_aliases =
+      [rADIUSActiveConnections, [rADIUSActiveConnections,
+                                 sasNMASProductOptions]]
+
+    assert_attribute_aliases([sasNMASProductOptions_aliases],
+                             [sasNMASProductOptions_schema],
+                             false)
+    assert_attribute_aliases([rADIUSActiveConnections_aliases],
+                             [rADIUSActiveConnections_schema],
+                             false)
+
+    assert_attribute_aliases([sasNMASProductOptions_aliases,
+                              radius__sas_radius_aliases],
+                             [sasNMASProductOptions_schema,
+                              rADIUSActiveConnections_schema],
+                             false)
+    assert_attribute_aliases([rADIUSActiveConnections_aliases,
+                              sas__radius_sas_aliases],
+                             [rADIUSActiveConnections_schema,
+                              sasNMASProductOptions_schema],
+                             false)
+
+    assert_attribute_aliases([radius__sas_radius_aliases,
+                              sas__sas_radius_aliases],
+                             [sasNMASProductOptions_schema,
+                              rADIUSActiveConnections_schema],
+                             false)
+    assert_attribute_aliases([sas__radius_sas_aliases,
+                              radius__radius_sas_aliases],
+                             [rADIUSActiveConnections_schema,
+                              sasNMASProductOptions_schema],
+                             false)
+
+    assert_attribute_aliases([sas__sas_radius_aliases,
+                              radius__sas_radius_aliases],
+                             [sasNMASProductOptions_schema,
+                              rADIUSActiveConnections_schema],
+                             true)
+    assert_attribute_aliases([radius__radius_sas_aliases,
+                              sas__radius_sas_aliases],
+                             [rADIUSActiveConnections_schema,
+                              sasNMASProductOptions_schema],
+                             true)
+  end
+
+  priority :normal
   def test_empty_schema
     assert_make_schema_with_empty_entries(nil)
     assert_make_schema_with_empty_entries({})
@@ -13,7 +84,6 @@ class TestSchema < Test::Unit::TestCase
     assert_equal([], schema["attributeTypes", "cn", "DESC"])
   end
 
-  priority :normal
   def test_attribute_name_with_under_score
     top_schema =
       "( 2.5.6.0 NAME 'Top' STRUCTURAL MUST objectClass MAY ( " +
@@ -269,5 +339,17 @@ class TestSchema < Test::Unit::TestCase
                             "1.3.6.1.4.1.1466.115.121.1.5",
                             "DESC"])
     assert_equal([], schema["objectClasses", "posixAccount", "MUST"])
+  end
+
+  def assert_attribute_aliases(expected, schemata, ensure_parse)
+    group = 'attributeTypes'
+    entry = {group => schemata}
+    schema = ActiveLdap::Schema.new(entry)
+    schema.send(:ensure_parse, group) if ensure_parse
+    result = []
+    expected.each do |key,|
+      result << [key, schema.attribute_aliases(key.to_s)]
+    end
+    assert_equal(expected, result)
   end
 end
