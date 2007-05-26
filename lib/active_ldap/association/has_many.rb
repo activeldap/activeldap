@@ -22,7 +22,11 @@ module ActiveLdap
         end.reject do |key, val|
           key.nil? or val.nil?
         end
-        foreign_class.find(:all, :filter => [:or, *components])
+        if components.empty?
+          []
+        else
+          foreign_class.find(:all, :filter => [:or, *components])
+        end
       end
 
       def delete_entries(entries)

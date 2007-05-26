@@ -115,7 +115,7 @@ module ActiveLdap
       end
 
       def search(options={})
-        filter = parse_filter(options[:filter] || 'objectClass=*')
+        filter = parse_filter(options[:filter]) || 'objectClass=*'
         attrs = options[:attributes] || []
         scope = ensure_scope(options[:scope])
         base = options[:base]

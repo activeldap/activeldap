@@ -32,7 +32,11 @@ module ActiveLdap
         components = values.collect do |value|
           [key, value]
         end
-        foreign_class.find(:all, :filter => [:or, *components])
+        if components.empty?
+          []
+        else
+          foreign_class.find(:all, :filter => [:or, *components])
+        end
       end
     end
   end
