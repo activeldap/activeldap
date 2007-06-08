@@ -75,9 +75,7 @@
 #
 # Now run:
 #
-#   $ ruby setup.rb config
-#   $ ruby setup.rb setup
-#   $ (as root) ruby setup.rb install
+#   $ (as root) rake install
 #
 # Now as a quick test, you can run:
 #
