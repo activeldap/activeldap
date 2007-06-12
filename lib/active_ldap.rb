@@ -61,7 +61,7 @@
 # === Installation
 #
 # Assuming all the requirements are installed, you can install by grabbing the latest tgz file from
-# the download site[http://projects.dataspill.org/libraries/ruby/activeldap/download.html].
+# the download site[http://rubyforge.org/frs/?group_id=381].
 #
 # The following steps will get the Ruby/ActiveLdap installed in no time!
 #
