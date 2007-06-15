@@ -4,6 +4,17 @@ class TestObjectClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_case_insensitive_match
+    assert_nothing_raised do
+      @group_class.instantiate(["cn=test-group,#{@group_class.base}",
+                                {
+                                  :cn => "test-group",
+                                  :objectClass => ["TOP", "posixgroup"],
+                                }])
+    end
+  end
+
+  priority :normal
   def test_ensure_recommended_classes
     make_temporary_group do |group|
       added_class = "labeledURIObject"
@@ -20,7 +31,6 @@ class TestObjectClass < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_unknown_object_class
     make_temporary_group do |group|
       assert_raises(ActiveLdap::ObjectClassError) do

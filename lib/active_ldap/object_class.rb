@@ -63,7 +63,10 @@ module ActiveLdap
     end
 
     def assert_have_all_required_classes(new_classes)
-      required_classes = self.class.required_classes - new_classes
+      normalized_new_classes = new_classes.collect(&:downcase)
+      required_classes = self.class.required_classes.reject do |required_class|
+        normalized_new_classes.include?(required_class.downcase)
+      end
       unless required_classes.empty?
         raise RequiredObjectClassMissed,
                 "Can't remove required objectClass: " +
