@@ -443,6 +443,7 @@ module ActiveLdap
         when :first
           find_initial(options)
         when :all
+          options[:value] ||= args[1]
           find_every(options)
         else
           find_from_dns(args, options)

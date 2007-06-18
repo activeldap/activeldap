@@ -4,6 +4,16 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_all_with_dn_attribute_value
+    make_temporary_user(:uid => "user1") do |user1,|
+      make_temporary_user(:uid => "user2") do |user2,|
+        assert_equal(["user1"],
+                     @user_class.find(:all, "*1").collect {|u| u.uid})
+      end
+    end
+  end
+
+  priority :normal
   def test_find_with_sort
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|
@@ -25,7 +35,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_split_search_value
     assert_split_search_value([nil, "test-user", nil], "test-user")
     assert_split_search_value([nil, "test-user", "ou=Sub"], "test-user,ou=Sub")
