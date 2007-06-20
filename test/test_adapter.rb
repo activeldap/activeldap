@@ -10,6 +10,12 @@ class TestAdapter < Test::Unit::TestCase
   end
 
   priority :must
+  def test_filter_with_escaped_character
+    assert_parse_filter("(uid=Alice\\3DBob)", {:uid => "Alice=Bob"})
+    assert_parse_filter("(uid=Alice\\2CBob)", {:uid => "Alice,Bob"})
+    assert_parse_filter("(uid=Alice\\3DBob\\2C)", {:uid => "Alice=Bob,"})
+    assert_parse_filter("(uid=Alice\\3D\\2CBob)", {:uid => "Alice=,Bob"})
+  end
 
   priority :normal
   def test_empty_filter
