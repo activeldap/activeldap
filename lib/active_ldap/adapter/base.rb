@@ -133,7 +133,7 @@ module ActiveLdap
         begin
           operation(options) do
             yield(base, scope, filter, attrs, limit, callback)
-        end
+          end
         rescue LdapError
           # Do nothing on failure
           @logger.debug {"Ignore error #{$!.class}(#{$!.message}) " +
