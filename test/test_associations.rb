@@ -4,6 +4,24 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_many_with_dn_key
+    @user_class.belongs_to :groups, :many => "memberUid", :foreign_key => "dn"
+    @user_class.set_associated_class(:groups, @group_class)
+    @group_class.has_many :members, :wrap => "memberUid", :primary_key => "dn"
+    @group_class.set_associated_class(:members, @user_class)
+    make_temporary_group do |group|
+      make_temporary_user do |user1,|
+        make_temporary_user do |user2,|
+          group.members = [user1, user2]
+          assert(group.save)
+          assert_equal([group.cn], user1.groups.collect(&:cn))
+          assert_equal([group.cn], user2.groups.collect(&:cn))
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_belongs_to_many_delete
     make_temporary_group do |group1|
       make_temporary_group do |group2|
