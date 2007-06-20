@@ -362,7 +362,13 @@ module ActiveLdap
           values[0] = values[0][1] if filter_logical_operator?(values[0][1])
           parse_filter(values, operator)
         else
-          "(#{key}=#{value})"
+          "(#{key}=#{escape_filter_value(value)})"
+        end
+      end
+
+      def escape_filter_value(value)
+        value.gsub(/[=,]/) do |s|
+          "\\%X" % s[0]
         end
       end
 
