@@ -75,7 +75,7 @@ module ActiveLdap
                 attributes[attr] = entry.vals(attr)
               end
               callback.call([entry.dn, attributes], block)
-              break if limit and limit >= i
+              break if limit and limit <= i
             end
           rescue RuntimeError
             if $!.message == "no result returned by search"

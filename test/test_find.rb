@@ -4,6 +4,31 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_with_limit
+    make_temporary_user(:uid => "user1") do |user1,|
+      make_temporary_user(:uid => "user2") do |user2,|
+        make_temporary_user(:uid => "user3") do |user3,|
+          users = @user_class.find(:all)
+          assert_equal(["user1", "user2", "user3"].sort,
+                       users.collect {|u| u.uid}.sort)
+
+          users = @user_class.find(:all, :limit => 2)
+          assert_operator([["user1", "user2"].sort,
+                           ["user2", "user3"].sort,
+                           ["user3", "user1"].sort],
+                          :include?,
+                          users.collect {|u| u.uid}.sort)
+
+          users = @user_class.find(:all, :limit => 1)
+          assert_operator([["user1"], ["user2"], ["user3"]],
+                          :include?,
+                          users.collect {|u| u.uid})
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_find_all_with_dn_attribute_value
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|
@@ -13,7 +38,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_find_with_sort
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|
