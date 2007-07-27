@@ -94,15 +94,15 @@ module Test
         original_run(result, &block)
       ensure
         if passed?
-          FileUtils.rm_f(not_passed_file)
+          FileUtils.touch(passed_file)
         else
-          FileUtils.touch(not_passed_file)
+          FileUtils.rm_f(passed_file)
         end
       end
 
       private
       def previous_test_success?
-        not File.exist?(not_passed_file)
+        File.exist?(passed_file)
       end
 
       def result_dir
@@ -113,8 +113,8 @@ module Test
         dir
       end
 
-      def not_passed_file
-        File.join(result_dir, "not-passed")
+      def passed_file
+        File.join(result_dir, "passed")
       end
     end
 
