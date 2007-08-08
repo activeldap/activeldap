@@ -1,8 +1,11 @@
 require 'active_ldap/association/collection'
+require 'active_ldap/association/has_many_utils'
 
 module ActiveLdap
   module Association
     class HasManyWrap < Collection
+      include HasManyUtils
+
       private
       def insert_entry(entry)
         old_value = @owner[@options[:wrap], true]
@@ -24,28 +27,16 @@ module ActiveLdap
       end
 
       def find_target
-        foreign_base_key = primary_key
-        requested_targets = @owner[@options[:wrap], true]
+        targets, requested_targets = collect_targets(:wrap, true)
+        raise EntryNotFound if targets.nil?
 
-        components = requested_targets.collect do |value|
-          key = val = nil
-          if foreign_base_key == "dn"
-            key, val = value.split(",")[0].split("=") unless value.empty?
-          else
-            key, val = foreign_base_key, value
-          end
-          [key, val]
-        end.reject do |key, val|
-          key.nil? or val.nil?
-        end
-        return [] if components.empty?
-
-        klass = foreign_class
         found_targets = {}
-        klass.find(:all, :filter => [:or, *components]).each do |target|
+        foreign_base_key = primary_key
+        targets.each do |target|
           found_targets[target.send(foreign_base_key)] ||= target
         end
 
+        klass = foreign_class
         requested_targets.collect do |name|
           found_targets[name] || klass.new(name)
         end
