@@ -28,7 +28,7 @@ module ActiveLdap
 
       def find_target
         targets, requested_targets = collect_targets(:wrap, true)
-        raise EntryNotFound if targets.nil?
+        return [] if targets.nil?
 
         found_targets = {}
         foreign_base_key = primary_key

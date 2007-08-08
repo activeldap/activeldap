@@ -14,27 +14,6 @@ module ActiveLdap
 
       def find_target
         collect_targets(:foreign_key_name)
-        foreign_base_key = primary_key
-        return [] if foreign_base_key
-
-        values = @owner[@options[:foreign_key_name], true]
-
-        components = values.reject do |value|
-          value.nil?
-        end
-        unless foreign_base_key == "dn"
-          components = values.collect do |value|
-            [foreign_base_key, value]
-          end
-        end
-
-        return [] if components.empty?
-
-        if foreign_base_key == "dn"
-          foreign_class.find(components)
-        else
-          foreign_class.find(:all, :filter => [:or, *components])
-        end
       end
 
       def delete_entries(entries)
