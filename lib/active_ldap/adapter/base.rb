@@ -95,8 +95,7 @@ module ActiveLdap
             'ldapSyntaxes',
             #'extendedAttributeInfo', # if we need RANGE-LOWER/UPPER.
           ]
-          key = 'subschemaSubentry'
-          base ||= root_dse([key], options)[0][key][0]
+          base ||= root_dse_values('subschemaSubentry', options)[0]
           base ||= 'cn=schema'
           dn, attributes = search(:base => base,
                                   :scope => :base,
@@ -248,10 +247,8 @@ module ActiveLdap
 
         # Get all SASL mechanisms
         mechanisms = operation(options) do
-          key = "supportedSASLMechanisms"
-          root_dse([key])[0][key]
+          root_dse_values("supportedSASLMechanisms")
         end
-        mechanisms ||= []
 
         if options.has_key?(:sasl_quiet)
           sasl_quiet = options[:sasl_quiet]
@@ -463,6 +460,12 @@ module ActiveLdap
         reconnect_attempts = options[:reconnect_attempts] || 0
 
         retry_limit < 0 or reconnect_attempts < (retry_limit - 1)
+      end
+
+      def root_dse_values(key, options={})
+        dse = root_dse([key], options)[0]
+        return [] if dse.nil?
+        dse[key] || dse[key.downcase] || []
       end
     end
   end
