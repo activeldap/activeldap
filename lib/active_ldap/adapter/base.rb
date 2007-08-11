@@ -9,7 +9,8 @@ module ActiveLdap
                                           :retry_wait, :bind_dn, :password,
                                           :password_block, :try_sasl,
                                           :sasl_mechanisms, :sasl_quiet,
-                                          :allow_anonymous, :store_password]
+                                          :allow_anonymous, :store_password,
+                                          :scope]
       def initialize(configuration={})
         @connection = nil
         @configuration = configuration.dup
@@ -116,7 +117,7 @@ module ActiveLdap
       def search(options={})
         filter = parse_filter(options[:filter]) || 'objectClass=*'
         attrs = options[:attributes] || []
-        scope = ensure_scope(options[:scope])
+        scope = ensure_scope(options[:scope] || @scope)
         base = options[:base]
         limit = options[:limit] || 0
         limit = nil if limit <= 0

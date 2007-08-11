@@ -69,7 +69,10 @@ module ActiveLdap
         load_target
 
         flatten_deeper(entries).each do |entry|
-          result &&= insert_entry(entry) unless @owner.new_entry?
+          unless @owner.new_entry?
+            infect_connection(entry)
+            result &&= insert_entry(entry)
+          end
           @target << entry
         end
 

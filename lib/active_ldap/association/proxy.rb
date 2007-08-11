@@ -84,6 +84,19 @@ module ActiveLdap
         loaded if target
         target
       end
+
+      def find_options(options={})
+        if @owner.connection != @owner.class.connection
+          {:connection => @owner.connection}.merge(options)
+        else
+          options
+        end
+      end
+
+      def infect_connection(target)
+        conn = @owner.instance_variable_get("@connection")
+        target.connection = conn if conn
+      end
     end
   end
 end

@@ -13,6 +13,8 @@ module ActiveLdap
     def self.append_features(base)
       super
       base.extend(ClassMethods)
+      base.class_inheritable_array(:associations)
+      base.associations = []
     end
 
     module ClassMethods
@@ -122,6 +124,7 @@ module ActiveLdap
         define_method("__make_#{name}") do
           make_association.call(self)
         end
+        associations << name
         association_reader(name, &make_association)
         association_writer(name, &make_association)
       end
@@ -156,6 +159,13 @@ module ActiveLdap
                                 :extend]
       def validate_has_many_options(options)
         options.assert_valid_keys(VALID_HAS_MANY_OPTIONS)
+      end
+    end
+
+    def clear_association_cache
+      return if new_record?
+      (self.class.associations || []).each do |association|
+        instance_variable_set("@#{association}", nil)
       end
     end
   end

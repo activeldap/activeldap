@@ -8,6 +8,7 @@ module ActiveLdap
           @target = @owner[@options[:foreign_key_name]] = nil
         else
           @target = (Proxy === entry ? entry.target : entry)
+          infect_connection(@target)
           unless entry.new_entry?
             @owner[@options[:foreign_key_name]] = entry[primary_key]
           end
@@ -32,10 +33,11 @@ module ActiveLdap
         raise EntryNotFound if value.nil?
         key = primary_key
         if key == "dn"
-          result = foreign_class.find(value)
+          result = foreign_class.find(value, find_options)
         else
           filter = {key => value}
-          result = foreign_class.find(:all, :filter => filter, :limit => 1).first
+          options = find_options(:filter => filter, :limit => 1)
+          result = foreign_class.find(:all, options).first
         end
         raise EntryNotFound if result.nil?
         result

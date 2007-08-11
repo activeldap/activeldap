@@ -86,15 +86,15 @@ module ActiveLdap
 	end
       end
 
-      def merge_configuration(config)
+      def merge_configuration(config, target=self)
         configuration = default_configuration
         config.symbolize_keys.each do |key, value|
           case key
           when :base
             # Scrub before inserting
-            self.base = value.gsub(/['}{#]/, '')
+            target.base = value.gsub(/['}{#]/, '')
           when :ldap_scope
-            self.ldap_scope = value
+            target.ldap_scope = value
           else
             configuration[key] = value
           end

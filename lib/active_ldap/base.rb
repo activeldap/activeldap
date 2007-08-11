@@ -168,9 +168,6 @@ module ActiveLdap
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
                                   :classes, :recommended_classes]
-    VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
-                            :classes, :scope, :limit, :attributes,
-                            :sort_by, :order]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -186,7 +183,7 @@ module ActiveLdap
               target = superclass
               value = nil
               loop do
-                break nil unless target.respond_to?("#{sym}")
+                break nil unless target.respond_to?(:#{sym})
                 value = target.#{sym}
                 break if value
                 target = target.superclass
@@ -262,47 +259,6 @@ module ActiveLdap
         end
       end
 
-      def search(options={}, &block)
-        validate_search_options(options)
-        attr = options[:attribute]
-        value = options[:value] || '*'
-        filter = options[:filter]
-        prefix = options[:prefix]
-        classes = options[:classes]
-
-        value = value.first if value.is_a?(Array) and value.first.size == 1
-        if filter.nil? and !value.is_a?(String)
-          raise ArgumentError, "Search value must be a String"
-        end
-
-        _attr, value, _prefix = split_search_value(value)
-        attr ||= _attr || dn_attribute || "objectClass"
-        prefix ||= _prefix
-        filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
-        filter = [:and, filter, *object_class_filters(classes)]
-        _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
-        search_options = {
-          :base => _base,
-          :scope => options[:scope] || ldap_scope,
-          :filter => filter,
-          :limit => options[:limit],
-          :attributes => options[:attributes],
-          :sort_by => options[:sort_by],
-          :order => options[:order],
-        }
-        connection.search(search_options) do |dn, attrs|
-          attributes = {}
-          attrs.each do |key, value|
-            normalized_attr, normalized_value = make_subtypes(key, value)
-            attributes[normalized_attr] ||= []
-            attributes[normalized_attr].concat(normalized_value)
-          end
-          value = [dn, attributes]
-          value = yield(value) if block_given?
-          value
-        end
-      end
-
       # This class function is used to setup all mappings between the subclass
       # and ldap for use in activeldap
       #
@@ -349,161 +305,15 @@ module ActiveLdap
 
       alias_method :ldap_scope_without_validation=, :ldap_scope=
       def ldap_scope=(scope)
+        validate_ldap_scope(scope)
+        self.ldap_scope_without_validation = scope
+      end
+
+      def validate_ldap_scope(scope)
         scope = scope.to_sym if scope.is_a?(String)
-        if scope.nil? or scope.is_a?(Symbol)
-          self.ldap_scope_without_validation = scope
-        else
-          raise ConfigurationError,
-                  ":ldap_scope '#{scope.inspect}' must be a Symbol"
-        end
-      end
-
-      def dump(options={})
-        ldifs = []
-        options = {:base => base, :scope => ldap_scope}.merge(options)
-        connection.search(options) do |dn, attributes|
-          ldifs << to_ldif(dn, attributes)
-        end
-        ldifs.join("\n")
-      end
-
-      def to_ldif(dn, attributes)
-        connection.to_ldif(dn, unnormalize_attributes(attributes))
-      end
-
-      def load(ldifs)
-        connection.load(ldifs)
-      end
-
-      def destroy(targets, options={})
-        targets = [targets] unless targets.is_a?(Array)
-        targets.each do |target|
-          find(target, options).destroy
-        end
-      end
-
-      def destroy_all(filter=nil, options={})
-        targets = []
-        if filter.is_a?(Hash)
-          options = options.merge(filter)
-          filter = nil
-        end
-        options = options.merge(:filter => filter) if filter
-        find(:all, options).sort_by do |target|
-          target.dn.reverse
-        end.reverse.each do |target|
-          target.destroy
-        end
-      end
-
-      def delete(targets, options={})
-        targets = [targets] unless targets.is_a?(Array)
-        targets = targets.collect do |target|
-          ensure_dn_attribute(ensure_base(target))
-        end
-        connection.delete(targets, options)
-      end
-
-      def delete_all(filter=nil, options={})
-        options = {:base => base, :scope => ldap_scope}.merge(options)
-        options = options.merge(:filter => filter) if filter
-        targets = connection.search(options).collect do |dn, attributes|
-          dn
-        end.sort_by do |dn|
-          dn.reverse
-        end.reverse
-
-        connection.delete(targets)
-      end
-
-      def add(dn, entries, options={})
-        unnormalized_entries = entries.collect do |type, key, value|
-          [type, key, unnormalize_attribute(key, value)]
-        end
-        connection.add(dn, unnormalized_entries, options)
-      end
-
-      def modify(dn, entries, options={})
-        unnormalized_entries = entries.collect do |type, key, value|
-          [type, key, unnormalize_attribute(key, value)]
-        end
-        connection.modify(dn, unnormalized_entries, options)
-      end
-
-      # find
-      #
-      # Finds the first match for value where |value| is the value of some
-      # |field|, or the wildcard match. This is only useful for derived classes.
-      # usage: Subclass.find(:attribute => "cn", :value => "some*val")
-      #        Subclass.find('some*val')
-      def find(*args)
-        options = extract_options_from_args!(args)
-        args = [:first] if args.empty? and !options.empty?
-        case args.first
-        when :first
-          find_initial(options)
-        when :all
-          options[:value] ||= args[1]
-          find_every(options)
-        else
-          find_from_dns(args, options)
-        end
-      end
-
-      def exists?(dn, options={})
-        prefix = /^#{Regexp.escape(truncate_base(ensure_dn_attribute(dn)))}/ #
-        dn_suffix = nil
-        not search({:value => dn}.merge(options)).find do |_dn,|
-          if prefix.match(_dn)
-            begin
-              dn_suffix ||= DN.parse(base)
-              dn_prefix = DN.parse(_dn) - dn_suffix
-              true
-            rescue DistinguishedNameInvalid, ArgumentError
-              false
-            end
-          else
-            false
-          end
-        end.nil?
-      end
-
-      def update(dn, attributes, options={})
-        if dn.is_a?(Array)
-          i = -1
-          dns = dn
-          dns.collect do |dn|
-            i += 1
-            update(dn, attributes[i], options)
-          end
-        else
-          object = find(dn, options)
-          object.update_attributes(attributes)
-          object
-        end
-      end
-
-      def update_all(attributes, filter=nil, options={})
-        search_options = options
-        if filter
-          if filter.is_a?(String) and /[=\(\)&\|]/ !~ filter
-            search_options = search_options.merge(:value => filter)
-          else
-            search_options = search_options.merge(:filter => filter)
-          end
-        end
-        targets = search(search_options).collect do |dn, attrs|
-          dn
-        end
-
-        entries = attributes.collect do |name, value|
-          normalized_name, normalized_value = normalize_attribute(name, value)
-          [:replace, normalized_name,
-           unnormalize_attribute(normalized_name, normalized_value)]
-        end
-        targets.each do |dn|
-          connection.modify(dn, entries, options)
-        end
+        return if scope.nil? or scope.is_a?(Symbol)
+        raise ConfigurationError,
+                ":ldap_scope '#{scope.inspect}' must be a Symbol"
       end
 
       def base_class
@@ -523,172 +333,6 @@ module ActiveLdap
         options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
       end
 
-      def validate_search_options(options)
-        options.assert_valid_keys(VALID_SEARCH_OPTIONS)
-      end
-
-      def extract_options_from_args!(args)
-        args.last.is_a?(Hash) ? args.pop : {}
-      end
-
-      def object_class_filters(classes=nil)
-        (classes || required_classes).collect do |name|
-          ["objectClass", escape_filter_value(name, true)]
-        end
-      end
-
-      def find_initial(options)
-        find_every(options.merge(:limit => 1)).first
-      end
-
-      def normalize_sort_order(value)
-        case value.to_s
-        when /\Aasc(?:end)?\z/i
-          :ascend
-        when /\Adesc(?:end)?\z/i
-          :descend
-        else
-          raise ArgumentError, "Invalid order: #{value.inspect}"
-        end
-      end
-
-      def find_every(options)
-        options = options.dup
-        sort_by = options.delete(:sort_by)
-        order = options.delete(:order)
-        limit = options.delete(:limit) if sort_by or order
-
-        results = search(options).collect do |dn, attrs|
-          instantiate([dn, attrs])
-        end
-        return results if sort_by.nil? and order.nil?
-
-        sort_by ||= "dn"
-        if sort_by.downcase == "dn"
-          results = results.sort_by {|result| DN.parse(result.dn)}
-        else
-          results = results.sort_by {|result| result.send(sort_by)}
-        end
-
-        results.reverse! if normalize_sort_order(order || "ascend") == :descend
-        results = results[0, limit] if limit
-        results
-      end
-
-      def find_from_dns(dns, options)
-        expects_array = dns.first.is_a?(Array)
-        return [] if expects_array and dns.first.empty?
-
-        dns = dns.flatten.compact.uniq
-
-        case dns.size
-        when 0
-          raise EntryNotFound, "Couldn't find #{name} without a DN"
-        when 1
-          result = find_one(dns.first, options)
-          expects_array ? [result] : result
-        else
-          find_some(dns, options)
-        end
-      end
-
-      def find_one(dn, options)
-        attr, value, prefix = split_search_value(dn)
-        filter = [attr || dn_attribute, escape_filter_value(value, true)]
-        filter = [:and, filter, options[:filter]] if options[:filter]
-        options = {:prefix => prefix}.merge(options.merge(:filter => filter))
-        result = find_initial(options)
-        if result
-          result
-        else
-          message = "Couldn't find #{name} with DN=#{dn}"
-          message << " #{options[:filter]}" if options[:filter]
-          raise EntryNotFound, message
-        end
-      end
-
-      def find_some(dns, options)
-        dn_filters = dns.collect do |dn|
-          attr, value, prefix = split_search_value(dn)
-          attr ||= dn_attribute
-          filter = [attr, escape_filter_value(value, true)]
-          if prefix
-            filter = [:and,
-                      filter,
-                      [dn, "*,#{escape_filter_value(prefix)},#{base}"]]
-          end
-          filter
-        end
-        filter = [:or, *dn_filters]
-        filter = [:and, filter, options[:filter]] if options[:filter]
-        result = find_every(options.merge(:filter => filter))
-        if result.size == dns.size
-          result
-        else
-          message = "Couldn't find all #{name} with DNs (#{dns.join(', ')})"
-          message << " #{options[:filter]}"if options[:filter]
-          raise EntryNotFound, message
-        end
-      end
-
-      def split_search_value(value)
-        attr = prefix = nil
-        begin
-          dn = DN.parse(value)
-          attr, value = dn.rdns.first.to_a.first
-          rest = dn.rdns[1..-1]
-          prefix = DN.new(*rest).to_s unless rest.empty?
-        rescue DistinguishedNameInvalid
-          begin
-            dn = DN.parse("DUMMY=#{value}")
-            _, value = dn.rdns.first.to_a.first
-            rest = dn.rdns[1..-1]
-            prefix = DN.new(*rest).to_s unless rest.empty?
-          rescue DistinguishedNameInvalid
-          end
-        end
-
-        prefix = nil if prefix == base
-        prefix = truncate_base(prefix) if prefix
-        [attr, value, prefix]
-      end
-
-      def escape_filter_value(value, without_asterisk=false)
-        value.gsub(/[\*\(\)\\\0]/) do |x|
-          if without_asterisk and x == "*"
-            x
-          else
-            "\\%02x" % x[0]
-          end
-        end
-      end
-
-      def ensure_dn(target)
-        attr, value, prefix = split_search_value(target)
-        "#{attr || dn_attribute}=#{value},#{prefix || base}"
-      end
-
-      def ensure_dn_attribute(target)
-        "#{dn_attribute}=" +
-          target.gsub(/^\s*#{Regexp.escape(dn_attribute)}\s*=\s*/i, '')
-      end
-
-      def ensure_base(target)
-        [truncate_base(target),  base].join(',')
-      end
-
-      def truncate_base(target)
-        if /,/ =~ target
-          begin
-            (DN.parse(target) - DN.parse(base)).to_s
-          rescue DistinguishedNameInvalid, ArgumentError
-            target
-          end
-        else
-          target
-        end
-      end
-
       def ensure_logger
         @@logger ||= configuration[:logger]
         # Setup default logger to console
@@ -702,8 +346,9 @@ module ActiveLdap
         configuration[:logger] ||= @@logger
       end
 
-      def instantiate(entry)
-        dn, attributes = entry
+      def instantiate(args)
+        dn, attributes, options = args
+        options ||= {}
         if self.class == Class
           klass = self.ancestors[0].to_s.split(':').last
           real_klass = self.ancestors[0]
@@ -713,6 +358,8 @@ module ActiveLdap
         end
 
         obj = real_klass.allocate
+        conn = options[:connection] || connection
+        obj.connection = conn if conn != connection
         obj.instance_eval do
           initialize_by_ldap_data(dn, attributes)
         end
@@ -883,6 +530,10 @@ module ActiveLdap
       end
     end
 
+    def delete(options={})
+      super(dn, options)
+    end
+
     # save
     #
     # Save and validate this object into LDAP
@@ -997,7 +648,7 @@ module ActiveLdap
     end
 
     def to_ldif
-      self.class.to_ldif(dn, normalize_data(@data))
+      super(dn, normalize_data(@data))
     end
 
     def to_xml(options={})
@@ -1030,7 +681,8 @@ module ActiveLdap
     alias_method :has_attribute?, :have_attribute?
 
     def reload
-      _, attributes = self.class.search(:value => id).find do |_dn, _attributes|
+      clear_association_cache
+      _, attributes = search(:value => id).find do |_dn, _attributes|
         dn == _dn
       end
       raise EntryNotFound, "Can't find dn '#{dn}' to reload" if attributes.nil?
@@ -1059,6 +711,21 @@ module ActiveLdap
       @data.each do |key, values|
         yield(key.dup, values.dup)
       end
+    end
+
+    def establish_connection(config={})
+      super
+      before_connection = @connection
+      begin
+        @connection = nil
+        connection.connect
+        @connection = connection
+      rescue ActiveLdap::Error
+        remove_connection
+        @connection = before_connection
+        raise
+      end
+      true
     end
 
     private
@@ -1094,6 +761,18 @@ module ActiveLdap
       yield self if block_given?
     end
 
+    def instantiate(args)
+      dn, attributes, options = args
+      options ||= {}
+
+      obj = self.class.allocate
+      obj.connection = options[:connection] || @connection
+      obj.instance_eval do
+        initialize_by_ldap_data(dn, attributes)
+      end
+      obj
+    end
+
     def to_real_attribute_name(name, allow_normalized_name=false)
       ensure_apply_object_class
       name = name.to_s
@@ -1123,7 +802,7 @@ module ActiveLdap
       logger.debug {"stub: enforce_type called"}
       ensure_apply_object_class
       # Enforce attribute value formatting
-      result = self.class.normalize_attribute(key, value)[1]
+      result = normalize_attribute(key, value)[1]
       logger.debug {"stub: enforce_types done"}
       result
     end
@@ -1137,6 +816,8 @@ module ActiveLdap
       @attr_aliases = {} # aliases of @attr_methods
       @last_oc = false # for use in other methods for "caching"
       @base = nil
+      @ldap_scope = nil
+      @connection ||= nil
     end
 
     # apply_object_class
@@ -1196,6 +877,17 @@ module ActiveLdap
     undef_method :base=
     def base=(object_local_base)
       @base = object_local_base
+    end
+
+    alias_method :ldap_scope_of_class, :ldap_scope
+    def ldap_scope
+      @ldap_scope || ldap_scope_of_class
+    end
+
+    undef_method :ldap_scope=
+    def ldap_scope=(scope)
+      self.class.validate_ldap_scope(scope)
+      @ldap_scope = scope
     end
 
     # get_attribute
@@ -1359,12 +1051,12 @@ module ActiveLdap
       result
     end
 
-    def collect_modified_entries(ldap_data, data)
-      entries = []
-      # Now that all the subtypes will be treated as unique attributes
+    def collect_modified_attributes(ldap_data, data)
+      attributes = []
+      # Now that all the options will be treated as unique attributes
       # we can see what's changed and add anything that is brand-spankin'
       # new.
-      logger.debug {'#collect_modified_entries: traversing ldap_data ' +
+      logger.debug {'#collect_modified_attributes: traversing ldap_data ' +
                       'determining replaces and deletes'}
       ldap_data.each do |k, v|
         value = data[k] || []
@@ -1376,60 +1068,59 @@ module ActiveLdap
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
-          logger.debug {"#save: removing attribute from existing entry: #{k}"}
+          logger.debug {"#save: removing attribute: #{k}"}
           if !data.has_key?(k) and schema.binary_required?(k)
             value = [{'binary' => []}]
           end
         else
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
-          logger.debug {"#collect_modified_entries: updating attribute of" +
-                          " existing entry: #{k}: #{value.inspect}"}
+          logger.debug {"#collect_modified_attributes: updating attribute:" +
+                          " #{k}: #{value.inspect}"}
         end
-        entries.push([:replace, k, value])
+        attributes.push([:replace, k, value])
       end
-      logger.debug {'#collect_modified_entries: finished traversing' +
+      logger.debug {'#collect_modified_attributes: finished traversing' +
                       ' ldap_data'}
-      logger.debug {'#collect_modified_entries: traversing data ' +
+      logger.debug {'#collect_modified_attributes: traversing data ' +
                       'determining adds'}
       data.each do |k, v|
         value = v || []
         next if ldap_data.has_key?(k) or value.empty?
 
         # Detect subtypes and account for them
-        logger.debug {"#save: adding attribute to existing entry: " +
-                        "#{k}: #{value.inspect}"}
+        logger.debug {"#save: adding attribute: #{k}: #{value.inspect}"}
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
-        entries.push([:replace, k, value])
+        attributes.push([:replace, k, value])
       end
 
-      entries
+      attributes
     end
 
-    def collect_all_entries(data)
+    def collect_all_attributes(data)
       dn_attr = to_real_attribute_name(dn_attribute)
       dn_value = data[dn_attr]
-      logger.debug {'#collect_all_entries: adding all attribute value pairs'}
-      logger.debug {"#collect_all_entries: adding " +
+      logger.debug {'#collect_all_attributes: adding all attribute value pairs'}
+      logger.debug {"#collect_all_attributes: adding " +
                       "#{dn_attr.inspect} = #{dn_value.inspect}"}
 
-      entries = []
-      entries.push([:add, dn_attr, dn_value])
+      attributes = []
+      attributes.push([:add, dn_attr, dn_value])
 
       oc_value = data['objectClass']
-      logger.debug {"#collect_all_entries: adding objectClass = " +
+      logger.debug {"#collect_all_attributes: adding objectClass = " +
                       "#{oc_value.inspect}"}
-      entries.push([:add, 'objectClass', oc_value])
+      attributes.push([:add, 'objectClass', oc_value])
       data.each do |key, value|
         next if value.empty? or key == 'objectClass' or key == dn_attr
 
-        logger.debug {"#collect_all_entries: adding attribute to new " +
-                        "entry: #{key.inspect}: #{value.inspect}"}
-        entries.push([:add, key, value])
+        logger.debug {"#collect_all_attributes: adding attribute: " +
+                        "#{key.inspect}: #{value.inspect}"}
+        attributes.push([:add, key, value])
       end
 
-      entries
+      attributes
     end
 
     def check_configuration
@@ -1446,14 +1137,14 @@ module ActiveLdap
     def prepare_data_for_saving
       logger.debug {"stub: save called"}
 
-      # Expand subtypes to real ldap_data entries
+      # Expand subtypes to real ldap_data attributes
       # We can't reuse @ldap_data because an exception would leave
       # an object in an unknown state
       logger.debug {"#save: expanding subtypes in @ldap_data"}
       ldap_data = normalize_data(@ldap_data)
       logger.debug {'#save: subtypes expanded for @ldap_data'}
 
-      # Expand subtypes to real data entries, but leave @data alone
+      # Expand subtypes to real data attributes, but leave @data alone
       logger.debug {'#save: expanding subtypes for @data'}
       bad_attrs = @data.keys - attribute_names
       data = normalize_data(@data, bad_attrs)
@@ -1480,9 +1171,9 @@ module ActiveLdap
 
     def create
       prepare_data_for_saving do |data, ldap_data|
-        entries = collect_all_entries(data)
+        attributes = collect_all_attributes(data)
         logger.debug {"#create: adding #{dn}"}
-        self.class.add(dn, entries)
+        add_entry(dn, attributes)
         logger.debug {"#create: add successful"}
         @new_entry = false
         true
@@ -1491,10 +1182,10 @@ module ActiveLdap
 
     def update
       prepare_data_for_saving do |data, ldap_data|
-        entries = collect_modified_entries(ldap_data, data)
+        attributes = collect_modified_attributes(ldap_data, data)
         logger.debug {'#update: traversing data complete'}
         logger.debug {"#update: modifying #{dn}"}
-        self.class.modify(dn, entries)
+        modify_entry(dn, attributes)
         logger.debug {'#update: modify successful'}
         true
       end

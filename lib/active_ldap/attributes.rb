@@ -1,7 +1,11 @@
 module ActiveLdap
   module Attributes
     def self.included(base)
-      base.extend(ClassMethods)
+      base.class_eval do
+        extend(ClassMethods)
+        extend(Normalize)
+        include(Normalize)
+      end
     end
 
     module ClassMethods
@@ -15,7 +19,9 @@ module ActiveLdap
           result + ancestor.instance_eval {@attr_protected ||= []}
         end
       end
+    end
 
+    module Normalize
       def normalize_attribute_name(name)
         name.to_s.downcase
       end
@@ -55,7 +61,7 @@ module ActiveLdap
         else
           values.each do |value|
             if value.is_a?(Hash)
-              suffix, real_value = extract_subtypes(value)
+              suffix, real_value = extract_attribute_options(value)
               new_name = name + suffix
               result[new_name] ||= []
               result[new_name].concat(real_value)
@@ -92,8 +98,9 @@ module ActiveLdap
         end
         # Contents MUST be a String or an Array
         if !value.has_key?('binary') and schema.binary_required?(name)
-          suffix, real_value = extract_subtypes(value)
-          name, values = make_subtypes(name + suffix + ';binary', real_value)
+          suffix, real_value = extract_attribute_options(value)
+          name, values =
+            normalize_attribute_options("#{name}#{suffix};binary", real_value)
           values
         else
           [value]
@@ -129,51 +136,39 @@ module ActiveLdap
         normalize_attribute_value_of_string(name, new_value)
       end
 
-
-      # make_subtypes
+      # normalize_attribute_options
       #
-      # Makes the Hashized value from the full attributename
+      # Makes the Hashized value from the full attribute name
       # e.g. userCertificate;binary => "some_bin"
       #      becomes userCertificate => {"binary" => "some_bin"}
-      def make_subtypes(attr, value)
-        logger.debug {"stub: called make_subtypes(#{attr.inspect}, " +
-                      "#{value.inspect})"}
+      def normalize_attribute_options(attr, value)
+        logger.debug {"stub: called normalize_attribute_options" +
+                      "(#{attr.inspect}, #{value.inspect})"}
         return [attr, value] unless attr.match(/;/)
 
-        ret_attr, *subtypes = attr.split(/;/)
-        return [ret_attr, [make_subtypes_helper(subtypes, value)]]
+        ret_attr, *options = attr.split(/;/)
+        [ret_attr,
+         [options.reverse.inject(value) {|result, option| {option => result}}]]
       end
 
-      # make_subtypes_helper
-      #
-      # This is a recursive function for building
-      # nested hashed from multi-subtyped values
-      def make_subtypes_helper(subtypes, value)
-        logger.debug {"stub: called make_subtypes_helper" +
-                      "(#{subtypes.inspect}, #{value.inspect})"}
-        return value if subtypes.size == 0
-        return {subtypes[0] => make_subtypes_helper(subtypes[1..-1], value)}
-      end
-
-      # extract_subtypes
+      # extract_attribute_options
       #
       # Extracts all of the subtypes from a given set of nested hashes
       # and returns the attribute suffix and the final true value
-      def extract_subtypes(value)
-        logger.debug {"stub: called extract_subtypes(#{value.inspect})"}
-        subtype = ''
+      def extract_attribute_options(value)
+        logger.debug {"stub: called extract_attribute_options(#{value.inspect})"}
+        options = ''
         ret_val = value
         if value.class == Hash
-          subtype = ';' + value.keys[0]
+          options = ';' + value.keys[0]
           ret_val = value[value.keys[0]]
-          subsubtype = ''
           if ret_val.class == Hash
-            subsubtype, ret_val = extract_subtypes(ret_val)
+            sub_options, ret_val = extract_attribute_options(ret_val)
+            options += sub_options
           end
-          subtype += subsubtype
         end
         ret_val = [ret_val] unless ret_val.class == Array
-        return subtype, ret_val
+        [options, ret_val]
       end
     end
 

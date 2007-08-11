@@ -47,23 +47,26 @@ module ActiveLdap
 
       def connection=(adapter)
         if adapter.is_a?(Adapter::Base)
-          @schema = nil
           active_connections[active_connection_name] = adapter
         elsif adapter.is_a?(Hash)
           config = adapter
-          adapter = (config[:adapter] || "ldap")
-          normalized_adapter = adapter.downcase.gsub(/-/, "_")
-          adapter_method = "#{normalized_adapter}_connection"
-          unless Adapter::Base.respond_to?(adapter_method)
-            raise AdapterNotFound.new(adapter)
-          end
-          config = remove_connection_related_configuration(config)
-          self.connection = Adapter::Base.send(adapter_method, config)
+          self.connection = instantiate_adapter(config)
         elsif adapter.nil?
           raise ConnectionNotEstablished
         else
           establish_connection(adapter)
         end
+      end
+
+      def instantiate_adapter(config)
+        adapter = (config[:adapter] || "ldap")
+        normalized_adapter = adapter.downcase.gsub(/-/, "_")
+        adapter_method = "#{normalized_adapter}_connection"
+        unless Adapter::Base.respond_to?(adapter_method)
+          raise AdapterNotFound.new(adapter)
+        end
+        config = remove_connection_related_configuration(config)
+        Adapter::Base.send(adapter_method, config)
       end
 
       def connected?
@@ -85,8 +88,12 @@ module ActiveLdap
         conn
       end
 
-      def remove_connection(klass=self)
-        key = active_connection_key(klass)
+      def remove_connection(klass_or_key=self)
+        if klass_or_key.is_a?(String)
+          key = klass_or_key
+        else
+          key = active_connection_key(klass_or_key)
+        end
         config = configuration(key)
         conn = active_connections[key]
         remove_configuration_by_configuration(config)
@@ -107,7 +114,7 @@ module ActiveLdap
 
       # Return the schema object
       def schema
-        @schema ||= connection.schema
+        connection.schema
       end
 
       private
@@ -127,16 +134,50 @@ module ActiveLdap
       end
     end
 
-    def connection
-      self.class.connection
+    def establish_connection(config=nil)
+      config = self.class.ensure_configuration(config)
+      config = self.class.configuration.merge(config)
+      config = self.class.merge_configuration(config, self)
+
+      remove_connection
+      self.class.define_configuration(dn, config)
     end
 
-    # schema
-    #
-    # Returns the value of self.class.schema
-    # This is just syntactic sugar
+    def remove_connection
+      self.class.remove_connection(dn)
+    end
+
+    def connection
+      conn = @connection
+      conn ||= self.class.active_connections[dn] || retrieve_connection if id
+      conn || self.class.connection
+    end
+
+    def connection=(adapter)
+      if adapter.nil? or adapter.is_a?(Adapter::Base)
+        @connection = adapter
+      elsif adapter.is_a?(Hash)
+        config = adapter
+        @connection = self.class.instantiate_adapter(config)
+      else
+        establish_connection(adapter)
+      end
+    end
+
+    def retrieve_connection
+      conn = self.class.active_connections[dn]
+      return conn if conn
+
+      config = self.class.configuration(dn)
+      return nil unless config
+
+      conn = self.class.instantiate_adapter(config)
+      @connection = self.class.active_connections[dn] = conn
+      conn
+    end
+
     def schema
-      self.class.schema
+      connection.schema
     end
   end
 end

@@ -18,9 +18,10 @@ module ActiveLdap
         if components.empty?
           targets = []
         elsif foreign_base_key == "dn"
-          targets = foreign_class.find(components)
+          targets = foreign_class.find(components, find_options)
         else
-          targets = foreign_class.find(:all, :filter => [:or, *components])
+          options = find_options(:filter => [:or, *components])
+          targets = foreign_class.find(:all, options)
         end
 
         if need_requested_targets
