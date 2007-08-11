@@ -95,10 +95,10 @@ module ActiveLdap
       end
 
       def remove_connection(klass_or_key=self)
-        if klass_or_key.is_a?(String)
-          key = klass_or_key
-        else
+        if klass_or_key.is_a?(Module)
           key = active_connection_key(klass_or_key)
+        else
+          key = klass_or_key
         end
         config = configuration(key)
         conn = active_connections[key]
