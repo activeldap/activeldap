@@ -177,7 +177,7 @@
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'cn',
 #                  :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
-#                  :scope => LDAP::LDAP_SCOPE_ONELEVEL
+#                  :scope => :one
 #   end
 #
 # As you can see, this method is used for defining how this class maps in to LDAP.  Let's say that
@@ -473,7 +473,7 @@
 # * :method indicates whether to use :ssl, :tls, or :plain
 # * :retries - indicates the number of attempts to reconnect that will be undertaken when a stale connection occurs. -1 means infinite.
 # * :retry_wait - seconds to wait before retrying a connection
-# * :ldap_scope - dictates how to find objects. (Default: ONELEVEL)
+# * :scope - dictates how to find objects. (Default: :one)
 # * :timeout - time in seconds - defaults to disabled. This CAN interrupt search() requests. Be warned.
 # * :retry_on_timeout - whether to reconnect when timeouts occur. Defaults to true
 # See lib/configuration.rb for defaults for each option

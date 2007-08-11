@@ -43,9 +43,15 @@ module ActiveLdap
         filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
         filter = [:and, filter, *object_class_filters(classes)]
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
+        if options.has_key?(:ldap_scope)
+          logger.warning do
+            ":ldap_scope search option is deprecated. Use :scope instead."
+          end
+          options[:scope] ||= options[:ldap_scope]
+        end
         search_options = {
           :base => _base,
-          :scope => options[:scope] || ldap_scope,
+          :scope => options[:scope] || scope,
           :filter => filter,
           :limit => options[:limit],
           :attributes => options[:attributes],
@@ -281,7 +287,7 @@ module ActiveLdap
     module LDIF
       def dump(options={})
         ldifs = []
-        options = {:base => base, :scope => ldap_scope}.merge(options)
+        options = {:base => base, :scope => scope}.merge(options)
         conn = options[:connection] || connection
         conn.search(options) do |dn, attributes|
           ldifs << to_ldif(dn, attributes)
@@ -332,7 +338,7 @@ module ActiveLdap
       end
 
       def delete_all(filter=nil, options={})
-        options = {:base => base, :scope => ldap_scope}.merge(options)
+        options = {:base => base, :scope => scope}.merge(options)
         options = options.merge(:filter => filter) if filter
         conn = options[:connection] || connection
         targets = conn.search(options).collect do |dn, attributes|

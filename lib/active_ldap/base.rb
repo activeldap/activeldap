@@ -201,7 +201,7 @@ module ActiveLdap
     end
 
     class_local_attr_accessor false, :prefix, :base, :dn_attribute
-    class_local_attr_accessor true, :ldap_scope
+    class_local_attr_accessor true, :scope
     class_local_attr_accessor true, :required_classes, :recommended_classes
 
     class << self
@@ -234,7 +234,7 @@ module ActiveLdap
       # :sasl_quiet - if true, sets @sasl_quiet on the Ruby/LDAP connection
       # :method - whether to use :ssl, :tls, or :plain (unencrypted)
       # :retry_wait - seconds to wait before retrying a connection
-      # :ldap_scope - dictates how to find objects. ONELEVEL by default to
+      # :scope - dictates how to find objects. ONELEVEL by default to
       #   avoid dn_attr collisions across OUs. Think before changing.
       # :timeout - time in seconds - defaults to disabled. This CAN interrupt
       #   search() requests. Be warned.
@@ -276,7 +276,7 @@ module ActiveLdap
 
         self.dn_attribute = dn_attribute
         self.prefix = prefix
-        self.ldap_scope = scope
+        self.scope = scope
         self.required_classes = classes
         self.recommended_classes = recommended_classes
 
@@ -303,17 +303,16 @@ module ActiveLdap
         end.join(",")
       end
 
-      alias_method :ldap_scope_without_validation=, :ldap_scope=
-      def ldap_scope=(scope)
-        validate_ldap_scope(scope)
-        self.ldap_scope_without_validation = scope
+      alias_method :scope_without_validation=, :scope=
+      def scope=(scope)
+        validate_scope(scope)
+        self.scope_without_validation = scope
       end
 
-      def validate_ldap_scope(scope)
+      def validate_scope(scope)
         scope = scope.to_sym if scope.is_a?(String)
         return if scope.nil? or scope.is_a?(Symbol)
-        raise ConfigurationError,
-                ":ldap_scope '#{scope.inspect}' must be a Symbol"
+        raise ConfigurationError, "scope '#{scope.inspect}' must be a Symbol"
       end
 
       def base_class
@@ -388,7 +387,7 @@ module ActiveLdap
       end
     end
 
-    self.ldap_scope = :sub
+    self.scope = :sub
     self.required_classes = ['top']
     self.recommended_classes = []
 
@@ -817,7 +816,7 @@ module ActiveLdap
       @attr_aliases = {} # aliases of @attr_methods
       @last_oc = false # for use in other methods for "caching"
       @base = nil
-      @ldap_scope = nil
+      @scope = nil
       @connection ||= nil
     end
 
@@ -880,15 +879,15 @@ module ActiveLdap
       @base = object_local_base
     end
 
-    alias_method :ldap_scope_of_class, :ldap_scope
-    def ldap_scope
-      @ldap_scope || ldap_scope_of_class
+    alias_method :scope_of_class, :scope
+    def scope
+      @scope || scope_of_class
     end
 
-    undef_method :ldap_scope=
-    def ldap_scope=(scope)
-      self.class.validate_ldap_scope(scope)
-      @ldap_scope = scope
+    undef_method :scope=
+    def scope=(scope)
+      self.class.validate_scope(scope)
+      @scope = scope
     end
 
     # get_attribute
