@@ -720,6 +720,7 @@ module ActiveLdap
         @connection = nil
         connection.connect
         @connection = connection
+        clear_association_cache
       rescue ActiveLdap::Error
         remove_connection
         @connection = before_connection

@@ -64,7 +64,7 @@ module AlTestUtils
     end
 
     def teardown
-      ActiveLdap::Base.clear_active_connections!
+      ActiveLdap::Base.remove_active_connections!
       super
     end
   end
@@ -187,7 +187,7 @@ module AlTestUtils
       @user_index += 1
       uid = config[:uid] || "temp-user#{@user_index}"
       ensure_delete_user(uid) do
-        password = config[:password] || "password"
+        password = config[:password] || "password#{@user_index}"
         uid_number = config[:uid_number] || default_uid
         gid_number = config[:gid_number] || default_gid
         home_directory = config[:home_directory] || "/nonexistent"
@@ -240,7 +240,10 @@ module AlTestUtils
     def ensure_delete_user(uid)
       yield(uid)
     ensure
-      @user_class.delete(uid) if @user_class.exists?(uid)
+      if @user_class.exists?(uid)
+        @user_class.find(uid).remove_connection
+        @user_class.delete(uid)
+      end
     end
 
     def ensure_delete_group(cn)

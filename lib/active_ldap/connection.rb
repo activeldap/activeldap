@@ -15,6 +15,12 @@ module ActiveLdap
         @active_connection_name ||= determine_active_connection_name
       end
 
+      def remove_active_connections!
+        active_connections.keys.each do |key|
+          remove_connection(key)
+        end
+      end
+
       def clear_active_connections!
         connections = active_connections
         connections.each do |key, connection|
