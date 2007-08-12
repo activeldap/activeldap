@@ -73,10 +73,36 @@ task :uninstall do
   end
 end
 
-
 desc 'Tag the repository for release.'
 task :tag do
   system "svn copy -m 'New release tag' https://ruby-activeldap.googlecode.com/svn/trunk https://ruby-activeldap.googlecode.com/svn/tags/r#{ActiveLdap::VERSION}"
+end
+
+
+desc "Update *.po/*.pot files and create *.mo from *.po files"
+task :gettext => ["getext:po:update", "gettext:mo:create"]
+
+namespace :gettext do
+  desc "Setup environment for GetText"
+  task :environment do
+    require "gettext/utils"
+  end
+
+  namespace :po do
+    desc "Update po/pot files (GetText)"
+    task :update => "gettext:environment" do
+      GetText.update_pofiles("active-ldap",
+                             Dir.glob("lib/**/*.rb"),
+                             "Ruby/ActiveLdap #{ActiveLdap::VERSION}")
+    end
+  end
+
+  namespace :mo do
+    desc "Create *.mo from *.po (GetText)"
+    task :create => "gettext:environment" do
+      GetText.create_mofiles(false)
+    end
+  end
 end
 
 # vim: syntax=ruby
