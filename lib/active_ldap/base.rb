@@ -463,10 +463,17 @@ module ActiveLdap
     #
     # Return attribute methods so that a program can determine available
     # attributes dynamically without schema awareness
-    def attribute_names
+    def attribute_names(normalize=false)
       logger.debug {"stub: attribute_names called"}
       ensure_apply_object_class
-      return @attr_methods.keys
+      names = @attr_methods.keys
+      if normalize
+        names.collect do |name|
+          to_real_attribute_name(name)
+        end.uniq
+      else
+        names
+      end
     end
 
     def attribute_present?(name)
@@ -616,7 +623,7 @@ module ActiveLdap
 
     # Updates a given attribute and saves immediately
     def update_attribute(name, value)
-      set_attribute(name, value) if have_attribute?(name)
+      send("#{name}=", value)
       save
     end
 
@@ -625,6 +632,11 @@ module ActiveLdap
     def update_attributes(attrs)
       self.attributes = attrs
       save
+    end
+
+    def update_attributes!(attrs)
+      self.attributes = attrs
+      save!
     end
 
     # This returns the key value pairs in @data with all values
@@ -642,7 +654,7 @@ module ActiveLdap
     def attributes=(hash_or_assoc)
       targets = remove_attributes_protected_from_mass_assignment(hash_or_assoc)
       targets.each do |key, value|
-        set_attribute(key, value) if have_attribute?(key)
+        send("#{key}=", value)
       end
     end
 

@@ -181,9 +181,9 @@ module ActiveLdap
       end
 
       targets.collect do |key, value|
-        [to_real_attribute_name(key), value]
+        [to_real_attribute_name(key) || key, value]
       end.reject do |key, value|
-        key.nil? or needless_attributes[key]
+        needless_attributes[key]
       end
     end
 
