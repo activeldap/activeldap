@@ -165,6 +165,10 @@ module ActiveLdap
       conn || self.class.connection
     end
 
+    def connected?
+      connection != self.class.connection
+    end
+
     def connection=(adapter)
       if adapter.nil? or adapter.is_a?(Adapter::Base)
         @connection = adapter

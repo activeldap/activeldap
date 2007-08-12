@@ -93,6 +93,10 @@ module ActiveLdap
       end
       alias_method :exists?, :exist?
 
+      def count(options={})
+        search(options).size
+      end
+
       private
       def validate_search_options(options)
         options.assert_valid_keys(VALID_SEARCH_OPTIONS)

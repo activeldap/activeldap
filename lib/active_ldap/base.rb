@@ -713,7 +713,10 @@ module ActiveLdap
     end
 
     def establish_connection(config={})
-      super
+      if config.is_a?(Hash)
+        config = {:bind_dn => dn, :allow_anonymous => false}.merge(config)
+      end
+      super(config)
       before_connection = @connection
       begin
         @connection = nil
