@@ -6,6 +6,7 @@ README
 Rakefile
 TODO
 benchmark/bench-al.rb
+data/locale/ja/LC_MESSAGES/active-ldap.mo
 examples/config.yaml.example
 examples/example.der
 examples/example.jpg
@@ -37,6 +38,7 @@ lib/active_ldap/association/belongs_to.rb
 lib/active_ldap/association/belongs_to_many.rb
 lib/active_ldap/association/collection.rb
 lib/active_ldap/association/has_many.rb
+lib/active_ldap/association/has_many_utils.rb
 lib/active_ldap/association/has_many_wrap.rb
 lib/active_ldap/association/proxy.rb
 lib/active_ldap/associations.rb
@@ -47,13 +49,16 @@ lib/active_ldap/command.rb
 lib/active_ldap/configuration.rb
 lib/active_ldap/connection.rb
 lib/active_ldap/distinguished_name.rb
+lib/active_ldap/get_text_fallback.rb
 lib/active_ldap/ldap_error.rb
 lib/active_ldap/object_class.rb
+lib/active_ldap/operations.rb
 lib/active_ldap/schema.rb
 lib/active_ldap/timeout.rb
 lib/active_ldap/timeout_stub.rb
 lib/active_ldap/user_password.rb
 lib/active_ldap/validations.rb
+po/ja/active-ldap.po
 rails/plugin/active_ldap/README
 rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb
 rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml
@@ -65,6 +70,8 @@ test/config.yaml.sample
 test/run-test.rb
 test/test-unit-ext.rb
 test/test-unit-ext/always-show-result.rb
+test/test-unit-ext/backtrace-filter.rb
+test/test-unit-ext/long-display-for-emacs.rb
 test/test-unit-ext/priority.rb
 test/test_adapter.rb
 test/test_associations.rb
@@ -75,6 +82,7 @@ test/test_bind.rb
 test/test_callback.rb
 test/test_connection.rb
 test/test_connection_per_class.rb
+test/test_connection_per_dn.rb
 test/test_dn.rb
 test/test_find.rb
 test/test_groupadd.rb

@@ -80,7 +80,7 @@ end
 
 
 desc "Update *.po/*.pot files and create *.mo from *.po files"
-task :gettext => ["getext:po:update", "gettext:mo:create"]
+task :gettext => ["gettext:po:update", "gettext:mo:create"]
 
 namespace :gettext do
   desc "Setup environment for GetText"
@@ -104,5 +104,7 @@ namespace :gettext do
     end
   end
 end
+
+task(:gem).prerequisites.unshift("gettext:mo:create")
 
 # vim: syntax=ruby
