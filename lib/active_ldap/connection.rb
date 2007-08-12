@@ -6,9 +6,32 @@ module ActiveLdap
 
     module ClassMethods
       @@active_connections = {}
+      @@allow_concurrency = false
 
-      def active_connections
+      def thread_safe_active_connections
         @@active_connections[Thread.current.object_id] ||= {}
+      end
+
+      def single_threaded_active_connections
+        @@active_connections
+      end
+
+      if @@allow_concurrency
+        alias_method :active_connections, :thread_safe_active_connections
+      else
+        alias_method :active_connections, :single_threaded_active_connections
+      end
+
+      def allow_concurrency=(threaded) #:nodoc:
+        logger.debug {"allow_concurrency=#{threaded}"} if logger
+        return if @@allow_concurrency == threaded
+        clear_all_cached_connections!
+        @@allow_concurrency = threaded
+        method_prefix = threaded ? "thread_safe" : "single_threaded"
+        sing = (class << self; self; end)
+        [:active_connections].each do |method|
+          sing.send(:alias_method, method, "#{method_prefix}_#{method}")
+        end
       end
 
       def active_connection_name
@@ -143,6 +166,18 @@ module ActiveLdap
         else
           superclass.active_connection_name
         end
+      end
+
+      def clear_all_cached_connections!
+        if @@allow_concurrency
+          @@active_connections.each_value do |connection_hash_for_thread|
+            connection_hash_for_thread.each_value {|conn| conn.disconnect!}
+            connection_hash_for_thread.clear
+          end
+        else
+          @@active_connections.each_value {|conn| conn.disconnect!}
+        end
+        @@active_connections.clear
       end
     end
 
