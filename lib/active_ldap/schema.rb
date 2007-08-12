@@ -1,5 +1,69 @@
 module ActiveLdap
   class Schema
+    class ObjectClass
+      attr_reader :must, :may, :super_classes
+      def initialize(name, schema)
+        @name = name
+        @schema = schema
+        collect_info
+      end
+
+      def super_class?(object_class)
+        @super_classes.include?(object_class)
+      end
+
+      private
+      def collect_info
+        @super_classes = collect_super_classes
+        @must, @may = collect_attributes
+      end
+
+      def collect_super_classes
+        super_classes = attribute('SUP')
+        loop do
+          start_size = super_classes.size
+          new_super_classes = []
+          super_classes.each do |super_class|
+            new_super_classes.concat(attribute('SUP', super_class))
+          end
+
+          super_classes.concat(new_super_classes)
+          super_classes.uniq!
+          break if super_classes.size == start_size
+        end
+        super_classes
+      end
+
+      def collect_attributes
+        must = attribute('MUST')
+        may = attribute('MAY')
+
+        @super_classes.each do |super_class|
+          must.concat(attribute('MUST', super_class))
+          may.concat(attribute('MAY', super_class))
+        end
+
+        # Clean out the dupes.
+        must.uniq!
+        may.uniq!
+        if @name == "inetOrgPerson"
+          may.collect! do |name|
+            if name == "x500uniqueIdentifier"
+              "x500UniqueIdentifier"
+            else
+              name
+            end
+          end
+        end
+
+        [must, may]
+      end
+
+      def attribute(attribute_name, name=@name)
+        @schema.object_class_attribute(name, attribute_name)
+      end
+    end
+
     def initialize(entries)
       @entries = default_entries.merge(entries || {})
       @schema_info = {}
@@ -131,51 +195,15 @@ module ActiveLdap
       end
     end
 
-    # class_attributes
-    #
-    # Returns an Array of all the valid attributes (but not with full aliases)
-    # for the given objectClass
-    def class_attributes(objc)
-      cache([:class_attributes, objc]) do
-        # First get all the current level attributes
-        must = object_class(objc, 'MUST')
-        may = object_class(objc, 'MAY')
+    def object_class(objc)
+      cache([:object_class, objc]) do
+        ObjectClass.new(objc, self)
+      end
+    end
 
-        # Now add all attributes from the parent object (SUPerclasses)
-        # Hopefully an iterative approach will be pretty speedy
-        # 1. build complete list of SUPs
-        # 2. Add attributes from each
-        sups = object_class(objc, 'SUP')
-        loop do
-          start_size = sups.size
-          new_sups = []
-          sups.each do |sup|
-            new_sups.concat(object_class(sup, 'SUP'))
-          end
-
-          sups.concat(new_sups)
-          sups.uniq!
-          break if sups.size == start_size
-        end
-        sups.each do |sup|
-          must.concat(object_class(sup, 'MUST'))
-          may.concat(object_class(sup, 'MAY'))
-        end
-
-        # Clean out the dupes.
-        must.uniq!
-        may.uniq!
-        if objc == "inetOrgPerson"
-          may.collect! do |name|
-            if name == "x500uniqueIdentifier"
-              "x500UniqueIdentifier"
-            else
-              name
-            end
-          end
-        end
-
-        {:must => must, :may => may}
+    def object_class_attribute(name, attribute_name)
+      cache([:object_class_attribute, name, attribute_name]) do
+        attribute("objectClasses", name, attribute_name)
       end
     end
 
@@ -262,12 +290,6 @@ module ActiveLdap
       return [] unless @entries.has_key?("ldapSyntaxes")
       cache([:ldap_syntax, name, attribute_name]) do
         attribute("ldapSyntaxes", name, attribute_name)
-      end
-    end
-
-    def object_class(name, attribute_name)
-      cache([:object_class, name, attribute_name]) do
-        attribute("objectClasses", name, attribute_name)
       end
     end
 

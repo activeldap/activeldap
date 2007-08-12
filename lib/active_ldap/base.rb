@@ -852,9 +852,9 @@ module ActiveLdap
       @mays = {}
       new_oc.each do |objc|
         # get all attributes for the class
-        attributes = schema.class_attributes(objc)
-        @musts[objc] = attributes[:must]
-        @mays[objc] = attributes[:may]
+        object_class = schema.object_class(objc)
+        @musts[objc] = object_class.must
+        @mays[objc] = object_class.may
       end
       @must = normalize_attribute_names(@musts.values)
       @may = normalize_attribute_names(@mays.values)
