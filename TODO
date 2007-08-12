@@ -1,4 +1,4 @@
-- Test  SASL bind.
+- Test SASL bind.
 - Add result pagination via LDAP::Controls
 - serialize & serialized_attributes
 - schema mgmt - how does AR handle it?
@@ -8,7 +8,6 @@ http://api.rubyonrails.com/classes/ActiveRecord/Base.html#M000865
 - handle all exception raised from Ruby/LDAP and wrap as
   ActiveLdap exception. I think we need to develop an
   application using ActiveLdap.
-- support Ruby/GetText.
 - Add locking around Timeout.alarm() to ensure a multithreaded ruby
   app doesn't hit any race conditions
 - Add AR matching exceptions:
