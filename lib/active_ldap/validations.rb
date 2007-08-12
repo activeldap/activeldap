@@ -9,6 +9,15 @@ module ActiveLdap
         alias_method :new_record?, :new_entry?
         include ActiveRecord::Validations
 
+        # Workaround for GetText's ugly implementation
+        begin
+          instance_method(:save_without_validation)
+        rescue NameError
+          alias_method_chain :save, :validation
+          alias_method_chain :save!, :validation
+          alias_method_chain :update_attribute, :validation_skipping
+        end
+
         validate :validate_required_values
 
         class << self
@@ -49,12 +58,25 @@ module ActiveLdap
               # Check for missing requirements.
               if value.empty?
                 aliases = schema.attribute_aliases(real_name) - [real_name]
-                message = "is required attribute "
-                unless aliases.empty?
-                  message << "(aliases: #{aliases.join(', ')}) "
+                args = [object_class]
+                if ActiveLdap.const_defined?(:GetTextFallback)
+                  if aliases.empty?
+                    format = "is required attribute by objectClass '%s'"
+                  else
+                    format = "is required attribute by objectClass '%s'" \
+                             ": aliases: %s"
+                    args << aliases.join(', ')
+                  end
+                else
+                  if aliases.empty?
+                    format = "%{fn} is required attribute by objectClass '%s'"
+                  else
+                    format = "%{fn} is required attribute by objectClass '%s'" \
+                             ": aliases: %s"
+                    args << aliases.join(', ')
+                  end
                 end
-                message << "by objectClass '#{object_class}'"
-                errors.add(real_name, message)
+                errors.add(real_name, format % args)
               end
             end
           end

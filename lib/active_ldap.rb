@@ -905,12 +905,6 @@
 # package, and I'd like to see it prove helpful to more people than just myself.
 #
 
-if RUBY_PLATFORM.match('linux')
-  require 'active_ldap/timeout'
-else
-  require 'active_ldap/timeout_stub'
-end
-
 require_gem_if_need = Proc.new do |library_name, gem_name|
   begin
     require library_name
@@ -927,6 +921,38 @@ if Dependencies.respond_to?(:load_paths)
   Dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
 end
 
+module ActiveLdap
+  VERSION = "0.8.2"
+end
+
+if RUBY_PLATFORM.match('linux')
+  require 'active_ldap/timeout'
+else
+  require 'active_ldap/timeout_stub'
+end
+
+require_gem_if_need.call("active_record/base", "activerecord")
+begin
+  require_gem_if_need.call("gettext/active_record", "gettext")
+  ActiveLdap.const_set("GetText", GetText)
+rescue LoadError
+  require 'active_ldap/get_text_fallback'
+end
+
+module ActiveLdap
+  module GetTextSupport
+    class << self
+      def included(base)
+        base.class_eval do
+          include(GetText)
+          bindtextdomain("active-ldap")
+        end
+      end
+    end
+  end
+end
+
+
 require 'active_ldap/base'
 require 'active_ldap/associations'
 require 'active_ldap/configuration'
@@ -936,13 +962,9 @@ require 'active_ldap/attributes'
 require 'active_ldap/object_class'
 require 'active_ldap/distinguished_name'
 
-require_gem_if_need.call("active_record/base", "activerecord")
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
 
-module ActiveLdap
-  VERSION = "0.8.2"
-end
 
 ActiveLdap::Base.class_eval do
   include ActiveLdap::Configuration

@@ -96,7 +96,7 @@ module ActiveLdap
         end
         if config.has_key?(:ldap_scope)
           logger.warning do
-            ":ldap_scope connection option is deprecated. Use :scope instead."
+            _(":ldap_scope connection option is deprecated. Use :scope instead.")
           end
           config[:scope] ||= config.delete(:ldap_scope)
         end

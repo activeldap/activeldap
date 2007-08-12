@@ -43,11 +43,11 @@ module ActiveLdap
         new_class.is_a?(String)
       end
       unless invalid_classes.empty?
-        message = "Value in objectClass array is not a String"
+        format = _("Value in objectClass array is not a String: %s")
         invalid_classes_info = invalid_classes.collect do |invalid_class|
           "#{invalid_class.class}:#{invalid_class.inspect}"
         end.join(", ")
-        raise TypeError,  "#{message}: #{invalid_classes_info}"
+        raise TypeError, format % invalid_classes_info
       end
     end
 
@@ -56,8 +56,8 @@ module ActiveLdap
         schema.exist_name?("objectClasses", new_class)
       end
       unless invalid_classes.empty?
-        message = "unknown objectClass in LDAP server"
-        message = "#{message}: #{invalid_classes.join(', ')}"
+        format = _("unknown objectClass in LDAP server: %s")
+        message = format % invalid_classes.join(', ')
         raise ObjectClassError, message
       end
     end
@@ -71,9 +71,9 @@ module ActiveLdap
            end)
       end
       unless required_classes.empty?
-        raise RequiredObjectClassMissed,
-                "Can't remove required objectClass: " +
-                 required_classes.join(", ")
+        format = _("Can't remove required objectClass: %s")
+        message = format % required_classes.join(", ")
+        raise RequiredObjectClassMissed, message
       end
     end
   end

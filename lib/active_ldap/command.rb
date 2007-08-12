@@ -3,6 +3,8 @@ require 'ostruct'
 
 module ActiveLdap
   module Command
+    include GetTextSupport
+
     module_function
     def parse_options(argv=nil, version=nil)
       argv ||= ARGV.dup
@@ -11,21 +13,21 @@ module ActiveLdap
         yield(opts, options)
 
         opts.separator ""
-        opts.separator "Common options:"
+        opts.separator _("Common options:")
 
         opts.on_tail("--config=CONFIG",
-                     "Specify configuration file written as YAML") do |file|
+                     _("Specify configuration file written as YAML")) do |file|
           require 'yaml'
           config = YAML.load(File.read(file)).symbolize_keys
           Configuration::DEFAULT_CONFIG.update(config)
         end
 
-        opts.on_tail("-h", "--help", "Show this message") do
+        opts.on_tail("-h", "--help", _("Show this message")) do
           puts opts
           exit
         end
 
-        opts.on_tail("--version", "Show version") do
+        opts.on_tail("--version", _("Show version")) do
           puts(version || VERSION)
           exit
         end

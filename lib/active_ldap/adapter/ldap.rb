@@ -79,8 +79,10 @@ module ActiveLdap
             end
           rescue RuntimeError
             if $!.message == "no result returned by search"
-              @logger.debug {"No matches for #{filter} and attrs " +
-                             "#{attrs.inspect}"}
+              @logger.debug do
+                args = [filter, attrs.inspect]
+                _("No matches: filter: %s: attributes: %s") % args
+              end
             else
               raise
             end
@@ -148,7 +150,7 @@ module ActiveLdap
         begin
           super
         rescue LDAP::ServerDown => e
-          @logger.error {"LDAP server is down: #{e.message}"}
+          @logger.error {_("LDAP server is down: %s") % e.message}
           retry if try_reconnect and reconnect(options)
           raise ConnectionError.new(e.message)
         end
@@ -164,9 +166,8 @@ module ActiveLdap
         available_methods = Method.constants.collect do |name|
           name.downcase.to_sym.inspect
         end.join(", ")
-        raise ConfigurationError,
-                "#{method.inspect} is not one of the available connect " +
-                "methods #{available_methods}"
+        format = _("%s is not one of the available connect methods: %s")
+        raise ConfigurationError, format % [method.inspect, available_methods]
       end
 
       def ensure_scope(scope)
@@ -178,8 +179,8 @@ module ActiveLdap
         value = scope_map[scope || :sub]
         if value.nil?
           available_scopes = scope_map.keys.inspect
-          raise ArgumentError, "#{scope.inspect} is not one of the available " +
-                               "LDAP scope #{available_scopes}"
+          format = _("%s is not one of the available LDAP scope: %s")
+          raise ArgumentError, format % [scope.inspect, available_scopes]
         end
         value
       end
@@ -224,7 +225,7 @@ module ActiveLdap
         when :replace, :add
           LDAP.const_get("LDAP_MOD_#{type.to_s.upcase}")
         else
-          raise ArgumentError, "unknown type: #{type}"
+          raise ArgumentError, _("unknown type: %s") % type
         end
       end
     end

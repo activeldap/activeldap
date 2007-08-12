@@ -43,6 +43,7 @@ module ActiveLdap
   # If this isn't read-only then lists become multiple entries, etc.
 
   class Error < StandardError
+    include GetTextSupport
   end
 
   # ConfigurationError
@@ -108,8 +109,11 @@ module ActiveLdap
     def initialize(dn, reason=nil)
       @dn = dn
       @reason = reason
-      message = "#{@dn} is invalid distinguished name (dn)"
-      message << ": #{@reason}"if @reason
+      if @reason
+        message = _("%s is invalid distinguished name (DN)") % @dn
+      else
+        message = _("%s is invalid distinguished name (DN): %s") % [@dn, @reason]
+      end
       super(message)
     end
   end
@@ -142,7 +146,7 @@ module ActiveLdap
     attr_reader :adapter
     def initialize(adapter)
       @adapter = adapter
-      super("LDAP configuration specifies nonexistent #{@adapter} adapter")
+      super(_("LDAP configuration specifies nonexistent %s adapter") % adapter)
     end
   end
 
@@ -150,7 +154,7 @@ module ActiveLdap
     attr_reader :name
     def initialize(name)
       @name = name
-      super("#{@name} is unknown attribute")
+      super(_("%s is unknown attribute") % @name)
     end
   end
 
@@ -160,6 +164,9 @@ module ActiveLdap
   # ActiveLdap functionality. It is meant to only ever be subclassed
   # by extension classes.
   class Base
+    include GetTextSupport
+    public :gettext
+
     if Reloadable.const_defined?(:Deprecated)
       include Reloadable::Deprecated
     else
@@ -312,7 +319,8 @@ module ActiveLdap
       def validate_scope(scope)
         scope = scope.to_sym if scope.is_a?(String)
         return if scope.nil? or scope.is_a?(Symbol)
-        raise ConfigurationError, "scope '#{scope.inspect}' must be a Symbol"
+        raise ConfigurationError,
+                _("scope '%s' must be a Symbol") % scope.inspect
       end
 
       def base_class
@@ -420,8 +428,8 @@ module ActiveLdap
         self.dn = normalized_attributes[dn_attribute]
         self.attributes = normalized_attributes
       else
-        message = "'#{attributes.inspect}' must be either "
-        message << "nil, DN value as String or Array or attributes as Hash"
+        message = _("'%s' must be either nil, DN value as String or Array " \
+                    "or attributes as Hash") % attributes.inspect
         raise ArgumentError, message
       end
       yield self if block_given?
@@ -501,7 +509,7 @@ module ActiveLdap
       dn_value = id
       if dn_value.nil?
         raise DistinguishedNameNotSetError.new,
-                "#{dn_attribute} value of #{self} doesn't set"
+                _("%s's DN attribute (%s) isn't set") % [self, dn_attribute]
       end
       _base = base
       _base = nil if _base.empty?
@@ -529,7 +537,7 @@ module ActiveLdap
         self.class.delete(dn)
         @new_entry = true
       rescue Error
-        raise DeleteError.new("Failed to delete LDAP entry: '#{dn}'")
+        raise DeleteError.new(_("Failed to delete LDAP entry: %s") % dn)
       end
     end
 
@@ -548,7 +556,7 @@ module ActiveLdap
 
     def save!
       unless create_or_update
-        raise EntryNotSaved, "entry #{dn} can't saved"
+        raise EntryNotSaved, _("entry %s can't be saved") % dn
       end
     end
 
@@ -569,7 +577,7 @@ module ActiveLdap
         if have_attribute?(real_key, ['objectClass'])
           if args.size != 1
             raise ArgumentError,
-                    "wrong number of arguments (#{args.size} for 1)"
+                    _("wrong number of arguments (%d for 1)") % args.size
           end
           return set_attribute(real_key, *args, &block)
         end
@@ -580,7 +588,7 @@ module ActiveLdap
         if have_attribute?(real_key, ['objectClass'])
           if args.size > 1
             raise ArgumentError,
-              "wrong number of arguments (#{args.size} for 1)"
+              _("wrong number of arguments (%d for 1)") % args.size
           end
           if before_type_cast
             return get_attribute_before_type_cast(real_key, *args)
@@ -687,7 +695,9 @@ module ActiveLdap
       _, attributes = search(:value => id).find do |_dn, _attributes|
         dn == _dn
       end
-      raise EntryNotFound, "Can't find dn '#{dn}' to reload" if attributes.nil?
+      if attributes.nil?
+        raise EntryNotFound, _("Can't find DN '%d' to reload") % dn
+      end
 
       @ldap_data.update(attributes)
       classes, attributes = extract_object_class(attributes)
@@ -1087,7 +1097,7 @@ module ActiveLdap
     def check_configuration
       unless dn_attribute
         raise ConfigurationError,
-                "dn_attribute not set for this class: #{self.class}"
+                _("dn_attribute isn't set for this class: %s") % self.class
       end
     end
 

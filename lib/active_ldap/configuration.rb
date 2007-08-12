@@ -55,7 +55,8 @@ module ActiveLdap
         if config.is_a?(Symbol) or config.is_a?(String)
           _config = configurations[config.to_s]
           unless _config
-            raise ConnectionError, "#{config} connection is not configured"
+            raise ConnectionError,
+                  _("%s connection is not configured") % config
           end
           config = _config
         end
@@ -96,8 +97,8 @@ module ActiveLdap
           when :scope, :ldap_scope
             if key == :ldap_scope
               logger.warning do
-                ":ldap_scope configuration option is deprecated. " +
-                  "Use :scope instead."
+                _(":ldap_scope configuration option is deprecated. " \
+                  "Use :scope instead.")
               end
             end
             target.scope = value

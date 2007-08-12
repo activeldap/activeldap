@@ -34,7 +34,8 @@ module ActiveLdap
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
         if filter.nil? and !value.is_a?(String)
-          raise ArgumentError, "Search value must be a String"
+          message = _("Search value must be a String: %s") % value.inspect
+          raise ArgumentError, message
         end
 
         _attr, value, _prefix = split_search_value(value)
@@ -45,7 +46,7 @@ module ActiveLdap
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
         if options.has_key?(:ldap_scope)
           logger.warning do
-            ":ldap_scope search option is deprecated. Use :scope instead."
+            _(":ldap_scope search option is deprecated. Use :scope instead.")
           end
           options[:scope] ||= options[:ldap_scope]
         end
@@ -199,7 +200,7 @@ module ActiveLdap
         when /\Adesc(?:end)?\z/i
           :descend
         else
-          raise ArgumentError, "Invalid order: #{value.inspect}"
+          raise ArgumentError, _("Invalid order: %s") % value.inspect
         end
       end
 
@@ -234,7 +235,7 @@ module ActiveLdap
 
         case dns.size
         when 0
-          raise EntryNotFound, "Couldn't find #{name} without a DN"
+          raise EntryNotFound, _("Couldn't find %s without a DN") % name
         when 1
           result = find_one(dns.first, options)
           expects_array ? [result] : result
@@ -252,9 +253,14 @@ module ActiveLdap
         if result
           result
         else
-          message = "Couldn't find #{name} with DN=#{dn}"
-          message << " #{options[:filter]}" if options[:filter]
-          raise EntryNotFound, message
+          args = [name, dn]
+          if options[:filter]
+            format = _("Couldn't find %s: DN: %s: filter: %s")
+            args << options[:filter]
+          else
+            format = _("Couldn't find %s: DN: %s")
+          end
+          raise EntryNotFound, format % args
         end
       end
 
@@ -276,9 +282,14 @@ module ActiveLdap
         if result.size == dns.size
           result
         else
-          message = "Couldn't find all #{name} with DNs (#{dns.join(', ')})"
-          message << " #{options[:filter]}"if options[:filter]
-          raise EntryNotFound, message
+          args = [name, dns.join(', ')]
+          if options[:filter]
+            format = _("Couldn't find all %s: DNs (%s): filter: %s")
+            args << options[:filter]
+          else
+            format = _("Couldn't find all %s: DNs (%s)")
+          end
+          raise EntryNotFound, format % args
         end
       end
 

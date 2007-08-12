@@ -2,7 +2,11 @@ require 'strscan'
 
 module ActiveLdap
   class DistinguishedName
+    include GetTextSupport
+
     class Parser
+      include GetTextSupport
+
       attr_reader :dn
       def initialize(source)
         @dn = nil
@@ -124,23 +128,23 @@ module ActiveLdap
       end
 
       def name_component_is_missing
-        invalid_dn("name component is missing")
+        invalid_dn(_("name component is missing"))
       end
 
       def rdn_is_missing
-        invalid_dn("relative distinguished name (RDN) is missing")
+        invalid_dn(_("relative distinguished name (RDN) is missing"))
       end
 
       def attribute_type_is_missing
-        invalid_dn("attribute type is missing")
+        invalid_dn(_("attribute type is missing"))
       end
 
       def attribute_value_is_missing
-        invalid_dn("attribute value is missing")
+        invalid_dn(_("attribute value is missing"))
       end
 
       def found_unmatched_quotation
-        invalid_dn("found unmatched quotation")
+        invalid_dn(_("found unmatched quotation"))
       end
     end
 
@@ -165,7 +169,7 @@ module ActiveLdap
         if rdn == normalized_rdns.pop
           rdns.pop
         else
-          raise ArgumentError, "#{other} isn't sub DN of #{self}"
+          raise ArgumentError, _("%s isn't sub DN of %s") % [other, self]
         end
       end
       self.class.new(*rdns)

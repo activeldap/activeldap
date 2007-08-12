@@ -8,19 +8,20 @@ module ActiveLdap
     module_function
     def valid?(password, hashed_password)
       unless /^\{([A-Z][A-Z\d]+)\}/ =~ hashed_password
-        raise ArgumentError, "Invalid hashed password"
+        raise ArgumentError, _("Invalid hashed password: %s") % hashed_password
       end
       type = $1
       hashed_password_without_type = $POSTMATCH
       normalized_type = type.downcase
       unless respond_to?(normalized_type)
-        raise ArgumentError, "Unknown Hash type #{type}"
+        raise ArgumentError, _("Unknown Hash type: %s") % type
       end
       salt_extractor = "extract_salt_for_#{normalized_type}"
       if respond_to?(salt_extractor)
         salt = send(salt_extractor, hashed_password_without_type)
         if salt.nil?
-          raise ArgumentError, "Can't extract salt from hashed password"
+          raise ArgumentError,
+            _("Can't extract salt from hashed password: %s") % hashed_password
         end
         generated_password = send(normalized_type, password, salt)
       else
@@ -48,7 +49,7 @@ module ActiveLdap
 
     def smd5(password, salt=nil)
       if salt and salt.size != 4
-        raise ArgumentError.new("salt size must be == 4")
+        raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
       md5_hash_with_salt = "#{MD5.md5(password + salt).digest}#{salt}"
@@ -65,7 +66,7 @@ module ActiveLdap
 
     def ssha(password, salt=nil)
       if salt and salt.size != 4
-        raise ArgumentError.new("salt size must be == 4")
+        raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
       sha1_hash_with_salt = "#{SHA1.sha1(password + salt).digest}#{salt}"

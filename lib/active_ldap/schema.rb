@@ -102,7 +102,7 @@ module ActiveLdap
       return {} if group.empty? or id_or_name.empty?
 
       unless @entries.has_key?(group)
-        raise ArgumentError, "Unknown schema group: #{group}"
+        raise ArgumentError, _("Unknown schema group: %s") % group
       end
 
       # Initialize anything that is required

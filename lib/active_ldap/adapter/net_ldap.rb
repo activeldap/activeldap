@@ -156,9 +156,8 @@ module ActiveLdap
         return METHOD[normalized_method] if METHOD.has_key?(normalized_method)
 
         available_methods = METHOD.keys.collect {|m| m.inspect}.join(", ")
-        raise ConfigurationError,
-                "#{method.inspect} is not one of the available connect " +
-                "methods #{available_methods}"
+        format = _("%s is not one of the available connect methods: %s")
+        raise ConfigurationError, format % [method.inspect, available_methods]
       end
 
       def ensure_scope(scope)
@@ -170,8 +169,8 @@ module ActiveLdap
         value = scope_map[scope || :sub]
         if value.nil?
           available_scopes = scope_map.keys.inspect
-          raise ArgumentError, "#{scope.inspect} is not one of the available " +
-                               "LDAP scope #{available_scopes}"
+          format = _("%s is not one of the available LDAP scope: %s")
+          raise ArgumentError, format % [scope.inspect, available_scopes]
         end
         value
       end
@@ -201,7 +200,10 @@ module ActiveLdap
         challenge_response = Proc.new do |cred|
           params = parse_sasl_digest_md5_credential(cred)
           qops = params["qop"].split(/,/)
-          return "unsupported qops: #{qops.inspect}" unless qops.include?("auth")
+          unless qops.include?("auth")
+            raise ActiveLdap::AuthenticationError,
+                  _("unsupported qops: %s") % qops.inspect
+          end
           qop = "auth"
           server = @connection.instance_variable_get("@conn").addr[2]
           realm = params['realm']
@@ -280,7 +282,7 @@ module ActiveLdap
         when :replace, :add
           type
         else
-          raise ArgumentError, "unknown type: #{type}"
+          raise ArgumentError, _("unknown type: %s") % type
         end
       end
     end

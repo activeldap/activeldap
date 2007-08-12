@@ -61,8 +61,14 @@ class TestUser < Test::Unit::TestCase
       assert(user.errors.invalid?(:sn))
       errors = %w(person organizationalPerson
                   inetOrgPerson).collect do |object_class|
-        "is required attribute (aliases: surname) by " +
-          "objectClass '#{object_class}'"
+        if ActiveLdap.const_defined?(:GetTextFallback)
+          format = "is required attribute by objectClass '%s': aliases: %s"
+          user.gettext(format) % [object_class, "surname"]
+        else
+          format = "%{fn} is required attribute by objectClass '%s': aliases: %s"
+          format = user.gettext(format).gsub(/%\{fn\}/, "Sn")
+          format % [object_class, "surname"]
+        end
       end
       assert_equal(errors.sort, user.errors.on(:sn).sort)
       user.sn = ['User']

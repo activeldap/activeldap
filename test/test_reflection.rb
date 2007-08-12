@@ -159,13 +159,13 @@ class TestReflection < Test::Unit::TestCase
   def collect_attributes(object_classes, with_aliases=true)
     attributes = []
     object_classes.each do |object_class|
-      attrs = ActiveLdap::Base.schema.class_attributes(object_class)
+      object_klass = ActiveLdap::Base.schema.object_class(object_class)
       if with_aliases
-        (attrs[:must] + attrs[:may]).each do |name|
+        (object_klass.must + object_klass.may).each do |name|
           attributes.concat(ActiveLdap::Base.schema.attribute_aliases(name))
         end
       else
-        attributes.concat(attrs[:must] + attrs[:may])
+        attributes.concat(object_klass.must + object_klass.may)
       end
     end
     attributes

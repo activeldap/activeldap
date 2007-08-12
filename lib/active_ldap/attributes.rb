@@ -31,8 +31,8 @@ module ActiveLdap
       # Arrays are for multiple entries
       def normalize_attribute(name, value)
         if name.nil?
-          raise RuntimeError, 'The first argument, name, must not be nil. ' +
-                              'Please report this as a bug!'
+          raise RuntimeError, _('The first argument, name, must not be nil. ' \
+                                'Please report this as a bug!')
         end
 
         name = normalize_attribute_name(name)
@@ -75,7 +75,7 @@ module ActiveLdap
       private
       def normalize_attribute_value_of_array(name, value)
         if value.size > 1 and schema.single_value?(name)
-          raise TypeError, "Attribute #{name} can only have a single value"
+          raise TypeError, _("Attribute %s can only have a single value") % name
         end
         if value.empty?
           schema.binary_required?(name) ? [{'binary' => value}] : value
@@ -88,11 +88,14 @@ module ActiveLdap
 
       def normalize_attribute_value_of_hash(name, value)
         if value.keys.size > 1
-          raise TypeError, "Hashes must have one key-value pair only."
+          raise TypeError,
+                _("Hashes must have one key-value pair only: %s") % value.inspect
         end
         unless value.keys[0].match(/^(lang-[a-z][a-z]*)|(binary)$/)
-          logger.warn {"unknown subtype did not match lang-* or binary:" +
-                       "#{value.keys[0]}"}
+          logger.warn do
+            format = _("unknown option did not match lang-* or binary: %s")
+            format % value.keys[0]
+          end
         end
         # Contents MUST be a String or an Array
         if !value.has_key?('binary') and schema.binary_required?(name)
