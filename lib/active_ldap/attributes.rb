@@ -30,8 +30,6 @@ module ActiveLdap
       # Hashes are for subtypes
       # Arrays are for multiple entries
       def normalize_attribute(name, value)
-        logger.debug {"stub: called normalize_attribute" +
-                      "(#{name.inspect}, #{value.inspect})"}
         if name.nil?
           raise RuntimeError, 'The first argument, name, must not be nil. ' +
                               'Please report this as a bug!'
@@ -142,8 +140,6 @@ module ActiveLdap
       # e.g. userCertificate;binary => "some_bin"
       #      becomes userCertificate => {"binary" => "some_bin"}
       def normalize_attribute_options(attr, value)
-        logger.debug {"stub: called normalize_attribute_options" +
-                      "(#{attr.inspect}, #{value.inspect})"}
         return [attr, value] unless attr.match(/;/)
 
         ret_attr, *options = attr.split(/;/)
@@ -156,7 +152,6 @@ module ActiveLdap
       # Extracts all of the subtypes from a given set of nested hashes
       # and returns the attribute suffix and the final true value
       def extract_attribute_options(value)
-        logger.debug {"stub: called extract_attribute_options(#{value.inspect})"}
         options = ''
         ret_val = value
         if value.class == Hash

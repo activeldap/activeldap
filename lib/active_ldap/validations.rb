@@ -37,8 +37,6 @@ module ActiveLdap
         # Basic validation:
         # - Verify that every 'MUST' specified in the schema has a value defined
         def validate_required_values
-          logger.debug {"stub: validate_required_values called"}
-
           # Make sure all MUST attributes have a value
           @musts.each do |object_class, attributes|
             attributes.each do |required_attribute|
@@ -60,7 +58,6 @@ module ActiveLdap
               end
             end
           end
-          logger.debug {"stub: validate_required_values finished"}
         end
 
         private

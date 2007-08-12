@@ -70,7 +70,6 @@ module ActiveLdap
       end
 
       def bind_as_anonymous(options={})
-        @logger.info {"Attempting anonymous authentication"}
         operation(options) do
           yield
         end
@@ -136,7 +135,7 @@ module ActiveLdap
           end
         rescue LdapError
           # Do nothing on failure
-          @logger.debug {"Ignore error #{$!.class}(#{$!.message}) " +
+          @logger.info {"Ignore error #{$!.class}(#{$!.message}) " +
                          "for #{filter} and attrs #{attrs.inspect}"}
         end
 
@@ -280,7 +279,6 @@ module ActiveLdap
             bound?
           end
         rescue LdapError::InvalidDnSyntax
-          @logger.debug {"DN is invalid: #{bind_dn}"}
           raise DistinguishedNameInvalid.new(bind_dn)
         rescue LdapError::InvalidCredentials
           false
@@ -436,9 +434,11 @@ module ActiveLdap
             connect(options)
             break
           rescue => detail
-            @logger.error {"Reconnect to server failed: #{detail.exception}"}
-            @logger.error {"Reconnect to server failed backtrace:\n" +
-                            detail.backtrace.join("\n")}
+            @logger.error do
+              "Reconnect to server failed: #{detail.exception}\n" +
+                "Reconnect to server failed backtrace:\n" +
+                detail.backtrace.join("\n")
+            end
             # Do not loop if forced
             raise ConnectionError, detail.message if force
           end

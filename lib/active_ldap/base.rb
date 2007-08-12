@@ -464,7 +464,6 @@ module ActiveLdap
     # Return attribute methods so that a program can determine available
     # attributes dynamically without schema awareness
     def attribute_names(normalize=false)
-      logger.debug {"stub: attribute_names called"}
       ensure_apply_object_class
       names = @attr_methods.keys
       if normalize
@@ -499,7 +498,6 @@ module ActiveLdap
     #
     # Return the authoritative dn
     def dn
-      logger.debug {"stub: dn called"}
       dn_value = id
       if dn_value.nil?
         raise DistinguishedNameNotSetError.new,
@@ -527,7 +525,6 @@ module ActiveLdap
     #
     # Delete this entry from LDAP
     def destroy
-      logger.debug {"stub: delete called"}
       begin
         self.class.delete(dn)
         @new_entry = true
@@ -563,29 +560,23 @@ module ActiveLdap
     #       using class_eval instead of using method_missing.  This would
     #       give tab completion in irb.
     def method_missing(name, *args, &block)
-      logger.debug {"stub: called method_missing" +
-                      "(#{name.inspect}, #{args.inspect})"}
       ensure_apply_object_class
 
       key = name.to_s
       case key
       when /=$/
         real_key = $PREMATCH
-        logger.debug {"method_missing: have_attribute? #{real_key}"}
         if have_attribute?(real_key, ['objectClass'])
           if args.size != 1
             raise ArgumentError,
                     "wrong number of arguments (#{args.size} for 1)"
           end
-          logger.debug {"method_missing: calling set_attribute" +
-                          "(#{real_key}, #{args.inspect})"}
           return set_attribute(real_key, *args, &block)
         end
       when /(?:(_before_type_cast)|(\?))?$/
         real_key = $PREMATCH
         before_type_cast = !$1.nil?
         query = !$2.nil?
-        logger.debug {"method_missing: have_attribute? #{real_key}"}
         if have_attribute?(real_key, ['objectClass'])
           if args.size > 1
             raise ArgumentError,
@@ -814,12 +805,9 @@ module ActiveLdap
     # This means that if you set userCertificate to somebinary value, it will
     # wrap it up correctly.
     def enforce_type(key, value)
-      logger.debug {"stub: enforce_type called"}
       ensure_apply_object_class
       # Enforce attribute value formatting
-      result = normalize_attribute(key, value)[1]
-      logger.debug {"stub: enforce_types done"}
-      result
+      normalize_attribute(key, value)[1]
     end
 
     def init_instance_variables
@@ -843,7 +831,6 @@ module ActiveLdap
     # removing defined attributes that are no longer valid
     # given the new objectclasses.
     def apply_object_class(val)
-      logger.debug {"stub: objectClass=(#{val.inspect}) called"}
       new_oc = val
       new_oc = [val] if new_oc.class != Array
       new_oc = new_oc.uniq
@@ -885,7 +872,6 @@ module ActiveLdap
 
     alias_method :base_of_class, :base
     def base
-      logger.debug {"stub: called base"}
       [@base, base_of_class].compact.join(",")
     end
 
@@ -909,14 +895,10 @@ module ActiveLdap
     #
     # Return the value of the attribute called by method_missing?
     def get_attribute(name, force_array=false)
-      logger.debug {"stub: called get_attribute" +
-                      "(#{name.inspect}, #{force_array.inspect}"}
       get_attribute_before_type_cast(name, force_array)
     end
 
     def get_attribute_as_query(name, force_array=false)
-      logger.debug {"stub: called get_attribute_as_query" +
-                      "(#{name.inspect}, #{force_array.inspect}"}
       value = get_attribute_before_type_cast(name, force_array)
       if force_array
         value.collect {|x| !false_value?(x)}
@@ -931,8 +913,6 @@ module ActiveLdap
     end
 
     def get_attribute_before_type_cast(name, force_array=false)
-      logger.debug {"stub: called get_attribute_before_type_cast" +
-                      "(#{name.inspect}, #{force_array.inspect}"}
       attr = to_real_attribute_name(name)
 
       value = @data[attr] || []
@@ -948,9 +928,6 @@ module ActiveLdap
     #
     # Set the value of the attribute called by method_missing?
     def set_attribute(name, value)
-      logger.debug {"stub: called set_attribute" +
-                      "(#{name.inspect}, #{value.inspect})"}
-
       # Get the attr and clean up the input
       attr = to_real_attribute_name(name)
       raise UnknownAttribute.new(name) if attr.nil?
@@ -959,11 +936,7 @@ module ActiveLdap
         value, @base = split_dn_value(value)
       end
 
-      logger.debug {"set_attribute(#{name.inspect}, #{value.inspect}): " +
-                      "method maps to #{attr}"}
-
       # Enforce LDAP-pleasing values
-      logger.debug {"value = #{value.inspect}, value.class = #{value.class}"}
       real_value = value
       # Squash empty values
       if value.class == Array
@@ -979,7 +952,6 @@ module ActiveLdap
       @data[attr] = enforce_type(attr, real_value)
 
       # Return the passed in value
-      logger.debug {"stub: exiting set_attribute"}
       @data[attr]
     end
 
@@ -1007,19 +979,12 @@ module ActiveLdap
     # Make a method entry for _every_ alias of a valid attribute and map it
     # onto the first attribute passed in.
     def define_attribute_methods(attr)
-      logger.debug {"stub: called define_attribute_methods(#{attr.inspect})"}
       return if @attr_methods.has_key?(attr)
       schema.attribute_aliases(attr).each do |ali|
-        logger.debug {"associating #{ali} --> #{attr}"}
         @attr_methods[ali] = attr
-        logger.debug {"associating #{Inflector.underscore(ali)}" +
-                        " --> #{attr}"}
         @attr_aliases[Inflector.underscore(ali)] = attr
-        logger.debug {"associating #{normalize_attribute_name(ali)}" +
-                        " --> #{attr}"}
         @normalized_attr_names[normalize_attribute_name(ali)] = attr
       end
-      logger.debug {"stub: leaving define_attribute_methods(#{attr.inspect})"}
     end
 
     # array_of
@@ -1027,8 +992,6 @@ module ActiveLdap
     # Returns the array form of a value, or not an array if
     # false is passed in.
     def array_of(value, to_a=true)
-      logger.debug {"stub: called array_of" +
-                      "(#{value.inspect}, #{to_a.inspect})"}
       case value
       when Array
         if to_a or value.size > 1
@@ -1071,8 +1034,6 @@ module ActiveLdap
       # Now that all the options will be treated as unique attributes
       # we can see what's changed and add anything that is brand-spankin'
       # new.
-      logger.debug {'#collect_modified_attributes: traversing ldap_data ' +
-                      'determining replaces and deletes'}
       ldap_data.each do |k, v|
         value = data[k] || []
 
@@ -1083,28 +1044,20 @@ module ActiveLdap
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
-          logger.debug {"#save: removing attribute: #{k}"}
           if !data.has_key?(k) and schema.binary_required?(k)
             value = [{'binary' => []}]
           end
         else
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
-          logger.debug {"#collect_modified_attributes: updating attribute:" +
-                          " #{k}: #{value.inspect}"}
         end
         attributes.push([:replace, k, value])
       end
-      logger.debug {'#collect_modified_attributes: finished traversing' +
-                      ' ldap_data'}
-      logger.debug {'#collect_modified_attributes: traversing data ' +
-                      'determining adds'}
       data.each do |k, v|
         value = v || []
         next if ldap_data.has_key?(k) or value.empty?
 
         # Detect subtypes and account for them
-        logger.debug {"#save: adding attribute: #{k}: #{value.inspect}"}
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
         attributes.push([:replace, k, value])
@@ -1116,22 +1069,15 @@ module ActiveLdap
     def collect_all_attributes(data)
       dn_attr = to_real_attribute_name(dn_attribute)
       dn_value = data[dn_attr]
-      logger.debug {'#collect_all_attributes: adding all attribute value pairs'}
-      logger.debug {"#collect_all_attributes: adding " +
-                      "#{dn_attr.inspect} = #{dn_value.inspect}"}
 
       attributes = []
       attributes.push([:add, dn_attr, dn_value])
 
       oc_value = data['objectClass']
-      logger.debug {"#collect_all_attributes: adding objectClass = " +
-                      "#{oc_value.inspect}"}
       attributes.push([:add, 'objectClass', oc_value])
       data.each do |key, value|
         next if value.empty? or key == 'objectClass' or key == dn_attr
 
-        logger.debug {"#collect_all_attributes: adding attribute: " +
-                        "#{key.inspect}: #{value.inspect}"}
         attributes.push([:add, key, value])
       end
 
@@ -1150,46 +1096,33 @@ module ActiveLdap
     end
 
     def prepare_data_for_saving
-      logger.debug {"stub: save called"}
-
       # Expand subtypes to real ldap_data attributes
       # We can't reuse @ldap_data because an exception would leave
       # an object in an unknown state
-      logger.debug {"#save: expanding subtypes in @ldap_data"}
       ldap_data = normalize_data(@ldap_data)
-      logger.debug {'#save: subtypes expanded for @ldap_data'}
 
       # Expand subtypes to real data attributes, but leave @data alone
-      logger.debug {'#save: expanding subtypes for @data'}
       bad_attrs = @data.keys - attribute_names
       data = normalize_data(@data, bad_attrs)
-      logger.debug {'#save: subtypes expanded for @data'}
 
       success = yield(data, ldap_data)
 
       if success
-        logger.debug {"#save: resetting @ldap_data to a dup of @data"}
         @ldap_data = Marshal.load(Marshal.dump(data))
         # Delete items disallowed by objectclasses.
         # They should have been removed from ldap.
-        logger.debug {'#save: removing attributes from @ldap_data not ' +
-                      'sent in data'}
         bad_attrs.each do |remove_me|
           @ldap_data.delete(remove_me)
         end
-        logger.debug {'#save: @ldap_data reset complete'}
       end
 
-      logger.debug {'stub: save exited'}
       success
     end
 
     def create
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_all_attributes(data)
-        logger.debug {"#create: adding #{dn}"}
         add_entry(dn, attributes)
-        logger.debug {"#create: add successful"}
         @new_entry = false
         true
       end
@@ -1198,10 +1131,7 @@ module ActiveLdap
     def update
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_modified_attributes(ldap_data, data)
-        logger.debug {'#update: traversing data complete'}
-        logger.debug {"#update: modifying #{dn}"}
         modify_entry(dn, attributes)
-        logger.debug {'#update: modify successful'}
         true
       end
     end
