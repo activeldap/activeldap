@@ -47,18 +47,19 @@ module ActiveLdap
         # - Verify that every 'MUST' specified in the schema has a value defined
         def validate_required_values
           # Make sure all MUST attributes have a value
-          @musts.each do |object_class, attributes|
-            attributes.each do |required_attribute|
+          @object_classes.each do |object_class|
+            object_class.must.each do |required_attribute|
               # Normalize to ensure we catch schema problems
-              real_name = to_real_attribute_name(required_attribute, true)
+              # needed?
+              real_name = to_real_attribute_name(required_attribute.name, true)
               raise UnknownAttribute.new(required_attribute) if real_name.nil?
               # # Set default if it wasn't yet set.
               # @data[real_name] ||= [] # need?
               value = @data[real_name] || []
               # Check for missing requirements.
               if value.empty?
-                aliases = schema.attribute_aliases(real_name) - [real_name]
-                args = [object_class]
+                aliases = required_attribute.aliases
+                args = [object_class.name]
                 if ActiveLdap.const_defined?(:GetTextFallback)
                   if aliases.empty?
                     format = "is required attribute by objectClass '%s'"

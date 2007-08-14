@@ -5,6 +5,11 @@ module ActiveLdap
     end
 
     module ClassMethods
+      def classes
+        required_classes.collect do |name|
+          schema.object_class(name)
+        end
+      end
     end
 
     def add_class(*target_classes)

@@ -74,11 +74,15 @@ module ActiveLdap
 
       private
       def normalize_attribute_value_of_array(name, value)
-        if value.size > 1 and schema.single_value?(name)
+        if value.size > 1 and schema.attribute(name).single_value?
           raise TypeError, _("Attribute %s can only have a single value") % name
         end
         if value.empty?
-          schema.binary_required?(name) ? [{'binary' => value}] : value
+          if schema.attribute(name).binary_required?
+            [{'binary' => value}]
+          else
+            value
+          end
         else
           value.collect do |entry|
             normalize_attribute(name, entry)[1][0]
@@ -98,7 +102,7 @@ module ActiveLdap
           end
         end
         # Contents MUST be a String or an Array
-        if !value.has_key?('binary') and schema.binary_required?(name)
+        if !value.has_key?('binary') and schema.attribute(name).binary_required?
           suffix, real_value = extract_attribute_options(value)
           name, values =
             normalize_attribute_options("#{name}#{suffix};binary", real_value)
@@ -109,11 +113,19 @@ module ActiveLdap
       end
 
       def normalize_attribute_value_of_nil_class(name, value)
-        schema.binary_required?(name) ? [{'binary' => []}] : []
+        if schema.attribute(name).binary_required?
+          [{'binary' => []}]
+        else
+          []
+        end
       end
 
       def normalize_attribute_value_of_string(name, value)
-        [schema.binary_required?(name) ? {'binary' => [value]} : value]
+        if schema.attribute(name).binary_required?
+          [{'binary' => [value]}]
+        else
+          [value]
+        end
       end
 
       def normalize_attribute_value_of_date(name, value)

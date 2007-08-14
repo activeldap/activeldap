@@ -4,6 +4,8 @@ class TestAttributes < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_to_real_attribute_name
     user = @user_class.new("user")
     assert_nil(user.__send__(:to_real_attribute_name, "objectclass"))
@@ -11,7 +13,6 @@ class TestAttributes < Test::Unit::TestCase
                  user.__send__(:to_real_attribute_name, "objectclass", true))
   end
 
-  priority :normal
   def test_protect_object_class_from_mass_assignment
     classes = @user_class.required_classes + ["inetOrgPerson"]
     user = @user_class.new(:uid => "XXX", :object_class => classes)

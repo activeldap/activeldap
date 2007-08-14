@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-12 19:33+0900\n"
-"PO-Revision-Date: 2007-08-12 19:34+0900\n"
+"POT-Creation-Date: 2007-08-14 22:04+0900\n"
+"PO-Revision-Date: 2007-08-14 22:05+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -125,23 +125,23 @@ msgstr ""
 msgid "Attribute %s can only have a single value"
 msgstr "属性%sは単一の値しか持てません。"
 
-#: lib/active_ldap/attributes.rb:92
+#: lib/active_ldap/attributes.rb:96
 msgid "Hashes must have one key-value pair only: %s"
 msgstr "ハッシュはひとつのキー・値のペアしか持ってはいけません。: %s"
 
-#: lib/active_ldap/attributes.rb:96
+#: lib/active_ldap/attributes.rb:100
 msgid "unknown option did not match lang-* or binary: %s"
 msgstr "lang-*にもbinaryにもマッチしない未知のオプションです: %s"
 
-#: lib/active_ldap/object_class.rb:46
+#: lib/active_ldap/object_class.rb:51
 msgid "Value in objectClass array is not a String: %s"
 msgstr "objectClassの配列の中身がStringではありません: %s"
 
-#: lib/active_ldap/object_class.rb:59
+#: lib/active_ldap/object_class.rb:64
 msgid "unknown objectClass in LDAP server: %s"
 msgstr "LDAPサーバが知らないobjectClassです: %s"
 
-#: lib/active_ldap/object_class.rb:74
+#: lib/active_ldap/object_class.rb:79
 msgid "Can't remove required objectClass: %s"
 msgstr "必須のobjectClassは削除できません: %s"
 
@@ -166,7 +166,7 @@ msgstr "ハッシュ化されたパスワードからsaltを取り出すこと�
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
 
-#: lib/active_ldap/schema.rb:105
+#: lib/active_ldap/schema.rb:229
 msgid "Unknown schema group: %s"
 msgstr "未知のスキーマグループです: %s"
 
@@ -223,10 +223,10 @@ msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
 #: lib/active_ldap/base.rb:699
-msgid "Can't find DN '%d' to reload"
+msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1100
+#: lib/active_ldap/base.rb:1097
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 

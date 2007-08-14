@@ -14,6 +14,8 @@ class TestConnection < Test::Unit::TestCase
   end
 
   priority :must
+
+  priority :normal
   def test_bind_format_check
     connector = Class.new(ActiveLdap::Base)
     assert(!connector.connected?)
@@ -30,7 +32,6 @@ class TestConnection < Test::Unit::TestCase
     assert_equal("Unknown key(s): bind_format", exception.message)
   end
 
-  priority :normal
   def test_can_reconnect?
     assert(!ActiveLdap::Base.connected?)
 

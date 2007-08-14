@@ -4,6 +4,8 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_case_insensitive_nested_ou
     ou_class("ou=Users").new("Sub").save!
     make_temporary_user(:uid => "test-user,ou=SUB") do |user, password|
@@ -14,7 +16,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_nested_ou
     make_ou("units")
     units = ou_class("ou=units")

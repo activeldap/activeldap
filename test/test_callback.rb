@@ -4,6 +4,8 @@ class TestCallback < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_callback_after_find_and_after_initialize
     make_temporary_group do |group|
       found_entries = []
@@ -30,6 +32,4 @@ class TestCallback < Test::Unit::TestCase
                    initialized_entries.collect {|g| g.cn}.sort)
     end
   end
-
-  priority :normal
 end

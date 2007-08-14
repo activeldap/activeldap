@@ -80,10 +80,10 @@ class TestUser < Test::Unit::TestCase
       user.user_certificate = certificate
       user.jpeg_photo = jpeg_photo
 
-      assert(ActiveLdap::Base.schema.binary?('jpegPhoto'),
+      assert(ActiveLdap::Base.schema.attribute('jpegPhoto').binary?,
              'jpegPhoto is binary?')
 
-      assert(ActiveLdap::Base.schema.binary?('userCertificate'),
+      assert(ActiveLdap::Base.schema.attribute('userCertificate').binary?,
              'userCertificate is binary?')
       assert_nothing_raised {user.save!}
     end

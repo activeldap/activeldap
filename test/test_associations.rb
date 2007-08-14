@@ -4,6 +4,8 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_belongs_to_many_with_dn_key
     @user_class.belongs_to :groups, :many => "memberUid", :foreign_key => "dn"
     @user_class.set_associated_class(:groups, @group_class)
@@ -21,7 +23,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_belongs_to_many_delete
     make_temporary_group do |group1|
       make_temporary_group do |group2|

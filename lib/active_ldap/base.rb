@@ -696,7 +696,7 @@ module ActiveLdap
         dn == _dn
       end
       if attributes.nil?
-        raise EntryNotFound, _("Can't find DN '%d' to reload") % dn
+        raise EntryNotFound, _("Can't find DN '%s' to reload") % dn
       end
 
       @ldap_data.update(attributes)
@@ -850,7 +850,7 @@ module ActiveLdap
       @last_oc = new_oc.dup
 
       # Set the actual objectClass data
-      define_attribute_methods('objectClass')
+      define_attribute_methods(schema.attribute('objectClass'))
       replace_class(*new_oc)
 
       # Build |data| from schema
@@ -858,25 +858,21 @@ module ActiveLdap
       @attr_methods = {}
       @normalized_attr_names = {}
       @attr_aliases = {}
-      @musts = {}
-      @mays = {}
+      @must = []
+      @may = []
+      @object_classes = []
       new_oc.each do |objc|
         # get all attributes for the class
         object_class = schema.object_class(objc)
-        @musts[objc] = object_class.must
-        @mays[objc] = object_class.may
+        @object_classes << object_class
+        @must.concat(object_class.must)
+        @may.concat(object_class.may)
       end
-      @must = normalize_attribute_names(@musts.values)
-      @may = normalize_attribute_names(@mays.values)
-      (@must + @may).uniq.each do |attr|
+      @must.uniq!
+      @may.uniq!
+      (@must + @may).each do |attr|
         # Update attr_method with appropriate
         define_attribute_methods(attr)
-      end
-    end
-
-    def normalize_attribute_names(names)
-      names.flatten.uniq.collect do |name|
-        schema.attribute_aliases(name).first || name
       end
     end
 
@@ -989,11 +985,12 @@ module ActiveLdap
     # Make a method entry for _every_ alias of a valid attribute and map it
     # onto the first attribute passed in.
     def define_attribute_methods(attr)
-      return if @attr_methods.has_key?(attr)
-      schema.attribute_aliases(attr).each do |ali|
-        @attr_methods[ali] = attr
-        @attr_aliases[Inflector.underscore(ali)] = attr
-        @normalized_attr_names[normalize_attribute_name(ali)] = attr
+      name = attr.name
+      return if @attr_methods.has_key?(name)
+      ([name] + attr.aliases).each do |ali|
+        @attr_methods[ali] = name
+        @attr_aliases[Inflector.underscore(ali)] = name
+        @normalized_attr_names[normalize_attribute_name(ali)] = name
       end
     end
 
@@ -1054,7 +1051,7 @@ module ActiveLdap
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
-          if !data.has_key?(k) and schema.binary_required?(k)
+          if !data.has_key?(k) and schema.attribute(k).binary_required?
             value = [{'binary' => []}]
           end
         else

@@ -2,6 +2,8 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+
+  priority :normal
   def test_duplicate_schema
     sasNMASProductOptions_schema =
       "( 2.16.840.1.113719.1.39.42.1.0.38 NAME 'sasNMASProductOptions' " +
@@ -314,7 +316,7 @@ class TestSchema < Test::Unit::TestCase
 
     schema = ActiveLdap::Schema.new({"attributeTypes" => [jpeg_photo_schema],
                                      "ldapSyntaxes" => [jpeg_schema]})
-    assert(schema.binary?("jpegPhoto"))
+    assert(schema.attribute("jpegPhoto").binary?)
   end
 
   private
@@ -348,7 +350,7 @@ class TestSchema < Test::Unit::TestCase
     schema.send(:ensure_parse, group) if ensure_parse
     result = []
     expected.each do |key,|
-      result << [key, schema.attribute_aliases(key.to_s)]
+      result << [key, schema.attribute(key.to_s).aliases]
     end
     assert_equal(expected, result)
   end

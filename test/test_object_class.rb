@@ -4,6 +4,8 @@ class TestObjectClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_case_insensitive_match
     assert_nothing_raised do
       @group_class.instantiate(["cn=test-group,#{@group_class.base}",
@@ -14,7 +16,6 @@ class TestObjectClass < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_ensure_recommended_classes
     make_temporary_group do |group|
       added_class = "labeledURIObject"

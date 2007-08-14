@@ -4,6 +4,8 @@ class TestConnectionPerDN < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_establish_connection
     make_temporary_user do |user, password|
       assert_equal(user.class.connection, user.connection)

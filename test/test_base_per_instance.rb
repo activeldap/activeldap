@@ -9,6 +9,8 @@ class TestBasePerInstance < Test::Unit::TestCase
   end
 
   priority :must
+
+  priority :normal
   def test_loose_dn
     user = @user_class.new("test-user , ou = Sub")
     assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)
@@ -17,7 +19,6 @@ class TestBasePerInstance < Test::Unit::TestCase
     assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)
   end
 
-  priority :normal
   def test_exists?
     make_temporary_user(:uid => "test-user,ou=Sub") do |user, password|
       assert(@user_class.exists?(user.uid))

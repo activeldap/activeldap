@@ -4,6 +4,8 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_find_with_limit
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|
@@ -28,7 +30,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_find_all_with_dn_attribute_value
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|

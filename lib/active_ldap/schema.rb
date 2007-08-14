@@ -1,21 +1,147 @@
 module ActiveLdap
   class Schema
-    class ObjectClass
-      attr_reader :must, :may, :super_classes
-      def initialize(name, schema)
-        @name = name
+    class Entry
+      include Comparable
+
+      attr_reader :id, :name, :aliases, :description
+      def initialize(name, schema, group)
         @schema = schema
+        @name, *@aliases = attribute("NAME", name)
+        @name ||= name
+        @id = @schema.resolve_name(group, @name)
         collect_info
+        @schema = nil
+      end
+
+      def eql?(other)
+        self.class == other.class and
+          id == other.id
+      end
+
+      def hash
+        id.hash
+      end
+
+      def <=>(other)
+        name <=> other.name
+      end
+    end
+
+    class Syntax < Entry
+      def initialize(name, schema)
+        super(name, schema, "ldapSyntaxes")
+      end
+
+      def binary_transfer_required?
+        @binary_transfer_required
+      end
+
+      def human_readable?
+        @human_readable
+      end
+
+      private
+      def attribute(attribute_name, name=@name)
+        @schema.ldap_syntax_attribute(name, attribute_name)
+      end
+
+      def collect_info
+        @description = attribute("DESC")[0]
+        @binary_transfer_required =
+          (attribute('X-BINARY-TRANSFER-REQUIRED')[0] == 'TRUE')
+        @human_readable = (attribute('X-NOT-HUMAN-READABLE')[0] != 'TRUE')
+      end
+    end
+
+    class Attribute < Entry
+      def initialize(name, schema)
+        super(name, schema, "attributeTypes")
+      end
+
+      # read_only?
+      #
+      # Returns true if an attribute is read-only
+      # NO-USER-MODIFICATION
+      def read_only?
+        @read_only
+      end
+
+      # single_value?
+      #
+      # Returns true if an attribute can only have one
+      # value defined
+      # SINGLE-VALUE
+      def single_value?
+        @single_value
+      end
+
+      # binary?
+      #
+      # Returns true if the given attribute's syntax
+      # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
+      def binary?
+        @binary
+      end
+
+      # binary_required?
+      #
+      # Returns true if the value MUST be transferred in binary
+      def binary_required?
+        @binary_required
+      end
+
+      private
+      def attribute(attribute_name, name=@name)
+        @schema.attribute_type(name, attribute_name)
+      end
+
+      def collect_info
+        @description = attribute("DESC")[0]
+        @read_only = attribute('NO-USER-MODIFICATION')[0] == 'TRUE'
+        @single_value = attribute('SINGLE-VALUE')[0] == 'TRUE'
+        syntax = attribute("SYNTAX")[0]
+        syntax = @schema.ldap_syntax(syntax) if syntax
+        if syntax
+          @binary_required = syntax.binary_transfer_required?
+          @binary = (@binary_required or !syntax.human_readable?)
+        else
+          @binary_required = false
+          @binary = false
+        end
+      end
+    end
+
+    class ObjectClass < Entry
+      attr_reader :super_classes
+      def initialize(name, schema)
+        super(name, schema, "objectClasses")
       end
 
       def super_class?(object_class)
         @super_classes.include?(object_class)
       end
 
+      def must(include_super_class=true)
+        if include_super_class
+          @all_must
+        else
+          @must
+        end
+      end
+
+      def may(include_super_class=true)
+        if include_super_class
+          @all_may
+        else
+          @may
+        end
+      end
+
       private
       def collect_info
+        @description = attribute("DESC")[0]
         @super_classes = collect_super_classes
-        @must, @may = collect_attributes
+        @must, @may, @all_must, @all_may = collect_attributes
       end
 
       def collect_super_classes
@@ -31,32 +157,27 @@ module ActiveLdap
           super_classes.uniq!
           break if super_classes.size == start_size
         end
-        super_classes
+        super_classes.collect do |name|
+          @schema.object_class(name)
+        end
       end
 
       def collect_attributes
-        must = attribute('MUST')
-        may = attribute('MAY')
+        must = attribute('MUST').collect {|name| @schema.attribute(name)}
+        may = attribute('MAY').collect {|name| @schema.attribute(name)}
 
+        all_must = must.dup
+        all_may = may.dup
         @super_classes.each do |super_class|
-          must.concat(attribute('MUST', super_class))
-          may.concat(attribute('MAY', super_class))
+          all_must.concat(super_class.must(false))
+          all_may.concat(super_class.may(false))
         end
 
         # Clean out the dupes.
-        must.uniq!
-        may.uniq!
-        if @name == "inetOrgPerson"
-          may.collect! do |name|
-            if name == "x500uniqueIdentifier"
-              "x500UniqueIdentifier"
-            else
-              name
-            end
-          end
-        end
+        all_must.uniq!
+        all_may.uniq!
 
-        [must, may]
+        [must, may, all_must, all_may]
       end
 
       def attribute(attribute_name, name=@name)
@@ -79,26 +200,29 @@ module ActiveLdap
       alias_map(group).has_key?(normalize_schema_name(name))
     end
 
-    # attribute
+    def resolve_name(group, name)
+      alias_map(group)[normalize_schema_name(name)]
+    end
+
+    # fetch
     #
     # This is just like LDAP::Schema#attribute except that it allows
     # look up in any of the given keys.
     # e.g.
-    #  attribute('attributeTypes', 'cn', 'DESC')
-    #  attribute('ldapSyntaxes', '1.3.6.1.4.1.1466.115.121.1.5', 'DESC')
-    def attribute(group, id_or_name, attribute_name)
+    #  fetch('attributeTypes', 'cn', 'DESC')
+    #  fetch('ldapSyntaxes', '1.3.6.1.4.1.1466.115.121.1.5', 'DESC')
+    def fetch(group, id_or_name, attribute_name)
       return [] if attribute_name.empty?
       attribute_name = normalize_attribute_name(attribute_name)
-      value = attributes(group, id_or_name)[attribute_name]
+      value = entry(group, id_or_name)[attribute_name]
       value ? value.dup : []
     end
-    alias_method :[], :attribute
-    alias_method :attr, :attribute
+    alias_method :[], :fetch
 
     NUMERIC_OID_RE = "\\d[\\d\\.]+"
     DESCRIPTION_RE = "[a-zA-Z][a-zA-Z\\d\\-]*"
     OID_RE = "(?:#{NUMERIC_OID_RE}|#{DESCRIPTION_RE}-oid)"
-    def attributes(group, id_or_name)
+    def entry(group, id_or_name)
       return {} if group.empty? or id_or_name.empty?
 
       unless @entries.has_key?(group)
@@ -138,72 +262,63 @@ module ActiveLdap
       ids[id || aliases[name]] || {}
     end
 
-    # attribute_aliases
-    #
-    # Returns all names from the LDAP schema for the
-    # attribute given.
-    def attribute_aliases(name)
-      cache([:attribute_aliases, name]) do
-        attribute_type(name, 'NAME')
+    def attribute(name)
+      cache([:attribute, name]) do
+        Attribute.new(name, self)
       end
     end
 
-    # read_only?
-    #
-    # Returns true if an attribute is read-only
-    # NO-USER-MODIFICATION
-    def read_only?(name)
-      cache([:read_only?, name]) do
-        attribute_type(name, 'NO-USER-MODIFICATION')[0] == 'TRUE'
+    def attributes
+      cache([:attributes]) do
+        names("attributeTypes").collect do |name|
+          attribute(name)
+        end
       end
     end
 
-    # single_value?
-    #
-    # Returns true if an attribute can only have one
-    # value defined
-    # SINGLE-VALUE
-    def single_value?(name)
-      cache([:single_value?, name]) do
-        attribute_type(name, 'SINGLE-VALUE')[0] == 'TRUE'
+    def attribute_type(name, attribute_name)
+      cache([:attribute_type, name, attribute_name]) do
+        fetch("attributeTypes", name, attribute_name)
       end
     end
 
-    # binary?
-    #
-    # Returns true if the given attribute's syntax
-    # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
-    def binary?(name)
-      cache([:binary?, name]) do
-        # Get syntax OID
-        syntax = attribute_type(name, 'SYNTAX')[0]
-        !syntax.nil? and
-          (ldap_syntax(syntax, 'X-NOT-HUMAN-READABLE') == ["TRUE"] or
-           ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"])
+    def object_class(name)
+      cache([:object_class, name]) do
+        ObjectClass.new(name, self)
       end
     end
 
-    # binary_required?
-    #
-    # Returns true if the value MUST be transferred in binary
-    def binary_required?(name)
-      cache([:binary_required?, name]) do
-        # Get syntax OID
-        syntax = attribute_type(name, 'SYNTAX')[0]
-        !syntax.nil? and
-          ldap_syntax(syntax, 'X-BINARY-TRANSFER-REQUIRED') == ["TRUE"]
-      end
-    end
-
-    def object_class(objc)
-      cache([:object_class, objc]) do
-        ObjectClass.new(objc, self)
+    def object_classes
+      cache([:object_classes]) do
+        names("objectClasses").collect do |name|
+          object_class(name)
+        end
       end
     end
 
     def object_class_attribute(name, attribute_name)
       cache([:object_class_attribute, name, attribute_name]) do
-        attribute("objectClasses", name, attribute_name)
+        fetch("objectClasses", name, attribute_name)
+      end
+    end
+
+    def ldap_syntax(name)
+      cache([:ldap_syntax, name]) do
+        Syntax.new(name, self)
+      end
+    end
+
+    def ldap_syntaxes
+      cache([:ldap_syntaxes]) do
+        names("ldapSyntaxes").collect do |name|
+          ldap_syntax(name)
+        end
+      end
+    end
+
+    def ldap_syntax_attribute(name, attribute_name)
+      cache([:ldap_syntax_attribute, name, attribute_name]) do
+        fetch("ldapSyntaxes", name, attribute_name)
       end
     end
 
@@ -280,19 +395,6 @@ module ActiveLdap
       end
     end
 
-    def attribute_type(name, attribute_name)
-      cache([:attribute_type, name, attribute_name]) do
-        attribute("attributeTypes", name, attribute_name)
-      end
-    end
-
-    def ldap_syntax(name, attribute_name)
-      return [] unless @entries.has_key?("ldapSyntaxes")
-      cache([:ldap_syntax, name, attribute_name]) do
-        attribute("ldapSyntaxes", name, attribute_name)
-      end
-    end
-
     def alias_map(group)
       ensure_parse(group)
       return {} if @schema_info[group].nil?
@@ -302,7 +404,7 @@ module ActiveLdap
     def ensure_parse(group)
       return if @entries[group].nil?
       unless @entries[group].empty?
-        attribute(group, 'nonexistent', 'nonexistent')
+        fetch(group, 'nonexistent', 'nonexistent')
       end
     end
 

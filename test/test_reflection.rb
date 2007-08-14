@@ -15,7 +15,7 @@ class TestReflection < Test::Unit::TestCase
 
   def test_respond_to?
     make_temporary_user do |user, password|
-      attributes = user.must + user.may
+      attributes = (user.must + user.may).collect(&:name)
       _wrap_assertion do
         attributes.each do |name|
           assert(user.respond_to?(name), name)
@@ -59,7 +59,8 @@ class TestReflection < Test::Unit::TestCase
     end
 
     make_temporary_user do |user, password|
-      attributes = user.must + user.may - ["objectClass"]
+      attributes = user.must.collect(&:name) + user.may.collect(&:name)
+      attributes -= ["objectClass"]
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
@@ -68,7 +69,8 @@ class TestReflection < Test::Unit::TestCase
 
     make_temporary_user do |user, password|
       user.remove_class("inetOrgPerson")
-      attributes = user.must + user.may - ["objectClass"]
+      attributes = user.must.collect(&:name) + user.may.collect(&:name)
+      attributes -= ["objectClass"]
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
@@ -76,7 +78,8 @@ class TestReflection < Test::Unit::TestCase
     end
 
     make_temporary_user do |user, password|
-      attributes = user.must + user.may - ["objectClass"]
+      attributes = user.must.collect(&:name) + user.may.collect(&:name)
+      attributes -= ["objectClass"]
       attributes = attributes.collect {|x| x.downcase}
       assert_not_equal([], attributes - user.methods)
       assert_not_equal([], attributes - user.methods(false))
@@ -91,7 +94,8 @@ class TestReflection < Test::Unit::TestCase
     end
 
     make_temporary_user do |user, password|
-      attributes = user.must + user.may - ["objectClass"]
+      attributes = user.must.collect(&:name) + user.may.collect(&:name)
+      attributes -= ["objectClass"]
       attributes = attributes.collect do |x|
         Inflector.underscore(x)
       end
@@ -109,7 +113,8 @@ class TestReflection < Test::Unit::TestCase
 
     make_temporary_user do |user, password|
       user.remove_class("inetOrgPerson")
-      attributes = user.must + user.may - ["objectClass"]
+      attributes = user.must.collect(&:name) + user.may.collect(&:name)
+      attributes -= ["objectClass"]
       attributes = attributes.collect do |x|
         Inflector.underscore(x)
       end
@@ -161,11 +166,12 @@ class TestReflection < Test::Unit::TestCase
     object_classes.each do |object_class|
       object_klass = ActiveLdap::Base.schema.object_class(object_class)
       if with_aliases
-        (object_klass.must + object_klass.may).each do |name|
-          attributes.concat(ActiveLdap::Base.schema.attribute_aliases(name))
+        (object_klass.must + object_klass.may).each do |attribute|
+          attributes << attribute.name
+          attributes.concat(attribute.aliases)
         end
       else
-        attributes.concat(object_klass.must + object_klass.may)
+        attributes.concat((object_klass.must + object_klass.may).collect(&:name))
       end
     end
     attributes
