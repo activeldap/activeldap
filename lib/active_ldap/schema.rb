@@ -1,190 +1,5 @@
 module ActiveLdap
   class Schema
-    class Entry
-      include Comparable
-
-      attr_reader :id, :name, :aliases, :description
-      def initialize(name, schema, group)
-        @schema = schema
-        @name, *@aliases = attribute("NAME", name)
-        @name ||= name
-        @id = @schema.resolve_name(group, @name)
-        collect_info
-        @schema = nil
-      end
-
-      def eql?(other)
-        self.class == other.class and
-          id == other.id
-      end
-
-      def hash
-        id.hash
-      end
-
-      def <=>(other)
-        name <=> other.name
-      end
-    end
-
-    class Syntax < Entry
-      def initialize(name, schema)
-        super(name, schema, "ldapSyntaxes")
-      end
-
-      def binary_transfer_required?
-        @binary_transfer_required
-      end
-
-      def human_readable?
-        @human_readable
-      end
-
-      private
-      def attribute(attribute_name, name=@name)
-        @schema.ldap_syntax_attribute(name, attribute_name)
-      end
-
-      def collect_info
-        @description = attribute("DESC")[0]
-        @binary_transfer_required =
-          (attribute('X-BINARY-TRANSFER-REQUIRED')[0] == 'TRUE')
-        @human_readable = (attribute('X-NOT-HUMAN-READABLE')[0] != 'TRUE')
-      end
-    end
-
-    class Attribute < Entry
-      def initialize(name, schema)
-        super(name, schema, "attributeTypes")
-      end
-
-      # read_only?
-      #
-      # Returns true if an attribute is read-only
-      # NO-USER-MODIFICATION
-      def read_only?
-        @read_only
-      end
-
-      # single_value?
-      #
-      # Returns true if an attribute can only have one
-      # value defined
-      # SINGLE-VALUE
-      def single_value?
-        @single_value
-      end
-
-      # binary?
-      #
-      # Returns true if the given attribute's syntax
-      # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
-      def binary?
-        @binary
-      end
-
-      # binary_required?
-      #
-      # Returns true if the value MUST be transferred in binary
-      def binary_required?
-        @binary_required
-      end
-
-      private
-      def attribute(attribute_name, name=@name)
-        @schema.attribute_type(name, attribute_name)
-      end
-
-      def collect_info
-        @description = attribute("DESC")[0]
-        @read_only = attribute('NO-USER-MODIFICATION')[0] == 'TRUE'
-        @single_value = attribute('SINGLE-VALUE')[0] == 'TRUE'
-        syntax = attribute("SYNTAX")[0]
-        syntax = @schema.ldap_syntax(syntax) if syntax
-        if syntax
-          @binary_required = syntax.binary_transfer_required?
-          @binary = (@binary_required or !syntax.human_readable?)
-        else
-          @binary_required = false
-          @binary = false
-        end
-      end
-    end
-
-    class ObjectClass < Entry
-      attr_reader :super_classes
-      def initialize(name, schema)
-        super(name, schema, "objectClasses")
-      end
-
-      def super_class?(object_class)
-        @super_classes.include?(object_class)
-      end
-
-      def must(include_super_class=true)
-        if include_super_class
-          @all_must
-        else
-          @must
-        end
-      end
-
-      def may(include_super_class=true)
-        if include_super_class
-          @all_may
-        else
-          @may
-        end
-      end
-
-      private
-      def collect_info
-        @description = attribute("DESC")[0]
-        @super_classes = collect_super_classes
-        @must, @may, @all_must, @all_may = collect_attributes
-      end
-
-      def collect_super_classes
-        super_classes = attribute('SUP')
-        loop do
-          start_size = super_classes.size
-          new_super_classes = []
-          super_classes.each do |super_class|
-            new_super_classes.concat(attribute('SUP', super_class))
-          end
-
-          super_classes.concat(new_super_classes)
-          super_classes.uniq!
-          break if super_classes.size == start_size
-        end
-        super_classes.collect do |name|
-          @schema.object_class(name)
-        end
-      end
-
-      def collect_attributes
-        must = attribute('MUST').collect {|name| @schema.attribute(name)}
-        may = attribute('MAY').collect {|name| @schema.attribute(name)}
-
-        all_must = must.dup
-        all_may = may.dup
-        @super_classes.each do |super_class|
-          all_must.concat(super_class.must(false))
-          all_may.concat(super_class.may(false))
-        end
-
-        # Clean out the dupes.
-        all_must.uniq!
-        all_may.uniq!
-
-        [must, may, all_must, all_may]
-      end
-
-      def attribute(attribute_name, name=@name)
-        @schema.object_class_attribute(name, attribute_name)
-      end
-    end
-
     def initialize(entries)
       @entries = default_entries.merge(entries || {})
       @schema_info = {}
@@ -423,5 +238,190 @@ module ActiveLdap
         "ldapSyntaxes" => [],
       }
     end
-  end # Schema
+
+    class Entry
+      include Comparable
+
+      attr_reader :id, :name, :aliases, :description
+      def initialize(name, schema, group)
+        @schema = schema
+        @name, *@aliases = attribute("NAME", name)
+        @name ||= name
+        @id = @schema.resolve_name(group, @name)
+        collect_info
+        @schema = nil
+      end
+
+      def eql?(other)
+        self.class == other.class and
+          id == other.id
+      end
+
+      def hash
+        id.hash
+      end
+
+      def <=>(other)
+        name <=> other.name
+      end
+    end
+
+    class Syntax < Entry
+      def initialize(name, schema)
+        super(name, schema, "ldapSyntaxes")
+      end
+
+      def binary_transfer_required?
+        @binary_transfer_required
+      end
+
+      def human_readable?
+        @human_readable
+      end
+
+      private
+      def attribute(attribute_name, name=@name)
+        @schema.ldap_syntax_attribute(name, attribute_name)
+      end
+
+      def collect_info
+        @description = attribute("DESC")[0]
+        @binary_transfer_required =
+          (attribute('X-BINARY-TRANSFER-REQUIRED')[0] == 'TRUE')
+        @human_readable = (attribute('X-NOT-HUMAN-READABLE')[0] != 'TRUE')
+      end
+    end
+
+    class Attribute < Entry
+      def initialize(name, schema)
+        super(name, schema, "attributeTypes")
+      end
+
+      # read_only?
+      #
+      # Returns true if an attribute is read-only
+      # NO-USER-MODIFICATION
+      def read_only?
+        @read_only
+      end
+
+      # single_value?
+      #
+      # Returns true if an attribute can only have one
+      # value defined
+      # SINGLE-VALUE
+      def single_value?
+        @single_value
+      end
+
+      # binary?
+      #
+      # Returns true if the given attribute's syntax
+      # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
+      def binary?
+        @binary
+      end
+
+      # binary_required?
+      #
+      # Returns true if the value MUST be transferred in binary
+      def binary_required?
+        @binary_required
+      end
+
+      private
+      def attribute(attribute_name, name=@name)
+        @schema.attribute_type(name, attribute_name)
+      end
+
+      def collect_info
+        @description = attribute("DESC")[0]
+        @read_only = attribute('NO-USER-MODIFICATION')[0] == 'TRUE'
+        @single_value = attribute('SINGLE-VALUE')[0] == 'TRUE'
+        syntax = attribute("SYNTAX")[0]
+        syntax = @schema.ldap_syntax(syntax) if syntax
+        if syntax
+          @binary_required = syntax.binary_transfer_required?
+          @binary = (@binary_required or !syntax.human_readable?)
+        else
+          @binary_required = false
+          @binary = false
+        end
+      end
+    end
+
+    class ObjectClass < Entry
+      attr_reader :super_classes
+      def initialize(name, schema)
+        super(name, schema, "objectClasses")
+      end
+
+      def super_class?(object_class)
+        @super_classes.include?(object_class)
+      end
+
+      def must(include_super_class=true)
+        if include_super_class
+          @all_must
+        else
+          @must
+        end
+      end
+
+      def may(include_super_class=true)
+        if include_super_class
+          @all_may
+        else
+          @may
+        end
+      end
+
+      private
+      def collect_info
+        @description = attribute("DESC")[0]
+        @super_classes = collect_super_classes
+        @must, @may, @all_must, @all_may = collect_attributes
+      end
+
+      def collect_super_classes
+        super_classes = attribute('SUP')
+        loop do
+          start_size = super_classes.size
+          new_super_classes = []
+          super_classes.each do |super_class|
+            new_super_classes.concat(attribute('SUP', super_class))
+          end
+
+          super_classes.concat(new_super_classes)
+          super_classes.uniq!
+          break if super_classes.size == start_size
+        end
+        super_classes.collect do |name|
+          @schema.object_class(name)
+        end
+      end
+
+      def collect_attributes
+        must = attribute('MUST').collect {|name| @schema.attribute(name)}
+        may = attribute('MAY').collect {|name| @schema.attribute(name)}
+
+        all_must = must.dup
+        all_may = may.dup
+        @super_classes.each do |super_class|
+          all_must.concat(super_class.must(false))
+          all_may.concat(super_class.may(false))
+        end
+
+        # Clean out the dupes.
+        all_must.uniq!
+        all_may.uniq!
+
+        [must, may, all_must, all_may]
+      end
+
+      def attribute(attribute_name, name=@name)
+        @schema.object_class_attribute(name, attribute_name)
+      end
+    end
+  end
 end

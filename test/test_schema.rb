@@ -17,58 +17,62 @@ class TestSchema < Test::Unit::TestCase
     sasNMASProductOptions = 'sasNMASProductOptions'
     rADIUSActiveConnections = 'rADIUSActiveConnections'
     sasNMASProductOptions_aliases =
-      [sasNMASProductOptions, [sasNMASProductOptions]]
+      [sasNMASProductOptions, []]
     rADIUSActiveConnections_aliases =
-      [rADIUSActiveConnections, [rADIUSActiveConnections]]
-    sas__sas_radius_aliases =
-      [sasNMASProductOptions, [sasNMASProductOptions,
-                               rADIUSActiveConnections]]
-    radius__sas_radius_aliases =
-      [rADIUSActiveConnections, [sasNMASProductOptions,
-                                 rADIUSActiveConnections]]
-    sas__radius_sas_aliases =
-      [sasNMASProductOptions, [rADIUSActiveConnections,
-                               sasNMASProductOptions]]
-    radius__radius_sas_aliases =
-      [rADIUSActiveConnections, [rADIUSActiveConnections,
-                                 sasNMASProductOptions]]
+      [rADIUSActiveConnections, []]
+    sas_radius_aliases = [sasNMASProductOptions, [rADIUSActiveConnections]]
+    radius_sas_aliases = [rADIUSActiveConnections, [sasNMASProductOptions]]
 
     assert_attribute_aliases([sasNMASProductOptions_aliases],
+                             [sasNMASProductOptions],
                              [sasNMASProductOptions_schema],
                              false)
     assert_attribute_aliases([rADIUSActiveConnections_aliases],
+                             [rADIUSActiveConnections],
                              [rADIUSActiveConnections_schema],
                              false)
 
     assert_attribute_aliases([sasNMASProductOptions_aliases,
-                              radius__sas_radius_aliases],
+                              sas_radius_aliases],
+                             [sasNMASProductOptions,
+                              rADIUSActiveConnections],
                              [sasNMASProductOptions_schema,
                               rADIUSActiveConnections_schema],
                              false)
     assert_attribute_aliases([rADIUSActiveConnections_aliases,
-                              sas__radius_sas_aliases],
+                              radius_sas_aliases],
+                             [rADIUSActiveConnections,
+                              sasNMASProductOptions],
                              [rADIUSActiveConnections_schema,
                               sasNMASProductOptions_schema],
                              false)
 
-    assert_attribute_aliases([radius__sas_radius_aliases,
-                              sas__sas_radius_aliases],
+    assert_attribute_aliases([sas_radius_aliases,
+                              sas_radius_aliases],
+                             [rADIUSActiveConnections,
+                              sasNMASProductOptions],
                              [sasNMASProductOptions_schema,
                               rADIUSActiveConnections_schema],
                              false)
-    assert_attribute_aliases([sas__radius_sas_aliases,
-                              radius__radius_sas_aliases],
+    assert_attribute_aliases([radius_sas_aliases,
+                              radius_sas_aliases],
+                             [sasNMASProductOptions,
+                              rADIUSActiveConnections],
                              [rADIUSActiveConnections_schema,
                               sasNMASProductOptions_schema],
                              false)
 
-    assert_attribute_aliases([sas__sas_radius_aliases,
-                              radius__sas_radius_aliases],
+    assert_attribute_aliases([sas_radius_aliases,
+                              sas_radius_aliases],
+                             [sasNMASProductOptions,
+                              rADIUSActiveConnections],
                              [sasNMASProductOptions_schema,
                               rADIUSActiveConnections_schema],
                              true)
-    assert_attribute_aliases([radius__radius_sas_aliases,
-                              sas__radius_sas_aliases],
+    assert_attribute_aliases([radius_sas_aliases,
+                              radius_sas_aliases],
+                             [rADIUSActiveConnections,
+                              sasNMASProductOptions],
                              [rADIUSActiveConnections_schema,
                               sasNMASProductOptions_schema],
                              true)
@@ -343,14 +347,14 @@ class TestSchema < Test::Unit::TestCase
     assert_equal([], schema["objectClasses", "posixAccount", "MUST"])
   end
 
-  def assert_attribute_aliases(expected, schemata, ensure_parse)
+  def assert_attribute_aliases(expected, keys, schemata, ensure_parse)
     group = 'attributeTypes'
     entry = {group => schemata}
     schema = ActiveLdap::Schema.new(entry)
     schema.send(:ensure_parse, group) if ensure_parse
-    result = []
-    expected.each do |key,|
-      result << [key, schema.attribute(key.to_s).aliases]
+    result = keys.collect do |key|
+      attribute = schema.attribute(key)
+      [attribute.name, attribute.aliases]
     end
     assert_equal(expected, result)
   end
