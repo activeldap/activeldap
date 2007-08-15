@@ -331,8 +331,66 @@ module ActiveLdap
         end
       end
 
-      def human_attribute_name(attribute_key_name)
-        attribute_key_name.humanize
+      def human_attribute_name(attribute_or_name)
+        s_(human_attribute_name_msgid(attribute_or_name))
+      end
+
+      def human_attribute_name_msgid(attribute_or_name)
+        if attribute_or_name.is_a?(Schema::Attribute)
+          name = attribute_or_name.name
+        else
+          name = attribute_or_name
+        end
+        "LDAP|Attribute|#{name}"
+      end
+
+      def human_attribute_description(attribute_or_name)
+        msgid = human_attribute_description_msgid(attribute_or_name)
+        return nil if msgid.nil?
+        s_(msgid)
+      end
+
+      def human_attribute_description_msgid(attribute_or_name)
+        if attribute_or_name.is_a?(Schema::Attribute)
+          attribute = attribute_or_name
+        else
+          attribute = schema.attribute(attribute_or_name)
+          return nil if attribute.nil?
+        end
+        description = attribute.description
+        return nil if description.nil?
+        "LDAP|Description|Attribute|#{attribute.name}|#{description}"
+      end
+
+      def human_object_class_name(object_class_or_name)
+        s_(human_object_class_name_msgid(object_class_or_name))
+      end
+
+      def human_object_class_name_msgid(object_class_or_name)
+        if object_class_or_name.is_a?(Schema::ObjectClass)
+          name = object_class_or_name.name
+        else
+          name = object_class_or_name
+        end
+        "LDAP|ObjectClass|#{name}"
+      end
+
+      def human_object_class_description(object_class_or_name)
+        msgid = human_object_class_description_msgid(object_class_or_name)
+        return nil if msgid.nil?
+        s_(msgid)
+      end
+
+      def human_object_class_description_msgid(object_class_or_name)
+        if object_class_or_name.is_a?(Schema::ObjectClass)
+          object_class = object_class_or_name
+        else
+          object_class = schema.object_class(object_class_or_name)
+          return nil if object_class.nil?
+        end
+        description = object_class.description
+        return nil if description.nil?
+        "LDAP|Description|ObjectClass|#{object_class.name}|#{description}"
       end
 
       private

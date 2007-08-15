@@ -94,12 +94,12 @@ module ActiveLdap
 
       def register_object_class(object_class, file)
         [object_class.name, *object_class.aliases].each do |name|
-          register("LDAP|ObjectClass|#{name}", file)
+          register(ActiveLdap::Base.human_object_class_name_msgid(name), file)
         end
         if object_class.description
-          prefix = "LDAP|Description|ObjectClass|"
-          register("#{prefix}#{object_class.name}|#{object_class.description}",
-                   file)
+          msgid =
+            ActiveLdap::Base.human_object_class_description_msgid(object_class)
+          register(msgid, file)
         end
         (object_class.must(false) + object_class.may(false)).each do |attribute|
           register_attribute(attribute, file)
@@ -111,11 +111,12 @@ module ActiveLdap
 
       def register_attribute(attribute, file)
         [attribute.name, *attribute.aliases].each do |name|
-          register("LDAP|Attribute|#{name}", file)
+          register(ActiveLdap::Base.human_attribute_name_msgid(name),
+                   file)
         end
         if attribute.description
-          prefix = "LDAP|Description|Attribute|"
-          register("#{prefix}#{attribute.name}|#{attribute.description}", file)
+          msgid = ActiveLdap::Base.human_attribute_description_msgid(attribute)
+          register(msgid, file)
         end
       end
     end
