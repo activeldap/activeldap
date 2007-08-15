@@ -91,8 +91,23 @@ namespace :gettext do
   namespace :po do
     desc "Update po/pot files (GetText)"
     task :update => "gettext:environment" do
+      require 'active_ldap/get_text/parser'
+      dummy_file = "@@@dummy-for-active-ldap@@@"
+      parser = Object.new
+      parser.instance_eval do
+        @parser = ActiveLdap::GetText::Parser.new
+        @dummy_file = dummy_file
+      end
+      def parser.target?(file)
+        file == @dummy_file
+      end
+      def parser.parse(file, targets)
+        @parser.extract_all_in_schema(targets)
+      end
+
+      GetText::RGetText.add_parser(parser)
       GetText.update_pofiles("active-ldap",
-                             Dir.glob("lib/**/*.rb"),
+                             [dummy_file] + Dir.glob("lib/**/*.rb"),
                              "Ruby/ActiveLdap #{ActiveLdap::VERSION}")
     end
   end
