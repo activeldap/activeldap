@@ -7,7 +7,17 @@ module ActiveLdap
 
       base.class_eval do
         alias_method :new_record?, :new_entry?
+        class << self
+          alias_method :human_attribute_name_active_ldap,
+                       :human_attribute_name
+        end
         include ActiveRecord::Validations
+        class << self
+          alias_method :human_attribute_name,
+                       :human_attribute_name_active_ldap
+          alias_method :human_attribute_table_name_for_error,
+                       :human_object_class_name
+        end
 
         # Workaround for GetText's ugly implementation
         begin
