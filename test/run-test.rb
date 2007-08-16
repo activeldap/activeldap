@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$KCODE = 'u'
+
 require 'yaml'
 require "test/unit"
 
