@@ -17,6 +17,7 @@ LDAP_ENV = "test" unless defined?(LDAP_ENV)
 module AlTestUtils
   def self.included(base)
     base.class_eval do
+      include ActiveLdap::GetTextSupport
       include Config
       include Connection
       include Populate

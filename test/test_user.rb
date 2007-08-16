@@ -66,7 +66,7 @@ class TestUser < Test::Unit::TestCase
           user.gettext(format) % [object_class, "surname"]
         else
           format = "%{fn} is required attribute by objectClass '%s': aliases: %s"
-          format = user.gettext(format).gsub(/%\{fn\}/, "Sn")
+          format = user.gettext(format).gsub(/%\{fn\}/, "sn")
           format % [object_class, "surname"]
         end
       end

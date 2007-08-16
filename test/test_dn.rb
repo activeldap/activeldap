@@ -136,7 +136,7 @@ class TestDN < Test::Unit::TestCase
     end
     assert_not_nil(exception)
     assert_equal(dn, exception.dn)
-    assert_equal(reason, exception.reason)
+    assert_equal(_(reason), exception.reason)
   end
 
   def assert_dn_parser_collect_pairs(expected, source)
