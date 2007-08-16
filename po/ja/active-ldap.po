@@ -6,14 +6,2715 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-14 22:04+0900\n"
-"PO-Revision-Date: 2007-08-14 22:05+0900\n"
+"POT-Creation-Date: 2007-08-16 21:20+0900\n"
+"PO-Revision-Date: 2007-08-16 21:57+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: -:-
+msgid "LDAP|ObjectClass|LDAProotDSE"
+msgstr "LDAPルートDSA特定エントリ(LDAProotDSE)"
+
+#: -:-
+msgid "LDAP|Attribute|olcArgsFile"
+msgstr "OpenLDAP設定: 引数の設定ファイル(olcArgsFile)"
+
+#: -:-
+msgid "LDAP|Description|Attribute|secretary|RFC1274: DN of secretary"
+msgstr "RFC1274: 秘書の共通名(DN)"
+
+#: -:-
+msgid "LDAP|Attribute|shadowFlag"
+msgstr "シャドーフラグ(shadowFlag)"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbCacheFree|Number of extra entries to free "
+"when max is reached"
+msgstr "最大数に達したときに開放する余分なエントリ数"
+
+#: -:-
+msgid "LDAP|Attribute|domainComponent"
+msgstr "ドメイン要素(domainComponent)"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|simpleSecurityObject|RFC1274: simple security "
+"object"
+msgstr "RFC1274: 簡素な安全性を持つオブジェクト"
+
+#: -:-
+msgid "LDAP|ObjectClass|simpleSecurityObject"
+msgstr "簡素なセキュリティオブジェクト(simpleSecurityObject)"
+
+#: -:-
+msgid "LDAP|Attribute|oncRpcNumber"
+msgstr "ONC RPC番号(oncRpcNumber)"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|bootableDevice|A device with boot parameters"
+msgstr "起動パラメタ付きデバイス"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaNextUserRid|Next NT rid to give our for users"
+msgstr "ユーザに付与する次のNT RID"
+
+#: -:-
+msgid "LDAP|Attribute|olcObjectClasses"
+msgstr "OpenLDAP設定: objectClass(olcObjectClasses)"
+
+#: -:-
+msgid "LDAP|Attribute|st"
+msgstr "州(st)"
+
+#: -:-
+msgid "LDAP|Description|Attribute|seeAlso|RFC2256: DN of related object"
+msgstr "RFC2256: 関連したオブジェクトへの参照"
+
+#: -:-
+msgid "LDAP|Description|Attribute|matchingRules|RFC2252: matching rules"
+msgstr "RFC2252: マッチ規則"
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaShareName|Share Name"
+msgstr "共有名"
+
+#: -:-
+msgid "LDAP|Attribute|objectClass"
+msgstr "オブジェクトクラス(objectClass)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPasswordHash"
+msgstr "OpenLDAP設定: パスワードハッシュ(olcPasswordHash)"
+
+#: -:-
+msgid "LDAP|Attribute|manager"
+msgstr "管理者"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcLdifConfig"
+msgstr "OpenLDAP設定: LDIF設定(olcLdifConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|posixAccount"
+msgstr "POSIXアカウント"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|extensibleObject|RFC2252: extensible object"
+msgstr "RFC2252: 拡張可能なオブジェクト"
+
+#: -:-
+msgid "LDAP|ObjectClass|extensibleObject"
+msgstr "拡張可能なオブジェクト(extensibleObject)"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|shadowAccount|Additional attributes for shadow "
+"passwords"
+msgstr "シャドーパスワード用追加属性"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaLogonToChgPwd|Force Users to logon for "
+"password change (default: 0 => off, 2 => on)"
+msgstr "パスワード変更のために強制的にユーザをログオンさせる (デフォルト: 0 => 無効, 2 => 有効)"
+
+#: -:-
+msgid "LDAP|Attribute|sambaSID"
+msgstr "Samba: セキュリティID(sambaSID)"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|dSA|RFC2256: a directory system agent (a server)"
+msgstr "RFC2256: ディレクトリシステムエージェント(サーバ)"
+
+#: -:-
+msgid "LDAP|Description|Attribute|userPassword|RFC2256/2307: password of user"
+msgstr "RFC2256/2307: ユーザのパスワード"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaLockoutObservationWindow|Reset time after "
+"lockout in minutes (default: 30)"
+msgstr "ロックアウト後にリセットする時間(分) (デフォルト: 30)"
+
+#: -:-
+msgid "LDAP|Attribute|sambaPwdHistoryLength"
+msgstr "Samba: パスワード履歴長(sambaPwdHistoryLength)"
+
+#: -:-
+msgid "LDAP|Attribute|nSRecord"
+msgstr "NSレコード(nSRecord)"
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaIdmapEntry"
+msgstr "Samba: ID写像エントリ(sambaIdmapEntry)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrIfMaxLen"
+msgstr "OpenLDAP設定: 索引に使用する部分文字列の最大長(olcIndexSubstrIfMaxLen)"
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaBoolOption|A boolean option"
+msgstr "真偽値のオプション"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|documentLocation|RFC1274: location of document "
+"original"
+msgstr "RFC1274: 元文書の場所"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCacheSize"
+msgstr "OpenLDAP設定: DBキャッシュ量(olcDbCacheSize)"
+
+#: -:-
+msgid "LDAP|Attribute|postalCode"
+msgstr "郵便番号(postalCode)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDefaultSearchBase"
+msgstr "OpenLDAP設定: デフォルト検索ベース(olcDefaultSearchBase)"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|serialNumber|RFC2256: serial number of the entity"
+msgstr "RFC2256: エントリの通し番号"
+
+#: -:-
+msgid "LDAP|Attribute|sambaPasswordHistory"
+msgstr "Samba: パスワード履歴(sambaPasswordHistory)"
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaOptionName|Option Name"
+msgstr "オプション名"
+
+#: -:-
+msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|telephoneNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowMax"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|ipNetwork"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbIDLcacheSize"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcBackend"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|subentry"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcLogLevel"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|facsimileTelephoneNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLMPassword"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowExpire"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowLastChange"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|applicationEntity"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|ipProtocol"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|groupOfNames"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|subschema"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|jpegPhoto"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|employeeNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaShare|Samba Share Section"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|domainRelatedObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|memberNisNetgroup"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|audio"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|ipHost"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|mail|RFC1274: RFC822 Mailbox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|pkiCA|RFC2587: PKI certificate authority"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipServiceProtocol"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAttributeOptions"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|posixAccount|Abstraction of an account with "
+"POSIX attributes"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaBadPasswordCount|Bad password attempt count"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|gn"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaNextGroupRid|Next NT rid to give out for "
+"groups"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaNTPassword"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcBackendConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaBadPasswordTime"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|c|RFC2256: ISO-3166 country 2-letter code"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|cNAMERecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaStringListOption|A string list option"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|postOfficeBox|RFC2256: Post Office Box"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|host"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbDirtyRead|Allow reads of uncommitted data"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPasswordHistory|Concatenated MD4 hashes of "
+"the unicode passwords used on this account"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaLogonScript|Logon script path"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|memberUid"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaShare"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbLockDetect"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthzRegexp"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|gecos|The GECOS field; the common name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userPKCS12"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|subtreeMaximumQuality|RFC1274: Subtree Maximun "
+"Quality"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbNoSync|Disable synchronous database writes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaGroupMapping"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|uidNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|uid"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaSidEntry|Structural Class for a SID"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|preferredLanguage|RFC2798: preferred written or "
+"spoken language for a person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbDirectory"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaLogoffTime|Timestamp of last logoff"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|oncRpc|Abstraction of an ONC/RPC binding"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|dNSDomain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLockoutObservationWindow"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaStringListOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcRestrict"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|street"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSDHParamFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|loginShell"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|cACertificate|RFC2256: X.509 CA certificate, use ;"
+"binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaSamAccount"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|sambaUnixIdPool|Pool for allocating UNIX uids/"
+"gids"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|labeledURI|RFC2079: Uniform Resource Identifier "
+"with optional label"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|destinationIndicator|RFC2256: destination "
+"indicator"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|x500UniqueIdentifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipProtocolNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCacheFree"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|OpenLDAProotDSE|OpenLDAP Root DSE object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|stateOrProvinceName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|inetOrgPerson"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaAlgorithmicRidBase"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaNextRid"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|description"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|mailPreferenceOption|RFC1274: mail preference "
+"option"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|seeAlso"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|homePhone|RFC1274: home telephone number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicationInterval"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|internationaliSDNNumber|RFC2256: international "
+"ISDN number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSchemaDN"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|streetAddress"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|uid|RFC1274: user identifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|bootFile|Boot image name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|alias|RFC2256: an alias"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|ipProtocol|Abstraction of an IP protocol"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|subtreeMaximumQuality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|loginShell|The path to the login shell"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|personalTitle|RFC1274: personal title"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|RFC822localPart"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration options"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcPlugin"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|documentPublisher|RFC1274: publisher of document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicaPidFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|departmentNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaStringOption|A string option"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|favouriteDrink"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbDirtyRead"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipHostNumber"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaBadPasswordTime|Time of the last bad "
+"password attempt"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowMin"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaGroupType"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|description|RFC2256: descriptive information"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|givenName"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|domainRelatedObject|RFC1274: an object related "
+"to an domain"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|organizationalPerson|RFC2256: an organizational "
+"person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedApplicationContext"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval in "
+"kbytes and minutes"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|ipService|Abstraction an Internet Protocol "
+"service"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaHomeDrive"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaLockoutThreshold|Lockout users after bad "
+"logon attempts (default: 0 => off)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaNextGroupRid"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|commonName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dmdName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|textEncodedORAddress"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaNTPassword|MD4 hash of the unicode password"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|bootableDevice"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbMode|Unix permissions of database files"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSecurity"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbIndex"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|organizationalStatus"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthIDRewrite"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|dmdName|RFC2256: name of DMD"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|ipNetworkNumber|IP network"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|ipNetwork|Abstraction of an IP network"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|uidNumber|An integer uniquely identifying a user "
+"in an administrative domain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|residentialPerson"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaTrustPassword|Samba Trust Password"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDatabase"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaGroupType|NT Group Type"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|secretary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|postalCode|RFC2256: postal code"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaPwdMustChange"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|attributeTypes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sOARecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|userSecurityInformation"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|owner|RFC2256: owner (of the object)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbShmKey"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcOverlayConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaDomain|Samba Domain Information"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcRequires"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|uidObject|RFC2377: uid object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|attributeTypes|RFC2252: attribute types"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReverseLookup"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|pilotPerson"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcConfigDir"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaHomePath|Home directory UNC path"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|associatedName|RFC1274: DN of entry associated "
+"with domain"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|givenName|RFC2256: first name(s) for which the "
+"entity is known by"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaRefuseMachinePwdChange"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|organizationalUnitName"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|authorityRevocationList|RFC2256: X.509 authority "
+"revocation list, use ;binary"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|presentationAddress|RFC2256: presentation address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|labeledURIObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaAcctFlags|Account Flags"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPwdMustChange|Timestamp of when the password "
+"will expire"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|homeDirectory"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|host|RFC1274: host computer"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcConcurrency"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcPidFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|oncRpc"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|cRLDistributionPoint"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|objectClass|RFC2256: object classes of the entity"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|subtreeSpecification"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaConfig|Samba Configuration Section"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|initials|RFC2256: initials of some or all of "
+"names, but not the surname(s)."
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentTitle"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|searchGuide"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReadOnly"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|preferredDeliveryMethod|RFC2256: preferred "
+"delivery method"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|dc|RFC1274/2247: domain component"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|uniqueMember"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaLockoutDuration|Lockout duration in minutes "
+"(default: 30, -1 => forever)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaBoolOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|pagerTelephoneNumber"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sn|RFC2256: last (family) name(s) for which the "
+"entity is known by"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowInactive"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|carLicense|RFC2798: vehicle license or "
+"registration plate"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|knowledgeInformation|RFC2256: knowledge "
+"information"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|pager|RFC1274: pager telephone number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcModuleList"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaSID|Security ID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaSIDList|Security ID List"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcToolThreads"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaLogonHours|Logon Hours"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaHomePath"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|co|RFC1274: friendly country name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|nameForms"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|audio|RFC1274: audio (u-law)"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|crossCertificatePair|RFC2256: X.509 cross "
+"certificate pair, use ;binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbSearchStack"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|telephoneNumber|RFC2256: Telephone Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReplogFile"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|title|RFC2256: title associated with the entity"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|x500UniqueIdentifier|RFC2256: X.500 unique "
+"identifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|organizationName"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|searchGuide|RFC2256: search guide, deprecated by "
+"enhancedSearchGuide"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|applicationProcess|RFC2256: an application "
+"process"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|pkiUser|RFC2587: a PKI user"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|deltaCRL|RFC2587: PKI user"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|otherMailbox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mobileTelephoneNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|qualityLabelledData"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|organizationalUnit|RFC2256: an organizational "
+"unit"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|presentationAddress"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaConfigOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSuffix"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|street|RFC2256: street address of this object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|postalAddress|RFC2256: postal address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentPublisher"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcLdifConfig|LDIF backend configuration"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|device|RFC2256: a device"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaMungedDial|Base64 encoded user parameter "
+"string"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaLMPassword|LanManager Password"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|macAddress"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|groupOfUniqueNames"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|sambaIdmapEntry|Mapping from a SID to an ID"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|owner"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSrvtab"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcArgsFile|File for slapd command line options"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslRealm"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|employeeType|RFC2798: type of employment for a "
+"person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|crossCertificatePair"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|documentVersion|RFC1274: version of document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcConfigFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCheckpoint"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ou"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLogonTime"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|uniqueMember|RFC2256: unique member of a group"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaMaxPwdAge|Maximum password age, in seconds "
+"(default: -1 => never expire passwords)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrAnyStep"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|organization"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcLocalSSF"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|teletexTerminalIdentifier"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaNextRid|Next NT rid to give out for anything"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaDomain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedAlgorithms"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|locality|RFC2256: a locality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|certificationAuthority-V2"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaMungedDial"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcModuleList|OpenLDAP dynamic module info"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ref"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLogonToChgPwd"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|homeDirectory|The absolute path to the home "
+"directory"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|ou|RFC2256: organizational unit this object "
+"belongs to"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaDomainName|Windows NT domain to which the "
+"user belongs"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|gidNumber"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|labeledURIObject|RFC2079: object that contains "
+"the URI attribute type"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcMaxDerefDepth"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|uidObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|deltaCRL"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|destinationIndicator"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|gecos"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaForceLogoff|Disconnect Users outside logon "
+"hours (default: -1 => off, 0 => on)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userClass"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|st|RFC2256: state or province which this object "
+"resides in"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|organizationalRole"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|displayName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSyncrepl"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaMinPwdAge"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|physicalDeliveryOfficeName|RFC2256: Physical "
+"Delivery Office Name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDisallows"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|pilotOrganization"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcDatabaseConfig"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|userSMIMECertificate|RFC2798: PKCS#7 SignedData "
+"used to support S/MIME"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentIdentifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcGentleHUP"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|drink|RFC1274: favorite drink"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcBackendConfig|OpenLDAP Backend-specific "
+"options"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|documentAuthor|RFC1274: DN of author of document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|buildingName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbCacheSize|Entry cache size in entries"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|dcObject|RFC2247: domain component object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaLogonTime|Timestamp of last logon"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|shadowWarning"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|shadowAccount"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcFrontendConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcAttributeTypes|OpenLDAP attributeTypes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbLockDetect|Deadlock detection algorithm"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslSecProps"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|personalTitle"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaKickoffTime"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|room"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaUnixIdPool"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLockoutDuration"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaMinPwdLength"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|mobile|RFC1274: mobile telephone number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|cn"
+msgstr "共通名(cn)"
+
+#: -:-
+msgid "LDAP|Attribute|sambaBadPasswordCount"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|co"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|gidNumber|An integer uniquely identifying a group "
+"in an administrative domain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcSchemaConfig|OpenLDAP schema object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcIncludeFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|ieee802Device|A device with a MAC address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|domain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaIntegerOption|An integer option"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcUpdateDN"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|internationaliSDNNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|strongAuthenticationUser"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|nisObject|An entry in a NIS map"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|fax"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|telexNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|personalSignature"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|carLicense"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|drink"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|x121Address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|roleOccupant"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|bootFile"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|userPKCS12|RFC2798: personal identity "
+"information, a PKCS #12 PFX"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentAuthor"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcDatabaseConfig|OpenLDAP Database-specific "
+"options"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|associatedDomain"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|sambaSamAccount|Samba 3.0 Auxilary SAM Account"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcThreads"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|dmd"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userid"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|applicationEntity|RFC2256: an application entity"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|postOfficeBox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslHost"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcPluginLogFile"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|userSecurityInformation|RFC2256: a user "
+"security information"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCertificateFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|applicationProcess"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaTrustPassword"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|c"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCRLCheck"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|dSAQuality|RFC1274: DSA Quality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|rfc822Mailbox"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|certificationAuthority|RFC2256: a certificate "
+"authority"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|aRecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbShmKey|Key for shared memory region"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbLinearIndex"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|nisNetgroupTriple"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|teletexTerminalIdentifier|RFC2256: Teletex "
+"Terminal Identifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcObjectIdentifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcBackend|A type of backend"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthzPolicy"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|nisObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaTrustFlags|Trust Password Flags"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPwdCanChange|Timestamp of when the user is "
+"allowed to update the password"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLockoutThreshold"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcIdleTimeout"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcModulePath"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|postalAddress"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|aliasedObjectName|RFC2256: name of aliased object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|manager|RFC1274: DN of manager"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|ref|namedref: subordinate referral URL"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaPwdLastSet"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaTrustFlags"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|documentIdentifier|RFC1274: unique identifier of "
+"document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|nisNetgroup"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|referral|namedref: named subordinate referral"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mDRecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbIndex|Attribute index parameters"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|OpenLDAProotDSE"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|homePostalAddress|RFC1274: home postal address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipNetworkNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|jpegPhoto|RFC2798: a JPEG image"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcOverlay"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcUpdateRef"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|person"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|registeredAddress|RFC2256: registered postal "
+"address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|title"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mailPreferenceOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|country"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSockbufMaxIncomingAuth"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|l"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|member|RFC2256: member of a group"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|pkiCA"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbConfig|BerkeleyDB DB_CONFIG configuration "
+"directives"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaDomainName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mobile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipNetmaskNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaShareName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReferral"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|l|RFC2256: locality which this object resides in"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaKickoffTime|Timestamp of when the user will "
+"be logged off automatically"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcInclude"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|subtreeMinimumQuality|RFC1274: Subtree Mininum "
+"Quality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|roomNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|physicalDeliveryOfficeName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|ipHostNumber|IP address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|o"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|o|RFC2256: organization this object belongs to"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAttributeTypes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaIntegerOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|roleOccupant|RFC2256: occupant of role"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|pilotDSA"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrIfMinLen"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|nisMap|A generic abstraction of a NIS map"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaHomeDrive|Driver letter of home directory "
+"mapping"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcModuleLoad"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCertificateKeyFile"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDatabase|The backend type for a database "
+"instance"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcConfigDir|Directory for slapd configuration "
+"backend"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcFrontendConfig|OpenLDAP frontend "
+"configuration"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|preferredDeliveryMethod"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcGlobal"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|userCertificate|RFC2256: X.509 user certificate, "
+"use ;binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|pkiUser"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|ipNetmaskNumber|IP netmask"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dITContentRules"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|dcObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaPrimaryGroupSID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaForceLogoff"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|newPilotPerson"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbLinearIndex|Index attributes one at a time"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|nisNetgroup|Abstraction of a netgroup"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|nisMapName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|businessCategory|RFC2256: business category"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|top|top of the superclass chain"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLogonScript"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|countryName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|friendlyCountryName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|associatedName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDitContentRules"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|personalSignature|RFC1274: Personal Signature (G3 "
+"fax)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicaArgsFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|objectClasses"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|subschema|RFC2252: controlling subschema (sub)"
+"entry"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|bootParameter"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|dSA"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcLimits"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|organizationalPerson"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|organizationalStatus|RFC1274: organizational "
+"status"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaMaxPwdAge"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPwdLastSet|Timestamp of the last password "
+"update"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSubordinate"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaSIDList"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbNoSync"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|friendlyCountry"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|photo|RFC1274: photo (G3 fax)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcHdbConfig|HDB backend configuration"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLogonHours"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|documentSeries"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSizeLimit"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentVersion"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userCertificate"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|localityName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcSockbufMaxIncoming"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|groupOfUniqueNames|RFC2256: a group of unique "
+"names (DN and Unique Identifier)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|documentTitle|RFC1274: title of document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|authorityRevocationList"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|nisMapEntry"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPrimaryGroupSID|Primary Group Security ID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|matchingRuleUse|RFC2252: matching rule uses"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|photo"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaRefuseMachinePwdChange|Allow Machine "
+"Password changes (default: 0 => off)"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|organizationalRole|RFC2256: an organizational "
+"role"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedApplicationContext|RFC2256: supported "
+"application context"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcIncludeFile|OpenLDAP configuration include "
+"file"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcConnMaxPending"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|sambaGroupMapping|Samba Group Mapping"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaPwdCanChange"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|posixGroup|Abstraction of a group of accounts"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|deltaRevocationList"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|alias"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dc"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|member"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|document"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCipherSuite"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|organizationalUnit"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaPwdHistoryLength|Length of Password History "
+"Entries (default: 0 => off)"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbDirectory|Directory for database content"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|organization|RFC2256: an organization"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|homePhone"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|certificationAuthority"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|janetMailbox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaAcctFlags"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userSMIMECertificate"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|departmentNumber|RFC2798: identifies a department "
+"within an organization"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|pager"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|employeeNumber|RFC2798: numerically identifies an "
+"employee within an organization"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcHdbConfig"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|cn|RFC2256: common name(s) for which the entity "
+"is known by"
+msgstr "RFC2256: エントリの一般的な名前"
+
+#: -:-
+msgid "LDAP|Attribute|preferredLanguage"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|subtreeMinimumQuality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|roomNumber|RFC1274: room number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcReplica"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|nisMap"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaProfilePath"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|matchingRules"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|employeeType"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcConnMaxPendingAuth"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|businessCategory"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcConfigFile|File for slapd configuration "
+"directives"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|knowledgeInformation"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|registeredAddress"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|residentialPerson|RFC2256: an residential person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|homeTelephoneNumber"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaAlgorithmicRidBase|Base at which the samba "
+"RID generation algorithm should operate"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|telexNumber|RFC2256: Telex Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|x121Address|RFC2256: X.121 Address"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|groupOfNames|RFC2256: a group of names (DNs)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|device"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcOverlayConfig|OpenLDAP Overlay-specific "
+"options"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|country|RFC2256: a country"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedAlgorithms|RFC2256: supported algorithms"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|nisNetgroupTriple|Netgroup triple"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|top"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAllows"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaMinPwdLength|Minimal password length "
+"(default: 5)"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaNextUserRid"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|certificateRevocationList|RFC2256: X.509 "
+"certificate revocation list, use ;binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcAccess"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCACertificateFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcDbMode"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcRootPW"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|sambaConfigOption|Samba Configuration Option"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|locality"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|olcSchemaConfig"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|labeledURI"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaLogoffTime"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbIDLcacheSize|IDL cache size in IDLs"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|ieee802Device"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|matchingRuleUse"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaMinPwdAge|Minimum password age, in seconds "
+"(default: 0 => allow immediate password change)"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|associatedDomain|RFC1274: domain associated with "
+"object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mail"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|buildingName|RFC1274: name of building"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|aliasedEntryName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|janetMailbox|RFC1274: Janet mailbox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|ipService"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|sambaProfilePath|Roaming profile path"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|displayName|RFC2798: preferred name to be used "
+"when displaying entries"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|serialNumber"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaStringOption"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaOptionName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTimeLimit"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSRandFile"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrAnyLen"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|aliasedObjectName"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|sambaUserWorkstations|List of user workstations "
+"the user is allowed to logon to"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|homePostalAddress"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|strongAuthenticationUser|RFC2256: a strong "
+"authentication user"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|ipHost|Abstraction of a host, an IP device"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|account"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sambaUserWorkstations"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dITStructureRules"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|referral"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|initials"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dSAQuality"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|deltaRevocationList|RFC2256: delta revocation "
+"list; use ;binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|objectClasses|RFC2252: object classes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|userClass|RFC1274: category of user"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ipServicePort"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|facsimileTelephoneNumber|RFC2256: Facsimile (Fax) "
+"Telephone Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcRootDN"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|person|RFC2256: a person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSVerifyClient"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|sn"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|userPassword"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|surname"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|cACertificate"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|sambaSidEntry"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|inetOrgPerson|RFC2798: Internet Organizational "
+"Person"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|documentLocation"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|certificateRevocationList"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcRootDSE"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcLastMod"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|posixGroup"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|macAddress|MAC address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|bootParameter|rpc.bootparamd parameter"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|mXRecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCACertificatePath"
+msgstr ""
 
 #: lib/active_ldap/adapter/ldap.rb:84
 msgid "No matches: filter: %s: attributes: %s"
@@ -115,6 +2816,10 @@ msgstr "このメッセージを表示します。"
 msgid "Show version"
 msgstr "バージョンを表示します。"
 
+#: lib/active_ldap/get_text/parser.rb:74
+msgid "Ignored '%{file}'. Solve dependencies first."
+msgstr ""
+
 #: lib/active_ldap/attributes.rb:34
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
 msgstr ""
@@ -166,7 +2871,7 @@ msgstr "ハッシュ化されたパスワードからsaltを取り出すこと�
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
 
-#: lib/active_ldap/schema.rb:229
+#: lib/active_ldap/schema.rb:44
 msgid "Unknown schema group: %s"
 msgstr "未知のスキーマグループです: %s"
 
@@ -199,34 +2904,34 @@ msgstr "%sは未知の属性です。"
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:431
+#: lib/active_ldap/base.rb:489
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:512
+#: lib/active_ldap/base.rb:570
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:540
+#: lib/active_ldap/base.rb:598
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:559
+#: lib/active_ldap/base.rb:617
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:580 lib/active_ldap/base.rb:591
+#: lib/active_ldap/base.rb:638 lib/active_ldap/base.rb:649
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:699
+#: lib/active_ldap/base.rb:757
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1097
+#: lib/active_ldap/base.rb:1155
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
