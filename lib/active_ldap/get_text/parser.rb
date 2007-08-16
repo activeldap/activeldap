@@ -51,7 +51,7 @@ module ActiveLdap
 
       def ensure_configuration(configuration)
         configuration ||= RAILS_ENV if Object.const_defined?(:RAILS_ENV)
-        configuration ||= {}
+        configuration ||= ENV["RAILS_ENV"] || {}
         if configuration.is_a?(String)
           if File.exists?(configuration)
             require 'erb'
