@@ -10,3 +10,7 @@ else
     "to make #{ldap_configuration_file}"
   ActiveLdap::Base.logger.error(message)
 end
+
+class ActionView::Base
+  include ActiveLdapHelper
+end
