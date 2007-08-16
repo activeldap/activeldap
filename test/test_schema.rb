@@ -3,6 +3,66 @@ require 'al-test-utils'
 class TestSchema < Test::Unit::TestCase
   priority :must
 
+  def test_super_class?
+    group = 'objectClasses'
+    entry = {
+      group => [
+                "( 2.5.6.6 NAME 'person' DESC 'RFC2256: a person' SUP " +
+                "top STRUCTURAL MUST ( sn $ cn ) MAY ( userPassword $ " +
+                "telephoneNumber $ seeAlso $ description ) )",
+
+                "( 2.5.6.7 NAME 'organizationalPerson' DESC 'RFC2256: " +
+                "an organizational person' SUP person STRUCTURAL MAY ( " +
+                "title $ x121Address $ registeredAddress $ " +
+                "destinationIndicator $ preferredDeliveryMethod $ " +
+                "telexNumber $ teletexTerminalIdentifier $ telephoneNumber " +
+                "$ internationaliSDNNumber $ facsimileTelephoneNumber $ " +
+                "street $ postOfficeBox $ postalCode $ postalAddress $ " +
+                "physicalDeliveryOfficeName $ ou $ st $ l ) )",
+
+                "( 2.16.840.1.113730.3.2.2 NAME 'inetOrgPerson' DESC " +
+                "'RFC2798: Internet Organizational Person' SUP " +
+                "organizationalPerson STRUCTURAL MAY ( audio $ " +
+                "businessCategory $ carLicense $ departmentNumber $ " +
+                "displayName $ employeeNumber $ employeeType $ givenName " +
+                "$ homePhone $ homePostalAddress $ initials $ jpegPhoto " +
+                "$ labeledURI $ mail $ manager $ mobile $ o $ pager $ " +
+                "photo $ roomNumber $ secretary $ uid $ userCertificate $ " +
+                "x500UniqueIdentifier $ preferredLanguage $ " +
+                "userSMIMECertificate $ userPKCS12 ) )",
+               ]
+    }
+    schema = ActiveLdap::Schema.new(entry)
+
+    person = schema.object_class('person')
+    organizational_person = schema.object_class("organizationalPerson")
+    inet_org_person = schema.object_class("inetOrgPerson")
+
+    assert_equal([[false, false, false]] * 2,
+                 [[person.super_class?(person),
+                   person.super_class?(organizational_person),
+                   person.super_class?(inet_org_person)],
+                  [person.super_class?("person"),
+                   person.super_class?("organizationalPerson"),
+                   person.super_class?("inetOrgPerson")]])
+
+    assert_equal([[true, false, false]] * 2,
+                 [[organizational_person.super_class?(person),
+                   organizational_person.super_class?(organizational_person),
+                   organizational_person.super_class?(inet_org_person)],
+                  [organizational_person.super_class?("person"),
+                   organizational_person.super_class?("organizationalPerson"),
+                   organizational_person.super_class?("inetOrgPerson")]])
+
+    assert_equal([[true, true, false]] * 2,
+                 [[inet_org_person.super_class?(person),
+                   inet_org_person.super_class?(organizational_person),
+                   inet_org_person.super_class?(inet_org_person)],
+                  [inet_org_person.super_class?("person"),
+                   inet_org_person.super_class?("organizationalPerson"),
+                   inet_org_person.super_class?("inetOrgPerson")]])
+  end
+
   priority :normal
   def test_duplicate_schema
     sasNMASProductOptions_schema =
