@@ -6,7 +6,7 @@ module ActiveLdap
     class Parser
       include GetText
 
-      def initialize(configuration={})
+      def initialize(configuration=nil)
         configuration = ensure_configuration(configuration)
         classes = configuration.delete(:classes) || ["ActiveLdap::Base"]
         @classes_re = /class.*#{Regexp.union(*classes)}/
@@ -21,7 +21,7 @@ module ActiveLdap
             klass = name.constantize
             next unless klass.is_a?(Class)
             next unless klass < ActiveLdap::Base
-            register(klass.name, file)
+            register(klass.name.singularize.underscore.gsub(/_/, " "), file)
             klass.classes.each do |object_class|
               register_object_class(object_class, file)
             end
@@ -50,6 +50,8 @@ module ActiveLdap
       end
 
       def ensure_configuration(configuration)
+        configuration ||= RAILS_ENV if Object.const_defined?(:RAILS_ENV)
+        configuration ||= {}
         if configuration.is_a?(String)
           if File.exists?(configuration)
             require 'erb'
@@ -58,6 +60,7 @@ module ActiveLdap
           else
             ENV["RAILS_ENV"] = configuration
             require 'config/environment'
+            configuration = ActiveLdap::Base.configurations[configuration]
           end
         end
         configuration = configuration.symbolize_keys

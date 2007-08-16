@@ -15,8 +15,6 @@ module ActiveLdap
         class << self
           alias_method :human_attribute_name,
                        :human_attribute_name_active_ldap
-          alias_method :human_attribute_table_name_for_error,
-                       :human_object_class_name
         end
 
         # Workaround for GetText's ugly implementation
