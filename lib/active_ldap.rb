@@ -939,19 +939,7 @@ rescue LoadError
   require 'active_ldap/get_text_fallback'
 end
 
-module ActiveLdap
-  module GetTextSupport
-    class << self
-      def included(base)
-        base.class_eval do
-          include(GetText)
-          bindtextdomain("active-ldap")
-        end
-      end
-    end
-  end
-end
-
+require 'active_ldap/get_text_support'
 
 require 'active_ldap/base'
 require 'active_ldap/associations'
