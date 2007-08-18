@@ -74,8 +74,11 @@ module ActiveLdap
 
       private
       def normalize_attribute_value_of_array(name, value)
-        if value.size > 1 and schema.attribute(name).single_value?
-          raise TypeError, _("Attribute %s can only have a single value") % name
+	attribute = schema.attribute(name)
+        if value.size > 1 and attribute.single_value?
+          format = _("Attribute %s can only have a single value")
+          message = format % self.class.human_attribute_name(attribute)
+          raise TypeError, message
         end
         if value.empty?
           if schema.attribute(name).binary_required?
@@ -92,8 +95,8 @@ module ActiveLdap
 
       def normalize_attribute_value_of_hash(name, value)
         if value.keys.size > 1
-          raise TypeError,
-                _("Hashes must have one key-value pair only: %s") % value.inspect
+          format = _("Hashes must have one key-value pair only: %s")
+          raise TypeError, format % value.inspect
         end
         unless value.keys[0].match(/^(lang-[a-z][a-z]*)|(binary)$/)
           logger.warn do

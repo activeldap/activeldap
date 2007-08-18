@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-16 22:01+0900\n"
-"PO-Revision-Date: 2007-08-18 19:30+0900\n"
+"POT-Creation-Date: 2007-08-18 20:35+0900\n"
+"PO-Revision-Date: 2007-08-18 20:36+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -577,7 +577,8 @@ msgstr "OpenLDAP設定: オーバーレイ(olcOverlay)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
-msgstr "OpenLDAP設定: パスワード暗号化用サルトの書式(olcPasswordCryptSaltFormat)"
+msgstr ""
+"OpenLDAP設定: パスワード暗号化用サルトの書式(olcPasswordCryptSaltFormat)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPasswordHash"
@@ -1783,7 +1784,9 @@ msgstr "ロックアウト後にリセットする時間(分) (デフォルト: 
 msgid ""
 "LDAP|Description|Attribute|sambaLockoutThreshold|Lockout users after bad "
 "logon attempts (default: 0 => off)"
-msgstr "指定した回数ログオンに失敗したあとにユーザをロックアウトする (デフォルト: 0 => 無効)"
+msgstr ""
+"指定した回数ログオンに失敗したあとにユーザをロックアウトする (デフォルト: 0 "
+"=> 無効)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLogoffTime|Timestamp of last logoff"
@@ -1813,13 +1816,16 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|sambaMaxPwdAge|Maximum password age, in seconds "
 "(default: -1 => never expire passwords)"
-msgstr "パスワードが失効するまでの時間(分) (デフォルト: -1 => パスワードは失効しない)"
+msgstr ""
+"パスワードが失効するまでの時間(分) (デフォルト: -1 => パスワードは失効しない)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaMinPwdAge|Minimum password age, in seconds "
 "(default: 0 => allow immediate password change)"
-msgstr "パスワードを変更できるようになるまでの時間(分) (デフォルト: 0 => すぐにパスワードを変更可能)"
+msgstr ""
+"パスワードを変更できるようになるまでの時間(分) (デフォルト: 0 => すぐにパス"
+"ワードを変更可能)"
 
 #: -:-
 msgid ""
@@ -1862,7 +1868,9 @@ msgstr "オプション名"
 msgid ""
 "LDAP|Description|Attribute|sambaPasswordHistory|Concatenated MD4 hashes of "
 "the unicode passwords used on this account"
-msgstr "このアカウントで使用されたUnicodeで符号化された<パスワードのMD4ハッシュを結合したもの"
+msgstr ""
+"このアカウントで使用されたUnicodeで符号化された<パスワードのMD4ハッシュを結合"
+"したもの"
 
 #: -:-
 msgid ""
@@ -1901,7 +1909,8 @@ msgstr "パスワードが失効する時刻"
 msgid ""
 "LDAP|Description|Attribute|sambaRefuseMachinePwdChange|Allow Machine "
 "Password changes (default: 0 => off)"
-msgstr "マシンがパスワードを変更することを許可するかどうか (デフォルト: 0 => 拒否)"
+msgstr ""
+"マシンがパスワードを変更することを許可するかどうか (デフォルト: 0 => 拒否)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaSIDList|Security ID List"
@@ -2802,6 +2811,14 @@ msgstr ""
 "サーバへの再接続失敗時のバックトレース:\\n\n"
 "%s"
 
+#: lib/active_ldap/validations.rb:84
+msgid "%{fn} is required attribute by objectClass '%s'"
+msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
+
+#: lib/active_ldap/validations.rb:86
+msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
+msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
+
 #: lib/active_ldap/command.rb:16
 msgid "Common options:"
 msgstr "共通のオプション"
@@ -2818,7 +2835,7 @@ msgstr "このメッセージを表示します。"
 msgid "Show version"
 msgstr "バージョンを表示します。"
 
-#: lib/active_ldap/get_text/parser.rb:74
+#: lib/active_ldap/get_text/parser.rb:87
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr "'%{file}'を無視します。まず依存関係を解決してください。"
 
@@ -2828,15 +2845,15 @@ msgstr ""
 "最初の引数nameがnilになるはずがあってはいけません。バグとして報告してくださ"
 "い！"
 
-#: lib/active_ldap/attributes.rb:78
+#: lib/active_ldap/attributes.rb:79
 msgid "Attribute %s can only have a single value"
 msgstr "属性%sは単一の値しか持てません。"
 
-#: lib/active_ldap/attributes.rb:96
+#: lib/active_ldap/attributes.rb:98
 msgid "Hashes must have one key-value pair only: %s"
 msgstr "ハッシュはひとつのキー・値のペアしか持ってはいけません。: %s"
 
-#: lib/active_ldap/attributes.rb:100
+#: lib/active_ldap/attributes.rb:103
 msgid "unknown option did not match lang-* or binary: %s"
 msgstr "lang-*にもbinaryにもマッチしない未知のオプションです: %s"
 
@@ -2844,11 +2861,11 @@ msgstr "lang-*にもbinaryにもマッチしない未知のオプションです
 msgid "Value in objectClass array is not a String: %s"
 msgstr "objectClassの配列の中身がStringではありません: %s"
 
-#: lib/active_ldap/object_class.rb:64
+#: lib/active_ldap/object_class.rb:65
 msgid "unknown objectClass in LDAP server: %s"
 msgstr "LDAPサーバが知らないobjectClassです: %s"
 
-#: lib/active_ldap/object_class.rb:79
+#: lib/active_ldap/object_class.rb:83
 msgid "Can't remove required objectClass: %s"
 msgstr "必須のobjectClassは削除できません: %s"
 
@@ -2929,11 +2946,11 @@ msgstr "エントリ%sを保存できません。"
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:757
+#: lib/active_ldap/base.rb:765
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1155
+#: lib/active_ldap/base.rb:1165
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 

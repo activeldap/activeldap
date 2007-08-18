@@ -66,8 +66,11 @@ module ActiveLdap
               value = @data[real_name] || []
               # Check for missing requirements.
               if value.empty?
-                aliases = required_attribute.aliases
-                args = [object_class.name]
+                _schema = schema
+                aliases = required_attribute.aliases.collect do |name|
+                  self.class.human_attribute_name(name)
+                end
+                args = [self.class.human_object_class_name(object_class)]
                 if ActiveLdap.const_defined?(:GetTextFallback)
                   if aliases.empty?
                     format = "is required attribute by objectClass '%s'"
@@ -78,10 +81,10 @@ module ActiveLdap
                   end
                 else
                   if aliases.empty?
-                    format = "%{fn} is required attribute by objectClass '%s'"
+                    format = _("%{fn} is required attribute by objectClass '%s'")
                   else
-                    format = "%{fn} is required attribute by objectClass '%s'" \
-                             ": aliases: %s"
+                    format = _("%{fn} is required attribute by objectClass " \
+                               "'%s': aliases: %s")
                     args << aliases.join(', ')
                   end
                 end

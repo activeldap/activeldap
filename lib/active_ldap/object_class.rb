@@ -81,7 +81,11 @@ module ActiveLdap
       end
       unless required_classes.empty?
         format = _("Can't remove required objectClass: %s")
-        message = format % required_classes.join(", ")
+        required_class_names = required_classes.collect do |required_class|
+          required_class = _schema.object_class(required_class)
+          self.class.human_object_class_name(required_class)
+        end
+        message = format % required_class_names.join(", ")
         raise RequiredObjectClassMissed, message
       end
     end
