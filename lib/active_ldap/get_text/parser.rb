@@ -8,10 +8,10 @@ module ActiveLdap
 
       def initialize(configuration=nil)
         configuration = ensure_configuration(configuration)
-        classes = configuration.delete(:classes) || ["ActiveLdap::Base"]
-        @classes_re = /class.*#{Regexp.union(*classes)}/
-        @configuration = default_configuration.merge(configuration)
-        ActiveLdap::Base.establish_connection(@configuration)
+        configuration = default_configuration.merge(configuration)
+
+        configuration = extract_options(configuration)
+        ActiveLdap::Base.establish_connection(configuration)
       end
 
       def parse(file, targets=[])
@@ -22,6 +22,7 @@ module ActiveLdap
             next unless klass.is_a?(Class)
             next unless klass < ActiveLdap::Base
             register(klass.name.singularize.underscore.gsub(/_/, " "), file)
+            next unless @extract_schema
             klass.classes.each do |object_class|
               register_object_class(object_class, file)
             end
@@ -42,15 +43,23 @@ module ActiveLdap
       end
 
       private
+      def extract_options(configuration)
+        configuration = configuration.dup
+        classes = configuration.delete(:classes) || ["ActiveLdap::Base"]
+        @classes_re = /class.*#{Regexp.union(*classes)}/ #
+        @extract_schema = configuration.delete(:extract_schema)
+        configuration
+      end
+
       def default_configuration
         {
           :host => "127.0.0.1",
           :allow_anonymous => true,
+          :extract_schema => false,
         }
       end
 
       def ensure_configuration(configuration)
-        configuration ||= RAILS_ENV if Object.const_defined?(:RAILS_ENV)
         configuration ||= ENV["RAILS_ENV"] || {}
         if configuration.is_a?(String)
           if File.exists?(configuration)
@@ -62,6 +71,10 @@ module ActiveLdap
             require 'config/environment'
             configuration = ActiveLdap::Base.configurations[configuration]
           end
+        end
+        if Object.const_defined?(:RAILS_ENV)
+          rails_configuration = ActiveLdap::Base.configurations[RAILS_ENV]
+          configuration = rails_configuration.merge(configuration)
         end
         configuration = configuration.symbolize_keys
       end
@@ -86,6 +99,8 @@ module ActiveLdap
         yield
         @targets.collect do |id, file_infos|
           [id, *file_infos.uniq]
+        end.sort_by do |id,|
+          id
         end
       end
 
