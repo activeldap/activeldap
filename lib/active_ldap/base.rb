@@ -716,11 +716,8 @@ module ActiveLdap
         unless respond_to?(setter)
           _schema ||= schema
           attribute = _schema.attribute(key)
-          if attribute.id.nil?
-            self.class.send(:attr_accessor, key)
-          else
-            define_attribute_methods(attribute)
-          end
+          next if attribute.id.nil?
+          define_attribute_methods(attribute)
         end
         send(setter, value)
       end
