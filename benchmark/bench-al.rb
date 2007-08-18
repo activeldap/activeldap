@@ -5,12 +5,27 @@ $LOAD_PATH.unshift(File.expand_path(File.join(base, "..", "lib")))
 require "active_ldap"
 require "benchmark"
 
-LDAP_SERVER = "127.0.0.1"
-LDAP_PORT = 389
-LDAP_BASE = ENV["LDAP_BASE"] || "dc=localdomain"
-LDAP_PREFIX = "ou=People"
-LDAP_USER = nil
-LDAP_PASSWORD = nil
+include ActiveLdap::GetTextSupport
+
+argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+  options.prefix = "ou=People"
+
+  opts.on("--prefix=PREFIX",
+          _("Specify prefix for benchmarking " \
+            "(default: %s)") % options.prefix) do |prefix|
+    options.prefix = prefix
+  end
+end
+
+ActiveLdap::Base.establish_connection
+config = ActiveLdap::Base.configuration
+
+LDAP_SERVER = config[:host]
+LDAP_PORT = config[:port]
+LDAP_BASE = config[:base]
+LDAP_PREFIX = options.prefix
+LDAP_USER = config[:bind_dn]
+LDAP_PASSWORD = config[:password]
 
 class ALUser < ActiveLdap::Base
   ldap_mapping :dn_attribute => 'uid', :prefix => LDAP_PREFIX,
@@ -24,7 +39,7 @@ def search_al
   ALUser.find(:all).each do |e|
     count += 1
   end
-  return count
+  count
 end # -- search_al
 
 def search_al_without_object_creation
@@ -32,7 +47,7 @@ def search_al_without_object_creation
   ALUser.search.each do |e|
     count += 1
   end
-  return count
+  count
 end
 
 # === search_ldap
@@ -98,25 +113,9 @@ def populate
   populate_users
 end
 
-# === main(argv)
+# === main
 #
-def main(argv)
-  # Connect with AL
-  #
-  config = {
-    :host => LDAP_SERVER,
-    :port => LDAP_PORT,
-    :base => LDAP_BASE,
-  }
-
-  do_populate = LDAP_USER && LDAP_PASSWORD
-
-  if do_populate
-    config[:bind_dn] = LDAP_USER
-    config[:password] = LDAP_PASSWORD
-  end
-  ActiveLdap::Base.establish_connection(config)
-
+def main(do_populate)
   if do_populate
     puts "populating..."
     dumped_data = ActiveLdap::Base.dump(:scope => :sub)
@@ -131,18 +130,16 @@ def main(argv)
   al_count_without_object_creation = 0
   ldap_count = 0
   Benchmark.bm(10) do |x|
-    x.report("AL") { al_count = search_al }
+    x.report("AL") {al_count = search_al}
     x.report("AL(No Obj)") do
       al_count_without_object_creation = search_al_without_object_creation
     end
-    x.report("LDAP") { ldap_count = search_ldap(conn) }
+    x.report("LDAP") {ldap_count = search_ldap(conn)}
   end
   print "Entries processed by Ruby/ActiveLdap: #{al_count}\n"
   print "Entries processed by Ruby/ActiveLdap (without object creation)" +
         ": #{al_count_without_object_creation}\n"
   print "Entries processed by Ruby/LDAP: #{ldap_count}\n"
-
-  0
 ensure
   if do_populate
     ActiveLdap::Base.delete_all(nil, :scope => :sub)
@@ -150,6 +147,4 @@ ensure
   end
 end
 
-if $0 == __FILE__ then
- exit(main(ARGV) || 1)
-end
+main(LDAP_USER && LDAP_PASSWORD)
