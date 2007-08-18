@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-18 21:28+0900\n"
+"POT-Creation-Date: 2007-08-18 23:51+0900\n"
 "PO-Revision-Date: 2007-08-18 21:03+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3235,34 +3235,26 @@ msgstr ""
 msgid "(default: %s)"
 msgstr ""
 
-#: benchmark/bench-al.rb:120
+#: benchmark/bench-al.rb:154
 msgid "Populating..."
 msgstr ""
 
-#: benchmark/bench-al.rb:133
-msgid "AL"
-msgstr ""
-
-#: benchmark/bench-al.rb:134
-msgid "AL(No Obj)"
-msgstr ""
-
-#: benchmark/bench-al.rb:137
-msgid "LDAP"
-msgstr ""
-
-#: benchmark/bench-al.rb:139
+#: benchmark/bench-al.rb:187
 msgid "Entries processed by Ruby/ActiveLdap: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:140
+#: benchmark/bench-al.rb:188
 msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:142
+#: benchmark/bench-al.rb:190
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:145
+#: benchmark/bench-al.rb:191
+msgid "Entries processed by Net::LDAP: %d"
+msgstr ""
+
+#: benchmark/bench-al.rb:194
 msgid "Cleaning..."
 msgstr ""

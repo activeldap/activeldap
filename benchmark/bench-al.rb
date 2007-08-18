@@ -20,7 +20,7 @@ end
 ActiveLdap::Base.establish_connection
 config = ActiveLdap::Base.configuration
 
-LDAP_SERVER = config[:host]
+LDAP_HOST = config[:host]
 LDAP_PORT = config[:port]
 LDAP_BASE = config[:base]
 LDAP_PREFIX = options.prefix
@@ -61,6 +61,40 @@ def search_ldap(conn)
   end
   count
 end # -- search_ldap
+
+def search_net_ldap(conn)
+  count = 0
+  conn.search(:base => "#{LDAP_PREFIX},#{LDAP_BASE}",
+              :scope => Net::LDAP::SearchScope_WholeSubtree,
+              :filter => "(uid=*)") do |e|
+    count += 1
+  end
+  count
+end
+
+def ldap_connection
+  require 'ldap'
+  conn = LDAP::Conn.new(LDAP_HOST, LDAP_PORT)
+  conn.set_option(LDAP::LDAP_OPT_PROTOCOL_VERSION, 3)
+  conn.bind(LDAP_USER, LDAP_PASSWORD) if LDAP_USER and LDAP_PASSWORD
+  conn
+rescue LoadError
+  nil
+end
+
+def net_ldap_connection
+  require 'net/ldap'
+  net_ldap_conn = Net::LDAP::Connection.new(:host => LDAP_HOST,
+                                            :port => LDAP_PORT)
+  if LDAP_USER and LDAP_PASSWORD
+    net_ldap_conn.bind(:method => :simple,
+                       :username => LDAP_USER,
+                       :password => LDAP_PASSWORD)
+  end
+  net_ldap_conn
+rescue LoadError
+  nil
+end
 
 def populate_base
   suffixes = []
@@ -125,21 +159,38 @@ def main(do_populate)
 
   # Standard connection
   #
-  conn = LDAP::Conn.new(LDAP_SERVER, LDAP_PORT)
+  ldap_conn = ldap_connection
+  net_ldap_conn = net_ldap_connection
+
   al_count = 0
   al_count_without_object_creation = 0
   ldap_count = 0
-  Benchmark.bm(10) do |x|
-    x.report(_("AL")) {al_count = search_al}
-    x.report(_("AL(No Obj)")) do
-      al_count_without_object_creation = search_al_without_object_creation
+  net_ldap_count = 0
+  Benchmark.bm(20) do |x|
+    [1].each do |n|
+      x.report("%3dx: AL" % n) {n.times {al_count = search_al}}
+      x.report("%3dx: AL(No Obj)" % n) do
+        n.times do
+          al_count_without_object_creation = search_al_without_object_creation
+        end
+      end
+      if ldap_conn
+        x.report("%3dx: LDAP" % n) do
+          n.times {ldap_count = search_ldap(ldap_conn)}
+        end
+      end
+      if net_ldap_conn
+        x.report("%3dx: Net::LDAP" % n) do
+          n.times {net_ldap_count = search_net_ldap(net_ldap_conn)}
+        end
+      end
     end
-    x.report(_("LDAP")) {ldap_count = search_ldap(conn)}
   end
   puts(_("Entries processed by Ruby/ActiveLdap: %d") % al_count)
   puts(_("Entries processed by Ruby/ActiveLdap (without object creation): " \
          "%d") % al_count_without_object_creation)
   puts(_("Entries processed by Ruby/LDAP: %d") % ldap_count)
+  puts(_("Entries processed by Net::LDAP: %d") % net_ldap_count)
 ensure
   if do_populate
     puts(_("Cleaning..."))

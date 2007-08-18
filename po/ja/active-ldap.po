@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-18 21:28+0900\n"
-"PO-Revision-Date: 2007-08-18 21:29+0900\n"
+"POT-Creation-Date: 2007-08-18 23:51+0900\n"
+"PO-Revision-Date: 2007-08-18 23:51+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3019,34 +3019,26 @@ msgstr "ベンチマーク用のプリフィックスを指定してください
 msgid "(default: %s)"
 msgstr "(デフォルト: %s)"
 
-#: benchmark/bench-al.rb:120
+#: benchmark/bench-al.rb:154
 msgid "Populating..."
 msgstr "データ投入中..."
 
-#: benchmark/bench-al.rb:133
-msgid "AL"
-msgstr "AL"
-
-#: benchmark/bench-al.rb:134
-msgid "AL(No Obj)"
-msgstr "AL(No Obj)"
-
-#: benchmark/bench-al.rb:137
-msgid "LDAP"
-msgstr "LDAP"
-
-#: benchmark/bench-al.rb:139
+#: benchmark/bench-al.rb:187
 msgid "Entries processed by Ruby/ActiveLdap: %d"
 msgstr "Ruby/ActiveLdapで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:140
+#: benchmark/bench-al.rb:188
 msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
 msgstr "Ruby/ActiveLdapで処理したエントリ数(オブジェクト生成無し): %d"
 
-#: benchmark/bench-al.rb:142
+#: benchmark/bench-al.rb:190
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr "Ruby/LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:145
+#: benchmark/bench-al.rb:191
+msgid "Entries processed by Net::LDAP: %d"
+msgstr "Net::LDAPで処理したエントリ数: %d"
+
+#: benchmark/bench-al.rb:194
 msgid "Cleaning..."
 msgstr "削除中..."
