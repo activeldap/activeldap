@@ -1,0 +1,12 @@
+<% form_tag do -%>
+<p><label for="login"><%= _("Login") %></label><br/>
+<%= text_field_tag 'login' %></p>
+
+<p><label for="password"><%= _("Password") %></label><br/>
+<%= password_field_tag 'password' %></p>
+
+<p><label for="remember_me"><%= _("Remember me:") %></label>
+<%= check_box_tag 'remember_me' %></p>
+
+<p><%= submit_tag(_('Log in')) %></p>
+<% end -%>

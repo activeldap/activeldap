@@ -1,0 +1,9 @@
+<% if @users.empty? -%>
+<p><%= _("No user.") %></p>
+<% else -%>
+<ul>
+<%   @users.each do |user| -%>
+  <li><%= user_link(user, true) %></li>
+<%   end -%>
+</ul>
+<% end -%>

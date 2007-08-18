@@ -1,0 +1,25 @@
+
+<div class="entry">
+  <h2>
+    <%= user_link_if(defined?(link_to_entry) && link_to_entry, entry, true) %>
+  </h2>
+  <table>
+    <thead>
+      <tr>
+	<th><%= _("attribute name") %></th>
+	<th><%= _("value") %></th>
+	<th><%= _("description") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+<% entry.attribute_names(true).sort.each do |name| -%>
+      <tr>
+	<th><%= h la_(name) %></th>
+	<td><%= h entry[name, true].join(", ") %></td>
+	<td><%= h lad_(name) %></td>
+      </tr>
+<% end -%>
+    </tbody>
+  </table>
+</div>

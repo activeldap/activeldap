@@ -1,0 +1,9 @@
+quentin:
+  id: 1
+  login: quentin
+  updated_at: <%= 5.days.ago.to_s :db %>
+
+aaron:
+  id: 2
+  login: aaron
+  updated_at: <%= 1.days.ago.to_s :db %>

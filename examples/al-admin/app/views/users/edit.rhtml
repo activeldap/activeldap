@@ -1,0 +1,10 @@
+<div class="entry">
+  <h2><%= user_link(@user) %></h2>
+  <% form_tag :action => 'update', :id => @user do %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag(_('Edit')) %>
+  <% end %>
+</div>
+
+<%= link_to _('Show'), :action => 'show', :id => @user %> |
+<%= link_to _('Back'), :action => 'index' %>
