@@ -29,6 +29,7 @@
 #
 
 require 'English'
+require 'thread'
 
 module ActiveLdap
   # OO-interface to LDAP assuming pam/nss_ldap-style organization with
@@ -801,6 +802,7 @@ module ActiveLdap
         @connection = nil
         connection.connect
         @connection = connection
+        @schema = nil
         clear_association_cache
       rescue ActiveLdap::Error
         remove_connection
@@ -808,6 +810,28 @@ module ActiveLdap
         raise
       end
       true
+    end
+
+    def schema
+      @schema ||= super
+    end
+
+    def inspect
+      @mutex.synchronize do
+        begin
+          schema, @schema = @schema, nil
+          must, may = @must, @may
+          object_classes = @object_classes
+          @must, @may = @must.collect(&:name), @may.collect(&:name)
+          @object_classes = @object_classes.collect(&:name)
+          super
+        ensure
+          @schema = schema
+          @must = must
+          @may = may
+          @object_classes = object_classes
+        end
+      end
     end
 
     private
@@ -887,6 +911,7 @@ module ActiveLdap
     end
 
     def init_instance_variables
+      @mutex = Mutex.new
       @data = {} # where the r/w entry data is stored
       @ldap_data = {} # original ldap entry data
       @attr_methods = {} # list of valid method calls for attributes used for
