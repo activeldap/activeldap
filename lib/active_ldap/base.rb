@@ -709,9 +709,20 @@ module ActiveLdap
     # Also be sure to only pass in key-value pairs of your choosing.
     # Do not let URL/form hackers supply the keys.
     def attributes=(hash_or_assoc)
+      _schema = nil
       targets = remove_attributes_protected_from_mass_assignment(hash_or_assoc)
       targets.each do |key, value|
-        send("#{key}=", value)
+        setter = "#{key}="
+        unless respond_to?(setter)
+          _schema ||= schema
+          attribute = _schema.attribute(key)
+          if attribute.id.nil?
+            self.class.send(:attr_accessor, key)
+          else
+            define_attribute_methods(attribute)
+          end
+        end
+        send(setter, value)
       end
     end
 
@@ -1082,12 +1093,14 @@ module ActiveLdap
     end
 
     def normalize_data(data, except=[])
+      _schema = schema
       result = {}
       data.each do |key, values|
         next if except.include?(key)
         real_name = to_real_attribute_name(key)
         next if real_name and except.include?(real_name)
         real_name ||= key
+        next if _schema.attribute(real_name).id.nil?
         result[real_name] ||= []
         result[real_name].concat(values)
       end

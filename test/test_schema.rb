@@ -38,29 +38,20 @@ class TestSchema < Test::Unit::TestCase
     organizational_person = schema.object_class("organizationalPerson")
     inet_org_person = schema.object_class("inetOrgPerson")
 
-    assert_equal([[false, false, false]] * 2,
-                 [[person.super_class?(person),
+    assert_equal([false, false, false],
+                 [person.super_class?(person),
                    person.super_class?(organizational_person),
-                   person.super_class?(inet_org_person)],
-                  [person.super_class?("person"),
-                   person.super_class?("organizationalPerson"),
-                   person.super_class?("inetOrgPerson")]])
+                   person.super_class?(inet_org_person)])
 
-    assert_equal([[true, false, false]] * 2,
-                 [[organizational_person.super_class?(person),
-                   organizational_person.super_class?(organizational_person),
-                   organizational_person.super_class?(inet_org_person)],
-                  [organizational_person.super_class?("person"),
-                   organizational_person.super_class?("organizationalPerson"),
-                   organizational_person.super_class?("inetOrgPerson")]])
+    assert_equal([true, false, false],
+                 [organizational_person.super_class?(person),
+                  organizational_person.super_class?(organizational_person),
+                  organizational_person.super_class?(inet_org_person)])
 
-    assert_equal([[true, true, false]] * 2,
-                 [[inet_org_person.super_class?(person),
-                   inet_org_person.super_class?(organizational_person),
-                   inet_org_person.super_class?(inet_org_person)],
-                  [inet_org_person.super_class?("person"),
-                   inet_org_person.super_class?("organizationalPerson"),
-                   inet_org_person.super_class?("inetOrgPerson")]])
+    assert_equal([true, true, false],
+                 [inet_org_person.super_class?(person),
+                  inet_org_person.super_class?(organizational_person),
+                  inet_org_person.super_class?(inet_org_person)])
   end
 
   priority :normal

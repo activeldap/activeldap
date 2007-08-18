@@ -354,13 +354,9 @@ module ActiveLdap
       attr_reader :super_classes
       def initialize(name, schema)
         super(name, schema, "objectClasses")
-        @schema = schema
       end
 
       def super_class?(object_class)
-        unless object_class.is_a?(ObjectClass)
-          object_class = @schema.object_class(object_class)
-        end
         @super_classes.include?(object_class)
       end
 

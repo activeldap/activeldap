@@ -68,11 +68,12 @@ module ActiveLdap
     end
 
     def assert_have_all_required_classes(new_classes)
+      _schema = schema
       normalized_new_classes = new_classes.collect(&:downcase)
       required_classes = self.class.required_classes.reject do |required_class|
         normalized_new_classes.include?(required_class.downcase) or
           (normalized_new_classes.find do |new_class|
-             schema.object_class(new_class).super_class?(required_class)
+             _schema.object_class(new_class).super_class?(required_class)
            end)
       end
       unless required_classes.empty?
