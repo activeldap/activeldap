@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
 "POT-Creation-Date: 2007-08-16 22:01+0900\n"
-"PO-Revision-Date: 2007-08-18 16:08+0900\n"
+"PO-Revision-Date: 2007-08-18 19:30+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -641,7 +641,7 @@ msgstr "OpenLDAP設定: ルートDN(olcRootDN)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRootDSE"
-msgstr "OpenLDAP設定: ルートDSA特定エントリ(olcRootDSE)"
+msgstr "OpenLDAP設定: ルートDSE(olcRootDSE)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRootPW"
@@ -1686,7 +1686,7 @@ msgstr "RFC2256: OSIプレゼンテーションアドレス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ref|namedref: subordinate referral URL"
-msgstr "名前付けされた参照: 下位の照会URL"
+msgstr "名前付き参照: 下位の照会URL"
 
 #: -:-
 msgid ""
@@ -2064,7 +2064,7 @@ msgstr "RFC2256: X.500 一意の識別子"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|OpenLDAProotDSE|OpenLDAP Root DSE object"
-msgstr "OpenLDAPのルートDSEオブジェクト"
+msgstr "OpenLDAPのルートDSA特定エントリオブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|alias|RFC2256: an alias"
@@ -2151,198 +2151,198 @@ msgstr "ホスト(IP装置)の抽象概念"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipNetwork|Abstraction of an IP network"
-msgstr ""
+msgstr "IPネットワークの抽象概念"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipProtocol|Abstraction of an IP protocol"
-msgstr ""
+msgstr "IPプロトコルの抽象概念"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|ipService|Abstraction an Internet Protocol "
 "service"
-msgstr ""
+msgstr "IPサービスの抽象概念"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|labeledURIObject|RFC2079: object that contains "
 "the URI attribute type"
-msgstr ""
+msgstr "RFC2079: URI属性種別を持ったオブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|locality|RFC2256: a locality"
-msgstr ""
+msgstr "RFC2256: 地域"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisMap|A generic abstraction of a NIS map"
-msgstr ""
+msgstr "NISマップの一般的な抽象概念"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisNetgroup|Abstraction of a netgroup"
-msgstr ""
+msgstr "ネットグループの抽象概念"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisObject|An entry in a NIS map"
-msgstr ""
+msgstr "NISマップのエントリ"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcBackendConfig|OpenLDAP Backend-specific "
 "options"
-msgstr ""
+msgstr "OpenLDAPのバックエンド特有のオプション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
-msgstr ""
+msgstr "OpenLDAPの設定オブジェクト"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcDatabaseConfig|OpenLDAP Database-specific "
 "options"
-msgstr ""
+msgstr "OpenLDAPのデータベース特有のオプション"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcFrontendConfig|OpenLDAP frontend "
 "configuration"
-msgstr ""
+msgstr "OpenLDAPのフロントエンドの設定"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration options"
-msgstr ""
+msgstr "OpenLDAPのグローバルな設定オプション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|olcHdbConfig|HDB backend configuration"
-msgstr ""
+msgstr "HDBバックエンドの設定"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcIncludeFile|OpenLDAP configuration include "
 "file"
-msgstr ""
+msgstr "取り込むOpenLDAPの設定ファイル"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|olcLdifConfig|LDIF backend configuration"
-msgstr ""
+msgstr "LDIFバックエンドの設定"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|olcModuleList|OpenLDAP dynamic module info"
-msgstr ""
+msgstr "OpenLDAPの動的モジュールの情報"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|olcOverlayConfig|OpenLDAP Overlay-specific "
 "options"
-msgstr ""
+msgstr "OpenLDAPのオーバレイ特有のオプション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|olcSchemaConfig|OpenLDAP schema object"
-msgstr ""
+msgstr "OpenLDAPのスキーマオブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|oncRpc|Abstraction of an ONC/RPC binding"
-msgstr ""
+msgstr "ONC RPCバインディングの抽象概念"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|organizationalPerson|RFC2256: an organizational "
 "person"
-msgstr ""
+msgstr "RFC2256: 組織の人"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|organizationalRole|RFC2256: an organizational "
 "role"
-msgstr ""
+msgstr "RFC2256: 組織の役割"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|organizationalUnit|RFC2256: an organizational "
 "unit"
-msgstr ""
+msgstr "RFC2256: 組織の単位"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|organization|RFC2256: an organization"
-msgstr ""
+msgstr "RFC2256: 組織"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|person|RFC2256: a person"
-msgstr ""
+msgstr "RFC2256: 人"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|pkiCA|RFC2587: PKI certificate authority"
-msgstr ""
+msgstr "RFC2287: PKI認証機関"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|pkiUser|RFC2587: a PKI user"
-msgstr ""
+msgstr "RFC2287: PKIユーザ"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|posixAccount|Abstraction of an account with "
 "POSIX attributes"
-msgstr ""
+msgstr "POSIX属性をもつアカウントの抽象概念"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|posixGroup|Abstraction of a group of accounts"
-msgstr ""
+msgstr "アカウントのグループの抽象概念"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|referral|namedref: named subordinate referral"
-msgstr ""
+msgstr "名前付き参照: 名前の付いた下位の照会"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|residentialPerson|RFC2256: an residential person"
-msgstr ""
+msgstr "RFC2256: 居住者"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|sambaConfigOption|Samba Configuration Option"
-msgstr ""
+msgstr "Sambaの設定オプション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaConfig|Samba Configuration Section"
-msgstr ""
+msgstr "Sambaoの設定セクション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaDomain|Samba Domain Information"
-msgstr ""
+msgstr "Sambaのドメイン情報"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaGroupMapping|Samba Group Mapping"
-msgstr ""
+msgstr "Sambaのグループ写像"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|sambaIdmapEntry|Mapping from a SID to an ID"
-msgstr ""
+msgstr "SIDからIDへの写像"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|sambaSamAccount|Samba 3.0 Auxilary SAM Account"
-msgstr ""
+msgstr "Samba 3.0の補助的なSAMアカウント"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaShare|Samba Share Section"
-msgstr ""
+msgstr "Sambaの共有セクション"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaSidEntry|Structural Class for a SID"
-msgstr ""
+msgstr "SIDの構造的なクラス"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|sambaTrustPassword|Samba Trust Password"
-msgstr ""
+msgstr "Sambaの信用パスワード"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|sambaUnixIdPool|Pool for allocating UNIX uids/"
 "gids"
-msgstr ""
+msgstr "UNIXのUID/GIDを割り当てるためのプール"
 
 #: -:-
 msgid ""
@@ -2360,115 +2360,115 @@ msgstr "RFC1274: 簡素な安全性を持つオブジェクト"
 msgid ""
 "LDAP|Description|ObjectClass|strongAuthenticationUser|RFC2256: a strong "
 "authentication user"
-msgstr ""
+msgstr "RFC2256: 強力な認証ユーザ"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|subschema|RFC2252: controlling subschema (sub)"
 "entry"
-msgstr ""
+msgstr "RFC2252: 制御されているサブスキーマエントリ"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|top|top of the superclass chain"
-msgstr ""
+msgstr "スーパクラス連鎖の最上位"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|uidObject|RFC2377: uid object"
-msgstr ""
+msgstr "RFC2377: UIDオブジェクト"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|userSecurityInformation|RFC2256: a user "
 "security information"
-msgstr ""
+msgstr "RFC2256: ユーザセキュリティ情報"
 
 #: -:-
 msgid "LDAP|ObjectClass|LDAProotDSE"
-msgstr "LDAPルートDSA特定エントリ(LDAProotDSE)"
+msgstr "LDAPルートDSE(LDAProotDSE)"
 
 #: -:-
 msgid "LDAP|ObjectClass|OpenLDAProotDSE"
-msgstr ""
+msgstr "OpenLDAPのルートDSE(OpenLDAProotDSE)"
 
 #: -:-
 msgid "LDAP|ObjectClass|RFC822localPart"
-msgstr ""
+msgstr "RFC822で定義されたローカルパート(RFC822localPart)"
 
 #: -:-
 msgid "LDAP|ObjectClass|account"
-msgstr ""
+msgstr "アカウント(account)"
 
 #: -:-
 msgid "LDAP|ObjectClass|alias"
-msgstr ""
+msgstr "別名(alias)"
 
 #: -:-
 msgid "LDAP|ObjectClass|applicationEntity"
-msgstr ""
+msgstr "応用実体(applicationEntity)"
 
 #: -:-
 msgid "LDAP|ObjectClass|applicationProcess"
-msgstr ""
+msgstr "応用プロセス(applicationProcess)"
 
 #: -:-
 msgid "LDAP|ObjectClass|bootableDevice"
-msgstr ""
+msgstr "起動可能デバイス(booatbleDevice)"
 
 #: -:-
 msgid "LDAP|ObjectClass|cRLDistributionPoint"
-msgstr ""
+msgstr "CRL配布点(cRLDistributionPoint)"
 
 #: -:-
 msgid "LDAP|ObjectClass|certificationAuthority"
-msgstr ""
+msgstr "認証機関(certificationAuthority)"
 
 #: -:-
 msgid "LDAP|ObjectClass|certificationAuthority-V2"
-msgstr ""
+msgstr "認証機関-V2(certificationAuthority-V2)"
 
 #: -:-
 msgid "LDAP|ObjectClass|country"
-msgstr ""
+msgstr "国(country)"
 
 #: -:-
 msgid "LDAP|ObjectClass|dNSDomain"
-msgstr ""
+msgstr "DNSドメイン(dNSDomain)"
 
 #: -:-
 msgid "LDAP|ObjectClass|dSA"
-msgstr ""
+msgstr "DSA(dSA)"
 
 #: -:-
 msgid "LDAP|ObjectClass|dcObject"
-msgstr ""
+msgstr "ドメイン要素オブジェクト(dcObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|deltaCRL"
-msgstr ""
+msgstr "差分CRL(deltaCRL)"
 
 #: -:-
 msgid "LDAP|ObjectClass|device"
-msgstr ""
+msgstr "デバイス(device)"
 
 #: -:-
 msgid "LDAP|ObjectClass|dmd"
-msgstr ""
+msgstr "ディレクトリ管理ドメイン(dmd)"
 
 #: -:-
 msgid "LDAP|ObjectClass|document"
-msgstr ""
+msgstr "文書(document)"
 
 #: -:-
 msgid "LDAP|ObjectClass|documentSeries"
-msgstr ""
+msgstr "文書シリーズ(documentSeries)"
 
 #: -:-
 msgid "LDAP|ObjectClass|domain"
-msgstr ""
+msgstr "ドメイン(domain)"
 
 #: -:-
 msgid "LDAP|ObjectClass|domainRelatedObject"
-msgstr ""
+msgstr "ドメイン関連オブジェクト(domainRelatedObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|extensibleObject"
@@ -2476,91 +2476,91 @@ msgstr "拡張可能なオブジェクト(extensibleObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|friendlyCountry"
-msgstr ""
+msgstr "友好国(friendlyCountry)"
 
 #: -:-
 msgid "LDAP|ObjectClass|groupOfNames"
-msgstr ""
+msgstr "名前のグループ(groupOfNames)"
 
 #: -:-
 msgid "LDAP|ObjectClass|groupOfUniqueNames"
-msgstr ""
+msgstr "一意な名前のグループ(groupOfUniqueNames)"
 
 #: -:-
 msgid "LDAP|ObjectClass|ieee802Device"
-msgstr ""
+msgstr "IEEE802規格のデバイス(ieee802Device)"
 
 #: -:-
 msgid "LDAP|ObjectClass|inetOrgPerson"
-msgstr ""
+msgstr "インターネット組織の人(inetOrgPerson)"
 
 #: -:-
 msgid "LDAP|ObjectClass|ipHost"
-msgstr ""
+msgstr "IPホスト(ipHost)"
 
 #: -:-
 msgid "LDAP|ObjectClass|ipNetwork"
-msgstr ""
+msgstr "IPネットワーク(ipNetwork)"
 
 #: -:-
 msgid "LDAP|ObjectClass|ipProtocol"
-msgstr ""
+msgstr "IPプロトコル(ipProtocol)"
 
 #: -:-
 msgid "LDAP|ObjectClass|ipService"
-msgstr ""
+msgstr "IPサービス(ipService)"
 
 #: -:-
 msgid "LDAP|ObjectClass|labeledURIObject"
-msgstr ""
+msgstr "ラベル付きのURIオブジェクト(labeledURIObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|locality"
-msgstr ""
+msgstr "地域(locality)"
 
 #: -:-
 msgid "LDAP|ObjectClass|newPilotPerson"
-msgstr ""
+msgstr "新しい試験的な人(newPilotPerson)"
 
 #: -:-
 msgid "LDAP|ObjectClass|nisMap"
-msgstr ""
+msgstr "NISマップ(nisMap)"
 
 #: -:-
 msgid "LDAP|ObjectClass|nisNetgroup"
-msgstr ""
+msgstr "NISネットグループ(nisNetgroup)"
 
 #: -:-
 msgid "LDAP|ObjectClass|nisObject"
-msgstr ""
+msgstr "NISオブジェクト(nisObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcBackendConfig"
-msgstr ""
+msgstr "OpenLDAP設定: バックエンド設定(olcBackendConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcConfig"
-msgstr ""
+msgstr "OpenLDAP設定: 設定(olcConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcDatabaseConfig"
-msgstr ""
+msgstr "OpenLDAP設定: データベース設定(olcDatabaseConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcFrontendConfig"
-msgstr ""
+msgstr "OpenLDAP設定: フロントエンド設定(olcFrontendConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcGlobal"
-msgstr ""
+msgstr "OpenLDAP設定: グローバル(olcGlobal)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcHdbConfig"
-msgstr ""
+msgstr "OpenLDAP設定: HDB設定(olcHdbConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcIncludeFile"
-msgstr ""
+msgstr "OpenLDAP設定: ファイル取り込み(olcIncludeFile)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcLdifConfig"
@@ -2568,59 +2568,59 @@ msgstr "OpenLDAP設定: LDIF設定(olcLdifConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcModuleList"
-msgstr ""
+msgstr "OpenLDAP設定: モジュール一覧(olcModuleList)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcOverlayConfig"
-msgstr ""
+msgstr "OpenLDAP設定: オーバレイ設定(olcOverlayConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcSchemaConfig"
-msgstr ""
+msgstr "OpenLDAP設定: スキーマ設定(olcSchemaConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|oncRpc"
-msgstr ""
+msgstr "ONC RPC(oncRpc)"
 
 #: -:-
 msgid "LDAP|ObjectClass|organization"
-msgstr ""
+msgstr "組織(organization)"
 
 #: -:-
 msgid "LDAP|ObjectClass|organizationalPerson"
-msgstr ""
+msgstr "組織の人(organizationalPerson)"
 
 #: -:-
 msgid "LDAP|ObjectClass|organizationalRole"
-msgstr ""
+msgstr "組織上の役割(organizationalRole)"
 
 #: -:-
 msgid "LDAP|ObjectClass|organizationalUnit"
-msgstr ""
+msgstr "組織の単位(organizationalUnit)"
 
 #: -:-
 msgid "LDAP|ObjectClass|person"
-msgstr ""
+msgstr "人(person)"
 
 #: -:-
 msgid "LDAP|ObjectClass|pilotDSA"
-msgstr ""
+msgstr "試験的なDSA(pilotDSA)"
 
 #: -:-
 msgid "LDAP|ObjectClass|pilotOrganization"
-msgstr ""
+msgstr "試験的な組織(pilotOrganization)"
 
 #: -:-
 msgid "LDAP|ObjectClass|pilotPerson"
-msgstr ""
+msgstr "試験的な人(pilotPerson)"
 
 #: -:-
 msgid "LDAP|ObjectClass|pkiCA"
-msgstr ""
+msgstr "PKI CA(pkiCA)"
 
 #: -:-
 msgid "LDAP|ObjectClass|pkiUser"
-msgstr ""
+msgstr "PKIユーザ(pkiUser)"
 
 #: -:-
 msgid "LDAP|ObjectClass|posixAccount"
@@ -2632,35 +2632,35 @@ msgstr "POSIXグループ(posixGroup)"
 
 #: -:-
 msgid "LDAP|ObjectClass|qualityLabelledData"
-msgstr ""
+msgstr "品質がラベル付けされたデータ(qualityLabelledData)"
 
 #: -:-
 msgid "LDAP|ObjectClass|referral"
-msgstr ""
+msgstr "照会(referral)"
 
 #: -:-
 msgid "LDAP|ObjectClass|residentialPerson"
-msgstr ""
+msgstr "居住者(residentialPerson)"
 
 #: -:-
 msgid "LDAP|ObjectClass|room"
-msgstr ""
+msgstr "部屋(room)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaConfig"
-msgstr ""
+msgstr "Samba: 設定(sambaConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaConfigOption"
-msgstr ""
+msgstr "Samba: 設定オプション(sambaConfigOption)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaDomain"
-msgstr ""
+msgstr "Samba: ドメイン(sambaDomain)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaGroupMapping"
-msgstr ""
+msgstr "Samba: グループ写像(sambaGroupMapping)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaIdmapEntry"
@@ -2668,27 +2668,27 @@ msgstr "Samba: ID写像エントリ(sambaIdmapEntry)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaSamAccount"
-msgstr ""
+msgstr "Samba: SAMアカウント(sambaSamAccount)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaShare"
-msgstr ""
+msgstr "Samba: 共有(sambaShare)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaSidEntry"
-msgstr ""
+msgstr "Samba: SIDエントリ(sambaSidEntry)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaTrustPassword"
-msgstr ""
+msgstr "Samba: 信用パスワード(sambaTrustPassword)"
 
 #: -:-
 msgid "LDAP|ObjectClass|sambaUnixIdPool"
-msgstr ""
+msgstr "Samba: UNIX IDプール(sambaUnixIdPool)"
 
 #: -:-
 msgid "LDAP|ObjectClass|shadowAccount"
-msgstr ""
+msgstr "シャドーアカウント(shadowAccount)"
 
 #: -:-
 msgid "LDAP|ObjectClass|simpleSecurityObject"
@@ -2696,27 +2696,27 @@ msgstr "簡素なセキュリティオブジェクト(simpleSecurityObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|strongAuthenticationUser"
-msgstr ""
+msgstr "強力な認証ユーザ(strongAuthenticationUser)"
 
 #: -:-
 msgid "LDAP|ObjectClass|subentry"
-msgstr ""
+msgstr "サブエントリ(subentry)"
 
 #: -:-
 msgid "LDAP|ObjectClass|subschema"
-msgstr ""
+msgstr "サブスキーマ(subschema)"
 
 #: -:-
 msgid "LDAP|ObjectClass|top"
-msgstr ""
+msgstr "トップ(top)"
 
 #: -:-
 msgid "LDAP|ObjectClass|uidObject"
-msgstr ""
+msgstr "UIDオブジェクト(uidObject)"
 
 #: -:-
 msgid "LDAP|ObjectClass|userSecurityInformation"
-msgstr ""
+msgstr "ユーザセキュリティ情報(userSecurityInformation)"
 
 #: lib/active_ldap/adapter/ldap.rb:84
 msgid "No matches: filter: %s: attributes: %s"
@@ -2820,7 +2820,7 @@ msgstr "バージョンを表示します。"
 
 #: lib/active_ldap/get_text/parser.rb:74
 msgid "Ignored '%{file}'. Solve dependencies first."
-msgstr ""
+msgstr "'%{file}'を無視します。まず依存関係を解決してください。"
 
 #: lib/active_ldap/attributes.rb:34
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
