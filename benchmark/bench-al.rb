@@ -11,8 +11,8 @@ argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
   options.prefix = "ou=People"
 
   opts.on("--prefix=PREFIX",
-          _("Specify prefix for benchmarking " \
-            "(default: %s)") % options.prefix) do |prefix|
+          _("Specify prefix for benchmarking"),
+          _("(default: %s)") % options.prefix) do |prefix|
     options.prefix = prefix
   end
 end
@@ -117,7 +117,7 @@ end
 #
 def main(do_populate)
   if do_populate
-    puts "populating..."
+    puts(_("Populating..."))
     dumped_data = ActiveLdap::Base.dump(:scope => :sub)
     ActiveLdap::Base.delete_all(nil, :scope => :sub)
     populate
@@ -130,18 +130,19 @@ def main(do_populate)
   al_count_without_object_creation = 0
   ldap_count = 0
   Benchmark.bm(10) do |x|
-    x.report("AL") {al_count = search_al}
-    x.report("AL(No Obj)") do
+    x.report(_("AL")) {al_count = search_al}
+    x.report(_("AL(No Obj)")) do
       al_count_without_object_creation = search_al_without_object_creation
     end
-    x.report("LDAP") {ldap_count = search_ldap(conn)}
+    x.report(_("LDAP")) {ldap_count = search_ldap(conn)}
   end
-  print "Entries processed by Ruby/ActiveLdap: #{al_count}\n"
-  print "Entries processed by Ruby/ActiveLdap (without object creation)" +
-        ": #{al_count_without_object_creation}\n"
-  print "Entries processed by Ruby/LDAP: #{ldap_count}\n"
+  puts(_("Entries processed by Ruby/ActiveLdap: %d") % al_count)
+  puts(_("Entries processed by Ruby/ActiveLdap (without object creation): " \
+         "%d") % al_count_without_object_creation)
+  puts(_("Entries processed by Ruby/LDAP: %d") % ldap_count)
 ensure
   if do_populate
+    puts(_("Cleaning..."))
     ActiveLdap::Base.delete_all(nil, :scope => :sub)
     ActiveLdap::Base.load(dumped_data)
   end

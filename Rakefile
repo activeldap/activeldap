@@ -107,7 +107,7 @@ namespace :gettext do
 
       GetText::RGetText.add_parser(parser)
       GetText.update_pofiles("active-ldap",
-                             [dummy_file] + Dir.glob("lib/**/*.rb"),
+                             [dummy_file] + Dir.glob("{lib,benchmark}/**/*.rb"),
                              "Ruby/ActiveLdap #{ActiveLdap::VERSION}")
     end
   end

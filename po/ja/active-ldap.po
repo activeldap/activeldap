@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-18 20:35+0900\n"
-"PO-Revision-Date: 2007-08-18 21:03+0900\n"
+"POT-Creation-Date: 2007-08-18 21:28+0900\n"
+"PO-Revision-Date: 2007-08-18 21:29+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -2903,54 +2903,54 @@ msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/base.rb:113
+#: lib/active_ldap/base.rb:114
 msgid "%s is invalid distinguished name (DN)"
 msgstr "%sは不正な識別名(DN)です。"
 
-#: lib/active_ldap/base.rb:115
+#: lib/active_ldap/base.rb:116
 msgid "%s is invalid distinguished name (DN): %s"
 msgstr "%sは不正な識別名(DN)です: %s"
 
-#: lib/active_ldap/base.rb:149
+#: lib/active_ldap/base.rb:150
 msgid "LDAP configuration specifies nonexistent %s adapter"
 msgstr "LDAPの設定が存在しない%sアダプタが指定しています。"
 
-#: lib/active_ldap/base.rb:157
+#: lib/active_ldap/base.rb:158
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です。"
 
-#: lib/active_ldap/base.rb:323
+#: lib/active_ldap/base.rb:324
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:489
+#: lib/active_ldap/base.rb:490
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:570
+#: lib/active_ldap/base.rb:571
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:598
+#: lib/active_ldap/base.rb:599
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:617
+#: lib/active_ldap/base.rb:618
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:638 lib/active_ldap/base.rb:649
+#: lib/active_ldap/base.rb:639 lib/active_ldap/base.rb:650
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:765
+#: lib/active_ldap/base.rb:766
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1165
+#: lib/active_ldap/base.rb:1190
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -3010,3 +3010,43 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 #: lib/active_ldap/operations.rb:290
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
+
+#: benchmark/bench-al.rb:14
+msgid "Specify prefix for benchmarking"
+msgstr "ベンチマーク用のプリフィックスを指定してください"
+
+#: benchmark/bench-al.rb:15
+msgid "(default: %s)"
+msgstr "(デフォルト: %s)"
+
+#: benchmark/bench-al.rb:120
+msgid "Populating..."
+msgstr "データ投入中..."
+
+#: benchmark/bench-al.rb:133
+msgid "AL"
+msgstr "AL"
+
+#: benchmark/bench-al.rb:134
+msgid "AL(No Obj)"
+msgstr "AL(No Obj)"
+
+#: benchmark/bench-al.rb:137
+msgid "LDAP"
+msgstr "LDAP"
+
+#: benchmark/bench-al.rb:139
+msgid "Entries processed by Ruby/ActiveLdap: %d"
+msgstr "Ruby/ActiveLdapで処理したエントリ数: %d"
+
+#: benchmark/bench-al.rb:140
+msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
+msgstr "Ruby/ActiveLdapで処理したエントリ数(オブジェクト生成無し): %d"
+
+#: benchmark/bench-al.rb:142
+msgid "Entries processed by Ruby/LDAP: %d"
+msgstr "Ruby/LDAPで処理したエントリ数: %d"
+
+#: benchmark/bench-al.rb:145
+msgid "Cleaning..."
+msgstr "削除中..."
