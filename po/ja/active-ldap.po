@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
 "POT-Creation-Date: 2007-08-16 22:01+0900\n"
-"PO-Revision-Date: 2007-08-18 12:40+0900\n"
+"PO-Revision-Date: 2007-08-18 16:08+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -313,7 +313,7 @@ msgstr "メール(mail)"
 
 #: -:-
 msgid "LDAP|Attribute|mailPreferenceOption"
-msgstr "メール優先オプション(mailPreferenceOption)"
+msgstr "メール設定オプション(mailPreferenceOption)"
 
 #: -:-
 msgid "LDAP|Attribute|manager"
@@ -601,7 +601,7 @@ msgstr "OpenLDAP設定: 読み込み専用(olcReadOnly)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReferral"
-msgstr "OpenLDAP設定: 紹介(olcReferral)"
+msgstr "OpenLDAP設定: 照会(olcReferral)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplica"
@@ -817,11 +817,11 @@ msgstr "郵便番号(postalCode)"
 
 #: -:-
 msgid "LDAP|Attribute|preferredDeliveryMethod"
-msgstr "推奨する配達方法(preferredDeliveryMethod)"
+msgstr "希望する配達方法(preferredDeliveryMethod)"
 
 #: -:-
 msgid "LDAP|Attribute|preferredLanguage"
-msgstr "推奨する言語(preferredLanguage)"
+msgstr "希望する言語(preferredLanguage)"
 
 #: -:-
 msgid "LDAP|Attribute|presentationAddress"
@@ -861,11 +861,11 @@ msgstr "Samba: RID生成アルゴリズム用ベース(sambaAlgorithmicRidBase)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBadPasswordCount"
-msgstr "Samba: 不正パスワード回数(sambaBadPasswordCount)"
+msgstr "Samba: パスワード失敗回数(sambaBadPasswordCount)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBadPasswordTime"
-msgstr "Samba: 最終パスワード不正時刻(sambaBadPasswordTime)"
+msgstr "Samba: 最終パスワード失敗時刻(sambaBadPasswordTime)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBoolOption"
@@ -1097,11 +1097,11 @@ msgstr "通りの住所(streatAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeMaximumQuality"
-msgstr "最大サブツリー特性(subtreeMaximumQuality)"
+msgstr "サブツリー最大品質(subtreeMaximumQuality)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeMinimumQuality"
-msgstr "最小サブツリー特性(subtreeMinimumQuality)"
+msgstr "サブツリー最小品質(subtreeMinimumQuality)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeSpecification"
@@ -1125,128 +1125,128 @@ msgstr "電話番号(telephoneNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|teletexTerminalIdentifier"
-msgstr ""
+msgstr "文字多重放送端末識別子(teletexTerminalIdentifier)"
 
 #: -:-
 msgid "LDAP|Attribute|telexNumber"
-msgstr ""
+msgstr "テレックス番号(telexNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|textEncodedORAddress"
-msgstr ""
+msgstr "テキスト符号化されたORアドレス(textEncodedORAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|title"
-msgstr ""
+msgstr "タイトル(title)"
 
 #: -:-
 msgid "LDAP|Attribute|uid"
-msgstr ""
+msgstr "ユーザID(uid)"
 
 #: -:-
 msgid "LDAP|Attribute|uidNumber"
-msgstr ""
+msgstr "ユーザID番号(uidNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|uniqueMember"
-msgstr ""
+msgstr "重複のないメンバー(uniqueNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|userCertificate"
-msgstr ""
+msgstr "ユーザ: 証明書(userCertificate)"
 
 #: -:-
 msgid "LDAP|Attribute|userClass"
-msgstr ""
+msgstr "ユーザ: クラス(userClass)"
 
 #: -:-
 msgid "LDAP|Attribute|userPKCS12"
-msgstr ""
+msgstr "ユーザ: PKCS12(userPKCS12)"
 
 #: -:-
 msgid "LDAP|Attribute|userPassword"
-msgstr ""
+msgstr "ユーザ: パスワード(userPassword)"
 
 #: -:-
 msgid "LDAP|Attribute|userSMIMECertificate"
-msgstr ""
+msgstr "ユーザ: S/MIME証明書(userSMIMECertificate)"
 
 #: -:-
 msgid "LDAP|Attribute|userid"
-msgstr ""
+msgstr "ユーザID(userid)"
 
 #: -:-
 msgid "LDAP|Attribute|x121Address"
-msgstr ""
+msgstr "X.121アドレス(x121Address)"
 
 #: -:-
 msgid "LDAP|Attribute|x500UniqueIdentifier"
-msgstr ""
+msgstr "X.500 一意の識別子(x500UniqueIdentifier)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|aliasedObjectName|RFC2256: name of aliased object"
-msgstr ""
+msgstr "RFC2256: 別名オブジェクトの名前"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|associatedDomain|RFC1274: domain associated with "
 "object"
-msgstr ""
+msgstr "RFC1274: オブジェクトに関連付けられたドメイン"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|associatedName|RFC1274: DN of entry associated "
 "with domain"
-msgstr ""
+msgstr "RFC1274: ドメインに関連付けられたエントリのDN"
 
 #: -:-
 msgid "LDAP|Description|Attribute|attributeTypes|RFC2252: attribute types"
-msgstr ""
+msgstr "RFC2252: 属性の種類"
 
 #: -:-
 msgid "LDAP|Description|Attribute|audio|RFC1274: audio (u-law)"
-msgstr ""
+msgstr "RFC1274: 音声(u-law)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|authorityRevocationList|RFC2256: X.509 authority "
 "revocation list, use ;binary"
-msgstr ""
+msgstr "RFC2256: X.509失効証明書一覧。;binaryを使うこと。"
 
 #: -:-
 msgid "LDAP|Description|Attribute|bootFile|Boot image name"
-msgstr ""
+msgstr "起動イメージ名"
 
 #: -:-
 msgid "LDAP|Description|Attribute|bootParameter|rpc.bootparamd parameter"
-msgstr ""
+msgstr "rpc.bootparamdのパラメタ"
 
 #: -:-
 msgid "LDAP|Description|Attribute|buildingName|RFC1274: name of building"
-msgstr ""
+msgstr "RFC1274: 建物の名前"
 
 #: -:-
 msgid "LDAP|Description|Attribute|businessCategory|RFC2256: business category"
-msgstr ""
+msgstr "RFC2256: 業種"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|cACertificate|RFC2256: X.509 CA certificate, use ;"
 "binary"
-msgstr ""
+msgstr "RFC2256: X.509 CA証明書。;binaryを使うこと。"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|carLicense|RFC2798: vehicle license or "
 "registration plate"
-msgstr ""
+msgstr "RFC2798: 運転免許証あるいは登録番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|certificateRevocationList|RFC2256: X.509 "
 "certificate revocation list, use ;binary"
-msgstr ""
+msgstr "RFC2256: X.509証明書失効一覧。;binaryを使うこと。"
 
 #: -:-
 msgid ""
@@ -1256,68 +1256,68 @@ msgstr "RFC2256: エントリの一般的な名前"
 
 #: -:-
 msgid "LDAP|Description|Attribute|co|RFC1274: friendly country name"
-msgstr ""
+msgstr "RFC1274: 友好国の名前"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|crossCertificatePair|RFC2256: X.509 cross "
 "certificate pair, use ;binary"
-msgstr ""
+msgstr "RFC2256: X.509相互認証組。;binaryを使うこと。"
 
 #: -:-
 msgid "LDAP|Description|Attribute|c|RFC2256: ISO-3166 country 2-letter code"
-msgstr ""
+msgstr "RFC2256: ISO-3166で定義される2文字の国コード"
 
 #: -:-
 msgid "LDAP|Description|Attribute|dSAQuality|RFC1274: DSA Quality"
-msgstr ""
+msgstr "RFC1274: ディレクトリシステムエージェント(DSA)の特性"
 
 #: -:-
 msgid "LDAP|Description|Attribute|dc|RFC1274/2247: domain component"
-msgstr ""
+msgstr "RFC1274/2247: ドメインの要素"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|deltaRevocationList|RFC2256: delta revocation "
 "list; use ;binary"
-msgstr ""
+msgstr "RFC2256: 差分失効一覧。;binaryを使うこと。"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|departmentNumber|RFC2798: identifies a department "
 "within an organization"
-msgstr ""
+msgstr "RFC2798: 組織内の部門を一意に識別する番号"
 
 #: -:-
 msgid "LDAP|Description|Attribute|description|RFC2256: descriptive information"
-msgstr ""
+msgstr "RFC2256: 記述的な情報"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|destinationIndicator|RFC2256: destination "
 "indicator"
-msgstr ""
+msgstr "RFC2256: 行き先を表示するもの"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|displayName|RFC2798: preferred name to be used "
 "when displaying entries"
-msgstr ""
+msgstr "RFC2798: エントリを表示するときに使いたい名前"
 
 #: -:-
 msgid "LDAP|Description|Attribute|dmdName|RFC2256: name of DMD"
-msgstr ""
+msgstr "RFC2256: ディレクトリ管理ドメイン(DMD)の名前"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|documentAuthor|RFC1274: DN of author of document"
-msgstr ""
+msgstr "RFC1274: 文書作成者のDN"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|documentIdentifier|RFC1274: unique identifier of "
 "document"
-msgstr ""
+msgstr "RFC1274: 文書を一意に識別する名前"
 
 #: -:-
 msgid ""
@@ -1328,147 +1328,147 @@ msgstr "RFC1274: 元文書の場所"
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|documentPublisher|RFC1274: publisher of document"
-msgstr ""
+msgstr "RFC1274: 文書の発行者"
 
 #: -:-
 msgid "LDAP|Description|Attribute|documentTitle|RFC1274: title of document"
-msgstr ""
+msgstr "RFC1274: 文書のタイトル"
 
 #: -:-
 msgid "LDAP|Description|Attribute|documentVersion|RFC1274: version of document"
-msgstr ""
+msgstr "RFC1274: 文書のバージョン"
 
 #: -:-
 msgid "LDAP|Description|Attribute|drink|RFC1274: favorite drink"
-msgstr ""
+msgstr "RFC1274: 好きな飲み物"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|employeeNumber|RFC2798: numerically identifies an "
 "employee within an organization"
-msgstr ""
+msgstr "RFC2798: 組織内の従業員を一意に識別する番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|employeeType|RFC2798: type of employment for a "
 "person"
-msgstr ""
+msgstr "RFC2798: 従業員の種類"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|facsimileTelephoneNumber|RFC2256: Facsimile (Fax) "
 "Telephone Number"
-msgstr ""
+msgstr "RFC2256: FAX番号"
 
 #: -:-
 msgid "LDAP|Description|Attribute|gecos|The GECOS field; the common name"
-msgstr ""
+msgstr "GECOSフィールド。つまり共通名。"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|gidNumber|An integer uniquely identifying a group "
 "in an administrative domain"
-msgstr ""
+msgstr "管理ドメイン内のグループを一意に識別する整数値"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|givenName|RFC2256: first name(s) for which the "
 "entity is known by"
-msgstr ""
+msgstr "RFC2256: 実体がわかる名前"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|homeDirectory|The absolute path to the home "
 "directory"
-msgstr ""
+msgstr "ホームディレクトリの絶対パス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|homePhone|RFC1274: home telephone number"
-msgstr ""
+msgstr "RFC1274: 自宅の電話番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|homePostalAddress|RFC1274: home postal address"
-msgstr ""
+msgstr "RFC1274: 自宅の郵便の宛先"
 
 #: -:-
 msgid "LDAP|Description|Attribute|host|RFC1274: host computer"
-msgstr ""
+msgstr "RFC1274: ホストコンピュータ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|initials|RFC2256: initials of some or all of "
 "names, but not the surname(s)."
-msgstr ""
+msgstr "RFC2256: 名前(姓を除く)の頭文字"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|internationaliSDNNumber|RFC2256: international "
 "ISDN number"
-msgstr ""
+msgstr "RFC2256: 国際ISDN番号"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ipHostNumber|IP address"
-msgstr ""
+msgstr "IPアドレス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ipNetmaskNumber|IP netmask"
-msgstr ""
+msgstr "IPネットマスク"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ipNetworkNumber|IP network"
-msgstr ""
+msgstr "IPネットワーク"
 
 #: -:-
 msgid "LDAP|Description|Attribute|janetMailbox|RFC1274: Janet mailbox"
-msgstr ""
+msgstr "RFC1274: JANETのメールボックス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|jpegPhoto|RFC2798: a JPEG image"
-msgstr ""
+msgstr "RFC2798: JPEG画像"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|knowledgeInformation|RFC2256: knowledge "
 "information"
-msgstr ""
+msgstr "RFC2256: 知識情報"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|labeledURI|RFC2079: Uniform Resource Identifier "
 "with optional label"
-msgstr ""
+msgstr "RFC2079: 付加ラベル付き統一資源識別子(URI)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|loginShell|The path to the login shell"
-msgstr ""
+msgstr "ログインシェルのパス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|l|RFC2256: locality which this object resides in"
-msgstr ""
+msgstr "RFC2256: オブジェクトが住んでいる地域"
 
 #: -:-
 msgid "LDAP|Description|Attribute|macAddress|MAC address"
-msgstr ""
+msgstr "MACアドレス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|mailPreferenceOption|RFC1274: mail preference "
 "option"
-msgstr ""
+msgstr "RFC1274: メール設定オプション"
 
 #: -:-
 msgid "LDAP|Description|Attribute|mail|RFC1274: RFC822 Mailbox"
-msgstr ""
+msgstr "RFC1274: RFC822で定義されているメールボックス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|manager|RFC1274: DN of manager"
-msgstr ""
+msgstr "RFC1274: 管理者のDN"
 
 #: -:-
 msgid "LDAP|Description|Attribute|matchingRuleUse|RFC2252: matching rule uses"
-msgstr ""
+msgstr "RFC2252: 使用するマッチ規則"
 
 #: -:-
 msgid "LDAP|Description|Attribute|matchingRules|RFC2252: matching rules"
@@ -1476,63 +1476,63 @@ msgstr "RFC2252: マッチ規則"
 
 #: -:-
 msgid "LDAP|Description|Attribute|member|RFC2256: member of a group"
-msgstr ""
+msgstr "RFC2256: グループのメンバー"
 
 #: -:-
 msgid "LDAP|Description|Attribute|mobile|RFC1274: mobile telephone number"
-msgstr ""
+msgstr "RFC1274: 携帯電話の電話番号"
 
 #: -:-
 msgid "LDAP|Description|Attribute|nisNetgroupTriple|Netgroup triple"
-msgstr ""
+msgstr "ネットグループトリプル"
 
 #: -:-
 msgid "LDAP|Description|Attribute|objectClasses|RFC2252: object classes"
-msgstr ""
+msgstr "RFC2252: オブジェクトが属するクラス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|objectClass|RFC2256: object classes of the entity"
-msgstr ""
+msgstr "RFC2256: 実体のオブジェクトクラス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
-msgstr ""
+msgstr "アクセス制御リスト"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
-msgstr ""
+msgstr "使うことを許可する非推奨の機能群"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcArgsFile|File for slapd command line options"
-msgstr ""
+msgstr "slapdのコマンドラインオプションで指定した設定ファイル"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcAttributeTypes|OpenLDAP attributeTypes"
-msgstr ""
+msgstr "OpenLDAP用のattributeTypes"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcBackend|A type of backend"
-msgstr ""
+msgstr "バックエンドの種類"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcConfigDir|Directory for slapd configuration "
 "backend"
-msgstr ""
+msgstr "slapd設定バックエンド用のディレクトリ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcConfigFile|File for slapd configuration "
 "directives"
-msgstr ""
+msgstr "slapd設定ディレクティブ用のファイル"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDatabase|The backend type for a database "
 "instance"
-msgstr ""
+msgstr "データベースインスタンス用のバックエンドの種類"
 
 #: -:-
 msgid ""
@@ -1542,186 +1542,186 @@ msgstr "最大数に達したときに開放する余分なエントリ数"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbCacheSize|Entry cache size in entries"
-msgstr ""
+msgstr "エントリをキャッシュする量"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval in "
 "kbytes and minutes"
-msgstr ""
+msgstr "データベースチェックポイント間隔(Kバイトと分で指定)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbConfig|BerkeleyDB DB_CONFIG configuration "
 "directives"
-msgstr ""
+msgstr "バークレイDB(BDB)のDB_CONFIG設定ディレクティブ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbDirectory|Directory for database content"
-msgstr ""
+msgstr "データベースの内容用のディレクトリ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbDirtyRead|Allow reads of uncommitted data"
-msgstr ""
+msgstr "コミット前のデータの読み込みを許可するかどうか"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbIDLcacheSize|IDL cache size in IDLs"
-msgstr ""
+msgstr "IDLのキャッシュ量"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbIndex|Attribute index parameters"
-msgstr ""
+msgstr "属性索引用のパラメタ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbLinearIndex|Index attributes one at a time"
-msgstr ""
+msgstr "一度に一つだけ属性を索引化する"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbLockDetect|Deadlock detection algorithm"
-msgstr ""
+msgstr "デッドロック検出アルゴリズム"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbMode|Unix permissions of database files"
-msgstr ""
+msgstr "データベースファイルのUNIXのパーミッション"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbNoSync|Disable synchronous database writes"
-msgstr ""
+msgstr "データベースへの同期書き込みを無効にする"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
-msgstr ""
+msgstr "IDLを<検索するスタックの深さ"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcDbShmKey|Key for shared memory region"
-msgstr ""
+msgstr "共有メモリ領域のキー"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
-msgstr ""
+msgstr "OpenLDAPディレクトリ情報ツリー(DIT)の内容規則"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
-msgstr ""
+msgstr "OpenLDAP用のオブジェクトクラス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|organizationalStatus|RFC1274: organizational "
 "status"
-msgstr ""
+msgstr "RFC1274: 組織の状態"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|ou|RFC2256: organizational unit this object "
 "belongs to"
-msgstr ""
+msgstr "RFC2256: このオブジェクトが属している組織単位"
 
 #: -:-
 msgid "LDAP|Description|Attribute|owner|RFC2256: owner (of the object)"
-msgstr ""
+msgstr "RFC2256: このオブジェクトの所有者"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|o|RFC2256: organization this object belongs to"
-msgstr ""
+msgstr "RFC2256: このオブジェクトが属する組織"
 
 #: -:-
 msgid "LDAP|Description|Attribute|pager|RFC1274: pager telephone number"
-msgstr ""
+msgstr "RFC1274: ポケベル番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|personalSignature|RFC1274: Personal Signature (G3 "
 "fax)"
-msgstr ""
+msgstr "RFC1274: 個人的な署名 (G3 FAX)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|personalTitle|RFC1274: personal title"
-msgstr ""
+msgstr "RFC1274: 個人的な肩書き"
 
 #: -:-
 msgid "LDAP|Description|Attribute|photo|RFC1274: photo (G3 fax)"
-msgstr ""
+msgstr "RFC1274: 写真 (G3 FAX)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|physicalDeliveryOfficeName|RFC2256: Physical "
 "Delivery Office Name"
-msgstr ""
+msgstr "RFC2256: 現物引き渡しオフィス名"
 
 #: -:-
 msgid "LDAP|Description|Attribute|postOfficeBox|RFC2256: Post Office Box"
-msgstr ""
+msgstr "RFC2256: 私書箱"
 
 #: -:-
 msgid "LDAP|Description|Attribute|postalAddress|RFC2256: postal address"
-msgstr ""
+msgstr "RFC2256: 郵便の宛先"
 
 #: -:-
 msgid "LDAP|Description|Attribute|postalCode|RFC2256: postal code"
-msgstr ""
+msgstr "RFC2256: 郵便番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|preferredDeliveryMethod|RFC2256: preferred "
 "delivery method"
-msgstr ""
+msgstr "RFC2256: 希望する配達方法"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|preferredLanguage|RFC2798: preferred written or "
 "spoken language for a person"
-msgstr ""
+msgstr "RFC2256: 希望する書き・話しに使う言語"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|presentationAddress|RFC2256: presentation address"
-msgstr ""
+msgstr "RFC2256: OSIプレゼンテーションアドレス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ref|namedref: subordinate referral URL"
-msgstr ""
+msgstr "名前付けされた参照: 下位の照会URL"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|registeredAddress|RFC2256: registered postal "
 "address"
-msgstr ""
+msgstr "RFC2256: 登録されている郵便の宛先"
 
 #: -:-
 msgid "LDAP|Description|Attribute|roleOccupant|RFC2256: occupant of role"
-msgstr ""
+msgstr "RFC2256: 居住者の役割"
 
 #: -:-
 msgid "LDAP|Description|Attribute|roomNumber|RFC1274: room number"
-msgstr ""
+msgstr "RFC1274: 部屋番号"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaAcctFlags|Account Flags"
-msgstr ""
+msgstr "アカウントフラグ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaAlgorithmicRidBase|Base at which the samba "
 "RID generation algorithm should operate"
-msgstr ""
+msgstr "SambaがRID生成アルゴリズムを実行するときに使用するベースとなるRID"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaBadPasswordCount|Bad password attempt count"
-msgstr ""
+msgstr "間違ったパスワードを試みた回数"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaBadPasswordTime|Time of the last bad "
 "password attempt"
-msgstr ""
+msgstr "最後に間違ったパスワードを試みた時間"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaBoolOption|A boolean option"
@@ -1731,47 +1731,47 @@ msgstr "真偽値のオプション"
 msgid ""
 "LDAP|Description|Attribute|sambaDomainName|Windows NT domain to which the "
 "user belongs"
-msgstr ""
+msgstr "ユーザが属するWindows NTドメイン"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaForceLogoff|Disconnect Users outside logon "
 "hours (default: -1 => off, 0 => on)"
-msgstr ""
+msgstr "ログオン時間後に<なると強制切断する(デフォルト: -1 => 無効, 0 => 有効)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaGroupType|NT Group Type"
-msgstr ""
+msgstr "NTグループ種類"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaHomeDrive|Driver letter of home directory "
 "mapping"
-msgstr ""
+msgstr "ホームディレクトリに割り当てるドライブ文字"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaHomePath|Home directory UNC path"
-msgstr ""
+msgstr "ホームディレクトリのUNCパス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaIntegerOption|An integer option"
-msgstr ""
+msgstr "整数値のオプション"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaKickoffTime|Timestamp of when the user will "
 "be logged off automatically"
-msgstr ""
+msgstr "ユーザが自動的にログオフしたときの時間"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLMPassword|LanManager Password"
-msgstr ""
+msgstr "LANマネージャ用のパスワード"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaLockoutDuration|Lockout duration in minutes "
 "(default: 30, -1 => forever)"
-msgstr ""
+msgstr "ロックアウト期間(default: 30, -1 => 永遠に)"
 
 #: -:-
 msgid ""
@@ -1783,23 +1783,23 @@ msgstr "ロックアウト後にリセットする時間(分) (デフォルト: 
 msgid ""
 "LDAP|Description|Attribute|sambaLockoutThreshold|Lockout users after bad "
 "logon attempts (default: 0 => off)"
-msgstr ""
+msgstr "指定した回数ログオンに失敗したあとにユーザをロックアウトする (デフォルト: 0 => 無効)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLogoffTime|Timestamp of last logoff"
-msgstr ""
+msgstr "最後にログオフした時刻"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLogonHours|Logon Hours"
-msgstr ""
+msgstr "ログオン時間"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLogonScript|Logon script path"
-msgstr ""
+msgstr "ログオンスクリプトパス"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaLogonTime|Timestamp of last logon"
-msgstr ""
+msgstr "最後にログオンした時刻"
 
 #: -:-
 msgid ""
@@ -1813,46 +1813,46 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|sambaMaxPwdAge|Maximum password age, in seconds "
 "(default: -1 => never expire passwords)"
-msgstr ""
+msgstr "パスワードが失効するまでの時間(分) (デフォルト: -1 => パスワードは失効しない)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaMinPwdAge|Minimum password age, in seconds "
 "(default: 0 => allow immediate password change)"
-msgstr ""
+msgstr "パスワードを変更できるようになるまでの時間(分) (デフォルト: 0 => すぐにパスワードを変更可能)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaMinPwdLength|Minimal password length "
 "(default: 5)"
-msgstr ""
+msgstr "最小のパスワード長 (デフォルト; 5)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaMungedDial|Base64 encoded user parameter "
 "string"
-msgstr ""
+msgstr "Base64で符号化されたユーザパラメタ文字列"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaNTPassword|MD4 hash of the unicode password"
-msgstr ""
+msgstr "Unicodeで符号化されたパスワードのMD4ハッシュ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaNextGroupRid|Next NT rid to give out for "
 "groups"
-msgstr ""
+msgstr "次のグループに割り当てるNT RID"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaNextRid|Next NT rid to give out for anything"
-msgstr ""
+msgstr "次の任意のオブジェクトに割り当てるNT RID"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaNextUserRid|Next NT rid to give our for users"
-msgstr "ユーザに付与する次のNT RID"
+msgstr "次のユーザに割り当てるNT RID"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaOptionName|Option Name"
@@ -1862,54 +1862,54 @@ msgstr "オプション名"
 msgid ""
 "LDAP|Description|Attribute|sambaPasswordHistory|Concatenated MD4 hashes of "
 "the unicode passwords used on this account"
-msgstr ""
+msgstr "このアカウントで使用されたUnicodeで符号化された<パスワードのMD4ハッシュを結合したもの"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaPrimaryGroupSID|Primary Group Security ID"
-msgstr ""
+msgstr "プライマリグループのセキュリティID"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaProfilePath|Roaming profile path"
-msgstr ""
+msgstr "移動プロファイルのパス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaPwdCanChange|Timestamp of when the user is "
 "allowed to update the password"
-msgstr ""
+msgstr "ユーザがパスワードを更新できるようになったときの時刻"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaPwdHistoryLength|Length of Password History "
 "Entries (default: 0 => off)"
-msgstr ""
+msgstr "パスワードの履歴を保存する世代数 (デフォルト: 0 => 無効)"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaPwdLastSet|Timestamp of the last password "
 "update"
-msgstr ""
+msgstr "最後にパスワードを更新した時刻"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaPwdMustChange|Timestamp of when the password "
 "will expire"
-msgstr ""
+msgstr "パスワードが失効する時刻"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaRefuseMachinePwdChange|Allow Machine "
 "Password changes (default: 0 => off)"
-msgstr ""
+msgstr "マシンがパスワードを変更することを許可するかどうか (デフォルト: 0 => 拒否)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaSIDList|Security ID List"
-msgstr ""
+msgstr "セキュリティID一覧"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaSID|Security ID"
-msgstr ""
+msgstr "セキュリティID"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaShareName|Share Name"
@@ -1917,27 +1917,27 @@ msgstr "共有名"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaStringListOption|A string list option"
-msgstr ""
+msgstr "文字列リストのオプション"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaStringOption|A string option"
-msgstr ""
+msgstr "文字列値のオプション"
 
 #: -:-
 msgid "LDAP|Description|Attribute|sambaTrustFlags|Trust Password Flags"
-msgstr ""
+msgstr "信用パスワードフラグ"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|sambaUserWorkstations|List of user workstations "
 "the user is allowed to logon to"
-msgstr ""
+msgstr "ユーザがログオン可能なワークステーション一覧"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|searchGuide|RFC2256: search guide, deprecated by "
 "enhancedSearchGuide"
-msgstr ""
+msgstr "RFC2256: 検索案内(enhancedSearchGuide導入により非推奨)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|secretary|RFC1274: DN of secretary"
@@ -1956,91 +1956,91 @@ msgstr "RFC2256: エントリの通し番号"
 msgid ""
 "LDAP|Description|Attribute|sn|RFC2256: last (family) name(s) for which the "
 "entity is known by"
-msgstr ""
+msgstr "RFFC2256: 実体だとわかる姓"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|street|RFC2256: street address of this object"
-msgstr ""
+msgstr "RFFC2256: オブジェクトの通りの住所"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|st|RFC2256: state or province which this object "
 "resides in"
-msgstr ""
+msgstr "RFFC2256: オブジェクトが住んでいる州・県・国"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|subtreeMaximumQuality|RFC1274: Subtree Maximun "
 "Quality"
-msgstr ""
+msgstr "RFC1274: サブツリーの最大品質"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|subtreeMinimumQuality|RFC1274: Subtree Mininum "
 "Quality"
-msgstr ""
+msgstr "RFC1274: サブツリーの最小品質"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|supportedAlgorithms|RFC2256: supported algorithms"
-msgstr ""
+msgstr "RFC2256: 対応しているアルゴリズム"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|supportedApplicationContext|RFC2256: supported "
 "application context"
-msgstr ""
+msgstr "RFC2256: 対応している応用コンテクスト"
 
 #: -:-
 msgid "LDAP|Description|Attribute|telephoneNumber|RFC2256: Telephone Number"
-msgstr ""
+msgstr "RFC2256: 電話番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|teletexTerminalIdentifier|RFC2256: Teletex "
 "Terminal Identifier"
-msgstr ""
+msgstr "RFC2256: 文字多重放送端末識別子"
 
 #: -:-
 msgid "LDAP|Description|Attribute|telexNumber|RFC2256: Telex Number"
-msgstr ""
+msgstr "RFC2256: テレックス番号"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|title|RFC2256: title associated with the entity"
-msgstr ""
+msgstr "RFC2256: 実体に関連付けられているタイトル"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|uidNumber|An integer uniquely identifying a user "
 "in an administrative domain"
-msgstr ""
+msgstr "管理上のドメインにいるユーザを一意に識別する整数値"
 
 #: -:-
 msgid "LDAP|Description|Attribute|uid|RFC1274: user identifier"
-msgstr ""
+msgstr "RFC1274: ユーザ識別子"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|uniqueMember|RFC2256: unique member of a group"
-msgstr ""
+msgstr "RFC2256: 重複のないグループのメンバー"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|userCertificate|RFC2256: X.509 user certificate, "
 "use ;binary"
-msgstr ""
+msgstr "RFC2256: X.509ユーザ証明書。;binaryを使うこと。"
 
 #: -:-
 msgid "LDAP|Description|Attribute|userClass|RFC1274: category of user"
-msgstr ""
+msgstr "RFC1274: ユーザの分類"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|userPKCS12|RFC2798: personal identity "
 "information, a PKCS #12 PFX"
-msgstr ""
+msgstr "RFC2798: 個人を識別する情報 (PKCS #12 PFX)"
 
 #: -:-
 msgid "LDAP|Description|Attribute|userPassword|RFC2256/2307: password of user"
@@ -2050,36 +2050,36 @@ msgstr "RFC2256/2307: ユーザのパスワード"
 msgid ""
 "LDAP|Description|Attribute|userSMIMECertificate|RFC2798: PKCS#7 SignedData "
 "used to support S/MIME"
-msgstr ""
+msgstr "RFC2798: S/MIMEをサポートするために使うPKCS#7署名済みデータ"
 
 #: -:-
 msgid "LDAP|Description|Attribute|x121Address|RFC2256: X.121 Address"
-msgstr ""
+msgstr "RFC2256: X.121アドレス"
 
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|x500UniqueIdentifier|RFC2256: X.500 unique "
 "identifier"
-msgstr ""
+msgstr "RFC2256: X.500 一意の識別子"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|OpenLDAProotDSE|OpenLDAP Root DSE object"
-msgstr ""
+msgstr "OpenLDAPのルートDSEオブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|alias|RFC2256: an alias"
-msgstr ""
+msgstr "RFC2256: 別名"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|applicationEntity|RFC2256: an application entity"
-msgstr ""
+msgstr "RFC2256: 応用実体"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|applicationProcess|RFC2256: an application "
 "process"
-msgstr ""
+msgstr "RFC2256: 応用プロセス"
 
 #: -:-
 msgid ""
@@ -2090,11 +2090,11 @@ msgstr "起動パラメタ付きデバイス"
 msgid ""
 "LDAP|Description|ObjectClass|certificationAuthority|RFC2256: a certificate "
 "authority"
-msgstr ""
+msgstr "RFC2256: 認証機関"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|country|RFC2256: a country"
-msgstr ""
+msgstr "RFC2256: 国"
 
 #: -:-
 msgid ""
@@ -2103,21 +2103,21 @@ msgstr "RFC2256: ディレクトリシステムエージェント(サーバ)"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|dcObject|RFC2247: domain component object"
-msgstr ""
+msgstr "RFC2247: ドメイン要素オブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|deltaCRL|RFC2587: PKI user"
-msgstr ""
+msgstr "RFC2287: PKIユーザ"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|device|RFC2256: a device"
-msgstr ""
+msgstr "RFC2256: 装置"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|domainRelatedObject|RFC1274: an object related "
 "to an domain"
-msgstr ""
+msgstr "RFC1274: ドメインに関連したオブジェクト"
 
 #: -:-
 msgid ""
@@ -2127,27 +2127,27 @@ msgstr "RFC2252: 拡張可能なオブジェクト"
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|groupOfNames|RFC2256: a group of names (DNs)"
-msgstr ""
+msgstr "RFC2256: 名前(DN)のグループ"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|groupOfUniqueNames|RFC2256: a group of unique "
 "names (DN and Unique Identifier)"
-msgstr ""
+msgstr "RFC2256: 一意な名前(DNと一意な識別子)のグループ"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ieee802Device|A device with a MAC address"
-msgstr ""
+msgstr "MACアドレス付きの装置"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|inetOrgPerson|RFC2798: Internet Organizational "
 "Person"
-msgstr ""
+msgstr "RFC2798: インターネット組織の人"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipHost|Abstraction of a host, an IP device"
-msgstr ""
+msgstr "ホスト(IP装置)の抽象概念"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipNetwork|Abstraction of an IP network"
