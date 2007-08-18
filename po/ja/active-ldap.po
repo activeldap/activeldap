@@ -2147,21 +2147,21 @@ msgstr "RFC2798: インターネット組織の人"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipHost|Abstraction of a host, an IP device"
-msgstr "ホスト(IP装置)の抽象概念"
+msgstr "ホスト(IP装置)の抽象化"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipNetwork|Abstraction of an IP network"
-msgstr "IPネットワークの抽象概念"
+msgstr "IPネットワークの抽象化"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|ipProtocol|Abstraction of an IP protocol"
-msgstr "IPプロトコルの抽象概念"
+msgstr "IPプロトコルの抽象化"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|ipService|Abstraction an Internet Protocol "
 "service"
-msgstr "IPサービスの抽象概念"
+msgstr "IPサービスの抽象化"
 
 #: -:-
 msgid ""
@@ -2175,11 +2175,11 @@ msgstr "RFC2256: 地域"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisMap|A generic abstraction of a NIS map"
-msgstr "NISマップの一般的な抽象概念"
+msgstr "NISマップの一般的な抽象化"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisNetgroup|Abstraction of a netgroup"
-msgstr "ネットグループの抽象概念"
+msgstr "ネットグループの抽象化"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisObject|An entry in a NIS map"
@@ -2242,7 +2242,7 @@ msgstr "OpenLDAPのスキーマオブジェクト"
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|oncRpc|Abstraction of an ONC/RPC binding"
-msgstr "ONC RPCバインディングの抽象概念"
+msgstr "ONC RPCバインディングの抽象化"
 
 #: -:-
 msgid ""
@@ -2282,12 +2282,12 @@ msgstr "RFC2287: PKIユーザ"
 msgid ""
 "LDAP|Description|ObjectClass|posixAccount|Abstraction of an account with "
 "POSIX attributes"
-msgstr "POSIX属性をもつアカウントの抽象概念"
+msgstr "POSIX属性をもつアカウントの抽象化"
 
 #: -:-
 msgid ""
 "LDAP|Description|ObjectClass|posixGroup|Abstraction of a group of accounts"
-msgstr "アカウントのグループの抽象概念"
+msgstr "アカウントのグループの抽象化"
 
 #: -:-
 msgid ""
