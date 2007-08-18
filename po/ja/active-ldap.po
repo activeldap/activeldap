@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
 "POT-Creation-Date: 2007-08-16 22:01+0900\n"
-"PO-Revision-Date: 2007-08-18 11:52+0900\n"
+"PO-Revision-Date: 2007-08-18 12:40+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -757,59 +757,59 @@ msgstr "ONC RPC番号(oncRpcNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|organizationName"
-msgstr ""
+msgstr "組織名(organizationName)"
 
 #: -:-
 msgid "LDAP|Attribute|organizationalStatus"
-msgstr ""
+msgstr "組織状態(organizationalStatus)"
 
 #: -:-
 msgid "LDAP|Attribute|organizationalUnitName"
-msgstr ""
+msgstr "組織単位名(organizationalUnitName)"
 
 #: -:-
 msgid "LDAP|Attribute|otherMailbox"
-msgstr ""
+msgstr "別のメールボックス(otherMailbox)"
 
 #: -:-
 msgid "LDAP|Attribute|ou"
-msgstr ""
+msgstr "組織単位名(ou)"
 
 #: -:-
 msgid "LDAP|Attribute|owner"
-msgstr ""
+msgstr "所有者(owner)"
 
 #: -:-
 msgid "LDAP|Attribute|pager"
-msgstr ""
+msgstr "ポケベル(pager)"
 
 #: -:-
 msgid "LDAP|Attribute|pagerTelephoneNumber"
-msgstr ""
+msgstr "ポケベルの番号(pagerTelephoneNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|personalSignature"
-msgstr ""
+msgstr "個人的な署名(personalSignature)"
 
 #: -:-
 msgid "LDAP|Attribute|personalTitle"
-msgstr ""
+msgstr "個人的な肩書き(personalTitle)"
 
 #: -:-
 msgid "LDAP|Attribute|photo"
-msgstr ""
+msgstr "写真(photo)"
 
 #: -:-
 msgid "LDAP|Attribute|physicalDeliveryOfficeName"
-msgstr ""
+msgstr "現物引き渡しオフィス名(physicalDeliveryOfficeName)"
 
 #: -:-
 msgid "LDAP|Attribute|postOfficeBox"
-msgstr ""
+msgstr "私書箱(postOfficeBox)"
 
 #: -:-
 msgid "LDAP|Attribute|postalAddress"
-msgstr ""
+msgstr "郵便の宛先(postalAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|postalCode"
@@ -817,159 +817,159 @@ msgstr "郵便番号(postalCode)"
 
 #: -:-
 msgid "LDAP|Attribute|preferredDeliveryMethod"
-msgstr ""
+msgstr "推奨する配達方法(preferredDeliveryMethod)"
 
 #: -:-
 msgid "LDAP|Attribute|preferredLanguage"
-msgstr ""
+msgstr "推奨する言語(preferredLanguage)"
 
 #: -:-
 msgid "LDAP|Attribute|presentationAddress"
-msgstr ""
+msgstr "OSIプレゼンテーションアドレス(presentationAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|ref"
-msgstr ""
+msgstr "参照(ref)"
 
 #: -:-
 msgid "LDAP|Attribute|registeredAddress"
-msgstr ""
+msgstr "登録済みアドレス(registeredAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|rfc822Mailbox"
-msgstr ""
+msgstr "RFC822メールボックス(rfc822Mailbox)"
 
 #: -:-
 msgid "LDAP|Attribute|roleOccupant"
-msgstr ""
+msgstr "居住者の役割(roleOccupant)"
 
 #: -:-
 msgid "LDAP|Attribute|roomNumber"
-msgstr ""
+msgstr "部屋番号(roomNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|sOARecord"
-msgstr ""
+msgstr "SOAレコード(sOARecord)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaAcctFlags"
-msgstr ""
+msgstr "Samba: アカウントフラグ(sambaAcctFlags)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaAlgorithmicRidBase"
-msgstr ""
+msgstr "Samba: RID生成アルゴリズム用ベース(sambaAlgorithmicRidBase)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBadPasswordCount"
-msgstr ""
+msgstr "Samba: 不正パスワード回数(sambaBadPasswordCount)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBadPasswordTime"
-msgstr ""
+msgstr "Samba: 最終パスワード不正時刻(sambaBadPasswordTime)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaBoolOption"
-msgstr ""
+msgstr "Samba: 真偽値オプション(sambaBoolOption)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaDomainName"
-msgstr ""
+msgstr "Samba: ドメイン名(sambaDomainName)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaForceLogoff"
-msgstr ""
+msgstr "Samba: 強制ログオフ(sambaForceLogoff)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaGroupType"
-msgstr ""
+msgstr "Samba: グループ種別(sambaGroupType)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaHomeDrive"
-msgstr ""
+msgstr "Samba: ホームドライブ(sambaHomeDrive)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaHomePath"
-msgstr ""
+msgstr "Samba: ホームパス(sambaHomePath)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaIntegerOption"
-msgstr ""
+msgstr "Samba: 整数値オプション(sambaIntegerOption)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaKickoffTime"
-msgstr ""
+msgstr "Samba: 自動ログオフ時刻(sambaKickoffTime)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLMPassword"
-msgstr ""
+msgstr "Samba: LANマネージャパスワード(sambaLMPassword)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLockoutDuration"
-msgstr ""
+msgstr "Samba: ロックアウト期間(sambaLockoutDuration)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLockoutObservationWindow"
-msgstr ""
+msgstr "Samba: ロックアウト監視時間(sambaLockoutObservationWindow)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLockoutThreshold"
-msgstr ""
+msgstr "Samba: ロックアウト閾値(sambaLockoutThreshold)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLogoffTime"
-msgstr ""
+msgstr "Samba: ログオフ時刻(sambaLogoffTime)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLogonHours"
-msgstr ""
+msgstr "Samba: ログオン時間(sambaLogonHours)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLogonScript"
-msgstr ""
+msgstr "Samba: ログオンスクリプト(sambaLogonScript)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLogonTime"
-msgstr ""
+msgstr "Samba: ログオン時刻(sambaLogonTime)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaLogonToChgPwd"
-msgstr ""
+msgstr "Samba: パスワード変更用ログオン(sambaLogonToChgPwd)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaMaxPwdAge"
-msgstr ""
+msgstr "Samba: 最大パスワード寿命(sambaMaxPwdAge)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaMinPwdAge"
-msgstr ""
+msgstr "Samba: 最小パスワード寿命(sambaMinPwdAge)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaMinPwdLength"
-msgstr ""
+msgstr "Samba: 最小パスワード長(sambaMinPwdLength)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaMungedDial"
-msgstr ""
+msgstr "Samba: 復元不能ダイヤル(sambaMungedDial)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaNTPassword"
-msgstr ""
+msgstr "Samba: NTパスワード(sambaNTPassword)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaNextGroupRid"
-msgstr ""
+msgstr "Samba: 次のグループRID(sambaNextGroupRid)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaNextRid"
-msgstr ""
+msgstr "Samba: 次のRID(sambaNextRid0"
 
 #: -:-
 msgid "LDAP|Attribute|sambaNextUserRid"
-msgstr ""
+msgstr "Samba: 次のユーザRID(sambaNextUserRid)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaOptionName"
-msgstr ""
+msgstr "Samba: オプション名(sambaOptionName)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPasswordHistory"
@@ -977,15 +977,15 @@ msgstr "Samba: パスワード履歴(sambaPasswordHistory)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPrimaryGroupSID"
-msgstr ""
+msgstr "Samba: プライマリグループSID(sambaPrimaryGroupSID)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaProfilePath"
-msgstr ""
+msgstr "Samba: プロフィールパス(sambaProfilePath)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPwdCanChange"
-msgstr ""
+msgstr "Samba: パスワード変更可能時刻(sambaPwdCanChange)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPwdHistoryLength"
@@ -993,15 +993,15 @@ msgstr "Samba: パスワード履歴長(sambaPwdHistoryLength)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPwdLastSet"
-msgstr ""
+msgstr "Samba: パスワード最終変更時刻(sambaPwdLastSet)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaPwdMustChange"
-msgstr ""
+msgstr "Samba: パスワード失効時刻(sambaPwdMustChange)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaRefuseMachinePwdChange"
-msgstr ""
+msgstr "Samba: マシンパスワード変更拒否(sambaRefuseMachinePwdChange)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaSID"
@@ -1009,35 +1009,35 @@ msgstr "Samba: セキュリティID(sambaSID)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaSIDList"
-msgstr ""
+msgstr "Samba; セキュリティID一覧(sambaSIDList)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaShareName"
-msgstr ""
+msgstr "Samba: 共有名(sambaShareName)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaStringListOption"
-msgstr ""
+msgstr "Samba: 文字列リストオプション(sambaStringListOption)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaStringOption"
-msgstr ""
+msgstr "Samba: 文字列値オプション(sambaStringOption)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaTrustFlags"
-msgstr ""
+msgstr "Samba: 信用フラグ(sambaTrustFlags)"
 
 #: -:-
 msgid "LDAP|Attribute|sambaUserWorkstations"
-msgstr ""
+msgstr "Samba: ユーザのワークステーション一覧(sambaUserWorkstations)"
 
 #: -:-
 msgid "LDAP|Attribute|searchGuide"
-msgstr ""
+msgstr "検索案内(searchGuide)"
 
 #: -:-
 msgid "LDAP|Attribute|secretary"
-msgstr ""
+msgstr "秘書(secretary)"
 
 #: -:-
 msgid "LDAP|Attribute|seeAlso"
@@ -1045,11 +1045,11 @@ msgstr "参照(seeAlso)"
 
 #: -:-
 msgid "LDAP|Attribute|serialNumber"
-msgstr ""
+msgstr "通し番号(serialNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowExpire"
-msgstr ""
+msgstr "シャドーパスワード失効日数(shadowExpire)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowFlag"
@@ -1057,71 +1057,71 @@ msgstr "シャドーフラグ(shadowFlag)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowInactive"
-msgstr ""
+msgstr "シャドーパスワード無効日(shadowInactive)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowLastChange"
-msgstr ""
+msgstr "最終シャドーパスワード更新日(shadowLastChange)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowMax"
-msgstr ""
+msgstr "最大シャドーパスワード長(shadowMax)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowMin"
-msgstr ""
+msgstr "最小シャドーパスワード長(shadowMin<)"
 
 #: -:-
 msgid "LDAP|Attribute|shadowWarning"
-msgstr ""
+msgstr "シャドーパスワード失効警告日(shadowWarning)"
 
 #: -:-
 msgid "LDAP|Attribute|sn"
-msgstr ""
+msgstr "姓(sn)"
 
 #: -:-
 msgid "LDAP|Attribute|st"
-msgstr "州(st)"
+msgstr "国・州(st)"
 
 #: -:-
 msgid "LDAP|Attribute|stateOrProvinceName"
-msgstr ""
+msgstr "州・県・地方名(stateOrProvinceName)"
 
 #: -:-
 msgid "LDAP|Attribute|street"
-msgstr ""
+msgstr "通り(street<)"
 
 #: -:-
 msgid "LDAP|Attribute|streetAddress"
-msgstr ""
+msgstr "通りの住所(streatAddress)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeMaximumQuality"
-msgstr ""
+msgstr "最大サブツリー特性(subtreeMaximumQuality)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeMinimumQuality"
-msgstr ""
+msgstr "最小サブツリー特性(subtreeMinimumQuality)"
 
 #: -:-
 msgid "LDAP|Attribute|subtreeSpecification"
-msgstr ""
+msgstr "サブツリー仕様(subtreeSpecification)"
 
 #: -:-
 msgid "LDAP|Attribute|supportedAlgorithms"
-msgstr ""
+msgstr "対応アルゴリズム(supportedAlgorithms)"
 
 #: -:-
 msgid "LDAP|Attribute|supportedApplicationContext"
-msgstr ""
+msgstr "対応応用コンテクスト(supportedApplicationContext)"
 
 #: -:-
 msgid "LDAP|Attribute|surname"
-msgstr ""
+msgstr "姓(surname)"
 
 #: -:-
 msgid "LDAP|Attribute|telephoneNumber"
-msgstr ""
+msgstr "電話番号(telephoneNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|teletexTerminalIdentifier"
