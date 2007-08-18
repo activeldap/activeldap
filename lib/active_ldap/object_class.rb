@@ -57,8 +57,9 @@ module ActiveLdap
     end
 
     def assert_valid_object_class_value(new_classes)
+      _schema = schema
       invalid_classes = new_classes.reject do |new_class|
-        schema.exist_name?("objectClasses", new_class)
+        !_schema.object_class(new_class).id.nil?
       end
       unless invalid_classes.empty?
         format = _("unknown objectClass in LDAP server: %s")
@@ -70,9 +71,11 @@ module ActiveLdap
     def assert_have_all_required_classes(new_classes)
       _schema = schema
       normalized_new_classes = new_classes.collect(&:downcase)
-      required_classes = self.class.required_classes.reject do |required_class|
-        normalized_new_classes.include?(required_class.downcase) or
+      required_classes = self.class.required_classes
+      required_classes = required_classes.reject do |required_class_name|
+        normalized_new_classes.include?(required_class_name.downcase) or
           (normalized_new_classes.find do |new_class|
+             required_class = _schema.object_class(required_class_name)
              _schema.object_class(new_class).super_class?(required_class)
            end)
       end
