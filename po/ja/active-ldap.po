@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
 "POT-Creation-Date: 2007-08-16 22:01+0900\n"
-"PO-Revision-Date: 2007-08-17 22:38+0900\n"
+"PO-Revision-Date: 2007-08-18 11:52+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "起動イメージファイル(bootFile)"
 
 #: -:-
 msgid "LDAP|Attribute|bootParameter"
-msgstr "起動パラメータ(bootParameter)"
+msgstr "起動パラメタ(bootParameter)"
 
 #: -:-
 msgid "LDAP|Attribute|buildingName"
@@ -389,7 +389,7 @@ msgstr "OpenLDAP設定: 許可(olcAllows)"
 
 #: -:-
 msgid "LDAP|Attribute|olcArgsFile"
-msgstr "OpenLDAP設定: 引数の設定ファイル(olcArgsFile)"
+msgstr "OpenLDAP設定: 引数で指定した設定ファイル(olcArgsFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcAttributeOptions"
@@ -441,59 +441,59 @@ msgstr "OpenLDAP設定: データベース(olcDatabase)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbCacheFree"
-msgstr ""
+msgstr "OpenLDAP設定: DB: キャッシュ開放量(olcDbCacheFree)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbCacheSize"
-msgstr "OpenLDAP設定: DBキャッシュ量(olcDbCacheSize)"
+msgstr "OpenLDAP設定: DB: キャッシュ量(olcDbCacheSize)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbCheckpoint"
-msgstr ""
+msgstr "OpenLDAP設定: DB: チェックポイント(olcDbCheckpoint)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbConfig"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 設定(olcDbConfig)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbDirectory"
-msgstr ""
+msgstr "OpenLDAP設定: DB: ディレクトリ(olcDbDirectory)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbDirtyRead"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 不正読込(olcDbDirtyRead)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbIDLcacheSize"
-msgstr ""
+msgstr "OpenLDAP設定: DB: IDLキャッシュ量(olcDbIDLcacheSize)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbIndex"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 索引(olcDbIndex)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbLinearIndex"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 線形索引(olcDbLinearIndex)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbLockDetect"
-msgstr ""
+msgstr "OpenLDAP設定: DB: ロック検出(olcDbLockDetect)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbMode"
-msgstr ""
+msgstr "OpenLDAP設定: DB: モード(olcDbMode)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbNoSync"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 非同期(olcDbNoSync)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbSearchStack"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 検索スタック(olcDbSearchStack)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbShmKey"
-msgstr ""
+msgstr "OpenLDAP設定: DB: 共有メモリキー(olcDbShmKey)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDefaultSearchBase"
@@ -501,31 +501,31 @@ msgstr "OpenLDAP設定: デフォルト検索ベース(olcDefaultSearchBase)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDisallows"
-msgstr ""
+msgstr "OpenLDAP設定: 拒否(olcDisallows)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDitContentRules"
-msgstr ""
+msgstr "OpenLDAP設定: DIT内容規則(olcDitContentRules)"
 
 #: -:-
 msgid "LDAP|Attribute|olcGentleHUP"
-msgstr ""
+msgstr "OpenLDAP設定: 穏やかなHUP(olcGentleHUP)"
 
 #: -:-
 msgid "LDAP|Attribute|olcIdleTimeout"
-msgstr ""
+msgstr "OpenLDAP設定: 待ちタイムアウト(olcIdleTimeout)"
 
 #: -:-
 msgid "LDAP|Attribute|olcInclude"
-msgstr ""
+msgstr "OpenLDAP設定: 取り込み(olcInclude)"
 
 #: -:-
 msgid "LDAP|Attribute|olcIndexSubstrAnyLen"
-msgstr ""
+msgstr "OpenLDAP設定: 索引に使用する部分文字列長(olcIndexSubstrAnyLen)"
 
 #: -:-
 msgid "LDAP|Attribute|olcIndexSubstrAnyStep"
-msgstr ""
+msgstr "OpenLDAP設定: 索引検索時に使用する移動幅(olcIndexSubstrAnyStep)"
 
 #: -:-
 msgid "LDAP|Attribute|olcIndexSubstrIfMaxLen"
@@ -533,51 +533,51 @@ msgstr "OpenLDAP設定: 索引に使用する部分文字列の最大長(olcInde
 
 #: -:-
 msgid "LDAP|Attribute|olcIndexSubstrIfMinLen"
-msgstr ""
+msgstr "OpenLDAP設定 索引に使用する部分文字列の最小長(olcIndexSubstrIfMinLen)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLastMod"
-msgstr ""
+msgstr "OpenLDAP設定: 最終更新情報(olcLastMod)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLimits"
-msgstr ""
+msgstr "OpenLDAP設定: 制限(olcLimits)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLocalSSF"
-msgstr ""
+msgstr "OpenLDAP設定: ローカルSSF(olcLocalSSF)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLogLevel"
-msgstr ""
+msgstr "OpenLDAP設定: ログレベル(olcLogLevel)"
 
 #: -:-
 msgid "LDAP|Attribute|olcMaxDerefDepth"
-msgstr ""
+msgstr "OpenLDAP設定: 最大別名解決深度(olcMaxDerefDepth)"
 
 #: -:-
 msgid "LDAP|Attribute|olcModuleLoad"
-msgstr ""
+msgstr "OpenLDAP設定: ロードするモジュール(olcModuleLoad)"
 
 #: -:-
 msgid "LDAP|Attribute|olcModulePath"
-msgstr ""
+msgstr "OpenLDAP設定: モジュールの検索パス(olcModulePath)"
 
 #: -:-
 msgid "LDAP|Attribute|olcObjectClasses"
-msgstr "OpenLDAP設定: objectClass(olcObjectClasses)"
+msgstr "OpenLDAP設定: オブジェクトクラス(olcObjectClasses)"
 
 #: -:-
 msgid "LDAP|Attribute|olcObjectIdentifier"
-msgstr ""
+msgstr "OpenLDAP設定: オブジェクト識別子(olcObjectIdentifier)"
 
 #: -:-
 msgid "LDAP|Attribute|olcOverlay"
-msgstr ""
+msgstr "OpenLDAP設定: オーバーレイ(olcOverlay)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
-msgstr ""
+msgstr "OpenLDAP設定: パスワード暗号化用サルトの書式(olcPasswordCryptSaltFormat)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPasswordHash"
@@ -585,171 +585,171 @@ msgstr "OpenLDAP設定: パスワードハッシュ(olcPasswordHash)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPidFile"
-msgstr ""
+msgstr "OpenLDAP設定: PIDファイル(olcPidFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPlugin"
-msgstr ""
+msgstr "OpenLDAP設定: プラグイン(olcPlugin)"
 
 #: -:-
 msgid "LDAP|Attribute|olcPluginLogFile"
-msgstr ""
+msgstr "OpenLDAP設定: プラグイン: ログファイル(olcPluginLogFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReadOnly"
-msgstr ""
+msgstr "OpenLDAP設定: 読み込み専用(olcReadOnly)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReferral"
-msgstr ""
+msgstr "OpenLDAP設定: 紹介(olcReferral)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplica"
-msgstr ""
+msgstr "OpenLDAP設定: 複製(olcReplica)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplicaArgsFile"
-msgstr ""
+msgstr "OpenLDAP設定: 複製: 引数で指定した設定ファイル(olcReplicaArgsFile0"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplicaPidFile"
-msgstr ""
+msgstr "OpenLDAP設定: 複製: PIDファイル(olcReplicaPidFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplicationInterval"
-msgstr ""
+msgstr "OpenLDAP設定: 複製間隔(olcReplicationInterval)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReplogFile"
-msgstr ""
+msgstr "OpenLDAP設定: 複製用ログファイル(olcReplogFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRequires"
-msgstr ""
+msgstr "OpenLDAP設定: 必須条件(olcRequires)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRestrict"
-msgstr ""
+msgstr "OpenLDAP設定: 制限(olcRestrict)"
 
 #: -:-
 msgid "LDAP|Attribute|olcReverseLookup"
-msgstr ""
+msgstr "OpenLDAP設定: 逆引き(olcReverseLookup)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRootDN"
-msgstr ""
+msgstr "OpenLDAP設定: ルートDN(olcRootDN)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRootDSE"
-msgstr ""
+msgstr "OpenLDAP設定: ルートDSA特定エントリ(olcRootDSE)"
 
 #: -:-
 msgid "LDAP|Attribute|olcRootPW"
-msgstr ""
+msgstr "OpenLDAP設定: ルートパスワード(olcRootPW)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSaslHost"
-msgstr ""
+msgstr "OpenLDAP設定: SASL: ホスト(olcSaslHost)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSaslRealm"
-msgstr ""
+msgstr "OpenLDAP設定: SASL: 領域(olcSaslRealm)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSaslSecProps"
-msgstr ""
+msgstr "OpenLDAP設定: SASL: セキュリティプロパティ(olcSaslSecProps)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSchemaDN"
-msgstr ""
+msgstr "OpenLDAP設定: スキーマDN(olcSchemaDN)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSecurity"
-msgstr ""
+msgstr "OpenLDAP設定: セキュリティ(olcSecurity)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSizeLimit"
-msgstr ""
+msgstr "OpenLDAP設定: サイズ制限(olcSizeLimit)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSockbufMaxIncoming"
-msgstr ""
+msgstr "OpenLDAP設定: 匿名接続用最大受信量(olcSockbufMaxIncoming)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSockbufMaxIncomingAuth"
-msgstr ""
+msgstr "OpenLDAP設定: 認証接続用最大受信量(olcSockbufMaxIncomingAuth)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSrvtab"
-msgstr ""
+msgstr "OpenLDAP設定: サービステーブル(olcSrvtab)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSubordinate"
-msgstr ""
+msgstr "OpenLDAP設定: 下位データベース(olcSubordinate)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSuffix"
-msgstr ""
+msgstr "OpenLDAP設定: サフィックス(olcSuffix)"
 
 #: -:-
 msgid "LDAP|Attribute|olcSyncrepl"
-msgstr ""
+msgstr "OpenLDAP設定: 同期複製(olcSyncrepl)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCACertificateFile"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: CA証明書ファイル(olcTLSCACertificateFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCACertificatePath"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: CA証明書パス(olcTLSCACertificatePath)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCRLCheck"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: 失効証明書一覧チェック(olcTLSCRLCheck)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCertificateFile"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: 証明書ファイル(olcTLSCertificateFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCertificateKeyFile"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: 証明書鍵ファイル(olcTLSCertificateKeyFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSCipherSuite"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: 暗号群(olcTLSCipherSuite)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSDHParamFile"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: DHパラメタファイル(olcTLSDHParamFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSRandFile"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: ランダムファイル(olcTLSRandFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSVerifyClient"
-msgstr ""
+msgstr "OpenLDAP設定: TLS: クライアント検証(olcTLSVerifyClient)"
 
 #: -:-
 msgid "LDAP|Attribute|olcThreads"
-msgstr ""
+msgstr "OpenLDAP設定: 最大スレッド数(olcThreads)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTimeLimit"
-msgstr ""
+msgstr "OpenLDAP設定: 時間制限(olcTimeLimit)"
 
 #: -:-
 msgid "LDAP|Attribute|olcToolThreads"
-msgstr ""
+msgstr "OpenLDAP設定: ツールモード時の最大スレッド数(olcToolThreads)"
 
 #: -:-
 msgid "LDAP|Attribute|olcUpdateDN"
-msgstr ""
+msgstr "OpenLDAP設定: 更新用DN(olcUpdateDN)"
 
 #: -:-
 msgid "LDAP|Attribute|olcUpdateRef"
-msgstr ""
+msgstr "OpenLDAP設定: 更新要求時の紹介URL(olcUpdateRef)"
 
 #: -:-
 msgid "LDAP|Attribute|oncRpcNumber"
