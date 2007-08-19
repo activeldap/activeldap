@@ -1,0 +1,144 @@
+# translation of al-admin.po to Nederlands
+# Nederlands translations for AL Admin package.
+# Copyright (C) 2007 Ace Suares
+# This file is distributed under the same license as the AL Admin package.
+#
+# Ace Suares <ace@suares.an>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: al-admin\n"
+"POT-Creation-Date: 2007-08-19 18:20+0900\n"
+"PO-Revision-Date: 2007-08-19 19:14-0400\n"
+"Last-Translator: Ace Suares <ace@suares.an>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: app/models/ldap_user.rb:-
+msgid "ldap user"
+msgstr "ldap gebruiker"
+
+#: app/models/user.rb:-
+msgid "user"
+msgstr "gebruiker"
+
+#: app/models/user.rb:-
+msgid "User|Login"
+msgstr "Gebruiker|Aanmelden"
+
+#: app/models/user.rb:-
+msgid "User|Dn"
+msgstr "Gebruiker|Dn"
+
+#: app/models/user.rb:-
+msgid "User|Updated at"
+msgstr "Gebruiker|Bijgewerkt om"
+
+#: app/models/user.rb:-
+msgid "User|Salt"
+msgstr "Gberuiker|Zout"
+
+#: app/models/user.rb:-
+msgid "User|Remember token"
+msgstr "Gebruiker:Herkenningsteken"
+
+#: app/models/user.rb:-
+msgid "User|Remember token expires at"
+msgstr "Gebruiker|Herkenningsteken verloopt om"
+
+#: app/controllers/account_controller.rb:23 lib/authenticated_system.rb:118
+msgid "Logged in successfully"
+msgstr "Succesvol aangemeld"
+
+#: app/controllers/account_controller.rb:25
+msgid "Login or Password is incorrect"
+msgstr "Gebruikersnaam of Wachtwoord incorrect"
+
+#: app/controllers/account_controller.rb:37
+msgid "Thanks for signing up!"
+msgstr "Bedankt voor het inschrijven!"
+
+#: app/controllers/account_controller.rb:46
+msgid "You have been logged out."
+msgstr "U bent afgemeld."
+
+#: app/controllers/users_controller.rb:26
+msgid "User was successfully updated."
+msgstr "Gebruikersgegevens bijgewerkt."
+
+#: app/views/layouts/application.rhtml:25
+msgid "Top"
+msgstr "Naar boven"
+
+#: app/views/users/_entry.rhtml:9
+msgid "attribute name"
+msgstr "naam van het attribuut"
+
+#: app/views/users/_entry.rhtml:10
+msgid "value"
+msgstr "waarde"
+
+#: app/views/users/_entry.rhtml:11
+msgid "description"
+msgstr "beschrijving"
+
+#: app/views/users/show.rhtml:3 app/views/users/edit.rhtml:10
+msgid "Back"
+msgstr "Terug"
+
+#: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
+#: app/views/account/login.rhtml:5
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: app/views/users/_form.rhtml:13 app/views/account/sign_up.rhtml:10
+msgid "Confirm Password"
+msgstr "Bevestig Wachtwoord"
+
+#: app/views/users/edit.rhtml:5
+msgid "Edit"
+msgstr "bewerken"
+
+#: app/views/users/edit.rhtml:9
+msgid "Show"
+msgstr "Toon"
+
+#: app/views/users/index.rhtml:2
+msgid "No user."
+msgstr "Geen gebruiker"
+
+#: app/views/welcome/index.rhtml:3
+msgid "Menu|Users list"
+msgstr "Menu|Gebruikerslijst"
+
+#: app/views/welcome/index.rhtml:4
+msgid "Menu|Logout"
+msgstr "Menu|Afmelden"
+
+#: app/views/welcome/index.rhtml:6
+msgid "Menu|Login"
+msgstr "menu|Aanmelden"
+
+#: app/views/welcome/index.rhtml:7
+msgid "Menu|Sign up"
+msgstr "Menu|Inschrijven"
+
+#: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
+msgid "Login"
+msgstr "Gebruikersnaam"
+
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+msgid "Sign up"
+msgstr "inschrijven"
+
+#: app/views/account/login.rhtml:8
+msgid "Remember me:"
+msgstr "Vergeet mij niet:"
+
+#: app/views/account/login.rhtml:11
+msgid "Log in"
+msgstr "Aanmelden"
+

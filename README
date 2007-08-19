@@ -44,9 +44,9 @@ RAILS
 
 There is a small rails plugin included that allows the use of a file named
 'ldap.yml' in the config directory of your rails app. This file has a similar
-function to the 'database.yml' file that allows you to set your database 
-connection settings per environment. Similarly, the ldap.yml file allows 
-settings to be set for development, test, and production environments. For 
+function to the 'database.yml' file that allows you to set your database
+connection settings per environment. Similarly, the ldap.yml file allows
+settings to be set for development, test, and production environments. For
 instance, the development entry would look something like the following:
 
           development:
@@ -61,7 +61,7 @@ To install, simply copy the rails/plugin/active_ldap folder into the
 vendor/plugins directory of your rails application and create config/ldap.yml.
 When your application starts up, the plugin will call #establish_connection
 using the parameters specified for your current environment.
-          
+
 
 LICENCE
 
@@ -95,7 +95,9 @@ list, please point out.
 * Ernie Miller: Bug reports and advices.
 * Daniel Pfile: Patches.
 * Jacob Wilkins: Bug reports.
-* Ace Suares: Bug reports.
+* Ace Suares:
+  * Bug reports.
+  * Nederlands translations.
 * Iain Pople: Bug reports and API improvement ideas.
 * Christoph Lipp: Tell us character escape syntax.
 * Kevin McCarthy: Patches.
