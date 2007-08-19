@@ -5,6 +5,43 @@ require 'hoe'
 $LOAD_PATH.unshift('./lib')
 require 'active_ldap'
 
+base_dir = File.expand_path(File.dirname(__FILE__))
+truncate_base_dir = Proc.new do |x|
+  x.gsub(/^#{Regexp.escape(base_dir + File::SEPARATOR)}/, '')
+end
+
+manifest = File.join(base_dir, "Manifest.txt")
+manifest_contents = []
+base_dir_included_components = %w(CHANGES COPYING LICENSE Manifest.txt
+                                  README Rakefile TODO)
+excluded_components = %w(.svn .test-result .config doc log tmp
+                         pkg html config.yaml database.yml ldap.yml)
+excluded_suffixes = %w(.help .sqlite3)
+white_list_paths =
+  [
+   "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml"
+  ]
+Find.find(base_dir) do |target|
+  target = truncate_base_dir[target]
+  components = target.split(File::SEPARATOR)
+  if components.size == 1 and !File.directory?(target)
+    next unless base_dir_included_components.include?(components[0])
+  end
+  unless white_list_paths.include?(target)
+    Find.prune if (excluded_components - components) != excluded_components
+    next if excluded_suffixes.include?(File.extname(target))
+  end
+  manifest_contents << target if File.file?(target)
+end
+
+File.open(manifest, "w") do |f|
+  f.puts manifest_contents.sort.join("\n")
+end
+at_exit do
+  FileUtils.rm_f(manifest)
+end
+
+
 project = Hoe.new('ruby-activeldap', ActiveLdap::VERSION) do |project|
   project.rubyforge_name = 'ruby-activeldap'
   project.author = ['Will Drewry', 'Kouhei Sutou']
