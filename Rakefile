@@ -2,10 +2,11 @@
 
 require 'rubygems'
 require 'hoe'
-$LOAD_PATH.unshift('./lib')
-require 'active_ldap'
 
 base_dir = File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(base_dir, 'lib'))
+require 'active_ldap'
+
 truncate_base_dir = Proc.new do |x|
   x.gsub(/^#{Regexp.escape(base_dir + File::SEPARATOR)}/, '')
 end
