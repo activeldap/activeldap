@@ -57,9 +57,9 @@ module ActiveLdap
         # Attempt 2: SIMPLE with credentials if password block
         # Attempt 3: SIMPLE ANONYMOUS if 1 and 2 fail (or pwblock returns '')
         if try_sasl and sasl_bind(bind_dn, options)
-          @logger.info {_('Bound by SASL')}
+          @logger.info {_('Bound by SASL as %s') % bind_dn}
         elsif simple_bind(bind_dn, options)
-          @logger.info {_('Bound by simple')}
+          @logger.info {_('Bound by simple as %s') % bind_dn}
         elsif allow_anonymous and bind_as_anonymous(options)
           @logger.info {_('Bound as anonymous')}
         else

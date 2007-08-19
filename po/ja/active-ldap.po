@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-18 23:51+0900\n"
-"PO-Revision-Date: 2007-08-18 23:51+0900\n"
+"POT-Creation-Date: 2007-08-19 18:14+0900\n"
+"PO-Revision-Date: 2007-08-19 18:15+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -2752,12 +2752,12 @@ msgid "unsupported qops: %s"
 msgstr "対応していないqopsです: %s"
 
 #: lib/active_ldap/adapter/base.rb:60
-msgid "Bound by SASL"
-msgstr "SASLで接続しました。"
+msgid "Bound by SASL as %s"
+msgstr "%sとしてSASLで接続しました。"
 
 #: lib/active_ldap/adapter/base.rb:62
-msgid "Bound by simple"
-msgstr "シンプル認証で接続しました。"
+msgid "Bound by simple as %s"
+msgstr "%sとしてシンプル認証で接続しました。"
 
 #: lib/active_ldap/adapter/base.rb:64
 msgid "Bound as anonymous"
@@ -2934,23 +2934,23 @@ msgstr ""
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:599
+#: lib/active_ldap/base.rb:604
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:618
+#: lib/active_ldap/base.rb:623
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:639 lib/active_ldap/base.rb:650
+#: lib/active_ldap/base.rb:644 lib/active_ldap/base.rb:655
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:766
+#: lib/active_ldap/base.rb:771
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1190
+#: lib/active_ldap/base.rb:1202
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -3023,22 +3023,22 @@ msgstr "(デフォルト: %s)"
 msgid "Populating..."
 msgstr "データ投入中..."
 
-#: benchmark/bench-al.rb:187
+#: benchmark/bench-al.rb:189
 msgid "Entries processed by Ruby/ActiveLdap: %d"
 msgstr "Ruby/ActiveLdapで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:188
+#: benchmark/bench-al.rb:190
 msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
 msgstr "Ruby/ActiveLdapで処理したエントリ数(オブジェクト生成無し): %d"
 
-#: benchmark/bench-al.rb:190
+#: benchmark/bench-al.rb:192
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr "Ruby/LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:191
+#: benchmark/bench-al.rb:193
 msgid "Entries processed by Net::LDAP: %d"
 msgstr "Net::LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:194
+#: benchmark/bench-al.rb:196
 msgid "Cleaning..."
 msgstr "削除中..."

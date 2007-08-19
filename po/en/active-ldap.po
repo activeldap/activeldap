@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-18 23:51+0900\n"
+"POT-Creation-Date: 2007-08-19 18:14+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -2741,11 +2741,11 @@ msgid "unsupported qops: %s"
 msgstr ""
 
 #: lib/active_ldap/adapter/base.rb:60
-msgid "Bound by SASL"
+msgid "Bound by SASL as %s"
 msgstr ""
 
 #: lib/active_ldap/adapter/base.rb:62
-msgid "Bound by simple"
+msgid "Bound by simple as %s"
 msgstr ""
 
 #: lib/active_ldap/adapter/base.rb:64
@@ -2914,23 +2914,23 @@ msgstr ""
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:599
+#: lib/active_ldap/base.rb:604
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:618
+#: lib/active_ldap/base.rb:623
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:639 lib/active_ldap/base.rb:650
+#: lib/active_ldap/base.rb:644 lib/active_ldap/base.rb:655
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:766
+#: lib/active_ldap/base.rb:771
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1190
+#: lib/active_ldap/base.rb:1202
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
@@ -3002,22 +3002,22 @@ msgstr ""
 msgid "Populating..."
 msgstr ""
 
-#: benchmark/bench-al.rb:187
+#: benchmark/bench-al.rb:189
 msgid "Entries processed by Ruby/ActiveLdap: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:188
+#: benchmark/bench-al.rb:190
 msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:190
+#: benchmark/bench-al.rb:192
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:191
+#: benchmark/bench-al.rb:193
 msgid "Entries processed by Net::LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:194
+#: benchmark/bench-al.rb:196
 msgid "Cleaning..."
 msgstr ""
