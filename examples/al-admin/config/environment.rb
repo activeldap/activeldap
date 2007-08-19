@@ -61,6 +61,4 @@ end
 
 # Include your application configuration below
 
-AL_ADMIN_VERSION = "0.0.1"
-
 require 'gettext/rails'

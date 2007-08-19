@@ -22,7 +22,7 @@ namespace :gettext do
 
       files = Dir.glob("{app,lib,components}/**/*.{rb,rhtml,rxml}")
       GetText.update_pofiles("al-admin", files,
-                             "AL Admin #{AL_ADMIN_VERSION}")
+                             "AL Admin #{ActiveLdap::VERSION}")
     end
   end
 
