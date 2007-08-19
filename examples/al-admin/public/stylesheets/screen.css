@@ -23,3 +23,9 @@ div.entry table tbody th
 {
   text-align: left;
 }
+
+div.object-class-information
+{
+  margin: 1em 5em;
+  padding: 0px 1em;
+}

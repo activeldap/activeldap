@@ -1,0 +1,23 @@
+
+<div class="object-class-information">
+  <h3><%=h la_("objectClass") %></h3>
+  <p><%=h lad_("objectClass") %></p>
+
+  <table>
+    <thead>
+	<tr>
+	  <th><%= _("objectClass name") %></th>
+	  <th><%= _("description") %></th>
+	</tr>
+    </thead>
+
+    <tbody>
+<% entry.classes.sort.each do |object_class| -%>
+      <tr>
+        <td><%=h loc_(object_class) %></td>
+        <td><%=h locd_(object_class) %></td>
+      </tr>
+<% end -%>
+    </tbody>
+  </table>
+</div>

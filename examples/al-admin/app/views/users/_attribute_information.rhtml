@@ -1,0 +1,22 @@
+
+<div class="attribute-information">
+  <table>
+    <thead>
+      <tr>
+	<th><%= _("attribute name") %></th>
+	<th><%= _("value") %></th>
+	<th><%= _("description") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+<% (entry.attribute_names(true) - ["objectClass"]).sort.each do |name| -%>
+      <tr>
+	<th><%= h la_(name) %></th>
+	<td><%= h entry[name, true].join(", ") %></td>
+	<td><%= h lad_(name) %></td>
+      </tr>
+<% end -%>
+    </tbody>
+  </table>
+</div>
