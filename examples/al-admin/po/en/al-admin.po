@@ -1,4 +1,4 @@
-# AL Admin's translated messages for Japanese.
+# English translations for AL Admin package.
 # Copyright (C) 2007 Kouhei Sutou
 # This file is distributed under the same license as the AL Admin package.
 # Kouhei Sutou <kou@cozmixng.org>, 2007.
@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.2\n"
 "POT-Creation-Date: 2007-08-19 09:40+0900\n"
-"PO-Revision-Date: 2007-08-18 20:02+0900\n"
+"PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
-"Language-Team: Japanese\n"
+"Language-Team: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,118 +17,118 @@ msgstr ""
 
 #: app/models/ldap_user.rb:-
 msgid "ldap user"
-msgstr "ユーザ"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "user"
-msgstr "ユーザ"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Login"
-msgstr "ログイン名"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Dn"
-msgstr "DN"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Updated at"
-msgstr "更新時刻"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Salt"
-msgstr "サルト"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Remember token"
-msgstr "記憶トークン"
+msgstr ""
 
 #: app/models/user.rb:-
 msgid "User|Remember token expires at"
-msgstr "記憶トークン失効時刻"
+msgstr ""
 
 #: app/controllers/account_controller.rb:23 lib/authenticated_system.rb:118
 msgid "Logged in successfully"
-msgstr "ログインに成功しました。"
+msgstr ""
 
 #: app/controllers/account_controller.rb:25
 msgid "Login or Password is incorrect"
-msgstr "ログイン名またはパスワードが間違っています。"
+msgstr ""
 
 #: app/controllers/account_controller.rb:37
 msgid "Thanks for signing up!"
-msgstr "登録ありがとうございます！"
+msgstr ""
 
 #: app/controllers/account_controller.rb:46
 msgid "You have been logged out."
-msgstr "ログアウトしました。"
+msgstr ""
 
 #: app/controllers/users_controller.rb:26
 msgid "User was successfully updated."
-msgstr "ユーザを正常に更新しました。"
+msgstr ""
 
 #: app/views/layouts/application.rhtml:25
 msgid "Top"
-msgstr "トップ"
+msgstr ""
 
 #: app/views/users/_entry.rhtml:9
 msgid "attribute name"
-msgstr "属性名"
+msgstr ""
 
 #: app/views/users/_entry.rhtml:10
 msgid "value"
-msgstr "値"
+msgstr ""
 
 #: app/views/users/_entry.rhtml:11
 msgid "description"
-msgstr "説明"
+msgstr ""
 
 #: app/views/users/show.rhtml:3 app/views/users/edit.rhtml:10
 msgid "Back"
-msgstr "戻る"
+msgstr ""
 
 #: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
 #: app/views/account/login.rhtml:5
 msgid "Password"
-msgstr "パスワード"
+msgstr ""
 
 #: app/views/users/_form.rhtml:13 app/views/account/sign_up.rhtml:10
 msgid "Confirm Password"
-msgstr "確認用パスワード"
+msgstr ""
 
 #: app/views/users/edit.rhtml:5
 msgid "Edit"
-msgstr "編集"
+msgstr ""
 
 #: app/views/users/edit.rhtml:9
 msgid "Show"
-msgstr "表示"
+msgstr ""
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
-msgstr "ユーザがいません。"
+msgstr ""
 
 #: app/views/welcome/index.rhtml:2
 msgid "Users list"
-msgstr "ユーザ一覧"
+msgstr ""
 
 #: app/views/welcome/index.rhtml:3 app/views/account/sign_up.rhtml:13
 #: app/views/account/sign_up.rhtml:21
 msgid "Sign up"
-msgstr "登録"
+msgstr ""
 
 #: app/views/welcome/index.rhtml:4
 msgid "Logout"
-msgstr "ログアウト"
+msgstr ""
 
 #: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
 msgid "Login"
-msgstr "ログイン名"
+msgstr ""
 
 #: app/views/account/login.rhtml:8
 msgid "Remember me:"
-msgstr "覚えておく:"
+msgstr ""
 
 #: app/views/account/login.rhtml:11
 msgid "Log in"
-msgstr "ログイン"
+msgstr ""
