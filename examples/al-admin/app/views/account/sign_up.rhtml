@@ -14,7 +14,7 @@
 
 <%   names = @user.attribute_names(true) - ["objectClass", "userPassword"] -%>
 <%   names.sort.each do |name| -%>
-<p><label for="<%= h name %>"><%=h _(name) %><br />
+<p><label for="<%= h name %>"><%=h la_(name) %><br />
 <%= f.text_field(name) %></p>
 <%   end -%>
 

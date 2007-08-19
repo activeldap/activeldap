@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.2\n"
-"POT-Creation-Date: 2007-08-19 09:40+0900\n"
+"POT-Creation-Date: 2007-08-19 18:20+0900\n"
 "PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -108,21 +108,28 @@ msgstr ""
 msgid "No user."
 msgstr ""
 
-#: app/views/welcome/index.rhtml:2
-msgid "Users list"
-msgstr ""
-
-#: app/views/welcome/index.rhtml:3 app/views/account/sign_up.rhtml:13
-#: app/views/account/sign_up.rhtml:21
-msgid "Sign up"
+#: app/views/welcome/index.rhtml:3
+msgid "Menu|Users list"
 msgstr ""
 
 #: app/views/welcome/index.rhtml:4
-msgid "Logout"
+msgid "Menu|Logout"
+msgstr ""
+
+#: app/views/welcome/index.rhtml:6
+msgid "Menu|Login"
+msgstr ""
+
+#: app/views/welcome/index.rhtml:7
+msgid "Menu|Sign up"
 msgstr ""
 
 #: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
 msgid "Login"
+msgstr ""
+
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+msgid "Sign up"
 msgstr ""
 
 #: app/views/account/login.rhtml:8

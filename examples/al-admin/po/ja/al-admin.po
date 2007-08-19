@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.2\n"
-"POT-Creation-Date: 2007-08-19 09:40+0900\n"
-"PO-Revision-Date: 2007-08-18 20:02+0900\n"
+"POT-Creation-Date: 2007-08-19 18:20+0900\n"
+"PO-Revision-Date: 2007-08-19 18:20+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -108,22 +108,29 @@ msgstr "表示"
 msgid "No user."
 msgstr "ユーザがいません。"
 
-#: app/views/welcome/index.rhtml:2
-msgid "Users list"
+#: app/views/welcome/index.rhtml:3
+msgid "Menu|Users list"
 msgstr "ユーザ一覧"
 
-#: app/views/welcome/index.rhtml:3 app/views/account/sign_up.rhtml:13
-#: app/views/account/sign_up.rhtml:21
-msgid "Sign up"
-msgstr "登録"
-
 #: app/views/welcome/index.rhtml:4
-msgid "Logout"
+msgid "Menu|Logout"
 msgstr "ログアウト"
+
+#: app/views/welcome/index.rhtml:6
+msgid "Menu|Login"
+msgstr "ログイン"
+
+#: app/views/welcome/index.rhtml:7
+msgid "Menu|Sign up"
+msgstr "登録"
 
 #: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
 msgid "Login"
 msgstr "ログイン名"
+
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+msgid "Sign up"
+msgstr "登録"
 
 #: app/views/account/login.rhtml:8
 msgid "Remember me:"

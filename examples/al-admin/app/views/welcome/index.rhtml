@@ -1,5 +1,9 @@
 <ul>
-  <li><%= link_to(_("Users list"), :controller => "users") %></li>
-  <li><%= link_to(_("Sign up"), sign_up_path) %></li>
-  <li><%= link_to(_("Logout"), logout_path) %></li>
+<% if logged_in? -%>
+  <li><%= link_to(s_("Menu|Users list"), :controller => "users") %></li>
+  <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
+<% else -%>
+  <li><%= link_to(s_("Menu|Login"), login_path) %></li>
+  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
+<% end -%>
 </ul>
