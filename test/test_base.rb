@@ -6,6 +6,32 @@ class TestBase < Test::Unit::TestCase
   priority :must
 
   priority :normal
+  def test_dn_attribute_per_instance
+    user = @user_class.new
+    assert_equal("uid", user.dn_attribute)
+    assert_nil(user.uid)
+
+    user.dn = "cn=xxx"
+    assert_equal("cn", user.dn_attribute)
+    assert_nil(user.uid)
+    assert_equal("xxx", user.cn)
+    assert_equal("cn=xxx,#{@user_class.base}", user.dn)
+
+    assert_equal("uid", @user_class.new.dn_attribute)
+
+    user.dn = "ZZZ"
+    assert_equal("cn", user.dn_attribute)
+    assert_nil(user.uid)
+    assert_equal("ZZZ", user.cn)
+    assert_equal("cn=ZZZ,#{@user_class.base}", user.dn)
+
+    user.dn = "uid=aaa"
+    assert_equal("uid", user.dn_attribute)
+    assert_equal("aaa", user.uid)
+    assert_equal("ZZZ", user.cn)
+    assert_equal("uid=aaa,#{@user_class.base}", user.dn)
+  end
+
   def test_case_insensitive_nested_ou
     ou_class("ou=Users").new("Sub").save!
     make_temporary_user(:uid => "test-user,ou=SUB") do |user, password|

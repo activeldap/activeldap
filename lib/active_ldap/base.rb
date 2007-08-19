@@ -588,6 +588,11 @@ module ActiveLdap
     end
     alias_method(:id=, :dn=)
 
+    alias_method(:dn_attribute_of_class, :dn_attribute)
+    def dn_attribute
+      @dn_attribute || dn_attribute_of_class
+    end
+
     # destroy
     #
     # Delete this entry from LDAP
@@ -919,6 +924,7 @@ module ActiveLdap
       @normalized_attr_names = {} # list of normalized attribute name
       @attr_aliases = {} # aliases of @attr_methods
       @last_oc = false # for use in other methods for "caching"
+      @dn_attribute = nil
       @base = nil
       @scope = nil
       @connection ||= nil
@@ -1030,7 +1036,11 @@ module ActiveLdap
       raise UnknownAttribute.new(name) if attr.nil?
 
       if attr == dn_attribute and value.is_a?(String)
-        value, @base = split_dn_value(value)
+        new_dn_attribute, value, @base = split_dn_value(value)
+        new_dn_attribute = to_real_attribute_name(new_dn_attribute)
+        if dn_attribute != new_dn_attribute
+          @dn_attribute = attr = new_dn_attribute
+        end
       end
 
       # Enforce LDAP-pleasing values
@@ -1068,7 +1078,9 @@ module ActiveLdap
       end
 
       val, *bases = relative_dn_value.rdns
-      [val.values[0], bases.empty? ? nil : DN.new(*bases).to_s]
+      dn_attribute_name, dn_attribute_value = val.to_a[0]
+      [dn_attribute_name, dn_attribute_value,
+       bases.empty? ? nil : DN.new(*bases).to_s]
     end
 
     # define_attribute_methods
