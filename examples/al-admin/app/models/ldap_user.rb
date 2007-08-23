@@ -3,14 +3,15 @@ require 'active_ldap/user_password'
 class LdapUser < ActiveLdap::Base
   ldap_mapping :prefix => "ou=Users",
                :classes => ["person"],
-               :dn_attribute => "uid"
+               :dn_attribute => "cn"
 
   attr_accessor :password
 
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
+  validates_presence_of :password, :password_confirmation,
+                        :if => :password_required?
+  validates_length_of :password, :within => 4..40,
+                      :if => :password_required?
+  validates_confirmation_of :password, :if => :password_required?
   before_save :encrypt_password
 
   class << self
