@@ -1,14 +1,14 @@
-<%= error_messages_for :user %>
-<%= error_messages_for :system_user %>
-<% form_for :user do |f| -%>
-<p><label for="uid"><%= _("Login") %></label><br/>
-<%= f.text_field :uid %></p>
+<%= error_messages_for(:user) %>
+<%= error_messages_for(:system_user) %>
+<% form_for(:user) do |f| -%>
+<p><label for="<%= @user.dn_attribute %>"><%= _("Login") %></label><br/>
+<%= f.text_field(@user.dn_attribute) %></p>
 
 <p><label for="password"><%= _("Password") %></label><br/>
-<%= f.password_field :password %></p>
+<%= f.password_field(:password) %></p>
 
 <p><label for="password_confirmation"><%= _("Confirm Password") %></label><br/>
-<%= f.password_field :password_confirmation %></p>
+<%= f.password_field(:password_confirmation) %></p>
 
 <p><%= submit_tag(_('Sign up')) %></p>
 
