@@ -481,8 +481,8 @@ module ActiveLdap
         apply_object_class(classes | initial_classes)
         normalized_attributes = {}
         attributes.each do |key, value|
-          real_key = to_real_attribute_name(key)
-          normalized_attributes[real_key] = value if real_key
+          real_key = to_real_attribute_name(key) || key
+          normalized_attributes[real_key] = value
         end
         self.dn = normalized_attributes[dn_attribute]
         self.attributes = normalized_attributes
