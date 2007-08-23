@@ -822,21 +822,17 @@ module ActiveLdap
     end
 
     def inspect
-      @mutex.synchronize do
-        begin
-          schema, @schema = @schema, nil
-          must, may = @must, @may
-          object_classes = @object_classes
-          @must, @may = @must.collect(&:name), @may.collect(&:name)
-          @object_classes = @object_classes.collect(&:name)
-          super
-        ensure
-          @schema = schema
-          @must = must
-          @may = may
-          @object_classes = object_classes
-        end
-      end
+      schema, @schema = @schema, nil
+      must, may = @must, @may
+      object_classes = @object_classes
+      @must, @may = @must.collect(&:name), @may.collect(&:name)
+      @object_classes = @object_classes.collect(&:name)
+      super
+    ensure
+      @schema = schema
+      @must = must
+      @may = may
+      @object_classes = object_classes
     end
 
     private
