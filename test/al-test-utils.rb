@@ -100,30 +100,7 @@ module AlTestUtils
     end
 
     def populate_base
-      unless ActiveLdap::Base.search(:scope => :base).empty?
-        return
-      end
-
-      suffixes = []
-      ActiveLdap::Base.base.split(/,/).reverse_each do |suffix|
-        prefix = suffixes.join(",")
-        suffixes.unshift(suffix)
-        name, value = suffix.split(/=/, 2)
-        next unless name == "dc"
-        dc_class = Class.new(ActiveLdap::Base)
-        dc_class.ldap_mapping :dn_attribute => "dc",
-                              :prefix => "",
-                              :scope => :base,
-                              :classes => ["top", "dcObject", "organization"]
-        dc_class.base = prefix
-        next if dc_class.exists?(value, :prefix => "dc=#{value}")
-        dc = dc_class.new(value)
-        dc.o = dc.dc
-        begin
-          dc.save
-        rescue ActiveLdap::OperationNotPermitted
-        end
-      end
+      ActiveLdap::Populate.ensure_base
     end
 
     def ou_class(prefix="")
@@ -141,7 +118,7 @@ module AlTestUtils
     end
 
     def make_ou(name)
-      ou_class.new(name).save
+      ActiveLdap::Populate.ensure_ou(name)
     end
 
     def populate_user_class

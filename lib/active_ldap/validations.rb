@@ -15,6 +15,11 @@ module ActiveLdap
         class << self
           alias_method :human_attribute_name,
                        :human_attribute_name_active_ldap
+          unless method_defined?(:human_attribute_name_with_gettext)
+            def human_attribute_name_with_gettext(attribute_key_name)
+              s_("#{self}|#{attribute_key_name.humanize}")
+            end
+          end
         end
 
         # Workaround for GetText's ugly implementation

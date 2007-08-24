@@ -256,7 +256,7 @@ module ActiveLdap
           args = [name, dn]
           if options[:filter]
             format = _("Couldn't find %s: DN: %s: filter: %s")
-            args << options[:filter]
+            args << options[:filter].inspect
           else
             format = _("Couldn't find %s: DN: %s")
           end
@@ -285,7 +285,7 @@ module ActiveLdap
           args = [name, dns.join(', ')]
           if options[:filter]
             format = _("Couldn't find all %s: DNs (%s): filter: %s")
-            args << options[:filter]
+            args << options[:filter].inspect
           else
             format = _("Couldn't find all %s: DNs (%s)")
           end
