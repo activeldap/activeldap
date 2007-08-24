@@ -27,13 +27,18 @@ class User < ActiveRecord::Base
   end
 
   def authenticated?(password)
-    return false if ldap_user.nil?
+    return false if ldap_user.nil? or ldap_user.new_entry?
     ldap_user.authenticated?(password)
   end
 
   def ldap_user
     @ldap_user ||= LdapUser.find(dn)
   rescue ActiveLdap::EntryNotFound
+    if dn
+      LdapUser.new(dn)
+    else
+      nil
+    end
   end
 
   def connected?
