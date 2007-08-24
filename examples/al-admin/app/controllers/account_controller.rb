@@ -1,5 +1,4 @@
 class AccountController < ApplicationController
-  # say something nice, you goof!  something sweet.
   def index
     if logged_in?
       redirect_to(top_path)
@@ -36,6 +35,8 @@ class AccountController < ApplicationController
         redirect_back_or_default(top_path)
         flash[:notice] = _("Thanks for signing up!")
       end
+    else
+      @user.password = @user.password_confirmation = nil
     end
   end
 

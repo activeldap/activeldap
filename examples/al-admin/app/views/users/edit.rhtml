@@ -2,9 +2,9 @@
   <h2><%= user_link(@user) %></h2>
   <% form_tag :action => 'update', :id => @user do %>
     <%= render :partial => 'form' %>
-    <%= submit_tag(_('Edit')) %>
+    <%= submit_tag(s_('Command|Update')) %>
   <% end %>
 </div>
 
-<%= link_to _('Show'), :action => 'show', :id => @user %> |
-<%= link_to _('Back'), :action => 'index' %>
+<%= link_to(s_('Menu|Show'), :action => 'show', :id => @user) %> |
+<%= link_to(s_('Menu|Back'), :action => 'index') %>

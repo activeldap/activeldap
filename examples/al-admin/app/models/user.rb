@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   def ldap_user
     @ldap_user ||= LdapUser.find(dn)
+  rescue ActiveLdap::EntryNotFound
   end
 
   def connected?

@@ -5,6 +5,8 @@ class LdapUser < ActiveLdap::Base
                :classes => ["person"],
                :dn_attribute => "cn"
 
+  N_("LdapUser|Password")
+  N_("LdapUser|Password confirmation")
   attr_accessor :password
 
   validates_presence_of :password, :password_confirmation,
@@ -34,15 +36,14 @@ class LdapUser < ActiveLdap::Base
   private
   def encrypt_password
     return if password.blank?
+    hash_type = "ssha"
     if /\A\{([A-Z][A-Z\d]+)\}/ =~ userPassword.to_s
       hash_type = $1.downcase
-      self.user_password = ActiveLdap::UserPassword.send(hash_type, password)
-    else
-      self.user_password = password
     end
+    self.user_password = ActiveLdap::UserPassword.send(hash_type, password)
   end
 
   def password_required?
-    !password.blank?
+    user_password.blank? or !password.blank?
   end
 end

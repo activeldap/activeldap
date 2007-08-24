@@ -6,9 +6,9 @@
 # Ace Suares <ace@suares.an>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: al-admin\n"
-"POT-Creation-Date: 2007-08-19 18:20+0900\n"
-"PO-Revision-Date: 2007-08-19 19:14-0400\n"
+"Project-Id-Version: AL Admin 0.8.2\n"
+"POT-Creation-Date: 2007-08-24 22:25+0900\n"
+"PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: app/models/ldap_user.rb:8
+#, fuzzy
+msgid "LdapUser|Password"
+msgstr "Wachtwoord"
+
+#: app/models/ldap_user.rb:9
+msgid "LdapUser|Password confirmation"
+msgstr ""
+
+#: app/models/user.rb:-
+msgid "User|Dn"
+msgstr "DN"
+
+#: app/models/user.rb:-
+msgid "User|Login"
+msgstr "Aanmelden"
+
+#: app/models/user.rb:-
+msgid "User|Remember token"
+msgstr "Herkenningsteken"
+
+#: app/models/user.rb:-
+msgid "User|Remember token expires at"
+msgstr "Herkenningsteken verloopt om"
+
+#: app/models/user.rb:-
+msgid "User|Salt"
+msgstr "Zout"
+
+#: app/models/user.rb:-
+msgid "User|Updated at"
+msgstr "Bijgewerkt om"
+
+#: app/models/entry.rb:17
+msgid "disable saving"
+msgstr ""
+
+#: app/models/entry.rb:-
+msgid "entry"
+msgstr ""
 
 #: app/models/ldap_user.rb:-
 msgid "ldap user"
@@ -25,43 +66,19 @@ msgstr "ldap gebruiker"
 msgid "user"
 msgstr "gebruiker"
 
-#: app/models/user.rb:-
-msgid "User|Login"
-msgstr "Gebruiker|Aanmelden"
-
-#: app/models/user.rb:-
-msgid "User|Dn"
-msgstr "Gebruiker|Dn"
-
-#: app/models/user.rb:-
-msgid "User|Updated at"
-msgstr "Gebruiker|Bijgewerkt om"
-
-#: app/models/user.rb:-
-msgid "User|Salt"
-msgstr "Gberuiker|Zout"
-
-#: app/models/user.rb:-
-msgid "User|Remember token"
-msgstr "Gebruiker:Herkenningsteken"
-
-#: app/models/user.rb:-
-msgid "User|Remember token expires at"
-msgstr "Gebruiker|Herkenningsteken verloopt om"
-
-#: app/controllers/account_controller.rb:23 lib/authenticated_system.rb:118
+#: app/controllers/account_controller.rb:22 lib/authenticated_system.rb:119
 msgid "Logged in successfully"
 msgstr "Succesvol aangemeld"
 
-#: app/controllers/account_controller.rb:25
+#: app/controllers/account_controller.rb:24
 msgid "Login or Password is incorrect"
 msgstr "Gebruikersnaam of Wachtwoord incorrect"
 
-#: app/controllers/account_controller.rb:37
+#: app/controllers/account_controller.rb:36
 msgid "Thanks for signing up!"
 msgstr "Bedankt voor het inschrijven!"
 
-#: app/controllers/account_controller.rb:46
+#: app/controllers/account_controller.rb:47
 msgid "You have been logged out."
 msgstr "U bent afgemeld."
 
@@ -69,24 +86,17 @@ msgstr "U bent afgemeld."
 msgid "User was successfully updated."
 msgstr "Gebruikersgegevens bijgewerkt."
 
+#: app/controllers/directory_controller.rb:18
+msgid "Populating is only for initialization"
+msgstr ""
+
 #: app/views/layouts/application.rhtml:25
 msgid "Top"
 msgstr "Naar boven"
 
-#: app/views/users/_entry.rhtml:9
-msgid "attribute name"
-msgstr "naam van het attribuut"
-
-#: app/views/users/_entry.rhtml:10
-msgid "value"
-msgstr "waarde"
-
-#: app/views/users/_entry.rhtml:11
-msgid "description"
-msgstr "beschrijving"
-
 #: app/views/users/show.rhtml:3 app/views/users/edit.rhtml:10
-msgid "Back"
+#, fuzzy
+msgid "Menu|Back"
 msgstr "Terug"
 
 #: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
@@ -99,32 +109,62 @@ msgid "Confirm Password"
 msgstr "Bevestig Wachtwoord"
 
 #: app/views/users/edit.rhtml:5
-msgid "Edit"
-msgstr "bewerken"
+msgid "Command|Update"
+msgstr ""
 
 #: app/views/users/edit.rhtml:9
-msgid "Show"
+msgid "Menu|Show"
 msgstr "Toon"
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
 msgstr "Geen gebruiker"
 
+#: app/views/users/_object_class_information.rhtml:9
+msgid "objectClass name"
+msgstr ""
+
+#: app/views/users/_object_class_information.rhtml:10
+#: app/views/users/_attribute_information.rhtml:8
+msgid "description"
+msgstr "beschrijving"
+
+#: app/views/users/_attribute_information.rhtml:6
+msgid "attribute name"
+msgstr "naam van het attribuut"
+
+#: app/views/users/_attribute_information.rhtml:7
+msgid "value"
+msgstr "waarde"
+
 #: app/views/welcome/index.rhtml:3
 msgid "Menu|Users list"
-msgstr "Menu|Gebruikerslijst"
+msgstr "Gebruikerslijst"
 
 #: app/views/welcome/index.rhtml:4
 msgid "Menu|Logout"
-msgstr "Menu|Afmelden"
+msgstr "Afmelden"
 
-#: app/views/welcome/index.rhtml:6
-msgid "Menu|Login"
-msgstr "menu|Aanmelden"
+#: app/views/welcome/index.rhtml:5
+msgid "Menu|Directory"
+msgstr ""
 
 #: app/views/welcome/index.rhtml:7
+msgid "Menu|Login"
+msgstr "Aanmelden"
+
+#: app/views/welcome/index.rhtml:8
 msgid "Menu|Sign up"
-msgstr "Menu|Inschrijven"
+msgstr "Inschrijven"
+
+#: app/views/welcome/index.rhtml:12
+#, fuzzy
+msgid "Menu|Populate"
+msgstr "Menu|Afmelden"
+
+#: app/views/welcome/index.rhtml:14
+msgid "OK?"
+msgstr ""
 
 #: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
 msgid "Login"
@@ -142,3 +182,21 @@ msgstr "Vergeet mij niet:"
 msgid "Log in"
 msgstr "Aanmelden"
 
+#: app/views/directory/populate.rhtml:1
+msgid "Done."
+msgstr ""
+
+#: app/views/directory/populate.rhtml:2
+#, fuzzy
+msgid "Menu|Index"
+msgstr "menu|Aanmelden"
+
+#: lib/authenticated_system.rb:75
+msgid "Please login."
+msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr "bewerken"
+
+#~ msgid "Show"
+#~ msgstr "Toon"

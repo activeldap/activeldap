@@ -72,6 +72,7 @@ module AuthenticatedSystem
       respond_to do |accepts|
         accepts.html do
           store_location
+          flash.now[:notice] = _("Please login.")
           redirect_to :controller => '/account', :action => 'login'
         end
         accepts.xml do
