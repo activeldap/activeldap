@@ -29,3 +29,14 @@ div.object-class-information
   margin: 1em 5em;
   padding: 0px 1em;
 }
+
+div.footer-link
+{
+  border-top: 1px solid gray;
+}
+
+div.system-info
+{
+  border-top: 1px solid gray;
+  text-align: right;
+}

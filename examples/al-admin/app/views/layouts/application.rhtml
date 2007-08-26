@@ -21,7 +21,12 @@
 <% end -%>
     <%= yield %>
 
-    <hr />
-    <%= link_to(_("Top"), top_path) %>
+    <div class="footer-link">
+      <p><%= link_to(_("Top"), top_path) %></p>
+    </div>
+
+    <div class="system-info">
+      <p>al-admin: Powered by Ruby/ActiveLdap <%= ActiveLdap::VERSION %></p>
+    </div>
   </body>
 </html>
