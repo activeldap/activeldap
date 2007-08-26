@@ -62,6 +62,7 @@ end
 # Include your application configuration below
 
 require 'gettext/rails'
+require 'accept_http_rails_relative_url_root'
 
 # ExceptionNotifier.sender_address = "null@cozmixng.org"
 # ExceptionNotifier.exception_recipients = %w(kou@cozmixng.org)
