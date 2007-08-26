@@ -1,3 +1,8 @@
+body
+{
+  margin: 0.5em 1.5em;
+}
+
 table, tr, th, td
 {
   border: 1px solid black;
@@ -30,13 +35,18 @@ div.object-class-information
   padding: 0px 1em;
 }
 
-div.footer-link
+div.footer
 {
+  margin-top: 0.5em;
   border-top: 1px solid gray;
+}
+
+div.footer div.links
+{
+  float: left;
 }
 
 div.system-info
 {
-  border-top: 1px solid gray;
   text-align: right;
 }

@@ -19,14 +19,23 @@
 <% if flash[:notice] -%>
     <p class="notice"><%=h flash[:notice] %></p>
 <% end -%>
-    <%= yield %>
-
-    <div class="footer-link">
-      <p><%= link_to(_("Top"), top_path) %></p>
+    <div class="content">
+      <%= yield %>
     </div>
 
-    <div class="system-info">
-      <p>al-admin: Powered by Ruby/ActiveLdap <%= ActiveLdap::VERSION %></p>
+    <div class="footer">
+      <div class="links">
+        <p><%= link_to(_("Top"), top_path) %></p>
+      </div>
+
+      <div class="system-info">
+	<p>
+          al-admin: Powered by
+          <%= link_to("Ruby/ActiveLdap",
+                      "http://rubyforge.org/projects/ruby-activeldap") %>
+          <%= ActiveLdap::VERSION %>
+        </p>
+      </div>
     </div>
   </body>
 </html>
