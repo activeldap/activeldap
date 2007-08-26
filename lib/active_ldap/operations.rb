@@ -76,21 +76,24 @@ module ActiveLdap
       end
 
       def exist?(dn, options={})
-        prefix = /^#{Regexp.escape(truncate_base(ensure_dn_attribute(dn)))}/ #
-        dn_suffix = nil
-        not search({:value => dn}.merge(options)).find do |_dn,|
-          if prefix.match(_dn)
-            begin
-              dn_suffix ||= DN.parse(base)
-              dn_prefix = DN.parse(_dn) - dn_suffix
-              true
-            rescue DistinguishedNameInvalid, ArgumentError
-              false
-            end
-          else
-            false
-          end
-        end.nil?
+        attr, value, prefix = split_search_value(dn)
+
+        options_for_leaf = {
+          :attribute => attr,
+          :value => value,
+          :prefix => prefix,
+        }
+
+        attribute = attr || dn_attribute || "objectClass"
+        options_for_non_leaf = {
+          :attribute => attr,
+          :value => value,
+          :prefix => ["#{attribute}=#{value}", prefix].compact.join(","),
+          :scope => :base,
+        }
+
+        !search(options_for_leaf.merge(options)).empty? or
+          !search(options_for_non_leaf.merge(options)).empty?
       end
       alias_method :exists?, :exist?
 
@@ -349,7 +352,7 @@ module ActiveLdap
         targets = conn.search(options).collect do |dn, attributes|
           dn
         end.sort_by do |dn|
-          dn.reverse
+          dn.upcase.reverse
         end.reverse
 
         conn.delete(targets)

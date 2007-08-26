@@ -550,12 +550,13 @@ module ActiveLdap
       !values.empty? or values.any? {|x| not (x and x.empty?)}
     end
 
-    # exists?
+    # exist?
     #
     # Return whether the entry exists in LDAP or not
-    def exists?
+    def exist?
       self.class.exists?(dn)
     end
+    alias_method(:exists?, :exist?)
 
     # new_entry?
     #
