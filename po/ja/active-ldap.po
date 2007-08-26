@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-26 18:58+0900\n"
+"POT-Creation-Date: 2007-08-26 19:05+0900\n"
 "PO-Revision-Date: 2007-08-26 19:00+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
@@ -2995,7 +2995,7 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
-#: rails/plugin/active_ldap/init.rb:9
+#: rails/plugin/active_ldap/init.rb:10
 msgid "You should run 'script/generator scaffold_al' to make %s."
 msgstr "%sを作るために'script/generator scaffold_al'を実行してください。"
 

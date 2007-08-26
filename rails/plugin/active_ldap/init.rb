@@ -6,8 +6,10 @@ if File.exist?(ldap_configuration_file)
   ActiveLdap::Base.configurations = configurations
   ActiveLdap::Base.establish_connection
 else
-  format = _("You should run 'script/generator scaffold_al' to make %s.")
-  ActiveLdap::Base.logger.error(format % ldap_configuration_file)
+  ActiveLdap::Base.class_eval do
+    format = _("You should run 'script/generator scaffold_al' to make %s.")
+    logger.error(format % ldap_configuration_file)
+  end
 end
 
 if ActiveLdap.const_defined?(:Helper)
