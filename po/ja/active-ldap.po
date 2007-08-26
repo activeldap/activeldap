@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
-"POT-Creation-Date: 2007-08-19 18:14+0900\n"
-"PO-Revision-Date: 2007-08-19 18:15+0900\n"
+"POT-Creation-Date: 2007-08-26 18:58+0900\n"
+"PO-Revision-Date: 2007-08-26 19:00+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -102,14 +102,6 @@ msgstr "国名(countryName)"
 #: -:-
 msgid "LDAP|Attribute|crossCertificatePair"
 msgstr "相互認証組(crossCertificatePair)"
-
-#: -:-
-msgid "LDAP|Attribute|dITContentRules"
-msgstr "ディレクトリ情報ツリー内容規則(dITContentRules)"
-
-#: -:-
-msgid "LDAP|Attribute|dITStructureRules"
-msgstr "ディレクトリ情報ツリー構造規則(dITStructureRules)"
 
 #: -:-
 msgid "LDAP|Attribute|dSAQuality"
@@ -350,10 +342,6 @@ msgstr "携帯電話の番号(mobileTelephoneNumber)"
 #: -:-
 msgid "LDAP|Attribute|nSRecord"
 msgstr "NSレコード(nSRecord)"
-
-#: -:-
-msgid "LDAP|Attribute|nameForms"
-msgstr "名前の構成(nameForms)"
 
 #: -:-
 msgid "LDAP|Attribute|nisMapEntry"
@@ -1103,10 +1091,6 @@ msgstr "サブツリー最大品質(subtreeMaximumQuality)"
 #: -:-
 msgid "LDAP|Attribute|subtreeMinimumQuality"
 msgstr "サブツリー最小品質(subtreeMinimumQuality)"
-
-#: -:-
-msgid "LDAP|Attribute|subtreeSpecification"
-msgstr "サブツリー仕様(subtreeSpecification)"
 
 #: -:-
 msgid "LDAP|Attribute|supportedAlgorithms"
@@ -2789,19 +2773,19 @@ msgstr "password_blockがnilでもProcでもありません。無視します。
 msgid "Requested action timed out."
 msgstr "要求したアクションがタイムアウトしました。"
 
-#: lib/active_ldap/adapter/base.rb:411
+#: lib/active_ldap/adapter/base.rb:446
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr "不正な論理演算子です: %s: 有効な演算子: %s\n"
 
-#: lib/active_ldap/adapter/base.rb:428
+#: lib/active_ldap/adapter/base.rb:463
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr "LDAPサーバへの再接続を諦めました。"
 
-#: lib/active_ldap/adapter/base.rb:431
+#: lib/active_ldap/adapter/base.rb:466
 msgid "Attempting to reconnect"
 msgstr "再接続を試みています。"
 
-#: lib/active_ldap/adapter/base.rb:442
+#: lib/active_ldap/adapter/base.rb:477
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -2811,11 +2795,11 @@ msgstr ""
 "サーバへの再接続失敗時のバックトレース:\\n\n"
 "%s"
 
-#: lib/active_ldap/validations.rb:84
+#: lib/active_ldap/validations.rb:89
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
 
-#: lib/active_ldap/validations.rb:86
+#: lib/active_ldap/validations.rb:91
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
@@ -2904,12 +2888,12 @@ msgstr ""
 ":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
 
 #: lib/active_ldap/base.rb:114
-msgid "%s is invalid distinguished name (DN)"
-msgstr "%sは不正な識別名(DN)です。"
-
-#: lib/active_ldap/base.rb:116
 msgid "%s is invalid distinguished name (DN): %s"
 msgstr "%sは不正な識別名(DN)です: %s"
+
+#: lib/active_ldap/base.rb:116
+msgid "%s is invalid distinguished name (DN)"
+msgstr "%sは不正な識別名(DN)です。"
 
 #: lib/active_ldap/base.rb:150
 msgid "LDAP configuration specifies nonexistent %s adapter"
@@ -2923,34 +2907,34 @@ msgstr "%sは未知の属性です。"
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:490
+#: lib/active_ldap/base.rb:499
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:571
+#: lib/active_ldap/base.rb:581
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:604
+#: lib/active_ldap/base.rb:614
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:623
+#: lib/active_ldap/base.rb:633
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:644 lib/active_ldap/base.rb:655
+#: lib/active_ldap/base.rb:654 lib/active_ldap/base.rb:665
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:771
+#: lib/active_ldap/base.rb:781
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1202
+#: lib/active_ldap/base.rb:1207
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -2987,29 +2971,33 @@ msgid ":ldap_scope search option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/operations.rb:203
+#: lib/active_ldap/operations.rb:196
 msgid "Invalid order: %s"
 msgstr "不正な順序です: %s"
 
-#: lib/active_ldap/operations.rb:238
+#: lib/active_ldap/operations.rb:231
 msgid "Couldn't find %s without a DN"
 msgstr "DNがないため%sが見つかりません。"
 
-#: lib/active_ldap/operations.rb:258
+#: lib/active_ldap/operations.rb:251
 msgid "Couldn't find %s: DN: %s: filter: %s"
 msgstr "%sが見つかりません: DN: %s: フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:261
+#: lib/active_ldap/operations.rb:254
 msgid "Couldn't find %s: DN: %s"
 msgstr "%sが見つかりません: DN: %s"
 
-#: lib/active_ldap/operations.rb:287
+#: lib/active_ldap/operations.rb:280
 msgid "Couldn't find all %s: DNs (%s): filter: %s"
 msgstr "すべての%sを見つけられませんでした: DN (%s): フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:290
+#: lib/active_ldap/operations.rb:283
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
+
+#: rails/plugin/active_ldap/init.rb:9
+msgid "You should run 'script/generator scaffold_al' to make %s."
+msgstr "%sを作るために'script/generator scaffold_al'を実行してください。"
 
 #: benchmark/bench-al.rb:14
 msgid "Specify prefix for benchmarking"
@@ -3042,3 +3030,15 @@ msgstr "Net::LDAPで処理したエントリ数: %d"
 #: benchmark/bench-al.rb:196
 msgid "Cleaning..."
 msgstr "削除中..."
+
+#~ msgid "LDAP|Attribute|dITContentRules"
+#~ msgstr "ディレクトリ情報ツリー内容規則(dITContentRules)"
+
+#~ msgid "LDAP|Attribute|dITStructureRules"
+#~ msgstr "ディレクトリ情報ツリー構造規則(dITStructureRules)"
+
+#~ msgid "LDAP|Attribute|subtreeSpecification"
+#~ msgstr "サブツリー仕様(subtreeSpecification)"
+
+#~ msgid "LDAP|Attribute|nameForms"
+#~ msgstr "名前の構成(nameForms)"

@@ -340,12 +340,18 @@ module ActiveLdap
 
       def human_attribute_name_msgid(attribute_or_name)
         if attribute_or_name.is_a?(Schema::Attribute)
-          attribute = attribute_or_name.name
+          name = attribute_or_name.name
         else
           attribute = schema.attribute(attribute_or_name)
           return nil if attribute.id.nil?
+          if attribute.name == attribute_or_name or
+              attribute.aliases.include?(attribute_or_name)
+            name = attribute_or_name
+          else
+            return nil
+          end
         end
-        "LDAP|Attribute|#{attribute.name}"
+        "LDAP|Attribute|#{name}"
       end
 
       def human_attribute_description(attribute_or_name)

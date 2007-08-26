@@ -129,8 +129,8 @@ module ActiveLdap
 
       def register_attribute(attribute, file)
         [attribute.name, *attribute.aliases].each do |name|
-          register(ActiveLdap::Base.human_attribute_name_msgid(name),
-                   file)
+          msgid = ActiveLdap::Base.human_attribute_name_msgid(name)
+          register(msgid, file) if msgid
         end
         if attribute.description
           msgid = ActiveLdap::Base.human_attribute_description_msgid(attribute)
