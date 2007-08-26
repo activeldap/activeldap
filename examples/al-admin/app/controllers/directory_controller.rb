@@ -8,7 +8,7 @@ class DirectoryController < ApplicationController
 
   def populate
     ActiveLdap::Populate.ensure_base
-    ActiveLdap::Populate.ensure_ou("Users")
+    ActiveLdap::Populate.ensure_ou(LdapUser.prefix)
   end
 
   private

@@ -31,6 +31,7 @@ module ActiveLdap
 
     def ensure_ou(name, base_class=nil)
       base_class ||= Base
+      name = name.gsub(/\Aou\s*=\s*/, '')
       unless base_class.search(:prefix => "ou=#{name}", :scope => :base).empty?
         return
       end
