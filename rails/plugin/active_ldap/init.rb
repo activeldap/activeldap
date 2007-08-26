@@ -11,6 +11,8 @@ else
   ActiveLdap::Base.logger.error(message)
 end
 
-class ActionView::Base
-  include ActiveLdapHelper
+if ActiveLdap.const_defined?(:Helper)
+  class ActionView::Base
+    include ActiveLdap::Helper
+  end
 end

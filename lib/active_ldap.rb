@@ -949,8 +949,10 @@ require 'active_ldap/operations'
 require 'active_ldap/attributes'
 require 'active_ldap/object_class'
 require 'active_ldap/distinguished_name'
+
 require 'active_ldap/populate'
 require 'active_ldap/escape'
+require 'active_ldap/helper'
 
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
