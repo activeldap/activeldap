@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => '_al-admin_session_id'
 
+  init_gettext "al-admin"
+
   include ExceptionNotifiable
 
   include AuthenticatedSystem
   before_filter :check_connectivity
   before_filter :login_from_cookie
-
-  init_gettext "al-admin"
 end
