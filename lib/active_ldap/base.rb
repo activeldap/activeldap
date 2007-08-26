@@ -842,8 +842,7 @@ module ActiveLdap
     private
     def extract_object_class(attributes)
       classes = []
-      attrs = attributes.reject do |key, value|
-        key = key.to_s
+      attrs = attributes.stringify_keys.reject do |key, value|
         if key == 'objectClass' or
             key.underscore == 'object_class' or
             key.downcase == 'objectclass'
