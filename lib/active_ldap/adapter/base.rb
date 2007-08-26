@@ -349,7 +349,23 @@ module ActiveLdap
         [operator, components]
       end
 
+      def extract_filter_value_options(value)
+        options = {}
+        if value.is_a?(Array)
+          case value[0]
+          when Hash
+            options = value[0]
+            value = value[1]
+          when "=", "~=", "<=", "=>"
+            options[:operator] = value[1]
+            value = value[1]
+          end
+        end
+        [value, options]
+      end
+
       def construct_component(key, value, operator=nil)
+        value, options = extract_filter_value_options(value)
         if collection?(value)
           values = []
           value.each do |val|
@@ -362,13 +378,30 @@ module ActiveLdap
           values[0] = values[0][1] if filter_logical_operator?(values[0][1])
           parse_filter(values, operator)
         else
-          "(#{key}=#{escape_filter_value(value)})"
+          [
+           "(",
+           escape_filter_key(key),
+           options[:operator] || "=",
+           escape_filter_value(value, options),
+           ")"
+          ].join
         end
       end
 
-      def escape_filter_value(value)
-        value.gsub(/[=,]/) do |s|
-          "\\%X" % s[0]
+      def escape_filter_key(key)
+        escape_filter_value(key.to_s)
+      end
+
+      def escape_filter_value(value, options={})
+        targets = ""
+        # ',' and '=' are for Net::LDAP
+        value.gsub(/[,=*()\\\0]\*?/) do |s|
+          if s == "*"
+            s
+          else
+            s = "*" if s == "**"
+            "\\%02X" % s[0]
+          end
         end
       end
 
@@ -379,7 +412,9 @@ module ActiveLdap
         when 0
           nil
         when 1
-          components.join
+          filter = components[0]
+          filter = "(!#{filter})" if operator == :not
+          filter
         else
           "(#{operator == :and ? '&' : '|'}#{components.join})"
         end
@@ -389,7 +424,7 @@ module ActiveLdap
         !object.is_a?(String) and object.respond_to?(:each)
       end
 
-      LOGICAL_OPERATORS = [:and, :or, :&, :|]
+      LOGICAL_OPERATORS = [:and, :or, :not, :&, :|]
       def filter_logical_operator?(operator)
         LOGICAL_OPERATORS.include?(operator)
       end
@@ -399,8 +434,10 @@ module ActiveLdap
         case (operator || :and)
         when :and, :&
           :and
-        else
+        when :or, :|
           :or
+        else
+          :not
         end
       end
 

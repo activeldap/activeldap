@@ -12,11 +12,21 @@ class TestAdapter < Test::Unit::TestCase
   priority :must
 
   priority :normal
-  def test_filter_with_escaped_character
+  def test_filter_with_escaped_character_for_net_ldap
     assert_parse_filter("(uid=Alice\\3DBob)", {:uid => "Alice=Bob"})
     assert_parse_filter("(uid=Alice\\2CBob)", {:uid => "Alice,Bob"})
     assert_parse_filter("(uid=Alice\\3DBob\\2C)", {:uid => "Alice=Bob,"})
     assert_parse_filter("(uid=Alice\\3D\\2CBob)", {:uid => "Alice=,Bob"})
+  end
+
+  def test_filter_with_escaped_character
+    assert_parse_filter("(uid=Alice\\28Bob)", {:uid => "Alice(Bob"})
+    assert_parse_filter("(uid=Alice\\29Bob)", {:uid => "Alice)Bob"})
+    assert_parse_filter("(uid=Alice\\29Bob\\28)", {:uid => "Alice)Bob("})
+    assert_parse_filter("(uid=Alice\\28\\29Bob)", {:uid => "Alice()Bob"})
+    assert_parse_filter("(uid=Alice*Bob)", {:uid => "Alice*Bob"})
+    assert_parse_filter("(uid=Alice\\2ABob)", {:uid => "Alice**Bob"})
+    assert_parse_filter("(uid=Alice\\2A*\\5CBob)", {:uid => "Alice***\\Bob"})
   end
 
   def test_empty_filter

@@ -41,7 +41,7 @@ module ActiveLdap
         _attr, value, _prefix = split_search_value(value)
         attr ||= _attr || dn_attribute || "objectClass"
         prefix ||= _prefix
-        filter ||= "(#{attr}=#{escape_filter_value(value, true)})"
+        filter ||= [attr, value]
         filter = [:and, filter, *object_class_filters(classes)]
         _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
         if options.has_key?(:ldap_scope)
@@ -130,17 +130,7 @@ module ActiveLdap
 
       def object_class_filters(classes=nil)
         (classes || required_classes).collect do |name|
-          ["objectClass", escape_filter_value(name, true)]
-        end
-      end
-
-      def escape_filter_value(value, without_asterisk=false)
-        value.gsub(/[\*\(\)\\\0]/) do |x|
-          if without_asterisk and x == "*"
-            x
-          else
-            "\\%02x" % x[0]
-          end
+          ["objectClass", Escape.ldap_filter_escape(name)]
         end
       end
 
@@ -246,7 +236,7 @@ module ActiveLdap
 
       def find_one(dn, options)
         attr, value, prefix = split_search_value(dn)
-        filter = [attr || dn_attribute, escape_filter_value(value, true)]
+        filter = [attr || dn_attribute, Escape.ldap_filter_escape(value)]
         filter = [:and, filter, options[:filter]] if options[:filter]
         options = {:prefix => prefix}.merge(options.merge(:filter => filter))
         result = find_initial(options)
@@ -268,11 +258,11 @@ module ActiveLdap
         dn_filters = dns.collect do |dn|
           attr, value, prefix = split_search_value(dn)
           attr ||= dn_attribute
-          filter = [attr, escape_filter_value(value, true)]
+          filter = [attr, value]
           if prefix
             filter = [:and,
                       filter,
-                      [dn, "*,#{escape_filter_value(prefix)},#{base}"]]
+                      [dn, "*,#{Escape.ldap_filter_escape(prefix)},#{base}"]]
           end
           filter
         end
