@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Ruby/ActiveLdap 0.8.2\n"
+"Project-Id-Version: Ruby/ActiveLdap 0.8.3\n"
 "POT-Creation-Date: 2007-08-26 19:05+0900\n"
 "PO-Revision-Date: 2007-08-26 19:00+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"

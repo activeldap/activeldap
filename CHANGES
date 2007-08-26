@@ -1,3 +1,10 @@
+0.8.3:
+  * Added AL-Admin Sample Rails app
+  * Added Ruby-GetText-Package support
+  * Added a Rails plugin
+  * Improved schema handling
+  * Improved performance
+  * Many bug fixes
 0.8.2:
   * Added Net::LDAP support!
     * supported SASL Digest-MD5 authentication with Net::LDAP.
