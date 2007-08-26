@@ -393,9 +393,7 @@ module ActiveLdap
       end
 
       def escape_filter_value(value, options={})
-        targets = ""
-        # ',' and '=' are for Net::LDAP
-        value.gsub(/[,=*()\\\0]\*?/) do |s|
+        value.gsub(/(?:[()\\\0]|\*\*?)/) do |s|
           if s == "*"
             s
           else
