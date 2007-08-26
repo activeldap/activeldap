@@ -111,9 +111,9 @@ module ActiveLdap
       @dn = dn
       @reason = reason
       if @reason
-        message = _("%s is invalid distinguished name (DN)") % @dn
-      else
         message = _("%s is invalid distinguished name (DN): %s") % [@dn, @reason]
+      else
+        message = _("%s is invalid distinguished name (DN)") % @dn
       end
       super(message)
     end
