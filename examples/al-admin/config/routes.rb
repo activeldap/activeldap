@@ -5,11 +5,13 @@ ActionController::Routing::Routes.draw do |map|
     duped_options = (options || {}).dup
     requirements = duped_options.delete(:requirements) || {}
     defaults = duped_options.delete(:defaults) || {}
-    map.send(method, ":lang/#{path}",
-             {
-               :requirements => {:lang => /[a-z]{2,2}/}.merge(requirements),
-               :defaults => {:lang => nil}.merge(defaults),
-             }.merge(duped_options))
+    lang_options = {
+      :requirements => {:lang => /[a-z]{2,2}/}.merge(requirements),
+      :defaults => {},
+    }
+    lang_options[:defaults] = {:lang => nil} if method != :connect
+    lang_options[:defaults].merge!(defaults)
+    map.send(method, ":lang/#{path}", lang_options.merge(duped_options))
     map.send(:connect, *args[1..-1])
   end
 
