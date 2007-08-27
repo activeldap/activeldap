@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   before_filter :check_connectivity
   before_filter :login_from_cookie
+
+  private
+  def default_url_options(options)
+    default_options = {}
+    lang = params["lang"]
+    default_options["lang"] = lang if lang
+    default_options.merge(options)
+  end
 end
