@@ -1040,7 +1040,7 @@ module ActiveLdap
       attr = to_real_attribute_name(name)
       raise UnknownAttribute.new(name) if attr.nil?
 
-      if attr == dn_attribute and value.is_a?(String)
+      if attr == dn_attribute and value.is_a?(String) and !value.blank?
         new_dn_attribute, value, @base = split_dn_value(value)
         new_dn_attribute = to_real_attribute_name(new_dn_attribute)
         if dn_attribute != new_dn_attribute
