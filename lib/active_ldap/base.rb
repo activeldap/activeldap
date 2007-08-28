@@ -1048,23 +1048,18 @@ module ActiveLdap
         end
       end
 
-      # Enforce LDAP-pleasing values
-      real_value = value
-      # Squash empty values
-      if value.class == Array
-        real_value = value.collect {|c| (c.nil? or c.empty?) ? [] : c}.flatten
+      case value
+      when nil, ""
+        value = []
+      when Array
+        value = value.collect {|c| c.blank? ? [] : c}.flatten
+      when String
+        value = [value]
+      when Numeric
+        value = [value.to_s]
       end
-      real_value = [] if real_value.nil?
-      real_value = [] if real_value == ''
-      real_value = [real_value] if real_value.class == String
-      real_value = [real_value.to_s] if real_value.class == Fixnum
-      # NOTE: Hashes are allowed for subtyping.
 
-      # Assign the value
-      @data[attr] = enforce_type(attr, real_value)
-
-      # Return the passed in value
-      @data[attr]
+      @data[attr] = enforce_type(attr, value)
     end
 
     def split_dn_value(value)

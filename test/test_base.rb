@@ -6,6 +6,19 @@ class TestBase < Test::Unit::TestCase
   priority :must
 
   priority :normal
+  def test_dn_attribute_per_instance_with_invalid_value
+    user = @user_class.new
+    assert_equal("uid", user.dn_attribute)
+
+    user.dn = nil
+    assert_equal("uid", user.dn_attribute)
+    assert_nil(user.uid)
+
+    user.dn = ""
+    assert_equal("uid", user.dn_attribute)
+    assert_nil(user.uid)
+  end
+
   def test_dn_attribute_per_instance
     user = @user_class.new
     assert_equal("uid", user.dn_attribute)

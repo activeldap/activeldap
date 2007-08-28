@@ -117,8 +117,6 @@ class TestDN < Test::Unit::TestCase
     assert_dn_parser_collect_pairs(",", "\\,")
   end
 
-  priority :normal
-
   private
   def assert_dn(expected, dn)
     assert_equal(ActiveLdap::DN.new(*expected), ActiveLdap::DN.parse(dn))
