@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'hoe'
+require 'find'
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(base_dir, 'lib'))
@@ -22,7 +23,7 @@ white_list_paths =
   [
    "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml"
   ]
-Find.find(base_dir) do |target|
+Find.find(base_dir + "/") do |target|
   target = truncate_base_dir[target]
   components = target.split(File::SEPARATOR)
   if components.size == 1 and !File.directory?(target)
