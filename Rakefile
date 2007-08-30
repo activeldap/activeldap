@@ -83,11 +83,13 @@ publish_docs_actions.push(after_publish_docs)
 # fix Hoe's incorrect guess.
 project.spec.executables.clear
 project.bin_files = project.spec.files.grep(/^bin/)
+
+rdoc_main = "lib/active_ldap.rb"
 project.spec.rdoc_options.each do |option|
-  option.replace("README") if option == "README.txt"
+  option.replace(rdoc_main) if option == "README.txt"
 end
 ObjectSpace.each_object(Rake::RDocTask) do |task|
-  task.main = "README" if task.main == "README.txt"
+  task.main = rdoc_main if task.main == "README.txt"
 end
 
 
