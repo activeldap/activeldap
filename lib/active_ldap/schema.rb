@@ -346,28 +346,22 @@ module ActiveLdap
         @binary_required
       end
 
+      def syntax
+        return @syntax if @syntax
+        return @super_attribute.syntax if @super_attribute
+        nil
+      end
+
       def valid?(value)
-        if @syntax
-          @syntax.valid?(value)
-        else
-          if @super_attribute
-            @super_attribute.valid?(value)
-          else
-            true
-          end
-        end
+        _syntax = syntax
+        return true if _syntax.nil?
+        _syntax.valid?(value)
       end
 
       def syntax_description
-        if @syntax
-          @syntax.description
-        else
-          if @super_attribute
-            @super_attribute.syntax_description
-          else
-            nil
-          end
-        end
+        _syntax = syntax
+        return nil if _syntax.nil?
+        _syntax.description
       end
 
       private

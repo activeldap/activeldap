@@ -115,9 +115,8 @@ module ActiveLdap
       @attribute_schemata.each do |name, attribute|
         self[name, true].each do |value|
           unless attribute.valid?(value)
-            syntax_description = attribute.syntax_description
             params = [value,
-                      self.class.human_syntax_description(syntax_description)]
+                      self.class.human_syntax_description(attribute.syntax)]
             if ActiveLdap.get_text_supported?
               format = _("%{fn} has invalid format: %s: required syntax: %s")
             else
