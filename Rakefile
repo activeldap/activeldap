@@ -53,6 +53,7 @@ project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.test_globs = ['test/test_*.rb']
   project.changes = project.paragraphs_of('CHANGES', 0..1).join("\n\n")
   project.extra_deps = ['activerecord']
+  project.rdoc_pattern = /(?:^(?:lib|bin)|\AREADME\z)/
   project.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap',
@@ -82,6 +83,12 @@ publish_docs_actions.push(after_publish_docs)
 # fix Hoe's incorrect guess.
 project.spec.executables.clear
 project.bin_files = project.spec.files.grep(/^bin/)
+project.spec.rdoc_options.each do |option|
+  option.replace("README") if option == "README.txt"
+end
+ObjectSpace.each_object(Rake::RDocTask) do |task|
+  task.main = "README" if task.main == "README.txt"
+end
 
 
 # fix Hoe's install and uninstall task.
