@@ -88,7 +88,7 @@ module ActiveLdap
               self.class.human_attribute_name(name)
             end
             args = [self.class.human_object_class_name(object_class)]
-            if ActiveLdap.get_text_support?
+            if ActiveLdap.get_text_supported?
               if aliases.empty?
                 format = _("%{fn} is required attribute by objectClass '%s'")
               else
@@ -116,7 +116,7 @@ module ActiveLdap
         self[name, true].each do |value|
           unless attribute.valid?(value)
             params = [value, attribute.syntax_description]
-            if ActiveLdap.get_text_support?
+            if ActiveLdap.get_text_supported?
               format = _("%{fn} has invalid format: %s: required syntax: %s")
             else
               format = _("has invalid format: %s: required syntax: %s")

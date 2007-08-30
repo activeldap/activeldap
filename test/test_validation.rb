@@ -19,7 +19,7 @@ class TestValidation < Test::Unit::TestCase
       syntax_description = lsd_("1.3.6.1.4.1.1466.115.121.1.12")
       assert_not_nil(syntax_description)
       params = ["test", syntax_description]
-      if ActiveLdap.get_text_support?
+      if ActiveLdap.get_text_supported?
         format = _("%{fn} has invalid format: %s: required syntax: %s")
         format = format % {:fn => la_("seeAlso")}
         assert_equal([format % params], user.errors.full_messages)
