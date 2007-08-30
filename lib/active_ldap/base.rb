@@ -226,8 +226,7 @@ module ActiveLdap
       # :bind_dn specifies the DN to bind with.
       # :password_block specifies a Proc object that will yield a String to
       #   be used as the password when called.
-      # :logger specifies a preconfigured Log4r::Logger to be used for all
-      #   logging
+      # :logger specifies a logger object (Logger, Log4r::Logger and s on)
       # :host sets the LDAP server hostname
       # :port sets the LDAP server port
       # :base overwrites Base.base - this affects EVERYTHING
@@ -342,11 +341,10 @@ module ActiveLdap
         @@logger ||= configuration[:logger]
         # Setup default logger to console
         if @@logger.nil?
-          require 'log4r'
-          @@logger = Log4r::Logger.new('activeldap')
-          @@logger.level = Log4r::OFF
-          Log4r::StderrOutputter.new 'console'
-          @@logger.add('console')
+          require 'logger'
+          @@logger = Logger.new(STDERR)
+          @@logger.progname = 'ActiveLdap'
+          @@logger.level = Logger::UNKNOWN
         end
         configuration[:logger] ||= @@logger
       end

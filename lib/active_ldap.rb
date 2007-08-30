@@ -52,7 +52,6 @@
 #
 # * Ruby[http://www.ruby-lang.org] 1.8.x
 # * Ruby/LDAP[http://ruby-ldap.sourceforge.net]
-# * Log4r[http://log4r.sourceforge.net]
 # * (Optional) Ruby/LDAP+GSSAPI[http://caliban.org/files/redhat/RPMS/i386/ruby-ldap-0.8.2-4.i386.rpm]
 # * An LDAP server compatible with Ruby/LDAP: OpenLDAP[http://www.openldap.org], etc
 #   - Your LDAP server must allow root_dse queries to allow for schema queries
@@ -434,7 +433,7 @@
 #     :host => 'ldap.dataspill.org',
 #     :port => 389,
 #     :base => 'dc=dataspill,dc=org',
-#     :logger => log4r_obj,
+#     :logger => logger_object,
 #     :bind_dn => "uid=drewry,ou=People,dc=dataspill,dc=org",
 #     :password_block => Proc.new { 'password12345' },
 #     :allow_anonymous => false,
@@ -460,7 +459,7 @@
 #   subclasses.
 # * :bind_dn specifies what your server expects when attempting to bind with
 #   credentials.
-# * :logger accepts a custom log4r object to integrate with any other logging
+# * :logger accepts a custom logger object to integrate with any other logging
 #   your application uses.
 # * :password_block, if defined, give the Proc block for acquiring the password
 # * :password, if defined, give the user's password as a String

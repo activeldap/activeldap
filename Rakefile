@@ -52,7 +52,7 @@ project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.url = 'http://rubyforge.org/projects/ruby-activeldap/'
   project.test_globs = ['test/test_*.rb']
   project.changes = project.paragraphs_of('CHANGES', 0..1).join("\n\n")
-  project.extra_deps = [['log4r', '>= 1.0.4'], 'activerecord']
+  project.extra_deps = ['activerecord']
   project.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap',
@@ -82,6 +82,7 @@ publish_docs_actions.push(after_publish_docs)
 # fix Hoe's incorrect guess.
 project.spec.executables.clear
 project.bin_files = project.spec.files.grep(/^bin/)
+
 
 # fix Hoe's install and uninstall task.
 task(:install).instance_variable_get("@actions").clear
