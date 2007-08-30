@@ -36,8 +36,15 @@ module ActiveLdap
 
       def extract_all_in_schema(targets=[])
         extract(targets) do
-          ActiveLdap::Base.schema.object_classes.each do |object_class|
+          schema = ActiveLdap::Base.schema
+          schema.object_classes.each do |object_class|
             register_object_class(object_class, "-")
+          end
+          schema.attributes.each do |attribute|
+            register_attribute(attribute, "-")
+          end
+          schema.ldap_syntaxes.each do |syntax|
+            register_syntax(syntax, "-")
           end
         end
       end
@@ -134,6 +141,16 @@ module ActiveLdap
         end
         if attribute.description
           msgid = ActiveLdap::Base.human_attribute_description_msgid(attribute)
+          register(msgid, file)
+        end
+      end
+
+      def register_syntax(syntax, file)
+        msgid = ActiveLdap::Base.human_syntax_name_msgid(syntax)
+        register(msgid, file)
+
+        if syntax.description
+          msgid = ActiveLdap::Base.human_syntax_description_msgid(syntax)
           register(msgid, file)
         end
       end

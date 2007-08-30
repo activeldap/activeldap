@@ -19,5 +19,15 @@ module ActiveLdap
       Base.human_object_class_description(object_class)
     end
     alias_method(:locd_, :ldap_object_class_description_gettext)
+
+    def ldap_syntax_name_gettext(syntax)
+      Base.human_syntax_name(syntax)
+    end
+    alias_method(:ls_, :ldap_syntax_name_gettext)
+
+    def ldap_syntax_description_gettext(syntax)
+      Base.human_syntax_description(syntax)
+    end
+    alias_method(:lsd_, :ldap_syntax_description_gettext)
   end
 end

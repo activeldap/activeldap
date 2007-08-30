@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.3\n"
-"POT-Creation-Date: 2007-08-26 19:05+0900\n"
-"PO-Revision-Date: 2007-08-26 19:00+0900\n"
+"POT-Creation-Date: 2007-08-30 00:15+0900\n"
+"PO-Revision-Date: 2007-08-30 20:10+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -26,6 +26,10 @@ msgstr "別名エントリの名前(aliasedEntryName)"
 #: -:-
 msgid "LDAP|Attribute|aliasedObjectName"
 msgstr "別名オブジェクトの名前(aliasedObjectName)"
+
+#: -:-
+msgid "LDAP|Attribute|altServer"
+msgstr "代替サーバ(altServer)"
 
 #: -:-
 msgid "LDAP|Attribute|associatedDomain"
@@ -100,8 +104,20 @@ msgid "LDAP|Attribute|countryName"
 msgstr "国名(countryName)"
 
 #: -:-
+msgid "LDAP|Attribute|createTimestamp"
+msgstr "作成時刻(createTimestamp)"
+
+#: -:-
+msgid "LDAP|Attribute|creatorsName"
+msgstr "作成者名(creatorsName)"
+
+#: -:-
 msgid "LDAP|Attribute|crossCertificatePair"
 msgstr "相互認証組(crossCertificatePair)"
+
+#: -:-
+msgid "LDAP|Attribute|dITRedirect"
+msgstr "DITリダイレクト先(dITRedirect)"
 
 #: -:-
 msgid "LDAP|Attribute|dSAQuality"
@@ -132,8 +148,16 @@ msgid "LDAP|Attribute|displayName"
 msgstr "表示名(displayName)"
 
 #: -:-
+msgid "LDAP|Attribute|distinguishedName"
+msgstr "識別名(distinguishedName)"
+
+#: -:-
 msgid "LDAP|Attribute|dmdName"
 msgstr "ディレクトリ管理ドメイン名(dmdName)"
+
+#: -:-
+msgid "LDAP|Attribute|dnQualifier"
+msgstr "DN限定詞(dnQualifier)"
 
 #: -:-
 msgid "LDAP|Attribute|documentAuthor"
@@ -168,12 +192,28 @@ msgid "LDAP|Attribute|drink"
 msgstr "飲み物(drink)"
 
 #: -:-
+msgid "LDAP|Attribute|email"
+msgstr "Eメール(email)"
+
+#: -:-
+msgid "LDAP|Attribute|emailAddress"
+msgstr "Eメールアドレス(emailAddress)"
+
+#: -:-
 msgid "LDAP|Attribute|employeeNumber"
 msgstr "従業員番号(employeeNumber)"
 
 #: -:-
 msgid "LDAP|Attribute|employeeType"
 msgstr "従業員種別(employeeType)"
+
+#: -:-
+msgid "LDAP|Attribute|enhancedSearchGuide"
+msgstr "拡張検索案内(enhancedSearchGuide)"
+
+#: -:-
+msgid "LDAP|Attribute|entryUUID"
+msgstr "エントリのUUID(entryUUID)"
 
 #: -:-
 msgid "LDAP|Attribute|facsimileTelephoneNumber"
@@ -196,6 +236,10 @@ msgid "LDAP|Attribute|gecos"
 msgstr "GECOS(gecos)"
 
 #: -:-
+msgid "LDAP|Attribute|generationQualifier"
+msgstr "世代限定詞(generationQualifier)"
+
+#: -:-
 msgid "LDAP|Attribute|gidNumber"
 msgstr "GID番号(gidNumber)"
 
@@ -206,6 +250,10 @@ msgstr "名前(givenName)"
 #: -:-
 msgid "LDAP|Attribute|gn"
 msgstr "名前(gn)"
+
+#: -:-
+msgid "LDAP|Attribute|hasSubordinates"
+msgstr "下位がある(hasSubordinate)"
 
 #: -:-
 msgid "LDAP|Attribute|homeDirectory"
@@ -226,6 +274,14 @@ msgstr "自宅電話番号(homeTelephoneNumber)"
 #: -:-
 msgid "LDAP|Attribute|host"
 msgstr "ホスト(host)"
+
+#: -:-
+msgid "LDAP|Attribute|houseIdentifier"
+msgstr "住宅識別子(houseIdentifier)"
+
+#: -:-
+msgid "LDAP|Attribute|info"
+msgstr "情報(info)"
 
 #: -:-
 msgid "LDAP|Attribute|initials"
@@ -278,6 +334,10 @@ msgstr "地域(l)"
 #: -:-
 msgid "LDAP|Attribute|labeledURI"
 msgstr "ラベル付けされたURI(labeledURI)"
+
+#: -:-
+msgid "LDAP|Attribute|ldapSyntaxes"
+msgstr "LDAP構文(ldapSyntaxes)"
 
 #: -:-
 msgid "LDAP|Attribute|localityName"
@@ -340,8 +400,24 @@ msgid "LDAP|Attribute|mobileTelephoneNumber"
 msgstr "携帯電話の番号(mobileTelephoneNumber)"
 
 #: -:-
+msgid "LDAP|Attribute|modifiersName"
+msgstr "変更者名(modifiersName)"
+
+#: -:-
+msgid "LDAP|Attribute|modifyTimestamp"
+msgstr "変更時刻(modifyTimestamp)"
+
+#: -:-
 msgid "LDAP|Attribute|nSRecord"
 msgstr "NSレコード(nSRecord)"
+
+#: -:-
+msgid "LDAP|Attribute|name"
+msgstr "名前(name)"
+
+#: -:-
+msgid "LDAP|Attribute|namingContexts"
+msgstr "名前付け文脈(namingContexts)"
 
 #: -:-
 msgid "LDAP|Attribute|nisMapEntry"
@@ -534,6 +610,10 @@ msgstr "OpenLDAP設定: 制限(olcLimits)"
 #: -:-
 msgid "LDAP|Attribute|olcLocalSSF"
 msgstr "OpenLDAP設定: ローカルSSF(olcLocalSSF)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLogFile"
+msgstr "OpenLDAP設定: ログファイル(olcLogFile)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLogLevel"
@@ -793,6 +873,10 @@ msgid "LDAP|Attribute|physicalDeliveryOfficeName"
 msgstr "現物引き渡しオフィス名(physicalDeliveryOfficeName)"
 
 #: -:-
+msgid "LDAP|Attribute|pkcs9email"
+msgstr "PKCS #9のEメール(pkcs9email)"
+
+#: -:-
 msgid "LDAP|Attribute|postOfficeBox"
 msgstr "私書箱(postOfficeBox)"
 
@@ -815,6 +899,14 @@ msgstr "希望する言語(preferredLanguage)"
 #: -:-
 msgid "LDAP|Attribute|presentationAddress"
 msgstr "OSIプレゼンテーションアドレス(presentationAddress)"
+
+#: -:-
+msgid "LDAP|Attribute|protocolInformation"
+msgstr "プロトコル情報(protocolInformation)"
+
+#: -:-
+msgid "LDAP|Attribute|pseudonym"
+msgstr "仮名(pseudonym)"
 
 #: -:-
 msgid "LDAP|Attribute|ref"
@@ -1065,6 +1157,10 @@ msgid "LDAP|Attribute|shadowWarning"
 msgstr "シャドーパスワード失効警告日(shadowWarning)"
 
 #: -:-
+msgid "LDAP|Attribute|singleLevelQuality"
+msgstr "単一レベル品質(singleLevelQuality)"
+
+#: -:-
 msgid "LDAP|Attribute|sn"
 msgstr "姓(sn)"
 
@@ -1085,6 +1181,14 @@ msgid "LDAP|Attribute|streetAddress"
 msgstr "通りの住所(streatAddress)"
 
 #: -:-
+msgid "LDAP|Attribute|structuralObjectClass"
+msgstr "構造的なオブジェクトクラス(structuralObjectClass)"
+
+#: -:-
+msgid "LDAP|Attribute|subschemaSubentry"
+msgstr "サブスキーマのサブエントリ(subschemaSubentry)"
+
+#: -:-
 msgid "LDAP|Attribute|subtreeMaximumQuality"
 msgstr "サブツリー最大品質(subtreeMaximumQuality)"
 
@@ -1099,6 +1203,26 @@ msgstr "対応アルゴリズム(supportedAlgorithms)"
 #: -:-
 msgid "LDAP|Attribute|supportedApplicationContext"
 msgstr "対応応用コンテクスト(supportedApplicationContext)"
+
+#: -:-
+msgid "LDAP|Attribute|supportedControl"
+msgstr "対応コントロール(supportedControl)"
+
+#: -:-
+msgid "LDAP|Attribute|supportedExtension"
+msgstr "対応拡張(supportedExtension)"
+
+#: -:-
+msgid "LDAP|Attribute|supportedFeatures"
+msgstr "対応機能(supportedFeatures)"
+
+#: -:-
+msgid "LDAP|Attribute|supportedLDAPVersion"
+msgstr "対応LDAPバージョン(supportedLDAPVersion)"
+
+#: -:-
+msgid "LDAP|Attribute|supportedSASLMechanisms"
+msgstr "対応SASLメカニズム(supportedSASLMechanisms)"
 
 #: -:-
 msgid "LDAP|Attribute|surname"
@@ -1133,6 +1257,10 @@ msgid "LDAP|Attribute|uidNumber"
 msgstr "ユーザID番号(uidNumber)"
 
 #: -:-
+msgid "LDAP|Attribute|uniqueIdentifier"
+msgstr "一意の識別子(uniqueIdentifier)"
+
+#: -:-
 msgid "LDAP|Attribute|uniqueMember"
 msgstr "重複のないメンバー(uniqueNumber)"
 
@@ -1161,6 +1289,14 @@ msgid "LDAP|Attribute|userid"
 msgstr "ユーザID(userid)"
 
 #: -:-
+msgid "LDAP|Attribute|vendorName"
+msgstr "ベンダー名(vendorName)"
+
+#: -:-
+msgid "LDAP|Attribute|vendorVersion"
+msgstr "ベンダーバージョン(vendorVersion)"
+
+#: -:-
 msgid "LDAP|Attribute|x121Address"
 msgstr "X.121アドレス(x121Address)"
 
@@ -1172,6 +1308,10 @@ msgstr "X.500 一意の識別子(x500UniqueIdentifier)"
 msgid ""
 "LDAP|Description|Attribute|aliasedObjectName|RFC2256: name of aliased object"
 msgstr "RFC2256: 別名オブジェクトの名前"
+
+#: -:-
+msgid "LDAP|Description|Attribute|altServer|RFC2252: alternative servers"
+msgstr "RFC2252: 代替サーバ"
 
 #: -:-
 msgid ""
@@ -1245,6 +1385,16 @@ msgstr "RFC1274: 友好国の名前"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|createTimestamp|RFC2252: time which object was "
+"created"
+msgstr "RFC2252: オブジェクトが作成された時刻"
+
+#: -:-
+msgid "LDAP|Description|Attribute|creatorsName|RFC2252: name of creator"
+msgstr "RFC2256: 作成者の名前"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|crossCertificatePair|RFC2256: X.509 cross "
 "certificate pair, use ;binary"
 msgstr "RFC2256: X.509相互認証組。;binaryを使うこと。"
@@ -1252,6 +1402,10 @@ msgstr "RFC2256: X.509相互認証組。;binaryを使うこと。"
 #: -:-
 msgid "LDAP|Description|Attribute|c|RFC2256: ISO-3166 country 2-letter code"
 msgstr "RFC2256: ISO-3166で定義される2文字の国コード"
+
+#: -:-
+msgid "LDAP|Description|Attribute|dITRedirect|RFC1274: DIT Redirect"
+msgstr "RFC1274: DITのリダイレクト先"
 
 #: -:-
 msgid "LDAP|Description|Attribute|dSAQuality|RFC1274: DSA Quality"
@@ -1290,8 +1444,18 @@ msgid ""
 msgstr "RFC2798: エントリを表示するときに使いたい名前"
 
 #: -:-
+msgid ""
+"LDAP|Description|Attribute|distinguishedName|RFC2256: common supertype of DN "
+"attributes"
+msgstr "RFC2256: DN属性共通のスーパータイプ"
+
+#: -:-
 msgid "LDAP|Description|Attribute|dmdName|RFC2256: name of DMD"
 msgstr "RFC2256: ディレクトリ管理ドメイン(DMD)の名前"
+
+#: -:-
+msgid "LDAP|Description|Attribute|dnQualifier|RFC2256: DN qualifier"
+msgstr "RFC1274: DN限定詞"
 
 #: -:-
 msgid ""
@@ -1329,6 +1493,12 @@ msgstr "RFC1274: 好きな飲み物"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|email|RFC3280: legacy attribute for email "
+"addresses in DNs"
+msgstr "RFC3280: 昔、DNの中のEメールアドレスに使われていた属性"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|employeeNumber|RFC2798: numerically identifies an "
 "employee within an organization"
 msgstr "RFC2798: 組織内の従業員を一意に識別する番号"
@@ -1338,6 +1508,15 @@ msgid ""
 "LDAP|Description|Attribute|employeeType|RFC2798: type of employment for a "
 "person"
 msgstr "RFC2798: 従業員の種類"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|enhancedSearchGuide|RFC2256: enhanced search guide"
+msgstr "RFC2256: 拡張された検索案内"
+
+#: -:-
+msgid "LDAP|Description|Attribute|entryUUID|UUID of the entry"
+msgstr "エントリのUUID"
 
 #: -:-
 msgid ""
@@ -1351,6 +1530,12 @@ msgstr "GECOSフィールド。つまり共通名。"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|generationQualifier|RFC2256: name qualifier "
+"indicating a generation"
+msgstr "RFC2256: 世代を識別する名前限定詞"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|gidNumber|An integer uniquely identifying a group "
 "in an administrative domain"
 msgstr "管理ドメイン内のグループを一意に識別する整数値"
@@ -1360,6 +1545,10 @@ msgid ""
 "LDAP|Description|Attribute|givenName|RFC2256: first name(s) for which the "
 "entity is known by"
 msgstr "RFC2256: 実体がわかる名前"
+
+#: -:-
+msgid "LDAP|Description|Attribute|hasSubordinates|X.501: entry has children"
+msgstr "X.501: エントリがこどもを持つか"
 
 #: -:-
 msgid ""
@@ -1379,6 +1568,14 @@ msgstr "RFC1274: 自宅の郵便の宛先"
 #: -:-
 msgid "LDAP|Description|Attribute|host|RFC1274: host computer"
 msgstr "RFC1274: ホストコンピュータ"
+
+#: -:-
+msgid "LDAP|Description|Attribute|houseIdentifier|RFC2256: house identifier"
+msgstr "RFC2256: 住宅識別子"
+
+#: -:-
+msgid "LDAP|Description|Attribute|info|RFC1274: general information"
+msgstr "RFC1274: 一般的な情報"
 
 #: -:-
 msgid ""
@@ -1425,6 +1622,10 @@ msgid ""
 msgstr "RFC2079: 付加ラベル付き統一資源識別子(URI)"
 
 #: -:-
+msgid "LDAP|Description|Attribute|ldapSyntaxes|RFC2252: LDAP syntaxes"
+msgstr "RFC2256: LDAPの構文"
+
+#: -:-
 msgid "LDAP|Description|Attribute|loginShell|The path to the login shell"
 msgstr "ログインシェルのパス"
 
@@ -1466,6 +1667,25 @@ msgstr "RFC2256: グループのメンバー"
 #: -:-
 msgid "LDAP|Description|Attribute|mobile|RFC1274: mobile telephone number"
 msgstr "RFC1274: 携帯電話の電話番号"
+
+#: -:-
+msgid "LDAP|Description|Attribute|modifiersName|RFC2252: name of last modifier"
+msgstr "RFC2256: 最終変更者の名前"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|modifyTimestamp|RFC2252: time which object was "
+"last modified"
+msgstr "RFC2252: オブジェクトが最後に変更された時刻"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|name|RFC2256: common supertype of name attributes"
+msgstr "RFC2256: 名前属性の共通のスーパータイプ"
+
+#: -:-
+msgid "LDAP|Description|Attribute|namingContexts|RFC2252: naming contexts"
+msgstr "RFC2252: 名前付けの文脈"
 
 #: -:-
 msgid "LDAP|Description|Attribute|nisNetgroupTriple|Netgroup triple"
@@ -1668,6 +1888,16 @@ msgstr "RFC2256: 希望する書き・話しに使う言語"
 msgid ""
 "LDAP|Description|Attribute|presentationAddress|RFC2256: presentation address"
 msgstr "RFC2256: OSIプレゼンテーションアドレス"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|protocolInformation|RFC2256: protocol information"
+msgstr "RFC2256: プロトコル情報"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|pseudonym|X.520(4th): pseudonym for the object"
+msgstr "X.520(4th): オブジェクトの仮名"
 
 #: -:-
 msgid "LDAP|Description|Attribute|ref|namedref: subordinate referral URL"
@@ -1947,6 +2177,11 @@ msgstr "RFC2256: エントリの通し番号"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|singleLevelQuality|RFC1274: Single Level Quality"
+msgstr "RFC1274: 単一レベル品質"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|sn|RFC2256: last (family) name(s) for which the "
 "entity is known by"
 msgstr "RFFC2256: 実体だとわかる姓"
@@ -1958,9 +2193,21 @@ msgstr "RFFC2256: オブジェクトの通りの住所"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|structuralObjectClass|X.500(93): structural "
+"object class of entry"
+msgstr "X.500(93): エントリの構造的なオブジェクトクラス"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|st|RFC2256: state or province which this object "
 "resides in"
 msgstr "RFFC2256: オブジェクトが住んでいる州・県・国"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|subschemaSubentry|RFC2252: name of controlling "
+"subschema entry"
+msgstr "RFC2252: 制御しているサブスキーマエントリの名前"
 
 #: -:-
 msgid ""
@@ -1984,6 +2231,33 @@ msgid ""
 "LDAP|Description|Attribute|supportedApplicationContext|RFC2256: supported "
 "application context"
 msgstr "RFC2256: 対応している応用コンテクスト"
+
+#: -:-
+msgid "LDAP|Description|Attribute|supportedControl|RFC2252: supported controls"
+msgstr "RFC2256: 対応しているコントロール"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedExtension|RFC2252: supported extended "
+"operations"
+msgstr "RFC2256: 対応している拡張"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedFeatures|features supported by the server"
+msgstr "サーバが対応している機能"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedLDAPVersion|RFC2252: supported LDAP "
+"versions"
+msgstr "RFC2256: 対応しているLDAPバージョン"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedSASLMechanisms|RFC2252: supported SASL "
+"mechanisms"
+msgstr "RFC2256: 対応しているSASLメカニズム"
 
 #: -:-
 msgid "LDAP|Description|Attribute|telephoneNumber|RFC2256: Telephone Number"
@@ -2015,6 +2289,10 @@ msgid "LDAP|Description|Attribute|uid|RFC1274: user identifier"
 msgstr "RFC1274: ユーザ識別子"
 
 #: -:-
+msgid "LDAP|Description|Attribute|uniqueIdentifier|RFC1274: unique identifer"
+msgstr "RFC1274: 一意な識別子"
+
+#: -:-
 msgid ""
 "LDAP|Description|Attribute|uniqueMember|RFC2256: unique member of a group"
 msgstr "RFC2256: 重複のないグループのメンバー"
@@ -2044,6 +2322,16 @@ msgid ""
 "LDAP|Description|Attribute|userSMIMECertificate|RFC2798: PKCS#7 SignedData "
 "used to support S/MIME"
 msgstr "RFC2798: S/MIMEをサポートするために使うPKCS#7署名済みデータ"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|vendorName|RFC3045: name of implementation vendor"
+msgstr "RFC3045: 実装ベンダーの名前"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|vendorVersion|RFC3045: version of implementation"
+msgstr "RFC3045: 実装のバージョン"
 
 #: -:-
 msgid "LDAP|Description|Attribute|x121Address|RFC2256: X.121 Address"
@@ -2374,6 +2662,136 @@ msgid ""
 "LDAP|Description|ObjectClass|userSecurityInformation|RFC2256: a user "
 "security information"
 msgstr "RFC2256: ユーザセキュリティ情報"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.2.36.79672281.1.5.0|RDN"
+msgstr "相対識別名(RDN)"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.1.0.0|RFC2307 NIS Netgroup Triple"
+msgstr "RFC2307: NISネットグループのトリプル"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.1.0.1|RFC2307 Boot Parameter"
+msgstr "RFC2307: 起動パラメータ"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.16.1|UUID"
+msgstr "UUID"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.10|Certificate Pair"
+msgstr "相互認証組(Certificate Pair)"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.11|Country String"
+msgstr "国コード"
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.12|Distinguished Name"
+msgstr "識別名(DN)"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.14|Delivery Method"
+msgstr "配送方法"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.15|Directory String"
+msgstr "ディレクトリ文字列（大文字小文字を区別しない）"
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.22|Facsimile Telephone "
+"Number"
+msgstr "FAX番号"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.24|Generalized Time"
+msgstr "一般化された時刻"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.26|IA5 String"
+msgstr "IA5文字列（大文字小文字を区別する）"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.27|Integer"
+msgstr "整数"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.28|JPEG"
+msgstr "JPEG"
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.34|Name And Optional UID"
+msgstr "名前と省略可能なUID"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.36|Numeric String"
+msgstr "数字"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.38|OID"
+msgstr "オブジェクトID(OID)"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.39|Other Mailbox"
+msgstr "他のメールボックス"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.40|Octet String"
+msgstr "8進数文字列"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.41|Postal Address"
+msgstr "郵便番号"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.44|Printable String"
+msgstr "印字可能な文字列"
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.45|SubtreeSpecification"
+msgstr "サブツリー仕様"
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.49|Supported Algorithm"
+msgstr "対応しているアルゴリズム"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.4|Audio"
+msgstr "音声"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.50|Telephone Number"
+msgstr "電話番号"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.52|Telex Number"
+msgstr "テレックス番号"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.5|Binary"
+msgstr "バイナリ"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.6|Bit String"
+msgstr "2進数文字列"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.7|Boolean"
+msgstr "真偽値"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.8|Certificate"
+msgstr "証明書"
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.9|Certificate List"
+msgstr "証明書一覧"
 
 #: -:-
 msgid "LDAP|ObjectClass|LDAProotDSE"
@@ -2711,6 +3129,130 @@ msgstr "UIDオブジェクト(uidObject)"
 msgid "LDAP|ObjectClass|userSecurityInformation"
 msgstr "ユーザセキュリティ情報(userSecurityInformation)"
 
+#: -:-
+msgid "LDAP|Syntax|1.2.36.79672281.1.5.0"
+msgstr "RDN(1.2.36.79672281.1.5.0)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.1.0.0"
+msgstr "NISネットグループのトリプル(1.3.6.1.1.1.0.0)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.1.0.1"
+msgstr "起動パラメータ(1.3.6.1.1.1.0.1)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.16.1"
+msgstr "UUID(1.3.6.1.1.16.1)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.10"
+msgstr "相互認証組(1.3.6.1.4.1.1466.115.121.1.10)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.11"
+msgstr "国コード(1.3.6.1.4.1.1466.115.121.1.11)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.12"
+msgstr "DN(1.3.6.1.4.1.1466.115.121.1.12)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.14"
+msgstr "配送方法(1.3.6.1.4.1.1466.115.121.1.14)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.15"
+msgstr "ディレクトリ文字列(1.3.6.1.4.1.1466.115.121.1.15)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.22"
+msgstr "FAX番号(1.3.6.1.4.1.1466.115.121.1.22)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.24"
+msgstr "一般化された時刻(1.3.6.1.4.1.1466.115.121.1.24)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.26"
+msgstr "IA5文字列(1.3.6.1.4.1.1466.115.121.1.26)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.27"
+msgstr "整数(1.3.6.1.4.1.1466.115.121.1.27)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.28"
+msgstr "JPEG(1.3.6.1.4.1.1466.115.121.1.28)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.34"
+msgstr "名前と省略可能なOID(1.3.6.1.4.1.1466.115.121.1.34)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.36"
+msgstr "数字(1.3.6.1.4.1.1466.115.121.1.36)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.38"
+msgstr "OID(1.3.6.1.4.1.1466.115.121.1.38)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.39"
+msgstr "他のメールボックス(1.3.6.1.4.1.1466.115.121.1.39)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.4"
+msgstr "音声(1.3.6.1.4.1.1466.115.121.1.4)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.40"
+msgstr "8進数文字列(1.3.6.1.4.1.1466.115.121.1.40)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.41"
+msgstr "郵便番号(1.3.6.1.4.1.1466.115.121.1.41)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.44"
+msgstr "印字可能な文字列(1.3.6.1.4.1.1466.115.121.1.44)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.45"
+msgstr "サブツリー仕様(1.3.6.1.4.1.1466.115.121.1.45)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.49"
+msgstr "対応しているアルゴリズム(1.3.6.1.4.1.1466.115.121.1.49)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.5"
+msgstr "バイナリ(1.3.6.1.4.1.1466.115.121.1.5)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.50"
+msgstr "電話番号(1.3.6.1.4.1.1466.115.121.1.50)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.52"
+msgstr "テレックス番号(1.3.6.1.4.1.1466.115.121.1.52)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.6"
+msgstr "2進数文字列(1.3.6.1.4.1.1466.115.121.1.6)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.7"
+msgstr "真偽値(1.3.6.1.4.1.1466.115.121.1.7)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.8"
+msgstr "証明書(1.3.6.1.4.1.1466.115.121.1.8)"
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
+msgstr "証明書一覧(1.3.6.1.4.1.1466.115.121.1.9)"
+
 #: lib/active_ldap/adapter/ldap.rb:84
 msgid "No matches: filter: %s: attributes: %s"
 msgstr "マッチしませんでした: フィルタ: %s: 属性: %s"
@@ -2795,13 +3337,21 @@ msgstr ""
 "サーバへの再接続失敗時のバックトレース:\\n\n"
 "%s"
 
-#: lib/active_ldap/validations.rb:89
+#: lib/active_ldap/validations.rb:101
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
 
-#: lib/active_ldap/validations.rb:91
+#: lib/active_ldap/validations.rb:103
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
+
+#: lib/active_ldap/validations.rb:120
+msgid "%{fn} has invalid format: %s: required syntax: %s"
+msgstr "%{fn}は不正な書式です: %s: 要求されている文法: %s"
+
+#: lib/active_ldap/validations.rb:122
+msgid "has invalid format: %s: required syntax: %s"
+msgstr "不正な書式です: %s: 要求されている文法: %s"
 
 #: lib/active_ldap/command.rb:16
 msgid "Common options:"
@@ -2819,7 +3369,7 @@ msgstr "このメッセージを表示します。"
 msgid "Show version"
 msgstr "バージョンを表示します。"
 
-#: lib/active_ldap/get_text/parser.rb:87
+#: lib/active_ldap/get_text/parser.rb:94
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr "'%{file}'を無視します。まず依存関係を解決してください。"
 
@@ -2874,7 +3424,7 @@ msgstr "ハッシュ化されたパスワードからsaltを取り出すこと�
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
 
-#: lib/active_ldap/schema.rb:44
+#: lib/active_ldap/schema.rb:49
 msgid "Unknown schema group: %s"
 msgstr "未知のスキーマグループです: %s"
 
@@ -2907,34 +3457,34 @@ msgstr "%sは未知の属性です。"
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:499
+#: lib/active_ldap/base.rb:429
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:581
+#: lib/active_ldap/base.rb:511
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:614
+#: lib/active_ldap/base.rb:544
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:633
+#: lib/active_ldap/base.rb:563
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:654 lib/active_ldap/base.rb:665
+#: lib/active_ldap/base.rb:584 lib/active_ldap/base.rb:595
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:781
+#: lib/active_ldap/base.rb:711
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1207
+#: lib/active_ldap/base.rb:1134
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 

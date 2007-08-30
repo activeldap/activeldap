@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.3\n"
-"POT-Creation-Date: 2007-08-26 19:05+0900\n"
+"POT-Creation-Date: 2007-08-30 00:15+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -25,6 +25,10 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|aliasedObjectName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|altServer"
 msgstr ""
 
 #: -:-
@@ -100,7 +104,19 @@ msgid "LDAP|Attribute|countryName"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|createTimestamp"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|creatorsName"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|crossCertificatePair"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dITRedirect"
 msgstr ""
 
 #: -:-
@@ -132,7 +148,15 @@ msgid "LDAP|Attribute|displayName"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|distinguishedName"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|dmdName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|dnQualifier"
 msgstr ""
 
 #: -:-
@@ -168,11 +192,27 @@ msgid "LDAP|Attribute|drink"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|email"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|emailAddress"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|employeeNumber"
 msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|employeeType"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|enhancedSearchGuide"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|entryUUID"
 msgstr ""
 
 #: -:-
@@ -196,6 +236,10 @@ msgid "LDAP|Attribute|gecos"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|generationQualifier"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|gidNumber"
 msgstr ""
 
@@ -205,6 +249,10 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|gn"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|hasSubordinates"
 msgstr ""
 
 #: -:-
@@ -225,6 +273,14 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|host"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|houseIdentifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|info"
 msgstr ""
 
 #: -:-
@@ -277,6 +333,10 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|labeledURI"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|ldapSyntaxes"
 msgstr ""
 
 #: -:-
@@ -340,7 +400,23 @@ msgid "LDAP|Attribute|mobileTelephoneNumber"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|modifiersName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|modifyTimestamp"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|nSRecord"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|namingContexts"
 msgstr ""
 
 #: -:-
@@ -533,6 +609,10 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|olcLocalSSF"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcLogFile"
 msgstr ""
 
 #: -:-
@@ -792,6 +872,10 @@ msgid "LDAP|Attribute|physicalDeliveryOfficeName"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|pkcs9email"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|postOfficeBox"
 msgstr ""
 
@@ -813,6 +897,14 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|presentationAddress"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|protocolInformation"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|pseudonym"
 msgstr ""
 
 #: -:-
@@ -1064,6 +1156,10 @@ msgid "LDAP|Attribute|shadowWarning"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|singleLevelQuality"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|sn"
 msgstr ""
 
@@ -1084,6 +1180,14 @@ msgid "LDAP|Attribute|streetAddress"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|structuralObjectClass"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|subschemaSubentry"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|subtreeMaximumQuality"
 msgstr ""
 
@@ -1097,6 +1201,26 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|supportedApplicationContext"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedControl"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedExtension"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedFeatures"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedLDAPVersion"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|supportedSASLMechanisms"
 msgstr ""
 
 #: -:-
@@ -1132,6 +1256,10 @@ msgid "LDAP|Attribute|uidNumber"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|uniqueIdentifier"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|uniqueMember"
 msgstr ""
 
@@ -1160,6 +1288,14 @@ msgid "LDAP|Attribute|userid"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|vendorName"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|vendorVersion"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|x121Address"
 msgstr ""
 
@@ -1170,6 +1306,10 @@ msgstr ""
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|aliasedObjectName|RFC2256: name of aliased object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|altServer|RFC2252: alternative servers"
 msgstr ""
 
 #: -:-
@@ -1244,12 +1384,26 @@ msgstr ""
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|createTimestamp|RFC2252: time which object was "
+"created"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|creatorsName|RFC2252: name of creator"
+msgstr ""
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|crossCertificatePair|RFC2256: X.509 cross "
 "certificate pair, use ;binary"
 msgstr ""
 
 #: -:-
 msgid "LDAP|Description|Attribute|c|RFC2256: ISO-3166 country 2-letter code"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|dITRedirect|RFC1274: DIT Redirect"
 msgstr ""
 
 #: -:-
@@ -1289,7 +1443,17 @@ msgid ""
 msgstr ""
 
 #: -:-
+msgid ""
+"LDAP|Description|Attribute|distinguishedName|RFC2256: common supertype of DN "
+"attributes"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Description|Attribute|dmdName|RFC2256: name of DMD"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|dnQualifier|RFC2256: DN qualifier"
 msgstr ""
 
 #: -:-
@@ -1328,6 +1492,12 @@ msgstr ""
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|email|RFC3280: legacy attribute for email "
+"addresses in DNs"
+msgstr ""
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|employeeNumber|RFC2798: numerically identifies an "
 "employee within an organization"
 msgstr ""
@@ -1336,6 +1506,15 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|employeeType|RFC2798: type of employment for a "
 "person"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|enhancedSearchGuide|RFC2256: enhanced search guide"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|entryUUID|UUID of the entry"
 msgstr ""
 
 #: -:-
@@ -1350,6 +1529,12 @@ msgstr ""
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|generationQualifier|RFC2256: name qualifier "
+"indicating a generation"
+msgstr ""
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|gidNumber|An integer uniquely identifying a group "
 "in an administrative domain"
 msgstr ""
@@ -1358,6 +1543,10 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|givenName|RFC2256: first name(s) for which the "
 "entity is known by"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|hasSubordinates|X.501: entry has children"
 msgstr ""
 
 #: -:-
@@ -1377,6 +1566,14 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Description|Attribute|host|RFC1274: host computer"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|houseIdentifier|RFC2256: house identifier"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|info|RFC1274: general information"
 msgstr ""
 
 #: -:-
@@ -1424,6 +1621,10 @@ msgid ""
 msgstr ""
 
 #: -:-
+msgid "LDAP|Description|Attribute|ldapSyntaxes|RFC2252: LDAP syntaxes"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Description|Attribute|loginShell|The path to the login shell"
 msgstr ""
 
@@ -1464,6 +1665,25 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Description|Attribute|mobile|RFC1274: mobile telephone number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|modifiersName|RFC2252: name of last modifier"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|modifyTimestamp|RFC2252: time which object was "
+"last modified"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|name|RFC2256: common supertype of name attributes"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|namingContexts|RFC2252: naming contexts"
 msgstr ""
 
 #: -:-
@@ -1666,6 +1886,16 @@ msgstr ""
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|presentationAddress|RFC2256: presentation address"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|protocolInformation|RFC2256: protocol information"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|pseudonym|X.520(4th): pseudonym for the object"
 msgstr ""
 
 #: -:-
@@ -1936,6 +2166,11 @@ msgstr ""
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|singleLevelQuality|RFC1274: Single Level Quality"
+msgstr ""
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|sn|RFC2256: last (family) name(s) for which the "
 "entity is known by"
 msgstr ""
@@ -1947,8 +2182,20 @@ msgstr ""
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|structuralObjectClass|X.500(93): structural "
+"object class of entry"
+msgstr ""
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|st|RFC2256: state or province which this object "
 "resides in"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|subschemaSubentry|RFC2252: name of controlling "
+"subschema entry"
 msgstr ""
 
 #: -:-
@@ -1972,6 +2219,33 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|supportedApplicationContext|RFC2256: supported "
 "application context"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|supportedControl|RFC2252: supported controls"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedExtension|RFC2252: supported extended "
+"operations"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedFeatures|features supported by the server"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedLDAPVersion|RFC2252: supported LDAP "
+"versions"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|supportedSASLMechanisms|RFC2252: supported SASL "
+"mechanisms"
 msgstr ""
 
 #: -:-
@@ -2004,6 +2278,10 @@ msgid "LDAP|Description|Attribute|uid|RFC1274: user identifier"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Description|Attribute|uniqueIdentifier|RFC1274: unique identifer"
+msgstr ""
+
+#: -:-
 msgid ""
 "LDAP|Description|Attribute|uniqueMember|RFC2256: unique member of a group"
 msgstr ""
@@ -2032,6 +2310,16 @@ msgstr ""
 msgid ""
 "LDAP|Description|Attribute|userSMIMECertificate|RFC2798: PKCS#7 SignedData "
 "used to support S/MIME"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|vendorName|RFC3045: name of implementation vendor"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|vendorVersion|RFC3045: version of implementation"
 msgstr ""
 
 #: -:-
@@ -2362,6 +2650,136 @@ msgstr ""
 msgid ""
 "LDAP|Description|ObjectClass|userSecurityInformation|RFC2256: a user "
 "security information"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.2.36.79672281.1.5.0|RDN"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.1.0.0|RFC2307 NIS Netgroup Triple"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.1.0.1|RFC2307 Boot Parameter"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.1.16.1|UUID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.10|Certificate Pair"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.11|Country String"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.12|Distinguished Name"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.14|Delivery Method"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.15|Directory String"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.22|Facsimile Telephone "
+"Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.24|Generalized Time"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.26|IA5 String"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.27|Integer"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.28|JPEG"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.34|Name And Optional UID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.36|Numeric String"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.38|OID"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.39|Other Mailbox"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.40|Octet String"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.41|Postal Address"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.44|Printable String"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.45|SubtreeSpecification"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.49|Supported Algorithm"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.4|Audio"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.50|Telephone Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.52|Telex Number"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.5|Binary"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.6|Bit String"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.7|Boolean"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.8|Certificate"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.9|Certificate List"
 msgstr ""
 
 #: -:-
@@ -2700,6 +3118,130 @@ msgstr ""
 msgid "LDAP|ObjectClass|userSecurityInformation"
 msgstr ""
 
+#: -:-
+msgid "LDAP|Syntax|1.2.36.79672281.1.5.0"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.1.0.0"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.1.0.1"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.1.16.1"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.10"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.11"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.12"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.14"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.15"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.22"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.24"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.26"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.27"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.28"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.34"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.36"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.38"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.39"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.4"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.40"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.41"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.44"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.45"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.49"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.5"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.50"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.52"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.6"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.7"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.8"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
+msgstr ""
+
 #: lib/active_ldap/adapter/ldap.rb:84
 msgid "No matches: filter: %s: attributes: %s"
 msgstr ""
@@ -2781,12 +3323,20 @@ msgid ""
 "%s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:89
+#: lib/active_ldap/validations.rb:101
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:91
+#: lib/active_ldap/validations.rb:103
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:120
+msgid "%{fn} has invalid format: %s: required syntax: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:122
+msgid "has invalid format: %s: required syntax: %s"
 msgstr ""
 
 #: lib/active_ldap/command.rb:16
@@ -2805,7 +3355,7 @@ msgstr ""
 msgid "Show version"
 msgstr ""
 
-#: lib/active_ldap/get_text/parser.rb:87
+#: lib/active_ldap/get_text/parser.rb:94
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr ""
 
@@ -2857,7 +3407,7 @@ msgstr ""
 msgid "salt size must be == 4: %s"
 msgstr ""
 
-#: lib/active_ldap/schema.rb:44
+#: lib/active_ldap/schema.rb:49
 msgid "Unknown schema group: %s"
 msgstr ""
 
@@ -2889,32 +3439,32 @@ msgstr ""
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:499
+#: lib/active_ldap/base.rb:429
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:581
+#: lib/active_ldap/base.rb:511
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:614
+#: lib/active_ldap/base.rb:544
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:633
+#: lib/active_ldap/base.rb:563
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:654 lib/active_ldap/base.rb:665
+#: lib/active_ldap/base.rb:584 lib/active_ldap/base.rb:595
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:781
+#: lib/active_ldap/base.rb:711
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1207
+#: lib/active_ldap/base.rb:1134
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 

@@ -3,6 +3,29 @@ require 'al-test-utils'
 class TestSchema < Test::Unit::TestCase
   priority :must
 
+  priority :normal
+  def test_syntax_validation
+    entry = {
+      "attributeTypes" =>
+      [
+       "( 2.5.4.34 NAME 'seeAlso' DESC 'RFC2256: DN of related object'" +
+       "SUP distinguishedName )",
+       "( 2.5.4.49 NAME 'distinguishedName' DESC 'RFC2256: common " +
+       "supertype of DN attributes' EQUALITY distinguishedNameMatch "+
+       "SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 )",
+      ],
+      "ldapSyntaxes" =>
+      [
+       "( 1.3.6.1.4.1.1466.115.121.1.12 DESC 'Distinguished Name' )",
+      ],
+    }
+
+    schema = ActiveLdap::Schema.new(entry)
+    see_also = schema.attribute("seeAlso")
+    assert(see_also.valid?("cn=test,dc=example,dc=com"))
+    assert(!see_also.valid?("test"))
+  end
+
   def test_super_class?
     group = 'objectClasses'
     entry = {
@@ -54,7 +77,6 @@ class TestSchema < Test::Unit::TestCase
                   inet_org_person.super_class?(inet_org_person)])
   end
 
-  priority :normal
   def test_duplicate_schema
     sasNMASProductOptions_schema =
       "( 2.16.840.1.113719.1.39.42.1.0.38 NAME 'sasNMASProductOptions' " +
@@ -129,7 +151,6 @@ class TestSchema < Test::Unit::TestCase
                              true)
   end
 
-  priority :normal
   def test_empty_schema
     assert_make_schema_with_empty_entries(nil)
     assert_make_schema_with_empty_entries({})

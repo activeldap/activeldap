@@ -332,76 +332,6 @@ module ActiveLdap
         end
       end
 
-      def human_attribute_name(attribute_or_name)
-        msgid = human_attribute_name_msgid(attribute_or_name)
-        msgid ||= human_attribute_name_with_gettext(attribute_or_name)
-        s_(msgid)
-      end
-
-      def human_attribute_name_msgid(attribute_or_name)
-        if attribute_or_name.is_a?(Schema::Attribute)
-          name = attribute_or_name.name
-        else
-          attribute = schema.attribute(attribute_or_name)
-          return nil if attribute.id.nil?
-          if attribute.name == attribute_or_name or
-              attribute.aliases.include?(attribute_or_name)
-            name = attribute_or_name
-          else
-            return nil
-          end
-        end
-        "LDAP|Attribute|#{name}"
-      end
-
-      def human_attribute_description(attribute_or_name)
-        msgid = human_attribute_description_msgid(attribute_or_name)
-        return nil if msgid.nil?
-        s_(msgid)
-      end
-
-      def human_attribute_description_msgid(attribute_or_name)
-        if attribute_or_name.is_a?(Schema::Attribute)
-          attribute = attribute_or_name
-        else
-          attribute = schema.attribute(attribute_or_name)
-          return nil if attribute.nil?
-        end
-        description = attribute.description
-        return nil if description.nil?
-        "LDAP|Description|Attribute|#{attribute.name}|#{description}"
-      end
-
-      def human_object_class_name(object_class_or_name)
-        s_(human_object_class_name_msgid(object_class_or_name))
-      end
-
-      def human_object_class_name_msgid(object_class_or_name)
-        if object_class_or_name.is_a?(Schema::ObjectClass)
-          name = object_class_or_name.name
-        else
-          name = object_class_or_name
-        end
-        "LDAP|ObjectClass|#{name}"
-      end
-
-      def human_object_class_description(object_class_or_name)
-        msgid = human_object_class_description_msgid(object_class_or_name)
-        return nil if msgid.nil?
-        s_(msgid)
-      end
-
-      def human_object_class_description_msgid(object_class_or_name)
-        if object_class_or_name.is_a?(Schema::ObjectClass)
-          object_class = object_class_or_name
-        else
-          object_class = schema.object_class(object_class_or_name)
-          return nil if object_class.nil?
-        end
-        description = object_class.description
-        return nil if description.nil?
-        "LDAP|Description|ObjectClass|#{object_class.name}|#{description}"
-      end
 
       private
       def validate_ldap_mapping_options(options)
@@ -541,7 +471,7 @@ module ActiveLdap
     # attributes dynamically without schema awareness
     def attribute_names(normalize=false)
       ensure_apply_object_class
-      names = @attr_methods.keys
+      names = @attribute_names.keys
       if normalize
         names.collect do |name|
           to_real_attribute_name(name)
@@ -679,7 +609,7 @@ module ActiveLdap
     # Add available attributes to the methods
     def methods(inherited_too=true)
       ensure_apply_object_class
-      target_names = @attr_methods.keys + @attr_aliases.keys
+      target_names = @attribute_names.keys + @attribute_aliases.keys
       target_names -= ['objectClass', Inflector.underscore('objectClass')]
       super + target_names.uniq.collect do |x|
         [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
@@ -892,12 +822,12 @@ module ActiveLdap
     def to_real_attribute_name(name, allow_normalized_name=false)
       ensure_apply_object_class
       name = name.to_s
-      real_name = @attr_methods[name]
-      real_name ||= @attr_aliases[Inflector.underscore(name)]
+      real_name = @attribute_names[name]
+      real_name ||= @attribute_aliases[Inflector.underscore(name)]
       if real_name
         real_name
       elsif allow_normalized_name
-        @attr_methods[@normalized_attr_names[normalize_attribute_name(name)]]
+        @normalized_attribute_names[normalize_attribute_name(name)]
       else
         nil
       end
@@ -924,10 +854,11 @@ module ActiveLdap
       @mutex = Mutex.new
       @data = {} # where the r/w entry data is stored
       @ldap_data = {} # original ldap entry data
-      @attr_methods = {} # list of valid method calls for attributes used for
-                         # dereferencing
-      @normalized_attr_names = {} # list of normalized attribute name
-      @attr_aliases = {} # aliases of @attr_methods
+      @attribute_schemata = {}
+      @attribute_names = {} # list of valid method calls for attributes used
+                            # for dereferencing
+      @normalized_attribute_names = {} # list of normalized attribute name
+      @attribute_aliases = {} # aliases of @attribute_names
       @last_oc = false # for use in other methods for "caching"
       @dn_attribute = nil
       @base = nil
@@ -956,10 +887,11 @@ module ActiveLdap
       replace_class(*new_oc)
 
       # Build |data| from schema
-      # clear attr_method mapping first
-      @attr_methods = {}
-      @normalized_attr_names = {}
-      @attr_aliases = {}
+      # clear attribute name mapping first
+      @attribute_schemata = {}
+      @attribute_names = {}
+      @normalized_attribute_names = {}
+      @attribute_aliases = {}
       @must = []
       @may = []
       @object_classes = []
@@ -1021,10 +953,9 @@ module ActiveLdap
     end
 
     def get_attribute_before_type_cast(name, force_array=false)
-      attr = to_real_attribute_name(name)
+      name = to_real_attribute_name(name)
 
-      value = @data[attr] || []
-      # Return a copy of the stored data
+      value = @data[name] || []
       if force_array
         value.dup
       else
@@ -1087,13 +1018,14 @@ module ActiveLdap
     #
     # Make a method entry for _every_ alias of a valid attribute and map it
     # onto the first attribute passed in.
-    def define_attribute_methods(attr)
-      name = attr.name
-      return if @attr_methods.has_key?(name)
-      ([name] + attr.aliases).each do |ali|
-        @attr_methods[ali] = name
-        @attr_aliases[Inflector.underscore(ali)] = name
-        @normalized_attr_names[normalize_attribute_name(ali)] = name
+    def define_attribute_methods(attribute)
+      real_name = attribute.name
+      return if @attribute_schemata.has_key?(real_name)
+      @attribute_schemata[real_name] = attribute
+      ([real_name] + attribute.aliases).each do |name|
+        @attribute_names[name] = real_name
+        @attribute_aliases[Inflector.underscore(name)] = real_name
+        @normalized_attribute_names[normalize_attribute_name(name)] = real_name
       end
     end
 

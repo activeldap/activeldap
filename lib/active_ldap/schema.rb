@@ -7,6 +7,11 @@ module ActiveLdap
       @cache = {}
     end
 
+    def ids(group)
+      info, ids, aliases = ensure_schema_info(group)
+      ids.keys
+    end
+
     def names(group)
       alias_map(group).keys
     end
@@ -125,8 +130,8 @@ module ActiveLdap
 
     def ldap_syntaxes
       cache([:ldap_syntaxes]) do
-        names("ldapSyntaxes").collect do |name|
-          ldap_syntax(name)
+        ids("ldapSyntaxes").collect do |id|
+          ldap_syntax(id)
         end
       end
     end
@@ -267,8 +272,11 @@ module ActiveLdap
     end
 
     class Syntax < Entry
-      def initialize(name, schema)
-        super(name, schema, "ldapSyntaxes")
+      def initialize(id, schema)
+        super(id, schema, "ldapSyntaxes")
+        @id = id
+        @name = nil if @name == @id
+        @validator = Syntaxes[@id]
       end
 
       def binary_transfer_required?
@@ -277,6 +285,14 @@ module ActiveLdap
 
       def human_readable?
         @human_readable
+      end
+
+      def valid?(value)
+        if @validator
+          @validator.valid?(value)
+        else
+          true
+        end
       end
 
       private
@@ -293,6 +309,7 @@ module ActiveLdap
     end
 
     class Attribute < Entry
+      attr_reader :super_attribute
       def initialize(name, schema)
         super(name, schema, "attributeTypes")
       end
@@ -329,6 +346,30 @@ module ActiveLdap
         @binary_required
       end
 
+      def valid?(value)
+        if @syntax
+          @syntax.valid?(value)
+        else
+          if @super_attribute
+            @super_attribute.valid?(value)
+          else
+            true
+          end
+        end
+      end
+
+      def syntax_description
+        if @syntax
+          @syntax.description
+        else
+          if @super_attribute
+            @super_attribute.syntax_description
+          else
+            nil
+          end
+        end
+      end
+
       private
       def attribute(attribute_name, name=@name)
         @schema.attribute_type(name, attribute_name)
@@ -336,13 +377,18 @@ module ActiveLdap
 
       def collect_info
         @description = attribute("DESC")[0]
+        @super_attribute = attribute("SUP")[0]
+        if @super_attribute
+          @super_attribute = @schema.attribute(@super_attribute)
+          @super_attribute = nil if @super_attribute.id.nil?
+        end
         @read_only = attribute('NO-USER-MODIFICATION')[0] == 'TRUE'
         @single_value = attribute('SINGLE-VALUE')[0] == 'TRUE'
-        syntax = attribute("SYNTAX")[0]
-        syntax = @schema.ldap_syntax(syntax) if syntax
-        if syntax
-          @binary_required = syntax.binary_transfer_required?
-          @binary = (@binary_required or !syntax.human_readable?)
+        @syntax = attribute("SYNTAX")[0]
+        @syntax = @schema.ldap_syntax(@syntax) if @syntax
+        if @syntax
+          @binary_required = @syntax.binary_transfer_required?
+          @binary = (@binary_required or !@syntax.human_readable?)
         else
           @binary_required = false
           @binary = false
@@ -425,3 +471,5 @@ module ActiveLdap
     end
   end
 end
+
+require 'active_ldap/schema/syntaxes'
