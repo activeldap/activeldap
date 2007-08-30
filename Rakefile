@@ -44,7 +44,7 @@ at_exit do
 end
 
 
-project = Hoe.new('ruby-activeldap', ActiveLdap::VERSION) do |project|
+project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.rubyforge_name = 'ruby-activeldap'
   project.author = ['Will Drewry', 'Kouhei Sutou']
   project.email = ['will@alum.bu.edu', 'kou@cozmixng.org']
