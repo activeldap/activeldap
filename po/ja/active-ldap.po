@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.3\n"
-"POT-Creation-Date: 2007-08-30 00:15+0900\n"
-"PO-Revision-Date: 2007-08-30 21:22+0900\n"
+"POT-Creation-Date: 2007-08-31 21:50+0900\n"
+"PO-Revision-Date: 2007-08-31 21:51+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3337,19 +3337,19 @@ msgstr ""
 "サーバへの再接続失敗時のバックトレース:\\n\n"
 "%s"
 
-#: lib/active_ldap/validations.rb:101
+#: lib/active_ldap/validations.rb:93
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
 
-#: lib/active_ldap/validations.rb:103
+#: lib/active_ldap/validations.rb:95
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
-#: lib/active_ldap/validations.rb:120
+#: lib/active_ldap/validations.rb:121
 msgid "%{fn} has invalid format: %s: required syntax: %s"
 msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s"
 
-#: lib/active_ldap/validations.rb:122
+#: lib/active_ldap/validations.rb:123
 msgid "has invalid format: %s: required syntax: %s"
 msgstr "不正な書式です: %s: 要求されている構文: %s"
 
@@ -3453,38 +3453,38 @@ msgstr "LDAPの設定が存在しない%sアダプタが指定しています。
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です。"
 
-#: lib/active_ldap/base.rb:324
+#: lib/active_ldap/base.rb:323
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:429
+#: lib/active_ldap/base.rb:427
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:511
+#: lib/active_ldap/base.rb:509
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:544
+#: lib/active_ldap/base.rb:542
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:563
+#: lib/active_ldap/base.rb:561
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:584 lib/active_ldap/base.rb:595
+#: lib/active_ldap/base.rb:582 lib/active_ldap/base.rb:593
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:711
+#: lib/active_ldap/base.rb:709
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1134
+#: lib/active_ldap/base.rb:1132
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -3545,7 +3545,11 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
-#: rails/plugin/active_ldap/init.rb:10
+#: rails/plugin/active_ldap/init.rb:7
+msgid "You need ActiveLdap %s or later"
+msgstr "ActiveLdap %s以上が必要です。"
+
+#: rails/plugin/active_ldap/init.rb:19
 msgid "You should run 'script/generator scaffold_al' to make %s."
 msgstr "%sを作るために'script/generator scaffold_al'を実行してください。"
 

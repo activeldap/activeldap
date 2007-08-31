@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.3\n"
-"POT-Creation-Date: 2007-08-30 00:15+0900\n"
+"POT-Creation-Date: 2007-08-31 21:50+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3323,19 +3323,19 @@ msgid ""
 "%s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:101
+#: lib/active_ldap/validations.rb:93
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:103
+#: lib/active_ldap/validations.rb:95
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:120
+#: lib/active_ldap/validations.rb:121
 msgid "%{fn} has invalid format: %s: required syntax: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:122
+#: lib/active_ldap/validations.rb:123
 msgid "has invalid format: %s: required syntax: %s"
 msgstr ""
 
@@ -3435,36 +3435,36 @@ msgstr ""
 msgid "%s is unknown attribute"
 msgstr ""
 
-#: lib/active_ldap/base.rb:324
+#: lib/active_ldap/base.rb:323
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:429
+#: lib/active_ldap/base.rb:427
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:511
+#: lib/active_ldap/base.rb:509
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:544
+#: lib/active_ldap/base.rb:542
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:563
+#: lib/active_ldap/base.rb:561
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:584 lib/active_ldap/base.rb:595
+#: lib/active_ldap/base.rb:582 lib/active_ldap/base.rb:593
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:711
+#: lib/active_ldap/base.rb:709
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1134
+#: lib/active_ldap/base.rb:1132
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
@@ -3524,7 +3524,11 @@ msgstr ""
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
-#: rails/plugin/active_ldap/init.rb:10
+#: rails/plugin/active_ldap/init.rb:7
+msgid "You need ActiveLdap %s or later"
+msgstr ""
+
+#: rails/plugin/active_ldap/init.rb:19
 msgid "You should run 'script/generator scaffold_al' to make %s."
 msgstr ""
 
