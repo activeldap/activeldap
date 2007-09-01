@@ -1,4 +1,4 @@
-class ModelAlGenerator < Rails::Generator::NamedBase
+class ModelActiveldapGenerator < Rails::Generator::NamedBase
   default_options :skip_migration => true
 
   def manifest
@@ -12,7 +12,7 @@ class ModelAlGenerator < Rails::Generator::NamedBase
       m.directory File.join('test/fixtures', class_path)
 
       # Model class, unit test, and fixtures.
-      m.template 'model_al.rb',      File.join('app/models', class_path, "#{file_name}.rb")
+      m.template 'model_activeldap.rb',      File.join('app/models', class_path, "#{file_name}.rb")
       m.template 'unit_test.rb',  File.join('test/unit', class_path, "#{file_name}_test.rb")
       m.template 'fixtures.yml',  File.join('test/fixtures', class_path, "#{table_name}.yml")
 
