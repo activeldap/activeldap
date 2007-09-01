@@ -1,7 +1,7 @@
 require_library_or_gem 'active_ldap'
 ActiveLdap::Base.logger ||= RAILS_DEFAULT_LOGGER
 
-required_version = ["0", "8", "3"]
+required_version = ["0", "8", "4"]
 if (ActiveLdap::VERSION.split(".") <=> required_version) < 0
   ActiveLdap::Base.class_eval do
     format = _("You need ActiveLdap %s or later")
