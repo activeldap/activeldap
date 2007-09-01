@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-08-31 21:53+0900\n"
-"PO-Revision-Date: 2007-08-31 21:51+0900\n"
+"POT-Creation-Date: 2007-09-01 13:03+0900\n"
+"PO-Revision-Date: 2007-09-01 13:04+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3552,6 +3552,10 @@ msgstr "ActiveLdap %s以上が必要です。"
 #: rails/plugin/active_ldap/init.rb:19
 msgid "You should run 'script/generator scaffold_al' to make %s."
 msgstr "%sを作るために'script/generator scaffold_al'を実行してください。"
+
+#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
+msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
+msgstr "scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
 
 #: benchmark/bench-al.rb:14
 msgid "Specify prefix for benchmarking"
