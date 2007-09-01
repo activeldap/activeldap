@@ -10,15 +10,15 @@ class TestConnectionPerDN < Test::Unit::TestCase
     make_temporary_user do |user, password|
       assert_equal(user.class.connection, user.connection)
       assert_raises(ActiveLdap::AuthenticationError) do
-        user.establish_connection(:bind_dn => nil,
-                                  :allow_anonymous => false,
-                                  :retry_limit => 0)
+        user.bind(:bind_dn => nil,
+                  :allow_anonymous => false,
+                  :retry_limit => 0)
       end
       assert_equal(user.class.connection, user.connection)
 
       assert_nothing_raised do
-        user.establish_connection(:bind_dn => nil,
-                                  :allow_anonymous => true)
+        user.bind(:bind_dn => nil,
+                  :allow_anonymous => true)
       end
       assert_not_equal(user.class.connection, user.connection)
 
@@ -30,8 +30,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
   def test_find
     make_temporary_user do |user, password|
       make_temporary_user do |user2, password2|
-        user.establish_connection(:bind_dn => user.dn,
-                                  :password => password)
+        user.bind(password)
         assert_not_equal(user.class.connection, user.connection)
 
         found_user2 = user.find(user2.dn)
@@ -41,8 +40,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
         assert_equal(found_user2.class.connection,
                      found_user2.class.find(found_user2.dn).connection)
 
-        found_user2.establish_connection(:bind_dn => user2.dn,
-                                         :password => password2)
+        found_user2.bind(password2)
         assert_not_equal(user.connection, found_user2.connection)
         assert_equal(user2.connection, found_user2.connection)
       end
@@ -56,8 +54,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
           user.groups = [group1]
           assert_equal(group1.connection, user.connection)
 
-          user.establish_connection(:bind_dn => user.dn,
-                                    :password => password)
+          user.bind(password)
           assert_not_equal(user.class.connection, user.connection)
           assert_not_equal(group1.connection, user.connection)
           assert_equal(user.groups[0].connection, user.connection)

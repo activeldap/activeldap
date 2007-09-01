@@ -13,9 +13,7 @@ ldap_configuration_file = File.join(RAILS_ROOT, 'config', 'ldap.yml')
 if File.exist?(ldap_configuration_file)
   configurations = YAML::load(ERB.new(IO.read(ldap_configuration_file)).result)
   ActiveLdap::Base.configurations = configurations
-  configuration = configurations[RAILS_ENV]
-  configuration = configuration.merge(:initial_connection_check => false)
-  ActiveLdap::Base.establish_connection(configuration)
+  ActiveLdap::Base.establish_connection
 else
   ActiveLdap::Base.class_eval do
     format = _("You should run 'script/generator scaffold_al' to make %s.")

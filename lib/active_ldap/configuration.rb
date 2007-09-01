@@ -32,8 +32,6 @@ module ActiveLdap
     # Whether or not to retry on timeouts
     DEFAULT_CONFIG[:retry_on_timeout] = true
 
-    DEFAULT_CONFIG[:initial_connection_check] = true
-
     DEFAULT_CONFIG[:logger] = nil
 
     module ClassMethods
@@ -82,8 +80,7 @@ module ActiveLdap
         @@defined_configurations.delete_if {|key, value| value == config}
       end
 
-      CONNECTION_CONFIGURATION_KEYS = [:base, :adapter,
-                                       :initial_connection_check]
+      CONNECTION_CONFIGURATION_KEYS = [:base, :adapter]
       def remove_connection_related_configuration(config)
         config.reject do |key, value|
           CONNECTION_CONFIGURATION_KEYS.include?(key)

@@ -18,7 +18,7 @@ class TestBind < Test::Unit::TestCase
       config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
       config.delete(:bind_dn)
       config[:allow_anonymous] = true
-      ActiveLdap::Base.establish_connection(config)
+      connect(config)
     end
     assert(ActiveLdap::Base.connected?,
            "Checking is the connection was established.")
@@ -33,7 +33,7 @@ class TestBind < Test::Unit::TestCase
     end
     assert_nothing_raised do
       config[:allow_anonymous] = false
-      ActiveLdap::Base.establish_connection(config)
+      connect(config)
     end
     assert(ActiveLdap::Base.connected?,
            "Checking is the connection was established.")
@@ -46,8 +46,14 @@ class TestBind < Test::Unit::TestCase
       config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
       config.delete(:bind_dn)
       config[:allow_anonymous] = false
-      ActiveLdap::Base.establish_connection(config)
+      connect(config)
     end
     assert(!ActiveLdap::Base.connection.bound?)
+  end
+
+  private
+  def connect(config)
+    ActiveLdap::Base.establish_connection(config)
+    ActiveLdap::Base.connection.connect
   end
 end

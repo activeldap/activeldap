@@ -19,9 +19,10 @@ class TestConnectionPerClass < Test::Unit::TestCase
     assert(anon_class.connection.bound?)
 
     assert_raises(ActiveLdap::AuthenticationError) do
-      non_anon_class.establish_connection(:bind_dn => nil,
-                                          :allow_anonymous => false,
-                                          :retry_limit => 0)
+      connect(non_anon_class,
+              :bind_dn => nil,
+              :allow_anonymous => false,
+              :retry_limit => 0)
     end
 
     assert(!non_anon_class.connection.bound?)
@@ -40,11 +41,18 @@ class TestConnectionPerClass < Test::Unit::TestCase
     assert(!anon_class.connection.bound?)
 
     assert_nothing_raised do
-      anon_class.establish_connection(:bind_dn => nil,
-                                      :allow_anonymous => true)
+      connect(anon_class,
+              :bind_dn => nil,
+              :allow_anonymous => true)
     end
 
     assert(!non_anon_class.connection.bound?)
     assert(anon_class.connection.bound?)
+  end
+
+  private
+  def connect(klass, config)
+    klass.establish_connection(config)
+    klass.connection.connect
   end
 end

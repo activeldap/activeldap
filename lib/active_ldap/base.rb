@@ -251,7 +251,6 @@ module ActiveLdap
       def establish_connection(config=nil)
         super
         ensure_logger
-        connection.connect if configuration[:initial_connection_check]
         nil
       end
 
@@ -734,11 +733,18 @@ module ActiveLdap
       end
     end
 
-    def establish_connection(config={})
-      if config.is_a?(Hash)
-        config = {:bind_dn => dn, :allow_anonymous => false}.merge(config)
+    def bind(config_or_password={}, &block)
+      if config_or_password.is_a?(String)
+        config = {:password => config_or_password}
+      elsif config_or_password.respond_to?(:call)
+        config = {:password_block => config_or_password}
+      else
+        config = config_or_password
       end
-      super(config)
+      config = {:bind_dn => dn, :allow_anonymous => false}.merge(config)
+      config[:password_block] ||= block if block_given?
+      establish_connection(config)
+
       before_connection = @connection
       begin
         @connection = nil
