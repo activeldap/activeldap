@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-01 13:03+0900\n"
-"PO-Revision-Date: 2007-09-01 13:04+0900\n"
+"POT-Creation-Date: 2007-09-01 13:34+0900\n"
+"PO-Revision-Date: 2007-09-01 13:36+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3555,15 +3555,26 @@ msgstr "%sを作るために'script/generator scaffold_al'を実行してくだ�
 
 #: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
 msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
-msgstr "scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
+msgstr ""
+"scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
+
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
+msgid "Use ATTRIBUTE as default DN attribute for instances of this model"
+msgstr "このモデルのインスタンスのデフォルトのDN用属性としてATTRIBUTEを使います。"
+
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:34
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:40
+#: benchmark/bench-al.rb:15
+msgid "(default: %s)"
+msgstr "(デフォルト: %s)"
+
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:39
+msgid "Use PREFIX as prefix for this model"
+msgstr "このモデルのプリフィックスとしてPREFIXを使います。"
 
 #: benchmark/bench-al.rb:14
 msgid "Specify prefix for benchmarking"
 msgstr "ベンチマーク用のプリフィックスを指定してください"
-
-#: benchmark/bench-al.rb:15
-msgid "(default: %s)"
-msgstr "(デフォルト: %s)"
 
 #: benchmark/bench-al.rb:154
 msgid "Populating..."

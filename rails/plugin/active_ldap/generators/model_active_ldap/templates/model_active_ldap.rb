@@ -1,3 +1,3 @@
 class <%= class_name %> < ActiveLdap::Base
-  ldap_mapping
+<%= ldap_mapping %>
 end

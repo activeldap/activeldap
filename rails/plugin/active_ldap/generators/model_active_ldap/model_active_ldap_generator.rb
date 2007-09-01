@@ -1,5 +1,7 @@
 class ModelActiveLdapGenerator < Rails::Generator::NamedBase
-  default_options :skip_migration => true
+  include ActiveLdap::GetTextSupport
+
+  default_options :dn_attribute => "cn", :classes => nil
 
   def manifest
     record do |m|
@@ -12,27 +14,57 @@ class ModelActiveLdapGenerator < Rails::Generator::NamedBase
       m.directory File.join('test/fixtures', class_path)
 
       # Model class, unit test, and fixtures.
-      m.template 'model_activeldap.rb',      File.join('app/models', class_path, "#{file_name}.rb")
-      m.template 'unit_test.rb',  File.join('test/unit', class_path, "#{file_name}_test.rb")
-      m.template 'fixtures.yml',  File.join('test/fixtures', class_path, "#{table_name}.yml")
-
-      unless options[:skip_migration]
-        m.migration_template 'migration.rb', 'db/migrate', :assigns => {
-          :migration_name => "Create#{class_name.pluralize.gsub(/::/, '')}"
-        }, :migration_file_name => "create_#{file_path.gsub(/\//, '_').pluralize}"
-      end
+      m.template('model_active_ldap.rb',
+                 File.join('app/models', class_path, "#{file_name}.rb"),
+                 :assigns => {:ldap_mapping => ldap_mapping})
+      m.template('unit_test.rb',
+                 File.join('test/unit', class_path, "#{file_name}_test.rb"))
+      m.template('fixtures.yml',
+                 File.join('test/fixtures', class_path, "#{table_name}.yml"))
     end
   end
 
-  protected
-    def banner
-      "Usage: #{$0} generate ModelAlName [field:type, field:type]"
+  private
+  def add_options!(opt)
+    opt.separator ''
+    opt.separator 'Options:'
+    opt.on("--dn-attribute=ATTRIBUTE",
+           _("Use ATTRIBUTE as default DN attribute for " \
+             "instances of this model"),
+           _("(default: %s)") % options[:dn_attribute]) do |attribute|
+      options[:dn_attribute] = attribute
     end
 
-    def add_options!(opt)
-      opt.separator ''
-      opt.separator 'Options:'
-      opt.on("--skip-migration", 
-             "Don't generate a migration file for this model") { |v| options[:skip_migration] = v }
+    opt.on("--prefix=PREFIX",
+           _("Use PREFIX as prefix for this model"),
+           _("(default: %s)") % default_prefix) do |prefix|
+      options[:prefix] = prefix
     end
+
+    opt.on("--classes=CLASS,CLASS,...",
+           Array,
+           "Use CLASSES as required objectClass for instances of this model",
+           "(default: %s)" % options[:classes]) do |classes|
+      options[:classes] = classes
+    end
+  end
+
+  def prefix
+    options[:prefix] || default_prefix
+  end
+
+  def default_prefix
+    "ou=#{Inflector.pluralize(Inflector.demodulize(name))}"
+  end
+
+  def ldap_mapping(indent='  ')
+    mapping = "ldap_mapping "
+    mapping_options = [":dn_attribute => #{options[:dn_attribute].dump}"]
+    mapping_options << ":prefix => #{prefix.dump}"
+    if options[:classes]
+      mapping_options << ":classes => #{options[:classes].inspect}"
+    end
+    mapping_options = mapping_options.join(",\n#{indent}#{' ' * mapping.size}")
+    "#{indent}#{mapping}#{mapping_options}"
+  end
 end

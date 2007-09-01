@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-01 13:03+0900\n"
+"POT-Creation-Date: 2007-09-01 13:34+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3536,12 +3536,22 @@ msgstr ""
 msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
 msgstr ""
 
-#: benchmark/bench-al.rb:14
-msgid "Specify prefix for benchmarking"
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
+msgid "Use ATTRIBUTE as default DN attribute for instances of this model"
 msgstr ""
 
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:34
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:40
 #: benchmark/bench-al.rb:15
 msgid "(default: %s)"
+msgstr ""
+
+#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:39
+msgid "Use PREFIX as prefix for this model"
+msgstr ""
+
+#: benchmark/bench-al.rb:14
+msgid "Specify prefix for benchmarking"
 msgstr ""
 
 #: benchmark/bench-al.rb:154
