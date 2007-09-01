@@ -251,9 +251,8 @@ module ActiveLdap
       def establish_connection(config=nil)
         super
         ensure_logger
-        connection.connect
-        # Make irb users happy with a 'true'
-        true
+        connection.connect if configuration[:initial_connection_check]
+        nil
       end
 
       def create(attributes=nil, &block)
