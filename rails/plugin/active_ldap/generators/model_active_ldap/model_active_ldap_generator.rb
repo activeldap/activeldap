@@ -1,4 +1,4 @@
-class ModelActiveldapGenerator < Rails::Generator::NamedBase
+class ModelActiveLdapGenerator < Rails::Generator::NamedBase
   default_options :skip_migration => true
 
   def manifest
