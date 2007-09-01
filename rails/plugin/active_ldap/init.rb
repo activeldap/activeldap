@@ -23,8 +23,6 @@ else
   end
 end
 
-if ActiveLdap.const_defined?(:Helper)
-  class ActionView::Base
-    include ActiveLdap::Helper
-  end
+class ActionView::Base
+  include ActiveLdap::Helper
 end
