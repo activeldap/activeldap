@@ -55,15 +55,6 @@ class TestSyntax < Test::Unit::TestCase
   end
 
   priority :must
-  def test_dn
-    assert_valid("cn=test", 'Distinguished Name')
-
-    value = "test"
-    params = [value, _("attribute value is missing")]
-    assert_invalid(_('%s is invalid distinguished name (DN): %s') % params,
-                   value, 'Distinguished Name')
-  end
-
   def test_bit_string
     assert_valid("'0101111101'B", 'Bit String')
     assert_valid("''B", 'Bit String')
@@ -92,6 +83,54 @@ class TestSyntax < Test::Unit::TestCase
     value = "true"
     assert_invalid(_("%s should be TRUE or FALSE") % value.inspect,
                    value, "Boolean")
+  end
+
+  def test_country_string
+    assert_valid("ja", "Country String")
+    assert_valid("JA", "Country String")
+
+    value = "japan"
+    assert_invalid(_("%s should be just 2 printable characters") % value.inspect,
+                   value, "Country String")
+  end
+
+  def test_dn
+    assert_valid("cn=test", 'Distinguished Name')
+    assert_valid("CN=Steve Kille,O=Isode Limited,C=GB", 'Distinguished Name')
+    assert_valid("OU=Sales+CN=J. Smith,O=Widget Inc.,C=US", 'Distinguished Name')
+    assert_valid("CN=L. Eagle,O=Sue\\, Grabbit and Runn,C=GB",
+                 'Distinguished Name')
+    assert_valid("CN=Before\\0DAfter,O=Test,C=GB", 'Distinguished Name')
+    assert_valid("1.3.6.1.4.1.1466.0=#04024869,O=Test,C=GB",
+                 'Distinguished Name')
+    assert_valid("SN=Lu\\C4\\8Di\\C4\\87", 'Distinguished Name')
+
+    value = "test"
+    params = [value, _("attribute value is missing")]
+    assert_invalid(_('%s is invalid distinguished name (DN): %s') % params,
+                   value, 'Distinguished Name')
+  end
+
+  def test_directory_string
+    assert_valid("This is a string of DirectoryString containing \#!%\#@",
+                 "Directory String")
+    assert_valid("これはDirectoryString文字列です。",
+                 "Directory String")
+
+    value = NKF.nkf("-We", "これはDirectoryString文字列です。")
+    assert_invalid(_("%s has invalid UTF-8 character") % value.inspect,
+                   value, "Directory String")
+  end
+
+  def test_generalized_time
+    assert_valid("199412161032", "Generalized Time")
+    assert_valid("199412161032Z", "Generalized Time")
+    assert_valid("199412161032+0900", "Generalized Time")
+
+    value = "1994"
+    params = [value.inspect, %w(month day hour minute).join(", ")]
+    assert_invalid("%s has missing components: %s" % params,
+                   value, "Generalized Time")
   end
 
   priority :normal
