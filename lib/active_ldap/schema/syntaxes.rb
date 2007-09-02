@@ -118,6 +118,29 @@ module ActiveLdap
           end
         end
       end
+
+      class Integer < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.27"] = self
+
+        def validate(value)
+          Integer(value)
+          nil
+        rescue ArgumentError
+          _("%s is invalid integer format") % value.inspect
+        end
+      end
+
+      class JPEG < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.28"] = self
+
+        def validate(value)
+          if value.unpack("n")[0] == 0xffd8
+            nil
+          else
+            _("invalid JPEG format")
+          end
+        end
+      end
     end
   end
 end

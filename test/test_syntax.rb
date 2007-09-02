@@ -133,6 +133,20 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Generalized Time")
   end
 
+  def test_integer
+    assert_valid("1321", "Integer")
+
+    assert_invalid_integer("13.5")
+    assert_invalid_integer("string")
+  end
+
+  def test_jpeg
+    assert_valid([0xffd8].pack("n"), "JPEG")
+
+    assert_invalid(_("invalid JPEG format"), "", "JPEG")
+    assert_invalid(_("invalid JPEG format"), "jpeg", "JPEG")
+  end
+
   priority :normal
 
   private
@@ -142,5 +156,10 @@ class TestSyntax < Test::Unit::TestCase
 
   def assert_invalid(reason, value, syntax_name)
     assert_equal(reason, @syntaxes[syntax_name].validate(value))
+  end
+
+  def assert_invalid_integer(value)
+    assert_invalid(_("%s is invalid integer format") % value.inspect,
+                   value, "Integer")
   end
 end
