@@ -16,6 +16,10 @@ module ActiveLdap
         include GetTextSupport
         SYNTAXES = {}
 
+        printable_character_source = "a-zA-Z\\d\"()+,\\-.\\/:? "
+        PRINTABLE_CHARACTER = /[#{printable_character_source}]/ #
+        UNPRINTABLE_CHARACTER = /[^#{printable_character_source}]/ #
+
         def valid?(value)
           validate(value).nil?
         end
@@ -57,7 +61,7 @@ module ActiveLdap
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.11"] = self
 
         def validate(value)
-          if /\A[a-z\d"()+,\-.\/:? ]{2,2}\z/i =~ value
+          if /\A#{PRINTABLE_CHARACTER}{2,2}\z/i =~ value
             nil
           else
             _("%s should be just 2 printable characters") % value.inspect
@@ -139,6 +143,79 @@ module ActiveLdap
           else
             _("invalid JPEG format")
           end
+        end
+      end
+
+      class NameAndOptionalUID < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.34"] = self
+
+        def validate(value)
+          separator_index = value.rindex("#")
+          if separator_index
+            dn = value[0, separator_index]
+            bit_string = value[(separator_index + 1)..-1]
+            bit_string_reason = BitString.new.validate(bit_string)
+            dn_reason = DistinguishedName.new.validate(dn)
+            if bit_string_reason
+              if dn_reason
+                value_reason = DistinguishedName.new.validate(value)
+                return nil unless value_reason
+                dn_reason
+              else
+                bit_string_reason
+              end
+            else
+              dn_reason
+            end
+          else
+            DistinguishedName.new.validate(value)
+          end
+        end
+      end
+
+      class NumericString < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.36"] = self
+
+        def validate(value)
+          if /\A\d+\z/ =~ value
+            nil
+          else
+            _("%s is invalid numeric format") % value.inspect
+          end
+        end
+      end
+
+      class OID < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.38"] = self
+
+        def validate(value)
+          DN.parse("#{value}=dummy")
+          nil
+        rescue DistinguishedNameInvalid
+          _("%s is invalid OID format") % value.inspect
+        end
+      end
+
+      class OtherMailbox < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.39"] = self
+
+        def validate(value)
+          type, mailbox = value.split('$', 2)
+
+          if type.empty?
+            return _("%s has no mailbox type") % value.inspect
+          end
+
+          if /(#{UNPRINTABLE_CHARACTER})/i =~ type
+            format = _("%s has unprintable character in mailbox type: '%s'")
+            return format % [value.inspect, $1]
+          end
+
+          if mailbox.blank?
+            return _("%s has no mailbox") % value.inspect
+          end
+
+          nil
         end
       end
     end

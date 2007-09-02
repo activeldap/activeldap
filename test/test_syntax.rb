@@ -147,6 +147,59 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid(_("invalid JPEG format"), "jpeg", "JPEG")
   end
 
+  def test_name_and_optional_uid
+    assert_valid("1.3.6.1.4.1.1466.0=#04024869,O=Test,C=GB#'0101'B",
+                 "Name And Optional UID")
+    assert_valid("cn=test", "Name And Optional UID")
+
+    value = "test"
+    params = [value, _("attribute value is missing")]
+    assert_invalid(_('%s is invalid distinguished name (DN): %s') % params,
+                   value, "Name And Optional UID")
+
+    bit_string = "'00x'B"
+    params = [bit_string.inspect, "x"]
+    assert_invalid(_("%s has invalid character '%s'") % params,
+                   "cn=test\##{bit_string}", "Name And Optional UID")
+  end
+
+  def test_numeric_string
+    assert_valid("1997", "Numeric String")
+
+    assert_invalid_numeric_string("-3")
+    assert_invalid_numeric_string("-3.5")
+    assert_invalid_numeric_string("string")
+  end
+
+  def test_oid
+    assert_valid("1.2.3.4", "OID")
+    assert_valid("cn", "OID")
+
+    assert_invalid_oid("\#@!")
+  end
+
+  def test_other_mailbox
+    assert_valid("smtp$bob@example.com", "Other Mailbox")
+
+
+    value = "smtp"
+    assert_invalid(_("%s has no mailbox") % value.inspect,
+                   value, "Other Mailbox")
+
+    value = "smtp$"
+    assert_invalid(_("%s has no mailbox") % value.inspect,
+                   value, "Other Mailbox")
+
+    value = "$bob@example.com"
+    assert_invalid(_("%s has no mailbox type") % value.inspect,
+                   value, "Other Mailbox")
+
+    value = "!$bob@example.com"
+    params = [value.inspect, "!"]
+    reason = _("%s has unprintable character in mailbox type: '%s'") % params
+    assert_invalid(reason, value, "Other Mailbox")
+  end
+
   priority :normal
 
   private
@@ -161,5 +214,15 @@ class TestSyntax < Test::Unit::TestCase
   def assert_invalid_integer(value)
     assert_invalid(_("%s is invalid integer format") % value.inspect,
                    value, "Integer")
+  end
+
+  def assert_invalid_numeric_string(value)
+    assert_invalid(_("%s is invalid numeric format") % value.inspect,
+                   value, "Numeric String")
+  end
+
+  def assert_invalid_oid(value)
+    assert_invalid(_("%s is invalid OID format") % value.inspect,
+                   value, "OID")
   end
 end
