@@ -12,19 +12,23 @@ class TestValidation < Test::Unit::TestCase
       user.see_also = "cn=test,dc=example,dc=com"
       assert(user.save)
 
-      user.see_also = "test"
+      value = "test"
+      user.see_also = value
       assert(!user.save)
       assert(user.errors.invalid?(:seeAlso))
       assert_equal(1, user.errors.size)
+
       syntax_description = lsd_("1.3.6.1.4.1.1466.115.121.1.12")
       assert_not_nil(syntax_description)
-      params = ["test", syntax_description]
+      reason_params = [value, _("attribute value is missing")]
+      reason = _('%s is invalid distinguished name (DN): %s') % reason_params
+      params = [value, syntax_description, reason]
       if ActiveLdap.get_text_supported?
-        format = _("%{fn} has invalid format: %s: required syntax: %s")
+        format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
         format = format % {:fn => la_("seeAlso")}
         assert_equal([format % params], user.errors.full_messages)
       else
-        format = _("has invalid value: %s: required syntax: %s")
+        format = _("has invalid value: %s: required syntax: %s: %s")
         assert_equal([format % params], user.errors.full_messages)
       end
     end

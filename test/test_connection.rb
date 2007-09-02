@@ -24,6 +24,7 @@ class TestConnection < Test::Unit::TestCase
       begin
         connector.establish_connection(:bind_format => "uid=%s,dc=test",
                                        :allow_anonymous => false)
+        connector.connection.connect
       rescue Exception
         exception = $!
         raise

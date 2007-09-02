@@ -8,6 +8,7 @@ module ActiveLdap
     end
 
     def ids(group)
+      ensure_parse(group)
       info, ids, aliases = ensure_schema_info(group)
       ids.keys
     end
@@ -288,10 +289,14 @@ module ActiveLdap
       end
 
       def valid?(value)
+        validate(value).nil?
+      end
+
+      def validate(value)
         if @validator
-          @validator.valid?(value)
+          @validator.validate(value)
         else
-          true
+          nil
         end
       end
 
@@ -347,21 +352,19 @@ module ActiveLdap
       end
 
       def syntax
-        return @syntax if @syntax
-        return @super_attribute.syntax if @super_attribute
-        nil
+        (@derived_syntax ||= [deriver_syntax])[0]
       end
 
       def valid?(value)
-        _syntax = syntax
-        return true if _syntax.nil?
-        _syntax.valid?(value)
+        validate(value).nil?
+      end
+
+      def validate(value)
+        send_to_syntax(nil, :validate, value)
       end
 
       def syntax_description
-        _syntax = syntax
-        return nil if _syntax.nil?
-        _syntax.description
+        send_to_syntax(nil, :description)
       end
 
       private
@@ -386,6 +389,21 @@ module ActiveLdap
         else
           @binary_required = false
           @binary = false
+        end
+      end
+
+      def deriver_syntax
+        return @syntax if @syntax
+        return @super_attribute.syntax if @super_attribute
+        nil
+      end
+
+      def send_to_syntax(default_value, method_name, *args)
+        _syntax = syntax
+        if _syntax
+          _syntax.send(method_name, *args)
+        else
+          default_value
         end
       end
     end
