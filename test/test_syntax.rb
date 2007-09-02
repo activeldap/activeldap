@@ -56,22 +56,52 @@ class TestSyntax < Test::Unit::TestCase
 
   priority :must
   def test_dn
-    assert_valid('Distinguished Name', "cn=test")
+    assert_valid("cn=test", 'Distinguished Name')
 
     value = "test"
     params = [value, _("attribute value is missing")]
     assert_invalid(_('%s is invalid distinguished name (DN): %s') % params,
-                   'Distinguished Name', value)
+                   value, 'Distinguished Name')
+  end
+
+  def test_bit_string
+    assert_valid("'0101111101'B", 'Bit String')
+    assert_valid("''B", 'Bit String')
+
+    value = "0101111101"
+    assert_invalid(_("%s doesn't have the first \"'\"") % value.inspect,
+                   value, 'Bit String')
+
+    value = "'0101111101'"
+    assert_invalid(_("%s doesn't have the last \"'B\"") % value.inspect,
+                   value, 'Bit String')
+
+    value = "'0101111101B"
+    assert_invalid(_("%s doesn't have the last \"'B\"") % value.inspect,
+                   value, 'Bit String')
+
+    value = "'0A'B"
+    assert_invalid(_("%s has invalid character '%s'") % [value.inspect, "A"],
+                   value, 'Bit String')
+  end
+
+  def test_boolean
+    assert_valid("TRUE", "Boolean")
+    assert_valid("FALSE", "Boolean")
+
+    value = "true"
+    assert_invalid(_("%s should be TRUE or FALSE") % value.inspect,
+                   value, "Boolean")
   end
 
   priority :normal
 
   private
-  def assert_valid(syntax_name, value)
+  def assert_valid(value, syntax_name)
     assert_nil(@syntaxes[syntax_name].validate(value))
   end
 
-  def assert_invalid(reason, syntax_name, value)
+  def assert_invalid(reason, value, syntax_name)
     assert_equal(reason, @syntaxes[syntax_name].validate(value))
   end
 end

@@ -352,7 +352,7 @@ module ActiveLdap
       end
 
       def syntax
-        (@derived_syntax ||= [deriver_syntax])[0]
+        (@derived_syntax ||= [derived_syntax])[0]
       end
 
       def valid?(value)
@@ -392,7 +392,7 @@ module ActiveLdap
         end
       end
 
-      def deriver_syntax
+      def derived_syntax
         return @syntax if @syntax
         return @super_attribute.syntax if @super_attribute
         nil
