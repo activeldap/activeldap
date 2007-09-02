@@ -933,12 +933,9 @@ end
 require_gem_if_need.call("active_record/base", "activerecord")
 begin
   require_gem_if_need.call("gettext/active_record", "gettext")
-  ActiveLdap.const_set("GetText", GetText)
 rescue LoadError
-  require 'active_ldap/get_text_fallback'
 end
-
-require 'active_ldap/get_text_support'
+require 'active_ldap/get_text'
 
 require 'active_ldap/base'
 require 'active_ldap/associations'

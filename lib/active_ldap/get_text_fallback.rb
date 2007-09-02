@@ -36,11 +36,11 @@ module ActiveLdap
     end
 
     def sgettext(msg_id, div='|')
-      index = msg.rindex(div)
+      index = msg_id.rindex(div)
       if index
-        msg[(index + 1)..-1]
+        msg_id[(index + 1)..-1]
       else
-        msg
+        msg_id
       end
     end
 

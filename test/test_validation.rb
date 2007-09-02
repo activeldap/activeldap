@@ -28,8 +28,8 @@ class TestValidation < Test::Unit::TestCase
         format = format % {:fn => la_("seeAlso")}
         assert_equal([format % params], user.errors.full_messages)
       else
-        format = _("has invalid value: %s: required syntax: %s: %s")
-        assert_equal([format % params], user.errors.full_messages)
+        format = _("has invalid format: %s: required syntax: %s: %s")
+        assert_equal(["seeAlso #{format % params}"], user.errors.full_messages)
       end
     end
   end
