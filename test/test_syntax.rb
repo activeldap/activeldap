@@ -200,6 +200,21 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid(reason, value, "Other Mailbox")
   end
 
+  def test_postal_address
+    assert_valid("1234 Main St.$Anytown, CA 12345$USA", "Postal Address")
+    assert_valid("\\241,000,000 Sweepstakes$PO Box 1000000$Anytown, " +
+                 "CA 12345$USA", "Postal Address")
+    assert_valid("$", "Postal Address")
+    assert_valid("1234 Main St.$", "Postal Address")
+
+
+    assert_invalid(_("empty string"), "", "Postal Address")
+
+    value = NKF.nkf("-We", "東京")
+    assert_invalid(_("%s has invalid UTF-8 character") % value.inspect,
+                   value, "Postal Address")
+  end
+
   priority :normal
 
   private

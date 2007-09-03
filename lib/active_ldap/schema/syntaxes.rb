@@ -218,6 +218,24 @@ module ActiveLdap
           nil
         end
       end
+
+      class PostalAddress < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.41"] = self
+
+        def validate(value)
+          if value.blank?
+            return _("empty string")
+          end
+
+          begin
+            value.unpack("U*")
+          rescue ArgumentError
+            return _("%s has invalid UTF-8 character") % value.inspect
+          end
+
+          nil
+        end
+      end
     end
   end
 end
