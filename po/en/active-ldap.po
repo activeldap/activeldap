@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-01 13:34+0900\n"
+"POT-Creation-Date: 2007-09-03 21:03+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3331,12 +3331,12 @@ msgstr ""
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:121
-msgid "%{fn} has invalid format: %s: required syntax: %s"
+#: lib/active_ldap/validations.rb:123
+msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:123
-msgid "has invalid format: %s: required syntax: %s"
+#: lib/active_ldap/validations.rb:125
+msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
 #: lib/active_ldap/command.rb:16
@@ -3407,7 +3407,7 @@ msgstr ""
 msgid "salt size must be == 4: %s"
 msgstr ""
 
-#: lib/active_ldap/schema.rb:49
+#: lib/active_ldap/schema.rb:50
 msgid "Unknown schema group: %s"
 msgstr ""
 
@@ -3435,36 +3435,36 @@ msgstr ""
 msgid "%s is unknown attribute"
 msgstr ""
 
-#: lib/active_ldap/base.rb:323
+#: lib/active_ldap/base.rb:321
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:427
+#: lib/active_ldap/base.rb:425
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:509
+#: lib/active_ldap/base.rb:507
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:542
+#: lib/active_ldap/base.rb:540
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:561
+#: lib/active_ldap/base.rb:559
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:582 lib/active_ldap/base.rb:593
+#: lib/active_ldap/base.rb:580 lib/active_ldap/base.rb:591
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:709
+#: lib/active_ldap/base.rb:707
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1132
+#: lib/active_ldap/base.rb:1137
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
@@ -3522,6 +3522,76 @@ msgstr ""
 
 #: lib/active_ldap/operations.rb:283
 msgid "Couldn't find all %s: DNs (%s)"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:33
+msgid "%s doesn't have the first \"'\""
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:37
+msgid "%s doesn't have the last \"'B\""
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:41
+msgid "%s has invalid character '%s'"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:55
+msgid "%s should be TRUE or FALSE"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:67
+msgid "%s should be just 2 printable characters"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:90
+#: lib/active_ldap/schema/syntaxes.rb:233
+msgid "%s has invalid UTF-8 character"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:118
+msgid "%s has missing components: %s"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:121
+msgid "%s is invalid time format"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:133
+msgid "%s is invalid integer format"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:144
+msgid "invalid JPEG format"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:183
+msgid "%s is invalid numeric format"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:195
+msgid "%s is invalid OID format"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:206
+msgid "%s has no mailbox type"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:210
+msgid "%s has unprintable character in mailbox type: '%s'"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:215
+msgid "%s has no mailbox"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:227
+#: lib/active_ldap/schema/syntaxes.rb:245
+msgid "empty string"
+msgstr ""
+
+#: lib/active_ldap/schema/syntaxes.rb:249
+msgid "%s has unprintable character: '%s'"
 msgstr ""
 
 #: rails/plugin/active_ldap/init.rb:7

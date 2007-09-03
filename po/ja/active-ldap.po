@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-01 13:34+0900\n"
-"PO-Revision-Date: 2007-09-02 17:24+0900\n"
+"POT-Creation-Date: 2007-09-03 21:03+0900\n"
+"PO-Revision-Date: 2007-09-03 21:11+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3345,13 +3345,13 @@ msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
-#: lib/active_ldap/validations.rb:121
-msgid "%{fn} has invalid format: %s: required syntax: %s"
-msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s"
-
 #: lib/active_ldap/validations.rb:123
-msgid "has invalid format: %s: required syntax: %s"
-msgstr "不正な書式です: %s: 要求されている構文: %s"
+msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
+msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s: %s"
+
+#: lib/active_ldap/validations.rb:125
+msgid "has invalid format: %s: required syntax: %s: %s"
+msgstr "不正な書式です: %s: 要求されている構文: %s: %s"
 
 #: lib/active_ldap/command.rb:16
 msgid "Common options:"
@@ -3424,7 +3424,7 @@ msgstr "ハッシュ化されたパスワードからsaltを取り出すこと�
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
 
-#: lib/active_ldap/schema.rb:49
+#: lib/active_ldap/schema.rb:50
 msgid "Unknown schema group: %s"
 msgstr "未知のスキーマグループです: %s"
 
@@ -3453,38 +3453,38 @@ msgstr "LDAPの設定が存在しない%sアダプタが指定しています。
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です。"
 
-#: lib/active_ldap/base.rb:323
+#: lib/active_ldap/base.rb:321
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:427
+#: lib/active_ldap/base.rb:425
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:509
+#: lib/active_ldap/base.rb:507
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:542
+#: lib/active_ldap/base.rb:540
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:561
+#: lib/active_ldap/base.rb:559
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:582 lib/active_ldap/base.rb:593
+#: lib/active_ldap/base.rb:580 lib/active_ldap/base.rb:591
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:709
+#: lib/active_ldap/base.rb:707
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1132
+#: lib/active_ldap/base.rb:1137
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -3545,6 +3545,76 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
+#: lib/active_ldap/schema/syntaxes.rb:33
+msgid "%s doesn't have the first \"'\""
+msgstr "%sには最初の\"'\"がありません。"
+
+#: lib/active_ldap/schema/syntaxes.rb:37
+msgid "%s doesn't have the last \"'B\""
+msgstr "%sには最後の\"'B\"がありません。"
+
+#: lib/active_ldap/schema/syntaxes.rb:41
+msgid "%s has invalid character '%s'"
+msgstr "%sは不正な文字'%s'を含んでいます。"
+
+#: lib/active_ldap/schema/syntaxes.rb:55
+msgid "%s should be TRUE or FALSE"
+msgstr "%sはTRUEまたはFALSEのどちらかでなければいけません。"
+
+#: lib/active_ldap/schema/syntaxes.rb:67
+msgid "%s should be just 2 printable characters"
+msgstr "%sはちょうど2文字の印字可能な文字列でなければいけません。"
+
+#: lib/active_ldap/schema/syntaxes.rb:90
+#: lib/active_ldap/schema/syntaxes.rb:233
+msgid "%s has invalid UTF-8 character"
+msgstr "%sは不正なUTF-8文字を含んでいます。"
+
+#: lib/active_ldap/schema/syntaxes.rb:118
+msgid "%s has missing components: %s"
+msgstr "%sには要素が欠けています: %s"
+
+#: lib/active_ldap/schema/syntaxes.rb:121
+msgid "%s is invalid time format"
+msgstr "%sは不正な時刻の書式です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:133
+msgid "%s is invalid integer format"
+msgstr "%sは不正な整数の書式です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:144
+msgid "invalid JPEG format"
+msgstr "不正なJPEG形式です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:183
+msgid "%s is invalid numeric format"
+msgstr "%sは不正な数字の書式です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:195
+msgid "%s is invalid OID format"
+msgstr "%sは不正なOIDの書式です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:206
+msgid "%s has no mailbox type"
+msgstr "%sにメールボックスの種類がありません。"
+
+#: lib/active_ldap/schema/syntaxes.rb:210
+msgid "%s has unprintable character in mailbox type: '%s'"
+msgstr "%sはメールボックスの種類に印字不可能な文字を含んでいます: '%s'"
+
+#: lib/active_ldap/schema/syntaxes.rb:215
+msgid "%s has no mailbox"
+msgstr "%sにメールボックスがありませんん。"
+
+#: lib/active_ldap/schema/syntaxes.rb:227
+#: lib/active_ldap/schema/syntaxes.rb:245
+msgid "empty string"
+msgstr "空の文字列です。"
+
+#: lib/active_ldap/schema/syntaxes.rb:249
+msgid "%s has unprintable character: '%s'"
+msgstr "%sは印字不可能な文字を含んでいます: '%s'"
+
 #: rails/plugin/active_ldap/init.rb:7
 msgid "You need ActiveLdap %s or later"
 msgstr "ActiveLdap %s以上が必要です。"
@@ -3560,7 +3630,8 @@ msgstr ""
 
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
 msgid "Use ATTRIBUTE as default DN attribute for instances of this model"
-msgstr "このモデルのインスタンスのデフォルトのDN用属性としてATTRIBUTEを使います。"
+msgstr ""
+"このモデルのインスタンスのデフォルトのDN用属性としてATTRIBUTEを使います。"
 
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:34
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:40
