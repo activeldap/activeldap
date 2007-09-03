@@ -215,6 +215,23 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Postal Address")
   end
 
+  def test_printable_string
+    assert_valid("This is a PrintableString", "Printable String")
+
+    assert_invalid(_("empty string"), "", "Printable String")
+
+
+    value = "abc!def"
+    params = [value.inspect, "!"]
+    reason = _("%s has unprintable character: '%s'") % params
+    assert_invalid(reason, value, "Printable String")
+
+    value = "abcあdef"
+    params = [value.inspect, "あ"]
+    reason = _("%s has unprintable character: '%s'") % params
+    assert_invalid(reason, value, "Printable String")
+  end
+
   priority :normal
 
   private

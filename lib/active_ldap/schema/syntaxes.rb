@@ -236,6 +236,23 @@ module ActiveLdap
           nil
         end
       end
+
+      class PrintableString < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.44"] = self
+
+        def validate(value)
+          if value.blank?
+            return _("empty string")
+          end
+
+          if /(#{UNPRINTABLE_CHARACTER})/i =~ value
+            format = _("%s has unprintable character: '%s'")
+            return format % [value.inspect, $1]
+          end
+
+          nil
+        end
+      end
     end
   end
 end
