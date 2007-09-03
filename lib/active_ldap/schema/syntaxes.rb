@@ -253,6 +253,14 @@ module ActiveLdap
           nil
         end
       end
+
+      class TelephoneNumber < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.50"] = self
+
+        def validate(value)
+          PrintableString.new.validate(value)
+        end
+      end
     end
   end
 end

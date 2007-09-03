@@ -232,6 +232,17 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid(reason, value, "Printable String")
   end
 
+  def test_telephone_number
+    assert_valid("+1 512 305 0280", "Telephone Number")
+
+    assert_invalid(_("empty string"), "", "Telephone Number")
+
+    value = "+1 5!2 305 0280"
+    params = [value.inspect, "!"]
+    reason = _("%s has unprintable character: '%s'") % params
+    assert_invalid(reason, value, "Telephone Number")
+  end
+
   priority :normal
 
   private
