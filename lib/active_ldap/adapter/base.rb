@@ -15,6 +15,7 @@ module ActiveLdap
                                           :scope]
       def initialize(configuration={})
         @connection = nil
+        @disconnected = false
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
         @configuration.assert_valid_keys(VALID_ADAPTER_CONFIGURATION_KEYS)
@@ -27,6 +28,7 @@ module ActiveLdap
         host = options[:host] || @host
         port = options[:port] || @port
         method = ensure_method(options[:method] || @method)
+        @disconnected = false
         @connection = yield(host, port, method)
         prepare_connection(options)
         bind(options)
@@ -78,7 +80,7 @@ module ActiveLdap
       end
 
       def connecting?
-        not @connection.nil?
+        !@connection.nil? and !@disconnected
       end
 
       def schema(options={})
@@ -198,11 +200,22 @@ module ActiveLdap
       end
 
       def operation(options)
-        reconnect_if_need
-        try_reconnect = !options.has_key?(:try_reconnect) ||
-                           options[:try_reconnect]
-        with_timeout(try_reconnect, options) do
-          yield
+        retried = false
+        begin
+          reconnect_if_need
+          try_reconnect = !options.has_key?(:try_reconnect) ||
+                             options[:try_reconnect]
+          with_timeout(try_reconnect, options) do
+            yield
+          end
+        rescue Errno::EPIPE
+          if retried or !try_reconnect
+            raise
+          else
+            retried = true
+            @disconnected = true
+            retry
+          end
         end
       end
 

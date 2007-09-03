@@ -30,7 +30,11 @@ module ActiveLdap
             :port => port,
           }
           config[:encryption] = {:method => method} if method
-          Net::LDAP::Connection.new(config)
+          begin
+            Net::LDAP::Connection.new(config)
+          rescue Net::LDAP::LdapError
+            raise ConnectionError, $!.message
+          end
         end
       end
 
