@@ -16,7 +16,7 @@ if File.exist?(ldap_configuration_file)
   ActiveLdap::Base.establish_connection
 else
   ActiveLdap::Base.class_eval do
-    format = _("You should run 'script/generator scaffold_al' to make %s.")
+    format = _("You should run 'script/generator scaffold_active_ldap' to make %s.")
     logger.error(format % ldap_configuration_file)
   end
 end
