@@ -192,6 +192,7 @@ module ActiveLdap
 
     def remove_connection
       self.class.remove_connection(dn)
+      @connection = nil
     end
 
     def connection
