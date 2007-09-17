@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-03 21:03+0900\n"
-"PO-Revision-Date: 2007-09-03 21:11+0900\n"
+"POT-Creation-Date: 2007-09-17 18:15+0900\n"
+"PO-Revision-Date: 2007-09-17 18:17+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -2473,6 +2473,10 @@ msgid ""
 msgstr "OpenLDAPのバックエンド特有のオプション"
 
 #: -:-
+msgid "LDAP|Description|ObjectClass|olcBdbConfig|BDB backend configuration"
+msgstr "BDBバックエンドの設定"
+
+#: -:-
 msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
 msgstr "OpenLDAPの設定オブジェクト"
 
@@ -2492,10 +2496,6 @@ msgstr "OpenLDAPのフロントエンドの設定"
 msgid ""
 "LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration options"
 msgstr "OpenLDAPのグローバルな設定オプション"
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcHdbConfig|HDB backend configuration"
-msgstr "HDBバックエンドの設定"
 
 #: -:-
 msgid ""
@@ -2950,6 +2950,10 @@ msgid "LDAP|ObjectClass|olcBackendConfig"
 msgstr "OpenLDAP設定: バックエンド設定(olcBackendConfig)"
 
 #: -:-
+msgid "LDAP|ObjectClass|olcBdbConfig"
+msgstr "OpenLDAP設定: BDB設定(olcBdbConfig)"
+
+#: -:-
 msgid "LDAP|ObjectClass|olcConfig"
 msgstr "OpenLDAP設定: 設定(olcConfig)"
 
@@ -2964,10 +2968,6 @@ msgstr "OpenLDAP設定: フロントエンド設定(olcFrontendConfig)"
 #: -:-
 msgid "LDAP|ObjectClass|olcGlobal"
 msgstr "OpenLDAP設定: グローバル(olcGlobal)"
-
-#: -:-
-msgid "LDAP|ObjectClass|olcHdbConfig"
-msgstr "OpenLDAP設定: HDB設定(olcHdbConfig)"
 
 #: -:-
 msgid "LDAP|ObjectClass|olcIncludeFile"
@@ -3253,6 +3253,18 @@ msgstr "証明書(1.3.6.1.4.1.1466.115.121.1.8)"
 msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
 msgstr "証明書一覧(1.3.6.1.4.1.1466.115.121.1.9)"
 
+#: lib/active_ldap/object_class.rb:51
+msgid "Value in objectClass array is not a String: %s"
+msgstr "objectClassの配列の中身がStringではありません: %s"
+
+#: lib/active_ldap/object_class.rb:65
+msgid "unknown objectClass in LDAP server: %s"
+msgstr "LDAPサーバが知らないobjectClassです: %s"
+
+#: lib/active_ldap/object_class.rb:83
+msgid "Can't remove required objectClass: %s"
+msgstr "必須のobjectClassは削除できません: %s"
+
 #: lib/active_ldap/adapter/ldap.rb:84
 msgid "No matches: filter: %s: attributes: %s"
 msgstr "マッチしませんでした: フィルタ: %s: 属性: %s"
@@ -3261,81 +3273,142 @@ msgstr "マッチしませんでした: フィルタ: %s: 属性: %s"
 msgid "LDAP server is down: %s"
 msgstr "LDAPサーバが稼働していません: %s"
 
-#: lib/active_ldap/adapter/ldap.rb:169 lib/active_ldap/adapter/net_ldap.rb:159
+#: lib/active_ldap/adapter/ldap.rb:169 lib/active_ldap/adapter/net_ldap.rb:163
 msgid "%s is not one of the available connect methods: %s"
 msgstr "%sは有効な接続方法ではありません: %s"
 
-#: lib/active_ldap/adapter/ldap.rb:182 lib/active_ldap/adapter/net_ldap.rb:172
+#: lib/active_ldap/adapter/ldap.rb:182 lib/active_ldap/adapter/net_ldap.rb:176
 msgid "%s is not one of the available LDAP scope: %s"
 msgstr "%sは有効なLDAPスコープではありません: %s"
 
-#: lib/active_ldap/adapter/ldap.rb:228 lib/active_ldap/adapter/net_ldap.rb:285
+#: lib/active_ldap/adapter/ldap.rb:228 lib/active_ldap/adapter/net_ldap.rb:289
 msgid "unknown type: %s"
 msgstr "未知の種類です: %s"
 
-#: lib/active_ldap/adapter/net_ldap.rb:205
+#: lib/active_ldap/adapter/net_ldap.rb:209
 msgid "unsupported qops: %s"
 msgstr "対応していないqopsです: %s"
 
-#: lib/active_ldap/adapter/base.rb:60
+#: lib/active_ldap/adapter/base.rb:62
 msgid "Bound by SASL as %s"
 msgstr "%sとしてSASLで接続しました。"
 
-#: lib/active_ldap/adapter/base.rb:62
+#: lib/active_ldap/adapter/base.rb:64
 msgid "Bound by simple as %s"
 msgstr "%sとしてシンプル認証で接続しました。"
 
-#: lib/active_ldap/adapter/base.rb:64
+#: lib/active_ldap/adapter/base.rb:66
 msgid "Bound as anonymous"
 msgstr "匿名ユーザとして接続しました。"
 
-#: lib/active_ldap/adapter/base.rb:67
+#: lib/active_ldap/adapter/base.rb:69
 msgid "All authentication methods exhausted."
 msgstr "すべての認証方法を使いきりました。"
 
-#: lib/active_ldap/adapter/base.rb:142
+#: lib/active_ldap/adapter/base.rb:144
 msgid "Ignore error %s(%s): filter %s: attributes: %s"
 msgstr "エラー%s(%s)を無視します: フィルタ %s: 属性: %s"
 
-#: lib/active_ldap/adapter/base.rb:160 lib/active_ldap/adapter/base.rb:170
+#: lib/active_ldap/adapter/base.rb:162 lib/active_ldap/adapter/base.rb:172
 msgid "No such entry: %s"
 msgstr "そのようなエントリはありません: %s"
 
-#: lib/active_ldap/adapter/base.rb:174 lib/active_ldap/adapter/base.rb:176
-#: lib/active_ldap/adapter/base.rb:178 lib/active_ldap/adapter/base.rb:180
-#: lib/active_ldap/adapter/base.rb:192
+#: lib/active_ldap/adapter/base.rb:176 lib/active_ldap/adapter/base.rb:178
+#: lib/active_ldap/adapter/base.rb:180 lib/active_ldap/adapter/base.rb:182
+#: lib/active_ldap/adapter/base.rb:194
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: lib/active_ldap/adapter/base.rb:223
+#: lib/active_ldap/adapter/base.rb:236
 msgid "password_block not nil or Proc object. Ignoring."
 msgstr "password_blockがnilでもProcでもありません。無視します。"
 
-#: lib/active_ldap/adapter/base.rb:242
+#: lib/active_ldap/adapter/base.rb:255
 msgid "Requested action timed out."
 msgstr "要求したアクションがタイムアウトしました。"
 
-#: lib/active_ldap/adapter/base.rb:446
+#: lib/active_ldap/adapter/base.rb:459
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr "不正な論理演算子です: %s: 有効な演算子: %s\n"
 
-#: lib/active_ldap/adapter/base.rb:463
+#: lib/active_ldap/adapter/base.rb:476
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr "LDAPサーバへの再接続を諦めました。"
 
-#: lib/active_ldap/adapter/base.rb:466
+#: lib/active_ldap/adapter/base.rb:479
 msgid "Attempting to reconnect"
 msgstr "再接続を試みています。"
 
-#: lib/active_ldap/adapter/base.rb:477
+#: lib/active_ldap/adapter/base.rb:490
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
 "%s"
 msgstr ""
-"サーバへの再接続が失敗しました: %s\\n\n"
-"サーバへの再接続失敗時のバックトレース:\\n\n"
+"サーバへの再接続が失敗しました: %s\n"
+"サーバへの再接続失敗時のバックトレース:\n"
 "%s"
+
+#: lib/active_ldap/acts/tree.rb:38
+msgid "parent must be an entry or parent DN: %s"
+msgstr "親はエントリかDNでなければいけません: %s"
+
+#: lib/active_ldap/operations.rb:37
+msgid "Search value must be a String: %s"
+msgstr "検索する値はStringでなければいけません: %s"
+
+#: lib/active_ldap/operations.rb:50
+msgid ":ldap_scope search option is deprecated. Use :scope instead."
+msgstr ""
+":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
+
+#: lib/active_ldap/operations.rb:197
+msgid "Invalid order: %s"
+msgstr "不正な順序です: %s"
+
+#: lib/active_ldap/operations.rb:232
+msgid "Couldn't find %s without a DN"
+msgstr "DNがないため%sが見つかりません。"
+
+#: lib/active_ldap/operations.rb:253
+msgid "Couldn't find %s: DN: %s: filter: %s"
+msgstr "%sが見つかりません: DN: %s: フィルタ: %s"
+
+#: lib/active_ldap/operations.rb:256
+msgid "Couldn't find %s: DN: %s"
+msgstr "%sが見つかりません: DN: %s"
+
+#: lib/active_ldap/operations.rb:283
+msgid "Couldn't find all %s: DNs (%s): filter: %s"
+msgstr "すべての%sを見つけられませんでした: DN (%s): フィルタ: %s"
+
+#: lib/active_ldap/operations.rb:286
+msgid "Couldn't find all %s: DNs (%s)"
+msgstr "すべての%sを見つけられませんでした: DN (%s)"
+
+#: lib/active_ldap/distinguished_name.rb:131
+msgid "name component is missing"
+msgstr "名前要素がありません。"
+
+#: lib/active_ldap/distinguished_name.rb:135
+msgid "relative distinguished name (RDN) is missing"
+msgstr "相対識別名(RDN)がありません。"
+
+#: lib/active_ldap/distinguished_name.rb:139
+msgid "attribute type is missing"
+msgstr "属性の種類がありません。"
+
+#: lib/active_ldap/distinguished_name.rb:143
+msgid "attribute value is missing"
+msgstr "属性の値がありません。"
+
+#: lib/active_ldap/distinguished_name.rb:147
+msgid "found unmatched quotation"
+msgstr "未対応の引用符が見つかりました。"
+
+#: lib/active_ldap/distinguished_name.rb:172
+msgid "%s isn't sub DN of %s"
+msgstr "%sは%sのサブDNではありません。"
 
 #: lib/active_ldap/validations.rb:93
 msgid "%{fn} is required attribute by objectClass '%s'"
@@ -3369,9 +3442,56 @@ msgstr "このメッセージを表示します。"
 msgid "Show version"
 msgstr "バージョンを表示します。"
 
-#: lib/active_ldap/get_text/parser.rb:94
-msgid "Ignored '%{file}'. Solve dependencies first."
-msgstr "'%{file}'を無視します。まず依存関係を解決してください。"
+#: lib/active_ldap/base.rb:114
+msgid "%s is invalid distinguished name (DN): %s"
+msgstr "%sは不正な識別名(DN)です: %s"
+
+#: lib/active_ldap/base.rb:116
+msgid "%s is invalid distinguished name (DN)"
+msgstr "%sは不正な識別名(DN)です。"
+
+#: lib/active_ldap/base.rb:150
+msgid "LDAP configuration specifies nonexistent %s adapter"
+msgstr "LDAPの設定が存在しない%sアダプタが指定しています。"
+
+#: lib/active_ldap/base.rb:158
+msgid "%s is unknown attribute"
+msgstr "%sは未知の属性です。"
+
+#: lib/active_ldap/base.rb:320
+msgid "scope '%s' must be a Symbol"
+msgstr "スコープ'%s'はシンボルでなければいけません。"
+
+#: lib/active_ldap/base.rb:424
+msgid ""
+"'%s' must be either nil, DN value as String or Array or attributes as Hash"
+msgstr ""
+"'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
+"ん。"
+
+#: lib/active_ldap/base.rb:506
+msgid "%s's DN attribute (%s) isn't set"
+msgstr "%sのDN属性(%s)が設定されていません。"
+
+#: lib/active_ldap/base.rb:539
+msgid "Failed to delete LDAP entry: %s"
+msgstr "LDAPエントリの削除に失敗しました: %s"
+
+#: lib/active_ldap/base.rb:558
+msgid "entry %s can't be saved"
+msgstr "エントリ%sを保存できません。"
+
+#: lib/active_ldap/base.rb:579 lib/active_ldap/base.rb:590
+msgid "wrong number of arguments (%d for 1)"
+msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
+
+#: lib/active_ldap/base.rb:706
+msgid "Can't find DN '%s' to reload"
+msgstr "再読み込みするDN '%s'が見つかりません。"
+
+#: lib/active_ldap/base.rb:1157
+msgid "dn_attribute isn't set for this class: %s"
+msgstr "このクラスのdn_attributeが設定されていません: %s"
 
 #: lib/active_ldap/attributes.rb:34
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
@@ -3391,17 +3511,9 @@ msgstr "ハッシュはひとつのキー・値のペアしか持ってはいけ
 msgid "unknown option did not match lang-* or binary: %s"
 msgstr "lang-*にもbinaryにもマッチしない未知のオプションです: %s"
 
-#: lib/active_ldap/object_class.rb:51
-msgid "Value in objectClass array is not a String: %s"
-msgstr "objectClassの配列の中身がStringではありません: %s"
-
-#: lib/active_ldap/object_class.rb:65
-msgid "unknown objectClass in LDAP server: %s"
-msgstr "LDAPサーバが知らないobjectClassです: %s"
-
-#: lib/active_ldap/object_class.rb:83
-msgid "Can't remove required objectClass: %s"
-msgstr "必須のobjectClassは削除できません: %s"
+#: lib/active_ldap/schema.rb:50
+msgid "Unknown schema group: %s"
+msgstr "未知のスキーマグループです: %s"
 
 #: lib/active_ldap/connection.rb:99
 msgid ":ldap_scope connection option is deprecated. Use :scope instead."
@@ -3423,127 +3535,6 @@ msgstr "ハッシュ化されたパスワードからsaltを取り出すこと�
 #: lib/active_ldap/user_password.rb:52 lib/active_ldap/user_password.rb:69
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
-
-#: lib/active_ldap/schema.rb:50
-msgid "Unknown schema group: %s"
-msgstr "未知のスキーマグループです: %s"
-
-#: lib/active_ldap/configuration.rb:59
-msgid "%s connection is not configured"
-msgstr "%sの接続は設定されていません。"
-
-#: lib/active_ldap/configuration.rb:100
-msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
-msgstr ""
-":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
-
-#: lib/active_ldap/base.rb:114
-msgid "%s is invalid distinguished name (DN): %s"
-msgstr "%sは不正な識別名(DN)です: %s"
-
-#: lib/active_ldap/base.rb:116
-msgid "%s is invalid distinguished name (DN)"
-msgstr "%sは不正な識別名(DN)です。"
-
-#: lib/active_ldap/base.rb:150
-msgid "LDAP configuration specifies nonexistent %s adapter"
-msgstr "LDAPの設定が存在しない%sアダプタが指定しています。"
-
-#: lib/active_ldap/base.rb:158
-msgid "%s is unknown attribute"
-msgstr "%sは未知の属性です。"
-
-#: lib/active_ldap/base.rb:321
-msgid "scope '%s' must be a Symbol"
-msgstr "スコープ'%s'はシンボルでなければいけません。"
-
-#: lib/active_ldap/base.rb:425
-msgid ""
-"'%s' must be either nil, DN value as String or Array or attributes as Hash"
-msgstr ""
-"'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
-"ん。"
-
-#: lib/active_ldap/base.rb:507
-msgid "%s's DN attribute (%s) isn't set"
-msgstr "%sのDN属性(%s)が設定されていません。"
-
-#: lib/active_ldap/base.rb:540
-msgid "Failed to delete LDAP entry: %s"
-msgstr "LDAPエントリの削除に失敗しました: %s"
-
-#: lib/active_ldap/base.rb:559
-msgid "entry %s can't be saved"
-msgstr "エントリ%sを保存できません。"
-
-#: lib/active_ldap/base.rb:580 lib/active_ldap/base.rb:591
-msgid "wrong number of arguments (%d for 1)"
-msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
-
-#: lib/active_ldap/base.rb:707
-msgid "Can't find DN '%s' to reload"
-msgstr "再読み込みするDN '%s'が見つかりません。"
-
-#: lib/active_ldap/base.rb:1137
-msgid "dn_attribute isn't set for this class: %s"
-msgstr "このクラスのdn_attributeが設定されていません: %s"
-
-#: lib/active_ldap/distinguished_name.rb:131
-msgid "name component is missing"
-msgstr "名前要素がありません。"
-
-#: lib/active_ldap/distinguished_name.rb:135
-msgid "relative distinguished name (RDN) is missing"
-msgstr "相対識別名(RDN)がありません。"
-
-#: lib/active_ldap/distinguished_name.rb:139
-msgid "attribute type is missing"
-msgstr "属性の種類がありません。"
-
-#: lib/active_ldap/distinguished_name.rb:143
-msgid "attribute value is missing"
-msgstr "属性の値がありません。"
-
-#: lib/active_ldap/distinguished_name.rb:147
-msgid "found unmatched quotation"
-msgstr "未対応の引用符が見つかりました。"
-
-#: lib/active_ldap/distinguished_name.rb:172
-msgid "%s isn't sub DN of %s"
-msgstr "%sは%sのサブDNではありません。"
-
-#: lib/active_ldap/operations.rb:37
-msgid "Search value must be a String: %s"
-msgstr "検索する値はStringでなければいけません: %s"
-
-#: lib/active_ldap/operations.rb:49
-msgid ":ldap_scope search option is deprecated. Use :scope instead."
-msgstr ""
-":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
-
-#: lib/active_ldap/operations.rb:196
-msgid "Invalid order: %s"
-msgstr "不正な順序です: %s"
-
-#: lib/active_ldap/operations.rb:231
-msgid "Couldn't find %s without a DN"
-msgstr "DNがないため%sが見つかりません。"
-
-#: lib/active_ldap/operations.rb:251
-msgid "Couldn't find %s: DN: %s: filter: %s"
-msgstr "%sが見つかりません: DN: %s: フィルタ: %s"
-
-#: lib/active_ldap/operations.rb:254
-msgid "Couldn't find %s: DN: %s"
-msgstr "%sが見つかりません: DN: %s"
-
-#: lib/active_ldap/operations.rb:280
-msgid "Couldn't find all %s: DNs (%s): filter: %s"
-msgstr "すべての%sを見つけられませんでした: DN (%s): フィルタ: %s"
-
-#: lib/active_ldap/operations.rb:283
-msgid "Couldn't find all %s: DNs (%s)"
-msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
 #: lib/active_ldap/schema/syntaxes.rb:33
 msgid "%s doesn't have the first \"'\""
@@ -3615,18 +3606,26 @@ msgstr "空の文字列です。"
 msgid "%s has unprintable character: '%s'"
 msgstr "%sは印字不可能な文字を含んでいます: '%s'"
 
+#: lib/active_ldap/get_text/parser.rb:94
+msgid "Ignored '%{file}'. Solve dependencies first."
+msgstr "'%{file}'を無視します。まず依存関係を解決してください。"
+
+#: lib/active_ldap/configuration.rb:59
+msgid "%s connection is not configured"
+msgstr "%sの接続は設定されていません。"
+
+#: lib/active_ldap/configuration.rb:100
+msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
+msgstr ""
+":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
+
 #: rails/plugin/active_ldap/init.rb:7
 msgid "You need ActiveLdap %s or later"
 msgstr "ActiveLdap %s以上が必要です。"
 
 #: rails/plugin/active_ldap/init.rb:19
-msgid "You should run 'script/generator scaffold_al' to make %s."
-msgstr "%sを作るために'script/generator scaffold_al'を実行してください。"
-
-#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
-msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
-msgstr ""
-"scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
+msgid "You should run 'script/generator scaffold_active_ldap' to make %s."
+msgstr "%sを作るために'script/generator scaffold_active_ldap'を実行してください。"
 
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
 msgid "Use ATTRIBUTE as default DN attribute for instances of this model"
@@ -3642,6 +3641,11 @@ msgstr "(デフォルト: %s)"
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:39
 msgid "Use PREFIX as prefix for this model"
 msgstr "このモデルのプリフィックスとしてPREFIXを使います。"
+
+#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
+msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
+msgstr ""
+"scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
 
 #: benchmark/bench-al.rb:14
 msgid "Specify prefix for benchmarking"
