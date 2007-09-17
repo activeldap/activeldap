@@ -22,7 +22,7 @@ module ActiveLdap
     module Common
       VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
                               :classes, :scope, :limit, :attributes,
-                              :sort_by, :order, :connection]
+                              :sort_by, :order, :connection, :base]
 
       def search(options={}, &block)
         validate_search_options(options)
@@ -43,7 +43,8 @@ module ActiveLdap
         prefix ||= _prefix
         filter ||= [attr, value]
         filter = [:and, filter, *object_class_filters(classes)]
-        _base = [prefix, base].compact.reject{|x| x.empty?}.join(",")
+        _base = options[:base]
+        _base ||= [prefix, base].compact.reject{|x| x.empty?}.join(",")
         if options.has_key?(:ldap_scope)
           logger.warning do
             _(":ldap_scope search option is deprecated. Use :scope instead.")
@@ -56,8 +57,8 @@ module ActiveLdap
           :filter => filter,
           :limit => options[:limit],
           :attributes => options[:attributes],
-          :sort_by => options[:sort_by],
-          :order => options[:order],
+          :sort_by => options[:sort_by] || sort_by,
+          :order => options[:order] || order,
         }
 
         conn = options[:connection] || connection
@@ -199,8 +200,8 @@ module ActiveLdap
 
       def find_every(options)
         options = options.dup
-        sort_by = options.delete(:sort_by)
-        order = options.delete(:order)
+        sort_by = options.delete(:sort_by) || sort_by
+        order = options.delete(:order) || order
         limit = options.delete(:limit) if sort_by or order
 
         results = search(options).collect do |dn, attrs|

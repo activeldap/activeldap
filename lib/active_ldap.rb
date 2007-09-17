@@ -938,13 +938,15 @@ end
 require 'active_ldap/get_text'
 
 require 'active_ldap/base'
+
 require 'active_ldap/associations'
+require 'active_ldap/attributes'
 require 'active_ldap/configuration'
 require 'active_ldap/connection'
 require 'active_ldap/operations'
 require 'active_ldap/human_readable'
-require 'active_ldap/attributes'
-require 'active_ldap/object_class'
+
+require 'active_ldap/acts/tree'
 
 require 'active_ldap/distinguished_name'
 require 'active_ldap/populate'
@@ -956,13 +958,16 @@ require 'active_ldap/callbacks'
 
 
 ActiveLdap::Base.class_eval do
+  include ActiveLdap::Associations
+  include ActiveLdap::Attributes
   include ActiveLdap::Configuration
   include ActiveLdap::Connection
   include ActiveLdap::Operations
-  include ActiveLdap::Attributes
   include ActiveLdap::ObjectClass
-  include ActiveLdap::Associations
   include ActiveLdap::HumanReadable
+
+  include ActiveLdap::Acts::Tree
+
   include ActiveLdap::Validations
   include ActiveLdap::Callbacks
 end

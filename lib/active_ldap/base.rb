@@ -175,7 +175,8 @@ module ActiveLdap
     end
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
-                                  :classes, :recommended_classes]
+                                  :classes, :recommended_classes,
+                                  :sort_by, :order]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -208,8 +209,8 @@ module ActiveLdap
       end
     end
 
-    class_local_attr_accessor false, :prefix, :base, :dn_attribute
-    class_local_attr_accessor true, :scope
+    class_local_attr_accessor false, :prefix, :base
+    class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
 
     class << self
@@ -272,18 +273,16 @@ module ActiveLdap
       #                :classes => ['top', 'posixAccount'],
       #                :scope => :sub
       def ldap_mapping(options={})
+        options = options.symbolize_keys
         validate_ldap_mapping_options(options)
-        dn_attribute = options[:dn_attribute] || default_dn_attribute
-        prefix = options[:prefix] || default_prefix
-        classes = options[:classes]
-        recommended_classes = options[:recommended_classes]
-        scope = options[:scope]
 
-        self.dn_attribute = dn_attribute
-        self.prefix = prefix
-        self.scope = scope
-        self.required_classes = classes
-        self.recommended_classes = recommended_classes
+        self.dn_attribute = options[:dn_attribute] || default_dn_attribute
+        self.prefix = options[:prefix] || default_prefix
+        self.scope = options[:scope]
+        self.required_classes = options[:classes]
+        self.recommended_classes = options[:recommended_classes]
+        self.sort_by = options[:sort_by]
+        self.order = options[:order]
 
         public_class_method :new
       end
@@ -304,7 +303,7 @@ module ActiveLdap
         _base = configuration[:base] if _base.nil? and configuration
         _base ||= base_inheritable(true)
         [prefix, _base].find_all do |component|
-          component and !component.empty?
+          !component.blank?
         end.join(",")
       end
 
