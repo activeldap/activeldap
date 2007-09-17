@@ -246,7 +246,8 @@ module ActiveLdap
         if result
           result
         else
-          args = [name, dn]
+          args = [self.is_a?(Class) ? name : self.class.name,
+                  dn]
           if options[:filter]
             format = _("Couldn't find %s: DN: %s: filter: %s")
             args << options[:filter].inspect
@@ -275,7 +276,8 @@ module ActiveLdap
         if result.size == dns.size
           result
         else
-          args = [name, dns.join(', ')]
+          args = [self.is_a?(Class) ? name : self.class.name,
+                  dns.join(", ")]
           if options[:filter]
             format = _("Couldn't find all %s: DNs (%s): filter: %s")
             args << options[:filter].inspect
