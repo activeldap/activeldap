@@ -764,6 +764,27 @@ module ActiveLdap
       @schema ||= super
     end
 
+    alias_method :base_of_class, :base
+    def base
+      [@base, base_of_class].compact.join(",")
+    end
+
+    undef_method :base=
+    def base=(object_local_base)
+      @base = object_local_base
+    end
+
+    alias_method :scope_of_class, :scope
+    def scope
+      @scope || scope_of_class
+    end
+
+    undef_method :scope=
+    def scope=(scope)
+      self.class.validate_scope(scope)
+      @scope = scope
+    end
+
     def inspect
       abbreviate_instance_variables do
         super
@@ -932,27 +953,6 @@ module ActiveLdap
         # Update attr_method with appropriate
         define_attribute_methods(attr)
       end
-    end
-
-    alias_method :base_of_class, :base
-    def base
-      [@base, base_of_class].compact.join(",")
-    end
-
-    undef_method :base=
-    def base=(object_local_base)
-      @base = object_local_base
-    end
-
-    alias_method :scope_of_class, :scope
-    def scope
-      @scope || scope_of_class
-    end
-
-    undef_method :scope=
-    def scope=(scope)
-      self.class.validate_scope(scope)
-      @scope = scope
     end
 
     # get_attribute
