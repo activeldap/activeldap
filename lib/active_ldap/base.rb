@@ -765,20 +765,41 @@ module ActiveLdap
     end
 
     def inspect
-      schema, @schema = @schema, nil
-      must, may = @must, @may
-      object_classes = @object_classes
-      @must, @may = @must.collect(&:name), @may.collect(&:name)
-      @object_classes = @object_classes.collect(&:name)
-      super
-    ensure
-      @schema = schema
-      @must = must
-      @may = may
-      @object_classes = object_classes
+      abbreviate_instance_variables do
+        super
+      end
+    end
+
+    def pretty_print(q)
+      abbreviate_instance_variables do
+        q.pp_object(self)
+      end
     end
 
     private
+    def abbreviate_instance_variables
+      @abbreviating ||= nil
+      connection, @connection = @connection, nil
+      schema, @schema = @schema, nil
+      attribute_schemata, @attribute_schemata = @attribute_schemata, nil
+      must, may = @must, @may
+      object_classes = @object_classes
+      unless @abbreviating
+        @abbreviating = true
+        @must, @may = @must.collect(&:name), @may.collect(&:name)
+        @object_classes = @object_classes.collect(&:name)
+      end
+      yield
+    ensure
+      @connection = connection
+      @schema = schema
+      @attribute_schemata = attribute_schemata
+      @must = must
+      @may = may
+      @object_classes = object_classes
+      @abbreviating = false
+    end
+
     def extract_object_class(attributes)
       classes = []
       attrs = attributes.stringify_keys.reject do |key, value|
