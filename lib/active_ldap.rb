@@ -930,7 +930,7 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-require_gem_if_need.call("active_record/base", "activerecord")
+require_gem_if_need.call("active_record", "activerecord")
 begin
   require_gem_if_need.call("gettext/active_record", "gettext")
 rescue LoadError
