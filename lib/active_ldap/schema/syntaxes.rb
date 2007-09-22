@@ -20,6 +20,10 @@ module ActiveLdap
         PRINTABLE_CHARACTER = /[#{printable_character_source}]/ #
         UNPRINTABLE_CHARACTER = /[^#{printable_character_source}]/ #
 
+        def type_cast(value)
+          value
+        end
+
         def valid?(value)
           validate(value).nil?
         end
@@ -155,7 +159,29 @@ module ActiveLdap
       class GeneralizedTime < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.24"] = self
 
+        def type_cast(value)
+          return value if value.nil? or value.is_a?(Time)
+          begin
+            Time.parse(value)
+          rescue ArgumentError
+            value
+          end
+        end
+
         private
+        def normalize_value(value)
+          if value.is_a?(Time)
+            normalized_value = value.strftime("%Y%m%d%H%M%S")
+            if value.gmt?
+              normalized_value + "Z"
+            else
+              normalized_value + ("%+03d%02d" % value.gmtoff.divmod(3600))
+            end
+          else
+            value
+          end
+        end
+
         def validate_normalized_value(value, original_value)
           match_data = /\A
                          (\d{4,4})?
@@ -176,11 +202,11 @@ module ActiveLdap
             if missing_components.empty?
               nil
             else
-              params = [value.inspect, missing_components.join(", ")]
+              params = [original_value.inspect, missing_components.join(", ")]
               _("%s has missing components: %s") % params
             end
           else
-            _("%s is invalid time format")
+            _("%s is invalid time format") % original_value.inspect
           end
         end
       end

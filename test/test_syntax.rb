@@ -71,6 +71,16 @@ class TestSyntax < Test::Unit::TestCase
     assert_dn_type_cast("cn=test", 'Distinguished Name')
   end
 
+  def test_generalized_time_type_cast
+    assert_type_cast_without_validation(nil, nil, "Generalized Time")
+    assert_type_cast(Time.parse("1994/12/16 10:32"), "199412161032",
+                     "Generalized Time")
+    assert_type_cast(Time.parse("1994/12/16 10:32Z"), "199412161032Z",
+                     "Generalized Time")
+    assert_type_cast(Time.parse("1994/12/16 10:32 +09:00"), "199412161032+0900",
+                     "Generalized Time")
+  end
+
   priority :normal
   def test_bit_string_validate
     assert_valid("'0101111101'B", 'Bit String')
