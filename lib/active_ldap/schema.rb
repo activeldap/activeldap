@@ -384,7 +384,7 @@ module ActiveLdap
       end
 
       def normalize_value(value)
-        send_to_syntax(value, :type_cast, value)
+        send_to_syntax(value, :normalize_value, value)
       end
 
       def syntax_description
