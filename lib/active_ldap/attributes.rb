@@ -41,7 +41,7 @@ module ActiveLdap
         if respond_to?(handler, true)
           [name, send(handler, name, value)]
         else
-          [name, [value.to_s]]
+          [name, [schema.attribute(name).normalize_value(value)]]
         end
       end
 
