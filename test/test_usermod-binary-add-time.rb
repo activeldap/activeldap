@@ -41,8 +41,10 @@ class TestUsermodBinaryAddTime < Test::Unit::TestCase
       user = @user_class.find(name)
       assert_equal(name, user.uid)
       assert_equal(cn, user.cn)
-      assert_equal(uid.to_s, user.uid_number)
-      assert_equal(uid.to_s, user.gid_number)
+      assert_equal(uid.to_i, user.uid_number)
+      assert_equal(uid.to_i, user.gid_number)
+      assert_equal(uid.to_s, user.uid_number_before_type_cast)
+      assert_equal(uid.to_s, user.gid_number_before_type_cast)
       assert_equal((previous_classes + ['strongAuthenticationUser']).sort,
                    user.classes.sort)
       cert = File.read(File.join(@examples_dir, 'example.der'))

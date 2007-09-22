@@ -308,6 +308,14 @@ module ActiveLdap
         end
       end
 
+      def normalize_value(value)
+        if @validator
+          @validator.normalize_value(value)
+        else
+          value
+        end
+      end
+
       private
       def attribute(attribute_name, name=@name)
         @schema.ldap_syntax_attribute(name, attribute_name)
@@ -369,6 +377,14 @@ module ActiveLdap
 
       def validate(value)
         send_to_syntax(nil, :validate, value)
+      end
+
+      def type_cast(value)
+        send_to_syntax(value, :type_cast, value)
+      end
+
+      def normalize_value(value)
+        send_to_syntax(value, :type_cast, value)
       end
 
       def syntax_description

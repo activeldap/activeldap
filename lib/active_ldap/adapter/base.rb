@@ -406,6 +406,12 @@ module ActiveLdap
       end
 
       def escape_filter_value(value, options={})
+        case value
+	when Numeric
+          value = value.to_s
+        when Time
+          value = Schema::GeneralizedTime.new.normalize_value(value)
+        end
         value.gsub(/(?:[()\\\0]|\*\*?)/) do |s|
           if s == "*"
             s

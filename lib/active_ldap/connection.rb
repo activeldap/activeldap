@@ -197,7 +197,9 @@ module ActiveLdap
 
     def connection
       conn = @connection
-      conn ||= self.class.active_connections[dn] || retrieve_connection if id
+      if get_attribute_before_type_cast(dn_attribute)[1]
+        conn ||= self.class.active_connections[dn] || retrieve_connection
+      end
       conn || self.class.connection
     end
 

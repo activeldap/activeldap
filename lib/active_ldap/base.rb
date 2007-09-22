@@ -590,7 +590,7 @@ module ActiveLdap
               _("wrong number of arguments (%d for 1)") % args.size
           end
           if before_type_cast
-            return get_attribute_before_type_cast(real_key, *args)
+            return get_attribute_before_type_cast(real_key, *args)[1]
           elsif query
             return get_attribute_as_query(real_key, *args)
           else
@@ -958,11 +958,30 @@ module ActiveLdap
     #
     # Return the value of the attribute called by method_missing?
     def get_attribute(name, force_array=false)
-      get_attribute_before_type_cast(name, force_array)
+      name, value = get_attribute_before_type_cast(name, force_array)
+      attribute = schema.attribute(name)
+      if value.is_a?(Array)
+        value.collect do |val|
+          attribute.type_cast(val)
+        end
+      else
+        attribute.type_cast(value)
+      end
+    end
+
+    def get_attribute_before_type_cast(name, force_array=false)
+      name = to_real_attribute_name(name)
+
+      value = @data[name] || []
+      if force_array
+        [name, value.dup]
+      else
+        [name, array_of(value.dup, false)]
+      end
     end
 
     def get_attribute_as_query(name, force_array=false)
-      value = get_attribute_before_type_cast(name, force_array)
+      name, value = get_attribute_before_type_cast(name, force_array)
       if force_array
         value.collect {|x| !false_value?(x)}
       else
@@ -973,17 +992,6 @@ module ActiveLdap
     def false_value?(value)
       value.nil? or value == false or value == [] or
         value == "false" or value == "FALSE" or value == ""
-    end
-
-    def get_attribute_before_type_cast(name, force_array=false)
-      name = to_real_attribute_name(name)
-
-      value = @data[name] || []
-      if force_array
-        value.dup
-      else
-        array_of(value.dup, false)
-      end
     end
 
     # set_attribute

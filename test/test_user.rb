@@ -41,12 +41,14 @@ class TestUser < Test::Unit::TestCase
       uid_number = 9000
       user.uid_number = uid_number
       # Test to_s on Fixnums
-      assert_equal(uid_number.to_s, user.uid_number)
+      assert_equal(uid_number, user.uid_number)
+      assert_equal(uid_number.to_s, user.uid_number_before_type_cast)
 
       gid_number = 9000
       user.gid_number = gid_number
       # Test to_s on Fixnums
-      assert_equal(gid_number.to_s, user.gid_number)
+      assert_equal(gid_number, user.gid_number)
+      assert_equal(gid_number.to_s, user.gid_number_before_type_cast)
 
       home_directory = '/home/foo'
       user.home_directory = home_directory

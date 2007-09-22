@@ -32,7 +32,6 @@ module ActiveLdap
           validate_normalized_value(normalize_value(value), value)
         end
 
-        private
         def normalize_value(value)
           value
         end
@@ -50,7 +49,6 @@ module ActiveLdap
           end
         end
 
-        private
         def normalize_value(value)
           if value.is_a?(String) and /\A[01]*\z/ =~ value
             "'#{value}'B"
@@ -59,6 +57,7 @@ module ActiveLdap
           end
         end
 
+        private
         def validate_normalized_value(value, original_value)
           if /\A'/ !~ value
             return _("%s doesn't have the first \"'\"") % original_value.inspect
@@ -90,7 +89,6 @@ module ActiveLdap
           end
         end
 
-        private
         def normalize_value(value)
           case value
           when true
@@ -102,6 +100,7 @@ module ActiveLdap
           end
         end
 
+        private
         def validate_normalized_value(value, original_value)
           if %w(TRUE FALSE).include?(value)
             nil
@@ -133,6 +132,14 @@ module ActiveLdap
           DN.parse(value)
         rescue DistinguishedNameInvalid
           value
+        end
+
+        def normalize_value(value)
+          if value.is_a?(DN)
+            value.to_s
+          else
+            value
+          end
         end
 
         private
@@ -168,7 +175,6 @@ module ActiveLdap
           end
         end
 
-        private
         def normalize_value(value)
           if value.is_a?(Time)
             normalized_value = value.strftime("%Y%m%d%H%M%S")
@@ -182,6 +188,7 @@ module ActiveLdap
           end
         end
 
+        private
         def validate_normalized_value(value, original_value)
           match_data = /\A
                          (\d{4,4})?
@@ -223,7 +230,6 @@ module ActiveLdap
           end
         end
 
-        private
         def normalize_value(value)
           if value.is_a?(Integer)
             value.to_s
@@ -232,6 +238,7 @@ module ActiveLdap
           end
         end
 
+        private
         def validate_normalized_value(value, original_value)
           Integer(value)
           nil

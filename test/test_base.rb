@@ -205,6 +205,7 @@ class TestBase < Test::Unit::TestCase
         assert_equal([], user2.errors.to_a)
         assert(@user_class.exists?(uid2))
         attributes.each do |key, value|
+          value = value.to_i if [:uid_number, :gid_number].include?(key)
           assert_equal(value, user2[key])
         end
       end
@@ -229,6 +230,7 @@ class TestBase < Test::Unit::TestCase
       assert_equal([], user.errors.to_a)
       assert(@user_class.exists?(uid))
       attributes.each do |key, value|
+        value = value.to_i if [:uid_number, :gid_number].include?(key)
         assert_equal(value, user[key])
       end
     end
