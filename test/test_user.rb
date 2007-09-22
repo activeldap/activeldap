@@ -58,9 +58,9 @@ class TestUser < Test::Unit::TestCase
       assert_equal([home_directory], user.home_directory(true),
                    'This should be [#{home_directory.dump}].')
 
-      see_also = ActiveLdap::DN.parse("cn=XXX,dc=local,dc=net")
+      see_also = "cn=XXX,dc=local,dc=net"
       user.see_also = see_also
-      assert_equal(ActiveLdap.parse(see_also), user.see_also)
+      assert_equal(ActiveLdap::DN.parse(see_also), user.see_also)
 
       see_also = ActiveLdap::DN.parse(see_also)
       user.see_also = see_also
