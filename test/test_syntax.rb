@@ -59,6 +59,11 @@ class TestSyntax < Test::Unit::TestCase
     assert_type_cast("0101111101", "'0101111101'B", 'Bit String')
   end
 
+  def test_boolean_type_cast
+    assert_type_cast(true, "TRUE", "Boolean")
+    assert_type_cast(false, "FALSE", "Boolean")
+  end
+
   priority :normal
   def test_bit_string_validate
     assert_valid("'0101111101'B", 'Bit String')
@@ -275,6 +280,8 @@ class TestSyntax < Test::Unit::TestCase
   def assert_type_cast(type_casted_value, original_value, syntax_name)
     syntax = @syntaxes[syntax_name]
     assert_equal(type_casted_value, syntax.type_cast(original_value))
+    assert_equal(type_casted_value, syntax.type_cast(type_casted_value))
+
     assert_valid(type_casted_value, syntax_name)
   end
 end

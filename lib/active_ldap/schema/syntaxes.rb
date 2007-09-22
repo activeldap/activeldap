@@ -46,6 +46,7 @@ module ActiveLdap
           end
         end
 
+        private
         def normalize_value(value)
           if value.is_a?(String) and /\A[01]*\z/ =~ value
             "'#{value}'B"
@@ -54,7 +55,6 @@ module ActiveLdap
           end
         end
 
-        private
         def validate_normalized_value(value, original_value)
           if /\A'/ !~ value
             return _("%s doesn't have the first \"'\"") % original_value.inspect
@@ -75,7 +75,29 @@ module ActiveLdap
       class Boolean < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.7"] = self
 
+        def type_cast(value)
+          case value
+          when "TRUE"
+            true
+          when "FALSE"
+            false
+          else
+            value
+          end
+        end
+
         private
+        def normalize_value(value)
+          case value
+          when true
+            "TRUE"
+          when false
+            "FALSE"
+          else
+            value
+          end
+        end
+
         def validate_normalized_value(value, original_value)
           if %w(TRUE FALSE).include?(value)
             nil
