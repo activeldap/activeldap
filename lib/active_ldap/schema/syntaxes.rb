@@ -28,6 +28,7 @@ module ActiveLdap
           validate_normalized_value(normalize_value(value), value)
         end
 
+        private
         def normalize_value(value)
           value
         end
@@ -297,9 +298,8 @@ module ActiveLdap
       class TelephoneNumber < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.50"] = self
 
-        private
-        def validate_normalized_value(value, original_value)
-          PrintableString.new.validate(original_value)
+        def validate(value)
+          PrintableString.new.validate(value)
         end
       end
     end
