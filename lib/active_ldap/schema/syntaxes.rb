@@ -214,7 +214,24 @@ module ActiveLdap
       class Integer < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.27"] = self
 
+        def type_cast(value)
+          return value if value.nil?
+          begin
+            Integer(value)
+          rescue ArgumentError
+            value
+          end
+        end
+
         private
+        def normalize_value(value)
+          if value.is_a?(Integer)
+            value.to_s
+          else
+            value
+          end
+        end
+
         def validate_normalized_value(value, original_value)
           Integer(value)
           nil

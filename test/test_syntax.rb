@@ -81,6 +81,11 @@ class TestSyntax < Test::Unit::TestCase
                      "Generalized Time")
   end
 
+  def test_integer_type_cast
+    assert_type_cast_without_validation(nil, nil, "Generalized Time")
+    assert_type_cast(1321, "1321", "Integer")
+  end
+
   priority :normal
   def test_bit_string_validate
     assert_valid("'0101111101'B", 'Bit String')
