@@ -55,11 +55,16 @@ class TestSyntax < Test::Unit::TestCase
   end
 
   priority :must
-  def test_bit_string
+  def test_bit_string_type_cast
+    assert_type_cast("0101111101", "'0101111101'B", 'Bit String')
+  end
+
+  priority :normal
+  def test_bit_string_validate
     assert_valid("'0101111101'B", 'Bit String')
     assert_valid("''B", 'Bit String')
 
-    value = "0101111101"
+    value = "0101111101'B"
     assert_invalid(_("%s doesn't have the first \"'\"") % value.inspect,
                    value, 'Bit String')
 
@@ -76,7 +81,7 @@ class TestSyntax < Test::Unit::TestCase
                    value, 'Bit String')
   end
 
-  def test_boolean
+  def test_boolean_validate
     assert_valid("TRUE", "Boolean")
     assert_valid("FALSE", "Boolean")
 
@@ -85,7 +90,7 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Boolean")
   end
 
-  def test_country_string
+  def test_country_string_validate
     assert_valid("ja", "Country String")
     assert_valid("JA", "Country String")
 
@@ -94,7 +99,7 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Country String")
   end
 
-  def test_dn
+  def test_dn_validate
     assert_valid("cn=test", 'Distinguished Name')
     assert_valid("CN=Steve Kille,O=Isode Limited,C=GB", 'Distinguished Name')
     assert_valid("OU=Sales+CN=J. Smith,O=Widget Inc.,C=US", 'Distinguished Name')
@@ -111,7 +116,7 @@ class TestSyntax < Test::Unit::TestCase
                    value, 'Distinguished Name')
   end
 
-  def test_directory_string
+  def test_directory_string_validate
     assert_valid("This is a string of DirectoryString containing \#!%\#@",
                  "Directory String")
     assert_valid("これはDirectoryString文字列です。",
@@ -122,32 +127,32 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Directory String")
   end
 
-  def test_generalized_time
+  def test_generalized_time_validate
     assert_valid("199412161032", "Generalized Time")
     assert_valid("199412161032Z", "Generalized Time")
     assert_valid("199412161032+0900", "Generalized Time")
 
     value = "1994"
     params = [value.inspect, %w(month day hour minute).join(", ")]
-    assert_invalid("%s has missing components: %s" % params,
+    assert_invalid(_("%s has missing components: %s") % params,
                    value, "Generalized Time")
   end
 
-  def test_integer
+  def test_integer_validate
     assert_valid("1321", "Integer")
 
     assert_invalid_integer("13.5")
     assert_invalid_integer("string")
   end
 
-  def test_jpeg
+  def test_jpeg_validate
     assert_valid([0xffd8].pack("n"), "JPEG")
 
     assert_invalid(_("invalid JPEG format"), "", "JPEG")
     assert_invalid(_("invalid JPEG format"), "jpeg", "JPEG")
   end
 
-  def test_name_and_optional_uid
+  def test_name_and_optional_uid_validate
     assert_valid("1.3.6.1.4.1.1466.0=#04024869,O=Test,C=GB#'0101'B",
                  "Name And Optional UID")
     assert_valid("cn=test", "Name And Optional UID")
@@ -163,7 +168,7 @@ class TestSyntax < Test::Unit::TestCase
                    "cn=test\##{bit_string}", "Name And Optional UID")
   end
 
-  def test_numeric_string
+  def test_numeric_string_validate
     assert_valid("1997", "Numeric String")
 
     assert_invalid_numeric_string("-3")
@@ -171,14 +176,14 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid_numeric_string("string")
   end
 
-  def test_oid
+  def test_oid_validate
     assert_valid("1.2.3.4", "OID")
     assert_valid("cn", "OID")
 
     assert_invalid_oid("\#@!")
   end
 
-  def test_other_mailbox
+  def test_other_mailbox_validate
     assert_valid("smtp$bob@example.com", "Other Mailbox")
 
 
@@ -200,7 +205,7 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid(reason, value, "Other Mailbox")
   end
 
-  def test_postal_address
+  def test_postal_address_validate
     assert_valid("1234 Main St.$Anytown, CA 12345$USA", "Postal Address")
     assert_valid("\\241,000,000 Sweepstakes$PO Box 1000000$Anytown, " +
                  "CA 12345$USA", "Postal Address")
@@ -215,7 +220,7 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Postal Address")
   end
 
-  def test_printable_string
+  def test_printable_string_validate
     assert_valid("This is a PrintableString", "Printable String")
 
     assert_invalid(_("empty string"), "", "Printable String")
@@ -232,7 +237,7 @@ class TestSyntax < Test::Unit::TestCase
     assert_invalid(reason, value, "Printable String")
   end
 
-  def test_telephone_number
+  def test_telephone_number_validate
     assert_valid("+1 512 305 0280", "Telephone Number")
 
     assert_invalid(_("empty string"), "", "Telephone Number")
@@ -242,8 +247,6 @@ class TestSyntax < Test::Unit::TestCase
     reason = _("%s has unprintable character: '%s'") % params
     assert_invalid(reason, value, "Telephone Number")
   end
-
-  priority :normal
 
   private
   def assert_valid(value, syntax_name)
@@ -267,5 +270,11 @@ class TestSyntax < Test::Unit::TestCase
   def assert_invalid_oid(value)
     assert_invalid(_("%s is invalid OID format") % value.inspect,
                    value, "OID")
+  end
+
+  def assert_type_cast(type_casted_value, original_value, syntax_name)
+    syntax = @syntaxes[syntax_name]
+    assert_equal(type_casted_value, syntax.type_cast(original_value))
+    assert_valid(type_casted_value, syntax_name)
   end
 end

@@ -23,22 +23,48 @@ module ActiveLdap
         def valid?(value)
           validate(value).nil?
         end
+
+        def validate(value)
+          validate_normalized_value(normalize_value(value), value)
+        end
+
+        def normalize_value(value)
+          value
+        end
       end
 
       class BitString < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.6"] = self
 
-        def validate(value)
+        def type_cast(value)
+          return nil if value.nil?
+          if /\A'([01]*)'B\z/ =~ value.to_s
+            $1
+          else
+            value
+          end
+        end
+
+        def normalize_value(value)
+          if value.is_a?(String) and /\A[01]*\z/ =~ value
+            "'#{value}'B"
+          else
+            value
+          end
+        end
+
+        private
+        def validate_normalized_value(value, original_value)
           if /\A'/ !~ value
-            return _("%s doesn't have the first \"'\"" % value.inspect)
+            return _("%s doesn't have the first \"'\"") % original_value.inspect
           end
 
           if /'B\z/ !~ value
-            return _("%s doesn't have the last \"'B\"" % value.inspect)
+            return _("%s doesn't have the last \"'B\"") % original_value.inspect
           end
 
           if /([^01])/ =~ value[1..-3]
-            return _("%s has invalid character '%s'" % [value.inspect, $1])
+            return _("%s has invalid character '%s'") % [value.inspect, $1]
           end
 
           nil
@@ -48,11 +74,12 @@ module ActiveLdap
       class Boolean < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.7"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if %w(TRUE FALSE).include?(value)
             nil
           else
-            _("%s should be TRUE or FALSE") % value.inspect
+            _("%s should be TRUE or FALSE") % original_value.inspect
           end
         end
       end
@@ -60,11 +87,13 @@ module ActiveLdap
       class CountryString < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.11"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if /\A#{PRINTABLE_CHARACTER}{2,2}\z/i =~ value
             nil
           else
-            _("%s should be just 2 printable characters") % value.inspect
+            format = _("%s should be just 2 printable characters")
+            format % original_value.inspect
           end
         end
       end
@@ -72,7 +101,8 @@ module ActiveLdap
       class DistinguishedName < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.12"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           DN.parse(value)
           nil
         rescue DistinguishedNameInvalid
@@ -83,18 +113,20 @@ module ActiveLdap
       class DirectoryString < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.15"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           value.unpack("U*")
           nil
         rescue ArgumentError
-          _("%s has invalid UTF-8 character") % value.inspect
+          _("%s has invalid UTF-8 character") % original_value.inspect
         end
       end
 
       class GeneralizedTime < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.24"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           match_data = /\A
                          (\d{4,4})?
                          (\d{2,2})?
@@ -126,18 +158,20 @@ module ActiveLdap
       class Integer < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.27"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           Integer(value)
           nil
         rescue ArgumentError
-          _("%s is invalid integer format") % value.inspect
+          _("%s is invalid integer format") % original_value.inspect
         end
       end
 
       class JPEG < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.28"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if value.unpack("n")[0] == 0xffd8
             nil
           else
@@ -149,7 +183,8 @@ module ActiveLdap
       class NameAndOptionalUID < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.34"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           separator_index = value.rindex("#")
           if separator_index
             dn = value[0, separator_index]
@@ -176,11 +211,12 @@ module ActiveLdap
       class NumericString < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.36"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if /\A\d+\z/ =~ value
             nil
           else
-            _("%s is invalid numeric format") % value.inspect
+            _("%s is invalid numeric format") % original_value.inspect
           end
         end
       end
@@ -188,31 +224,33 @@ module ActiveLdap
       class OID < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.38"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           DN.parse("#{value}=dummy")
           nil
         rescue DistinguishedNameInvalid
-          _("%s is invalid OID format") % value.inspect
+          _("%s is invalid OID format") % original_value.inspect
         end
       end
 
       class OtherMailbox < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.39"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           type, mailbox = value.split('$', 2)
 
           if type.empty?
-            return _("%s has no mailbox type") % value.inspect
+            return _("%s has no mailbox type") % original_value.inspect
           end
 
           if /(#{UNPRINTABLE_CHARACTER})/i =~ type
             format = _("%s has unprintable character in mailbox type: '%s'")
-            return format % [value.inspect, $1]
+            return format % [original_value.inspect, $1]
           end
 
           if mailbox.blank?
-            return _("%s has no mailbox") % value.inspect
+            return _("%s has no mailbox") % original_value.inspect
           end
 
           nil
@@ -222,7 +260,8 @@ module ActiveLdap
       class PostalAddress < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.41"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if value.blank?
             return _("empty string")
           end
@@ -230,7 +269,7 @@ module ActiveLdap
           begin
             value.unpack("U*")
           rescue ArgumentError
-            return _("%s has invalid UTF-8 character") % value.inspect
+            return _("%s has invalid UTF-8 character") % original_value.inspect
           end
 
           nil
@@ -240,14 +279,15 @@ module ActiveLdap
       class PrintableString < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.44"] = self
 
-        def validate(value)
+        private
+        def validate_normalized_value(value, original_value)
           if value.blank?
             return _("empty string")
           end
 
           if /(#{UNPRINTABLE_CHARACTER})/i =~ value
             format = _("%s has unprintable character: '%s'")
-            return format % [value.inspect, $1]
+            return format % [original_value.inspect, $1]
           end
 
           nil
@@ -257,8 +297,9 @@ module ActiveLdap
       class TelephoneNumber < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.50"] = self
 
-        def validate(value)
-          PrintableString.new.validate(value)
+        private
+        def validate_normalized_value(value, original_value)
+          PrintableString.new.validate(original_value)
         end
       end
     end

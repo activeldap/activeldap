@@ -300,6 +300,14 @@ module ActiveLdap
         end
       end
 
+      def type_cast(value)
+        if @validator
+          @validator.type_cast(value)
+        else
+          value
+        end
+      end
+
       private
       def attribute(attribute_name, name=@name)
         @schema.ldap_syntax_attribute(name, attribute_name)
