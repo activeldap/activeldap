@@ -407,7 +407,7 @@ module ActiveLdap
 
       def escape_filter_value(value, options={})
         case value
-	when Numeric
+	when Numeric, DN
           value = value.to_s
         when Time
           value = Schema::GeneralizedTime.new.normalize_value(value)
