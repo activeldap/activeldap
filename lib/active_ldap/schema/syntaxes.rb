@@ -124,6 +124,13 @@ module ActiveLdap
       class DistinguishedName < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.12"] = self
 
+        def type_cast(value)
+          return nil if value.nil?
+          DN.parse(value)
+        rescue DistinguishedNameInvalid
+          value
+        end
+
         private
         def validate_normalized_value(value, original_value)
           DN.parse(value)

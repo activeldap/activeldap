@@ -10,6 +10,7 @@ module ActiveLdap
       attr_reader :dn
       def initialize(source)
         @dn = nil
+        source = source.to_s if source.is_a?(DN)
         @source = source
       end
 

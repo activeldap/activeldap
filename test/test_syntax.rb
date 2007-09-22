@@ -56,12 +56,19 @@ class TestSyntax < Test::Unit::TestCase
 
   priority :must
   def test_bit_string_type_cast
+    assert_type_cast_without_validation(nil, nil, 'Bit String')
     assert_type_cast("0101111101", "'0101111101'B", 'Bit String')
   end
 
   def test_boolean_type_cast
+    assert_type_cast_without_validation(nil, nil, 'Boolean')
     assert_type_cast(true, "TRUE", "Boolean")
     assert_type_cast(false, "FALSE", "Boolean")
+  end
+
+  def test_dn_type_cast
+    assert_type_cast_without_validation(nil, nil, 'Distinguished Name')
+    assert_dn_type_cast("cn=test", 'Distinguished Name')
   end
 
   priority :normal
@@ -277,11 +284,21 @@ class TestSyntax < Test::Unit::TestCase
                    value, "OID")
   end
 
-  def assert_type_cast(type_casted_value, original_value, syntax_name)
+  def assert_type_cast_without_validation(type_casted_value, original_value,
+                                          syntax_name)
     syntax = @syntaxes[syntax_name]
     assert_equal(type_casted_value, syntax.type_cast(original_value))
     assert_equal(type_casted_value, syntax.type_cast(type_casted_value))
+  end
 
+  def assert_type_cast(type_casted_value, original_value, syntax_name)
+    assert_type_cast_without_validation(type_casted_value, original_value,
+                                        syntax_name)
     assert_valid(type_casted_value, syntax_name)
+  end
+
+  def assert_dn_type_cast(original_value, syntax_name)
+    assert_type_cast(ActiveLdap::DN.parse(original_value), original_value,
+                     syntax_name)
   end
 end
