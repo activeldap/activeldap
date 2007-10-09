@@ -1,3 +1,4 @@
+- write tests for :uri option in configuration.
 - Test SASL bind.
 - Add result pagination via LDAP::Controls
 - serialize & serialized_attributes

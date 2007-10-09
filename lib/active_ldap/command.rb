@@ -19,6 +19,7 @@ module ActiveLdap
                      _("Specify configuration file written as YAML")) do |file|
           require 'yaml'
           config = YAML.load(File.read(file)).symbolize_keys
+          config = Base.prepare_configuration(config)
           Configuration::DEFAULT_CONFIG.update(config)
         end
 

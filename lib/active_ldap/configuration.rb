@@ -1,3 +1,14 @@
+require 'uri'
+begin
+  require 'uri/ldaps'
+rescue LoadError
+  module URI
+    class LDAPS < LDAP
+      DEFAULT_PORT = 636
+    end
+    @@schemes['LDAPS'] = LDAPS
+  end
+end
 
 module ActiveLdap
   # Configuration
@@ -80,16 +91,16 @@ module ActiveLdap
         @@defined_configurations.delete_if {|key, value| value == config}
       end
 
-      CONNECTION_CONFIGURATION_KEYS = [:base, :adapter]
+      CONNECTION_CONFIGURATION_KEYS = [:uri, :base, :adapter]
       def remove_connection_related_configuration(config)
         config.reject do |key, value|
           CONNECTION_CONFIGURATION_KEYS.include?(key)
 	end
       end
 
-      def merge_configuration(config, target=self)
+      def merge_configuration(user_configuration, target=self)
         configuration = default_configuration
-        config.symbolize_keys.each do |key, value|
+        prepare_configuration(user_configuration).each do |key, value|
           case key
           when :base
             # Scrub before inserting
@@ -108,6 +119,28 @@ module ActiveLdap
           end
         end
         configuration
+      end
+
+      def prepare_configuration(configuration)
+        configuration = configuration.symbolize_keys
+        uri = configuration.delete(:uri)
+        return configuration unless uri
+
+        begin
+          uri = URI.parse(uri)
+        rescue URI::InvalidURIError
+          raise ConfigurationError.new(_("invalid URI: %s") % uri)
+        end
+        unless uri.is_a?(URI::LDAP)
+          raise ConfigurationError.new(_("not a LDAP URI: %s") % uri.to_s)
+        end
+
+        uri_configuration = {:port => uri.port}
+        uri_configuration[:host] = uri.host if uri.host
+        uri_configuration[:bind_dn] = uri.dn if uri.dn
+        uri_configuration[:scope] = uri.scope if uri.scope
+        uri_configuration[:method] = :ssl if uri.is_a?(URI::LDAPS)
+        uri_configuration.merge(configuration)
       end
     end
   end
