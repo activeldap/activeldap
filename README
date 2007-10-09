@@ -20,10 +20,9 @@ http://ruby-activeldap.rubyforge.org/
 
 PREREQUISITES
 
-  * Ruby 1.8.x [1]
-  * Ruby/LDAP [0]
-  * ActiveRecord [2]
-  * (Optional) Ruby/LDAP+GSSAPI [3]
+  * Ruby 1.8.x [2]
+  * Ruby/LDAP [0] or Net::LDAP [1]
+  * ActiveRecord [3]
   * An LDAP server compatible with Ruby/LDAP: OpenLDAP, etc
 
 
@@ -75,9 +74,9 @@ Please see the file LICENSE for the terms of the licence.
 REFERENCES
 
 [0] - http://ruby-ldap.sourceforge.net
-[1] - http://www.ruby-lang.org
-[2] - http://activerecord.rubyonrails.org
-[3] - http://caliban.org/files/redhat/RPMS/i386/ruby-ldap-0.8.2-4.i386.rpm
+[1] - http://rubyforge.org/projects/net-ldap/
+[2] - http://www.ruby-lang.org
+[3] - http://activerecord.rubyonrails.org
 
 
 THANKS
