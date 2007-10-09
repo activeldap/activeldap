@@ -9,7 +9,7 @@ Contributors:
 DESCRIPTION
 'Ruby/ActiveLdap' is a ruby extension library which provides a clean objected
 oriented interface to the Ruby/LDAP[0] library.  It was inspired by
-ActivRecord[2]. This is not nearly as clean or as flexible as ActiveRecord, but
+ActivRecord[3]. This is not nearly as clean or as flexible as ActiveRecord, but
 it is still trivial to define new objects and manipulate them with minimal
 difficulty.
 
