@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-09-17 18:15+0900\n"
+"POT-Creation-Date: 2007-10-10 21:14+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3316,19 +3316,19 @@ msgstr ""
 msgid "Requested action timed out."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:459
+#: lib/active_ldap/adapter/base.rb:465
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:476
+#: lib/active_ldap/adapter/base.rb:482
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:479
+#: lib/active_ldap/adapter/base.rb:485
 msgid "Attempting to reconnect"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:490
+#: lib/active_ldap/adapter/base.rb:496
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -3371,27 +3371,27 @@ msgstr ""
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:131
+#: lib/active_ldap/distinguished_name.rb:132
 msgid "name component is missing"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:135
+#: lib/active_ldap/distinguished_name.rb:136
 msgid "relative distinguished name (RDN) is missing"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:139
+#: lib/active_ldap/distinguished_name.rb:140
 msgid "attribute type is missing"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:143
+#: lib/active_ldap/distinguished_name.rb:144
 msgid "attribute value is missing"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:147
+#: lib/active_ldap/distinguished_name.rb:148
 msgid "found unmatched quotation"
 msgstr ""
 
-#: lib/active_ldap/distinguished_name.rb:172
+#: lib/active_ldap/distinguished_name.rb:173
 msgid "%s isn't sub DN of %s"
 msgstr ""
 
@@ -3419,11 +3419,11 @@ msgstr ""
 msgid "Specify configuration file written as YAML"
 msgstr ""
 
-#: lib/active_ldap/command.rb:25
+#: lib/active_ldap/command.rb:26
 msgid "Show this message"
 msgstr ""
 
-#: lib/active_ldap/command.rb:30
+#: lib/active_ldap/command.rb:31
 msgid "Show version"
 msgstr ""
 
@@ -3472,7 +3472,7 @@ msgstr ""
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1157
+#: lib/active_ldap/base.rb:1165
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
@@ -3516,73 +3516,73 @@ msgstr ""
 msgid "salt size must be == 4: %s"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:33
+#: lib/active_ldap/schema/syntaxes.rb:63
 msgid "%s doesn't have the first \"'\""
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:37
+#: lib/active_ldap/schema/syntaxes.rb:67
 msgid "%s doesn't have the last \"'B\""
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:41
+#: lib/active_ldap/schema/syntaxes.rb:71
 msgid "%s has invalid character '%s'"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:55
+#: lib/active_ldap/schema/syntaxes.rb:108
 msgid "%s should be TRUE or FALSE"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:67
+#: lib/active_ldap/schema/syntaxes.rb:121
 msgid "%s should be just 2 printable characters"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:90
-#: lib/active_ldap/schema/syntaxes.rb:233
+#: lib/active_ldap/schema/syntaxes.rb:162
+#: lib/active_ldap/schema/syntaxes.rb:352
 msgid "%s has invalid UTF-8 character"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:118
+#: lib/active_ldap/schema/syntaxes.rb:213
 msgid "%s has missing components: %s"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:121
+#: lib/active_ldap/schema/syntaxes.rb:216
 msgid "%s is invalid time format"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:133
+#: lib/active_ldap/schema/syntaxes.rb:246
 msgid "%s is invalid integer format"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:144
+#: lib/active_ldap/schema/syntaxes.rb:258
 msgid "invalid JPEG format"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:183
+#: lib/active_ldap/schema/syntaxes.rb:299
 msgid "%s is invalid numeric format"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:195
+#: lib/active_ldap/schema/syntaxes.rb:312
 msgid "%s is invalid OID format"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:206
+#: lib/active_ldap/schema/syntaxes.rb:324
 msgid "%s has no mailbox type"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:210
+#: lib/active_ldap/schema/syntaxes.rb:328
 msgid "%s has unprintable character in mailbox type: '%s'"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:215
+#: lib/active_ldap/schema/syntaxes.rb:333
 msgid "%s has no mailbox"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:227
-#: lib/active_ldap/schema/syntaxes.rb:245
+#: lib/active_ldap/schema/syntaxes.rb:346
+#: lib/active_ldap/schema/syntaxes.rb:365
 msgid "empty string"
 msgstr ""
 
-#: lib/active_ldap/schema/syntaxes.rb:249
+#: lib/active_ldap/schema/syntaxes.rb:369
 msgid "%s has unprintable character: '%s'"
 msgstr ""
 
@@ -3590,12 +3590,20 @@ msgstr ""
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr ""
 
-#: lib/active_ldap/configuration.rb:59
+#: lib/active_ldap/configuration.rb:70
 msgid "%s connection is not configured"
 msgstr ""
 
-#: lib/active_ldap/configuration.rb:100
+#: lib/active_ldap/configuration.rb:111
 msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
+msgstr ""
+
+#: lib/active_ldap/configuration.rb:132
+msgid "invalid URI: %s"
+msgstr ""
+
+#: lib/active_ldap/configuration.rb:135
+msgid "not a LDAP URI: %s"
 msgstr ""
 
 #: rails/plugin/active_ldap/init.rb:7
