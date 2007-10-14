@@ -11,7 +11,7 @@ end
 
 ldap_configuration_file = File.join(RAILS_ROOT, 'config', 'ldap.yml')
 if File.exist?(ldap_configuration_file)
-  configurations = YAML::load(ERB.new(IO.read(ldap_configuration_file)).result)
+  configurations = YAML.load(ERB.new(IO.read(ldap_configuration_file)).result)
   ActiveLdap::Base.configurations = configurations
   ActiveLdap::Base.establish_connection
 else
