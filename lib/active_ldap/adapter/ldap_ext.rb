@@ -13,7 +13,7 @@ module LDAP
 
     alias_method :_initialize, :initialize
     def initialize(op, type, vals)
-      if (LDAP::VERSION.split(/\./).collect {|x| x.to_i} <=> [0, 9, 7]) <= 0
+      if (VERSION.split(/\./).collect {|x| x.to_i} <=> [0, 9, 7]) <= 0
         @op, @type, @vals = op, type, vals # to protect from GC
       end
       _initialize(op, type, vals)
