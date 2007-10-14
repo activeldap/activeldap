@@ -7,9 +7,7 @@ module ActiveLdap
     class Base
       class << self
         def net_ldap_connection(options)
-          unless defined?(::Net::LDAP)
-            require 'active_ldap/adapter/net_ldap_ext'
-          end
+          require 'active_ldap/adapter/net_ldap_ext'
           NetLdap.new(options)
         end
       end

@@ -5,9 +5,7 @@ module ActiveLdap
     class Base
       class << self
         def ldap_connection(options)
-          unless defined?(::LDAP)
-            require 'active_ldap/adapter/ldap_ext'
-          end
+          require 'active_ldap/adapter/ldap_ext'
           Ldap.new(options)
         end
       end
