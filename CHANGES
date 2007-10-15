@@ -11,7 +11,7 @@
   * improved LDAP server support:
     * improved Sun DS support.
     * improved ActiveDirectory support. Thanks to Ernie Miller!
-    * improved Fedora-DS support. Thanks to by Daniel Pfile!
+    * improved Fedora-DS support. Thanks to Daniel Pfile!
   * improved existing functions:
     * improved DN handling. Thanks to James Hughes!
     * improved SASL bind.
