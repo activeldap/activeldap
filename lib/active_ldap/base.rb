@@ -168,10 +168,12 @@ module ActiveLdap
     include GetTextSupport
     public :gettext
 
-    if Reloadable.const_defined?(:Deprecated)
-      include Reloadable::Deprecated
-    else
-      include Reloadable::Subclasses
+    if Object.const_defined?(:Reloadable)
+      if Reloadable.const_defined?(:Deprecated)
+        include Reloadable::Deprecated
+      else
+        include Reloadable::Subclasses
+      end
     end
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
