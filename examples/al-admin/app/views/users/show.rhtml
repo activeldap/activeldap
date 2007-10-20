@@ -1,3 +1,7 @@
 <%= render(:partial => "entry", :locals => {:entry => @user}) %>
 
-<%= link_to s_('Menu|Back'), :action => 'index' %>
+<div class="navi">
+  <ul>
+    <li><%= link_to s_('Menu|Back'), :action => 'index' %></li>
+  </ul>
+</div>

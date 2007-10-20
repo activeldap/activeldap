@@ -6,5 +6,9 @@
   <% end %>
 </div>
 
-<%= link_to(s_('Menu|Show'), :action => 'show', :id => @user) %> |
-<%= link_to(s_('Menu|Back'), :action => 'index') %>
+<div class="navi">
+  <ul>
+    <li><%= link_to(s_('Menu|Show'), :action => 'show', :id => @user) %></li>
+    <li><%= link_to(s_('Menu|Back'), :action => 'index') %></li>
+  </ul>
+</div>

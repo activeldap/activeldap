@@ -1,16 +1,16 @@
 .fieldWithErrors {
   padding: 2px;
-  background-color: red;
+  background-color: #0c0;
   display: table;
 }
 
 #errorExplanation {
   width: 400px;
-  border: 2px solid red;
+  border: 2px solid #0c0;
   padding: 7px;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #fcfffc;
 }
 
 #errorExplanation h2 {
@@ -19,7 +19,7 @@
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: -7px;
-  background-color: #c00;
+  background-color: #0c0;
   color: #fff;
 }
 
