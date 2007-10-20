@@ -26,30 +26,36 @@
 	  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
 	</ul>
       </div>
+
+      <hr class="clear" />
     </div>
 
-    <h1><%=h "#{controller.controller_name}: #{controller.action_name}" %></h1>
-
+    <div class="body">
+      <div class="content">
 <% if flash[:notice] -%>
-    <%= flash_box("<p class=\"notice\">#{h(flash[:notice])}</p>") %>
+        <%= flash_box("<p class=\"notice\">#{h(flash[:notice])}</p>") %>
 <% end -%>
 
-    <div class="content">
-      <%= yield %>
-    </div>
+	<h1>
+          <%=h "#{controller.controller_name}: #{controller.action_name}" %>
+        </h1>
 
-    <div class="footer">
-      <div class="links">
-        <p><%= link_to(_("Top"), top_path) %></p>
+	<%= yield %>
       </div>
 
-      <div class="system-info">
-	<p>
-          al-admin: Powered by
-          <%= link_to("Ruby/ActiveLdap",
-                      "http://rubyforge.org/projects/ruby-activeldap") %>
-          <%= ActiveLdap::VERSION %>
-        </p>
+      <div class="footer">
+	<div class="links">
+	  <p><%= link_to(_("Top"), top_path) %></p>
+	</div>
+
+	<div class="system-info">
+	  <p>
+	    al-admin: Powered by
+	    <%= link_to("Ruby/ActiveLdap",
+			"http://rubyforge.org/projects/ruby-activeldap") %>
+	    <%= ActiveLdap::VERSION %>
+	  </p>
+	</div>
       </div>
     </div>
   </body>

@@ -1,16 +1,8 @@
+html,
 body
 {
-  margin: 0.5em 1.5em;
-}
-
-table, tr, th, td
-{
-  border: 1px solid black;
-}
-
-div.logo
-{
-  float: left;
+  margin: 0;
+  background-color: white;
 }
 
 a img
@@ -18,14 +10,80 @@ a img
   border-style: none;
 }
 
+a:link
+{
+  color: #060;
+}
+
+a:visited
+{
+  color: #990;
+}
+
+a:hover
+{
+  color: #9c0;
+}
+
+a:active
+{
+  color: #9f0;
+}
+
+hr.clear
+{
+  visibility: hidden;
+  clear: both;
+}
+
+div.header
+{
+  background-image: url(../images/header-background.png);
+  background-repeat: repeat-x;
+  border-top: 5px solid #9d9;
+  border-bottom: 3px solid #9d9;
+}
+
+div.logo
+{
+  float: left;
+}
+
 div.menu
 {
   float: right;
+  margin-right: 1em;
 }
 
 div.menu li
 {
   display: inline;
+}
+
+div.content
+{
+  margin: 0.5em 1.5em;
+}
+
+div.footer
+{
+  padding: 0 1.5em;
+  border-top: 3px solid #9d9;
+}
+
+div.footer div.links
+{
+  float: left;
+}
+
+div.system-info
+{
+  text-align: right;
+}
+
+table, tr, th, td
+{
+  border: 1px solid black;
 }
 
 h1
@@ -72,18 +130,3 @@ div.object-class-information
   padding: 0px 1em;
 }
 
-div.footer
-{
-  margin-top: 0.5em;
-  border-top: 1px solid gray;
-}
-
-div.footer div.links
-{
-  float: left;
-}
-
-div.system-info
-{
-  text-align: right;
-}
