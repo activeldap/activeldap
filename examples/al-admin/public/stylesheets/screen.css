@@ -8,8 +8,27 @@ table, tr, th, td
   border: 1px solid black;
 }
 
-div#flash-box,
-div.content
+div.logo
+{
+  float: left;
+}
+
+a img
+{
+  border-style: none;
+}
+
+div.menu
+{
+  float: right;
+}
+
+div.menu li
+{
+  display: inline;
+}
+
+h1
 {
   clear: both;
 }
@@ -29,21 +48,6 @@ p.notice
   color: green;
   padding: 1em;
   text-align: center;
-}
-
-h1
-{
-  float: left;
-}
-
-div.menu
-{
-  float: right;
-}
-
-div.menu li
-{
-  display: inline;
 }
 
 div.entry

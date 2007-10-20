@@ -15,14 +15,20 @@
     <%= javascript_include_tag :defaults %>
   </head>
   <body>
-    <h1><%=h "#{controller.controller_name}: #{controller.action_name}" %></h1>
+    <div class="header">
+      <div class="logo">
+        <%= link_to(image_tag("al-admin.png"), top_path) %>
+      </div>
 
-    <div class="menu">
-      <ul>
-        <li><%= link_to(s_("Menu|Login"), login_path) %></li>
-	<li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
-      </ul>
+      <div class="menu">
+	<ul>
+	  <li><%= link_to(s_("Menu|Login"), login_path) %></li>
+	  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
+	</ul>
+      </div>
     </div>
+
+    <h1><%=h "#{controller.controller_name}: #{controller.action_name}" %></h1>
 
 <% if flash[:notice] -%>
     <%= flash_box("<p class=\"notice\">#{h(flash[:notice])}</p>") %>
