@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AL Admin 0.8.3\n"
-"POT-Creation-Date: 2007-08-24 22:25+0900\n"
-"PO-Revision-Date: 2007-08-24 22:25+0900\n"
+"Project-Id-Version: AL Admin 0.8.4\n"
+"POT-Creation-Date: 2007-10-20 21:35+0900\n"
+"PO-Revision-Date: 2007-10-20 21:35+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -63,6 +63,10 @@ msgstr "ユーザ"
 msgid "user"
 msgstr "ユーザ"
 
+#: app/controllers/directory_controller.rb:18
+msgid "Populating is only for initialization"
+msgstr "データ構築は初期化時のみ利用できます。"
+
 #: app/controllers/account_controller.rb:22 lib/authenticated_system.rb:119
 msgid "Logged in successfully"
 msgstr "ログインに成功しました。"
@@ -83,26 +87,29 @@ msgstr "ログアウトしました。"
 msgid "User was successfully updated."
 msgstr "ユーザを正常に更新しました。"
 
-#: app/controllers/directory_controller.rb:18
-msgid "Populating is only for initialization"
-msgstr "データ構築は初期化時のみ利用できます。"
+#: app/helpers/users_helper.rb:9
+msgid "Edit"
+msgstr "編集"
 
-#: app/views/layouts/application.rhtml:25
+#: app/views/directory/populate.rhtml:1
+msgid "Done."
+msgstr "完了。"
+
+#: app/views/directory/populate.rhtml:2
+msgid "Menu|Index"
+msgstr "一覧"
+
+#: app/views/layouts/application.rhtml:22
+msgid "Menu|Login"
+msgstr "ログイン"
+
+#: app/views/layouts/application.rhtml:23
+msgid "Menu|Sign up"
+msgstr "登録"
+
+#: app/views/layouts/application.rhtml:37
 msgid "Top"
 msgstr "トップ"
-
-#: app/views/users/show.rhtml:3 app/views/users/edit.rhtml:10
-msgid "Menu|Back"
-msgstr "戻る"
-
-#: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
-#: app/views/account/login.rhtml:5
-msgid "Password"
-msgstr "パスワード"
-
-#: app/views/users/_form.rhtml:13 app/views/account/sign_up.rhtml:10
-msgid "Confirm Password"
-msgstr "確認用パスワード"
 
 #: app/views/users/edit.rhtml:5
 msgid "Command|Update"
@@ -112,18 +119,18 @@ msgstr "更新"
 msgid "Menu|Show"
 msgstr "表示"
 
-#: app/views/users/index.rhtml:2
-msgid "No user."
-msgstr "ユーザがいません。"
+#: app/views/users/edit.rhtml:10 app/views/users/show.rhtml:3
+msgid "Menu|Back"
+msgstr "戻る"
 
-#: app/views/users/_object_class_information.rhtml:9
-msgid "objectClass name"
-msgstr "オブジェクトクラス名"
+#: app/views/users/_form.rhtml:6 app/views/account/login.rhtml:5
+#: app/views/account/sign_up.rhtml:7
+msgid "Password"
+msgstr "パスワード"
 
-#: app/views/users/_object_class_information.rhtml:10
-#: app/views/users/_attribute_information.rhtml:8
-msgid "description"
-msgstr "説明"
+#: app/views/users/_form.rhtml:13 app/views/account/sign_up.rhtml:10
+msgid "Confirm Password"
+msgstr "確認用パスワード"
 
 #: app/views/users/_attribute_information.rhtml:6
 msgid "attribute name"
@@ -132,6 +139,35 @@ msgstr "属性名"
 #: app/views/users/_attribute_information.rhtml:7
 msgid "value"
 msgstr "値"
+
+#: app/views/users/_attribute_information.rhtml:8
+#: app/views/users/_object_class_information.rhtml:10
+msgid "description"
+msgstr "説明"
+
+#: app/views/users/_object_class_information.rhtml:9
+msgid "objectClass name"
+msgstr "オブジェクトクラス名"
+
+#: app/views/users/index.rhtml:2
+msgid "No user."
+msgstr "ユーザがいません。"
+
+#: app/views/account/login.rhtml:2 app/views/account/sign_up.rhtml:4
+msgid "Login"
+msgstr "ログイン名"
+
+#: app/views/account/login.rhtml:8
+msgid "Remember me:"
+msgstr "覚えておく:"
+
+#: app/views/account/login.rhtml:11
+msgid "Log in"
+msgstr "ログイン"
+
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+msgid "Sign up"
+msgstr "登録"
 
 #: app/views/welcome/index.rhtml:3
 msgid "Menu|Users list"
@@ -146,44 +182,16 @@ msgid "Menu|Directory"
 msgstr "ディレクトリ"
 
 #: app/views/welcome/index.rhtml:7
-msgid "Menu|Login"
-msgstr "ログイン"
+msgid "Please login!"
+msgstr "ログインしてください。"
 
-#: app/views/welcome/index.rhtml:8
-msgid "Menu|Sign up"
-msgstr "登録"
-
-#: app/views/welcome/index.rhtml:12
+#: app/views/welcome/index.rhtml:11
 msgid "Menu|Populate"
 msgstr "構築"
 
-#: app/views/welcome/index.rhtml:14
+#: app/views/welcome/index.rhtml:13
 msgid "OK?"
 msgstr "いいですか？"
-
-#: app/views/account/sign_up.rhtml:4 app/views/account/login.rhtml:2
-msgid "Login"
-msgstr "ログイン名"
-
-#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
-msgid "Sign up"
-msgstr "登録"
-
-#: app/views/account/login.rhtml:8
-msgid "Remember me:"
-msgstr "覚えておく:"
-
-#: app/views/account/login.rhtml:11
-msgid "Log in"
-msgstr "ログイン"
-
-#: app/views/directory/populate.rhtml:1
-msgid "Done."
-msgstr "完了。"
-
-#: app/views/directory/populate.rhtml:2
-msgid "Menu|Index"
-msgstr "一覧"
 
 #: lib/authenticated_system.rb:75
 msgid "Please login."

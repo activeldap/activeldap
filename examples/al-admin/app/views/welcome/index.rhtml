@@ -4,7 +4,7 @@
   <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
   <li><%= link_to(s_("Menu|Directory"), :controller => "directory") %></li>
 <% else -%>
-  <p><%= _("Please login!") %></p>
+  <p><%= _("Please login.") %></p>
 <% end -%>
 
 <% if Entry.empty? -%>
