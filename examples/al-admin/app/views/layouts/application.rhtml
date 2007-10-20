@@ -16,9 +16,18 @@
   </head>
   <body>
     <h1><%=h "#{controller.controller_name}: #{controller.action_name}" %></h1>
+
+    <div class="menu">
+      <ul>
+        <li><%= link_to(s_("Menu|Login"), login_path) %></li>
+	<li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
+      </ul>
+    </div>
+
 <% if flash[:notice] -%>
-    <p class="notice"><%=h flash[:notice] %></p>
+    <%= flash_box("<p class=\"notice\">#{h(flash[:notice])}</p>") %>
 <% end -%>
+
     <div class="content">
       <%= yield %>
     </div>

@@ -8,9 +8,42 @@ table, tr, th, td
   border: 1px solid black;
 }
 
+div#flash-box,
+div.content
+{
+  clear: both;
+}
+
+div#flash-box
+{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: #fcfffc;
+  border: 1px solid #cdc;
+  border-width: 1px 0;
+}
+
 p.notice
 {
   color: green;
+  padding: 1em;
+  text-align: center;
+}
+
+h1
+{
+  float: left;
+}
+
+div.menu
+{
+  float: right;
+}
+
+div.menu li
+{
+  display: inline;
 }
 
 div.entry
