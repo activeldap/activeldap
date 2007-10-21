@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
     requirements = duped_options.delete(:requirements) || {}
     defaults = duped_options.delete(:defaults) || {}
     lang_options = {
-      :requirements => {:lang => /[a-z]{2,2}/}.merge(requirements),
+      :requirements => {:lang => /(?:[a-z]{2,2})?/}.merge(requirements),
       :defaults => {},
     }
     lang_options[:defaults] = {:lang => nil} if method != :connect

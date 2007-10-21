@@ -40,8 +40,6 @@ div.header
 {
   background-image: url(../images/header-background.png);
   background-repeat: repeat-x;
-  border-top: 5px solid #9d9;
-  border-bottom: 3px solid #9d9;
 }
 
 div.logo
@@ -68,17 +66,16 @@ div.content
 div.footer
 {
   padding: 0 1.5em;
-  border-top: 3px solid #9d9;
-}
-
-div.footer div.links
-{
-  float: left;
 }
 
 div.system-info
 {
   text-align: right;
+}
+
+address
+{
+  color: gray;
 }
 
 table, tr, th, td

@@ -1,15 +1,15 @@
-<ul>
 <% if logged_in? -%>
+<ul>
   <li><%= link_to(s_("Menu|Users list"), :controller => "users") %></li>
   <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
   <li><%= link_to(s_("Menu|Directory"), :controller => "directory") %></li>
-<% else -%>
-  <p><%= _("Please login.") %></p>
-<% end -%>
 
-<% if Entry.empty? -%>
+  <% if Entry.empty? -%>
   <li><%= link_to(s_("Menu|Populate"),
                   {:controller => "directory", :action => "populate"},
                   :confirm => _("OK?")) %></li>
-<% end -%>
+  <% end -%>
 </ul>
+<% else -%>
+  <p><%= _("Please login.") %></p>
+<% end -%>
