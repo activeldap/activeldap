@@ -21,6 +21,23 @@ hr.clear
   clear: both;
 }
 
+address
+{
+  color: gray;
+}
+
+table, tr, th, td
+{
+  border: 1px solid black;
+}
+
+h1
+{
+  margin-top: 0;
+  padding-left: 0.3em;
+  background-color: #cfc;
+}
+
 div.header
 {
   background-image: url(../images/header-background.png);
@@ -72,25 +89,41 @@ div.system-info
   text-align: right;
 }
 
-form.login
+div.login-form
 {
+  padding: 3px;
+  border: 1px solid #9c9;
+  width: 20em;
+  margin: auto;
 }
 
-address
+div.login-form form
 {
-  color: gray;
+  background-color: #cfc;
+  padding: 0.5em 1em;
+  margin: auto;
 }
 
-table, tr, th, td
+div.login-form form th
 {
-  border: 1px solid black;
+  font-weight: normal;
+  text-align: right;
 }
 
-h1
+div.login-form form td input[type="text"],
+div.login-form form td input[type="password"]
 {
-  margin-top: 0;
-  padding-left: 0.3em;
-  background-color: #9c9;
+  width: 13em;
+}
+
+div.login-form form td[colspan="2"]
+{
+  text-align: center;
+}
+
+div.login-form form > p
+{
+  text-align: center;
 }
 
 div.content

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-20 21:35+0900\n"
+"POT-Creation-Date: 2007-10-21 12:42+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -90,7 +90,7 @@ msgstr "U bent afgemeld."
 msgid "User was successfully updated."
 msgstr "Gebruikersgegevens bijgewerkt."
 
-#: app/helpers/users_helper.rb:9
+#: app/helpers/users_helper.rb:10
 msgid "Edit"
 msgstr "bewerken"
 
@@ -103,33 +103,32 @@ msgstr ""
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
 
-#: app/views/layouts/application.rhtml:22
+#: app/views/layouts/application.rhtml:27 app/views/welcome/index.rhtml:4
+msgid "Menu|Logout"
+msgstr "Afmelden"
+
+#: app/views/layouts/application.rhtml:29
 msgid "Menu|Login"
 msgstr "Aanmelden"
 
-#: app/views/layouts/application.rhtml:23
+#: app/views/layouts/application.rhtml:31
 msgid "Menu|Sign up"
 msgstr "Inschrijven"
-
-#: app/views/layouts/application.rhtml:37
-msgid "Top"
-msgstr "Naar boven"
 
 #: app/views/users/edit.rhtml:5
 msgid "Command|Update"
 msgstr ""
 
-#: app/views/users/edit.rhtml:9
+#: app/views/users/edit.rhtml:11
 msgid "Menu|Show"
 msgstr "Toon"
 
-#: app/views/users/edit.rhtml:10 app/views/users/show.rhtml:3
+#: app/views/users/edit.rhtml:12 app/views/users/show.rhtml:5
 #, fuzzy
 msgid "Menu|Back"
 msgstr "Terug"
 
-#: app/views/users/_form.rhtml:6 app/views/account/login.rhtml:5
-#: app/views/account/sign_up.rhtml:7
+#: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -158,17 +157,27 @@ msgstr ""
 msgid "No user."
 msgstr "Geen gebruiker"
 
-#: app/views/account/login.rhtml:2 app/views/account/sign_up.rhtml:4
-msgid "Login"
+#: app/views/account/login.rhtml:5
+#, fuzzy
+msgid "Login:"
 msgstr "Gebruikersnaam"
 
-#: app/views/account/login.rhtml:8
+#: app/views/account/login.rhtml:10
+#, fuzzy
+msgid "Password:"
+msgstr "Wachtwoord"
+
+#: app/views/account/login.rhtml:16
 msgid "Remember me:"
 msgstr "Vergeet mij niet:"
 
-#: app/views/account/login.rhtml:11
+#: app/views/account/login.rhtml:22
 msgid "Log in"
 msgstr "Aanmelden"
+
+#: app/views/account/sign_up.rhtml:4
+msgid "Login"
+msgstr "Gebruikersnaam"
 
 #: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
 msgid "Sign up"
@@ -178,30 +187,25 @@ msgstr "inschrijven"
 msgid "Menu|Users list"
 msgstr "Gebruikerslijst"
 
-#: app/views/welcome/index.rhtml:4
-msgid "Menu|Logout"
-msgstr "Afmelden"
-
 #: app/views/welcome/index.rhtml:5
 msgid "Menu|Directory"
 msgstr ""
 
-#: app/views/welcome/index.rhtml:7
-msgid "Please login!"
-msgstr ""
-
-#: app/views/welcome/index.rhtml:11
+#: app/views/welcome/index.rhtml:8
 #, fuzzy
 msgid "Menu|Populate"
 msgstr "Menu|Afmelden"
 
-#: app/views/welcome/index.rhtml:13
+#: app/views/welcome/index.rhtml:10
 msgid "OK?"
 msgstr ""
 
-#: lib/authenticated_system.rb:75
+#: app/views/welcome/index.rhtml:14 lib/authenticated_system.rb:75
 msgid "Please login."
 msgstr ""
+
+#~ msgid "Top"
+#~ msgstr "Naar boven"
 
 #~ msgid "Show"
 #~ msgstr "Toon"

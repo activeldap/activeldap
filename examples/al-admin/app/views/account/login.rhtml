@@ -1,12 +1,24 @@
-<% form_tag(:class => "login") do -%>
-<p><label for="login"><%= _("Login") %></label><br/>
-<%= text_field_tag 'login' %></p>
+<div class="login-form">
+  <% form_tag do %>
+    <table>
+      <tr>
+        <th><label for="login"><%= _("Login:") %></label></th>
+        <td><%= text_field_tag 'login' %></td>
+      </tr>
 
-<p><label for="password"><%= _("Password") %></label><br/>
-<%= password_field_tag 'password' %></p>
+      <tr>
+        <th><label for="password"><%= _("Password:") %></th>
+        <td><%= password_field_tag 'password' %></td>
+      </tr>
 
-<p><label for="remember_me"><%= _("Remember me:") %></label>
-<%= check_box_tag 'remember_me' %></p>
+      <tr>
+        <td colspan="2">
+          <label for="remember_me"><%= _("Remember me:") %></label>
+          <%= check_box_tag 'remember_me' %>
+        </td>
+      </tr>
+    </table>
 
-<p><%= submit_tag(_('Log in')) %></p>
-<% end -%>
+    <p class="submit"><%= submit_tag(_('Log in')) %></p>
+  <% end %>
+</div>
