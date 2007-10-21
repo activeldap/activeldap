@@ -4,16 +4,17 @@ module ApplicationHelper
 
   def flash_box(message)
     id = "flash-box"
-    fade_out = update_page {|page| page.visual_effect(:fade, id)}
-    flash_box_div = content_tag("div", message,
+    fade_out = Proc.new {|page| page.visual_effect(:fade, id)}
+    flash_box_div = content_tag("div", "\n#{message}\n",
                                 :id => id,
-                                :onclick => fade_out)
+                                :onclick => update_page(&fade_out))
     set_opacity = update_page {|page| page[id].setOpacity("0.8")}
     effect = update_page do |page|
       page.delay(5) do
-        page.visual_effect(:fade, fade_out)
+        fade_out.call(page)
       end
     end
-    flash_box_div + javascript_tag(set_opacity + effect)
+    javascript_content = "#{set_opacity}\n#{effect}"
+    "#{flash_box_div}\n#{javascript_tag(javascript_content)}"
   end
 end

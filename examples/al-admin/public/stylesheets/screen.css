@@ -55,6 +55,12 @@ div.content
   margin: 0.5em 1.5em;
 }
 
+div.main
+{
+  padding: 0 1em;
+  padding-bottom: 0.5em;
+}
+
 div.footer
 {
   clear: both;
@@ -64,6 +70,10 @@ div.footer
 div.system-info
 {
   text-align: right;
+}
+
+form.login
+{
 }
 
 address
@@ -107,16 +117,12 @@ p.notice
 
 div.navi
 {
-  margin-top: 1em;
-  padding: 0.5em;
-  border-top: 1px solid #9c9;
   text-align: right;
 }
 
 div.navi ul
 {
-  margin: 0;
-  padding: 0;
+  margin-bottom: 0;
 }
 
 div.navi li
