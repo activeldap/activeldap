@@ -33,6 +33,11 @@ class LdapUser < ActiveLdap::Base
     false
   end
 
+  def short_dn
+    @short_dn ||=
+      (ActiveLdap::DN.parse(dn) - ActiveLdap::DN.parse(self.class.base)).to_s
+  end
+
   private
   def encrypt_password
     return if password.blank?

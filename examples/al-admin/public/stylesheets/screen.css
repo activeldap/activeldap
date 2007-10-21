@@ -10,25 +10,10 @@ a img
   border-style: none;
 }
 
-a:link
-{
-  color: #060;
-}
-
-a:visited
-{
-  color: #990;
-}
-
-a:hover
-{
-  color: #9c0;
-}
-
-a:active
-{
-  color: #9f0;
-}
+a:link {color: #060;}
+a:visited {color: #990;}
+a:hover {color: #9c0;}
+a:active {color: #9f0;}
 
 hr.clear
 {
@@ -56,6 +41,13 @@ div.menu
 div.menu li
 {
   display: inline;
+  padding-right: 5px;
+  border-right: 1px solid black;
+}
+
+span.myself
+{
+  font-weight: bold;
 }
 
 div.content
@@ -65,6 +57,7 @@ div.content
 
 div.footer
 {
+  clear: both;
   padding: 0 1.5em;
 }
 
@@ -85,7 +78,14 @@ table, tr, th, td
 
 h1
 {
-  clear: both;
+  margin-top: 0;
+  padding-left: 0.3em;
+  background-color: #9c9;
+}
+
+div.content
+{
+  border: 1px solid #9c9;
 }
 
 div#flash-box
@@ -108,8 +108,9 @@ p.notice
 div.navi
 {
   margin-top: 1em;
-  padding-top: 0.5em;
-  border-top: 3px solid #9d9;
+  padding: 0.5em;
+  border-top: 1px solid #9c9;
+  text-align: right;
 }
 
 div.navi ul
@@ -121,6 +122,8 @@ div.navi ul
 div.navi li
 {
   display: inline;
+  padding-left: 5px;
+  border-left: 1px solid black;
 }
 
 div.entry table

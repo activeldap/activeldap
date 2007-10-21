@@ -22,7 +22,12 @@
 
       <div class="menu">
 	<ul>
+<% if logged_in? -%>
+	  <li><span class="myself"><%= h(current_user.short_dn) %></span></li>
+	  <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
+<% else -%>
 	  <li><%= link_to(s_("Menu|Login"), login_path) %></li>
+<% end -%>
 	  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
 	</ul>
       </div>
@@ -31,11 +36,11 @@
     </div>
 
     <div class="body">
-      <div class="content">
 <% if flash[:notice] -%>
-        <%= flash_box("<p class=\"notice\">#{h(flash[:notice])}</p>") %>
+      <%= flash_box(content_tag(:p, h(flash[:notice]), :class => "notice")) %>
 <% end -%>
 
+      <div class="content">
 	<h1>
           <%=h "#{controller.controller_name}: #{controller.action_name}" %>
         </h1>

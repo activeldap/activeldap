@@ -2,6 +2,9 @@ class WelcomeController < ApplicationController
   include UrlHelper
 
   def index
-    redirect_to(:login_path) unless logged_in?
+    unless logged_in?
+      flash.keep(:notice)
+      redirect_to(:login_path)
+    end
   end
 end

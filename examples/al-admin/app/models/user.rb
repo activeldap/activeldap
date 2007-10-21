@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     @ldap_user = nil
   end
 
+  def short_dn
+    @ldap_user.short_dn
+  end
+
   private
   def generate_salt
     return unless new_record?
