@@ -97,6 +97,15 @@ div.login-form
   margin: auto;
 }
 
+div.login-form table,
+div.login-form tr,
+div.login-form th,
+div.login-form td
+{
+  border-style: none;
+}
+
+
 div.login-form form
 {
   background-color: #cfc;
