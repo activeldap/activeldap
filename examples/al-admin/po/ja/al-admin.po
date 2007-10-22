@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-21 12:42+0900\n"
-"PO-Revision-Date: 2007-10-21 12:42+0900\n"
+"POT-Creation-Date: 2007-10-22 22:26+0900\n"
+"PO-Revision-Date: 2007-10-22 22:27+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -67,19 +67,19 @@ msgstr "ユーザ"
 msgid "Populating is only for initialization"
 msgstr "データ構築は初期化時のみ利用できます。"
 
-#: app/controllers/account_controller.rb:22 lib/authenticated_system.rb:119
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:119
 msgid "Logged in successfully"
 msgstr "ログインに成功しました。"
 
-#: app/controllers/account_controller.rb:24
+#: app/controllers/account_controller.rb:26
 msgid "Login or Password is incorrect"
 msgstr "ログイン名またはパスワードが間違っています。"
 
-#: app/controllers/account_controller.rb:36
+#: app/controllers/account_controller.rb:38
 msgid "Thanks for signing up!"
 msgstr "登録ありがとうございます！"
 
-#: app/controllers/account_controller.rb:47
+#: app/controllers/account_controller.rb:46
 msgid "You have been logged out."
 msgstr "ログアウトしました。"
 
@@ -99,17 +99,25 @@ msgstr "完了。"
 msgid "Menu|Index"
 msgstr "一覧"
 
-#: app/views/layouts/application.rhtml:27 app/views/welcome/index.rhtml:4
+#: app/views/layouts/_header_menu.rhtml:5
 msgid "Menu|Logout"
 msgstr "ログアウト"
 
-#: app/views/layouts/application.rhtml:29
+#: app/views/layouts/_header_menu.rhtml:7
 msgid "Menu|Login"
 msgstr "ログイン"
 
-#: app/views/layouts/application.rhtml:31
+#: app/views/layouts/_header_menu.rhtml:9
 msgid "Menu|Sign up"
 msgstr "登録"
+
+#: app/views/layouts/_main_menu.rhtml:6
+msgid "Menu|Users list"
+msgstr "ユーザ一覧"
+
+#: app/views/layouts/_main_menu.rhtml:7
+msgid "Menu|Directory"
+msgstr "ディレクトリ"
 
 #: app/views/users/edit.rhtml:5
 msgid "Command|Update"
@@ -176,22 +184,18 @@ msgstr "ログイン名"
 msgid "Sign up"
 msgstr "登録"
 
-#: app/views/welcome/index.rhtml:3
-msgid "Menu|Users list"
-msgstr "ユーザ一覧"
-
-#: app/views/welcome/index.rhtml:5
-msgid "Menu|Directory"
-msgstr "ディレクトリ"
-
-#: app/views/welcome/index.rhtml:8
+#: app/views/welcome/index.rhtml:4
 msgid "Menu|Populate"
 msgstr "構築"
 
-#: app/views/welcome/index.rhtml:10
+#: app/views/welcome/index.rhtml:6
 msgid "OK?"
 msgstr "いいですか？"
 
-#: app/views/welcome/index.rhtml:14 lib/authenticated_system.rb:75
+#: app/views/welcome/index.rhtml:8
+msgid "Welcome %s!"
+msgstr "ようこそ%s！"
+
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:75
 msgid "Please login."
 msgstr "ログインしてください。"

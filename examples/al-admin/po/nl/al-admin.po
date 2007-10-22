@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-21 12:42+0900\n"
+"POT-Creation-Date: 2007-10-22 22:26+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -70,19 +70,19 @@ msgstr "gebruiker"
 msgid "Populating is only for initialization"
 msgstr ""
 
-#: app/controllers/account_controller.rb:22 lib/authenticated_system.rb:119
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:119
 msgid "Logged in successfully"
 msgstr "Succesvol aangemeld"
 
-#: app/controllers/account_controller.rb:24
+#: app/controllers/account_controller.rb:26
 msgid "Login or Password is incorrect"
 msgstr "Gebruikersnaam of Wachtwoord incorrect"
 
-#: app/controllers/account_controller.rb:36
+#: app/controllers/account_controller.rb:38
 msgid "Thanks for signing up!"
 msgstr "Bedankt voor het inschrijven!"
 
-#: app/controllers/account_controller.rb:47
+#: app/controllers/account_controller.rb:46
 msgid "You have been logged out."
 msgstr "U bent afgemeld."
 
@@ -103,17 +103,25 @@ msgstr ""
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
 
-#: app/views/layouts/application.rhtml:27 app/views/welcome/index.rhtml:4
+#: app/views/layouts/_header_menu.rhtml:5
 msgid "Menu|Logout"
 msgstr "Afmelden"
 
-#: app/views/layouts/application.rhtml:29
+#: app/views/layouts/_header_menu.rhtml:7
 msgid "Menu|Login"
 msgstr "Aanmelden"
 
-#: app/views/layouts/application.rhtml:31
+#: app/views/layouts/_header_menu.rhtml:9
 msgid "Menu|Sign up"
 msgstr "Inschrijven"
+
+#: app/views/layouts/_main_menu.rhtml:6
+msgid "Menu|Users list"
+msgstr "Gebruikerslijst"
+
+#: app/views/layouts/_main_menu.rhtml:7
+msgid "Menu|Directory"
+msgstr ""
 
 #: app/views/users/edit.rhtml:5
 msgid "Command|Update"
@@ -183,24 +191,20 @@ msgstr "Gebruikersnaam"
 msgid "Sign up"
 msgstr "inschrijven"
 
-#: app/views/welcome/index.rhtml:3
-msgid "Menu|Users list"
-msgstr "Gebruikerslijst"
-
-#: app/views/welcome/index.rhtml:5
-msgid "Menu|Directory"
-msgstr ""
-
-#: app/views/welcome/index.rhtml:8
+#: app/views/welcome/index.rhtml:4
 #, fuzzy
 msgid "Menu|Populate"
 msgstr "Menu|Afmelden"
 
-#: app/views/welcome/index.rhtml:10
+#: app/views/welcome/index.rhtml:6
 msgid "OK?"
 msgstr ""
 
-#: app/views/welcome/index.rhtml:14 lib/authenticated_system.rb:75
+#: app/views/welcome/index.rhtml:8
+msgid "Welcome %s!"
+msgstr ""
+
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:75
 msgid "Please login."
 msgstr ""
 
