@@ -1,4 +1,6 @@
 class AccountController < ApplicationController
+  before_filter :force_logout, :only => [:sign_up, :login, :logout]
+
   def index
     if logged_in?
       redirect_to(top_path)
@@ -41,10 +43,15 @@ class AccountController < ApplicationController
   end
 
   def logout
+    flash[:notice] = _("You have been logged out.")
+    redirect_back_or_default(top_path)
+  end
+
+  private
+  def force_logout
     current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = _("You have been logged out.")
-    redirect_back_or_default(top_path)
+    true
   end
 end
