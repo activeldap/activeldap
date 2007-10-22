@@ -21,23 +21,13 @@
       </div>
 
       <div class="menu">
-	<ul>
-<% if logged_in? -%>
-	  <li><span class="myself"><%= h(current_user.short_dn) %></span></li>
-	  <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
-<% else -%>
-	  <li><%= link_to(s_("Menu|Login"), login_path) %></li>
-<% end -%>
-	  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
-	</ul>
+        <%= render(:partial => "layouts/header_menu") %>
       </div>
 
       <hr class="clear" />
     </div>
 
-<% if flash[:notice] -%>
-    <%= flash_box(content_tag(:p, h(flash[:notice]), :class => "notice")) %>
-<% end -%>
+    <%= render(:partial => "layouts/flash_box") %>
 
     <div class="body">
       <div class="content">
@@ -46,19 +36,13 @@
         </h1>
 
         <div class="main">
+          <%= render(:partial => "layouts/main_menu") %>
   	  <%= yield %>
         </div>
       </div>
 
       <div class="footer">
-	<div class="system-info">
-	  <address>
-	    al-admin: Powered by
-	    <%= link_to("Ruby/ActiveLdap",
-			"http://rubyforge.org/projects/ruby-activeldap") %>
-	    <%= ActiveLdap::VERSION %>
-	  </address>
-	</div>
+        <%= render(:partial => "layouts/footer") %>
       </div>
     </div>
   </body>

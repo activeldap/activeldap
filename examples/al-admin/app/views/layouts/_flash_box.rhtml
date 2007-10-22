@@ -1,0 +1,4 @@
+
+<% if flash[:notice] -%>
+  <%= flash_box(content_tag(:p, h(flash[:notice]), :class => "notice")) %>
+<% end -%>

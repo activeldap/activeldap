@@ -1,0 +1,10 @@
+
+<ul>
+<% if logged_in? -%>
+  <li><span class="myself"><%= h(current_user.short_dn) %></span></li>
+  <li><%= link_to(s_("Menu|Logout"), logout_path) %></li>
+<% else -%>
+  <li><%= link_to(s_("Menu|Login"), login_path) %></li>
+<% end -%>
+  <li><%= link_to(s_("Menu|Sign up"), sign_up_path) %></li>
+</ul>

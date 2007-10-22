@@ -1,0 +1,52 @@
+html,
+body
+{
+  margin: 0;
+  background-color: white;
+}
+
+a img
+{
+  border-style: none;
+}
+
+a:link {color: #060;}
+a:visited {color: #990;}
+a:hover {color: #9c0;}
+a:active {color: #9f0;}
+
+hr.clear
+{
+  visibility: hidden;
+  clear: both;
+}
+
+address
+{
+  color: gray;
+}
+
+h1
+{
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0.3em;
+  background-color: #cfc;
+}
+
+div#flash-box
+{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: #fcfffc;
+  border: 1px solid #cdc;
+  border-width: 1px 0;
+}
+
+p.notice
+{
+  color: green;
+  padding: 1em;
+  text-align: center;
+}

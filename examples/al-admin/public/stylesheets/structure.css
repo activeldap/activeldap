@@ -1,0 +1,81 @@
+div.header
+{
+  background-image: url(../images/header-background.png);
+  background-repeat: repeat-x;
+}
+
+div.logo
+{
+  float: left;
+}
+
+div.menu
+{
+  float: right;
+  margin-right: 1em;
+}
+
+div.menu li
+{
+  display: inline;
+  padding-right: 5px;
+  border-right: 1px solid black;
+}
+
+span.myself
+{
+  font-weight: bold;
+}
+
+div.content
+{
+  margin: 0.5em 1.5em;
+  border: 1px solid #9c9;
+}
+
+div.main
+{
+  padding: 0 1em;
+  padding-bottom: 0.5em;
+}
+
+div.main-menu
+{
+  margin: 0 -1em;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+  background-color: #cfc;
+}
+
+div.main-menu ul
+{
+  margin: 0;
+  padding: 0;
+}
+
+div.main-menu li
+{
+  display: inline;
+  margin: 0 0.25em;
+  padding: 0 0.5em;
+  padding-top: 0.25em;
+  background-color: #efe;
+  border: 1px solid #9c9;
+  border-bottom-style: none;
+}
+
+div.main-menu li.current-page
+{
+  background-color: white;
+}
+
+div.footer
+{
+  clear: both;
+  padding: 0 1.5em;
+}
+
+div.system-info
+{
+  text-align: right;
+}

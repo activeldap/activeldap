@@ -1,0 +1,15 @@
+
+<% if logged_in? -%>
+  <div class="main-menu">
+    <ul>
+<% [
+    [s_("Menu|Users list"), {:controller => "users"}],
+    [s_("Menu|Directory"), {:controller => "directory"}]
+   ].each do |label, options| -%>
+      <li <%= current_page?(options) ? 'class="current-page"' : "" %>>
+        <%= link_to(label, options) %>
+      </li>
+<% end -%>
+    </ul>
+  </div>
+<% end -%>
