@@ -980,6 +980,3 @@ end
 ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
   require "active_ldap/adapter/#{adapter}"
 end
-
-net_ldap_lib = File.join(File.dirname(__FILE__), "..", "..", "net-ldap", "lib")
-$LOAD_PATH.unshift(File.expand_path(net_ldap_lib))
