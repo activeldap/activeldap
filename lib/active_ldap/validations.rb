@@ -31,6 +31,7 @@ module ActiveLdap
           alias_method_chain :update_attribute, :validation_skipping
         end
 
+        validate_on_create :validate_duplicated_dn_creation
         validate :validate_required_ldap_values
         validate :validate_ldap_values
 
@@ -66,6 +67,17 @@ module ActiveLdap
     end
 
     private
+    def validate_duplicated_dn_creation
+      if exist?
+        if ActiveLdap.get_text_supported?
+          format = _("%{fn} is duplicated: %s")
+        else
+          format = _("is duplicated: %s")
+        end
+        errors.add("dn", format % dn)
+      end
+    end
+
     # validate_required_ldap_values
     #
     # Basic validation:

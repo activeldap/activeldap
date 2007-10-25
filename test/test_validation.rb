@@ -5,6 +5,19 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_duplicated_dn_creation
+    assert(ou_class.new("YYY").save)
+    ou = ou_class.new("YYY")
+    assert(!ou.save)
+    if ActiveLdap.get_text_supported?
+      format = _("%{fn} is duplicated: %s") % {:fn => la_("DN")}
+    else
+      format = "Dn " + _("is duplicated: %s")
+    end
+    assert_equal([format % ou.dn], ou.errors.full_messages)
+  end
+
+  priority :normal
   def test_syntax_validation
     make_temporary_user do |user, password|
       assert(user.save)
@@ -34,7 +47,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_save!
     make_temporary_group do |group|
       group.description = ""

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-10-10 21:14+0900\n"
+"POT-Creation-Date: 2007-10-25 20:50+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3254,27 +3254,27 @@ msgstr ""
 msgid "Can't remove required objectClass: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:84
+#: lib/active_ldap/adapter/ldap.rb:82
 msgid "No matches: filter: %s: attributes: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:153
+#: lib/active_ldap/adapter/ldap.rb:151
 msgid "LDAP server is down: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:169 lib/active_ldap/adapter/net_ldap.rb:163
+#: lib/active_ldap/adapter/ldap.rb:167 lib/active_ldap/adapter/net_ldap.rb:161
 msgid "%s is not one of the available connect methods: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:182 lib/active_ldap/adapter/net_ldap.rb:176
+#: lib/active_ldap/adapter/ldap.rb:180 lib/active_ldap/adapter/net_ldap.rb:174
 msgid "%s is not one of the available LDAP scope: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:228 lib/active_ldap/adapter/net_ldap.rb:289
+#: lib/active_ldap/adapter/ldap.rb:226 lib/active_ldap/adapter/net_ldap.rb:287
 msgid "unknown type: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/net_ldap.rb:209
+#: lib/active_ldap/adapter/net_ldap.rb:207
 msgid "unsupported qops: %s"
 msgstr ""
 
@@ -3395,19 +3395,27 @@ msgstr ""
 msgid "%s isn't sub DN of %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:93
+#: lib/active_ldap/validations.rb:73
+msgid "%{fn} is duplicated: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:75
+msgid "is duplicated: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:105
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:95
+#: lib/active_ldap/validations.rb:107
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:123
+#: lib/active_ldap/validations.rb:135
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:125
+#: lib/active_ldap/validations.rb:137
 msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
@@ -3443,36 +3451,36 @@ msgstr ""
 msgid "%s is unknown attribute"
 msgstr ""
 
-#: lib/active_ldap/base.rb:320
+#: lib/active_ldap/base.rb:322
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:424
+#: lib/active_ldap/base.rb:426
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:506
+#: lib/active_ldap/base.rb:508
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:539
+#: lib/active_ldap/base.rb:541
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:558
+#: lib/active_ldap/base.rb:560
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:579 lib/active_ldap/base.rb:590
+#: lib/active_ldap/base.rb:581 lib/active_ldap/base.rb:592
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:706
+#: lib/active_ldap/base.rb:708
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1165
+#: lib/active_ldap/base.rb:1167
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
