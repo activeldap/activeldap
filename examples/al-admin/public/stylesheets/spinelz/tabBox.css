@@ -1,0 +1,94 @@
+.tabBox_tabBox {
+  margin:                     0;
+  padding:                    0;
+  text-decoration:            none;
+  text-transform:             none;
+  text-indent:                0;
+  font-weight:                normal;
+}
+
+.tabBox_panelContainer {
+  border-left:                1px solid #999999;
+  border-right:               1px solid #999999;
+  border-bottom:              1px solid #999999;
+}
+
+.tabBox_tabContainer {
+  /*
+  height:                     42px;
+  background:                 url(../../images/spinelz/tab_bar.gif) repeat-x;
+  background-position:        bottom;
+  */
+  height:                     24px;
+  padding-left:               5px;
+}
+
+.tabBox_tabBar {
+  clear:                      left;
+  height:                     18px;
+  background:                 url(../../images/spinelz/tab_bar.gif) repeat-x;
+  background-position:        bottom;
+  padding-left:               5px;
+}
+
+.tabBox_tab {
+  float:                      left;
+}
+
+.tabBox_tab div{
+  float:                      left;
+  height:                     24px;  
+  cursor:                     pointer;
+  overflow:                   hidden;
+}
+
+.tabBox_tabLeftInactive {
+  background:                 url('../../images/spinelz/tabBox_tabLeftInactive.gif') no-repeat;
+  width:                      8px;
+  margin-left:                4px;
+}
+
+.tabBox_tabLeftActive {
+  background:                 url('../../images/spinelz/tabBox_tabLeftActive.gif') no-repeat;
+  width:                      8px;
+  margin-left:                4px;
+}
+
+.tabBox_tabMiddleInactive {
+  background:                 url('../../images/spinelz/tabBox_tabMiddleInactive.gif') repeat-x;
+  line-height:                1.8em;
+}
+
+.tabBox_tabMiddleActive {
+  background:                 url('../../images/spinelz/tabBox_tabMiddleActive.gif') repeat-x;
+  line-height:                1.8em;
+}
+
+.tabBox_tabRightInactive {
+  background:                 url('../../images/spinelz/tabBox_tabRightInactive.gif') no-repeat;
+  width:                      10px;
+  padding:                    0;
+}
+
+.tabBox_tabRightActive {
+  background:                 url('../../images/spinelz/tabBox_tabRightActive.gif') no-repeat;
+  width:                      10px;
+}
+
+.tabBox_tabTitle {
+  font-weight:                bold;
+  line-height:                1.5em;
+  padding:                    0 10px !important;
+}
+
+.tabBox_closeButton {
+  border:                     0;
+  overflow:                   hidden;
+  cursor:                     pointer;
+  font-size:                  5px;
+  width:                      16px;
+  height:                     16px !important;
+  background:                 url('../../images/spinelz/tabBox_close.gif') no-repeat;
+  position:                   relative;
+  top:                        5px;
+}

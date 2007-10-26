@@ -1,0 +1,151 @@
+div.balloon_tooltip {
+  position: absolute;
+}
+
+/* ---- Top ---- */
+div.balloon_top {
+  width: 100%;
+  height: 30px;
+  position: relative;
+}
+
+div.balloon_top_left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_top_left.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_top_middle {
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_top_middle.gif);
+  background-repeat: repeat-x;
+  margin: 0 70px;
+}
+
+div.balloon_top_right {
+  width: 70px;
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_top_right.gif);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* ---- Middle ---- */
+div.balloon_middle {
+  width: 100%;
+  position: relative;
+}
+
+div.balloon_middle_left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+}
+
+div.balloon_middle_left_row {
+  width: 70px;
+  height: 20px;
+  background-image: url(../../images/spinelz/balloon_middle_left.gif);
+  background-repeat: repeat-y;
+}
+
+div.balloon_middle_right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+}
+
+div.balloon_middle_right_row {
+  width: 70px;
+  height: 20px;
+  background-image: url(../../images/spinelz/balloon_middle_right.gif);
+  background-repeat: repeat-y;
+}
+
+div.balloon_left_arrow {
+  width: 70px;
+  height: 60px;
+}
+
+div.balloon_left_up_arrow {
+  width: 70px;
+  height: 60px;
+  background-image: url(../../images/spinelz/balloon_left_up_arrow.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_left_down_arrow {
+  width: 70px;
+  height: 60px;
+  background-image: url(../../images/spinelz/balloon_left_down_arrow.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_right_arrow {
+  width: 70px;
+  height: 60px;
+}
+
+div.balloon_right_up_arrow {
+  width: 70px;
+  height: 60px;
+  background-image: url(../../images/spinelz/balloon_right_up_arrow.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_right_down_arrow {
+  width: 70px;
+  height: 60px;
+  background-image: url(../../images/spinelz/balloon_right_down_arrow.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_body {
+  margin: 0 70px;
+  background-image: url(../../images/spinelz/balloon_back.gif);
+  background-repeat: no-repeat;
+  background-color: #f8ffee;
+  overflow: hidden;
+}
+
+/* ---- Bottom ---- */
+div.balloon_bottom {
+  width: 100%;
+  height: 30px;
+  position: relative;
+}
+
+div.balloon_bottom_left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_bottom_left.gif);
+  background-repeat: no-repeat;
+}
+
+div.balloon_bottom_middle {
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_bottom_middle.gif);
+  background-repeat: repeat-x;
+  margin: 0 70px;
+}
+
+div.balloon_bottom_right {
+  width: 70px;
+  height: 30px;
+  background-image: url(../../images/spinelz/balloon_bottom_right.gif);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

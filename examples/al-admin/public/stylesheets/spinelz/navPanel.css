@@ -1,0 +1,58 @@
+.navPanel{
+  border-bottom:              1px solid #919b9c;
+}
+
+.navPanel_panel{
+  border-left:                1px solid #999999;
+  border-right:               1px solid #999999;
+  padding:                    10px;
+  overflow:                   auto;
+}
+
+.navPanel_tab {
+  height:                     26px;
+  position:                   relative;
+  cursor:                     pointer;
+}  
+.navPanel_tab div{
+  height:                     26px;
+}  
+.navPanel_tabLeftInactive {
+  background:                 url('../../images/spinelz/navPanel_tab_left_inactive.gif') no-repeat;
+  position:                   absolute;
+  left:                       0;
+  width:                      10px;
+}
+
+.navPanel_tabLeftActive {
+  background:                 url('../../images/spinelz/navPanel_tab_left_active.gif') no-repeat;
+  position:                   absolute;
+  left:                       0;
+  width:                      10px;
+}
+
+.navPanel_tabMiddleInactive {
+  background:                 url('../../images/spinelz/navPanel_tab_middle_inactive.gif') repeat-x;
+  margin:                     0 10px;
+}
+
+.navPanel_tabMiddleActive {
+  background:                 url('../../images/spinelz/navPanel_tab_middle_active.gif') repeat-x;
+  margin:                     0 10px;
+}
+
+.navPanel_tabRightInactive {
+  background:                 url('../../images/spinelz/navPanel_tab_right_inactive.gif') no-repeat;
+  position:                   absolute;
+  top:                        0;
+  right:                      0;
+  width:                      10px;
+}
+
+.navPanel_tabRightActive {
+  background:                 url('../../images/spinelz/navPanel_tab_right_active.gif') no-repeat;
+  position:                   absolute;
+  top:                        0;
+  right:                      0;
+  width:                      10px;
+}

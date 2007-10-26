@@ -1,0 +1,140 @@
+.window {
+  position:                   absolute;
+  margin:                     0;
+  padding:                    0;
+  text-decoration:            none;
+  text-transform:             none;
+  text-indent:                0;
+  font-weight:                normal;
+}
+
+.window_header{
+  width:                      100%;
+  height:                     45px;
+  position:                   relative;
+}
+
+.window_headerLeft{
+  width:                      30px;
+  height:                     45px;
+  top:                        0;
+  position:                   absolute;
+  left:                       0;
+  background:                 url('../../images/spinelz/window_top_left.gif') no-repeat;
+}
+
+.window_headerMiddle{
+  height:                     45px;
+  top:                        0;
+  margin:                     0 30px;
+  background:                 url('../../images/spinelz/window_top_middle.gif') repeat-x;
+  cursor:                     move;
+  line-height:                3.0em;
+  overflow:                   hidden;
+}
+
+.window_headerRight{
+  width:                      30px;
+  height:                     45px;
+  top:                        0;
+  position:                   absolute;
+  right:                      0;
+  background:                 url('../../images/spinelz/window_top_right.gif') no-repeat;
+}
+
+.window_buttonHolder{
+  width:                      60px;
+  height:                     16px;
+  position:                   absolute;
+  top:                        0;
+  right:                      32px;
+  margin-top:                 10px;
+}
+
+.window_closeButton{
+  float:                      right;
+  overflow:                   hidden;
+  font-size:                  5px;
+  width:                      16px;
+  height:                     16px;
+  background:                 url('../../images/spinelz/window_close.gif') no-repeat;
+  cursor:pointer;
+}
+
+.window_maxButton{
+  float:                      right;
+  overflow:                   hidden;
+  cursor:                     pointer;
+  width:                      16px;
+  height:                     16px;
+  background:                 url('../../images/spinelz/window_max.gif') no-repeat;
+}
+
+.window_minButton{
+  float:                      right;
+  overflow:                   hidden;
+  cursor:                     pointer;
+  width:                      16px;
+  height:                     16px;
+  background:                 url('../../images/spinelz/window_min.gif') no-repeat;
+}
+
+.window_body{
+  width:                      100%;
+  background:                 transparent;
+  color:                      #000000;
+  position:                   relative;
+}
+
+.window_bodyLeft{
+  top:                        0;
+  width:                      30px;
+  position:                   absolute;
+  left:                       0;
+  background:                 url('../../images/spinelz/window_middle_left.gif') repeat-y;
+}
+
+.window_bodyMiddle{
+  top:                        0;
+  position:                   relative;
+  margin:                     0 30px;
+  background:                 #fff;
+  color:                      #000000;
+}
+
+.window_bodyRight{
+  top:                        0;
+  width:                      30px;
+  position:                   absolute;
+  right:                      0;
+  background:                 url('../../images/spinelz/window_middle_right.gif') repeat-y;
+}
+
+.window_bottom{
+  width:                      100%;
+  height:                     35px;
+  position:                   relative;
+}
+
+.window_bottomLeft{
+  width:                      30px;
+  height:                     35px;
+  position:                   absolute;
+  left:                       0;
+  background:                 url('../../images/spinelz/window_bottom_left.gif') no-repeat;
+}
+
+.window_bottomMiddle{
+  height:                     35px;
+  margin:                     0 30px;
+  background: url('../../images/spinelz/window_bottom_middle.gif') repeat-x;
+}
+
+.window_bottomRight{
+  width:                      30px;
+  height:                     35px;
+  position:                   absolute;
+  top:                        0;
+  right:                      0;
+  background:                 url('../../images/spinelz/window_bottom_right.gif') no-repeat;
+}

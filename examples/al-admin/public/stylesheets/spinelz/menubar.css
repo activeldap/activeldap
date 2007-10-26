@@ -1,0 +1,78 @@
+* {
+  margin:                     0;
+  padding:                    0;
+}
+
+.menubar {
+  background:                 url(../../images/spinelz/menubar_back.gif) repeat-x;
+  border:                     1px solid #999999;
+  font-size:                  0.8em;
+  line-height:                1.3em;
+  height:                     26px;
+}
+
+.menubar_menu {
+}
+
+.menubar_menuBody {
+  float:                      left;
+  cursor:                     pointer;
+  padding:                    3px 8px;
+  height:                     20px;
+  line-height:                1.8em;
+}
+
+.menubar_menuBodyHover {
+  float:                      left;
+  cursor:                     pointer;
+  background:                 #defa93;
+  padding:                    3px 8px;
+  height:                     20px;
+  line-height:                1.8em;
+}
+
+.menubar_subMenu {
+}
+
+.menubar_subMenuBody {
+  background:                 url(../../images/spinelz/menubar_subcontents_back.gif) repeat-x #fff;
+  color:                      #4F4534;
+  padding:                    0 3px;
+  cursor:                     pointer;
+}
+
+.menubar_subMenuBodyHover {
+  background:                 #C8CEF6;
+  color:                      #4F4534;
+  padding:                    0 3px;
+  cursor:                     pointer;
+}
+
+.menubar_subMenuBody A {
+  background:                 #FFFFFF;
+  color:                      gray;
+  cursor:                     pointer;
+}
+
+.menubar_subMenuBodyHover A {
+  background-color:           #C8CEF6;
+  color:                      #FFFFFF;
+  cursor:                     pointer;
+
+}
+
+.menubar_menuContainer {
+  border:                     1px solid #999999;
+  position:                   absolute;
+  width:                      100px;
+}
+
+.menubar_dirMark {
+  position:                   relative;
+  top:                        -17px;
+  left:                       0;
+  float:                      right;
+  color:                      #999999;
+  cursor:                     pointer;
+}
+

@@ -1,0 +1,23 @@
+.switcher_state_close {
+  float:               left;
+  background-image:    url('../../images/spinelz/switcher_close.gif');
+  background-repeat:   no-repeat;
+  height:              16px;
+  width:               16px;
+  background-position: center center;
+  overflow:            visible;
+}
+
+.switcher_state_open {
+  float:               left;
+  background-image:    url('../../images/spinelz/switcher_open.gif');
+  background-repeat:   no-repeat;
+  height:              16px;
+  width:               16px;
+  background-position: center center;
+  overflow:            visible;
+}
+
+.switcher_switch {
+  cursor:              pointer;
+}

@@ -1,0 +1,51 @@
+
+.sortableTable_header {
+  width:                      100%;
+  border:                     none;
+}
+
+.sortableTable_thead {
+  background:                 url(../../images/spinelz/table_back.gif) repeat-x #ffffff;
+  height:                     26px;
+  border:                     1px solid #999;
+}
+
+.sortableTable_thead th { 
+  border:                     0;
+  padding:                    0;
+}
+.sortableTable_tbody {
+  background:                 #ffffff;
+}
+
+.sortableTable_tbody th { 
+ border:                      0;
+}
+
+.sortableTable_title {
+  float:                      left;
+  width:                      100%;
+  font-weight:                bold;
+  height:                     26px;
+}
+
+.sortableTable_empty {
+  height:                     16px;
+  width:                      16px;
+}
+
+.sortableTable_down {
+  background:                 url(../../images/spinelz/sortableTable_down.gif) no-repeat;
+  cursor:                     pointer; 
+  height:                     16px;
+  width:                      16px;
+  overflow:                   hidden;
+}
+
+.sortableTable_up {
+  background:                 url(../../images/spinelz/sortableTable_up.gif) no-repeat;
+  cursor:                     pointer; 
+  height:                     16px;
+  width:                      16px;
+  overflow:                   hidden;
+}

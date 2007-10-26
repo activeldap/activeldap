@@ -1,0 +1,508 @@
+.timepicker_container {
+  margin:                     0;
+  padding:                    0;
+  text-decoration:            none;
+  text-transform:             none;
+  text-indent:                0;
+  font-weight:                normal;
+  font-size:                  13px;
+  font-family:                Verdana, monospace;
+  width:                      150px;
+  background:                 #ffffff;
+  color:                      #4F4534;
+  border:                     1px solid #999999;
+}
+
+/* header */
+.timepicker_scheduleHandler {
+  background:                 url('../../images/spinelz/calendar_default_handler.gif') no-repeat;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     move;
+  float:                      left;
+}
+
+.timepicker_header {
+  background:                 url(../../images/spinelz/calender_back.gif) repeat-x;
+  color:                      #4F4534; 
+  width:                      100%;
+  height:                     26px; 
+  border-bottom:              1px solid #999999;
+  border-collapse:            collapse;
+  font-size:                  13px;
+  font-weight:                bold; 
+}
+
+.timepicker_preYears {
+  text-align:                 left;
+  width: 35px;
+}
+
+.timepicker_years {
+  text-align:                 center;
+}
+
+.timepicker_years span {
+  font-weight:                bolder;
+  font-size:                  105%;
+}
+
+.timepicker_nextYears {
+  text-align:                 right;
+  width: 35px;
+}
+
+.timepicker_nextMonthMark {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.timepicker_nextYearMark {
+  background:                 url('../../images/spinelz/calendar_next_second.gif') no-repeat;;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.timepicker_nextWeekMark {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin:                     0 0 0 auto;
+}
+
+.timepicker_preMonthMark {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.timepicker_preYearMark {
+  background:                 url('../../images/spinelz/calendar_pre_second.gif') no-repeat;;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.timepicker_preWeekMark {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+}
+
+.timepicker_markHover {
+  margin-left:                5px;
+  margin-right:               5px;
+  cursor:                     pointer;
+  color:                      #FF8080;
+  background-color:           #E6E6FA;
+}
+
+.timepicker_ym {
+  margin-left:                5px;
+}
+
+.timepicker_table {
+  font-size:                  12px;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  width:                      100%;
+  table-layout:               fixed;
+}
+
+.timepicker_table TH {
+  border-right:               1px solid #999999;
+  border-bottom:              1px solid gray;
+  text-align:                 center;
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  cursor:                     pointer;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.timepicker_table TH.right {
+  border-right-style:         none;
+}
+
+.timepicker_table TD {
+  border-right:               1px solid #999999;
+  border-bottom:              1px solid #999999;
+  vertical-align:             text-top;
+  height:                     100px;
+  margin:                     0;
+  padding:                    0;
+}
+
+.timepicker_table TD.right {
+  border-right-style:         none;
+}
+
+.timepicker_table TD.bottom {
+  border-bottom-style:        none;
+}
+
+.timepicker_date {
+  cursor:                     pointer;
+  color:                      #000000;
+  background:                 #FFFFFF;
+  font-weight:                bold;
+}
+.timepicker_holidayContainer span {
+  padding:                    2px;
+}
+.timepicker_regularHoliday {
+  cursor:                     pointer;
+  background:                 #ededed;
+  color:                      #285A94;
+  font-weight:                bold;
+}
+
+.timepicker_holiday {
+  cursor:                     pointer;
+  background-color:           #dedede;
+  color:                      #285A94;
+  font-weight:                bold;
+  overflow:                   hidden;
+}
+
+.timepicker_schedule {
+  cursor:                     pointer;
+  background:                 url(../../images/spinelz/timepicker_schedule.gif) repeat-x;
+  color:                      #285A94;
+  font-weight:                bold;
+}
+
+.timepicker_highlightDay {
+  cursor:                     pointer;
+  font-weight:                bold;
+  text-decoration:            underline;
+}
+
+.timepicker_selected {
+  background:                 #285A94;
+  color:                      #ffffff;
+}
+
+.timepicker_dateContainer {
+  width:                      100%;
+  overflow:                   hidden;
+  height:                     15px;
+}
+
+/*
+.timepicker_holidayContainer {
+  width:                      100%;
+  overflow:                   hidden;
+}
+*/
+
+.timepicker_holidayName {
+  margin-left:                10px;
+}
+
+.timepicker_schedule .timepicker_scheduleListContainer {
+  color: #000000;
+  margin-top: 5px;
+}
+
+.timepicker_selected .timepicker_scheduleListContainer {
+  color:                      #FFFFFF;
+  margin-top:                 5px;
+}
+
+.timepicker_scheduleListContainer UL {
+  list-style:                 square outside;
+  font-weight:                normal;
+  padding:                    0;
+  margin:                     0 0 0 15px;
+}
+
+.timepicker_scheduleItem {
+  font-size: 10px;
+}
+
+.timepicker_scheduleItem DIV {
+  overflow:                   hidden;
+  font-size: 10px;
+}
+
+/* small size */
+.timepicker_small {
+  border:                     1px solid #999999;
+  font-size:                  13px;
+  width:                      175px;
+  background:                 #FFFFFF;
+  color:                      #4F4534;
+}
+
+.timepicker_timepicker_small {
+  background:                 #FFFFFF;
+  color:                      #4F4534;
+  font-size:                  11px;
+}
+
+.timepicker_header_small {
+  background:                 url(../../images/spinelz/calender_back.gif) repeat-x;
+  color:                      #4F4534;
+  width:                      100%;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+  font-weight:                bold;
+  border-collapse:            collapse; 
+  border-bottom:              1px solid #999999;
+  height:                     26px;
+}
+
+.timepicker_tableSmall {
+  font-size:                  11px;
+  text-align:                 left;
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0 0 0 0;
+  padding:                    0;
+  table-layout:               fixed;
+}
+
+.timepicker_tableSmall TH {
+  text-align:                 center;
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  width:                      14%;
+  cursor:                     pointer;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.timepicker_tableSmall TD {
+  text-align:                 center;
+  vertical-align:             text-top;
+  margin:                     0;
+  padding:                    0;
+  height:                     20px;
+  vertical-align:             middle;
+}
+
+
+/* week */
+.timepicker_weekContainerTable {
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+}
+
+.timepicker_weekContainerTable TH {
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.timepicker_weekContainerTable TD {
+  margin:                     0;
+  padding:                    0;
+}
+
+.timepicker_timeline {
+  margin:                     0;
+  padding:                    0;
+  width:                      25px;
+}
+
+.timepicker_timelineTimeTop {
+  height:                     23px;
+  text-align:                 center;
+}
+
+.timepicker_timelineTime_ie {
+  height:                     27px;
+  border-top:                 1px solid #999999;
+  text-align:                 center;
+}
+
+.timepicker_timelineTime_ieTop {
+  height:                     28px;
+  border-top:                 1px solid #999999;
+  text-align:                 center;
+}
+
+.timepicker_timelineTime {
+  height:                     25px;
+  border-top:                 1px solid #999999;
+  text-align:                 center;
+}
+
+.timepicker_headerColumn {
+  border-left:                1px solid #999999;
+  border-bottom:              1px solid #999999;
+  height:                     23px;
+  overflow:                   hidden;
+  cursor:                     pointer;
+}
+
+.timepicker_headerColumn a {
+  position: relative;
+  top: 4px;
+}
+
+.timepicker_columnTopDate {
+  height:                     12px;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.timepicker_columnDate {
+  height:                     12px;
+  border-top:                 1px solid #999999;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.timepicker_columnOddDate {
+  height:                     12px;
+  border-top:                 1px dashed #999999;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.timepicker_scheduleItemSmall {
+  font-size:                  10px;
+  height:                     25px;
+  width:                      100%;
+  background-color:           #E6E6FA; 
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+/*   opacity:                    0.7; */
+  z-index:                    1000;
+  overflow:                   hidden;
+}
+
+.timepicker_scheduleItemLarge {
+  font-size:                  10px;
+  height:                     17px;
+  width:                      100%;
+  background-color:           #E6E6FA; 
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+  overflow:                   hidden;
+  border:                     2px solid #285A94;
+  cursor:                     pointer;
+}
+
+.timepicker_scheduleItemNoBorder {
+  padding-top:                2px;
+  font-size:                  10px;
+  height:                     16px;
+  width:                      100%;
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+  overflow:                   hidden;
+  cursor:                     pointer;
+}
+
+.timepicker_scheduleItemNoBorder div {
+  height:                     16px;
+}
+
+.timepicker_scheduleItemSelect {
+  border:                     2px solid red;
+}
+
+/*
+.timepicker_detailItem UL {
+  list-style:                 square outside;
+  font-weight:                normal;
+  padding:                    0;
+  margin:                     0 0 0 15px;
+}
+*/
+
+.timepicker_weekMainTable {
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+}
+
+.timepicker_weekMainTable TH {
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  margin:                     0;
+  padding:                    0;
+  text-align:                 center;
+}
+
+.timepicker_weekMainTable TD {
+  margin:                     0;
+  padding:                    0;
+}
+
+.timepicker_weekScheduleContainer {
+}
+
+.timepicker_deleteImage {
+  background:                 url(../../images/spinelz/timepicker_delete.gif) no-repeat;
+  position:                   absolute;
+  top:                        0;
+  right:                      0;
+  width:                      16px;
+  height:                     16px;
+  font-size:                  5px;
+  cursor:                     pointer;
+}
+
+.timepicker_privateImage {
+  background:                 url(../../images/spinelz/timepicker_private_icon.gif) no-repeat;
+  float:                      left;
+  width:                      16px;
+  height:                     16px;
+  font-size:                  5px;
+}
+
+.timepicker_selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border:                      2px solid #9b0f0f;
+  background:                  #FFC0CB;
+}
+
+.timepicker_scheduleItemTimeArea {
+  margin-right: 3px;
+  font-size: 9px;
+}
+
+.timepicker_cover {
+  width:                      100%;
+  height:                     100px;
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+}
+
+.timepicker_displayToggle {
+   font-weight:               normal;
+}

@@ -1,0 +1,564 @@
+.calendar {
+  margin:                     0;
+  padding:                    0;
+  text-decoration:            none;
+  text-transform:             none;
+  text-indent:                0;
+  font-weight:                normal;
+  font-size:                  13px;
+  font-family:                Verdana, monospace;
+  width:                      100%;
+  background:                 #ffffff;
+  color:                      #4F4534;
+  border:                     1px solid #999999;
+}
+
+/* header */
+.calendar_scheduleHandler {
+  background:                 url('../../images/spinelz/calendar_default_handler.gif') no-repeat;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     move;
+  float:                      left;
+}
+
+.calendar_header {
+  background:                 url(../../images/spinelz/calender_back.gif) repeat-x;
+  color:                      #4F4534; 
+  width:                      100%;
+  height:                     26px; 
+  border-bottom:              1px solid #999999;
+  border-collapse:            collapse;
+  font-size:                  13px;
+  font-weight:                bold; 
+}
+
+.calendar_preYears {
+  text-align:                 left;
+  width: 35px;
+}
+
+.calendar_years {
+  text-align:                 center;
+}
+
+.calendar_years span {
+  font-weight:                bolder;
+  font-size:                  105%;
+}
+
+.calendar_nextYears {
+  text-align:                 right;
+  width: 35px;
+}
+
+.calendar_nextMonthMark {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.calendar_nextMonthMarkHover {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.calendar_nextYearMark {
+  background:                 url('../../images/spinelz/calendar_next_second.gif') no-repeat;;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.calendar_nextYearMarkHover {
+  background:                 url('../../images/spinelz/calendar_next_second.gif') no-repeat;;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.calendar_nextWeekMark {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin:                     0 0 0 auto;
+}
+
+.calendar_nextWeekMarkHover {
+  background:                 url('../../images/spinelz/calendar_next.gif') no-repeat;;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin:                     0 0 0 auto;
+}
+
+.calendar_preMonthMark {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.calendar_preMonthMarkHover {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  margin-left:                16px;
+}
+
+.calendar_preYearMark {
+  background:                 url('../../images/spinelz/calendar_pre_second.gif') no-repeat;;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.calendar_preYearMarkHover {
+  background:                 url('../../images/spinelz/calendar_pre_second.gif') no-repeat;;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+  float:                      left;
+}
+
+.calendar_preWeekMark {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  background-position:        left top;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+}
+
+.calendar_preWeekMarkHover {
+  background:                 url('../../images/spinelz/calendar_pre.gif') no-repeat;;
+  background-position:        left bottom;
+  width:                      16px;
+  height:                     16px;
+  cursor:                     pointer;
+}
+
+.calendar_markHover {
+  margin-left:                5px;
+  margin-right:               5px;
+  cursor:                     pointer;
+  color:                      #FF8080;
+  background-color:           #E6E6FA;
+}
+
+.calendar_ym {
+  margin-left:                5px;
+}
+
+.calendar_table {
+  font-size:                  12px;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  width:                      100%;
+  table-layout:               fixed;
+}
+
+.calendar_table TH {
+  border-right:               1px solid #999999;
+  border-bottom:              1px solid gray;
+  text-align:                 center;
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  cursor:                     default;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.calendar_table TH.right {
+  border-right-style:         none;
+}
+
+.calendar_table TD {
+  border-right:               1px solid #999999;
+  border-bottom:              1px solid #999999;
+  vertical-align:             text-top;
+  height:                     100px;
+  margin:                     0;
+  padding:                    0;
+}
+
+.calendar_table TD.right {
+  border-right-style:         none;
+}
+
+.calendar_table TD.bottom {
+  border-bottom-style:        none;
+}
+
+.calendar_date {
+  cursor:                     pointer;
+  color:                      #000000;
+  background:                 #FFFFFF;
+  font-weight:                bold;
+}
+.calendar_holidayContainer span {
+  padding:                    2px;
+}
+.calendar_regularHoliday {
+  cursor:                     pointer;
+  background:                 #ededed;
+  color:                      #285A94;
+  font-weight:                bold;
+}
+
+.calendar_holiday {
+  cursor:                     pointer;
+  background-color:           #dedede;
+  color:                      #285A94;
+  font-weight:                bold;
+  overflow:                   hidden;
+}
+
+.calendar_schedule {
+  cursor:                     pointer;
+  background:                 url(../../images/spinelz/calendar_schedule.gif) repeat-x;
+  color:                      #285A94;
+  font-weight:                bold;
+}
+
+.calendar_highlightDay {
+  cursor:                     pointer;
+  font-weight:                bold;
+  text-decoration:            underline;
+  color:                      red;
+}
+
+.calendar_highlightTime {
+  cursor:                     default;
+  font-weight:                bold;
+  text-decoration:            underline;
+  color:                      red;
+}
+
+.calendar_selected {
+  background:                 #285A94;
+  color:                      #ffffff;
+}
+
+.calendar_dateContainer {
+  width:                      100%;
+  overflow:                   hidden;
+  height:                     15px;
+}
+
+/*
+.calendar_holidayContainer {
+  width:                      100%;
+  overflow:                   hidden;
+}
+*/
+
+.calendar_holidayName {
+  margin-left:                10px;
+}
+
+.calendar_schedule .calendar_scheduleListContainer {
+  color: #000000;
+  margin-top: 5px;
+}
+
+.calendar_selected .calendar_scheduleListContainer {
+  color:                      #FFFFFF;
+  margin-top:                 5px;
+}
+
+.calendar_scheduleListContainer UL {
+  list-style:                 square outside;
+  font-weight:                normal;
+  padding:                    0;
+  margin:                     0 0 0 15px;
+}
+
+.calendar_scheduleItem {
+  font-size: 10px;
+}
+
+.calendar_scheduleItem DIV {
+  overflow:                   hidden;
+  font-size: 10px;
+}
+
+/* small size */
+.calendar_small {
+  border:                     1px solid #999999;
+  font-size:                  13px;
+  width:                      175px;
+  background:                 #FFFFFF;
+  color:                      #4F4534;
+}
+
+.calendar_calendar_small {
+  background:                 #FFFFFF;
+  color:                      #4F4534;
+  font-size:                  11px;
+}
+
+.calendar_header_small {
+  background:                 url(../../images/spinelz/calender_back.gif) repeat-x;
+  color:                      #4F4534;
+  width:                      100%;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+  font-weight:                bold;
+  border-collapse:            collapse; 
+  border-bottom:              1px solid #999999;
+  height:                     26px;
+}
+
+.calendar_tableSmall {
+  font-size:                  11px;
+  text-align:                 left;
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0 0 0 0;
+  padding:                    0;
+  table-layout:               fixed;
+}
+
+.calendar_tableSmall TH {
+  text-align:                 center;
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  width:                      14%;
+  cursor:                     default;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.calendar_tableSmall TD {
+  text-align:                 center;
+  vertical-align:             text-top;
+  margin:                     0;
+  padding:                    0;
+  height:                     20px;
+  vertical-align:             middle;
+}
+
+
+/* week */
+.calendar_weekContainerTable {
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+}
+
+.calendar_weekContainerTable TH {
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  margin:                     0;
+  padding:                    0;
+  height:                     24px;
+}
+
+.calendar_weekContainerTable TD {
+  margin:                     0;
+  padding:                    0;
+}
+
+.calendar_timeline {
+  margin:                     0;
+  padding:                    0;
+  width:                      50px;
+}
+
+.calendar_timelineTimeTop {
+  height:                     23px;
+  text-align:                 center;
+}
+
+.calendar_timelineTime {
+  height:                     51px;
+  border-top:                 1px solid #999999;
+  text-align:                 center;
+}
+
+.calendar_headerColumn {
+  border-left:                1px solid #999999;
+  border-bottom:              1px solid #999999;
+  height:                     23px;
+  overflow:                   hidden;
+  cursor:                     default;
+}
+
+.calendar_headerColumn a {
+  position: relative;
+  top: 4px;
+}
+
+.calendar_columnTopDate {
+  height:                     25px;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.calendar_columnDate {
+  height:                     25px;
+  border-top:                 1px solid #999999;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.calendar_columnOddDate {
+  height:                     25px;
+  border-top:                 1px dashed #999999;
+  border-left:                1px solid #999999;
+  cursor:                     pointer;
+}
+
+.calendar_scheduleItemSmall {
+  font-size:                  10px;
+  height:                     25px;
+  width:                      100%;
+  background-color:           #E6E6FA; 
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+/*   opacity:                    0.7; */
+  z-index:                    1000;
+  overflow:                   hidden;
+}
+
+.calendar_scheduleItemLarge {
+  font-size:                  10px;
+  height:                     17px;
+  width:                      100%;
+  background-color:           #E6E6FA; 
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+  overflow:                   hidden;
+  border:                     2px solid #285A94;
+  cursor:                     pointer;
+}
+
+.calendar_scheduleItemNoBorder {
+  padding-top:                2px;
+  font-size:                  10px;
+  height:                     16px;
+  width:                      100%;
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+  overflow:                   hidden;
+  cursor:                     pointer;
+}
+
+.calendar_scheduleItemNoBorder div {
+  height:                     16px;
+}
+
+.calendar_scheduleItemSelect {
+  border:                     2px solid red;
+}
+
+/*
+.calendar_detailItem UL {
+  list-style:                 square outside;
+  font-weight:                normal;
+  padding:                    0;
+  margin:                     0 0 0 15px;
+}
+*/
+
+.calendar_weekMainTable {
+  width:                      100%;
+  border-collapse:            collapse;
+  margin:                     0;
+  padding:                    0;
+  font-size:                  11px;
+}
+
+.calendar_weekMainTable TH {
+  background:                 url(../../images/spinelz/calender_back_second.gif) #FFFFFF;
+  color:                      #4F4534;
+  margin:                     0;
+  padding:                    0;
+  text-align:                 center;
+}
+
+.calendar_weekMainTable TD {
+  margin:                     0;
+  padding:                    0;
+}
+
+.calendar_weekScheduleContainer {
+}
+
+.calendar_deleteImage {
+  background:                 url(../../images/spinelz/calendar_delete.gif) no-repeat;
+  position:                   absolute;
+  top:                        0;
+  right:                      0;
+  width:                      16px;
+  height:                     16px;
+  font-size:                  5px;
+  cursor:                     pointer;
+}
+
+.calendar_privateImage {
+  background:                 url(../../images/spinelz/calendar_private_icon.gif) no-repeat;
+  float:                      left;
+  width:                      16px;
+  height:                     16px;
+  font-size:                  5px;
+}
+
+.calendar_selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border:                      2px solid #9b0f0f;
+  background:                  #FFC0CB;
+}
+
+.calendar_scheduleItemTimeArea {
+  margin-right: 3px;
+  font-size: 9px;
+}
+
+.calendar_skipNode {
+  font-size: 10px;
+  position:  absolute;
+}
+
+.calendar_cover {
+  width:                      100%;
+  height:                     100px;
+  position:                   absolute;
+  left:                       0;
+  top:                        0;
+  z-index:                    1000;
+}
