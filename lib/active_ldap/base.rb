@@ -330,6 +330,9 @@ module ActiveLdap
         end
       end
 
+      def default_search_attribute
+        dn_attribute
+      end
 
       private
       def validate_ldap_mapping_options(options)
@@ -531,6 +534,10 @@ module ActiveLdap
     alias_method(:dn_attribute_of_class, :dn_attribute)
     def dn_attribute
       @dn_attribute || dn_attribute_of_class
+    end
+
+    def default_search_attribute
+      self.class.default_search_attribute
     end
 
     # destroy

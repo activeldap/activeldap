@@ -39,7 +39,7 @@ module ActiveLdap
         end
 
         _attr, value, _prefix = split_search_value(value)
-        attr ||= _attr || dn_attribute || "objectClass"
+        attr ||= _attr || ensure_search_attribute
         prefix ||= _prefix
         filter ||= [attr, value]
         filter = [:and, filter, *object_class_filters(classes)]
@@ -85,7 +85,7 @@ module ActiveLdap
           :prefix => prefix,
         }
 
-        attribute = attr || dn_attribute || "objectClass"
+        attribute = attr || ensure_search_attribute
         options_for_non_leaf = {
           :attribute => attr,
           :value => value,
@@ -109,6 +109,10 @@ module ActiveLdap
 
       def extract_options_from_args!(args)
         args.last.is_a?(Hash) ? args.pop : {}
+      end
+
+      def ensure_search_attribute(*candidates)
+        default_search_attribute || "objectClass"
       end
 
       def ensure_dn_attribute(target)
@@ -240,7 +244,8 @@ module ActiveLdap
 
       def find_one(dn, options)
         attr, value, prefix = split_search_value(dn)
-        filter = [attr || dn_attribute, Escape.ldap_filter_escape(value)]
+        filter = [attr || ensure_search_attribute,
+                  Escape.ldap_filter_escape(value)]
         filter = [:and, filter, options[:filter]] if options[:filter]
         options = {:prefix => prefix}.merge(options.merge(:filter => filter))
         result = find_initial(options)
@@ -262,7 +267,7 @@ module ActiveLdap
       def find_some(dns, options)
         dn_filters = dns.collect do |dn|
           attr, value, prefix = split_search_value(dn)
-          attr ||= dn_attribute
+          attr ||= ensure_search_attribute
           filter = [attr, value]
           if prefix
             filter = [:and,
