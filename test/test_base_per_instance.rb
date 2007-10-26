@@ -9,6 +9,17 @@ class TestBasePerInstance < Test::Unit::TestCase
   end
 
   priority :must
+  def test_dn_is_base
+    entry_class = Class.new(ActiveLdap::Base)
+    entry_class.ldap_mapping :prefix => "",
+                             :classes => ["top"],
+                             :scope => :sub
+    entry_class.dn_attribute = nil
+
+    entry = entry_class.root
+    assert_equal(entry_class.base, entry.dn)
+    assert_equal(entry_class.base, entry.base)
+  end
 
   priority :normal
   def test_loose_dn

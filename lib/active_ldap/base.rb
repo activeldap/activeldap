@@ -428,6 +428,7 @@ module ActiveLdap
         raise ArgumentError, message
       end
       yield self if block_given?
+      assert_dn_attribute
     end
 
     # Returns true if the +comparison_object+ is the same object, or is of
@@ -502,6 +503,8 @@ module ActiveLdap
     #
     # Return the authoritative dn
     def dn
+      return base if @dn_is_base
+
       dn_value = id
       if dn_value.nil?
         raise DistinguishedNameNotSetError.new,
@@ -838,19 +841,20 @@ module ActiveLdap
     end
 
     def init_base
-      check_configuration
       init_instance_variables
     end
 
     def initialize_by_ldap_data(dn, attributes)
       init_base
       @new_entry = false
+      @dn_is_base = false
       @ldap_data = attributes
       classes, attributes = extract_object_class(attributes)
       apply_object_class(classes)
       self.dn = dn
       self.attributes = attributes
       yield self if block_given?
+      assert_dn_attribute
     end
 
     def instantiate(args)
@@ -866,6 +870,7 @@ module ActiveLdap
     end
 
     def to_real_attribute_name(name, allow_normalized_name=false)
+      return name if name.nil?
       ensure_apply_object_class
       name = name.to_s
       real_name = @attribute_names[name]
@@ -1000,17 +1005,9 @@ module ActiveLdap
     #
     # Set the value of the attribute called by method_missing?
     def set_attribute(name, value)
-      # Get the attr and clean up the input
       attr = to_real_attribute_name(name)
+      attr, value = update_dn(attr, value) if attr == dn_attribute
       raise UnknownAttribute.new(name) if attr.nil?
-
-      if attr == dn_attribute and value.is_a?(String) and !value.blank?
-        new_dn_attribute, value, @base = split_dn_value(value)
-        new_dn_attribute = to_real_attribute_name(new_dn_attribute)
-        if dn_attribute != new_dn_attribute
-          @dn_attribute = attr = new_dn_attribute
-        end
-      end
 
       case value
       when nil, ""
@@ -1026,6 +1023,29 @@ module ActiveLdap
       @data[attr] = enforce_type(attr, value)
     end
 
+    def update_dn(attr, value)
+      @dn_is_base = false
+      return [attr, value] if value.blank?
+
+      new_dn_attribute, new_value, base = split_dn_value(value)
+      if new_dn_attribute.nil? and new_value.nil?
+        @dn_is_base = true
+        @base = nil
+        attr, value = DN.parse(base).rdns[0].to_a[0]
+        @dn_attribute = attr
+      else
+        new_dn_attribute = to_real_attribute_name(new_dn_attribute)
+        if new_dn_attribute
+          value = new_value
+          @base = base
+          if dn_attribute != new_dn_attribute
+            @dn_attribute = attr = new_dn_attribute
+          end
+        end
+      end
+      [attr, value]
+    end
+
     def split_dn_value(value)
       dn_value = relative_dn_value = nil
       begin
@@ -1036,12 +1056,16 @@ module ActiveLdap
 
       begin
         relative_dn_value = dn_value - DN.parse(base_of_class)
-        relative_dn_value = dn_value if relative_dn_value.rdns.empty?
+        if relative_dn_value.rdns.empty?
+          val = []
+          bases = dn_value.rdns
+        else
+          val, *bases = relative_dn_value.rdns
+        end
       rescue ArgumentError
-        relative_dn_value = dn_value
+        val, *bases = dn_value.rdns
       end
 
-      val, *bases = relative_dn_value.rdns
       dn_attribute_name, dn_attribute_value = val.to_a[0]
       [dn_attribute_name, dn_attribute_value,
        bases.empty? ? nil : DN.new(*bases).to_s]
@@ -1161,7 +1185,7 @@ module ActiveLdap
       attributes
     end
 
-    def check_configuration
+    def assert_dn_attribute
       unless dn_attribute
         raise ConfigurationError,
                 _("dn_attribute isn't set for this class: %s") % self.class
