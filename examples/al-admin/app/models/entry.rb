@@ -12,6 +12,10 @@ class Entry < ActiveLdap::Base
     end
   end
 
+  def short_dn
+    @short_dn ||= dn == base ? dn : "#{dn_attribute}=#{id}"
+  end
+
   private
   def always_fail
     errors.add("save", _("disable saving"))

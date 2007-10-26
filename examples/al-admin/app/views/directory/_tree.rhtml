@@ -1,0 +1,9 @@
+<% have_child = !tree.children.empty? %>
+<li class="<%= have_child ? 'dir' : 'file' %>">
+  <%= h(tree.short_dn) %>
+<% if have_child -%>
+  <ul>
+    <%= render(:partial => "tree", :collection => tree.children) %>
+  </ul>
+<% end -%>
+</li>

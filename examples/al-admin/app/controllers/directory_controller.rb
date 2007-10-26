@@ -3,7 +3,7 @@ class DirectoryController < ApplicationController
   before_filter :empty_entries_required, :only => [:populate]
 
   def index
-    @entries = Entry.search(:limit => 10)
+    @root = Entry.root
   end
 
   def populate

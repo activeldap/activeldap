@@ -1,5 +1,9 @@
-<ul>
-<% @entries.each do |dn, attributes| -%>
-  <li><%= h dn %></li>
-<% end -%>
+<ul id="directory-tree">
+  <%= render(:partial => "tree", :object => @root) %>
 </ul>
+
+<%= javascript_tag("new TreeView('directory-tree', {
+				    move:       false,
+				    emptyImg:   true,
+				    open:       true
+				  });") %>
