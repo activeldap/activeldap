@@ -1,6 +1,8 @@
 <div class="entry">
   <h2><%= user_link(@user) %></h2>
-  <% form_tag :action => 'update', :id => @user do %>
+  <span class="dn"><%= h(@user.dn) %></span>
+
+  <% form_tag(:action => 'update', :id => @user) do %>
     <%= render :partial => 'form' %>
     <%= submit_tag(s_('Command|Update')) %>
   <% end %>
@@ -9,6 +11,6 @@
 <div class="navi">
   <ul>
     <li><%= link_to(s_('Menu|Show'), :action => 'show', :id => @user) %></li>
-    <li><%= link_to(s_('Menu|Back'), :action => 'index') %></li>
+    <li><%= link_to(s_('Menu|Index'), :action => 'index') %></li>
   </ul>
 </div>

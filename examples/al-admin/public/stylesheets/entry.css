@@ -44,8 +44,3 @@ div.entry td
   background-color: white;
   padding: 5px;
 }
-
-div.entry th[scope="row"]
-{
-  text-align: left;
-}

@@ -50,3 +50,8 @@ p.notice
   padding: 1em;
   text-align: center;
 }
+
+th[scope="row"]
+{
+  text-align: left;
+}

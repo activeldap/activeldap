@@ -17,28 +17,8 @@ div.navi li
   border-left: 1px solid black;
 }
 
-div.entry table,
-div.entry tr,
-div.entry th,
-div.entry td
+form table
 {
-  border: 1px solid black;
-}
-
-
-
-div.entry table
-{
-  margin-left: 3em;
-}
-
-div.entry table tbody th
-{
-  text-align: left;
-}
-
-div.entry div.object-class-information
-{
-  margin: 1em 5em;
-  padding: 0px 1em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
