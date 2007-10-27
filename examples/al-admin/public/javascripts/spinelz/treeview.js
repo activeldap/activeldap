@@ -215,7 +215,7 @@ TreeView.prototype = {
       customClass,
       this.classNames.joinClassNames('handle')
     ];
-    var display = (this.options.open) ? 'show' : 'none';
+    var display = (this.options.open) ? 'block' : 'none';
     this.dirIds.push({state: stateId, icon: iconId, bodyText: bodyTextId});
 
     var html =
