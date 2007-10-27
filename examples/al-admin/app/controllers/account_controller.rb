@@ -50,7 +50,7 @@ class AccountController < ApplicationController
   private
   def force_logout
     current_user.forget_me if logged_in?
-    @current_user = nil
+    self.current_user = nil
     cookies.delete :auth_token
     reset_session
     true
