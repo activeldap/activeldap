@@ -68,7 +68,7 @@ module ActiveLdap
 
     private
     def validate_duplicated_dn_creation
-      if exist?
+      if id and exist?
         if ActiveLdap.get_text_supported?
           format = _("%{fn} is duplicated: %s")
         else
