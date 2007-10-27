@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
 "POT-Creation-Date: 2007-10-25 20:50+0900\n"
-"PO-Revision-Date: 2007-10-25 20:50+0900\n"
+"PO-Revision-Date: 2007-10-27 16:01+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -1174,7 +1174,7 @@ msgstr "州・県・地方名(stateOrProvinceName)"
 
 #: -:-
 msgid "LDAP|Attribute|street"
-msgstr "通り(street<)"
+msgstr "通り(street)"
 
 #: -:-
 msgid "LDAP|Attribute|streetAddress"
