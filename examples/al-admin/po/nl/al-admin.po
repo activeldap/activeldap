@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 19:53+0900\n"
+"POT-Creation-Date: 2007-10-27 21:03+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -102,19 +102,11 @@ msgstr "bewerken"
 msgid "Done."
 msgstr ""
 
-#: app/views/directory/populate.rhtml:2
+#: app/views/directory/populate.rhtml:2 app/views/users/edit.rhtml:14
+#: app/views/users/show.rhtml:9
 #, fuzzy
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
-
-#: app/views/directory/_entry.rhtml:10
-msgid "objectClasses"
-msgstr ""
-
-#: app/views/directory/_entry.rhtml:19
-#, fuzzy
-msgid "Attributes"
-msgstr "naam van het attribuut"
 
 #: app/views/layouts/_header_menu.rhtml:5
 msgid "Menu|Logout"
@@ -136,43 +128,60 @@ msgstr "Gebruikerslijst"
 msgid "Menu|Directory"
 msgstr ""
 
-#: app/views/users/edit.rhtml:5
-msgid "Command|Update"
+#: app/views/_entry/_object_class_information.rhtml:6
+msgid "objectClass name"
 msgstr ""
 
-#: app/views/users/edit.rhtml:11
-msgid "Menu|Show"
-msgstr "Toon"
-
-#: app/views/users/edit.rhtml:12 app/views/users/show.rhtml:5
-#, fuzzy
-msgid "Menu|Back"
-msgstr "Terug"
-
-#: app/views/users/_form.rhtml:6 app/views/account/sign_up.rhtml:7
-msgid "Password"
-msgstr "Wachtwoord"
-
-#: app/views/users/_form.rhtml:13 app/views/account/sign_up.rhtml:10
-msgid "Confirm Password"
-msgstr "Bevestig Wachtwoord"
-
-#: app/views/users/_attribute_information.rhtml:6
-msgid "attribute name"
-msgstr "naam van het attribuut"
-
-#: app/views/users/_attribute_information.rhtml:7
-msgid "value"
-msgstr "waarde"
-
-#: app/views/users/_attribute_information.rhtml:8
-#: app/views/users/_object_class_information.rhtml:10
+#: app/views/_entry/_object_class_information.rhtml:7
+#: app/views/_entry/_attributes_information.rhtml:8
+#: app/views/users/_form.rhtml:29
 msgid "description"
 msgstr "beschrijving"
 
-#: app/views/users/_object_class_information.rhtml:9
-msgid "objectClass name"
+#: app/views/_entry/_attributes_information.rhtml:6
+#: app/views/users/_form.rhtml:27
+msgid "attribute name"
+msgstr "naam van het attribuut"
+
+#: app/views/_entry/_attributes_information.rhtml:7
+#: app/views/users/_form.rhtml:28
+msgid "value"
+msgstr "waarde"
+
+#: app/views/_entry/_entry.rhtml:10
+msgid "objectClasses"
 msgstr ""
+
+#: app/views/_entry/_entry.rhtml:19
+#, fuzzy
+msgid "Attributes"
+msgstr "naam van het attribuut"
+
+#: app/views/users/edit.rhtml:7
+msgid "Command|Update"
+msgstr ""
+
+#: app/views/users/edit.rhtml:13
+msgid "Menu|Show"
+msgstr "Toon"
+
+#: app/views/users/_form.rhtml:4
+#, fuzzy
+msgid "Change password"
+msgstr "Bevestig Wachtwoord"
+
+#: app/views/users/_form.rhtml:8 app/views/account/sign_up.rhtml:7
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: app/views/users/_form.rhtml:15 app/views/account/sign_up.rhtml:10
+msgid "Confirm Password"
+msgstr "Bevestig Wachtwoord"
+
+#: app/views/users/_form.rhtml:22
+#, fuzzy
+msgid "Update attributes"
+msgstr "naam van het attribuut"
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
@@ -220,6 +229,10 @@ msgstr ""
 #: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:75
 msgid "Please login."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Menu|Back"
+#~ msgstr "Terug"
 
 #~ msgid "Top"
 #~ msgstr "Naar boven"
