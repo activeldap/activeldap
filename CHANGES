@@ -1,3 +1,25 @@
+0.8.4:
+  * Improved DN handling.
+  * Supported attribute value validation by LDAP schema.
+  * Changed RubyGems name: ruby-activeldap -> activeldap.
+  * Removed Log4r dependency.
+  * Supported lazy connection establishing.
+    * [API CHANGE]: establish_connection doesn't connect LDAP server.
+  * [API CHANGE]: Removed ActiveLdap::Base#establish_connection.
+  * Added ActiveLdap::Base#bind. (use this instead of #establish_connection)
+  * Supported implicit acts_as_tree.
+  * [API CHANGE]: Supported type casting.
+  * Supported :uri option in configuration.
+  * Improved Rails integration:
+    * Followed Rails 2.0 changes.
+    * AL-Admin:
+      * Supported lang parameter in URL.
+      * Improved design a bit. (Please someone help us!)
+    * Rails plugin:
+      * Added ActiveLdap::VERSION check.
+      * Added model_active_ldap generator.
+      * Renamed scaffold_al generator to scaffold_active_ldap.
+
 0.8.3:
   * Added AL-Admin Sample Rails app
   * Added Ruby-GetText-Package support
@@ -5,6 +27,7 @@
   * Improved schema handling
   * Improved performance
   * Many bug fixes
+
 0.8.2:
   * Added Net::LDAP support!
     * supported SASL Digest-MD5 authentication with Net::LDAP.
