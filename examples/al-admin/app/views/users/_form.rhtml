@@ -1,43 +1,5 @@
 
 <%= error_messages_for "user" %>
 
-<h3><%= _("Change password") %></h3>
-
-<table>
-  <tr>
-    <th scope="row"><label for="user_password"><%= _("Password") %></label></th>
-    <td><%= password_field("user", "password") %></td>
-  </tr>
-
-  <tr>
-    <th scope="row">
-      <label for="user_password_confirmation">
-        <%= _("Confirm Password") %>
-      </label>
-    </th>
-    <td><%= password_field("user", "password_confirmation") %></td>
-  </tr>
-</table>
-
-<h3><%= _("Update attributes") %></h3>
-
-<table>
-  <thead>
-    <tr>
-      <th><%= _("attribute name") %></th>
-      <th><%= _("value") %></th>
-      <th><%= _("description") %></th>
-    </tr>
-  </thead>
-
-<% names = @user.attribute_names(true) - ["objectClass", "userPassword"] -%>
-<% names.sort.each do |name| -%>
-  <tr class="<%= cycle('even', 'odd') %>">
-    <th scope="row">
-      <label for="user_<%=h name %>"><%= h la_(name) %></label>
-    </th>
-    <td><%= text_field("user", name) %></td>
-    <td><%= h lad_(name) %></td>
-  </tr>
-<% end -%>
-</table>
+<%= render(:partial => "password_change_form") %>
+<%= render(:partial => "attributes_update_form") %>
