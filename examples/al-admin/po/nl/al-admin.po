@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-22 22:26+0900\n"
+"POT-Creation-Date: 2007-10-27 16:49+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -50,7 +50,7 @@ msgstr "Zout"
 msgid "User|Updated at"
 msgstr "Bijgewerkt om"
 
-#: app/models/entry.rb:17
+#: app/models/entry.rb:21
 msgid "disable saving"
 msgstr ""
 
@@ -66,7 +66,7 @@ msgstr "ldap gebruiker"
 msgid "user"
 msgstr "gebruiker"
 
-#: app/controllers/directory_controller.rb:18
+#: app/controllers/directory_controller.rb:28
 msgid "Populating is only for initialization"
 msgstr ""
 
@@ -102,6 +102,15 @@ msgstr ""
 #, fuzzy
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
+
+#: app/views/directory/_entry.rhtml:10
+msgid "objectClasses"
+msgstr ""
+
+#: app/views/directory/_entry.rhtml:19
+#, fuzzy
+msgid "Attributes"
+msgstr "naam van het attribuut"
 
 #: app/views/layouts/_header_menu.rhtml:5
 msgid "Menu|Logout"

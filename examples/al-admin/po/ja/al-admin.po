@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-22 22:26+0900\n"
-"PO-Revision-Date: 2007-10-22 22:27+0900\n"
+"POT-Creation-Date: 2007-10-27 16:49+0900\n"
+"PO-Revision-Date: 2007-10-27 16:50+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "サルト"
 msgid "User|Updated at"
 msgstr "更新時刻"
 
-#: app/models/entry.rb:17
+#: app/models/entry.rb:21
 msgid "disable saving"
 msgstr "保存は禁止されています。"
 
@@ -63,7 +63,7 @@ msgstr "ユーザ"
 msgid "user"
 msgstr "ユーザ"
 
-#: app/controllers/directory_controller.rb:18
+#: app/controllers/directory_controller.rb:28
 msgid "Populating is only for initialization"
 msgstr "データ構築は初期化時のみ利用できます。"
 
@@ -98,6 +98,14 @@ msgstr "完了。"
 #: app/views/directory/populate.rhtml:2
 msgid "Menu|Index"
 msgstr "一覧"
+
+#: app/views/directory/_entry.rhtml:10
+msgid "objectClasses"
+msgstr "オブジェクトクラス一覧"
+
+#: app/views/directory/_entry.rhtml:19
+msgid "Attributes"
+msgstr "属性一覧"
 
 #: app/views/layouts/_header_menu.rhtml:5
 msgid "Menu|Logout"
