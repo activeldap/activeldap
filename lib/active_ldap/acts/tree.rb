@@ -11,8 +11,8 @@ module ActiveLdap
       end
 
       module ClassMethods
-        def root
-          find(:first, :scope => :base)
+        def root(options={})
+          find(:first, options.merge(:scope => :base))
         end
       end
 
