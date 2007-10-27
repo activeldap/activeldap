@@ -1,0 +1,49 @@
+#directory-tree
+{
+  padding: 0;
+  width: 30%;
+  overflow: auto;
+  border-right: 1px solid #9c9;
+  float: left;
+}
+
+span.node-dn
+{
+  display: none;
+}
+
+div.directory-entry
+{
+  width: 65%;
+  float: left;
+  margin-left: 1em;
+}
+
+div.directory-entry h2
+{
+  margin-bottom: 0;
+}
+
+div.directory-entry span.dn
+{
+  color: gray;
+  font-size: small;
+  text-align: right;
+  display: block;
+}
+
+div.switcher
+{
+  background-color: #cfc;
+}
+
+div.siwtcher span
+{
+  margin-right: 1em;
+  border: 1px solid red;
+}
+
+div.switcher-content
+{
+  padding: 1em;
+}
