@@ -23,3 +23,10 @@
 	       :locals => {:entry => entry}) %>
   </div>
 </div>
+
+<%= javascript_tag("new Switcher('object-class-information-switch',
+                                 'object-class-information-content',
+                                 {open: true});
+                    new Switcher('attributes-information-switch',
+                                 'attributes-information-content',
+                                 {open: true});") %>
