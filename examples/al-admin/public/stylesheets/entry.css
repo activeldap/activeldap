@@ -44,3 +44,9 @@ div.entry td
   background-color: white;
   padding: 5px;
 }
+
+div.entry tr.even th,
+div.entry tr.even td
+{
+  background-color: #efe;
+}

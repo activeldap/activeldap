@@ -11,7 +11,7 @@
 
     <tbody>
 <% (entry.attribute_names(true) - ["objectClass"]).sort.each do |name| -%>
-      <tr>
+      <tr class="<%= cycle('even', 'odd') %>">
 	<th scope="row"><%= h(la_(name)) %></th>
 	<td><%= h(entry[name, true].join(", ")) %></td>
 	<td><%= h(lad_(name)) %></td>
@@ -20,3 +20,4 @@
     </tbody>
   </table>
 </div>
+<% reset_cycle %>

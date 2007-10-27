@@ -32,7 +32,7 @@
 
 <% names = @user.attribute_names(true) - ["objectClass", "userPassword"] -%>
 <% names.sort.each do |name| -%>
-  <tr>
+  <tr class="<%= cycle('even', 'odd') %>">
     <th scope="row">
       <label for="user_<%=h name %>"><%= h la_(name) %></label>
     </th>
