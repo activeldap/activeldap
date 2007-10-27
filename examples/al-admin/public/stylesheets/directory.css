@@ -3,7 +3,6 @@
   padding: 0;
   width: 30%;
   overflow: auto;
-  border-right: 1px solid #9c9;
   float: left;
 }
 
@@ -16,7 +15,8 @@ div.directory-entry
 {
   width: 65%;
   float: left;
-  margin-left: 1em;
+  padding-left: 1em;
+  border-left: 1px solid #9c9;
 }
 
 div.directory-entry h2
@@ -37,13 +37,33 @@ div.switcher
   background-color: #cfc;
 }
 
-div.siwtcher span
+div.switcher span
 {
-  margin-right: 1em;
-  border: 1px solid red;
+  margin-right: 0.5em;
 }
 
 div.switcher-content
 {
   padding: 1em;
+}
+
+div.switcher-content h3
+{
+  margin-top: 0;
+}
+
+table
+{
+  background-color: #9c9;
+}
+
+tr, th, td
+{
+  background-color: white;
+  padding: 5px;
+}
+
+th[scope="row"]
+{
+  text-align: left;
 }

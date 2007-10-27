@@ -2,8 +2,12 @@
   <%= render(:partial => "tree", :object => @root) %>
 </ul>
 
-<%= javascript_tag("new TreeView('directory-tree', {
-				    move:       false,
-				    emptyImg:   true,
-				    open:       true
-				  });") %>
+<div id="entry-information">
+  <%= render(:partial => "entry", :object => @root) %>
+</div>
+
+<%= javascript_tag(render(:partial => "tree_view_js",
+                          :locals => {:tree_id => "directory-tree",
+                                      :entry_id => "entry-information"})) %>
+
+<hr class="clear" />

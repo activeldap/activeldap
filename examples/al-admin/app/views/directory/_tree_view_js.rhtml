@@ -1,0 +1,29 @@
+<%# -*- javascript -*- %>
+var setupSwitch = function()
+{
+  new Switcher('object-class-information-switch',
+               'object-class-information-content',
+               {open: true});
+  new Switcher('attributes-information-switch',
+               'attributes-information-content',
+               {open: true});
+};
+
+var treeView = new TreeView(<%= tree_id.to_json %>,
+                            {
+                              move: false,
+                              emptyImg: true,
+                              open: true
+                            });
+
+treeView.addSelectItemCallback(function (element)
+{
+  var selectedNode = element.getElementsByClassName('node-dn')[0];
+  var selectedDN = selectedNode.childNodes[0].nodeValue;
+  new Ajax.Updater(<%= entry_id.to_json %>,
+                   <%= url_for(:action => "entry").to_json %>,
+                   {parameters: {dn: selectedDN},
+                    onComplete: setupSwitch});
+});
+
+setupSwitch();

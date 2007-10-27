@@ -1,0 +1,25 @@
+
+<div class="directory-entry">
+  <h2><%= h(entry.short_dn) %></h2>
+  <span class="dn"><%= h(entry.dn) %></span>
+
+  <hr class="clear" />
+
+  <div class="switcher">
+    <span id="object-class-information-switch"></span>
+    <span><%= _("objectClasses") %></span>
+  </div>
+  <div id="object-class-information-content" class="switcher-content">
+    <%= render(:partial => "/users/object_class_information",
+	       :locals => {:entry => entry}) %>
+  </div>
+
+  <div class="switcher">
+    <span id="attributes-information-switch"></span>
+    <span><%= _("Attributes") %></span>
+  </div>
+  <div id="attributes-information-content" class="switcher-content">
+    <%= render(:partial => "/users/attribute_information",
+	       :locals => {:entry => entry}) %>
+  </div>
+</div>

@@ -6,6 +6,16 @@ class DirectoryController < ApplicationController
     @root = Entry.root
   end
 
+  def entry
+    dn = params[:dn]
+    if Entry.base == dn
+      @entry = Entry.root
+    else
+      @entry = Entry.find(dn)
+    end
+    render(:partial => "entry", :object => @entry)
+  end
+
   def populate
     ActiveLdap::Populate.ensure_base
     ActiveLdap::Populate.ensure_ou(LdapUser.prefix)

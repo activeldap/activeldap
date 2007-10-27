@@ -12,9 +12,9 @@
     <tbody>
 <% (entry.attribute_names(true) - ["objectClass"]).sort.each do |name| -%>
       <tr>
-	<th><%= h la_(name) %></th>
-	<td><%= h entry[name, true].join(", ") %></td>
-	<td><%= h lad_(name) %></td>
+	<th scope="row"><%= h(la_(name)) %></th>
+	<td><%= h(entry[name, true].join(", ")) %></td>
+	<td><%= h(lad_(name)) %></td>
       </tr>
 <% end -%>
     </tbody>
