@@ -1,6 +1,6 @@
-
+<% title ||= h(entry.short_dn) %>
 <div class="entry">
-  <h2><%= defined?(title) || h(entry.short_dn) %></h2>
+  <h2><%= title %></h2>
   <span class="dn"><%= h(entry.dn) %></span>
 
   <hr class="clear" />
@@ -10,7 +10,7 @@
     <%= _("objectClasses") %>
   </h3>
   <div id="object-class-information-content" class="switcher-content">
-    <%= render(:partial => "/directory/object_class_information",
+    <%= render(:partial => "_entry/object_class_information",
 	       :locals => {:entry => entry}) %>
   </div>
 
@@ -19,7 +19,7 @@
     <%= _("Attributes") %>
   </h3>
   <div id="attributes-information-content" class="switcher-content">
-    <%= render(:partial => "/directory/attributes_information",
+    <%= render(:partial => "_entry/attributes_information",
 	       :locals => {:entry => entry}) %>
   </div>
 </div>
