@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 16:49+0900\n"
+"POT-Creation-Date: 2007-10-27 19:53+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "ldap gebruiker"
 msgid "user"
 msgstr "gebruiker"
 
-#: app/controllers/directory_controller.rb:28
+#: app/controllers/directory_controller.rb:31
 msgid "Populating is only for initialization"
 msgstr ""
 
@@ -82,13 +82,17 @@ msgstr "Gebruikersnaam of Wachtwoord incorrect"
 msgid "Thanks for signing up!"
 msgstr "Bedankt voor het inschrijven!"
 
-#: app/controllers/account_controller.rb:46
+#: app/controllers/account_controller.rb:45
 msgid "You have been logged out."
 msgstr "U bent afgemeld."
 
 #: app/controllers/users_controller.rb:26
 msgid "User was successfully updated."
 msgstr "Gebruikersgegevens bijgewerkt."
+
+#: app/helpers/directory_helper.rb:3
+msgid "Failed to retrieve the entry"
+msgstr ""
 
 #: app/helpers/users_helper.rb:10
 msgid "Edit"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 16:49+0900\n"
+"POT-Creation-Date: 2007-10-27 19:53+0900\n"
 "PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "user"
 msgstr ""
 
-#: app/controllers/directory_controller.rb:28
+#: app/controllers/directory_controller.rb:31
 msgid "Populating is only for initialization"
 msgstr ""
 
@@ -79,12 +79,16 @@ msgstr ""
 msgid "Thanks for signing up!"
 msgstr ""
 
-#: app/controllers/account_controller.rb:46
+#: app/controllers/account_controller.rb:45
 msgid "You have been logged out."
 msgstr ""
 
 #: app/controllers/users_controller.rb:26
 msgid "User was successfully updated."
+msgstr ""
+
+#: app/helpers/directory_helper.rb:3
+msgid "Failed to retrieve the entry"
 msgstr ""
 
 #: app/helpers/users_helper.rb:10

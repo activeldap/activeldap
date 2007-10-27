@@ -11,7 +11,7 @@ span.node-dn
   display: none;
 }
 
-div.directory-entry
+div#entry-information
 {
   width: 65%;
   float: left;
@@ -19,12 +19,12 @@ div.directory-entry
   border-left: 1px solid #9c9;
 }
 
-div.directory-entry h2
+div#entry-information h2
 {
   margin-bottom: 0;
 }
 
-div.directory-entry span.dn
+div#entry-information span.dn
 {
   color: gray;
   font-size: small;

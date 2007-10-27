@@ -10,8 +10,16 @@ treeView.addSelectItemCallback(function (element)
 {
   var selectedNode = element.getElementsByClassName('node-dn')[0];
   var selectedDN = selectedNode.childNodes[0].nodeValue;
+  var failureHandler = function(transport, json)
+  {
+    var message = <%= failed_to_retrieve_entry_message.to_json %> + "\n";
+    message += '<span class="dn">' + selectedDN + "</span>\n";
+    $(<%= entry_id.to_json %>).update(message);
+  }
+
   new Ajax.Updater({success: <%= entry_id.to_json %>},
                    <%= url_for(:action => "entry").to_json %>,
                    {parameters: {dn: selectedDN},
-                    evalScripts: true});
+                    evalScripts: true,
+                    onFailure: failureHandler});
 });

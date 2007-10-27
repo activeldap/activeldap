@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 16:49+0900\n"
-"PO-Revision-Date: 2007-10-27 16:50+0900\n"
+"POT-Creation-Date: 2007-10-27 19:53+0900\n"
+"PO-Revision-Date: 2007-10-27 19:53+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "ユーザ"
 msgid "user"
 msgstr "ユーザ"
 
-#: app/controllers/directory_controller.rb:28
+#: app/controllers/directory_controller.rb:31
 msgid "Populating is only for initialization"
 msgstr "データ構築は初期化時のみ利用できます。"
 
@@ -79,13 +79,17 @@ msgstr "ログイン名またはパスワードが間違っています。"
 msgid "Thanks for signing up!"
 msgstr "登録ありがとうございます！"
 
-#: app/controllers/account_controller.rb:46
+#: app/controllers/account_controller.rb:45
 msgid "You have been logged out."
 msgstr "ログアウトしました。"
 
 #: app/controllers/users_controller.rb:26
 msgid "User was successfully updated."
 msgstr "ユーザを正常に更新しました。"
+
+#: app/helpers/directory_helper.rb:3
+msgid "Failed to retrieve the entry"
+msgstr "指定されたエントリの取得に失敗しました"
 
 #: app/helpers/users_helper.rb:10
 msgid "Edit"

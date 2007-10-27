@@ -2,6 +2,9 @@ class DirectoryController < ApplicationController
   before_filter :login_required, :except => [:populate]
   before_filter :empty_entries_required, :only => [:populate]
 
+  verify :xhr => true, :only => [:entry],
+         :render => {:text => "Bad Request", :status => 400}
+
   def index
     @root = Entry.root(find_options)
   end
@@ -32,5 +35,13 @@ class DirectoryController < ApplicationController
 
   def find_options
     {:connection => current_user.ldap_connection}
+  end
+
+  def access_denied
+    if action_name == "entry"
+      render(:text => "Unauthorized", :status => 401)
+    else
+      super
+    end
   end
 end
