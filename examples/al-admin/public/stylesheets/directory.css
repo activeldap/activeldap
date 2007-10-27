@@ -32,12 +32,13 @@ div#entry-information span.dn
   display: block;
 }
 
-div.switcher
+div.directory-entry h3
 {
   background-color: #cfc;
+  margin-bottom: 0;
 }
 
-div.switcher span
+span.switch
 {
   margin-right: 0.5em;
 }
