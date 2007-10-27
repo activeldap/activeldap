@@ -44,6 +44,8 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  config.logger = Logger.new(config.log_path, 7)
+  config.logger.level = Logger.const_get(config.log_level.to_s.upcase)
 end
 
 # Add new inflection rules using the following format 
