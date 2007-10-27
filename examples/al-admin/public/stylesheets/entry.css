@@ -15,11 +15,14 @@ div.entry h3
 {
   background-color: #cfc;
   margin-bottom: 0;
+  padding-left: 0.5em;
 }
 
 span.switch
 {
+  margin-left: -0.5em;
   margin-right: 0.5em;
+  height: 1.25em;
 }
 
 div.switcher-content
