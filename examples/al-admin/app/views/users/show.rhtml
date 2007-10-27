@@ -1,4 +1,8 @@
-<%= render(:partial => "entry", :locals => {:entry => @user}) %>
+<%= render(:partial => "/_entry/entry",
+           :locals => {
+             :entry => @user,
+             :title => user_link(@user, true)
+           }) %>
 
 <div class="navi">
   <ul>

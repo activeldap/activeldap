@@ -1,42 +1,51 @@
-div.navi
-{
-  text-align: right;
-}
-
-div.navi ul
+div.entry h2
 {
   margin-bottom: 0;
 }
 
-div.navi li
+div.entry span.dn
 {
-  display: inline;
-  padding-left: 5px;
-  border-left: 1px solid black;
+  color: gray;
+  font-size: small;
+  text-align: right;
+  display: block;
 }
 
-div.entry table,
+div.entry h3
+{
+  background-color: #cfc;
+  margin-bottom: 0;
+}
+
+span.switch
+{
+  margin-right: 0.5em;
+}
+
+div.switcher-content
+{
+  padding: 1em;
+}
+
+div.switcher-content h3
+{
+  margin-top: 0;
+}
+
+div.entry table
+{
+  background-color: #9c9;
+}
+
 div.entry tr,
 div.entry th,
 div.entry td
 {
-  border: 1px solid black;
+  background-color: white;
+  padding: 5px;
 }
 
-
-
-div.entry table
-{
-  margin-left: 3em;
-}
-
-div.entry table tbody th
+div.entry th[scope="row"]
 {
   text-align: left;
-}
-
-div.entry div.object-class-information
-{
-  margin: 1em 5em;
-  padding: 0px 1em;
 }

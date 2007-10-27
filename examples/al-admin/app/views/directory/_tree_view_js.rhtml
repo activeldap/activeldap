@@ -14,6 +14,7 @@ treeView.addSelectItemCallback(function (element)
   {
     var message = <%= failed_to_retrieve_entry_message.to_json %> + "\n";
     message += '<span class="dn">' + selectedDN + "</span>\n";
+    message = "<div class=\"entry\">\n" + message + "</div>";
     $(<%= entry_id.to_json %>).update(message);
   }
 
