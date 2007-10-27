@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     ldap_user.connected?
   end
 
+  def ldap_connection
+    ldap_user.connection
+  end
+
   def remember_token?
     begin
       remember_token_expires_at and

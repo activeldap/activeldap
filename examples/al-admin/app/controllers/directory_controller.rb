@@ -3,15 +3,15 @@ class DirectoryController < ApplicationController
   before_filter :empty_entries_required, :only => [:populate]
 
   def index
-    @root = Entry.root
+    @root = Entry.root(find_options)
   end
 
   def entry
     dn = params[:dn]
     if Entry.base == dn
-      @entry = Entry.root
+      @entry = Entry.root(find_options)
     else
-      @entry = Entry.find(dn)
+      @entry = Entry.find(dn, find_options)
     end
     render(:partial => "entry", :object => @entry)
   end
@@ -28,5 +28,9 @@ class DirectoryController < ApplicationController
     flash.now[:notice] = _("Populating is only for initialization")
     redirect_to(top_url)
     false
+  end
+
+  def find_options
+    {:connection => current_user.ldap_connection}
   end
 end

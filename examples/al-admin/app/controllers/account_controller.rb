@@ -37,9 +37,8 @@ class AccountController < ApplicationController
         redirect_back_or_default(top_path)
         flash[:notice] = _("Thanks for signing up!")
       end
-    else
-      @user.password = @user.password_confirmation = nil
     end
+    @user.password = @user.password_confirmation = nil
   end
 
   def logout
