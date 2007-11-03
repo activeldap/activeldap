@@ -5,6 +5,14 @@
 
   <h3><%= _("Description") %></h3>
   <p class="description"><%= h(lsd_(@syntax)) %></p>
+
+<% unless @syntax.aliases.empty? -%>
+  <%= render(:partial => "_schema/aliases", :object => @syntax.aliases) %>
+<% end -%>
+
+  <% switcher("syntax-detail", _("Detail")) do %>
+    <%= render(:partial => "detail", :locals => {:syntax => @syntax}) %>
+  <% end %>
 </div>
 
 <div class="navi">

@@ -1,0 +1,14 @@
+<table class="values">
+  <tbody>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <th scope="row"><%= _("Binary tranfer required") %></th>
+      <td><%= boolean_value(syntax.binary_transfer_required?) %></td>
+    </tr>
+
+    <tr class="<%= cycle('even', 'odd') %>">
+      <th scope="row"><%= _("Human readable") %></th>
+      <td><%= boolean_value(syntax.human_readable?) %></td>
+    </tr>
+  </tbody>
+</table>
+<% reset_cycle %>
