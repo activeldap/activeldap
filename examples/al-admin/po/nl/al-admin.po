@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 15:11+0900\n"
+"POT-Creation-Date: 2007-11-03 15:22+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -104,7 +104,7 @@ msgstr ""
 
 #: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
 #: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
-#: app/views/attributes/show.rhtml:20
+#: app/views/attributes/show.rhtml:29
 #, fuzzy
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
@@ -310,7 +310,12 @@ msgstr ""
 msgid "Syntax"
 msgstr ""
 
-#: app/views/attributes/show.rhtml:13
+#: app/views/attributes/show.rhtml:14
+#, fuzzy
+msgid "Super attribute"
+msgstr "naam van het attribuut"
+
+#: app/views/attributes/show.rhtml:22
 msgid "Detail"
 msgstr ""
 
