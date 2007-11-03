@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 13:11+0900\n"
-"PO-Revision-Date: 2007-11-03 13:11+0900\n"
+"POT-Creation-Date: 2007-11-03 14:20+0900\n"
+"PO-Revision-Date: 2007-11-03 14:20+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr "編集"
 msgid "Done."
 msgstr "完了。"
 
-#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:58
+#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:43
 #: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
 msgid "Menu|Index"
 msgstr "一覧"
@@ -139,49 +139,60 @@ msgid "value"
 msgstr "値"
 
 #: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/object_classes/_object_classes.rhtml:7
+#: app/views/object_classes/_object_classes.rhtml:6
 #: app/views/users/_attributes_update_form.rhtml:10
 msgid "description"
 msgstr "説明"
 
-#: app/views/_entry/_entry.rhtml:8
+#: app/views/_entry/_entry.rhtml:6
 msgid "objectClasses"
 msgstr "オブジェクトクラス一覧"
 
-#: app/views/_entry/_entry.rhtml:17
+#: app/views/_entry/_entry.rhtml:11
 msgid "Attributes"
 msgstr "属性一覧"
 
-#: app/views/object_classes/_object_classes.rhtml:6
+#: app/views/object_classes/_object_classes.rhtml:5
 msgid "objectClass name"
 msgstr "オブジェクトクラス名"
 
 #: app/views/object_classes/show.rhtml:6
-#: app/views/object_classes/show.rhtml:21
-#: app/views/object_classes/show.rhtml:40
+#: app/views/object_classes/_attributes.rhtml:11
 msgid "Description"
 msgstr "説明"
 
-#: app/views/object_classes/show.rhtml:9
-msgid "Aliases"
-msgstr "別名一覧"
+#: app/views/object_classes/show.rhtml:15
+msgid "Super classes"
+msgstr "スーパートクラス一覧"
 
-#: app/views/object_classes/show.rhtml:16
+#: app/views/object_classes/show.rhtml:19
+#: app/views/object_classes/_attributes.rhtml:4
+msgid "None"
+msgstr "なし"
+
+#: app/views/object_classes/show.rhtml:30
 msgid "Requeired attributes"
 msgstr "必須の属性一覧"
 
-#: app/views/object_classes/show.rhtml:20
-#: app/views/object_classes/show.rhtml:39
-msgid "Name"
-msgstr "名前"
-
-#: app/views/object_classes/show.rhtml:35
+#: app/views/object_classes/show.rhtml:36
 msgid "Optional attributes"
 msgstr "省略可能な属性一覧"
+
+#: app/views/object_classes/_aliases.rhtml:2
+msgid "Aliases"
+msgstr "別名一覧"
 
 #: app/views/object_classes/index.rhtml:2
 msgid "objectClass list"
 msgstr "オブジェクトクラス一覧"
+
+#: app/views/object_classes/_attributes.rhtml:9
+msgid "Name"
+msgstr "名前"
+
+#: app/views/object_classes/_attributes.rhtml:10
+msgid "Inherited"
+msgstr "継承"
 
 #: app/views/users/edit.rhtml:7
 msgid "Command|Update"
