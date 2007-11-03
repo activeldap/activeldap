@@ -15,7 +15,7 @@
       <tbody>
     <% attributes.sort.each do |attribute| %>
 	<tr class="<%= cycle('even', 'odd') %>">
-	  <td><%= h(la_(attribute)) %></td>
+	  <td><%= link_to_attribute(attribute) %></td>
 	  <td class="inherited">
             <%= boolean_value(own_attributes.include?(attribute)) %>
           </td>

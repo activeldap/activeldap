@@ -12,7 +12,7 @@
     <tbody>
 <% (entry.attribute_names(true) - ["objectClass"]).sort.each do |name| -%>
       <tr class="<%= cycle('even', 'odd') %>">
-	<th scope="row"><%= h(la_(name)) %></th>
+	<th scope="row"><%= link_to_attribute(name) %></th>
 	<td><%= h(entry[name, true].join(", ")) %></td>
 	<td><%= h(lad_(name)) %></td>
       </tr>

@@ -1,4 +1,6 @@
 module UsersHelper
+  include ObjectClassesHelper
+
   def user_link(user, with_edit=false)
     user_link_if(true, user, with_edit)
   end
