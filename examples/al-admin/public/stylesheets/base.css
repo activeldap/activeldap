@@ -91,11 +91,3 @@ div.navi li
   padding-left: 5px;
   border-left: 1px solid black;
 }
-
-span.full-identifier
-{
-  color: gray;
-  font-size: small;
-  text-align: right;
-  display: block;
-}

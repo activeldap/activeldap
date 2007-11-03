@@ -4,27 +4,27 @@
   <span class="full-identifier"><%= h(entry.dn) %></span>
 
   <h3>
-    <span id="object-class-information-switch" class="switch"></span>
+    <span id="object-classes-switch" class="switch"></span>
     <%= _("objectClasses") %>
   </h3>
-  <div id="object-class-information-content" class="switcher-content">
+  <div id="object-classes-content" class="switcher-content">
     <%= render(:partial => "object_classes/object_classes",
 	       :object => entry.classes) %>
   </div>
 
   <h3>
-    <span id="attributes-information-switch" class="switch"></span>
+    <span id="attributes-switch" class="switch"></span>
     <%= _("Attributes") %>
   </h3>
-  <div id="attributes-information-content" class="switcher-content">
+  <div id="attributes-content" class="switcher-content">
     <%= render(:partial => "_entry/attributes_information",
 	       :locals => {:entry => entry}) %>
   </div>
 </div>
 
-<%= javascript_tag("new Switcher('object-class-information-switch',
-                                 'object-class-information-content',
+<%= javascript_tag("new Switcher('object-classes-switch',
+                                 'object-classes-content',
                                  {open: true});
-                    new Switcher('attributes-information-switch',
-                                 'attributes-information-content',
+                    new Switcher('attributes-switch',
+                                 'attributes-content',
                                  {open: true});") %>

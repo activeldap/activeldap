@@ -1,6 +1,6 @@
 @import url("detail.css");
 
-p.object-class
+p.description
 {
-  margin-left: 1em;
+  margin: 1em;
 }

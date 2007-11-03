@@ -21,3 +21,11 @@ div.detail div.switcher-content
 {
   padding: 1em;
 }
+
+div.detail span.full-identifier
+{
+  color: gray;
+  font-size: small;
+  text-align: right;
+  display: block;
+}
