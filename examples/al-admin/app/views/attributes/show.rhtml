@@ -13,9 +13,9 @@
 <% if @attribute.super_attribute -%>
   <h3><%= _("Super attribute") %></h3>
   <p class="super-attribute">
-    <%= link_to(h(la_(@attribute)),
+    <%= link_to(h(la_(@attribute.super_attribute)),
                 :action => "show",
-                :id => @attribute) %>
+                :id => @attribute.super_attribute) %>
   </p>
 <% end -%>
 
