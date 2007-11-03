@@ -1,6 +1,6 @@
-<div class="entry">
+<div class="detail">
   <h2><%= user_link(@user) %></h2>
-  <span class="dn"><%= h(@user.dn) %></span>
+  <span class="full-identifier"><%= h(@user.dn) %></span>
 
   <% form_tag(:action => 'update', :id => @user) do %>
     <%= render :partial => 'form' %>
