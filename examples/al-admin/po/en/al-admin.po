@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 15:22+0900\n"
+"POT-Creation-Date: 2007-11-03 22:35+0900\n"
 "PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -87,11 +87,11 @@ msgstr ""
 msgid "User was successfully updated."
 msgstr ""
 
-#: app/helpers/directory_helper.rb:3
+#: app/helpers/directory_helper.rb:5
 msgid "Failed to retrieve the entry"
 msgstr ""
 
-#: app/helpers/users_helper.rb:10
+#: app/helpers/users_helper.rb:12
 msgid "Edit"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 
 #: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
 #: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
-#: app/views/attributes/show.rhtml:29
+#: app/views/syntaxes/show.rhtml:20 app/views/attributes/show.rhtml:29
 msgid "Menu|Index"
 msgstr ""
 
@@ -133,6 +133,10 @@ msgstr ""
 msgid "Menu|Attribute list"
 msgstr ""
 
+#: app/views/layouts/_main_menu.rhtml:10
+msgid "Menu|Syntax list"
+msgstr ""
+
 #: app/views/_entry/_attributes_information.rhtml:6
 #: app/views/attributes/_attributes.rhtml:5
 msgid "Attribute name"
@@ -145,6 +149,7 @@ msgstr ""
 #: app/views/_entry/_attributes_information.rhtml:8
 #: app/views/object_classes/show.rhtml:6
 #: app/views/object_classes/_attributes.rhtml:11
+#: app/views/syntaxes/_syntaxes.rhtml:6 app/views/syntaxes/show.rhtml:6
 #: app/views/attributes/show.rhtml:6 app/views/attributes/_attributes.rhtml:6
 msgid "Description"
 msgstr ""
@@ -257,6 +262,26 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
+#: app/views/syntaxes/_syntaxes.rhtml:5
+msgid "Syntax name"
+msgstr ""
+
+#: app/views/syntaxes/show.rhtml:13 app/views/attributes/show.rhtml:22
+msgid "Detail"
+msgstr ""
+
+#: app/views/syntaxes/_detail.rhtml:4
+msgid "Binary tranfer required"
+msgstr ""
+
+#: app/views/syntaxes/_detail.rhtml:9
+msgid "Human readable"
+msgstr ""
+
+#: app/views/syntaxes/index.rhtml:1
+msgid "Syntax list"
+msgstr ""
+
 #: app/views/welcome/index.rhtml:4
 msgid "Menu|Populate"
 msgstr ""
@@ -273,32 +298,28 @@ msgstr ""
 msgid "Please login."
 msgstr ""
 
-#: app/views/attributes/_attribute.rhtml:4
-msgid "Read only"
-msgstr ""
-
-#: app/views/attributes/_attribute.rhtml:9
-msgid "Single value"
-msgstr ""
-
-#: app/views/attributes/_attribute.rhtml:14
-msgid "Binary"
-msgstr ""
-
-#: app/views/attributes/_attribute.rhtml:19
-msgid "Binary required"
-msgstr ""
-
-#: app/views/attributes/_attribute.rhtml:24
-msgid "Syntax"
-msgstr ""
-
 #: app/views/attributes/show.rhtml:14
 msgid "Super attribute"
 msgstr ""
 
-#: app/views/attributes/show.rhtml:22
-msgid "Detail"
+#: app/views/attributes/_detail.rhtml:4
+msgid "Read only"
+msgstr ""
+
+#: app/views/attributes/_detail.rhtml:9
+msgid "Single value"
+msgstr ""
+
+#: app/views/attributes/_detail.rhtml:14
+msgid "Binary"
+msgstr ""
+
+#: app/views/attributes/_detail.rhtml:19
+msgid "Binary required"
+msgstr ""
+
+#: app/views/attributes/_detail.rhtml:24
+msgid "Syntax"
 msgstr ""
 
 #: app/views/attributes/index.rhtml:1
