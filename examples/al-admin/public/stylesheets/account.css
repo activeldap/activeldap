@@ -39,3 +39,8 @@ div.login-form form > p
 {
   text-align: center;
 }
+
+span.required-attribute-mark
+{
+  color: red;
+}
