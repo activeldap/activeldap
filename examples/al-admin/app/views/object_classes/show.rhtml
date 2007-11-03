@@ -10,20 +10,14 @@
   <%= render(:partial => "_schema/aliases", :object => @object_class.aliases) %>
 <% end -%>
 
-  <h3>
-    <span id="object-classes-switch" class="switch"></span>
-    <%= _("Super classes") %>
-  </h3>
-  <div id="object-classes-content" class="switcher-content">
+  <% switcher("object-classes", _("Super classes")) do %>
 <% if @object_class.super_classes.empty? -%>
     <p><%= _("None") %></p>
 <% else -%>
     <%= render(:partial => "object_classes",
                :object => @object_class.super_classes) %>
 <% end -%>
-  </div>
-  <%= switcher_element('object-classes') %>
-
+  <% end %>
 
   <%= render(:partial => "attributes",
              :object => @object_class.must,
