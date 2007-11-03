@@ -10,23 +10,15 @@
   <%= render(:partial => "aliases", :object => @object_class.aliases) %>
 <% end -%>
 
-  <h3><%= _("Requeired attributes") %></h3>
-  <div class="required-attributes">
-<% if @object_class.must.empty? -%>
-    <p><%= _("None") %></p>
-<% else -%>
-     <%= render(:partial => "attributes", :object => @object_class.must) %>
-<% end -%>
-   </div>
+  <%= render(:partial => "attributes",
+             :object => @object_class.must,
+             :locals => {:title => _("Requeired attributes"),
+                         :prefix => "required-attributes"}) %>
 
-  <h3><%= _("Optional attributes") %></h3>
-  <div class="optional-attributes">
-<% if @object_class.may.empty? -%>
-    <p><%= _("None") %></p>
-<% else -%>
-     <%= render(:partial => "attributes", :object => @object_class.may) %>
-<% end -%>
-  </div>
+  <%= render(:partial => "attributes",
+             :object => @object_class.may,
+             :locals => {:title => _("Optional attributes"),
+                         :prefix => "optional-attributes"}) %>
 </div>
 
 <div class="navi">
