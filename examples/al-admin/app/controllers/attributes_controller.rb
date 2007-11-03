@@ -1,4 +1,6 @@
 class AttributesController < ApplicationController
+  before_filter :login_required
+
   def index
     @attributes = schema.attributes
   end
