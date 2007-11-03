@@ -277,7 +277,14 @@ module ActiveLdap
     end
 
     class Syntax < Entry
+      attr_reader :length
       def initialize(id, schema)
+        if /\{(\d+)\}\z/ =~ id
+          id = $PREMATCH
+          @length = Integer($1)
+        else
+          @length = nil
+        end
         super(id, schema, "ldapSyntaxes")
         @id = id
         @name = nil if @name == @id
@@ -318,6 +325,14 @@ module ActiveLdap
         else
           value
         end
+      end
+
+      def <=>(other)
+        id <=> other.id
+      end
+
+      def to_param
+        id
       end
 
       private
