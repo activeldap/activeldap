@@ -10,7 +10,7 @@
   <%= render(:partial => "_schema/aliases", :object => @object_class.aliases) %>
 <% end -%>
 
-  <% switcher("object-classes", _("Super classes")) do %>
+  <% switcher("super-classes", _("Super classes")) do %>
 <% if @object_class.super_classes.empty? -%>
     <p><%= _("None") %></p>
 <% else -%>

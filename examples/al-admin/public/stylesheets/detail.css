@@ -30,7 +30,7 @@ div.detail span.full-identifier
   display: block;
 }
 
-div.detail p.description
+div.detail > p
 {
   margin: 1em;
 }
