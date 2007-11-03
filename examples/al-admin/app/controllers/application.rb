@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     default_options["lang"] = lang if lang
     default_options.merge(options)
   end
+
+  def schema
+    @schema ||= current_ldap_user.schema
+  end
 end

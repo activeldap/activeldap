@@ -13,9 +13,4 @@ class ObjectClassesController < ApplicationController
     end
     raise ActiveRecord::RecordNotFound if @object_class.nil?
   end
-
-  private
-  def schema
-    @schema ||= current_ldap_user.schema
-  end
 end
