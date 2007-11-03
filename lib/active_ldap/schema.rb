@@ -270,6 +270,10 @@ module ActiveLdap
       def <=>(other)
         name <=> other.name
       end
+
+      def to_param
+        name
+      end
     end
 
     class Syntax < Entry
