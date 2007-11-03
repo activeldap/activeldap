@@ -168,7 +168,7 @@ msgstr "説明"
 
 #: app/views/object_classes/show.rhtml:13
 msgid "Super classes"
-msgstr "スーパークラス一覧"
+msgstr "親クラス一覧"
 
 #: app/views/object_classes/show.rhtml:15
 #: app/views/object_classes/_attributes.rhtml:4
@@ -295,7 +295,7 @@ msgstr "構文"
 
 #: app/views/attributes/show.rhtml:14
 msgid "Super attribute"
-msgstr "スーパー属性"
+msgstr "親属性"
 
 #: app/views/attributes/show.rhtml:22
 msgid "Detail"
