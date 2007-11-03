@@ -14,7 +14,7 @@
         <td><%= link_to(h(loc_(object_class)),
                         :controller => "object_classes",
                         :action => "show",
-                        :id => object_class.is_a?(String) ? object_class : object_class.name) %></td>
+                        :id => object_class) %></td>
         <td><%=h locd_(object_class) %></td>
       </tr>
 <% end -%>
