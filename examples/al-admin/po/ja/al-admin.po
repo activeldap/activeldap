@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 21:03+0900\n"
-"PO-Revision-Date: 2007-10-27 21:04+0900\n"
+"POT-Creation-Date: 2007-11-03 13:11+0900\n"
+"PO-Revision-Date: 2007-11-03 13:11+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "ユーザ"
 msgid "Populating is only for initialization"
 msgstr "データ構築は初期化時のみ利用できます。"
 
-#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:119
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:123
 msgid "Logged in successfully"
 msgstr "ログインに成功しました。"
 
@@ -99,8 +99,8 @@ msgstr "編集"
 msgid "Done."
 msgstr "完了。"
 
-#: app/views/directory/populate.rhtml:2 app/views/users/edit.rhtml:14
-#: app/views/users/show.rhtml:9
+#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:58
+#: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
 msgid "Menu|Index"
 msgstr "一覧"
 
@@ -124,33 +124,64 @@ msgstr "ユーザ一覧"
 msgid "Menu|Directory"
 msgstr "ディレクトリ"
 
-#: app/views/_entry/_object_class_information.rhtml:6
-msgid "objectClass name"
-msgstr "オブジェクトクラス名"
-
-#: app/views/_entry/_object_class_information.rhtml:7
-#: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/users/_form.rhtml:29
-msgid "description"
-msgstr "説明"
+#: app/views/layouts/_main_menu.rhtml:8
+msgid "Menu|objectClass list"
+msgstr "オブジェクトクラス一覧"
 
 #: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/users/_form.rhtml:27
+#: app/views/users/_attributes_update_form.rhtml:8
 msgid "attribute name"
 msgstr "属性名"
 
 #: app/views/_entry/_attributes_information.rhtml:7
-#: app/views/users/_form.rhtml:28
+#: app/views/users/_attributes_update_form.rhtml:9
 msgid "value"
 msgstr "値"
 
-#: app/views/_entry/_entry.rhtml:10
+#: app/views/_entry/_attributes_information.rhtml:8
+#: app/views/object_classes/_object_classes.rhtml:7
+#: app/views/users/_attributes_update_form.rhtml:10
+msgid "description"
+msgstr "説明"
+
+#: app/views/_entry/_entry.rhtml:8
 msgid "objectClasses"
 msgstr "オブジェクトクラス一覧"
 
-#: app/views/_entry/_entry.rhtml:19
+#: app/views/_entry/_entry.rhtml:17
 msgid "Attributes"
 msgstr "属性一覧"
+
+#: app/views/object_classes/_object_classes.rhtml:6
+msgid "objectClass name"
+msgstr "オブジェクトクラス名"
+
+#: app/views/object_classes/show.rhtml:6
+#: app/views/object_classes/show.rhtml:21
+#: app/views/object_classes/show.rhtml:40
+msgid "Description"
+msgstr "説明"
+
+#: app/views/object_classes/show.rhtml:9
+msgid "Aliases"
+msgstr "別名一覧"
+
+#: app/views/object_classes/show.rhtml:16
+msgid "Requeired attributes"
+msgstr "必須の属性一覧"
+
+#: app/views/object_classes/show.rhtml:20
+#: app/views/object_classes/show.rhtml:39
+msgid "Name"
+msgstr "名前"
+
+#: app/views/object_classes/show.rhtml:35
+msgid "Optional attributes"
+msgstr "省略可能な属性一覧"
+
+#: app/views/object_classes/index.rhtml:2
+msgid "objectClass list"
+msgstr "オブジェクトクラス一覧"
 
 #: app/views/users/edit.rhtml:7
 msgid "Command|Update"
@@ -160,25 +191,27 @@ msgstr "更新"
 msgid "Menu|Show"
 msgstr "表示"
 
-#: app/views/users/_form.rhtml:4
+#: app/views/users/_password_change_form.rhtml:2
 msgid "Change password"
 msgstr "パスワード変更"
 
-#: app/views/users/_form.rhtml:8 app/views/account/sign_up.rhtml:7
+#: app/views/users/_password_change_form.rhtml:7
+#: app/views/account/sign_up.rhtml:7
 msgid "Password"
 msgstr "パスワード"
 
-#: app/views/users/_form.rhtml:15 app/views/account/sign_up.rhtml:10
+#: app/views/users/_password_change_form.rhtml:15
+#: app/views/account/sign_up.rhtml:10
 msgid "Confirm Password"
 msgstr "確認用パスワード"
-
-#: app/views/users/_form.rhtml:22
-msgid "Update attributes"
-msgstr "属性更新"
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
 msgstr "ユーザがいません。"
+
+#: app/views/users/_attributes_update_form.rhtml:3
+msgid "Update attributes"
+msgstr "属性更新"
 
 #: app/views/account/login.rhtml:5
 msgid "Login:"
@@ -216,6 +249,6 @@ msgstr "いいですか？"
 msgid "Welcome %s!"
 msgstr "ようこそ%s！"
 
-#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:75
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
 msgid "Please login."
 msgstr "ログインしてください。"

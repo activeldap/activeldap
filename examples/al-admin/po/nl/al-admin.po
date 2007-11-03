@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-10-27 21:03+0900\n"
+"POT-Creation-Date: 2007-11-03 13:11+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -70,7 +70,7 @@ msgstr "gebruiker"
 msgid "Populating is only for initialization"
 msgstr ""
 
-#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:119
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:123
 msgid "Logged in successfully"
 msgstr "Succesvol aangemeld"
 
@@ -102,8 +102,8 @@ msgstr "bewerken"
 msgid "Done."
 msgstr ""
 
-#: app/views/directory/populate.rhtml:2 app/views/users/edit.rhtml:14
-#: app/views/users/show.rhtml:9
+#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:58
+#: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
 #, fuzzy
 msgid "Menu|Index"
 msgstr "menu|Aanmelden"
@@ -128,34 +128,69 @@ msgstr "Gebruikerslijst"
 msgid "Menu|Directory"
 msgstr ""
 
-#: app/views/_entry/_object_class_information.rhtml:6
-msgid "objectClass name"
-msgstr ""
-
-#: app/views/_entry/_object_class_information.rhtml:7
-#: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/users/_form.rhtml:29
-msgid "description"
-msgstr "beschrijving"
+#: app/views/layouts/_main_menu.rhtml:8
+#, fuzzy
+msgid "Menu|objectClass list"
+msgstr "Gebruikerslijst"
 
 #: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/users/_form.rhtml:27
+#: app/views/users/_attributes_update_form.rhtml:8
 msgid "attribute name"
 msgstr "naam van het attribuut"
 
 #: app/views/_entry/_attributes_information.rhtml:7
-#: app/views/users/_form.rhtml:28
+#: app/views/users/_attributes_update_form.rhtml:9
 msgid "value"
 msgstr "waarde"
 
-#: app/views/_entry/_entry.rhtml:10
+#: app/views/_entry/_attributes_information.rhtml:8
+#: app/views/object_classes/_object_classes.rhtml:7
+#: app/views/users/_attributes_update_form.rhtml:10
+msgid "description"
+msgstr "beschrijving"
+
+#: app/views/_entry/_entry.rhtml:8
 msgid "objectClasses"
 msgstr ""
 
-#: app/views/_entry/_entry.rhtml:19
+#: app/views/_entry/_entry.rhtml:17
 #, fuzzy
 msgid "Attributes"
 msgstr "naam van het attribuut"
+
+#: app/views/object_classes/_object_classes.rhtml:6
+msgid "objectClass name"
+msgstr ""
+
+#: app/views/object_classes/show.rhtml:6
+#: app/views/object_classes/show.rhtml:21
+#: app/views/object_classes/show.rhtml:40
+#, fuzzy
+msgid "Description"
+msgstr "beschrijving"
+
+#: app/views/object_classes/show.rhtml:9
+msgid "Aliases"
+msgstr ""
+
+#: app/views/object_classes/show.rhtml:16
+#, fuzzy
+msgid "Requeired attributes"
+msgstr "naam van het attribuut"
+
+#: app/views/object_classes/show.rhtml:20
+#: app/views/object_classes/show.rhtml:39
+msgid "Name"
+msgstr ""
+
+#: app/views/object_classes/show.rhtml:35
+#, fuzzy
+msgid "Optional attributes"
+msgstr "naam van het attribuut"
+
+#: app/views/object_classes/index.rhtml:2
+msgid "objectClass list"
+msgstr ""
 
 #: app/views/users/edit.rhtml:7
 msgid "Command|Update"
@@ -165,27 +200,29 @@ msgstr ""
 msgid "Menu|Show"
 msgstr "Toon"
 
-#: app/views/users/_form.rhtml:4
+#: app/views/users/_password_change_form.rhtml:2
 #, fuzzy
 msgid "Change password"
 msgstr "Bevestig Wachtwoord"
 
-#: app/views/users/_form.rhtml:8 app/views/account/sign_up.rhtml:7
+#: app/views/users/_password_change_form.rhtml:7
+#: app/views/account/sign_up.rhtml:7
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: app/views/users/_form.rhtml:15 app/views/account/sign_up.rhtml:10
+#: app/views/users/_password_change_form.rhtml:15
+#: app/views/account/sign_up.rhtml:10
 msgid "Confirm Password"
 msgstr "Bevestig Wachtwoord"
-
-#: app/views/users/_form.rhtml:22
-#, fuzzy
-msgid "Update attributes"
-msgstr "naam van het attribuut"
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
 msgstr "Geen gebruiker"
+
+#: app/views/users/_attributes_update_form.rhtml:3
+#, fuzzy
+msgid "Update attributes"
+msgstr "naam van het attribuut"
 
 #: app/views/account/login.rhtml:5
 #, fuzzy
@@ -226,7 +263,7 @@ msgstr ""
 msgid "Welcome %s!"
 msgstr ""
 
-#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:75
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
 msgid "Please login."
 msgstr ""
 
