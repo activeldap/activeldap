@@ -29,3 +29,8 @@ div.detail span.full-identifier
   text-align: right;
   display: block;
 }
+
+div.detail p.description
+{
+  margin: 1em;
+}

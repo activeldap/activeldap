@@ -1,0 +1,14 @@
+
+<div class="attribute detail">
+  <h2><%= h(la_(@attribute)) %></h2>
+  <span class="full-identifier"><%= h(@attribute.id) %></span>
+
+  <h3><%= _("Description") %></h3>
+  <p class="description"><%= h(lad_(@attribute)) %></p>
+</div>
+
+<div class="navi">
+  <ul>
+    <li><%= link_to s_('Menu|Index'), :action => 'index' %></li>
+  </ul>
+</div>
