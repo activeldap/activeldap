@@ -5,6 +5,10 @@
 
   <h3><%= _("Description") %></h3>
   <p class="description"><%= h(lad_(@attribute)) %></p>
+
+<% unless @attribute.aliases.empty? -%>
+  <%= render(:partial => "_schema/aliases", :object => @attribute.aliases) %>
+<% end -%>
 </div>
 
 <div class="navi">

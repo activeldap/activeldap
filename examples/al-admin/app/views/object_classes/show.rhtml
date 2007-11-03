@@ -7,7 +7,7 @@
   <p class="description"><%= h(locd_(@object_class)) %></p>
 
 <% unless @object_class.aliases.empty? -%>
-  <%= render(:partial => "aliases", :object => @object_class.aliases) %>
+  <%= render(:partial => "_schema/aliases", :object => @object_class.aliases) %>
 <% end -%>
 
   <h3>
