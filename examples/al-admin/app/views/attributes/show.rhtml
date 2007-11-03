@@ -20,7 +20,7 @@
 <% end -%>
 
   <% switcher("attribute-detail", _("Detail")) do %>
-    <%= render(:partial => "attribute", :object => @attribute) %>
+    <%= render(:partial => "detail", :locals => {:attribute => @attribute}) %>
   <% end %>
 </div>
 
