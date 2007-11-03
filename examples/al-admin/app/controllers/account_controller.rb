@@ -29,10 +29,7 @@ class AccountController < ApplicationController
 
   def sign_up
     @user = LdapUser.new(params[:user])
-    schema = @user.schema
-    @required_attributes = @user.classes.collect do |name|
-      schema.object_class(name).must.collect(&:name)
-    end.flatten.uniq.sort
+    @required_attributes = @user.must.collect(&:name)
     return unless request.post?
 
     if @user.save

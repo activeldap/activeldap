@@ -1,4 +1,7 @@
-<% names = @user.attribute_names(true) - ["objectClass", "userPassword"] %>
+<%
+  names = @user.attribute_names(true) - ["objectClass", "userPassword"]
+  required_attributes = @user.must.collect(&:name)
+%>
 
 <h3><%= _("Update attributes") %></h3>
 
@@ -15,6 +18,9 @@
   <tr class="<%= cycle('even', 'odd') %>">
     <th scope="row">
       <label for="user_<%=h name %>"><%= h la_(name) %></label>
+<%   if required_attributes.include?(name) -%>
+      <span class="required-attribute-mark">*</span>
+<%   end -%>
     </th>
     <td><%= text_field("user", name) %></td>
     <td><%= h lad_(name) %></td>
