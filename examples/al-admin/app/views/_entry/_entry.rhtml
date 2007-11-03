@@ -11,6 +11,7 @@
     <%= render(:partial => "object_classes/object_classes",
 	       :object => entry.classes) %>
   </div>
+  <%= switcher_element("object-classes") %>
 
   <h3>
     <span id="attributes-switch" class="switch"></span>
@@ -20,11 +21,5 @@
     <%= render(:partial => "_entry/attributes_information",
 	       :locals => {:entry => entry}) %>
   </div>
+  <%= switcher_element("attributes") %>
 </div>
-
-<%= javascript_tag("new Switcher('object-classes-switch',
-                                 'object-classes-content',
-                                 {open: true});
-                    new Switcher('attributes-switch',
-                                 'attributes-content',
-                                 {open: true});") %>

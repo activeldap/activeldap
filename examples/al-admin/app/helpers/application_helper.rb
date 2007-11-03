@@ -17,4 +17,12 @@ module ApplicationHelper
     javascript_content = "#{set_opacity}\n#{effect}"
     "#{flash_box_div}\n#{javascript_tag(javascript_content)}"
   end
+
+  def switcher_element(prefix, options={})
+    options[:open] = true unless options.has_key?(:open)
+    switch_id = "#{prefix}-switch".to_json
+    content_id = "#{prefix}-content".to_json
+    options = options_for_javascript(options)
+    javascript_tag("new Switcher(#{switch_id}, #{content_id}, #{options});")
+  end
 end

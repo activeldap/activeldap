@@ -27,6 +27,4 @@
 <% end -%>
 </div>
 
-<%= javascript_tag("new Switcher('#{prefix}-switch',
-                                 '#{prefix}-content',
-                                 {open: true})") %>
+<%= switcher_element(prefix) %>
