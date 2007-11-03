@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 14:20+0900\n"
+"POT-Creation-Date: 2007-11-03 14:52+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -78,11 +78,11 @@ msgstr "Succesvol aangemeld"
 msgid "Login or Password is incorrect"
 msgstr "Gebruikersnaam of Wachtwoord incorrect"
 
-#: app/controllers/account_controller.rb:38
+#: app/controllers/account_controller.rb:40
 msgid "Thanks for signing up!"
 msgstr "Bedankt voor het inschrijven!"
 
-#: app/controllers/account_controller.rb:45
+#: app/controllers/account_controller.rb:47
 msgid "You have been logged out."
 msgstr "U bent afgemeld."
 
@@ -133,20 +133,28 @@ msgstr ""
 msgid "Menu|objectClass list"
 msgstr "Gebruikerslijst"
 
+#: app/views/layouts/_main_menu.rhtml:9
+#, fuzzy
+msgid "Menu|Attribute list"
+msgstr "naam van het attribuut"
+
 #: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:8
-msgid "attribute name"
+#: app/views/attributes/_attributes.rhtml:5
+#, fuzzy
+msgid "Attribute name"
 msgstr "naam van het attribuut"
 
 #: app/views/_entry/_attributes_information.rhtml:7
-#: app/views/users/_attributes_update_form.rhtml:9
-msgid "value"
+#, fuzzy
+msgid "Value"
 msgstr "waarde"
 
 #: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/object_classes/_object_classes.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:10
-msgid "description"
+#: app/views/object_classes/show.rhtml:6
+#: app/views/object_classes/_attributes.rhtml:11
+#: app/views/attributes/_attributes.rhtml:6
+#, fuzzy
+msgid "Description"
 msgstr "beschrijving"
 
 #: app/views/_entry/_entry.rhtml:6
@@ -162,10 +170,9 @@ msgstr "naam van het attribuut"
 msgid "objectClass name"
 msgstr ""
 
-#: app/views/object_classes/show.rhtml:6
-#: app/views/object_classes/_attributes.rhtml:11
-#, fuzzy
-msgid "Description"
+#: app/views/object_classes/_object_classes.rhtml:6
+#: app/views/users/_attributes_update_form.rhtml:13
+msgid "description"
 msgstr "beschrijving"
 
 #: app/views/object_classes/show.rhtml:15
@@ -191,7 +198,7 @@ msgstr "naam van het attribuut"
 msgid "Aliases"
 msgstr ""
 
-#: app/views/object_classes/index.rhtml:2
+#: app/views/object_classes/index.rhtml:1
 msgid "objectClass list"
 msgstr ""
 
@@ -230,10 +237,18 @@ msgstr "Bevestig Wachtwoord"
 msgid "No user."
 msgstr "Geen gebruiker"
 
-#: app/views/users/_attributes_update_form.rhtml:3
+#: app/views/users/_attributes_update_form.rhtml:6
 #, fuzzy
 msgid "Update attributes"
 msgstr "naam van het attribuut"
+
+#: app/views/users/_attributes_update_form.rhtml:11
+msgid "attribute name"
+msgstr "naam van het attribuut"
+
+#: app/views/users/_attributes_update_form.rhtml:12
+msgid "value"
+msgstr "waarde"
 
 #: app/views/account/login.rhtml:5
 #, fuzzy
@@ -257,7 +272,7 @@ msgstr "Aanmelden"
 msgid "Login"
 msgstr "Gebruikersnaam"
 
-#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:27
 msgid "Sign up"
 msgstr "inschrijven"
 
@@ -277,6 +292,11 @@ msgstr ""
 #: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
 msgid "Please login."
 msgstr ""
+
+#: app/views/attributes/index.rhtml:1
+#, fuzzy
+msgid "Attribute list"
+msgstr "naam van het attribuut"
 
 #, fuzzy
 #~ msgid "Menu|Back"

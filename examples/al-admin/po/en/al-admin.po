@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 14:20+0900\n"
+"POT-Creation-Date: 2007-11-03 14:52+0900\n"
 "PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -75,11 +75,11 @@ msgstr ""
 msgid "Login or Password is incorrect"
 msgstr ""
 
-#: app/controllers/account_controller.rb:38
+#: app/controllers/account_controller.rb:40
 msgid "Thanks for signing up!"
 msgstr ""
 
-#: app/controllers/account_controller.rb:45
+#: app/controllers/account_controller.rb:47
 msgid "You have been logged out."
 msgstr ""
 
@@ -128,20 +128,24 @@ msgstr ""
 msgid "Menu|objectClass list"
 msgstr ""
 
+#: app/views/layouts/_main_menu.rhtml:9
+msgid "Menu|Attribute list"
+msgstr ""
+
 #: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:8
-msgid "attribute name"
+#: app/views/attributes/_attributes.rhtml:5
+msgid "Attribute name"
 msgstr ""
 
 #: app/views/_entry/_attributes_information.rhtml:7
-#: app/views/users/_attributes_update_form.rhtml:9
-msgid "value"
+msgid "Value"
 msgstr ""
 
 #: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/object_classes/_object_classes.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:10
-msgid "description"
+#: app/views/object_classes/show.rhtml:6
+#: app/views/object_classes/_attributes.rhtml:11
+#: app/views/attributes/_attributes.rhtml:6
+msgid "Description"
 msgstr ""
 
 #: app/views/_entry/_entry.rhtml:6
@@ -156,9 +160,9 @@ msgstr ""
 msgid "objectClass name"
 msgstr ""
 
-#: app/views/object_classes/show.rhtml:6
-#: app/views/object_classes/_attributes.rhtml:11
-msgid "Description"
+#: app/views/object_classes/_object_classes.rhtml:6
+#: app/views/users/_attributes_update_form.rhtml:13
+msgid "description"
 msgstr ""
 
 #: app/views/object_classes/show.rhtml:15
@@ -182,7 +186,7 @@ msgstr ""
 msgid "Aliases"
 msgstr ""
 
-#: app/views/object_classes/index.rhtml:2
+#: app/views/object_classes/index.rhtml:1
 msgid "objectClass list"
 msgstr ""
 
@@ -220,8 +224,16 @@ msgstr ""
 msgid "No user."
 msgstr ""
 
-#: app/views/users/_attributes_update_form.rhtml:3
+#: app/views/users/_attributes_update_form.rhtml:6
 msgid "Update attributes"
+msgstr ""
+
+#: app/views/users/_attributes_update_form.rhtml:11
+msgid "attribute name"
+msgstr ""
+
+#: app/views/users/_attributes_update_form.rhtml:12
+msgid "value"
 msgstr ""
 
 #: app/views/account/login.rhtml:5
@@ -244,7 +256,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:27
 msgid "Sign up"
 msgstr ""
 
@@ -262,4 +274,8 @@ msgstr ""
 
 #: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
 msgid "Please login."
+msgstr ""
+
+#: app/views/attributes/index.rhtml:1
+msgid "Attribute list"
 msgstr ""

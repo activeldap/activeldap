@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 14:20+0900\n"
-"PO-Revision-Date: 2007-11-03 14:20+0900\n"
+"POT-Creation-Date: 2007-11-03 14:52+0900\n"
+"PO-Revision-Date: 2007-11-03 14:52+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -75,11 +75,11 @@ msgstr "ログインに成功しました。"
 msgid "Login or Password is incorrect"
 msgstr "ログイン名またはパスワードが間違っています。"
 
-#: app/controllers/account_controller.rb:38
+#: app/controllers/account_controller.rb:40
 msgid "Thanks for signing up!"
 msgstr "登録ありがとうございます！"
 
-#: app/controllers/account_controller.rb:45
+#: app/controllers/account_controller.rb:47
 msgid "You have been logged out."
 msgstr "ログアウトしました。"
 
@@ -128,20 +128,24 @@ msgstr "ディレクトリ"
 msgid "Menu|objectClass list"
 msgstr "オブジェクトクラス一覧"
 
+#: app/views/layouts/_main_menu.rhtml:9
+msgid "Menu|Attribute list"
+msgstr "属性一覧"
+
 #: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:8
-msgid "attribute name"
+#: app/views/attributes/_attributes.rhtml:5
+msgid "Attribute name"
 msgstr "属性名"
 
 #: app/views/_entry/_attributes_information.rhtml:7
-#: app/views/users/_attributes_update_form.rhtml:9
-msgid "value"
+msgid "Value"
 msgstr "値"
 
 #: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/object_classes/_object_classes.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:10
-msgid "description"
+#: app/views/object_classes/show.rhtml:6
+#: app/views/object_classes/_attributes.rhtml:11
+#: app/views/attributes/_attributes.rhtml:6
+msgid "Description"
 msgstr "説明"
 
 #: app/views/_entry/_entry.rhtml:6
@@ -156,9 +160,9 @@ msgstr "属性一覧"
 msgid "objectClass name"
 msgstr "オブジェクトクラス名"
 
-#: app/views/object_classes/show.rhtml:6
-#: app/views/object_classes/_attributes.rhtml:11
-msgid "Description"
+#: app/views/object_classes/_object_classes.rhtml:6
+#: app/views/users/_attributes_update_form.rhtml:13
+msgid "description"
 msgstr "説明"
 
 #: app/views/object_classes/show.rhtml:15
@@ -182,7 +186,7 @@ msgstr "省略可能な属性一覧"
 msgid "Aliases"
 msgstr "別名一覧"
 
-#: app/views/object_classes/index.rhtml:2
+#: app/views/object_classes/index.rhtml:1
 msgid "objectClass list"
 msgstr "オブジェクトクラス一覧"
 
@@ -220,9 +224,17 @@ msgstr "確認用パスワード"
 msgid "No user."
 msgstr "ユーザがいません。"
 
-#: app/views/users/_attributes_update_form.rhtml:3
+#: app/views/users/_attributes_update_form.rhtml:6
 msgid "Update attributes"
 msgstr "属性更新"
+
+#: app/views/users/_attributes_update_form.rhtml:11
+msgid "attribute name"
+msgstr "属性名"
+
+#: app/views/users/_attributes_update_form.rhtml:12
+msgid "value"
+msgstr "値"
 
 #: app/views/account/login.rhtml:5
 msgid "Login:"
@@ -244,7 +256,7 @@ msgstr "ログイン"
 msgid "Login"
 msgstr "ログイン名"
 
-#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:21
+#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:27
 msgid "Sign up"
 msgstr "登録"
 
@@ -263,3 +275,7 @@ msgstr "ようこそ%s！"
 #: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
 msgid "Please login."
 msgstr "ログインしてください。"
+
+#: app/views/attributes/index.rhtml:1
+msgid "Attribute list"
+msgstr "属性一覧"
