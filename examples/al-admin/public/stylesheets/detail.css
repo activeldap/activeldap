@@ -1,23 +1,23 @@
-div.entry h2
+div.detail h2
 {
   margin-bottom: 0;
 }
 
-div.entry h3
+div.detail h3
 {
   background-color: #cfc;
   margin-bottom: 0;
   padding-left: 0.5em;
 }
 
-span.switch
+div.detail span.switch
 {
   margin-left: -0.5em;
   margin-right: 0.5em;
   height: 1.25em;
 }
 
-div.switcher-content
+div.detail div.switcher-content
 {
   padding: 1em;
 }
