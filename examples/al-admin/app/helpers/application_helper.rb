@@ -18,6 +18,16 @@ module ApplicationHelper
     "#{flash_box_div}\n#{javascript_tag(javascript_content)}"
   end
 
+  def switcher(prefix, title, &proc)
+    concat(render(:partial => "_switcher/before",
+                  :locals => {:prefix => prefix, :title => title}),
+           proc.binding)
+    yield
+    concat(render(:partial => "_switcher/after",
+                  :locals => {:prefix => prefix}),
+           proc.binding)
+  end
+
   def switcher_element(prefix, options={})
     options[:open] = true unless options.has_key?(:open)
     switch_id = "#{prefix}-switch".to_json

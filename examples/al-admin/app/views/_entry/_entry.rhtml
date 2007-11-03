@@ -3,23 +3,13 @@
   <h2><%= title %></h2>
   <span class="full-identifier"><%= h(entry.dn) %></span>
 
-  <h3>
-    <span id="object-classes-switch" class="switch"></span>
-    <%= _("objectClasses") %>
-  </h3>
-  <div id="object-classes-content" class="switcher-content">
+  <% switcher("object-classes", _("objectClasses")) do %>
     <%= render(:partial => "object_classes/object_classes",
 	       :object => entry.classes) %>
-  </div>
-  <%= switcher_element("object-classes") %>
+  <% end %>
 
-  <h3>
-    <span id="attributes-switch" class="switch"></span>
-    <%= _("Attributes") %>
-  </h3>
-  <div id="attributes-content" class="switcher-content">
+  <% switcher("attributes", _("Attributes")) do %>
     <%= render(:partial => "_entry/attributes_information",
 	       :locals => {:entry => entry}) %>
-  </div>
-  <%= switcher_element("attributes") %>
+  <% end %>
 </div>

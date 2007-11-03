@@ -1,30 +1,24 @@
 
-<h3>
-  <span id="<%= prefix %>-switch" class="switch"></span>
-  <%= title %>
-</h3>
-<div id="<%= prefix %>-content" class="switcher-content">
-<% if attributes.empty? -%>
-  <p><%= _("None") %></p>
-<% else -%>
-  <table class="values">
-    <thead>
-      <tr>
-        <th><%= _("Name") %></th>
-        <th><%= _("Description") %></th>
-      </tr>
-    </thead>
+<% switcher(prefix, title) do %>
+  <% if attributes.empty? -%>
+    <p><%= _("None") %></p>
+  <% else -%>
+    <table class="values">
+      <thead>
+	<tr>
+	  <th><%= _("Name") %></th>
+	  <th><%= _("Description") %></th>
+	</tr>
+      </thead>
 
-    <tbody>
-<%   attributes.sort.each do |attribute| -%>
-      <tr class="<%= cycle('even', 'odd') %>">
-        <td><%= h(la_(attribute)) %></td>
-        <td><%= h(lad_(attribute)) %></td>
-      </tr>
-<%   end -%>
+      <tbody>
+<%     attributes.sort.each do |attribute| -%>
+	<tr class="<%= cycle('even', 'odd') %>">
+	  <td><%= h(la_(attribute)) %></td>
+	  <td><%= h(lad_(attribute)) %></td>
+	</tr>
+<%     end -%>
     </tbody>
   </table>
-<% end -%>
-</div>
-
-<%= switcher_element(prefix) %>
+<%   end -%>
+<% end %>
