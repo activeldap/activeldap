@@ -1,0 +1,18 @@
+
+<table class="values">
+  <thead>
+    <tr>
+      <th><%= _("Name") %></th>
+      <th><%= _("Description") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% attributes.sort.each do |attribute| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <td><%= h(la_(attribute)) %></td>
+      <td><%= h(lad_(attribute)) %></td>
+    </tr>
+<%   end -%>
+  </tbody>
+</table>

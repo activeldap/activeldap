@@ -6,51 +6,27 @@
   <h3><%= _("Description") %></h3>
   <p class="description"><%= h(locd_(@object_class)) %></p>
 
-  <h3><%= _("Aliases") %></h3>
-<ul>
-<% @object_class.aliases.uniq.sort.each do |alias_name| %>
-  <li><%= h(alias_name) %></li>
-<% end %>
-</ul>
+<% unless @object_class.aliases.empty? -%>
+  <%= render(:partial => "aliases", :object => @object_class.aliases) %>
+<% end -%>
 
   <h3><%= _("Requeired attributes") %></h3>
-<table class="values">
-  <thead>
-    <tr>
-      <th><%= _("Name") %></th>
-      <th><%= _("Description") %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-<% @object_class.must.sort.each do |attribute| -%>
-    <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= h(la_(attribute)) %></td>
-      <td><%= h(lad_(attribute)) %></td>
-    </tr>
+  <div class="required-attributes">
+<% if @object_class.must.empty? -%>
+    <p><%= _("None") %></p>
+<% else -%>
+     <%= render(:partial => "attributes", :object => @object_class.must) %>
 <% end -%>
-  </tbody>
-</table>
+   </div>
 
   <h3><%= _("Optional attributes") %></h3>
-<table class="values">
-  <thead>
-    <tr>
-      <th><%= _("Name") %></th>
-      <th><%= _("Description") %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-<% @object_class.may.sort.each do |attribute| -%>
-    <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= h(la_(attribute)) %></td>
-      <td><%= h(lad_(attribute)) %></td>
-    </tr>
+  <div class="optional-attributes">
+<% if @object_class.may.empty? -%>
+    <p><%= _("None") %></p>
+<% else -%>
+     <%= render(:partial => "attributes", :object => @object_class.may) %>
 <% end -%>
-  </tbody>
-</table>
-
+  </div>
 </div>
 
 <div class="navi">
