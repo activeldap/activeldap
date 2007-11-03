@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 14:52+0900\n"
-"PO-Revision-Date: 2007-11-03 14:52+0900\n"
+"POT-Creation-Date: 2007-11-03 15:11+0900\n"
+"PO-Revision-Date: 2007-11-03 15:13+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -99,8 +99,9 @@ msgstr "編集"
 msgid "Done."
 msgstr "完了。"
 
-#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:43
+#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
 #: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
+#: app/views/attributes/show.rhtml:20
 msgid "Menu|Index"
 msgstr "一覧"
 
@@ -144,7 +145,7 @@ msgstr "値"
 #: app/views/_entry/_attributes_information.rhtml:8
 #: app/views/object_classes/show.rhtml:6
 #: app/views/object_classes/_attributes.rhtml:11
-#: app/views/attributes/_attributes.rhtml:6
+#: app/views/attributes/show.rhtml:6 app/views/attributes/_attributes.rhtml:6
 msgid "Description"
 msgstr "説明"
 
@@ -165,26 +166,22 @@ msgstr "オブジェクトクラス名"
 msgid "description"
 msgstr "説明"
 
-#: app/views/object_classes/show.rhtml:15
+#: app/views/object_classes/show.rhtml:13
 msgid "Super classes"
 msgstr "スーパートクラス一覧"
 
-#: app/views/object_classes/show.rhtml:19
+#: app/views/object_classes/show.rhtml:15
 #: app/views/object_classes/_attributes.rhtml:4
 msgid "None"
 msgstr "なし"
 
-#: app/views/object_classes/show.rhtml:30
+#: app/views/object_classes/show.rhtml:24
 msgid "Requeired attributes"
 msgstr "必須の属性一覧"
 
-#: app/views/object_classes/show.rhtml:36
+#: app/views/object_classes/show.rhtml:30
 msgid "Optional attributes"
 msgstr "省略可能な属性一覧"
-
-#: app/views/object_classes/_aliases.rhtml:2
-msgid "Aliases"
-msgstr "別名一覧"
 
 #: app/views/object_classes/index.rhtml:1
 msgid "objectClass list"
@@ -276,6 +273,34 @@ msgstr "ようこそ%s！"
 msgid "Please login."
 msgstr "ログインしてください。"
 
+#: app/views/attributes/_attribute.rhtml:4
+msgid "Read only"
+msgstr "読み込み専用"
+
+#: app/views/attributes/_attribute.rhtml:9
+msgid "Single value"
+msgstr "値は一つのみ"
+
+#: app/views/attributes/_attribute.rhtml:14
+msgid "Binary"
+msgstr "バイナリ"
+
+#: app/views/attributes/_attribute.rhtml:19
+msgid "Binary required"
+msgstr "バイナリが必須"
+
+#: app/views/attributes/_attribute.rhtml:24
+msgid "Syntax"
+msgstr "構文"
+
+#: app/views/attributes/show.rhtml:13
+msgid "Detail"
+msgstr "詳細"
+
 #: app/views/attributes/index.rhtml:1
 msgid "Attribute list"
 msgstr "属性一覧"
+
+#: app/views/_schema/_aliases.rhtml:2
+msgid "Aliases"
+msgstr "別名一覧"
