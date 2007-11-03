@@ -4,3 +4,8 @@ p.description
 {
   margin: 1em;
 }
+
+td.inherited
+{
+  text-align: center;
+}

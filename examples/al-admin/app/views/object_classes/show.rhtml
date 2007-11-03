@@ -28,12 +28,14 @@
   <%= render(:partial => "attributes",
              :object => @object_class.must,
              :locals => {:title => _("Requeired attributes"),
-                         :prefix => "required-attributes"}) %>
+                         :prefix => "required-attributes",
+                         :own_attributes => @object_class.must(false)}) %>
 
   <%= render(:partial => "attributes",
              :object => @object_class.may,
              :locals => {:title => _("Optional attributes"),
-                         :prefix => "optional-attributes"}) %>
+                         :prefix => "optional-attributes",
+                         :own_attributes => @object_class.may(false)}) %>
 </div>
 
 <div class="navi">
