@@ -1,4 +1,6 @@
 class ObjectClassesController < ApplicationController
+  before_filter :login_required
+
   def index
     @object_classes = schema.object_classes
   end
