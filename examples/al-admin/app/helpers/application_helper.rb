@@ -35,4 +35,8 @@ module ApplicationHelper
     options = options_for_javascript(options)
     javascript_tag("new Switcher(#{switch_id}, #{content_id}, #{options});")
   end
+
+  def boolean_value(condition)
+    condition ? "o" : "x"
+  end
 end

@@ -9,6 +9,10 @@
 <% unless @attribute.aliases.empty? -%>
   <%= render(:partial => "_schema/aliases", :object => @attribute.aliases) %>
 <% end -%>
+
+  <% switcher("attribute-detail", _("Detail")) do %>
+    <%= render(:partial => "attribute", :object => @attribute) %>
+  <% end %>
 </div>
 
 <div class="navi">
