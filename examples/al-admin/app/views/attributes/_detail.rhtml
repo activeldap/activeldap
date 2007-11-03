@@ -22,7 +22,7 @@
 
     <tr class="<%= cycle('even', 'odd') %>">
       <th scope="row"><%= _("Syntax") %></th>
-      <td><%= h(ls_(attribute.syntax)) %></td>
+      <td><%= link_to_syntax(attribute.syntax) %></td>
     </tr>
   </tbody>
 </table>
