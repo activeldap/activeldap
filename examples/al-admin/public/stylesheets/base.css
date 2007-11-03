@@ -55,3 +55,22 @@ th[scope="row"]
 {
   text-align: left;
 }
+
+table.values
+{
+  background-color: #9c9;
+}
+
+table.values tr,
+table.values th,
+table.values td
+{
+  background-color: white;
+  padding: 5px;
+}
+
+table.values tr.even th,
+table.values tr.even td
+{
+  background-color: #efe;
+}

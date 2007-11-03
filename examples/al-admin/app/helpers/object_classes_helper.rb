@@ -1,0 +1,2 @@
+module ObjectClassesHelper
+end

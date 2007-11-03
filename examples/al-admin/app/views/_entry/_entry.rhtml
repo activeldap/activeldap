@@ -8,8 +8,8 @@
     <%= _("objectClasses") %>
   </h3>
   <div id="object-class-information-content" class="switcher-content">
-    <%= render(:partial => "_entry/object_class_information",
-	       :locals => {:entry => entry}) %>
+    <%= render(:partial => "object_classes/object_classes",
+	       :object => entry.classes) %>
   </div>
 
   <h3>

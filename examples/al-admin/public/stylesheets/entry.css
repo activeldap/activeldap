@@ -29,22 +29,3 @@ div.switcher-content
 {
   padding: 1em;
 }
-
-div.entry table
-{
-  background-color: #9c9;
-}
-
-div.entry tr,
-div.entry th,
-div.entry td
-{
-  background-color: white;
-  padding: 5px;
-}
-
-div.entry tr.even th,
-div.entry tr.even td
-{
-  background-color: #efe;
-}
