@@ -3,14 +3,6 @@ div.entry h2
   margin-bottom: 0;
 }
 
-div.entry span.dn
-{
-  color: gray;
-  font-size: small;
-  text-align: right;
-  display: block;
-}
-
 div.entry h3
 {
   background-color: #cfc;

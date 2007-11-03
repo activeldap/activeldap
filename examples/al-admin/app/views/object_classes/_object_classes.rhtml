@@ -11,7 +11,10 @@
     <tbody>
 <% object_classes.uniq.sort.each do |object_class| -%>
       <tr class="<%= cycle('even', 'odd') %>">
-        <td><%=h loc_(object_class) %></td>
+        <td><%= link_to(h(loc_(object_class)),
+                        :controller => "object_classes",
+                        :action => "show",
+                        :id => object_class.is_a?(String) ? object_class : object_class.name) %></td>
         <td><%=h locd_(object_class) %></td>
       </tr>
 <% end -%>

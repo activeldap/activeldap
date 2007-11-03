@@ -74,3 +74,28 @@ table.values tr.even td
 {
   background-color: #efe;
 }
+
+div.navi
+{
+  text-align: right;
+}
+
+div.navi ul
+{
+  margin-bottom: 0;
+}
+
+div.navi li
+{
+  display: inline;
+  padding-left: 5px;
+  border-left: 1px solid black;
+}
+
+span.full-identifier
+{
+  color: gray;
+  font-size: small;
+  text-align: right;
+  display: block;
+}
