@@ -6,7 +6,8 @@ class AttributesController < ApplicationController
   end
 
   def show
-    key = params[:id]
+    key = params[:id].to_a.flatten.compact[0]
+    raise ActiveRecord::RecordNotFound if key.nil?
     @attribute = schema.attributes.find do |attribute|
       attribute.name == key or
         attribute.id == key

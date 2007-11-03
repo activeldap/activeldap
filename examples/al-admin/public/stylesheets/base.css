@@ -37,6 +37,7 @@ h1
 div#flash-box
 {
   position: absolute;
+  top: 0;
   left: 0;
   width: 100%;
   background-color: #fcfffc;

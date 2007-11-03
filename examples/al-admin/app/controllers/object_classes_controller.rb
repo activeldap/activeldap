@@ -6,7 +6,8 @@ class ObjectClassesController < ApplicationController
   end
 
   def show
-    key = params[:id]
+    key = params[:id].to_a.flatten.compact[0]
+    raise ActiveRecord::RecordNotFound if key.nil?
     @object_class = schema.object_classes.find do |object_class|
       object_class.name == key or
         object_class.id == key

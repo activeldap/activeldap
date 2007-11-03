@@ -1,0 +1,14 @@
+
+<div class="syntax detail">
+  <h2><%= h(ls_(@syntax)) %></h2>
+  <span class="full-identifier"><%= h(@syntax.id) %></span>
+
+  <h3><%= _("Description") %></h3>
+  <p class="description"><%= h(lsd_(@syntax)) %></p>
+</div>
+
+<div class="navi">
+  <ul>
+    <li><%= link_to s_('Menu|Index'), :action => 'index' %></li>
+  </ul>
+</div>

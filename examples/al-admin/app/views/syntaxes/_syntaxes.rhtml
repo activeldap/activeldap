@@ -2,16 +2,16 @@
 <table class="values">
   <thead>
     <tr>
-      <th><%= _("Attribute name") %></th>
+      <th><%= _("Syntax name") %></th>
       <th><%= _("Description") %></th>
     </tr>
   </thead>
 
   <tbody>
-<% attributes.uniq.sort.each do |attribute| -%>
+<% syntaxes.uniq.sort.each do |syntax| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= link_to_attribute(attribute) %></td>
-      <td><%= h(lad_(attribute)) %></td>
+      <td><%= link_to_syntax(syntax) %></td>
+      <td><%= h(lsd_(syntax)) %></td>
     </tr>
 <% end -%>
   </tbody>

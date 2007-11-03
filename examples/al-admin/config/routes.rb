@@ -29,6 +29,13 @@ ActionController::Routing::Routes.draw do |map|
   # -- just remember to delete public/index.html.
   lang_map.call(:top, '', :controller => "welcome")
 
+  lang_map.call(:connect, 'object_class/*id',
+                :controller => "object_classes", :action => "show")
+  lang_map.call(:connect, 'attribute/*id',
+                :controller => "attributes", :action => "show")
+  lang_map.call(:connect, 'syntax/*id',
+                :controller => "syntaxes", :action => "show")
+
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   lang_map.call(:connect, ':controller/service.wsdl', :action => 'wsdl')
