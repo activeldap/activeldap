@@ -55,6 +55,17 @@ class TestSyntax < Test::Unit::TestCase
   end
 
   priority :must
+  def test_id_with_length
+    id = "1.3.6.1.4.1.1466.115.121.1.26"
+
+    syntax = ActiveLdap::Schema::Syntax.new(id, @schema)
+    assert_equal([id, nil], [syntax.id, syntax.length])
+
+    syntax = ActiveLdap::Schema::Syntax.new("#{id}{128}", @schema)
+    assert_equal([id, 128], [syntax.id, syntax.length])
+  end
+
+  priority :normal
   def test_bit_string_type_cast
     assert_type_cast_without_validation(nil, nil, 'Bit String')
     assert_type_cast("0101111101", "'0101111101'B", 'Bit String')
@@ -86,7 +97,6 @@ class TestSyntax < Test::Unit::TestCase
     assert_type_cast(1321, "1321", "Integer")
   end
 
-  priority :normal
   def test_bit_string_validate
     assert_valid("'0101111101'B", 'Bit String')
     assert_valid("''B", 'Bit String')
