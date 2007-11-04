@@ -5,6 +5,34 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_syntax_validation_with_complex_value
+    make_temporary_user do |user, password|
+      assert(user.save)
+
+      option = 'lang-en-us'
+      value = 'test-en'
+      user.see_also = ["cn=test,dc=example,dc=com", {option => value}]
+      assert(!user.save)
+      assert(user.errors.invalid?(:seeAlso))
+      assert_equal(1, user.errors.size)
+
+      syntax_description = lsd_("1.3.6.1.4.1.1466.115.121.1.12")
+      assert_not_nil(syntax_description)
+      reason_params = [value, _("attribute value is missing")]
+      reason = _('%s is invalid distinguished name (DN): %s') % reason_params
+      params = [option, value, syntax_description, reason]
+      if ActiveLdap.get_text_supported?
+        format = _("%{fn} (%s) has invalid format: %s: required syntax: %s: %s")
+        format = format % {:fn => la_("seeAlso")}
+        assert_equal([format % params], user.errors.full_messages)
+      else
+        format = _("(%s) has invalid format: %s: required syntax: %s: %s")
+        assert_equal(["seeAlso #{format % params}"], user.errors.full_messages)
+      end
+    end
+  end
+
+  priority :normal
   def test_duplicated_dn_creation
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
@@ -17,7 +45,6 @@ class TestValidation < Test::Unit::TestCase
     assert_equal([format % ou.dn], ou.errors.full_messages)
   end
 
-  priority :normal
   def test_syntax_validation
     make_temporary_user do |user, password|
       assert(user.save)

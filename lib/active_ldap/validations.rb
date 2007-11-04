@@ -126,18 +126,44 @@ module ActiveLdap
     def validate_ldap_values
       @attribute_schemata.each do |name, attribute|
         self[name, true].each do |value|
-          failed_reason = attribute.validate(value)
-          if failed_reason
-            params = [value,
-                      self.class.human_syntax_description(attribute.syntax),
-                     failed_reason]
-            if ActiveLdap.get_text_supported?
+          validate_ldap_value(attribute, name, value)
+        end
+      end
+    end
+
+    def validate_ldap_value(attribute, name, value, option=nil)
+      case value
+      when Hash
+        value.each do |sub_option, val|
+          validate_ldap_value(attribute, name, val,
+                              [option, sub_option].compact.join(";"))
+        end
+      when Array
+        value.each do |val|
+          validate_ldap_value(attribute, name, val, option)
+        end
+      else
+        failed_reason = attribute.validate(value)
+        if failed_reason
+          params = [value,
+                    self.class.human_syntax_description(attribute.syntax),
+                    failed_reason]
+          if ActiveLdap.get_text_supported?
+            if option
+              format =
+                _("%{fn} (%s) has invalid format: %s: required syntax: %s: %s")
+            else
               format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
+            end
+          else
+            if option
+              format = _("(%s) has invalid format: %s: required syntax: %s: %s")
             else
               format = _("has invalid format: %s: required syntax: %s: %s")
             end
-            errors.add(name, format % params)
           end
+          params.unshift(option) if option
+          errors.add(name, format % params)
         end
       end
     end
