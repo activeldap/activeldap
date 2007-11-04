@@ -16,6 +16,7 @@
       * Supported lang parameter in URL.
       * Improved design a bit. (Please someone help us!)
       * Supported schema inspection.
+      * Supported objectClass modifiation.
     * Rails plugin:
       * Added ActiveLdap::VERSION check.
       * Added model_active_ldap generator.
