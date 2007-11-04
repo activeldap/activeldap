@@ -122,6 +122,20 @@ module ActiveLdap
   class DistinguishedNameNotSetError < Error
   end
 
+  class LdifInvalid < Error
+    attr_reader :ldif, :reason
+    def initialize(ldif, reason=nil)
+      @ldif = ldif
+      @reason = reason
+      if @reason
+        message = _("%s is invalid LDIF: %s") % [@ldif, @reason]
+      else
+        message = _("%s is invalid LDIF") % @ldif
+      end
+      super(message)
+    end
+  end
+
   class EntryNotSaved < Error
   end
 
