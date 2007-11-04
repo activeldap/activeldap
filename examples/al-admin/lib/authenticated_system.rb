@@ -5,21 +5,10 @@ module AuthenticatedSystem
     def logged_in?
       current_user != :false
     end
-    
-    def check_connectivity
-      if logged_in? and !current_user.connected?
-        self.current_user = :false
-      end
-      true
-    end
 
     # Accesses the current user from the session.
     def current_user
       @current_user ||= (session[:user] && User.find_by_id(session[:user])) || :false
-    end
-
-    def current_ldap_user
-      logged_in? ? current_user.ldap_user : nil
     end
 
     # Store the given user in the session.

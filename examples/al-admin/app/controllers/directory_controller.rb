@@ -34,7 +34,7 @@ class DirectoryController < ApplicationController
   end
 
   def find_options
-    {:connection => current_user.ldap_connection}
+    {:connection => current_ldap_user.connection}
   end
 
   def access_denied

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     previous_user_password = @user.user_password
     if @user.update_attributes(params[:user])
       if previous_user_password != @user.user_password
-        @user.establish_connection(:password => @user.password)
+        @user.bind(@user.password)
       end
       flash[:notice] = _('User was successfully updated.')
       redirect_to :action => 'show', :id => @user

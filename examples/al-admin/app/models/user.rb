@@ -41,19 +41,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def connected?
-    ldap_user.connected?
-  end
-
-  def ldap_connection
-    ldap_user.connection
-  end
-
   def remember_token?
     begin
       remember_token_expires_at and
         Time.now.utc < remember_token_expires_at and
-        connected?
+        ldap_user.connected?
     rescue ActiveLdap::EntryNotFound
       false
     end
@@ -75,7 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def short_dn
-    @ldap_user.short_dn
+    ldap_user.short_dn
   end
 
   private

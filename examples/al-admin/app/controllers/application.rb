@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
 
   include AuthenticatedSystem
-  before_filter :check_connectivity
   before_filter :login_from_cookie
 
   private
@@ -21,7 +20,15 @@ class ApplicationController < ActionController::Base
     default_options.merge(options)
   end
 
+  def current_ldap_user
+    logged_in? ? current_user.ldap_user : nil
+  end
+
   def schema
     @schema ||= current_ldap_user.schema
+  end
+
+  def authorized?
+    current_ldap_user.connected?
   end
 end
