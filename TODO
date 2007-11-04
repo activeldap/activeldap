@@ -1,3 +1,6 @@
+- Provide FormHelper for LDAP entry's attribute to handle multiple values
+  (["foo", "bar", ...]) and option value ({"binary" => "..."},
+  {"lang-en-us" => "..."})
 - Test SASL bind.
 - Add result pagination via LDAP::Controls
 - serialize & serialized_attributes
