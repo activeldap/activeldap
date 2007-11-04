@@ -908,23 +908,6 @@ module ActiveLdap
       normalize_attribute(key, value)[1]
     end
 
-    def type_cast(attribute, value)
-      case value
-      when Hash
-        result = {}
-        value.each do |option, val|
-          result[option] = type_cast(attribute, val)
-        end
-        result
-      when Array
-        value.collect do |val|
-          type_cast(attribute, val)
-        end
-      else
-        attribute.type_cast(value)
-      end
-    end
-
     def init_instance_variables
       @mutex = Mutex.new
       @data = {} # where the r/w entry data is stored
@@ -992,6 +975,23 @@ module ActiveLdap
       name, value = get_attribute_before_type_cast(name, force_array)
       attribute = schema.attribute(name)
       type_cast(attribute, value)
+    end
+
+    def type_cast(attribute, value)
+      case value
+      when Hash
+        result = {}
+        value.each do |option, val|
+          result[option] = type_cast(attribute, val)
+        end
+        result
+      when Array
+        value.collect do |val|
+          type_cast(attribute, val)
+        end
+      else
+        attribute.type_cast(value)
+      end
     end
 
     def get_attribute_before_type_cast(name, force_array=false)
