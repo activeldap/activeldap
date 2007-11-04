@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.8.4\n"
-"POT-Creation-Date: 2007-10-25 20:50+0900\n"
+"POT-Creation-Date: 2007-11-04 12:09+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3335,7 +3335,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: lib/active_ldap/acts/tree.rb:38
+#: lib/active_ldap/acts/tree.rb:66
 msgid "parent must be an entry or parent DN: %s"
 msgstr ""
 
@@ -3347,27 +3347,27 @@ msgstr ""
 msgid ":ldap_scope search option is deprecated. Use :scope instead."
 msgstr ""
 
-#: lib/active_ldap/operations.rb:197
+#: lib/active_ldap/operations.rb:201
 msgid "Invalid order: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:232
+#: lib/active_ldap/operations.rb:236
 msgid "Couldn't find %s without a DN"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:253
+#: lib/active_ldap/operations.rb:258
 msgid "Couldn't find %s: DN: %s: filter: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:256
+#: lib/active_ldap/operations.rb:261
 msgid "Couldn't find %s: DN: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:283
+#: lib/active_ldap/operations.rb:288
 msgid "Couldn't find all %s: DNs (%s): filter: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:286
+#: lib/active_ldap/operations.rb:291
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
@@ -3411,11 +3411,19 @@ msgstr ""
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:135
+#: lib/active_ldap/validations.rb:154
+msgid "%{fn} (%s) has invalid format: %s: required syntax: %s: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:156
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:137
+#: lib/active_ldap/validations.rb:160
+msgid "(%s) has invalid format: %s: required syntax: %s: %s"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:162
 msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
@@ -3455,32 +3463,32 @@ msgstr ""
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:426
+#: lib/active_ldap/base.rb:429
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:508
+#: lib/active_ldap/base.rb:514
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:541
+#: lib/active_ldap/base.rb:551
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:560
+#: lib/active_ldap/base.rb:570
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:581 lib/active_ldap/base.rb:592
+#: lib/active_ldap/base.rb:591 lib/active_ldap/base.rb:602
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:708
+#: lib/active_ldap/base.rb:718
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1167
+#: lib/active_ldap/base.rb:1209
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
