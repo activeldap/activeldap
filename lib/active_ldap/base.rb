@@ -661,9 +661,10 @@ module ActiveLdap
     # It is unwise to attempt objectClass updates this way.
     # Also be sure to only pass in key-value pairs of your choosing.
     # Do not let URL/form hackers supply the keys.
-    def attributes=(hash_or_assoc)
+    def attributes=(new_attributes)
+      return if new_attributes.nil?
       _schema = nil
-      targets = remove_attributes_protected_from_mass_assignment(hash_or_assoc)
+      targets = remove_attributes_protected_from_mass_assignment(new_attributes)
       targets.each do |key, value|
         setter = "#{key}="
         unless respond_to?(setter)
