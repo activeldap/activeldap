@@ -3,28 +3,28 @@
   required_attributes = @user.must.collect(&:name)
 %>
 
-<% switcher("attributes", _("Update attributes")) do %>
-  <table class="values">
-    <thead>
-      <tr>
-	<th><%= _("attribute name") %></th>
-	<th><%= _("value") %></th>
-	<th><%= _("description") %></th>
-      </tr>
-    </thead>
+<h3><%= _("Update attributes") %></h3>
 
-  <% names.sort.each do |name| %>
-    <tr class="<%= cycle('even', 'odd') %>">
-      <th scope="row">
-	<label for="user_<%=h name %>"><%= h la_(name) %></label>
-	<%= link_to("?", attribute_url_for_options(name)) %>
-    <% if required_attributes.include?(name) %>
-	<span class="required-attribute-mark">*</span>
-    <% end %>
-      </th>
-      <td><%= text_field("user", name) %></td>
-      <td><%= h lad_(name) %></td>
+<table class="values form">
+  <thead>
+    <tr>
+      <th><%= _("attribute name") %></th>
+      <th><%= _("value") %></th>
+      <th><%= _("description") %></th>
     </tr>
-  <% end %>
-  </table>
+  </thead>
+
+<% names.sort.each do |name| -%>
+  <tr class="<%= cycle('even', 'odd') %>">
+    <th scope="row">
+      <label for="user_<%=h name %>"><%= h la_(name) %></label>
+      <%= link_to("?", attribute_url_for_options(name)) %>
+<%   if required_attributes.include?(name) -%>
+      <span class="required-attribute-mark">*</span>
+<%   end -%>
+    </th>
+    <td><%= text_field("user", name) %></td>
+    <td><%= h lad_(name) %></td>
+  </tr>
 <% end -%>
+</table>

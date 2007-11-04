@@ -35,7 +35,12 @@ class UsersController < ApplicationController
   def update_object_classes
     @user = find(params[:id])
     @user.replace_class(params["object-classes"])
-    @user.attributes = params[:user]
+    available_attributes = @user.attribute_names(true)
+    attributes = {}
+    (params[:user] || {}).each do |key, value|
+      attributes[key] = value if available_attributes.include?(key)
+    end
+    @user.attributes = attributes
     render(:partial => "attributes_update_form")
   end
 

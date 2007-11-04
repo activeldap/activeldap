@@ -1,6 +1,6 @@
 @import url("detail.css");
 
-form > table
+table.form
 {
   margin: 1em;
 }
