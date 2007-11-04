@@ -17,7 +17,7 @@
 	<tr class="<%= cycle('even', 'odd') %>">
 	  <td><%= link_to_attribute(attribute) %></td>
 	  <td class="inherited">
-            <%= boolean_value(own_attributes.include?(attribute)) %>
+            <%= boolean_value(!own_attributes.include?(attribute)) %>
           </td>
 	  <td><%= h(lad_(attribute)) %></td>
 	</tr>
