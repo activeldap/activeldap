@@ -61,8 +61,8 @@ module ActiveLdap
           :order => options[:order] || order,
         }
 
-        conn = options[:connection] || connection
-        conn.search(search_options) do |dn, attrs|
+        options[:connection] ||= connection
+        options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
           attrs.each do |key, value|
             normalized_attr, normalized_value =
@@ -304,21 +304,21 @@ module ActiveLdap
       def dump(options={})
         ldifs = []
         options = {:base => base, :scope => scope}.merge(options)
-        conn = options[:connection] || connection
-        conn.search(options) do |dn, attributes|
+        options[:connection] ||= connection
+        options[:connection].search(options) do |dn, attributes|
           ldifs << to_ldif(dn, attributes)
         end
         ldifs.join("\n")
       end
 
       def to_ldif(dn, attributes, options={})
-        conn = options[:connection] || connection
-        conn.to_ldif(dn, unnormalize_attributes(attributes))
+        options[:connection] ||= connection
+        options[:connection].to_ldif(dn, unnormalize_attributes(attributes))
       end
 
       def load(ldifs, options={})
-        conn = options[:connection] || connection
-        conn.load(ldifs)
+        options[:connection] ||= connection
+        options[:connection].load(ldifs)
       end
     end
 
@@ -349,14 +349,15 @@ module ActiveLdap
         targets = targets.collect do |target|
           ensure_dn_attribute(ensure_base(target))
         end
-        conn = options[:connection] || connection
-        conn.delete(targets, options)
+        options[:connection] ||= connection
+        options[:connection].delete(targets, options)
       end
 
       def delete_all(filter=nil, options={})
         options = {:base => base, :scope => scope}.merge(options)
         options = options.merge(:filter => filter) if filter
-        conn = options[:connection] || connection
+        options[:connection] ||= connection
+        conn = options[:connection]
         targets = conn.search(options).collect do |dn, attributes|
           dn
         end.sort_by do |dn|
@@ -372,16 +373,16 @@ module ActiveLdap
         unnormalized_attributes = attributes.collect do |type, key, value|
           [type, key, unnormalize_attribute(key, value)]
         end
-        conn = options[:connection] || connection
-        conn.add(dn, unnormalized_attributes, options)
+        options[:connection] ||= connection
+        options[:connection].add(dn, unnormalized_attributes, options)
       end
 
       def modify_entry(dn, attributes, options={})
         unnormalized_attributes = attributes.collect do |type, key, value|
           [type, key, unnormalize_attribute(key, value)]
         end
-        conn = options[:connection] || connection
-        conn.modify(dn, unnormalized_attributes, options)
+        options[:connection] ||= connection
+        options[:connection].modify(dn, unnormalized_attributes, options)
       end
 
       def update(dn, attributes, options={})
@@ -417,7 +418,8 @@ module ActiveLdap
           [:replace, normalized_name,
            unnormalize_attribute(normalized_name, normalized_value)]
         end
-        conn = options[:connection] || connection
+        options[:connection] ||= connection
+        conn = options[:connection]
         targets.each do |dn|
           conn.modify(dn, unnormalized_attributes, options)
         end
