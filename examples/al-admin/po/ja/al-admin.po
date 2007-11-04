@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 22:35+0900\n"
-"PO-Revision-Date: 2007-11-03 22:36+0900\n"
+"POT-Creation-Date: 2007-11-04 15:53+0900\n"
+"PO-Revision-Date: 2007-11-04 15:54+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "ユーザ"
 msgid "Populating is only for initialization"
 msgstr "データ構築は初期化時のみ利用できます。"
 
-#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:123
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:112
 msgid "Logged in successfully"
 msgstr "ログインに成功しました。"
 
@@ -83,7 +83,7 @@ msgstr "登録ありがとうございます！"
 msgid "You have been logged out."
 msgstr "ログアウトしました。"
 
-#: app/controllers/users_controller.rb:26
+#: app/controllers/users_controller.rb:27
 msgid "User was successfully updated."
 msgstr "ユーザを正常に更新しました。"
 
@@ -100,7 +100,7 @@ msgid "Done."
 msgstr "完了。"
 
 #: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
-#: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
+#: app/views/users/edit.rhtml:13 app/views/users/show.rhtml:9
 #: app/views/syntaxes/show.rhtml:20 app/views/attributes/show.rhtml:29
 msgid "Menu|Index"
 msgstr "一覧"
@@ -149,6 +149,7 @@ msgstr "値"
 #: app/views/_entry/_attributes_information.rhtml:8
 #: app/views/object_classes/show.rhtml:6
 #: app/views/object_classes/_attributes.rhtml:11
+#: app/views/users/_object_classes_update_form.rhtml:12
 #: app/views/syntaxes/_syntaxes.rhtml:6 app/views/syntaxes/show.rhtml:6
 #: app/views/attributes/show.rhtml:6 app/views/attributes/_attributes.rhtml:6
 msgid "Description"
@@ -163,6 +164,7 @@ msgid "Attributes"
 msgstr "属性一覧"
 
 #: app/views/object_classes/_object_classes.rhtml:5
+#: app/views/users/_object_classes_update_form.rhtml:11
 msgid "objectClass name"
 msgstr "オブジェクトクラス名"
 
@@ -200,13 +202,13 @@ msgstr "名前"
 msgid "Inherited"
 msgstr "継承"
 
-#: app/views/users/edit.rhtml:7
-msgid "Command|Update"
-msgstr "更新"
-
-#: app/views/users/edit.rhtml:13
+#: app/views/users/edit.rhtml:12
 msgid "Menu|Show"
 msgstr "表示"
+
+#: app/views/users/_form.rhtml:5 app/views/users/_form.rhtml:13
+msgid "Command|Update"
+msgstr "更新"
 
 #: app/views/users/_password_change_form.rhtml:2
 msgid "Change password"
@@ -221,6 +223,14 @@ msgstr "パスワード"
 #: app/views/account/sign_up.rhtml:10
 msgid "Confirm Password"
 msgstr "確認用パスワード"
+
+#: app/views/users/_object_classes_update_form.rhtml:6
+msgid "Update objectClasses"
+msgstr "オブジェクトクラス更新"
+
+#: app/views/users/_object_classes_update_form.rhtml:10
+msgid "Use"
+msgstr "使う"
 
 #: app/views/users/index.rhtml:2
 msgid "No user."
@@ -294,7 +304,7 @@ msgstr "いいですか？"
 msgid "Welcome %s!"
 msgstr "ようこそ%s！"
 
-#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:68
 msgid "Please login."
 msgstr "ログインしてください。"
 

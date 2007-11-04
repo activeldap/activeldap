@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AL Admin 0.8.4\n"
-"POT-Creation-Date: 2007-11-03 22:35+0900\n"
+"POT-Creation-Date: 2007-11-04 15:53+0900\n"
 "PO-Revision-Date: 2007-08-19 09:44+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Populating is only for initialization"
 msgstr ""
 
-#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:123
+#: app/controllers/account_controller.rb:24 lib/authenticated_system.rb:112
 msgid "Logged in successfully"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "You have been logged out."
 msgstr ""
 
-#: app/controllers/users_controller.rb:26
+#: app/controllers/users_controller.rb:27
 msgid "User was successfully updated."
 msgstr ""
 
@@ -100,7 +100,7 @@ msgid "Done."
 msgstr ""
 
 #: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
-#: app/views/users/edit.rhtml:14 app/views/users/show.rhtml:9
+#: app/views/users/edit.rhtml:13 app/views/users/show.rhtml:9
 #: app/views/syntaxes/show.rhtml:20 app/views/attributes/show.rhtml:29
 msgid "Menu|Index"
 msgstr ""
@@ -149,6 +149,7 @@ msgstr ""
 #: app/views/_entry/_attributes_information.rhtml:8
 #: app/views/object_classes/show.rhtml:6
 #: app/views/object_classes/_attributes.rhtml:11
+#: app/views/users/_object_classes_update_form.rhtml:12
 #: app/views/syntaxes/_syntaxes.rhtml:6 app/views/syntaxes/show.rhtml:6
 #: app/views/attributes/show.rhtml:6 app/views/attributes/_attributes.rhtml:6
 msgid "Description"
@@ -163,6 +164,7 @@ msgid "Attributes"
 msgstr ""
 
 #: app/views/object_classes/_object_classes.rhtml:5
+#: app/views/users/_object_classes_update_form.rhtml:11
 msgid "objectClass name"
 msgstr ""
 
@@ -200,12 +202,12 @@ msgstr ""
 msgid "Inherited"
 msgstr ""
 
-#: app/views/users/edit.rhtml:7
-msgid "Command|Update"
+#: app/views/users/edit.rhtml:12
+msgid "Menu|Show"
 msgstr ""
 
-#: app/views/users/edit.rhtml:13
-msgid "Menu|Show"
+#: app/views/users/_form.rhtml:5 app/views/users/_form.rhtml:13
+msgid "Command|Update"
 msgstr ""
 
 #: app/views/users/_password_change_form.rhtml:2
@@ -220,6 +222,14 @@ msgstr ""
 #: app/views/users/_password_change_form.rhtml:15
 #: app/views/account/sign_up.rhtml:10
 msgid "Confirm Password"
+msgstr ""
+
+#: app/views/users/_object_classes_update_form.rhtml:6
+msgid "Update objectClasses"
+msgstr ""
+
+#: app/views/users/_object_classes_update_form.rhtml:10
+msgid "Use"
 msgstr ""
 
 #: app/views/users/index.rhtml:2
@@ -294,7 +304,7 @@ msgstr ""
 msgid "Welcome %s!"
 msgstr ""
 
-#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:79
+#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:68
 msgid "Please login."
 msgstr ""
 
