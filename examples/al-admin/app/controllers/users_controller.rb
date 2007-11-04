@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = find(params[:id])
     previous_user_password = @user.user_password
     if @user.update_attributes(params[:user])
-      if previous_user_password != @user.user_password
+      if previous_user_password != @user.user_password and @user.connected?
         @user.bind(@user.password)
       end
       flash[:notice] = _('User was successfully updated.')
@@ -33,6 +33,6 @@ class UsersController < ApplicationController
 
   private
   def find(*args)
-    current_user.ldap_user.find(*args)
+    current_ldap_user.find(*args)
   end
 end
