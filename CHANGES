@@ -15,6 +15,7 @@
     * AL-Admin:
       * Supported lang parameter in URL.
       * Improved design a bit. (Please someone help us!)
+      * Supported schema inspection.
     * Rails plugin:
       * Added ActiveLdap::VERSION check.
       * Added model_active_ldap generator.
