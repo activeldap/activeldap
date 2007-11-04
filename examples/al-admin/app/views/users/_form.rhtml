@@ -1,5 +1,13 @@
-
+<% attributes_form_id = "attributes-form" %>
 <%= error_messages_for "user" %>
 
 <%= render(:partial => "password_change_form") %>
-<%= render(:partial => "attributes_update_form") %>
+<%= submit_tag(s_('Command|Update')) %>
+
+<%= render(:partial => "object_classes_update_form",
+           :locals => {:attributes_form_id => attributes_form_id}) %>
+
+<div id="<%= attributes_form_id %>">
+  <%= render(:partial => "attributes_update_form") %>
+</div>
+<%= submit_tag(s_('Command|Update')) %>

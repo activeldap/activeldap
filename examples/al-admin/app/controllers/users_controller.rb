@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def update
     @user = find(params[:id])
     previous_user_password = @user.user_password
+    @user.replace_class(params["object-classes"])
     if @user.update_attributes(params[:user])
       if previous_user_password != @user.user_password and @user.connected?
         @user.bind(@user.password)
@@ -29,6 +30,13 @@ class UsersController < ApplicationController
       @user.password = @user.password_confirmation = nil
       render :action => 'edit'
     end
+  end
+
+  def update_object_classes
+    @user = find(params[:id])
+    @user.replace_class(params["object-classes"])
+    @user.attributes = params[:user]
+    render(:partial => "attributes_update_form")
   end
 
   private

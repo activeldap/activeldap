@@ -1,6 +1,13 @@
 @import url("detail.css");
 
-form table
+form > table
 {
   margin: 1em;
+}
+
+form div.switcher-content
+{
+  height: 20em;
+  overflow: auto;
+  margin: 1em 0;
 }
