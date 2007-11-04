@@ -18,6 +18,7 @@
   <tr class="<%= cycle('even', 'odd') %>">
     <th scope="row">
       <label for="user_<%=h name %>"><%= h la_(name) %></label>
+      <%= link_to("?", attribute_url_for_options(name)) %>
 <%   if required_attributes.include?(name) -%>
       <span class="required-attribute-mark">*</span>
 <%   end -%>
