@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AL Admin 0.8.4\n"
+"Project-Id-Version: AL Admin 0.9.0\n"
 "POT-Creation-Date: 2007-11-04 15:53+0900\n"
 "PO-Revision-Date: 2007-11-04 16:02+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"

@@ -47,7 +47,7 @@ end
 project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.rubyforge_name = 'ruby-activeldap'
   project.author = ['Will Drewry', 'Kouhei Sutou']
-  project.email = ['will@alum.bu.edu', 'kou@cozmixng.org']
+  project.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
   project.summary = 'Ruby/ActiveLdap is a object-oriented API to LDAP'
   project.url = 'http://rubyforge.org/projects/ruby-activeldap/'
   project.test_globs = ['test/test_*.rb']
