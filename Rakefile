@@ -23,9 +23,10 @@ white_list_paths =
   [
    "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml"
   ]
-Find.find(base_dir) do |target|
+Find.find(base_dir + File::SEPARATOR) do |target|
   target = truncate_base_dir[target]
   components = target.split(File::SEPARATOR)
+  next if components.empty?
   if components.size == 1 and !File.directory?(target)
     next unless base_dir_included_components.include?(components[0])
   end
