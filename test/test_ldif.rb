@@ -12,6 +12,11 @@ class TestLDIF < Test::Unit::TestCase
   priority :must
   def test_dn_spec
     assert_invalid_ldif("'dn:' is missing", "version: 1\n")
+
+    assert_valid_dn("cn=Barbara Jensen,ou=Product Development,dc=example,dc=com",
+                    "version: 1\n" +
+                    "dn: cn=Barbara Jensen, ou=Product Development, " +
+                    "dc=example, dc=com")
   end
 
   def test_version_number
@@ -33,6 +38,11 @@ class TestLDIF < Test::Unit::TestCase
   priority :normal
 
   private
+  def assert_valid_dn(dn, ldif_source)
+    ldif = ActiveLdap::Ldif.parse(ldif_source)
+    assert_equal([dn], ldif.entries.collect {|entry| entry.dn})
+  end
+
   def assert_valid_version(version, ldif_source)
     ldif = ActiveLdap::Ldif.parse(ldif_source)
     assert_equal(version, ldif.version)

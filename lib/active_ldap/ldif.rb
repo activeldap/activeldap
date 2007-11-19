@@ -30,11 +30,24 @@ module ActiveLdap
         raise separator_is_missing unless scanner.scan(/#{SEPARATOR}+/)
 
         raise dn_mark_is_missing unless scanner.scan(/dn:/)
+        if scanner.scan(/:/)
+          dn = parse_dn(read_base64_value(scanner))
+        elsif scanner.scan(/\s*(.+)$/)
+          dn = parse_dn(scanner[1])
+        else
+          dn_is_missing
+        end
 
-        @ldif = LDIF.new(version)
+        @ldif = LDIF.new(version, [Entry.new(dn)])
       end
 
       private
+      def parse_dn(dn_string)
+        DN.parse(dn_string).to_s
+      rescue DistinguishedNameInvalid
+        invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, $!.reason])
+      end
+
       def invalid_ldif(reason)
         LdifInvalid.new(@source, reason)
       end
@@ -54,6 +67,10 @@ module ActiveLdap
       def dn_mark_is_missing
         invalid_ldif(_("'dn:' is missing"))
       end
+
+      def dn_is_missing
+        invalid_ldif(_("DN is missing"))
+      end
     end
 
     class << self
@@ -62,9 +79,17 @@ module ActiveLdap
       end
     end
 
-    attr_reader :version
-    def initialize(version)
+    attr_reader :version, :entries
+    def initialize(version, entries)
       @version = version
+      @entries = entries
+    end
+
+    class Entry
+      attr_reader :dn
+      def initialize(dn)
+        @dn = dn
+      end
     end
   end
 
