@@ -10,8 +10,14 @@ class TestLDIF < Test::Unit::TestCase
   end
 
   priority :must
+  def test_dn_spec
+    assert_invalid_ldif("'dn:' is missing", "version: 1\n")
+  end
+
   def test_version_number
-    assert_valid_version(1, "version: 1")
+    assert_valid_version(1, "version: 1\ndn:")
+    assert_valid_version(1, "version: 1\r\ndn:")
+    assert_valid_version(1, "version: 1\r\n\n\r\n\ndn:")
 
     assert_invalid_ldif("unsupported version: 0", "version: 0")
     assert_invalid_ldif("unsupported version: 2", "version: 2")

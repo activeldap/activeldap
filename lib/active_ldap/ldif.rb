@@ -17,6 +17,7 @@ module ActiveLdap
         @source = source
       end
 
+      SEPARATOR = /(?:\r\n|\n)/
       def parse
         return @ldif if @ldif
 
@@ -25,6 +26,10 @@ module ActiveLdap
 
         version = Integer(scanner[1])
         raise unsupported_version(version) if version != 1
+
+        raise separator_is_missing unless scanner.scan(/#{SEPARATOR}+/)
+
+        raise dn_mark_is_missing unless scanner.scan(/dn:/)
 
         @ldif = LDIF.new(version)
       end
@@ -40,6 +45,14 @@ module ActiveLdap
 
       def unsupported_version(version)
         invalid_ldif(_("unsupported version: %d") % version)
+      end
+
+      def separator_is_missing
+        invalid_ldif(_("separator is missing"))
+      end
+
+      def dn_mark_is_missing
+        invalid_ldif(_("'dn:' is missing"))
       end
     end
 
