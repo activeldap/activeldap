@@ -17,6 +17,9 @@ class TestLDIF < Test::Unit::TestCase
                     "version: 1\n" +
                     "dn: cn=Barbara Jensen, ou=Product Development, " +
                     "dc=example, dc=com")
+    dn = "cn=Barbara Jensen,ou=Product Development,dc=example,dc=com"
+    encoded_dn = Base64.encode64(dn).gsub(/\n/, "\n ")
+    assert_valid_dn(dn, "version: 1\ndn:: #{encoded_dn}")
   end
 
   def test_version_number

@@ -2,6 +2,7 @@
 # Don't care this file for now.
 
 require 'strscan'
+require 'base64'
 
 module ActiveLdap
   class Ldif
@@ -30,7 +31,7 @@ module ActiveLdap
         raise separator_is_missing unless scanner.scan(/#{SEPARATOR}+/)
 
         raise dn_mark_is_missing unless scanner.scan(/dn:/)
-        if scanner.scan(/:/)
+        if scanner.scan(/:\s*/)
           dn = parse_dn(read_base64_value(scanner))
         elsif scanner.scan(/\s*(.+)$/)
           dn = parse_dn(scanner[1])
@@ -42,6 +43,13 @@ module ActiveLdap
       end
 
       private
+      def read_base64_value(scanner)
+        value = scanner.scan(/(?:[a-zA-Z0-9\+\/=]|#{SEPARATOR} )+/)
+        raise base64_encoded_value_is_missing if value.nil?
+
+        Base64.decode64(value.gsub(/#{SEPARATOR} /, '')).chomp
+      end
+
       def parse_dn(dn_string)
         DN.parse(dn_string).to_s
       rescue DistinguishedNameInvalid
@@ -70,6 +78,10 @@ module ActiveLdap
 
       def dn_is_missing
         invalid_ldif(_("DN is missing"))
+      end
+
+      def base64_encoded_value_is_missing
+        invalid_ldif(_("Base64 encoded value is missing"))
       end
     end
 
