@@ -33,11 +33,14 @@ module ActiveLdap
         raise dn_mark_is_missing unless scanner.scan(/dn:/)
         if scanner.scan(/:\s*/)
           dn = parse_dn(read_base64_value(scanner))
-        elsif scanner.scan(/\s*(.+)$/)
-          dn = parse_dn(scanner[1])
         else
-          dn_is_missing
+          scanner.scan(/\s*/)
+          dn = scanner.scan(/.+$/)
+          raise dn_is_missing if dn.nil?
+          dn = parse_dn(dn)
         end
+
+        raise separator_is_missing unless scanner.scan(SEPARATOR)
 
         @ldif = LDIF.new(version, [Entry.new(dn)])
       end

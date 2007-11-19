@@ -12,20 +12,23 @@ class TestLDIF < Test::Unit::TestCase
   priority :must
   def test_dn_spec
     assert_invalid_ldif("'dn:' is missing", "version: 1\n")
+    assert_invalid_ldif("DN is missing", "version: 1\ndn:")
+    assert_invalid_ldif("DN is missing", "version: 1\ndn:\n")
+    assert_invalid_ldif("DN is missing", "version: 1\ndn: \n")
 
     assert_valid_dn("cn=Barbara Jensen,ou=Product Development,dc=example,dc=com",
                     "version: 1\n" +
                     "dn: cn=Barbara Jensen, ou=Product Development, " +
-                    "dc=example, dc=com")
+                    "dc=example, dc=com\n")
     dn = "cn=Barbara Jensen,ou=Product Development,dc=example,dc=com"
     encoded_dn = Base64.encode64(dn).gsub(/\n/, "\n ")
-    assert_valid_dn(dn, "version: 1\ndn:: #{encoded_dn}")
+    assert_valid_dn(dn, "version: 1\ndn:: #{encoded_dn}\n")
   end
 
   def test_version_number
-    assert_valid_version(1, "version: 1\ndn:")
-    assert_valid_version(1, "version: 1\r\ndn:")
-    assert_valid_version(1, "version: 1\r\n\n\r\n\ndn:")
+    assert_valid_version(1, "version: 1\ndn: dc=com\n")
+    assert_valid_version(1, "version: 1\r\ndn: dc=com\n")
+    assert_valid_version(1, "version: 1\r\n\n\r\n\ndn: dc=com\n")
 
     assert_invalid_ldif("unsupported version: 0", "version: 0")
     assert_invalid_ldif("unsupported version: 2", "version: 2")
