@@ -11,8 +11,10 @@ class TestLDIF < Test::Unit::TestCase
 
   priority :must
   def test_version_number
+    assert_valid_version(1, "version: 1")
+
     assert_invalid_ldif("unsupported version: 0", "version: 0")
-    assert_invalid_ldif("unsupported version: 0", "version: 0")
+    assert_invalid_ldif("unsupported version: 2", "version: 2")
   end
 
   def test_version_spec
@@ -25,6 +27,11 @@ class TestLDIF < Test::Unit::TestCase
   priority :normal
 
   private
+  def assert_valid_version(version, ldif_source)
+    ldif = ActiveLdap::Ldif.parse(ldif_source)
+    assert_equal(version, ldif.version)
+  end
+
   def assert_invalid_ldif(reason, ldif)
     exception = assert_raise(ActiveLdap::LdifInvalid) do
       ActiveLdap::Ldif.parse(ldif)

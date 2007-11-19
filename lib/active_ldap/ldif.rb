@@ -24,7 +24,9 @@ module ActiveLdap
         raise version_spec_is_missing unless scanner.scan(/version:\s*(\d+)/)
 
         version = Integer(scanner[1])
-        raise unsupported_version(version) if version != "1"
+        raise unsupported_version(version) if version != 1
+
+        @ldif = LDIF.new(version)
       end
 
       private
@@ -45,6 +47,11 @@ module ActiveLdap
       def parse(ldif)
         Parser.new(ldif).parse
       end
+    end
+
+    attr_reader :version
+    def initialize(version)
+      @version = version
     end
   end
 
