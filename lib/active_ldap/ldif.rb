@@ -19,6 +19,10 @@ module ActiveLdap
       end
 
       SEPARATOR = /(?:\r\n|\n)/
+      ATTRIBUTE_TYPE_CHARS = /[a-zA-Z][a-zA-Z0-9\-]*/
+      SAFE_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x7F]/
+      SAFE_INIT_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x1F\x21-\x39\x3B\x3D-\x7F]/
+      SAFE_STRING = /#{SAFE_INIT_CHAR}#{SAFE_CHAR}*/
       def parse
         return @ldif if @ldif
 
@@ -42,7 +46,9 @@ module ActiveLdap
 
         raise separator_is_missing unless scanner.scan(SEPARATOR)
 
-        @ldif = LDIF.new(version, [Entry.new(dn)])
+        attributes = parse_attributes(scanner)
+
+        @ldif = LDIF.new(version, [Entry.new(dn, attributes)])
       end
 
       private
@@ -57,6 +63,50 @@ module ActiveLdap
         DN.parse(dn_string).to_s
       rescue DistinguishedNameInvalid
         invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, $!.reason])
+      end
+
+      def parse_attributes(scanner)
+        attributes = {}
+        type, options, value = parse_attribute(scanner)
+        attributes[type] = [value]
+        while scanner.scan(SEPARATOR)
+          break if scanner.scan(/#{SEPARATOR}+/) or scanner.eos?
+          type, options, value = parse_attribute(scanner)
+          attributes[type] ||= []
+          attributes[type] << value
+        end
+        attributes
+      end
+
+      def parse_attribute(scanner)
+        type = scanner.scan(ATTRIBUTE_TYPE_CHARS)
+        raise attribute_type_is_missing if type.nil?
+        options = parse_options(scanner)
+        value = parse_attribute_value(scanner)
+        [type, options, value]
+      end
+
+      def parse_options(scanner)
+        options = []
+        while scanner.scan(/;/)
+          option = scanner.scan(ATTRIBUTE_TYPE_CHARS)
+          raise option_is_missing if option.nil?
+          options << option
+        end
+        options
+      end
+
+      def parse_attribute_value(scanner)
+        raise attribute_value_separator_is_missing if scanner.scan(/:/).nil?
+        if scanner.scan(/:/)
+          scanner.scan(/\s*/)
+          read_base64_value(scanner)
+        elsif scanner.scan(/</)
+          raise not_implemented
+        else
+          scanner.scan(/\s*/)
+          scanner.scan(/#{SAFE_STRING}?/)
+        end
       end
 
       def invalid_ldif(reason)
@@ -86,6 +136,18 @@ module ActiveLdap
       def base64_encoded_value_is_missing
         invalid_ldif(_("Base64 encoded value is missing"))
       end
+
+      def attribute_type_is_missing
+        invalid_ldif(_("attribute type is missing"))
+      end
+
+      def option_is_missing
+        invalid_ldif(_("option is missing"))
+      end
+
+      def attribute_value_separator_is_missing
+        invalid_ldif(_("':' is missing"))
+      end
     end
 
     class << self
@@ -101,9 +163,14 @@ module ActiveLdap
     end
 
     class Entry
-      attr_reader :dn
-      def initialize(dn)
+      attr_reader :dn, :attributes
+      def initialize(dn, attributes)
         @dn = dn
+        @attributes = attributes
+      end
+
+      def to_hash
+        attributes.merge({"dn" => dn})
       end
     end
   end
