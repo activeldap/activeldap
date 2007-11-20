@@ -10,6 +10,39 @@ class TestLDIF < Test::Unit::TestCase
   end
 
   priority :must
+  def test_an_entry_with_base64_encoded_value
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Gern Jensen
+cn: Gern O Jensen
+sn: Jensen
+uid: gernj
+telephonenumber: +1 408 555 1212
+description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
+ IGlzIGJhc2UtNjQtZW5jb2RlZCBiZWNhdXNlIGl0IGhhcyBhIGNvbnRyb2wgY2hhcmFjdG
+ VyIGluIGl0IChhIENSKS4NICBCeSB0aGUgd2F5LCB5b3Ugc2hvdWxkIHJlYWxseSBnZXQg
+ b3V0IG1vcmUu
+EOL
+
+    entry = {
+      "dn" => "cn=Gern Jensen,ou=Product Testing,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Gern Jensen", "Gern O Jensen"],
+      "sn" => ["Jensen"],
+      "uid" => ["gernj"],
+      "telephonenumber" => ["+1 408 555 1212"],
+      "description" => ["What a careful reader you are!  " +
+                        "This value is base-64-encoded because it has a " +
+                        "control character in it (a CR).\r  By the way, " +
+                        "you should really get out more."],
+    }
+    assert_ldif(1, [entry], ldif_source)
+  end
+
   def test_entries
     ldif_source = <<-EOL
 version: 1
@@ -68,6 +101,7 @@ uid: bjensen
 telephonenumber: +1 408 555 1212
 description: A big sailing fan.
 EOL
+
     entry = {
       "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
