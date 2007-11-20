@@ -10,7 +10,50 @@ class TestLDIF < Test::Unit::TestCase
   end
 
   priority :must
-  def test_attribute_value_spec
+  def test_entries
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Barbara Jensen
+cn: Barbara J Jensen
+cn: Babs Jensen
+sn: Jensen
+uid: bjensen
+telephonenumber: +1 408 555 1212
+description: A big sailing fan.
+
+dn: cn=Bjorn Jensen, ou=Accounting, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Bjorn Jensen
+sn: Jensen
+telephonenumber: +1 408 555 1212
+EOL
+
+    entry1 = {
+      "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Barbara Jensen", "Barbara J Jensen", "Babs Jensen"],
+      "sn" => ["Jensen"],
+      "uid" => ["bjensen"],
+      "telephonenumber" => ["+1 408 555 1212"],
+      "description" => ["A big sailing fan."],
+    }
+    entry2 = {
+      "dn" => "cn=Bjorn Jensen,ou=Accounting,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Bjorn Jensen"],
+      "sn" => ["Jensen"],
+      "telephonenumber" => ["+1 408 555 1212"],
+    }
+    assert_ldif(1, [entry1, entry2], ldif_source)
+  end
+
+  def test_an_entry
     ldif_source = <<-EOL
 version: 1
 dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com

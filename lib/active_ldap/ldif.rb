@@ -34,21 +34,9 @@ module ActiveLdap
 
         raise separator_is_missing unless scanner.scan(/#{SEPARATOR}+/)
 
-        raise dn_mark_is_missing unless scanner.scan(/dn:/)
-        if scanner.scan(/:\s*/)
-          dn = parse_dn(read_base64_value(scanner))
-        else
-          scanner.scan(/\s*/)
-          dn = scanner.scan(/.+$/)
-          raise dn_is_missing if dn.nil?
-          dn = parse_dn(dn)
-        end
+        entries = parse_entries(scanner)
 
-        raise separator_is_missing unless scanner.scan(SEPARATOR)
-
-        attributes = parse_attributes(scanner)
-
-        @ldif = LDIF.new(version, [Entry.new(dn, attributes)])
+        @ldif = LDIF.new(version, entries)
       end
 
       private
@@ -107,6 +95,33 @@ module ActiveLdap
           scanner.scan(/\s*/)
           scanner.scan(/#{SAFE_STRING}?/)
         end
+      end
+
+      def parse_entry(scanner)
+        raise dn_mark_is_missing unless scanner.scan(/dn:/)
+        if scanner.scan(/:\s*/)
+          dn = parse_dn(read_base64_value(scanner))
+        else
+          scanner.scan(/\s*/)
+          dn = scanner.scan(/.+$/)
+          raise dn_is_missing if dn.nil?
+          dn = parse_dn(dn)
+        end
+
+        raise separator_is_missing unless scanner.scan(SEPARATOR)
+
+        attributes = parse_attributes(scanner)
+
+        Entry.new(dn, attributes)
+      end
+
+      def parse_entries(scanner)
+        entries = []
+        entries << parse_entry(scanner)
+        until scanner.eos?
+          entries << parse_entry(scanner)
+        end
+        entries
       end
 
       def invalid_ldif(reason)
