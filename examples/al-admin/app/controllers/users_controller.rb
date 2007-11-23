@@ -19,8 +19,14 @@ class UsersController < ApplicationController
   def update
     @user = find(params[:id])
     previous_user_password = @user.user_password
-    @user.replace_class(params["object-classes"])
-    if @user.update_attributes(params[:user])
+    object_class_error_message = nil
+    begin
+      @user.replace_class(params["object-classes"])
+    rescue ActiveLdap::RequiredObjectClassMissed
+      object_class_error_message = $!.message
+    end
+    if @user.update_attributes(params[:user]) and
+        object_class_error_message.nil?
       if previous_user_password != @user.user_password and @user.connected?
         @user.bind(@user.password)
       end
@@ -28,6 +34,7 @@ class UsersController < ApplicationController
       redirect_to :action => 'show', :id => @user
     else
       @user.password = @user.password_confirmation = nil
+      @user.errors.add("objectClass", object_class_error_message)
       render :action => 'edit'
     end
   end
