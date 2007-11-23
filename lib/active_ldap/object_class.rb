@@ -50,7 +50,7 @@ module ActiveLdap
       unless invalid_classes.empty?
         format = _("Value in objectClass array is not a String: %s")
         invalid_classes_info = invalid_classes.collect do |invalid_class|
-          "#{invalid_class.class}:#{invalid_class.inspect}"
+          "#{invalid_class.class}: #{invalid_class.inspect}"
         end.join(", ")
         raise TypeError, format % invalid_classes_info
       end
