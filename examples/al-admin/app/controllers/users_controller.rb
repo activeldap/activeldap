@@ -34,7 +34,14 @@ class UsersController < ApplicationController
 
   def update_object_classes
     @user = find(params[:id])
-    @user.replace_class(params["object-classes"])
+    begin
+      @user.replace_class(params["object-classes"])
+    rescue ActiveLdap::RequiredObjectClassMissed
+      flash.now[:inline_notice] = $!.message
+      erb = "<%= flash_box(flash[:inline_notice], :need_container => true) %>"
+      render(:inline => erb, :status => 400)
+      return
+    end
     available_attributes = @user.attribute_names(true)
     attributes = {}
     (params[:user] || {}).each do |key, value|

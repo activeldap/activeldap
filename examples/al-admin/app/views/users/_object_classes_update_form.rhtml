@@ -1,6 +1,7 @@
 <%
   using_object_classes = @user.classes
   available_object_classes = @user.schema.object_classes.collect(&:name)
+  update_failure_id = 'object-classes-obdate-failur'
 %>
 
 <% switcher("object-classes", _("Update objectClasses")) do %>
@@ -33,8 +34,13 @@
 <% end %>
 
 <%= javascript_tag("function updateAttributesForm(form) {" +
-                      remote_function(:update => attributes_form_id,
+                      remote_function(:update => {
+                                        :success => attributes_form_id,
+		      			:failure => update_failure_id,
+                                      },
                                       :url => {:action => :update_object_classes,
                                                :id => @user},
                                       :with => 'Form.serialize(form)') +
                    "}") %>
+
+<div id="<%= h(update_failure_id) %>"></div>

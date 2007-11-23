@@ -34,6 +34,11 @@ h1
   background-color: #cfc;
 }
 
+div.flash-box-container
+{
+  position: relative;
+}
+
 div#flash-box
 {
   position: absolute;

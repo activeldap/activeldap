@@ -13,7 +13,8 @@
     <%= stylesheet_link_tag('rails') %>
     <%= stylesheet_link_tag('spinelz/treeview.css') %>
     <%= stylesheet_link_tag('spinelz/switcher.css') %>
-    <%= stylesheet_link_tag('common') %>
+    <%= stylesheet_link_tag('base') %>
+    <%= stylesheet_link_tag('structure') %>
     <%= stylesheet_link_tag(@controller.controller_name.gsub(/_/, "-")) %>
     <%= javascript_include_tag(:defaults) %>
     <%= javascript_include_tag("spinelz_lib/spinelz_util.js") %>
@@ -34,7 +35,7 @@
       <hr class="clear" />
     </div>
 
-    <%= render(:partial => "layouts/flash_box") %>
+    <%= flash_box(flash[:notice]) %>
 
     <div class="body">
       <div class="content">

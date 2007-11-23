@@ -2,12 +2,18 @@
 module ApplicationHelper
   include UrlHelper
 
-  def flash_box(message)
+  def flash_box(message, options={})
+    return '' if message.nil?
     id = "flash-box"
     fade_out = Proc.new {|page| page.visual_effect(:fade, id)}
+    message = content_tag(:p, h(message), :class => "notice")
     flash_box_div = content_tag("div", "\n#{message}\n",
                                 :id => id,
                                 :onclick => update_page(&fade_out))
+    if options[:need_container]
+      flash_box_div = content_tag("div", "\n  #{flash_box_div}\n",
+                                  :class => "flash-box-container")
+    end
     set_opacity = update_page {|page| page[id].setOpacity("0.8")}
     effect = update_page do |page|
       page.delay(5) do
