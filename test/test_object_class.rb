@@ -4,6 +4,13 @@ class TestObjectClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_pass_nil_to_replace_class
+    make_temporary_group do |group|
+      assert_raises(ActiveLdap::RequiredObjectClassMissed) do
+        group.replace_class(nil)
+      end
+    end
+  end
 
   priority :normal
   def test_case_insensitive_match
