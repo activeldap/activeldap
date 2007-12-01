@@ -123,18 +123,36 @@ module ActiveLdap
   end
 
   class LdifInvalid < Error
-    attr_reader :ldif, :reason, :line, :column
+    attr_reader :ldif, :reason, :line, :column, :nearest
     def initialize(ldif, reason=nil, line=nil, column=nil)
       @ldif = ldif
       @reason = reason
       @line = line
       @column = column
+      @nearest = nil
       if @reason
         message = _("invalid LDIF: %s:") % [@ldif, @reason]
       else
         message = _("invalid LDIF:") % @ldif
       end
+      if @line and @column
+        @nearest = detect_nearest(@line, @column)
+        message << "\n#{@line}:#{@column}:\n#{@nearest}"
+      end
       super("#{message}\n#{@ldif}")
+    end
+
+    NEAREST_MARK = "|@|"
+    private
+    def detect_nearest(line, column)
+      nearest = @ldif.to_a[line - 1]
+      if nearest
+        nearest[column, 0] = NEAREST_MARK
+      else
+        nearest = NEAREST_MARK
+      end
+      nearest = "#{@ldif.to_a[line - 2]}#{nearest}" if nearest == NEAREST_MARK
+      nearest
     end
   end
 

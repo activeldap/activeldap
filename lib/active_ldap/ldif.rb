@@ -208,6 +208,8 @@ module ActiveLdap
 
       def line
         _consumed_source = consumed_source
+        return 1 if _consumed_source.empty?
+
         n = _consumed_source.to_a.size
         n += 1 if _consumed_source[-1, 1] == "\n"
         n
@@ -215,15 +217,13 @@ module ActiveLdap
 
       def column
         _consumed_source = consumed_source
-        _column = position - ((_consumed_source.rindex("\n") || 1) - 1)
-        _column -= 1 if _consumed_source[-1, 1] == "\n"
-        _column
+        return 1 if _consumed_source.empty? or _consumed_source[-1, 1] == "\n"
+
+        position - ((_consumed_source.rindex("\n") || -1) + 1)
       end
 
       def position
-        position = @scanner.pos
-        position -= @sub_scanner.string.length - @sub_scanner.pos
-        position
+        @scanner.pos - (@sub_scanner.string.length - @sub_scanner.pos)
       end
 
       private
