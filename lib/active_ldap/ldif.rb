@@ -28,7 +28,7 @@ module ActiveLdap
         @scanner = Scanner.new(@source)
         raise version_spec_is_missing unless @scanner.scan(/version:/)
         @scanner.scan(/\s*/)
-        raise version_spec_is_missing unless @scanner.scan(/(\d+)/)
+        raise version_number_is_missing unless @scanner.scan(/(\d+)/)
 
         version = Integer(@scanner[1])
         raise unsupported_version(version) if version != 1
@@ -133,6 +133,10 @@ module ActiveLdap
         invalid_ldif(_("version spec is missing"))
       end
 
+      def version_number_is_missing
+        invalid_ldif(_("version number is missing"))
+      end
+
       def unsupported_version(version)
         invalid_ldif(_("unsupported version: %d") % version)
       end
@@ -217,9 +221,9 @@ module ActiveLdap
 
       def column
         _consumed_source = consumed_source
-        return 1 if _consumed_source.empty? or _consumed_source[-1, 1] == "\n"
+        return 1 if _consumed_source.empty?
 
-        position - ((_consumed_source.rindex("\n") || -1) + 1)
+        position - (_consumed_source.rindex("\n") || -1)
       end
 
       def position

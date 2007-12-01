@@ -145,12 +145,8 @@ module ActiveLdap
     NEAREST_MARK = "|@|"
     private
     def detect_nearest(line, column)
-      nearest = @ldif.to_a[line - 1]
-      if nearest
-        nearest[column, 0] = NEAREST_MARK
-      else
-        nearest = NEAREST_MARK
-      end
+      nearest = @ldif.to_a[line - 1] || ""
+      nearest[column - 1, 0] = NEAREST_MARK
       nearest = "#{@ldif.to_a[line - 2]}#{nearest}" if nearest == NEAREST_MARK
       nearest
     end

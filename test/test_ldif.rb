@@ -150,7 +150,7 @@ EOL
     assert_invalid_ldif("'dn:' is missing",
                         "version: 1\n", 2, 1, "version: 1\n|@|")
     assert_invalid_ldif("DN is missing",
-                        "version: 1\ndn:", 2, 3, "dn:|@|")
+                        "version: 1\ndn:", 2, 4, "dn:|@|")
     assert_invalid_ldif("DN is missing",
                         "version: 1\ndn:\n", 3, 1, "dn:\n|@|")
     assert_invalid_ldif("DN is missing",
@@ -172,20 +172,22 @@ EOL
     assert_valid_version(1, "version: 1\r\n\n\r\n\ndn: dc=com\ndc: com\n")
 
     assert_invalid_ldif("unsupported version: 0",
-                        "version: 0", 1, 10, "version: 0|@|")
+                        "version: 0", 1, 11, "version: 0|@|")
     assert_invalid_ldif("unsupported version: 2",
-                        "version: 2", 1, 10, "version: 2|@|")
+                        "version: 2", 1, 11, "version: 2|@|")
   end
 
   def test_version_spec
     assert_invalid_ldif("version spec is missing",
                         "", 1, 1, "|@|")
     assert_invalid_ldif("version spec is missing",
-                        "version:", 1, 8, "version:|@|")
-    assert_invalid_ldif("version spec is missing",
-                        "version: ", 1, 9, "version: |@|")
-    assert_invalid_ldif("version spec is missing",
-                        "version: XXX", 1, 9, "version: |@|XXX")
+                        "VERSION: 1", 1, 1, "|@|VERSION: 1")
+    assert_invalid_ldif("version number is missing",
+                        "version:", 1, 9, "version:|@|")
+    assert_invalid_ldif("version number is missing",
+                        "version: ", 1, 10, "version: |@|")
+    assert_invalid_ldif("version number is missing",
+                        "version: XXX", 1, 10, "version: |@|XXX")
   end
 
   priority :normal
