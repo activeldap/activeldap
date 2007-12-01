@@ -83,6 +83,7 @@ module ActiveLdap
     # Basic validation:
     # - Verify that every 'MUST' specified in the schema has a value defined
     def validate_required_ldap_values
+      _schema = nil
       # Make sure all MUST attributes have a value
       @object_classes.each do |object_class|
         object_class.must.each do |required_attribute|
@@ -90,35 +91,33 @@ module ActiveLdap
           # needed?
           real_name = to_real_attribute_name(required_attribute.name, true)
           raise UnknownAttribute.new(required_attribute) if real_name.nil?
-          # # Set default if it wasn't yet set.
-          # @data[real_name] ||= [] # need?
+
           value = @data[real_name] || []
-          # Check for missing requirements.
-          if value.empty?
-            _schema = schema
-            aliases = required_attribute.aliases.collect do |name|
-              self.class.human_attribute_name(name)
-            end
-            args = [self.class.human_object_class_name(object_class)]
-            if ActiveLdap.get_text_supported?
-              if aliases.empty?
-                format = _("%{fn} is required attribute by objectClass '%s'")
-              else
-                format = _("%{fn} is required attribute by objectClass " \
-                           "'%s': aliases: %s")
-                args << aliases.join(', ')
-              end
-            else
-              if aliases.empty?
-                format = "is required attribute by objectClass '%s'"
-              else
-                format = "is required attribute by objectClass '%s'" \
-                         ": aliases: %s"
-                args << aliases.join(', ')
-              end
-            end
-            errors.add(real_name, format % args)
+          next unless self.class.blank_value?(value)
+
+          _schema ||= schema
+          aliases = required_attribute.aliases.collect do |name|
+            self.class.human_attribute_name(name)
           end
+          args = [self.class.human_object_class_name(object_class)]
+          if ActiveLdap.get_text_supported?
+            if aliases.empty?
+              format = _("%{fn} is required attribute by objectClass '%s'")
+            else
+              format = _("%{fn} is required attribute by objectClass " \
+                         "'%s': aliases: %s")
+              args << aliases.join(', ')
+            end
+          else
+            if aliases.empty?
+              format = "is required attribute by objectClass '%s'"
+            else
+              format = "is required attribute by objectClass '%s'" \
+              ": aliases: %s"
+              args << aliases.join(', ')
+            end
+          end
+          errors.add(real_name, format % args)
         end
       end
     end

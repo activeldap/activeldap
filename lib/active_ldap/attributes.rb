@@ -19,6 +19,17 @@ module ActiveLdap
           result + ancestor.instance_eval {@attr_protected ||= []}
         end
       end
+
+      def blank_value?(value)
+        case value
+        when Hash
+          value.values.all? {|val| blank_value?(val)}
+        when Array
+          value.all? {|val| blank_value?(val)}
+        else
+          value.blank?
+        end
+      end
     end
 
     module Normalize

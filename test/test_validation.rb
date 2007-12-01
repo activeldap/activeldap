@@ -5,6 +5,19 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_validate_required_ldap_values
+    make_temporary_user(:simple => true) do |user, password|
+      assert(user.save)
+
+      user.add_class("strongAuthenticationUser")
+      user.user_certificate = nil
+      assert(!user.save)
+      assert(user.errors.invalid?(:userCertificate))
+      assert_equal(1, user.errors.size)
+    end
+  end
+
+  priority :normal
   def test_syntax_validation
     make_temporary_user do |user, password|
       assert(user.save)
@@ -26,7 +39,6 @@ class TestValidation < Test::Unit::TestCase
                                   "lang-ja-jp")
   end
 
-  priority :normal
   def test_duplicated_dn_creation
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
