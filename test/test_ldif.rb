@@ -43,6 +43,38 @@ EOL
     assert_ldif(1, [entry], ldif_source)
   end
 
+  def test_an_entry_with_folded_attribute_value
+    ldif_source = <<-EOL
+version: 1
+dn:cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
+objectclass:top
+objectclass:person
+objectclass:organizationalPerson
+cn:Barbara Jensen
+cn:Barbara J Jensen
+cn:Babs Jensen
+sn:Jensen
+uid:bjensen
+telephonenumber:+1 408 555 1212
+description:Babs is a big sailing fan, and travels extensively in sea
+ rch of perfect sailing conditions.
+title:Product Manager, Rod and Reel Division
+EOL
+
+    entry = {
+      "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Barbara Jensen", "Barbara J Jensen", "Babs Jensen"],
+      "sn" => ["Jensen"],
+      "uid" => ["bjensen"],
+      "telephonenumber" => ["+1 408 555 1212"],
+      "description" => ["Babs is a big sailing fan, and travels extensively " +
+                        "in search of perfect sailing conditions."],
+      "title" => ["Product Manager, Rod and Reel Division"],
+    }
+    assert_ldif(1, [entry], ldif_source)
+  end
+
   def test_entries
     ldif_source = <<-EOL
 version: 1

@@ -123,16 +123,18 @@ module ActiveLdap
   end
 
   class LdifInvalid < Error
-    attr_reader :ldif, :reason
-    def initialize(ldif, reason=nil)
+    attr_reader :ldif, :reason, :line, :column
+    def initialize(ldif, reason=nil, line=nil, column=nil)
       @ldif = ldif
       @reason = reason
+      @line = line
+      @column = column
       if @reason
-        message = _("%s is invalid LDIF: %s") % [@ldif, @reason]
+        message = _("invalid LDIF: %s:") % [@ldif, @reason]
       else
-        message = _("%s is invalid LDIF") % @ldif
+        message = _("invalid LDIF:") % @ldif
       end
-      super(message)
+      super("#{message}\n#{@ldif}")
     end
   end
 
