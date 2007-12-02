@@ -131,15 +131,16 @@ module ActiveLdap
       @column = column
       @nearest = nil
       if @reason
-        message = _("invalid LDIF: %s:") % [@ldif, @reason]
+        message = _("invalid LDIF: %s:") % @reason
       else
-        message = _("invalid LDIF:") % @ldif
+        message = _("invalid LDIF:")
       end
       if @line and @column
         @nearest = detect_nearest(@line, @column)
-        message << "\n#{@line}:#{@column}:\n#{@nearest}"
+        snippet = generate_snippet
+        message << "\n#{snippet}\n"
       end
-      super("#{message}\n#{@ldif}")
+      super("#{message}\n#{numbered_ldif}")
     end
 
     NEAREST_MARK = "|@|"
@@ -149,6 +150,32 @@ module ActiveLdap
       nearest[column - 1, 0] = NEAREST_MARK
       nearest = "#{@ldif.to_a[line - 2]}#{nearest}" if nearest == NEAREST_MARK
       nearest
+    end
+
+    def generate_snippet
+      nearest = @nearest.chomp
+      column_column = ":#{@column}"
+      target_position_info = "#{@line}#{column_column}: "
+      if /\n/ =~ nearest
+        snippet = "%#{Math.log10(@line).truncate}d" % (@line - 1)
+        snippet << " " * column_column.size
+        snippet << ": "
+        snippet << nearest.gsub(/\n/, "\n#{target_position_info}")
+      else
+        snippet = "#{target_position_info}#{nearest}"
+      end
+      snippet
+    end
+
+    def numbered_ldif
+      return @ldif if @ldif.blank?
+      lines = @ldif.to_a
+      format = "%#{Math.log10(lines.size).truncate}d: %s"
+      i = 0
+      lines.collect do |line|
+        i += 1
+        format % [i, line]
+      end.join
     end
   end
 
