@@ -1,8 +1,10 @@
 # Experimental work-in-progress LDIF implementation.
 # Don't care this file for now.
 
-require 'strscan'
-require 'base64'
+require "strscan"
+require "base64"
+require "uri"
+require "open-uri"
 
 module ActiveLdap
   class Ldif
@@ -48,10 +50,27 @@ module ActiveLdap
         Base64.decode64(value).chomp
       end
 
+      def read_external_file
+        uri_string = @scanner.scan(URI::REGEXP::ABS_URI)
+        raise uri_is_missing if uri_string.nil?
+        uri = nil
+        begin
+          uri = URI.parse(uri_string)
+        rescue URI::Error
+          raise invalid_uri(uri_string, $!.message)
+        end
+
+        if uri.scheme == "file"
+          File.open(uri.path, "rb").read
+        else
+          uri.read
+        end
+      end
+
       def parse_dn(dn_string)
         DN.parse(dn_string).to_s
       rescue DistinguishedNameInvalid
-        invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, $!.reason])
+        invalid_dn(dn_string, $!.reason)
       end
 
       def parse_attributes
@@ -64,7 +83,9 @@ module ActiveLdap
           attributes[type] ||= []
           container = attributes[type]
           options.each do |option|
-            parent = container.find {|val| val.is_a?(Hash) and val.has_key?(option)}
+            parent = container.find do |val|
+              val.is_a?(Hash) and val.has_key?(option)
+            end
             if parent.nil?
               parent = {option => []}
               container << parent
@@ -100,7 +121,8 @@ module ActiveLdap
           @scanner.scan(/\s*/)
           read_base64_value
         elsif @scanner.scan(/</)
-          raise not_implemented
+          @scanner.scan(/\s*/)
+          read_external_file
         else
           @scanner.scan(/\s*/)
           @scanner.scan(/#{SAFE_STRING}?/)
@@ -162,6 +184,10 @@ module ActiveLdap
         invalid_ldif(_("DN is missing"))
       end
 
+      def invalid_dn(dn_string, reason)
+        invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, reason])
+      end
+
       def base64_encoded_value_is_missing
         invalid_ldif(_("Base64 encoded value is missing"))
       end
@@ -176,6 +202,10 @@ module ActiveLdap
 
       def attribute_value_separator_is_missing
         invalid_ldif(_("':' is missing"))
+      end
+
+      def invalid_uri(uri_string, message)
+        invalid_ldif(_("URI is invalid: %s: %s") % [uri_string, message])
       end
     end
 

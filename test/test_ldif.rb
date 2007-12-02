@@ -1,15 +1,39 @@
 require 'al-test-utils'
 
 class TestLDIF < Test::Unit::TestCase
-  include AlTestUtils
-
-  def setup
-  end
-
-  def teardown
-  end
+  include ActiveLdap::GetTextSupport
+  include AlTestUtils::Config
+  include AlTestUtils::ExampleFile
 
   priority :must
+  def test_entries_with_external_file_reference
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Horatio Jensen, ou=Product Testing, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Horatio Jensen
+cn: Horatio N Jensen
+sn: Jensen
+uid: hjensen
+telephonenumber: +1 408 555 1212
+jpegphoto:< file://#{jpeg_photo_path}
+EOL
+
+    entry = {
+      "dn" => "cn=Horatio Jensen,ou=Product Testing,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Horatio Jensen", "Horatio N Jensen"],
+      "sn" => ["Jensen"],
+      "uid" => ["hjensen"],
+      "telephonenumber" => ["+1 408 555 1212"],
+      "jpegphoto" => [jpeg_photo],
+    }
+
+    assert_ldif(1, [entry], ldif_source)
+  end
+
   def test_entries_with_option_attributes
     ldif_source = <<-EOL
 version: 1
