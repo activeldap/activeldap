@@ -39,9 +39,9 @@ module ActiveLdap
 
         raise separator_is_missing unless @scanner.scan_separators
 
-        entries = parse_entries
+        records = parse_records
 
-        @ldif = LDIF.new(version, entries)
+        @ldif = LDIF.new(version, records)
       end
 
       private
@@ -170,7 +170,7 @@ module ActiveLdap
         AddRecord.new(dn, controls, attributes)
       end
 
-      def parse_entry
+      def parse_record
         raise dn_mark_is_missing unless @scanner.scan(/dn:/)
         if @scanner.scan(/:\s*/)
           dn = parse_dn(read_base64_value)
@@ -191,17 +191,17 @@ module ActiveLdap
           parse_change_type_record(dn, controls, change_type)
         else
           attributes = parse_attributes
-          Entry.new(dn, attributes)
+          ContentRecord.new(dn, attributes)
         end
       end
 
-      def parse_entries
-        entries = []
-        entries << parse_entry
+      def parse_records
+        records = []
+        records << parse_record
         until @scanner.eos?
-          entries << parse_entry
+          records << parse_record
         end
-        entries
+        records
       end
 
       def invalid_ldif(reason)
@@ -344,13 +344,13 @@ module ActiveLdap
       end
     end
 
-    attr_reader :version, :entries
-    def initialize(version, entries)
+    attr_reader :version, :records
+    def initialize(version, records)
       @version = version
-      @entries = entries
+      @records = records
     end
 
-    class Entry
+    class Record
       attr_reader :dn, :attributes
       def initialize(dn, attributes)
         @dn = dn
@@ -362,21 +362,41 @@ module ActiveLdap
       end
     end
 
-    class AddRecord
-      attr_reader :dn, :controls, :attributes, :change_type
-      def initialize(dn, controls, attributes)
-        @dn = dn
+    class ContentRecord < Record
+    end
+
+    class ChangeRecord < Record
+      attr_reader :controls, :change_type
+      def initialize(dn, attributes, controls, change_type)
+        super(dn, attributes)
         @controls = controls
-        @attributes = attributes
-        @change_type = "add"
+        @change_type = change_type
       end
 
       def add?
-        true
+        @change_type == "add"
       end
 
-      def to_hash
-        attributes.merge({"dn" => dn})
+      def delete?
+        @change_type == "delete"
+      end
+
+      def modify?
+        @change_type == "modify"
+      end
+
+      def modify_dn?
+        @change_type == "moddn"
+      end
+
+      def modify_rdn?
+        @change_type == "modrdn"
+      end
+    end
+
+    class AddRecord < ChangeRecord
+      def initialize(dn, controls, attributes)
+        super(dn, attributes, controls, "add")
       end
     end
   end

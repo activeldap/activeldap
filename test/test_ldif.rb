@@ -31,12 +31,12 @@ EOL
     }
 
     ldif = assert_ldif(1, [change_attributes], ldif_source)
-    record = ldif.entries[0]
+    record = ldif.records[0]
     assert("add", record.change_type)
     assert(record.add?)
   end
 
-  def test_entries_with_external_file_reference
+  def test_records_with_external_file_reference
     ldif_source = <<-EOL
 version: 1
 dn: cn=Horatio Jensen, ou=Product Testing, dc=airius, dc=com
@@ -51,7 +51,7 @@ telephonenumber: +1 408 555 1212
 jpegphoto:< file://#{jpeg_photo_path}
 EOL
 
-    entry = {
+    record = {
       "dn" => "cn=Horatio Jensen,ou=Product Testing,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Horatio Jensen", "Horatio N Jensen"],
@@ -61,10 +61,10 @@ EOL
       "jpegphoto" => [jpeg_photo],
     }
 
-    assert_ldif(1, [entry], ldif_source)
+    assert_ldif(1, [record], ldif_source)
   end
 
-  def test_entries_with_option_attributes
+  def test_records_with_option_attributes
     ldif_source = <<-EOL
 version: 1
 dn:: b3U95Za25qWt6YOoLG89QWlyaXVz
@@ -122,7 +122,7 @@ cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 EOL
 
-    entry1 = {
+    record1 = {
       "dn" => "ou=営業部,o=Airius",
       "objectclass" => ["top", "organizationalUnit"],
       "ou" => [
@@ -138,7 +138,7 @@ EOL
       "description" => ["Japanese office"],
     }
 
-    entry2 = {
+    record2 = {
       "dn" => "uid=rogasawara,ou=営業部,o=Airius",
       "userpassword" => ["{SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM="],
       "objectclass" => ["top", "person",
@@ -188,10 +188,10 @@ EOL
       "preferredlanguage" => ["ja"],
     }
 
-    assert_ldif(1, [entry1, entry2], ldif_source)
+    assert_ldif(1, [record1, record2], ldif_source)
   end
 
-  def test_an_entry_with_base64_encoded_value
+  def test_an_record_with_base64_encoded_value
     ldif_source = <<-EOL
 version: 1
 dn: cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com
@@ -209,7 +209,7 @@ description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
  b3V0IG1vcmUu
 EOL
 
-    entry = {
+    record = {
       "dn" => "cn=Gern Jensen,ou=Product Testing,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Gern Jensen", "Gern O Jensen"],
@@ -221,10 +221,10 @@ EOL
                         "control character in it (a CR).\r  By the way, " +
                         "you should really get out more."],
     }
-    assert_ldif(1, [entry], ldif_source)
+    assert_ldif(1, [record], ldif_source)
   end
 
-  def test_an_entry_with_folded_attribute_value
+  def test_an_record_with_folded_attribute_value
     ldif_source = <<-EOL
 version: 1
 dn:cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
@@ -242,7 +242,7 @@ description:Babs is a big sailing fan, and travels extensively in sea
 title:Product Manager, Rod and Reel Division
 EOL
 
-    entry = {
+    record = {
       "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Barbara Jensen", "Barbara J Jensen", "Babs Jensen"],
@@ -253,10 +253,10 @@ EOL
                         "in search of perfect sailing conditions."],
       "title" => ["Product Manager, Rod and Reel Division"],
     }
-    assert_ldif(1, [entry], ldif_source)
+    assert_ldif(1, [record], ldif_source)
   end
 
-  def test_entries
+  def test_records
     ldif_source = <<-EOL
 version: 1
 dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
@@ -280,7 +280,7 @@ sn: Jensen
 telephonenumber: +1 408 555 1212
 EOL
 
-    entry1 = {
+    record1 = {
       "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Barbara Jensen", "Barbara J Jensen", "Babs Jensen"],
@@ -289,17 +289,17 @@ EOL
       "telephonenumber" => ["+1 408 555 1212"],
       "description" => ["A big sailing fan."],
     }
-    entry2 = {
+    record2 = {
       "dn" => "cn=Bjorn Jensen,ou=Accounting,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Bjorn Jensen"],
       "sn" => ["Jensen"],
       "telephonenumber" => ["+1 408 555 1212"],
     }
-    assert_ldif(1, [entry1, entry2], ldif_source)
+    assert_ldif(1, [record1, record2], ldif_source)
   end
 
-  def test_an_entry
+  def test_an_record
     ldif_source = <<-EOL
 version: 1
 dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
@@ -315,7 +315,7 @@ telephonenumber: +1 408 555 1212
 description: A big sailing fan.
 EOL
 
-    entry = {
+    record = {
       "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
       "objectclass" => ["top", "person", "organizationalPerson"],
       "cn" => ["Barbara Jensen", "Barbara J Jensen", "Babs Jensen"],
@@ -324,7 +324,7 @@ EOL
       "telephonenumber" => ["+1 408 555 1212"],
       "description" => ["A big sailing fan."],
     }
-    assert_ldif(1, [entry], ldif_source)
+    assert_ldif(1, [record], ldif_source)
   end
 
   def test_comment
@@ -337,11 +337,11 @@ objectclass: top
  ass: organizationalPerson
 EOL
 
-    entry = {
+    record = {
       "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
       "objectclass" => ["top"],
     }
-    assert_ldif(1, [entry], ldif_source)
+    assert_ldif(1, [record], ldif_source)
   end
 
   def test_dn_spec
@@ -391,17 +391,17 @@ EOL
   priority :normal
 
   private
-  def assert_ldif(version, entries, ldif_source)
+  def assert_ldif(version, records, ldif_source)
     ldif = ActiveLdap::Ldif.parse(ldif_source)
     assert_equal(version, ldif.version)
-    assert_equal(entries,
-                 ldif.entries.collect {|entry| entry.to_hash})
+    assert_equal(records,
+                 ldif.records.collect {|record| record.to_hash})
     ldif
   end
 
   def assert_valid_dn(dn, ldif_source)
     ldif = ActiveLdap::Ldif.parse(ldif_source)
-    assert_equal([dn], ldif.entries.collect {|entry| entry.dn})
+    assert_equal([dn], ldif.records.collect {|record| record.dn})
   end
 
   def assert_valid_version(version, ldif_source)
