@@ -10,6 +10,133 @@ class TestLDIF < Test::Unit::TestCase
   end
 
   priority :must
+  def test_entries_with_option_attributes
+    ldif_source = <<-EOL
+version: 1
+dn:: b3U95Za25qWt6YOoLG89QWlyaXVz
+# dn:: ou=<JapaneseOU>,o=Airius
+objectclass: top
+objectclass: organizationalUnit
+ou:: 5Za25qWt6YOo
+# ou:: <JapaneseOU>
+ou;lang-ja:: 5Za25qWt6YOo
+# ou;lang-ja:: <JapaneseOU>
+ou;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2
+# ou;lang-ja:: <JapaneseOU_in_phonetic_representation>
+ou;lang-en: Sales
+description: Japanese office
+
+dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+# dn:: uid=<uid>,ou=<JapaneseOU>,o=Airius
+userpassword: {SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM=
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: rogasawara
+mail: rogasawara@airius.co.jp
+givenname;lang-ja:: 44Ot44OJ44OL44O8
+# givenname;lang-ja:: <JapaneseGivenname>
+sn;lang-ja:: 5bCP56yg5Y6f
+# sn;lang-ja:: <JapaneseSn>
+cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+# cn;lang-ja:: <JapaneseCn>
+title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==
+# title;lang-ja:: <JapaneseTitle>
+preferredlanguage: ja
+givenname:: 44Ot44OJ44OL44O8
+# givenname:: <JapaneseGivenname>
+sn:: 5bCP56yg5Y6f
+# sn:: <JapaneseSn>
+cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+# cn:: <JapaneseCn>
+title:: 5Za25qWt6YOoIOmDqOmVtw==
+# title:: <JapaneseTitle>
+givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8
+# givenname;lang-ja;phonetic::
+  <JapaneseGivenname_in_phonetic_representation_kana>
+sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ
+# sn;lang-ja;phonetic:: <JapaneseSn_in_phonetic_representation_kana>
+cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==
+# cn;lang-ja;phonetic:: <JapaneseCn_in_phonetic_representation_kana>
+title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
+# title;lang-ja;phonetic::
+# <JapaneseTitle_in_phonetic_representation_kana>
+givenname;lang-en: Rodney
+sn;lang-en: Ogasawara
+cn;lang-en: Rodney Ogasawara
+title;lang-en: Sales, Director
+EOL
+
+    entry1 = {
+      "dn" => "ou=営業部,o=Airius",
+      "objectclass" => ["top", "organizationalUnit"],
+      "ou" => [
+               "営業部",
+               {"lang-ja" =>
+                 [
+                  "営業部",
+                  {"phonetic" => ["えいぎょうぶ"]},
+                 ],
+               },
+               {"lang-en" => ["Sales"]},
+              ],
+      "description" => ["Japanese office"],
+    }
+
+    entry2 = {
+      "dn" => "uid=rogasawara,ou=営業部,o=Airius",
+      "userpassword" => ["{SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM="],
+      "objectclass" => ["top", "person",
+                        "organizationalPerson", "inetOrgPerson"],
+      "uid" => ["rogasawara"],
+      "mail" => ["rogasawara@airius.co.jp"],
+      "givenname" => [
+                      {"lang-ja" =>
+                        [
+                         "ロドニー",
+                         {"phonetic" => ["ろどにー"]},
+                        ]
+                      },
+                      "ロドニー",
+                      {"lang-en" => ["Rodney"]},
+                     ],
+      "sn" => [
+               {"lang-ja" =>
+                 [
+                  "小笠原",
+                  {"phonetic" => ["おがさわら"]},
+                 ]
+               },
+               "小笠原",
+               {"lang-en" => ["Ogasawara"]},
+              ],
+      "cn" => [
+               {"lang-ja" =>
+                 [
+                  "小笠原 ロドニー",
+                  {"phonetic" => ["おがさわら ろどにー"]},
+                 ],
+               },
+               "小笠原 ロドニー",
+               {"lang-en" => ["Rodney Ogasawara"]},
+              ],
+      "title" => [
+                  {"lang-ja" =>
+                    [
+                     "営業部 部長",
+                     {"phonetic" => ["えいぎょうぶ ぶちょう"]}
+                    ]
+                  },
+                  "営業部 部長",
+                  {"lang-en" => ["Sales, Director"]},
+                 ],
+      "preferredlanguage" => ["ja"],
+    }
+
+    assert_ldif(1, [entry1, entry2], ldif_source)
+  end
+
   def test_an_entry_with_base64_encoded_value
     ldif_source = <<-EOL
 version: 1

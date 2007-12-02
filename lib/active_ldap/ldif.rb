@@ -62,7 +62,16 @@ module ActiveLdap
           break if @scanner.scan_separator or @scanner.eos?
           type, options, value = parse_attribute
           attributes[type] ||= []
-          attributes[type] << value
+          container = attributes[type]
+          options.each do |option|
+            parent = container.find {|val| val.is_a?(Hash) and val.has_key?(option)}
+            if parent.nil?
+              parent = {option => []}
+              container << parent
+            end
+            container = parent[option]
+          end
+          container << value
         end
         attributes
       end
