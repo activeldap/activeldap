@@ -170,7 +170,7 @@ module ActiveLdap
     def numbered_ldif
       return @ldif if @ldif.blank?
       lines = @ldif.to_a
-      format = "%#{Math.log10(lines.size).truncate}d: %s"
+      format = "%#{Math.log10(lines.size).truncate + 1}d: %s"
       i = 0
       lines.collect do |line|
         i += 1
