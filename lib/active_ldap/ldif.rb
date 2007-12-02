@@ -30,9 +30,11 @@ module ActiveLdap
         @scanner = Scanner.new(@source)
         raise version_spec_is_missing unless @scanner.scan(/version:/)
         @scanner.scan(/\s*/)
-        raise version_number_is_missing unless @scanner.scan(/(\d+)/)
 
-        version = Integer(@scanner[1])
+        version = @scanner.scan(/\d+/)
+        raise version_number_is_missing if version.nil?
+
+        version = Integer(version)
         raise unsupported_version(version) if version != 1
 
         raise separator_is_missing unless @scanner.scan_separators
@@ -129,6 +131,45 @@ module ActiveLdap
         end
       end
 
+      def parse_control
+        return nil if @scanner.scan(/control:/).nil?
+        @scanner.scan(/\s*/)
+        oid = @scanner.scan(/\d+(?:\.\d+)?/)
+        raise oid_is_missing if oid.nil?
+        criticality = nil
+        if @scanner.scan(/\s+/)
+          criticality = @scanner.scan(/true|false/)
+          raise criticality_is_missing if criticality.nil?
+        end
+        value = parse_attribute_value if @scanner.peek(/:/)
+        raise separator_is_missing unless @scanner.scan_separator
+        [oid, criticality, value]
+      end
+
+      def parse_controls
+        controls = []
+        loop do
+          control = parse_control
+          break if control.nil?
+          controls << control
+        end
+        controls
+      end
+
+      def parse_change_type
+        return nil unless @scanner.scan(/changetype:\s*/)
+        type = @scanner.scan(/add|delete|modrdn|moddn|modify/)
+        raise change_type_is_missing if type.nil?
+
+        raise separator_is_missing unless @scanner.scan_separator
+        type
+      end
+
+      def parse_change_type_record(dn, controls, change_type)
+        attributes = parse_attributes
+        AddRecord.new(dn, controls, attributes)
+      end
+
       def parse_entry
         raise dn_mark_is_missing unless @scanner.scan(/dn:/)
         if @scanner.scan(/:\s*/)
@@ -142,9 +183,16 @@ module ActiveLdap
 
         raise separator_is_missing unless @scanner.scan_separators
 
-        attributes = parse_attributes
+        controls = parse_controls
+        change_type = parse_change_type
+        raise change_type_is_missing if change_type.nil? and !controls.empty?
 
-        Entry.new(dn, attributes)
+        if change_type
+          parse_change_type_record(dn, controls, change_type)
+        else
+          attributes = parse_attributes
+          Entry.new(dn, attributes)
+        end
       end
 
       def parse_entries
@@ -221,6 +269,11 @@ module ActiveLdap
       def scan(regexp)
         @sub_scanner = next_segment if @sub_scanner.eos?
         @sub_scanner.scan(regexp)
+      end
+
+      def peek(regexp)
+        @sub_scanner = next_segment if @sub_scanner.eos?
+        @sub_scanner.peek(regexp)
       end
 
       def scan_separator
@@ -302,6 +355,24 @@ module ActiveLdap
       def initialize(dn, attributes)
         @dn = dn
         @attributes = attributes
+      end
+
+      def to_hash
+        attributes.merge({"dn" => dn})
+      end
+    end
+
+    class AddRecord
+      attr_reader :dn, :controls, :attributes, :change_type
+      def initialize(dn, controls, attributes)
+        @dn = dn
+        @controls = controls
+        @attributes = attributes
+        @change_type = "add"
+      end
+
+      def add?
+        true
       end
 
       def to_hash

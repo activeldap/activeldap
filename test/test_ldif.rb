@@ -6,6 +6,36 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_add_record
+    ldif_source = <<-EOL
+version: 1
+# Add a new entry
+dn: cn=Fiona Jensen, ou=Marketing, dc=airius, dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Fiona Jensen
+sn: Jensen
+uid: fiona
+telephonenumber: +1 408 555 1212
+EOL
+
+    change_attributes = {
+      "dn" => "cn=Fiona Jensen,ou=Marketing,dc=airius,dc=com",
+      "objectclass" => ["top", "person", "organizationalPerson"],
+      "cn" => ["Fiona Jensen"],
+      "sn" => ["Jensen"],
+      "uid" => ["fiona"],
+      "telephonenumber" => ["+1 408 555 1212"],
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.entries[0]
+    assert("add", record.change_type)
+    assert(record.add?)
+  end
+
   def test_entries_with_external_file_reference
     ldif_source = <<-EOL
 version: 1
@@ -366,6 +396,7 @@ EOL
     assert_equal(version, ldif.version)
     assert_equal(entries,
                  ldif.entries.collect {|entry| entry.to_hash})
+    ldif
   end
 
   def assert_valid_dn(dn, ldif_source)
