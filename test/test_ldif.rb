@@ -146,6 +146,23 @@ EOL
     assert_ldif(1, [entry], ldif_source)
   end
 
+  def test_comment
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
+objectclass: top
+# objectclass: person
+#objectcl
+ ass: organizationalPerson
+EOL
+
+    entry = {
+      "dn" => "cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com",
+      "objectclass" => ["top"],
+    }
+    assert_ldif(1, [entry], ldif_source)
+  end
+
   def test_dn_spec
     assert_invalid_ldif("'dn:' is missing",
                         "version: 1\n", 2, 1, "version: 1\n|@|")

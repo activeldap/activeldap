@@ -207,7 +207,8 @@ module ActiveLdap
       end
 
       def eos?
-        @scanner.eos?
+        @sub_scanner = next_segment if @sub_scanner.eos?
+        @sub_scanner.eos? and @scanner.eos?
       end
 
       def line
@@ -232,9 +233,12 @@ module ActiveLdap
 
       private
       def next_segment
-        segment = @scanner.scan(/.+(?:#{SEPARATOR} .*)*#{SEPARATOR}?/)
-        return @sub_scanner if segment.nil?
-        StringScanner.new(segment.gsub(/\r?\n /, ''))
+        loop do
+          segment = @scanner.scan(/.+(?:#{SEPARATOR} .*)*#{SEPARATOR}?/)
+          return @sub_scanner if segment.nil?
+          next if segment[0, 1] == "#"
+          return StringScanner.new(segment.gsub(/\r?\n /, ''))
+        end
       end
 
       def consumed_source
