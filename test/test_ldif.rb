@@ -6,6 +6,24 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_delete_record
+    ldif_source = <<-EOL
+version: 1
+# Delete an existing entry
+dn: cn=Robert Jensen, ou=Marketing, dc=airius, dc=com
+changetype: delete
+EOL
+
+    change_attributes = {
+      "dn" => "cn=Robert Jensen,ou=Marketing,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("delete", record.change_type)
+    assert(record.delete?)
+  end
+
   def test_add_record
     ldif_source = <<-EOL
 version: 1
@@ -32,7 +50,7 @@ EOL
 
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
-    assert("add", record.change_type)
+    assert_equal("add", record.change_type)
     assert(record.add?)
   end
 

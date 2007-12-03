@@ -166,8 +166,15 @@ module ActiveLdap
       end
 
       def parse_change_type_record(dn, controls, change_type)
-        attributes = parse_attributes
-        AddRecord.new(dn, controls, attributes)
+        case change_type
+        when "add"
+          attributes = parse_attributes
+          AddRecord.new(dn, controls, attributes)
+        when "delete"
+          DeleteRecord.new(dn, controls)
+        else
+          raise unknown_change_type(change_type)
+        end
       end
 
       def parse_record
@@ -397,6 +404,12 @@ module ActiveLdap
     class AddRecord < ChangeRecord
       def initialize(dn, controls, attributes)
         super(dn, attributes, controls, "add")
+      end
+    end
+
+    class DeleteRecord < ChangeRecord
+      def initialize(dn, controls)
+        super(dn, {}, controls, "delete")
       end
     end
   end
