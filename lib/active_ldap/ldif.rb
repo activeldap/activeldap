@@ -117,12 +117,12 @@ module ActiveLdap
         options
       end
 
-      def parse_attribute_value
+      def parse_attribute_value(accept_external_file=true)
         raise attribute_value_separator_is_missing if @scanner.scan(/:/).nil?
         if @scanner.scan(/:/)
           @scanner.scan(/\s*/)
           read_base64_value
-        elsif @scanner.scan(/</)
+        elsif accept_external_file and @scanner.scan(/</)
           @scanner.scan(/\s*/)
           read_external_file
         else
@@ -165,6 +165,29 @@ module ActiveLdap
         type
       end
 
+      def parse_modify_rdn_record(dn, controls)
+        raise newrdn_mark_is_missing unless @scanner.scan(/newrdn\b/)
+        new_rdn = parse_attribute_value(false)
+        raise separator_is_missing unless @scanner.scan_separator
+
+        unless @scanner.scan(/deleteoldrdn:/)
+          raise delete_old_rdn_mark_is_missing
+        end
+        @scanner.scan(/\s*/)
+        delete_old_rdn = @scanner.scan(/[01]/)
+        raise delete_old_rdn_value_is_missing if delete_old_rdn.nil?
+        raise separator_is_missing unless @scanner.scan_separator
+
+        if @scanner.scan(/newsuperior:/)
+          @scanner.scan(/\s*/)
+          new_superior = parse_attribute_value(false)
+          raise new_superior_value_is_missing if new_superior.nil?
+          new_superior = parse_dn(new_superior)
+          raise separator_is_missing unless @scanner.scan_separator
+        end
+        ModifyRDNRecord.new(dn, controls, new_rdn, delete_old_rdn, new_superior)
+      end
+
       def parse_change_type_record(dn, controls, change_type)
         case change_type
         when "add"
@@ -172,6 +195,8 @@ module ActiveLdap
           AddRecord.new(dn, controls, attributes)
         when "delete"
           DeleteRecord.new(dn, controls)
+        when "modrdn"
+          parse_modify_rdn_record(dn, controls)
         else
           raise unknown_change_type(change_type)
         end
@@ -410,6 +435,20 @@ module ActiveLdap
     class DeleteRecord < ChangeRecord
       def initialize(dn, controls)
         super(dn, {}, controls, "delete")
+      end
+    end
+
+    class ModifyRDNRecord < ChangeRecord
+      attr_reader :new_rdn, :new_superior
+      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
+        super(dn, {}, controls, "modrdn")
+        @new_rdn = new_rdn
+        @delete_old_rdn = delete_old_rdn
+        @new_superior = new_superior
+      end
+
+      def delete_old_rdn?
+        @delete_old_rdn
       end
     end
   end

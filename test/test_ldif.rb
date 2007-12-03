@@ -6,6 +6,29 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_modrdn_record
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry's relative distinguished name
+dn: cn=Paul Jensen, ou=Product Development, dc=airius, dc=com
+changetype: modrdn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
+
+    change_attributes = {
+      "dn" => "cn=Paul Jensen,ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("modrdn", record.change_type)
+    assert(record.modify_rdn?)
+    assert_equal("cn=Paula Jensen", record.new_rdn)
+    assert(record.delete_old_rdn?)
+    assert_nil(record.new_superior)
+  end
+
   def test_delete_record
     ldif_source = <<-EOL
 version: 1
