@@ -75,13 +75,19 @@ module ActiveLdap
         invalid_dn(dn_string, $!.reason)
       end
 
-      def parse_attributes
+      def parse_attributes(least=0)
+        i = 0
         attributes = {}
-        type, options, value = parse_attribute
-        attributes[type] = [value]
-        while @scanner.scan_separator
-          break if @scanner.scan_separator or @scanner.eos?
+        loop do
+          i += 1
+          if i >= least
+            break if block_given? and yield
+            break if @scanner.scan_separator or @scanner.eos?
+          end
           type, options, value = parse_attribute
+          if @scanner.scan_separator.nil? and !@scanner.eos?
+            raise separator_is_missing
+          end
           attributes[type] ||= []
           container = attributes[type]
           options.each do |option|
@@ -99,10 +105,15 @@ module ActiveLdap
         attributes
       end
 
-      def parse_attribute
+      def parse_attribute_description
         type = @scanner.scan(ATTRIBUTE_TYPE_CHARS)
         raise attribute_type_is_missing if type.nil?
         options = parse_options
+        [type, options]
+      end
+
+      def parse_attribute
+        type, options = parse_attribute_description
         value = parse_attribute_value
         [type, options, value]
       end
@@ -141,7 +152,7 @@ module ActiveLdap
           criticality = @scanner.scan(/true|false/)
           raise criticality_is_missing if criticality.nil?
         end
-        value = parse_attribute_value if @scanner.peek(/:/)
+        value = parse_attribute_value if @scanner.check(/:/)
         raise separator_is_missing unless @scanner.scan_separator
         [oid, criticality, value]
       end
@@ -188,15 +199,60 @@ module ActiveLdap
         ModifyRDNRecord.new(dn, controls, new_rdn, delete_old_rdn, new_superior)
       end
 
+      def parse_modify_spec
+        return nil if @scanner.scan(/(add|delete|replace):/).nil?
+        type = @scanner[1]
+        @scanner.scan(/\s*/)
+        attribute, options = parse_attribute_description
+        raise separator_is_missing unless @scanner.scan_separator
+        attributes = parse_attributes do
+          if @scanner.scan(/-/)
+            raise separator_is_missing unless @scanner.scan_separator
+            true
+          else
+            false
+          end
+        end
+        [type, attribute, options, attributes]
+      end
+
+      def parse_modify_record(dn, controls)
+        operations = []
+        loop do
+          spec = parse_modify_spec
+          if spec.nil?
+            break if @scanner.eos?
+            raise modify_spec_separator_is_missing if @scanner.scan(/-/).nil?
+            raise separator_is_missing unless @scanner.scan_separator
+            break
+          end
+          type, attribute, options, attributes = spec
+          case type
+          when "add"
+            klass = ModifyRecord::AddOperation
+          when "delete"
+            klass = ModifyRecord::DeleteOperation
+          when "replace"
+            klass = ModifyRecord::ReplaceOperation
+          else
+            unsupported_modify_type(type)
+          end
+          operations << klass.new(attribute, options, attributes)
+        end
+        ModifyRecord.new(dn, controls, operations)
+      end
+
       def parse_change_type_record(dn, controls, change_type)
         case change_type
         when "add"
-          attributes = parse_attributes
+          attributes = parse_attributes(1)
           AddRecord.new(dn, controls, attributes)
         when "delete"
           DeleteRecord.new(dn, controls)
         when "modrdn"
           parse_modify_rdn_record(dn, controls)
+        when "modify"
+          parse_modify_record(dn, controls)
         else
           raise unknown_change_type(change_type)
         end
@@ -222,7 +278,7 @@ module ActiveLdap
         if change_type
           parse_change_type_record(dn, controls, change_type)
         else
-          attributes = parse_attributes
+          attributes = parse_attributes(1)
           ContentRecord.new(dn, attributes)
         end
       end
@@ -287,6 +343,10 @@ module ActiveLdap
       def invalid_uri(uri_string, message)
         invalid_ldif(_("URI is invalid: %s: %s") % [uri_string, message])
       end
+
+      def modify_spec_separator_is_missing
+        invalid_ldif(_("'-' is missing"))
+      end
     end
 
     class Scanner
@@ -303,9 +363,9 @@ module ActiveLdap
         @sub_scanner.scan(regexp)
       end
 
-      def peek(regexp)
+      def check(regexp)
         @sub_scanner = next_segment if @sub_scanner.eos?
-        @sub_scanner.peek(regexp)
+        @sub_scanner.check(regexp)
       end
 
       def scan_separator
@@ -465,6 +525,60 @@ module ActiveLdap
         else
           raise ArgumentError,
                 _("invalid delete_old_rdn value: %s") % delete_old_rdn.inspect
+        end
+      end
+    end
+
+    class ModifyRecord < ChangeRecord
+      include Enumerable
+
+      attr_reader :operations
+      def initialize(dn, controls, operations)
+        super(dn, {}, controls, "modify")
+        @operations = operations
+      end
+
+      def each(&block)
+        @operations.each(&block)
+      end
+
+      class Operation
+        attr_reader :type, :attribute, :options, :attributes
+        def initialize(type, attribute, options, attributes)
+          @type = type
+          @attribute = attribute
+          @options = options
+          @attributes = attributes
+        end
+
+        def add?
+          @type == "add"
+        end
+
+        def delete?
+          @type == "delete"
+        end
+
+        def replace?
+          @type == "replace"
+        end
+      end
+
+      class AddOperation < Operation
+        def initialize(attribute, options, attributes)
+          super("add", attribute, options, attributes)
+        end
+      end
+
+      class DeleteOperation < Operation
+        def initialize(attribute, options, attributes)
+          super("delete", attribute, options, attributes)
+        end
+      end
+
+      class ReplaceOperation < Operation
+        def initialize(attribute, options, attributes)
+          super("replace", attribute, options, attributes)
         end
       end
     end

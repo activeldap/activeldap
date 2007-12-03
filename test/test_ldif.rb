@@ -6,6 +6,62 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_modify_record
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry: add an additional value to the postaladdress
+# attribute, completely delete the description attribute, replace
+# the telephonenumber attribute with two values, and delete a specific
+# value from the facsimiletelephonenumber attribute
+dn: cn=Paula Jensen, ou=Product Development, dc=airius, dc=com
+changetype: modify
+add: postaladdress
+postaladdress: 123 Anystreet $ Sunnyvale, CA $ 94086
+-
+delete: description
+-
+replace: telephonenumber
+telephonenumber: +1 408 555 1234
+telephonenumber: +1 408 555 5678
+-
+delete: facsimiletelephonenumber
+facsimiletelephonenumber: +1 408 555 9876
+-
+EOL
+
+    change_attributes = {
+      "dn" => "cn=Paula Jensen,ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("modify", record.change_type)
+    assert(record.modify?)
+
+    operations = [
+                  ["add", "postaladdress",
+                   {"postaladdress" =>
+                     ["123 Anystreet $ Sunnyvale, CA $ 94086"]}],
+                  ["delete", "description", {}],
+                  ["replace", "telephonenumber",
+                   {"telephonenumber" => [
+                                          "+1 408 555 1234",
+                                          "+1 408 555 5678",
+                                         ]}],
+                  ["delete", "facsimiletelephonenumber",
+                   {"facsimiletelephonenumber" => ["+1 408 555 9876"]}],
+                 ]
+    i = -1
+    actual = record.operations.collect do |operation|
+      i += 1
+      type = operations[i][0]
+      [operation.send("#{type}?"),
+       [operation.type, operation.attribute, operation.attributes]]
+    end
+    assert_equal(operations.collect {|operation| [true, operation]},
+                 actual)
+  end
+
   def test_modrdn_record_with_newsuperior
     ldif_source = <<-EOL
 version: 1
