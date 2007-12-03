@@ -178,7 +178,7 @@ module ActiveLdap
         raise delete_old_rdn_value_is_missing if delete_old_rdn.nil?
         raise separator_is_missing unless @scanner.scan_separator
 
-        if @scanner.scan(/newsuperior:/)
+        if @scanner.scan(/newsuperior\b/)
           @scanner.scan(/\s*/)
           new_superior = parse_attribute_value(false)
           raise new_superior_value_is_missing if new_superior.nil?
@@ -383,6 +383,8 @@ module ActiveLdap
     end
 
     class Record
+      include GetTextSupport
+
       attr_reader :dn, :attributes
       def initialize(dn, attributes)
         @dn = dn
@@ -443,12 +445,27 @@ module ActiveLdap
       def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
         super(dn, {}, controls, "modrdn")
         @new_rdn = new_rdn
-        @delete_old_rdn = delete_old_rdn
+        @delete_old_rdn = normalize_delete_old_rdn(delete_old_rdn)
         @new_superior = new_superior
       end
 
       def delete_old_rdn?
         @delete_old_rdn
+      end
+
+      private
+      def normalize_delete_old_rdn(delete_old_rdn)
+        case delete_old_rdn
+        when "1", true
+          true
+        when "0", false
+          false
+        when nil
+          nil
+        else
+          raise ArgumentError,
+                _("invalid delete_old_rdn value: %s") % delete_old_rdn.inspect
+        end
       end
     end
   end

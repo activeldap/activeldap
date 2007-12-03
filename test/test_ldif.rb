@@ -6,6 +6,31 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_modrdn_record_with_newsuperior
+    ldif_source = <<-EOL
+version: 1
+# Rename an entry and move all of its children to a new location in
+# the directory tree (only implemented by LDAPv3 servers).
+dn: ou=PD Accountants, ou=Product Development, dc=airius, dc=com
+changetype: modrdn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting, dc=airius, dc=com
+EOL
+
+    change_attributes = {
+      "dn" => "ou=PD Accountants,ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("modrdn", record.change_type)
+    assert(record.modify_rdn?)
+    assert_equal("ou=Product Development Accountants", record.new_rdn)
+    assert(!record.delete_old_rdn?)
+    assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
+  end
+
   def test_modrdn_record
     ldif_source = <<-EOL
 version: 1
