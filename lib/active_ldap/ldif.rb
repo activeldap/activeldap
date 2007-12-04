@@ -75,14 +75,14 @@ module ActiveLdap
         invalid_dn(dn_string, $!.reason)
       end
 
-      def parse_attributes(least=0)
+      def parse_attributes(least=0, &block)
         i = 0
         attributes = {}
+        block ||= Proc.new {@scanner.check_separator}
         loop do
           i += 1
           if i >= least
-            break if block_given? and yield
-            break if @scanner.scan_separator or @scanner.eos?
+            break if block.call or @scanner.eos?
           end
           type, options, value = parse_attribute
           if @scanner.scan_separator.nil? and !@scanner.eos?
@@ -220,12 +220,7 @@ module ActiveLdap
         operations = []
         loop do
           spec = parse_modify_spec
-          if spec.nil?
-            break if @scanner.eos?
-            raise modify_spec_separator_is_missing if @scanner.scan(/-/).nil?
-            raise separator_is_missing unless @scanner.scan_separator
-            break
-          end
+          break if spec.nil?
           type, attribute, options, attributes = spec
           case type
           when "add"
@@ -269,7 +264,7 @@ module ActiveLdap
           dn = parse_dn(dn)
         end
 
-        raise separator_is_missing unless @scanner.scan_separators
+        raise separator_is_missing unless @scanner.scan_separator
 
         controls = parse_controls
         change_type = parse_change_type
@@ -285,9 +280,10 @@ module ActiveLdap
 
       def parse_records
         records = []
-        records << parse_record
-        until @scanner.eos?
+        loop do
           records << parse_record
+          break if @scanner.eos?
+          raise separator_is_missing if @scanner.scan_separator.nil?
         end
         records
       end
@@ -374,11 +370,18 @@ module ActiveLdap
         scan(SEPARATOR)
       end
 
+      def check_separator
+        return @scanner.check(SEPARATOR) if @sub_scanner.eos?
+
+        check(SEPARATOR)
+      end
+
       def scan_separators
         return @scanner.scan(/#{SEPARATOR}+/) if @sub_scanner.eos?
 
         sub_result = scan(/#{SEPARATOR}+/)
         return nil if sub_result.nil?
+        return sub_result unless @sub_scanner.eos?
 
         result = @scanner.scan(/#{SEPARATOR}+/)
         return sub_result if result.nil?
