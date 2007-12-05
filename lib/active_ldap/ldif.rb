@@ -445,6 +445,14 @@ module ActiveLdap
       @records = records
     end
 
+    def to_s
+      result = "version: #{@version}\n"
+      result << @records.collect do |record|
+        record.to_s
+      end.join("\n")
+      result
+    end
+
     class Record
       include GetTextSupport
 
@@ -456,6 +464,23 @@ module ActiveLdap
 
       def to_hash
         attributes.merge({"dn" => dn})
+      end
+
+      def to_s
+        result = to_s_prelude
+        result << to_s_content
+        result
+      end
+
+      private
+      def to_s_prelude
+        "dn: #{dn}\n"
+      end
+
+      def to_s_content
+        @attributes.collect do |name, value|
+          "#{name}: #{value}"
+        end.join("\n")
       end
     end
 
@@ -490,6 +515,21 @@ module ActiveLdap
         @change_type == "modrdn"
       end
 
+      private
+      def to_s_prelude
+        result = super
+        @controls.each do |control|
+          result << control.to_s
+        end
+        result
+      end
+
+      def to_s_content
+        result = "changetype: #{@change_type}\n"
+        result << super
+        result
+      end
+
       class Control
         attr_reader :type, :value
         def initialize(type, criticality, value)
@@ -512,6 +552,14 @@ module ActiveLdap
             :criticality => @criticality,
             :value => @value,
           }
+        end
+
+        def to_s
+          result = "control: #{@type}"
+          result << " #{@criticality}" unless @criticality.nil?
+          result << @value if @value
+          result << "\n"
+          result
         end
 
         private

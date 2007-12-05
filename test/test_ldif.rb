@@ -40,6 +40,26 @@ EOL
     assert_nil(control.value)
   end
 
+  def test_change_record_with_control_to_s
+    ldif_source = <<-EOL
+version: 1
+# Delete an entry. The operation will attach the LDAPv3
+# Tree Delete Control defined in [9]. The criticality
+# field is "true" and the controlValue field is
+# absent, as required by [9].
+dn: ou=Product Development, dc=airius, dc=com
+control: 1.2.840.113556.1.4.805 true
+changetype: delete
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: ou=Product Development,dc=airius,dc=com
+control: 1.2.840.113556.1.4.805 true
+changetype: delete
+EOL
+  end
+
   def test_multi_change_type_records
     ldif_source = <<-EOL
 version: 1
@@ -739,5 +759,10 @@ EOL
     assert_equal([_(reason), line, column, nearest, ldif],
                  [exception.reason, exception.line, exception.column,
                   exception.nearest, exception.ldif])
+  end
+
+  def assert_ldif_to_s(expected_ldif_source, original_ldif_source)
+    ldif = ActiveLdap::Ldif.parse(original_ldif_source)
+    assert_equal(expected_ldif_source, ldif.to_s)
   end
 end
