@@ -464,6 +464,28 @@ EOL
     assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
   end
 
+  def test_modrdn_record_with_newsuperior
+    ldif_source = <<-EOL
+version: 1
+# Rename an entry and move all of its children to a new location in
+# the directory tree (only implemented by LDAPv3 servers).
+dn: ou=PD Accountants, ou=Product Development, dc=airius, dc=com
+changetype: modrdn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting, dc=airius, dc=com
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: ou=PD Accountants,ou=Product Development,dc=airius,dc=com
+changetype: modrdn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting,dc=airius,dc=com
+EOL
+  end
+
   def test_modrdn_record
     ldif_source = <<-EOL
 version: 1
