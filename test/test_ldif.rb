@@ -591,6 +591,35 @@ EOL
     assert_true(record.add?)
   end
 
+  def test_add_record_to_s
+    ldif_source = <<-EOL
+version: 1
+# Add a new entry
+dn: cn=Fiona Jensen, ou=Marketing, dc=airius, dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Fiona Jensen
+sn: Jensen
+uid: fiona
+telephonenumber: +1 408 555 1212
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Fiona Jensen,ou=Marketing,dc=airius,dc=com
+changetype: add
+cn: Fiona Jensen
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+sn: Jensen
+telephonenumber: +1 408 555 1212
+uid: fiona
+EOL
+  end
+
   def test_records_with_external_file_reference
     ldif_source = <<-EOL
 version: 1
