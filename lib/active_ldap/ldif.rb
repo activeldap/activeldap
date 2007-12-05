@@ -478,9 +478,14 @@ module ActiveLdap
       end
 
       def to_s_content
-        @attributes.collect do |name, value|
-          "#{name}: #{value}"
-        end.join("\n")
+        return "" if @attributes.empty?
+        @attributes.sort_by do |name, values|
+          [name, values]
+        end.collect do |name, values|
+          values.sort.collect do |value|
+            "#{name}: #{value}"
+          end.join("\n")
+        end.join("\n") + "\n"
       end
     end
 
@@ -618,6 +623,14 @@ module ActiveLdap
                 _("invalid delete_old_rdn value: %s") % delete_old_rdn.inspect
         end
       end
+
+      def to_s_content
+        result = super
+        result << "newrdn: #{@new_rdn}\n"
+        result << "deleteoldrdn: #{@delete_old_rdn ? 1 : 0}\n"
+        result << "newsuperior: #{@new_superior}\n" if @new_superior
+        result
+      end
     end
 
     class ModifyRecord < ChangeRecord
@@ -633,6 +646,16 @@ module ActiveLdap
         @operations.each(&block)
       end
 
+      private
+      def to_s_content
+        result = super
+        return result if @operations.empty?
+        @operations.collect do |operation|
+          result << "#{operation}-\n"
+        end
+        result
+      end
+
       class Operation
         attr_reader :type, :attribute, :options, :attributes
         def initialize(type, attribute, options, attributes)
@@ -640,6 +663,10 @@ module ActiveLdap
           @attribute = attribute
           @options = options
           @attributes = attributes
+        end
+
+        def full_attribute_name
+          [@attribute, *@options].join(";")
         end
 
         def add?
@@ -652,6 +679,18 @@ module ActiveLdap
 
         def replace?
           @type == "replace"
+        end
+
+        def to_s
+          result = "#{@type}: #{full_attribute_name}\n"
+          @attributes.sort_by do |name, values|
+            [name, values]
+          end.each do |name, values|
+            values.each do |value|
+              result << "#{name}: #{value}\n"
+            end
+          end
+          result
         end
       end
 
