@@ -2,10 +2,44 @@ require 'al-test-utils'
 
 class TestLDIF < Test::Unit::TestCase
   include ActiveLdap::GetTextSupport
+  include AlTestUtils::Assertions
   include AlTestUtils::Config
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_change_record_with_control
+    ldif_source = <<-EOL
+version: 1
+# Delete an entry. The operation will attach the LDAPv3
+# Tree Delete Control defined in [9]. The criticality
+# field is "true" and the controlValue field is
+# absent, as required by [9].
+dn: ou=Product Development, dc=airius, dc=com
+control: 1.2.840.113556.1.4.805 true
+changetype: delete
+EOL
+
+    change_attributes = {
+      "dn" => "ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("delete", record.change_type)
+    assert_true(record.delete?)
+    assert_equal([{
+                    :type => "1.2.840.113556.1.4.805",
+                    :criticality => true,
+                    :value => nil
+                  }],
+                 record.controls.collect {|control| control.to_hash})
+
+    control = record.controls[0]
+    assert_equal("1.2.840.113556.1.4.805", control.type)
+    assert_true(control.criticality?)
+    assert_nil(control.value)
+  end
+
   def test_multi_change_type_records
     ldif_source = <<-EOL
 version: 1
@@ -109,29 +143,29 @@ EOL
                        ldif_source)
     record = ldif.records[0]
     assert_equal("add", record.change_type)
-    assert(record.add?)
+    assert_true(record.add?)
 
     record = ldif.records[1]
     assert_equal("delete", record.change_type)
-    assert(record.delete?)
+    assert_true(record.delete?)
 
     record = ldif.records[2]
     assert_equal("modrdn", record.change_type)
-    assert(record.modify_rdn?)
+    assert_true(record.modify_rdn?)
     assert_equal("cn=Paula Jensen", record.new_rdn)
-    assert(record.delete_old_rdn?)
+    assert_true(record.delete_old_rdn?)
     assert_nil(record.new_superior)
 
     record = ldif.records[3]
     assert_equal("modrdn", record.change_type)
-    assert(record.modify_rdn?)
+    assert_true(record.modify_rdn?)
     assert_equal("ou=Product Development Accountants", record.new_rdn)
-    assert(!record.delete_old_rdn?)
+    assert_false(record.delete_old_rdn?)
     assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
 
     record = ldif.records[4]
     assert_equal("modify", record.change_type)
-    assert(record.modify?)
+    assert_true(record.modify?)
     operations = [
                   ["add", "postaladdress",
                    {"postaladdress" =>
@@ -157,7 +191,7 @@ EOL
 
     record = ldif.records[5]
     assert_equal("modify", record.change_type)
-    assert(record.modify?)
+    assert_true(record.modify?)
     operations = [
                   ["replace", "postaladdress", {}],
                   ["delete", "description", {}],
@@ -203,7 +237,7 @@ EOL
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
     assert_equal("modify", record.change_type)
-    assert(record.modify?)
+    assert_true(record.modify?)
 
     operations = [
                   ["add", "postaladdress",
@@ -248,9 +282,9 @@ EOL
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
     assert_equal("modrdn", record.change_type)
-    assert(record.modify_rdn?)
+    assert_true(record.modify_rdn?)
     assert_equal("ou=Product Development Accountants", record.new_rdn)
-    assert(!record.delete_old_rdn?)
+    assert_false(record.delete_old_rdn?)
     assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
   end
 
@@ -271,9 +305,9 @@ EOL
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
     assert_equal("modrdn", record.change_type)
-    assert(record.modify_rdn?)
+    assert_true(record.modify_rdn?)
     assert_equal("cn=Paula Jensen", record.new_rdn)
-    assert(record.delete_old_rdn?)
+    assert_true(record.delete_old_rdn?)
     assert_nil(record.new_superior)
   end
 
@@ -292,7 +326,7 @@ EOL
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
     assert_equal("delete", record.change_type)
-    assert(record.delete?)
+    assert_true(record.delete?)
   end
 
   def test_add_record
@@ -322,7 +356,7 @@ EOL
     ldif = assert_ldif(1, [change_attributes], ldif_source)
     record = ldif.records[0]
     assert_equal("add", record.change_type)
-    assert(record.add?)
+    assert_true(record.add?)
   end
 
   def test_records_with_external_file_reference

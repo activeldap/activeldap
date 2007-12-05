@@ -145,8 +145,8 @@ module ActiveLdap
       def parse_control
         return nil if @scanner.scan(/control:/).nil?
         @scanner.scan(/\s*/)
-        oid = @scanner.scan(/\d+(?:\.\d+)?/)
-        raise oid_is_missing if oid.nil?
+        type = @scanner.scan(/\d+(?:\.\d+)*/)
+        raise control_type_is_missing if type.nil?
         criticality = nil
         if @scanner.scan(/\s+/)
           criticality = @scanner.scan(/true|false/)
@@ -154,7 +154,7 @@ module ActiveLdap
         end
         value = parse_attribute_value if @scanner.check(/:/)
         raise separator_is_missing unless @scanner.scan_separator
-        [oid, criticality, value]
+        ChangeRecord::Control.new(type, criticality, value)
       end
 
       def parse_controls
@@ -488,6 +488,46 @@ module ActiveLdap
 
       def modify_rdn?
         @change_type == "modrdn"
+      end
+
+      class Control
+        attr_reader :type, :value
+        def initialize(type, criticality, value)
+          @type = type
+          @criticality = normalize_criticality(criticality)
+          @value = value
+        end
+
+        def criticality?
+          @criticality
+        end
+
+        def to_a
+          [@type, @criticality, @value]
+        end
+
+        def to_hash
+          {
+            :type => @type,
+            :criticality => @criticality,
+            :value => @value,
+          }
+        end
+
+        private
+        def normalize_criticality(criticality)
+          case criticality
+          when "true", true
+            true
+          when "false", false
+            false
+          when nil
+            nil
+          else
+            raise ArgumentError,
+                  _("invalid criticality: %s") % criticality.inspect
+          end
+        end
       end
     end
 

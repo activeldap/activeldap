@@ -17,12 +17,23 @@ module AlTestUtils
   def self.included(base)
     base.class_eval do
       include ActiveLdap::GetTextSupport
+      include Assertions
       include Config
       include Connection
       include Populate
       include TemporaryEntry
       include CommandSupport
       include MockLogger
+    end
+  end
+
+  module Assertions
+    def assert_true(actual, *args)
+      assert_equal(true, actual, *args)
+    end
+
+    def assert_false(actual, *args)
+      assert_equal(false, actual, *args)
     end
   end
 
