@@ -546,6 +546,21 @@ EOL
     assert_true(record.delete?)
   end
 
+  def test_delete_record_to_s
+    ldif_source = <<-EOL
+version: 1
+# Delete an existing entry
+dn: cn=Robert Jensen, ou=Marketing, dc=airius, dc=com
+changetype: delete
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Robert Jensen,ou=Marketing,dc=airius,dc=com
+changetype: delete
+EOL
+  end
+
   def test_add_record
     ldif_source = <<-EOL
 version: 1
