@@ -397,6 +397,48 @@ EOL
                  actual)
   end
 
+  def test_modify_record
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry: add an additional value to the postaladdress
+# attribute, completely delete the description attribute, replace
+# the telephonenumber attribute with two values, and delete a specific
+# value from the facsimiletelephonenumber attribute
+dn: cn=Paula Jensen, ou=Product Development, dc=airius, dc=com
+changetype: modify
+add: postaladdress
+postaladdress: 123 Anystreet $ Sunnyvale, CA $ 94086
+-
+delete: description
+-
+replace: telephonenumber
+telephonenumber: +1 408 555 1234
+telephonenumber: +1 408 555 5678
+-
+delete: facsimiletelephonenumber
+facsimiletelephonenumber: +1 408 555 9876
+-
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Paula Jensen,ou=Product Development,dc=airius,dc=com
+changetype: modify
+add: postaladdress
+postaladdress: 123 Anystreet $ Sunnyvale, CA $ 94086
+-
+delete: description
+-
+replace: telephonenumber
+telephonenumber: +1 408 555 1234
+telephonenumber: +1 408 555 5678
+-
+delete: facsimiletelephonenumber
+facsimiletelephonenumber: +1 408 555 9876
+-
+EOL
+  end
+
   def test_modrdn_record_with_newsuperior
     ldif_source = <<-EOL
 version: 1
