@@ -397,7 +397,7 @@ EOL
                  actual)
   end
 
-  def test_modify_record
+  def test_modify_record_to_s
     ldif_source = <<-EOL
 version: 1
 # Modify an entry: add an additional value to the postaladdress
@@ -464,7 +464,7 @@ EOL
     assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
   end
 
-  def test_modrdn_record_with_newsuperior
+  def test_modrdn_record_with_newsuperior_to_s
     ldif_source = <<-EOL
 version: 1
 # Rename an entry and move all of its children to a new location in
@@ -507,6 +507,25 @@ EOL
     assert_equal("cn=Paula Jensen", record.new_rdn)
     assert_true(record.delete_old_rdn?)
     assert_nil(record.new_superior)
+  end
+
+  def test_modrdn_record_to_s
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry's relative distinguished name
+dn: cn=Paul Jensen, ou=Product Development, dc=airius, dc=com
+changetype: modrdn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Paul Jensen,ou=Product Development,dc=airius,dc=com
+changetype: modrdn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
   end
 
   def test_delete_record
