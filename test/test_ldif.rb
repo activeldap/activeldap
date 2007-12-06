@@ -648,6 +648,46 @@ EOL
     assert_ldif(1, [record], ldif_source)
   end
 
+  def test_records_with_external_file_reference_to_s
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Horatio Jensen, ou=Product Testing, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Horatio Jensen
+cn: Horatio N Jensen
+sn: Jensen
+uid: hjensen
+telephonenumber: +1 408 555 1212
+jpegphoto:< file://#{jpeg_photo_path}
+EOL
+
+    jpeg_photo_attribute = "jpegphoto:: "
+    value = [jpeg_photo].pack("m").gsub(/\n/, '')
+    first_line_value_size = 75 - jpeg_photo_attribute.size
+    jpeg_photo_attribute << value[0, first_line_value_size] + "\n"
+    value = value[first_line_value_size..-1]
+    value.scan(/.{1,74}/).each do |line|
+      jpeg_photo_attribute << " #{line}\n"
+    end
+    jpeg_photo_attribute = jpeg_photo_attribute.chomp
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Horatio Jensen,ou=Product Testing,dc=airius,dc=com
+cn: Horatio Jensen
+cn: Horatio N Jensen
+#{jpeg_photo_attribute}
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+sn: Jensen
+telephonenumber: +1 408 555 1212
+uid: hjensen
+EOL
+  end
+
   def test_records_with_option_attributes
     ldif_source = <<-EOL
 version: 1

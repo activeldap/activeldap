@@ -10,6 +10,39 @@ module ActiveLdap
   class Ldif
     include GetTextSupport
 
+    module Attribute
+      SIZE = 75
+
+      module_function
+      def encode(name, value)
+        return "#{name}:\n" if value.blank?
+        result = "#{name}:"
+
+        if /\A#{Parser::SAFE_STRING}\z/ !~ value
+          result << ":"
+          value = [value].pack("m").gsub(/\n/, '')
+        end
+        result << " "
+
+        first_line_value_size = SIZE - result.size
+        if value.size > first_line_value_size
+          first_line_value = value[0, first_line_value_size]
+          rest_value = value[first_line_value_size..-1]
+        else
+          first_line_value = value
+          rest_value = nil
+        end
+
+        result << "#{first_line_value}\n"
+        return result if rest_value.nil?
+
+        rest_value.scan(/.{1,#{SIZE - 1}}/).each do |line|
+          result << " #{line}\n"
+        end
+        result
+      end
+    end
+
     class Parser
       include GetTextSupport
 
@@ -474,18 +507,21 @@ module ActiveLdap
 
       private
       def to_s_prelude
-        "dn: #{dn}\n"
+        Attribute.encode("dn", dn)
       end
 
       def to_s_content
         return "" if @attributes.empty?
+
+        result = ""
         @attributes.sort_by do |name, values|
           [name, values]
-        end.collect do |name, values|
-          values.sort.collect do |value|
-            "#{name}: #{value}"
-          end.join("\n")
-        end.join("\n") + "\n"
+        end.each do |name, values|
+          values.sort.each do |value|
+            result << Attribute.encode(name, value)
+          end
+        end
+        result
       end
     end
 
@@ -628,7 +664,7 @@ module ActiveLdap
         result = super
         result << "newrdn: #{@new_rdn}\n"
         result << "deleteoldrdn: #{@delete_old_rdn ? 1 : 0}\n"
-        result << "newsuperior: #{@new_superior}\n" if @new_superior
+        result << Attribute.encode("newsuperior", @new_superior) if @new_superior
         result
       end
     end
@@ -682,12 +718,12 @@ module ActiveLdap
         end
 
         def to_s
-          result = "#{@type}: #{full_attribute_name}\n"
+          result = Attribute.encode(@type, full_attribute_name)
           @attributes.sort_by do |name, values|
             [name, values]
           end.each do |name, values|
             values.each do |value|
-              result << "#{name}: #{value}\n"
+              result << Attribute.encode(name, value)
             end
           end
           result
