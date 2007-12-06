@@ -1167,6 +1167,38 @@ EOL
     assert_ldif(1, [record], ldif_source)
   end
 
+  def test_an_record_to_s
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Barbara Jensen
+cn: Barbara J Jensen
+cn: Babs Jensen
+sn: Jensen
+uid: bjensen
+telephonenumber: +1 408 555 1212
+description: A big sailing fan.
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Barbara Jensen,ou=Product Development,dc=airius,dc=com
+cn: Babs Jensen
+cn: Barbara J Jensen
+cn: Barbara Jensen
+description: A big sailing fan.
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+sn: Jensen
+telephonenumber: +1 408 555 1212
+uid: bjensen
+EOL
+  end
+
   def test_comment
     ldif_source = <<-EOL
 version: 1
