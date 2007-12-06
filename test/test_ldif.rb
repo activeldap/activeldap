@@ -815,6 +815,103 @@ EOL
     assert_ldif(1, [record1, record2], ldif_source)
   end
 
+  def test_records_with_option_attributes_to_s
+    ldif_source = <<-EOL
+version: 1
+dn:: b3U95Za25qWt6YOoLG89QWlyaXVz
+# dn:: ou=<JapaneseOU>,o=Airius
+objectclass: top
+objectclass: organizationalUnit
+ou:: 5Za25qWt6YOo
+# ou:: <JapaneseOU>
+ou;lang-ja:: 5Za25qWt6YOo
+# ou;lang-ja:: <JapaneseOU>
+ou;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2
+# ou;lang-ja:: <JapaneseOU_in_phonetic_representation>
+ou;lang-en: Sales
+description: Japanese office
+
+dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+# dn:: uid=<uid>,ou=<JapaneseOU>,o=Airius
+userpassword: {SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM=
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: rogasawara
+mail: rogasawara@airius.co.jp
+givenname;lang-ja:: 44Ot44OJ44OL44O8
+# givenname;lang-ja:: <JapaneseGivenname>
+sn;lang-ja:: 5bCP56yg5Y6f
+# sn;lang-ja:: <JapaneseSn>
+cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+# cn;lang-ja:: <JapaneseCn>
+title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==
+# title;lang-ja:: <JapaneseTitle>
+preferredlanguage: ja
+givenname:: 44Ot44OJ44OL44O8
+# givenname:: <JapaneseGivenname>
+sn:: 5bCP56yg5Y6f
+# sn:: <JapaneseSn>
+cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+# cn:: <JapaneseCn>
+title:: 5Za25qWt6YOoIOmDqOmVtw==
+# title:: <JapaneseTitle>
+givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8
+# givenname;lang-ja;phonetic::
+  <JapaneseGivenname_in_phonetic_representation_kana>
+sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ
+# sn;lang-ja;phonetic:: <JapaneseSn_in_phonetic_representation_kana>
+cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==
+# cn;lang-ja;phonetic:: <JapaneseCn_in_phonetic_representation_kana>
+title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
+# title;lang-ja;phonetic::
+# <JapaneseTitle_in_phonetic_representation_kana>
+givenname;lang-en: Rodney
+sn;lang-en: Ogasawara
+cn;lang-en: Rodney Ogasawara
+title;lang-en: Sales, Director
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn:: b3U95Za25qWt6YOoLG89QWlyaXVz
+description: Japanese office
+objectclass: organizationalUnit
+objectclass: top
+ou:: 5Za25qWt6YOo
+ou;lang-en: Sales
+ou;lang-ja:: 5Za25qWt6YOo
+ou;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2
+
+dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+cn;lang-en: Rodney Ogasawara
+cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==
+givenname:: 44Ot44OJ44OL44O8
+givenname;lang-en: Rodney
+givenname;lang-ja:: 44Ot44OJ44OL44O8
+givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8
+mail: rogasawara@airius.co.jp
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+preferredlanguage: ja
+sn:: 5bCP56yg5Y6f
+sn;lang-en: Ogasawara
+sn;lang-ja:: 5bCP56yg5Y6f
+sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ
+title:: 5Za25qWt6YOoIOmDqOmVtw==
+title;lang-en: Sales, Director
+title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==
+title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
+uid: rogasawara
+userpassword: {SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM=
+EOL
+  end
+
   def test_an_record_with_base64_encoded_value
     ldif_source = <<-EOL
 version: 1

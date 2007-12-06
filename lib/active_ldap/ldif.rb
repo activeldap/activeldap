@@ -514,12 +514,34 @@ module ActiveLdap
         return "" if @attributes.empty?
 
         result = ""
-        @attributes.sort_by do |name, values|
-          [name, values]
-        end.each do |name, values|
-          values.sort.each do |value|
-            result << Attribute.encode(name, value)
+        @attributes.sort_by {|name, value| name}.each do |name, value|
+          result << to_s_attribute_values(name, value)
+        end
+        result
+      end
+
+      def to_s_attribute_values(name, values)
+        result = ""
+        values = normalize_attribute_value(values)
+        values.sort.each do |options, value|
+          result << Attribute.encode([name, *options].join(";"), value)
+        end
+        result
+      end
+
+      def normalize_attribute_value(value, result=[])
+        case value
+        when Array
+          value.each {|val| normalize_attribute_value(val, result)}
+        when Hash
+          value.each do |option, val|
+            normalize_attribute_value(val).each do |options, v|
+              result << [[option] + options, v]
+            end
           end
+          result
+        else
+          result << [[], value]
         end
         result
       end
