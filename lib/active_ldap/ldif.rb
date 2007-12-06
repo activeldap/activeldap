@@ -41,7 +41,7 @@ module ActiveLdap
         return "#{name}:\n" if value.blank?
         result = "#{name}:"
 
-        if /\A#{Parser::SAFE_STRING}\z/ !~ value
+        if value[-1, 1] == ' ' or /\A#{Parser::SAFE_STRING}\z/ !~ value
           result << ":"
           value = [value].pack("m").gsub(/\n/, '')
         end

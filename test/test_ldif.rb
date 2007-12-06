@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_to_s_with_last_space
+    ldif_source = <<-EOL
+version: 1
+# 'ou=Product Development,dc=airius,dc=com '
+dn:: b3U9UHJvZHVjdCBEZXZlbG9wbWVudCwgZGM9YWlyaXVzLCBkYz1jb20g
+# 'ou=Product Development,dc=airius,dc=com '
+description:: b3U9UHJvZHVjdCBEZXZlbG9wbWVudCwgZGM9YWlyaXVzLCBkYz1jb20g
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: ou=Product Development,dc=airius,dc="com "
+description:: b3U9UHJvZHVjdCBEZXZlbG9wbWVudCwgZGM9YWlyaXVzLCBkYz1jb20g
+EOL
+  end
+
   def test_change_record_with_control
     ldif_source = <<-EOL
 version: 1
