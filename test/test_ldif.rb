@@ -945,6 +945,41 @@ EOL
     assert_ldif(1, [record], ldif_source)
   end
 
+  def test_an_record_with_base64_encoded_value_to_s
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Gern Jensen
+cn: Gern O Jensen
+sn: Jensen
+uid: gernj
+telephonenumber: +1 408 555 1212
+description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
+ IGlzIGJhc2UtNjQtZW5jb2RlZCBiZWNhdXNlIGl0IGhhcyBhIGNvbnRyb2wgY2hhcmFjdG
+ VyIGluIGl0IChhIENSKS4NICBCeSB0aGUgd2F5LCB5b3Ugc2hvdWxkIHJlYWxseSBnZXQg
+ b3V0IG1vcmUu
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Gern Jensen,ou=Product Testing,dc=airius,dc=com
+cn: Gern Jensen
+cn: Gern O Jensen
+description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVlIGlzI
+ GJhc2UtNjQtZW5jb2RlZCBiZWNhdXNlIGl0IGhhcyBhIGNvbnRyb2wgY2hhcmFjdGVyIGluIGl
+ 0IChhIENSKS4NICBCeSB0aGUgd2F5LCB5b3Ugc2hvdWxkIHJlYWxseSBnZXQgb3V0IG1vcmUu
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+sn: Jensen
+telephonenumber: +1 408 555 1212
+uid: gernj
+EOL
+  end
+
   def test_an_record_with_folded_attribute_value
     ldif_source = <<-EOL
 version: 1
