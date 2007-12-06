@@ -1285,6 +1285,10 @@ EOL
     assert_equal(version, ldif.version)
     assert_equal(records,
                  ldif.records.collect {|record| record.to_hash})
+
+    reparsed_ldif = ActiveLdap::Ldif.parse(ldif.to_s)
+    assert_equal(ldif, reparsed_ldif)
+
     ldif
   end
 

@@ -10,6 +10,29 @@ module ActiveLdap
   class Ldif
     include GetTextSupport
 
+    module Attributes
+      module_function
+      def encode(attributes)
+        return "" if attributes.empty?
+
+        result = ""
+        normalize(attributes).sort_by {|name,| name}.each do |name, values|
+          values.each do |options, value|
+            result << Attribute.encode([name, *options].join(";"), value)
+          end
+        end
+        result
+      end
+
+      def normalize(attributes)
+        result = {}
+        attributes.each do |name, values|
+          result[name] = Attribute.normalize_value(values).sort
+        end
+        result
+      end
+    end
+
     module Attribute
       SIZE = 75
 
@@ -38,6 +61,23 @@ module ActiveLdap
 
         rest_value.scan(/.{1,#{SIZE - 1}}/).each do |line|
           result << " #{line}\n"
+        end
+        result
+      end
+
+      def normalize_value(value, result=[])
+        case value
+        when Array
+          value.each {|val| normalize_value(val, result)}
+        when Hash
+          value.each do |option, val|
+            normalize_value(val).each do |options, v|
+              result << [[option] + options, v]
+            end
+          end
+          result
+        else
+          result << [[], value]
         end
         result
       end
@@ -486,6 +526,11 @@ module ActiveLdap
       result
     end
 
+    def ==(other)
+      other.is_a?(self.class) and
+        @version == other.version and @records == other.records
+    end
+
     class Record
       include GetTextSupport
 
@@ -505,45 +550,20 @@ module ActiveLdap
         result
       end
 
+      def ==(other)
+        other.is_a?(self.class) and
+          @dn == other.dn and
+          Attributes.normalize(@attributes) ==
+          Attributes.normalize(other.attributes)
+      end
+
       private
       def to_s_prelude
         Attribute.encode("dn", dn)
       end
 
       def to_s_content
-        return "" if @attributes.empty?
-
-        result = ""
-        @attributes.sort_by {|name, value| name}.each do |name, value|
-          result << to_s_attribute_values(name, value)
-        end
-        result
-      end
-
-      def to_s_attribute_values(name, values)
-        result = ""
-        values = normalize_attribute_value(values)
-        values.sort.each do |options, value|
-          result << Attribute.encode([name, *options].join(";"), value)
-        end
-        result
-      end
-
-      def normalize_attribute_value(value, result=[])
-        case value
-        when Array
-          value.each {|val| normalize_attribute_value(val, result)}
-        when Hash
-          value.each do |option, val|
-            normalize_attribute_value(val).each do |options, v|
-              result << [[option] + options, v]
-            end
-          end
-          result
-        else
-          result << [[], value]
-        end
-        result
+        Attributes.encode(@attributes)
       end
     end
 
@@ -576,6 +596,12 @@ module ActiveLdap
 
       def modify_rdn?
         @change_type == "modrdn"
+      end
+
+      def ==(other)
+        super(other) and
+          @controls = other.controls and
+          @change_type == other.change_type
       end
 
       private
@@ -623,6 +649,13 @@ module ActiveLdap
           result << @value if @value
           result << "\n"
           result
+        end
+
+        def ==(other)
+          other.is_a?(self.class) and
+            @type == other.type and
+            @criticality = other.criticality and
+            @value == other.value
         end
 
         private
@@ -704,6 +737,10 @@ module ActiveLdap
         @operations.each(&block)
       end
 
+      def ==(other)
+        super(other) and @operations == other.operations
+      end
+
       private
       def to_s_content
         result = super
@@ -740,15 +777,16 @@ module ActiveLdap
         end
 
         def to_s
-          result = Attribute.encode(@type, full_attribute_name)
-          @attributes.sort_by do |name, values|
-            [name, values]
-          end.each do |name, values|
-            values.each do |value|
-              result << Attribute.encode(name, value)
-            end
-          end
-          result
+          Attribute.encode(@type, full_attribute_name) +
+            Attributes.encode(@attributes)
+        end
+
+        def ==(other)
+          other.is_a?(self.class) and
+            @type == other.type and
+            full_attribute_name == other.full_attribute_name and
+            Attributes.normalize(@attributes) ==
+            Attributes.normalize(other.attributes)
         end
       end
 
