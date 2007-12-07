@@ -7,6 +7,23 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_modify_target_attribute_name_is_missing
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: modify
+add:
+-
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+add:|@|
+EOL
+
+    assert_invalid_ldif("attribute type is missing",
+                        ldif_source, 4, 5, ldif_source_with_error_mark)
+  end
+
   def test_newsuperior_separator_is_missing
     ldif_source = <<-EOL.chomp
 version: 1

@@ -301,7 +301,7 @@ module ActiveLdap
           when "replace"
             klass = ModifyRecord::ReplaceOperation
           else
-            unsupported_modify_type(type)
+            unknown_modify_type(type)
           end
           operations << klass.new(attribute, options, attributes)
         end
