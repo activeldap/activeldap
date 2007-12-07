@@ -7,6 +7,24 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_multi_records_without_separator
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: delete
+dn: cn=Fiona Jensen, ou=Marketing, dc=airius, dc=com
+seealso:
+description::
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+|@|dn: cn=Fiona Jensen, ou=Marketing, dc=airius, dc=com
+EOL
+
+    assert_invalid_ldif("separator is missing", ldif_source,
+                        4, 1, ldif_source_with_error_mark)
+  end
+
   def test_to_s_with_blank_value
     ldif_source = <<-EOL
 version: 1
@@ -1383,6 +1401,9 @@ EOL
                         "version: 0", 1, 11, "version: 0|@|")
     assert_invalid_ldif("unsupported version: 2",
                         "version: 2", 1, 11, "version: 2|@|")
+
+    assert_invalid_ldif("separator is missing",
+                        "version: 1", 1, 11, "version: 1|@|")
   end
 
   def test_version_spec

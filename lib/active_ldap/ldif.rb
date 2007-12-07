@@ -5,8 +5,6 @@ require "open-uri"
 
 module ActiveLdap
   class Ldif
-    include GetTextSupport
-
     module Attributes
       module_function
       def encode(attributes)
