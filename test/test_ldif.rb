@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_add_change_type_without_attribute
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: add
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+changetype: add
+|@|
+EOL
+
+    assert_invalid_ldif("attribute spec is missing",
+                        ldif_source, 4, 1, ldif_source_with_error_mark)
+  end
+
   def test_change_type_with_an_extra_space
     ldif_source = <<-EOL
 version: 1

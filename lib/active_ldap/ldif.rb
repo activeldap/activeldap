@@ -170,6 +170,7 @@ module ActiveLdap
           end
           container << value
         end
+        raise attribute_spec_is_missing if attributes.size < least
         attributes
       end
 
@@ -440,6 +441,10 @@ module ActiveLdap
 
       def change_type_value_is_missing
         invalid_ldif(_("change type value is missing"))
+      end
+
+      def attribute_spec_is_missing
+        invalid_ldif(_("attribute spec is missing"))
       end
     end
 
