@@ -7,6 +7,21 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_control_separator_is_missing
+    ldif_source = <<-EOL.chomp
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+control: 1.2.840.113556.1.4.805 true
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+control: 1.2.840.113556.1.4.805 true|@|
+EOL
+
+    assert_invalid_ldif("separator is missing",
+                        ldif_source, 3, 37, ldif_source_with_error_mark)
+  end
+
   def test_criticality_is_missing
     ldif_source = <<-EOL
 version: 1
