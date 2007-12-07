@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-07 23:55+0900\n"
+"POT-Creation-Date: 2007-12-07 23:59+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3371,91 +3371,95 @@ msgstr ""
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:375
+#: lib/active_ldap/ldif.rb:376
 msgid "version spec is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:379
+#: lib/active_ldap/ldif.rb:380
 msgid "version number is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:383
+#: lib/active_ldap/ldif.rb:384
 msgid "unsupported version: %d"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:387
+#: lib/active_ldap/ldif.rb:388
 msgid "separator is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:391
+#: lib/active_ldap/ldif.rb:392
 msgid "'dn:' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:395
+#: lib/active_ldap/ldif.rb:396
 msgid "DN is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:399
+#: lib/active_ldap/ldif.rb:400
 msgid "DN is invalid: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:403
+#: lib/active_ldap/ldif.rb:404
 msgid "DN has an invalid character: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:407 lib/active_ldap/distinguished_name.rb:140
+#: lib/active_ldap/ldif.rb:408 lib/active_ldap/distinguished_name.rb:140
 msgid "attribute type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:411
+#: lib/active_ldap/ldif.rb:412
 msgid "option is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:415
+#: lib/active_ldap/ldif.rb:416
 msgid "':' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:419
+#: lib/active_ldap/ldif.rb:420
 msgid "URI is invalid: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:423
+#: lib/active_ldap/ldif.rb:424
 msgid "'-' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:427
+#: lib/active_ldap/ldif.rb:428
 msgid "unknown change type: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:431
+#: lib/active_ldap/ldif.rb:432
 msgid "change type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:435
+#: lib/active_ldap/ldif.rb:436
 msgid "control type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:439
+#: lib/active_ldap/ldif.rb:440
 msgid "criticality is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:443
+#: lib/active_ldap/ldif.rb:444
 msgid "change type value is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:447
+#: lib/active_ldap/ldif.rb:448
 msgid "attribute spec is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:451
+#: lib/active_ldap/ldif.rb:452
 msgid "'newrdn:' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:706
+#: lib/active_ldap/ldif.rb:456
+msgid "new RDN value is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:711
 msgid "invalid criticality value: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:749
+#: lib/active_ldap/ldif.rb:754
 msgid "invalid deleteoldrdn value: %s"
 msgstr ""
 
