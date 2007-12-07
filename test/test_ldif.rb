@@ -10,6 +10,20 @@ class TestLDIF < Test::Unit::TestCase
   def test_invalid_dn
     ldif_source = <<-EOL
 version: 1
+dn: ou=o=Airius
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+dn: ou=o=Airius|@|
+EOL
+
+    message = "DN is invalid: ou=o=Airius: %s" % _("attribute type is missing")
+    assert_invalid_ldif(message, ldif_source, 2, 16, ldif_source_with_error_mark)
+  end
+
+  def test_invalid_dn_value
+    ldif_source = <<-EOL
+version: 1
 # dn:: ou=<JapaneseOU>,o=Airius
 dn: ou=営業部,o=Airius
 EOL
@@ -1401,8 +1415,7 @@ EOL
 
     dn = "cn=Barbara Jensen,ou=Product Development,dc=example,dc=com"
     cn = "Barbara Jensen"
-    assert_valid_dn(dn,
-                    "version: 1\ndn: #{dn}\ncn:#{cn}\n")
+    assert_valid_dn(dn, "version: 1\ndn: #{dn}\ncn:#{cn}\n")
 
     encoded_dn = Base64.encode64(dn).gsub(/\n/, "\n ")
     encoded_cn = Base64.encode64(cn).gsub(/\n/, "\n ")

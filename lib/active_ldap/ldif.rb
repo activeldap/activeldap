@@ -140,7 +140,7 @@ module ActiveLdap
       def parse_dn(dn_string)
         DN.parse(dn_string).to_s
       rescue DistinguishedNameInvalid
-        invalid_dn(dn_string, $!.reason)
+        raise invalid_dn(dn_string, $!.reason)
       end
 
       def parse_attributes(least=0, &block)
