@@ -17,8 +17,9 @@ EOL
 dn: ou=o=Airius|@|
 EOL
 
-    message = "DN is invalid: ou=o=Airius: %s" % _("attribute type is missing")
-    assert_invalid_ldif(message, ldif_source, 2, 16, ldif_source_with_error_mark)
+    assert_invalid_ldif(["DN is invalid: %s: %s",
+                         "ou=o=Airius", "attribute type is missing"],
+                        ldif_source, 2, 16, ldif_source_with_error_mark)
   end
 
   def test_invalid_dn_value
@@ -32,8 +33,8 @@ EOL
 dn: ou=|@|営業部,o=Airius
 EOL
 
-    assert_invalid_ldif("DN has an invalid character: 営", ldif_source,
-                        3, 8, ldif_source_with_error_mark)
+    assert_invalid_ldif(["DN has an invalid character: %s", "営"],
+                        ldif_source, 3, 8, ldif_source_with_error_mark)
   end
 
   def test_multi_records_without_separator
@@ -1427,9 +1428,9 @@ EOL
     assert_valid_version(1, "version: 1\r\ndn: dc=com\ndc: com\n")
     assert_valid_version(1, "version: 1\r\n\n\r\n\ndn: dc=com\ndc: com\n")
 
-    assert_invalid_ldif("unsupported version: 0",
+    assert_invalid_ldif(["unsupported version: %d", 0],
                         "version: 0", 1, 11, "version: 0|@|")
-    assert_invalid_ldif("unsupported version: 2",
+    assert_invalid_ldif(["unsupported version: %d", 2],
                         "version: 2", 1, 11, "version: 2|@|")
 
     assert_invalid_ldif("separator is missing",
@@ -1478,7 +1479,9 @@ EOL
     exception = assert_raise(ActiveLdap::LdifInvalid) do
       ActiveLdap::Ldif.parse(ldif)
     end
-    assert_equal([_(reason), line, column, nearest, ldif],
+    reason, *params = reason
+    assert_equal([_(reason) % params.collect {|param| _(param)},
+                  line, column, nearest, ldif],
                  [exception.reason, exception.line, exception.column,
                   exception.nearest, exception.ldif])
   end

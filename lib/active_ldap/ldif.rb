@@ -678,7 +678,7 @@ module ActiveLdap
             nil
           else
             raise ArgumentError,
-                  _("invalid criticality: %s") % criticality.inspect
+                  _("invalid criticality value: %s") % criticality.inspect
           end
         end
       end
@@ -721,7 +721,7 @@ module ActiveLdap
           nil
         else
           raise ArgumentError,
-                _("invalid delete_old_rdn value: %s") % delete_old_rdn.inspect
+                _("invalid deleteoldrdn value: %s") % delete_old_rdn.inspect
         end
       end
 
