@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-08 00:06+0900\n"
-"PO-Revision-Date: 2007-12-08 00:06+0900\n"
+"POT-Creation-Date: 2007-12-08 00:09+0900\n"
+"PO-Revision-Date: 2007-12-08 00:09+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3474,11 +3474,15 @@ msgstr "新しいRDNの値がありません"
 msgid "'deleteoldrdn:' is missing"
 msgstr "deleteoldrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:715
+#: lib/active_ldap/ldif.rb:464
+msgid "delete old RDN value is missing"
+msgstr "古いRDNを削除するかどうかの指定値がありません"
+
+#: lib/active_ldap/ldif.rb:719
 msgid "invalid criticality value: %s"
 msgstr "不正な臨界指定値です: %s"
 
-#: lib/active_ldap/ldif.rb:758
+#: lib/active_ldap/ldif.rb:762
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 

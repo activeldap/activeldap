@@ -459,6 +459,10 @@ module ActiveLdap
       def delete_old_rdn_mark_is_missing
         invalid_ldif(_("'deleteoldrdn:' is missing"))
       end
+
+      def delete_old_rdn_value_is_missing
+        invalid_ldif(_("delete old RDN value is missing"))
+      end
     end
 
     class Scanner

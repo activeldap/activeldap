@@ -7,6 +7,40 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_invalid_deleteoldrdn_value
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: x
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+deleteoldrdn: |@|x
+EOL
+
+    assert_invalid_ldif("delete old RDN value is missing",
+                        ldif_source, 5, 15, ldif_source_with_error_mark)
+  end
+
+  def test_deleteoldrdn_value_is_missing
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn:
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+deleteoldrdn:|@|
+EOL
+
+    assert_invalid_ldif("delete old RDN value is missing",
+                        ldif_source, 5, 14, ldif_source_with_error_mark)
+  end
+
   def test_deleteoldrdn_mark_is_missing
     ldif_source = <<-EOL
 version: 1
