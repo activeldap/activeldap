@@ -7,6 +7,21 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_invalid_dn
+    ldif_source = <<-EOL
+version: 1
+# dn:: ou=<JapaneseOU>,o=Airius
+dn: ou=営業部,o=Airius
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+dn: ou=|@|営業部,o=Airius
+EOL
+
+    assert_invalid_ldif("DN has an invalid character: 営", ldif_source,
+                        3, 8, ldif_source_with_error_mark)
+  end
+
   def test_multi_records_without_separator
     ldif_source = <<-EOL
 version: 1

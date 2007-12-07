@@ -331,8 +331,12 @@ module ActiveLdap
           dn = parse_dn(read_base64_value)
         else
           @scanner.scan(FILL)
-          dn = @scanner.scan(/.+$/)
-          raise dn_is_missing if dn.nil?
+          dn = @scanner.scan(/#{SAFE_STRING}$/)
+          if dn.nil?
+            partial_dn = @scanner.scan(SAFE_STRING)
+            raise dn_has_invalid_character(@scanner.check(/./)) if partial_dn
+            raise dn_is_missing
+          end
           dn = parse_dn(dn)
         end
 
@@ -390,6 +394,10 @@ module ActiveLdap
 
       def invalid_dn(dn_string, reason)
         invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, reason])
+      end
+
+      def dn_has_invalid_character(character)
+        invalid_ldif(_("DN has an invalid character: %s") % character)
       end
 
       def attribute_type_is_missing
