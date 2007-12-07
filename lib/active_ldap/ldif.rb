@@ -239,7 +239,7 @@ module ActiveLdap
         return nil unless @scanner.scan(/changetype:/)
         @scanner.scan(FILL)
         type = @scanner.scan(/add|delete|modrdn|moddn|modify/)
-        raise change_type_is_missing if type.nil?
+        raise change_type_value_is_missing if type.nil?
 
         raise separator_is_missing unless @scanner.scan_separator
         type
@@ -428,6 +428,10 @@ module ActiveLdap
 
       def change_type_is_missing
         invalid_ldif(_("change type is missing"))
+      end
+
+      def control_type_is_missing
+        invalid_ldif(_("control type is missing"))
       end
     end
 

@@ -7,6 +7,21 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_control_type_is_missing
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+control:
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+control:|@|
+EOL
+
+    assert_invalid_ldif("control type is missing",
+                        ldif_source, 3, 9, ldif_source_with_error_mark)
+  end
+
   def test_change_type_is_missing
     ldif_source = <<-EOL
 version: 1
