@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_change_type_is_missing
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+control: 1.2.840.113556.1.4.805 true
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+control: 1.2.840.113556.1.4.805 true
+|@|
+EOL
+
+    assert_invalid_ldif("change type is missing",
+                        ldif_source, 4, 1, ldif_source_with_error_mark)
+  end
+
   def test_invalid_dn
     ldif_source = <<-EOL
 version: 1

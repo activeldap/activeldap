@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-07 20:55+0900\n"
-"PO-Revision-Date: 2007-12-07 20:58+0900\n"
+"POT-Creation-Date: 2007-12-07 21:04+0900\n"
+"PO-Revision-Date: 2007-12-07 21:05+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3442,11 +3442,15 @@ msgstr "'-'がありません"
 msgid "unknown change type: %s"
 msgstr "未知の変更型です: %s"
 
-#: lib/active_ldap/ldif.rb:681
+#: lib/active_ldap/ldif.rb:430
+msgid "change type is missing"
+msgstr "変更型がありません"
+
+#: lib/active_ldap/ldif.rb:685
 msgid "invalid criticality value: %s"
 msgstr "不正なcriticality値です: %s"
 
-#: lib/active_ldap/ldif.rb:724
+#: lib/active_ldap/ldif.rb:728
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 

@@ -425,6 +425,10 @@ module ActiveLdap
       def unknown_change_type(change_type)
         invalid_ldif(_("unknown change type: %s") % change_type)
       end
+
+      def change_type_is_missing
+        invalid_ldif(_("change type is missing"))
+      end
     end
 
     class Scanner
