@@ -7,8 +7,26 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
-  def test_newsuperior_value_is_missing
+  def test_newsuperior_separator_is_missing
     ldif_source = <<-EOL.chomp
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+newsuperior: ou=Accounting, dc=airius, dc=com
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+newsuperior: ou=Accounting, dc=airius, dc=com|@|
+EOL
+
+    assert_invalid_ldif("separator is missing",
+                        ldif_source, 6, 46, ldif_source_with_error_mark)
+  end
+
+  def test_newsuperior_value_is_missing
+    ldif_source = <<-EOL
 version: 1
 dn: ou=Product Development, dc=airius, dc=com
 changetype: moddn
@@ -17,7 +35,7 @@ deleteoldrdn: 1
 newsuperior:
 EOL
 
-    ldif_source_with_error_mark = <<-EOL.chomp
+    ldif_source_with_error_mark = <<-EOL
 newsuperior:|@|
 EOL
 
