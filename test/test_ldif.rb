@@ -7,6 +7,36 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_change_type_with_an_extra_space
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: delete 
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+changetype: delete|@| 
+EOL
+
+    assert_invalid_ldif("separator is missing",
+                        ldif_source, 3, 19, ldif_source_with_error_mark)
+  end
+
+  def test_change_type_separator_is_missing
+    ldif_source = <<-EOL.chomp
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: delete
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+changetype: delete|@|
+EOL
+
+    assert_invalid_ldif("separator is missing",
+                        ldif_source, 3, 19, ldif_source_with_error_mark)
+  end
+
   def test_change_type_value_is_missing
     ldif_source = <<-EOL
 version: 1
