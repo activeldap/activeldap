@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-11-04 12:09+0900\n"
-"PO-Revision-Date: 2007-11-04 12:10+0900\n"
+"POT-Creation-Date: 2007-12-07 20:55+0900\n"
+"PO-Revision-Date: 2007-12-07 20:56+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3386,6 +3386,70 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
+#: lib/active_ldap/ldif.rb:374
+msgid "version spec is missing"
+msgstr "バージョン指定がありません"
+
+#: lib/active_ldap/ldif.rb:378
+msgid "version number is missing"
+msgstr "バージョン番号がありません"
+
+#: lib/active_ldap/ldif.rb:382
+msgid "unsupported version: %d"
+msgstr "対応していないバージョンです: %s"
+
+#: lib/active_ldap/ldif.rb:386
+msgid "separator is missing"
+msgstr "分離記号（改行）がありません"
+
+#: lib/active_ldap/ldif.rb:390
+msgid "'dn:' is missing"
+msgstr "'dn:'がありません"
+
+#: lib/active_ldap/ldif.rb:394
+msgid "DN is missing"
+msgstr "DNがありません"
+
+#: lib/active_ldap/ldif.rb:398
+msgid "DN is invalid: %s: %s"
+msgstr "不正なDNです: %s: %s"
+
+#: lib/active_ldap/ldif.rb:402
+msgid "DN has an invalid character: %s"
+msgstr "DNは不正な文字を含んでいます: %s"
+
+#: lib/active_ldap/ldif.rb:406 lib/active_ldap/distinguished_name.rb:140
+msgid "attribute type is missing"
+msgstr "属性の種類がありません"
+
+#: lib/active_ldap/ldif.rb:410
+msgid "option is missing"
+msgstr "オプションがありません"
+
+#: lib/active_ldap/ldif.rb:414
+msgid "':' is missing"
+msgstr "':'がありません"
+
+#: lib/active_ldap/ldif.rb:418
+msgid "URI is invalid: %s: %s"
+msgstr "不正なURIです: %s: %s"
+
+#: lib/active_ldap/ldif.rb:422
+msgid "'-' is missing"
+msgstr "'-'がありません"
+
+#: lib/active_ldap/ldif.rb:426
+msgid "unknown change type: %s"
+msgstr "未知の変更型です: %s"
+
+#: lib/active_ldap/ldif.rb:681
+msgid "invalid criticality value: %s"
+msgstr "不正なcriticality値です: %s"
+
+#: lib/active_ldap/ldif.rb:724
+msgid "invalid deleteoldrdn value: %s"
+msgstr "不正なdeleteoldrdn値です: %s"
+
 #: lib/active_ldap/distinguished_name.rb:132
 msgid "name component is missing"
 msgstr "名前要素がありません。"
@@ -3393,10 +3457,6 @@ msgstr "名前要素がありません。"
 #: lib/active_ldap/distinguished_name.rb:136
 msgid "relative distinguished name (RDN) is missing"
 msgstr "相対識別名(RDN)がありません。"
-
-#: lib/active_ldap/distinguished_name.rb:140
-msgid "attribute type is missing"
-msgstr "属性の種類がありません。"
 
 #: lib/active_ldap/distinguished_name.rb:144
 msgid "attribute value is missing"
@@ -3426,19 +3486,19 @@ msgstr "%{fn}はobjectClass'%s'の必須の属性です。"
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
-#: lib/active_ldap/validations.rb:154
+#: lib/active_ldap/validations.rb:153
 msgid "%{fn} (%s) has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:156
+#: lib/active_ldap/validations.rb:155
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:160
+#: lib/active_ldap/validations.rb:159
 msgid "(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr "(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:162
+#: lib/active_ldap/validations.rb:161
 msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr "は不正な書式です: %s: 要求されている構文: %s: %s"
 
@@ -3466,64 +3526,72 @@ msgstr "%sは不正な識別名(DN)です: %s"
 msgid "%s is invalid distinguished name (DN)"
 msgstr "%sは不正な識別名(DN)です。"
 
-#: lib/active_ldap/base.rb:150
+#: lib/active_ldap/base.rb:134
+msgid "invalid LDIF: %s:"
+msgstr "不正なLDIFです: %s:"
+
+#: lib/active_ldap/base.rb:136
+msgid "invalid LDIF:"
+msgstr "不正なLDIFです:"
+
+#: lib/active_ldap/base.rb:207
 msgid "LDAP configuration specifies nonexistent %s adapter"
 msgstr "LDAPの設定が存在しない%sアダプタが指定しています。"
 
-#: lib/active_ldap/base.rb:158
+#: lib/active_ldap/base.rb:215
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です。"
 
-#: lib/active_ldap/base.rb:322
+#: lib/active_ldap/base.rb:379
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません。"
 
-#: lib/active_ldap/base.rb:429
+#: lib/active_ldap/base.rb:486
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
 msgstr ""
 "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
 "ん。"
 
-#: lib/active_ldap/base.rb:514
+#: lib/active_ldap/base.rb:571
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません。"
 
-#: lib/active_ldap/base.rb:551
+#: lib/active_ldap/base.rb:608
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:570
+#: lib/active_ldap/base.rb:627
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません。"
 
-#: lib/active_ldap/base.rb:591 lib/active_ldap/base.rb:602
+#: lib/active_ldap/base.rb:648 lib/active_ldap/base.rb:659
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:718
+#: lib/active_ldap/base.rb:776
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません。"
 
-#: lib/active_ldap/base.rb:1209
+#: lib/active_ldap/base.rb:1267
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
-#: lib/active_ldap/attributes.rb:34
+#: lib/active_ldap/attributes.rb:45
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
 msgstr ""
 "最初の引数nameがnilになるはずがあってはいけません。バグとして報告してくださ"
 "い！"
 
-#: lib/active_ldap/attributes.rb:79
+#: lib/active_ldap/attributes.rb:90
 msgid "Attribute %s can only have a single value"
 msgstr "属性%sは単一の値しか持てません。"
 
-#: lib/active_ldap/attributes.rb:98
+#: lib/active_ldap/attributes.rb:109
 msgid "Hashes must have one key-value pair only: %s"
 msgstr "ハッシュはひとつのキー・値のペアしか持ってはいけません。: %s"
 
-#: lib/active_ldap/attributes.rb:103
+#: lib/active_ldap/attributes.rb:114
 msgid "unknown option did not match lang-* or binary: %s"
 msgstr "lang-*にもbinaryにもマッチしない未知のオプションです: %s"
 
