@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-07 21:07+0900\n"
-"PO-Revision-Date: 2007-12-07 21:10+0900\n"
+"POT-Creation-Date: 2007-12-07 21:14+0900\n"
+"PO-Revision-Date: 2007-12-07 21:17+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3450,11 +3450,15 @@ msgstr "変更型がありません"
 msgid "control type is missing"
 msgstr "制御型がありません"
 
-#: lib/active_ldap/ldif.rb:689
-msgid "invalid criticality value: %s"
-msgstr "不正なcriticality値です: %s"
+#: lib/active_ldap/ldif.rb:438
+msgid "criticality is missing"
+msgstr "臨界指定がありません"
 
-#: lib/active_ldap/ldif.rb:732
+#: lib/active_ldap/ldif.rb:693
+msgid "invalid criticality value: %s"
+msgstr "不正な臨界指定値です: %s"
+
+#: lib/active_ldap/ldif.rb:736
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 
@@ -3557,7 +3561,9 @@ msgstr "スコープ'%s'はシンボルでなければいけません"
 #: lib/active_ldap/base.rb:486
 msgid ""
 "'%s' must be either nil, DN value as String or Array or attributes as Hash"
-msgstr "'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけません"
+msgstr ""
+"'%s'はnil、StringによるDN、DNの配列、Hashによる属性のどれかでなければいけませ"
+"ん"
 
 #: lib/active_ldap/base.rb:571
 msgid "%s's DN attribute (%s) isn't set"

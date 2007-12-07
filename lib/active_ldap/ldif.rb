@@ -216,7 +216,7 @@ module ActiveLdap
         type = @scanner.scan(/\d+(?:\.\d+)*/)
         raise control_type_is_missing if type.nil?
         criticality = nil
-        if @scanner.scan(/\s+/)
+        if @scanner.scan(/ +/)
           criticality = @scanner.scan(/true|false/)
           raise criticality_is_missing if criticality.nil?
         end
@@ -432,6 +432,10 @@ module ActiveLdap
 
       def control_type_is_missing
         invalid_ldif(_("control type is missing"))
+      end
+
+      def criticality_is_missing
+        invalid_ldif(_("criticality is missing"))
       end
     end
 
