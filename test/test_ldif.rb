@@ -7,6 +7,24 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_newsuperior_value_is_missing
+    ldif_source = <<-EOL.chomp
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+newsuperior:
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+newsuperior:|@|
+EOL
+
+    assert_invalid_ldif("new superior value is missing",
+                        ldif_source, 6, 13, ldif_source_with_error_mark)
+  end
+
   def test_deleteoldrdn_separator_is_missing
     ldif_source = <<-EOL.chomp
 version: 1

@@ -463,6 +463,10 @@ module ActiveLdap
       def delete_old_rdn_value_is_missing
         invalid_ldif(_("delete old RDN value is missing"))
       end
+
+      def new_superior_value_is_missing
+        invalid_ldif(_("new superior value is missing"))
+      end
     end
 
     class Scanner
