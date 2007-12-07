@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_modify_spec_first_line_separator_is_missing
+    ldif_source = <<-EOL.chomp
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: modify
+add: postaladdress
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+add: postaladdress|@|
+EOL
+
+    assert_invalid_ldif("separator is missing",
+                        ldif_source, 4, 19, ldif_source_with_error_mark)
+  end
+
   def test_modify_target_attribute_name_is_missing
     ldif_source = <<-EOL
 version: 1
