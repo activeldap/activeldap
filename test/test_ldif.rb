@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_to_s_with_blank_value
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development,dc=airius,dc=com
+seealso:
+description::
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: ou=Product Development,dc=airius,dc=com
+description:
+seealso:
+EOL
+  end
+
   def test_to_s_with_last_space
     ldif_source = <<-EOL
 version: 1
@@ -1255,9 +1271,9 @@ EOL
     assert_invalid_ldif("DN is missing",
                         "version: 1\ndn:", 2, 4, "dn:|@|")
     assert_invalid_ldif("DN is missing",
-                        "version: 1\ndn:\n", 3, 1, "dn:\n|@|")
+                        "version: 1\ndn:\n", 2, 4, "dn:|@|\n")
     assert_invalid_ldif("DN is missing",
-                        "version: 1\ndn: \n", 3, 1, "dn: \n|@|")
+                        "version: 1\ndn: \n", 2, 5, "dn: |@|\n")
 
     dn = "cn=Barbara Jensen,ou=Product Development,dc=example,dc=com"
     cn = "Barbara Jensen"

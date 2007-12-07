@@ -1,6 +1,3 @@
-# Experimental work-in-progress LDIF implementation.
-# Don't care this file for now.
-
 require "strscan"
 require "base64"
 require "uri"
@@ -97,12 +94,13 @@ module ActiveLdap
       SAFE_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x7F]/
       SAFE_INIT_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x1F\x21-\x39\x3B\x3D-\x7F]/
       SAFE_STRING = /#{SAFE_INIT_CHAR}#{SAFE_CHAR}*/
+      FILL = / */
       def parse
         return @ldif if @ldif
 
         @scanner = Scanner.new(@source)
         raise version_spec_is_missing unless @scanner.scan(/version:/)
-        @scanner.scan(/\s*/)
+        @scanner.scan(FILL)
 
         version = @scanner.scan(/\d+/)
         raise version_number_is_missing if version.nil?
@@ -120,8 +118,7 @@ module ActiveLdap
       private
       def read_base64_value
         value = @scanner.scan(/[a-zA-Z0-9\+\/=]+/)
-        raise base64_encoded_value_is_missing if value.nil?
-
+        return nil if value.nil?
         Base64.decode64(value).chomp
       end
 
@@ -204,20 +201,20 @@ module ActiveLdap
       def parse_attribute_value(accept_external_file=true)
         raise attribute_value_separator_is_missing if @scanner.scan(/:/).nil?
         if @scanner.scan(/:/)
-          @scanner.scan(/\s*/)
+          @scanner.scan(FILL)
           read_base64_value
         elsif accept_external_file and @scanner.scan(/</)
-          @scanner.scan(/\s*/)
+          @scanner.scan(FILL)
           read_external_file
         else
-          @scanner.scan(/\s*/)
-          @scanner.scan(/#{SAFE_STRING}?/)
+          @scanner.scan(FILL)
+          @scanner.scan(SAFE_STRING)
         end
       end
 
       def parse_control
         return nil if @scanner.scan(/control:/).nil?
-        @scanner.scan(/\s*/)
+        @scanner.scan(FILL)
         type = @scanner.scan(/\d+(?:\.\d+)*/)
         raise control_type_is_missing if type.nil?
         criticality = nil
@@ -241,7 +238,8 @@ module ActiveLdap
       end
 
       def parse_change_type
-        return nil unless @scanner.scan(/changetype:\s*/)
+        return nil unless @scanner.scan(/changetype:/)
+        @scanner.scan(FILL)
         type = @scanner.scan(/add|delete|modrdn|moddn|modify/)
         raise change_type_is_missing if type.nil?
 
@@ -257,13 +255,13 @@ module ActiveLdap
         unless @scanner.scan(/deleteoldrdn:/)
           raise delete_old_rdn_mark_is_missing
         end
-        @scanner.scan(/\s*/)
+        @scanner.scan(FILL)
         delete_old_rdn = @scanner.scan(/[01]/)
         raise delete_old_rdn_value_is_missing if delete_old_rdn.nil?
         raise separator_is_missing unless @scanner.scan_separator
 
         if @scanner.scan(/newsuperior\b/)
-          @scanner.scan(/\s*/)
+          @scanner.scan(FILL)
           new_superior = parse_attribute_value(false)
           raise new_superior_value_is_missing if new_superior.nil?
           new_superior = parse_dn(new_superior)
@@ -275,7 +273,7 @@ module ActiveLdap
       def parse_modify_spec
         return nil if @scanner.scan(/(add|delete|replace):/).nil?
         type = @scanner[1]
-        @scanner.scan(/\s*/)
+        @scanner.scan(FILL)
         attribute, options = parse_attribute_description
         raise separator_is_missing unless @scanner.scan_separator
         attributes = parse_attributes do
@@ -328,10 +326,11 @@ module ActiveLdap
 
       def parse_record
         raise dn_mark_is_missing unless @scanner.scan(/dn:/)
-        if @scanner.scan(/:\s*/)
+        if @scanner.scan(/:/)
+          @scanner.scan(FILL)
           dn = parse_dn(read_base64_value)
         else
-          @scanner.scan(/\s*/)
+          @scanner.scan(FILL)
           dn = @scanner.scan(/.+$/)
           raise dn_is_missing if dn.nil?
           dn = parse_dn(dn)
@@ -391,10 +390,6 @@ module ActiveLdap
 
       def invalid_dn(dn_string, reason)
         invalid_ldif(_("DN is invalid: %s: %s") % [dn_string, reason])
-      end
-
-      def base64_encoded_value_is_missing
-        invalid_ldif(_("Base64 encoded value is missing"))
       end
 
       def attribute_type_is_missing
