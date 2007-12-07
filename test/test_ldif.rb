@@ -560,6 +560,95 @@ deleteoldrdn: 1
 EOL
   end
 
+  def test_moddn_record_with_newsuperior
+    ldif_source = <<-EOL
+version: 1
+# Rename an entry and move all of its children to a new location in
+# the directory tree (only implemented by LDAPv3 servers).
+dn: ou=PD Accountants, ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting, dc=airius, dc=com
+EOL
+
+    change_attributes = {
+      "dn" => "ou=PD Accountants,ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("moddn", record.change_type)
+    assert_true(record.modify_dn?)
+    assert_equal("ou=Product Development Accountants", record.new_rdn)
+    assert_false(record.delete_old_rdn?)
+    assert_equal("ou=Accounting,dc=airius,dc=com", record.new_superior)
+  end
+
+  def test_moddn_record_with_newsuperior_to_s
+    ldif_source = <<-EOL
+version: 1
+# Rename an entry and move all of its children to a new location in
+# the directory tree (only implemented by LDAPv3 servers).
+dn: ou=PD Accountants, ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting, dc=airius, dc=com
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: ou=PD Accountants,ou=Product Development,dc=airius,dc=com
+changetype: moddn
+newrdn: ou=Product Development Accountants
+deleteoldrdn: 0
+newsuperior: ou=Accounting,dc=airius,dc=com
+EOL
+  end
+
+  def test_moddn_record
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry's relative distinguished name
+dn: cn=Paul Jensen, ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
+
+    change_attributes = {
+      "dn" => "cn=Paul Jensen,ou=Product Development,dc=airius,dc=com",
+    }
+
+    ldif = assert_ldif(1, [change_attributes], ldif_source)
+    record = ldif.records[0]
+    assert_equal("moddn", record.change_type)
+    assert_true(record.modify_dn?)
+    assert_equal("cn=Paula Jensen", record.new_rdn)
+    assert_true(record.delete_old_rdn?)
+    assert_nil(record.new_superior)
+  end
+
+  def test_moddn_record_to_s
+    ldif_source = <<-EOL
+version: 1
+# Modify an entry's relative distinguished name
+dn: cn=Paul Jensen, ou=Product Development, dc=airius, dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: cn=Paul Jensen,ou=Product Development,dc=airius,dc=com
+changetype: moddn
+newrdn: cn=Paula Jensen
+deleteoldrdn: 1
+EOL
+  end
+
   def test_delete_record
     ldif_source = <<-EOL
 version: 1

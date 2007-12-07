@@ -247,7 +247,7 @@ module ActiveLdap
         type
       end
 
-      def parse_modify_rdn_record(dn, controls)
+      def parse_modify_name_record(klass, dn, controls)
         raise newrdn_mark_is_missing unless @scanner.scan(/newrdn\b/)
         new_rdn = parse_attribute_value(false)
         raise separator_is_missing unless @scanner.scan_separator
@@ -267,7 +267,7 @@ module ActiveLdap
           new_superior = parse_dn(new_superior)
           raise separator_is_missing unless @scanner.scan_separator
         end
-        ModifyRDNRecord.new(dn, controls, new_rdn, delete_old_rdn, new_superior)
+        klass.new(dn, controls, new_rdn, delete_old_rdn, new_superior)
       end
 
       def parse_modify_spec
@@ -315,8 +315,10 @@ module ActiveLdap
           AddRecord.new(dn, controls, attributes)
         when "delete"
           DeleteRecord.new(dn, controls)
+        when "moddn"
+          parse_modify_name_record(ModifyDNRecord, dn, controls)
         when "modrdn"
-          parse_modify_rdn_record(dn, controls)
+          parse_modify_name_record(ModifyRDNRecord, dn, controls)
         when "modify"
           parse_modify_record(dn, controls)
         else
@@ -410,6 +412,10 @@ module ActiveLdap
 
       def modify_spec_separator_is_missing
         invalid_ldif(_("'-' is missing"))
+      end
+
+      def unknown_change_type(change_type)
+        invalid_ldif(_("unknown change type: %s") % change_type)
       end
     end
 
@@ -682,10 +688,11 @@ module ActiveLdap
       end
     end
 
-    class ModifyRDNRecord < ChangeRecord
+    class ModifyNameRecord < ChangeRecord
       attr_reader :new_rdn, :new_superior
-      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
-        super(dn, {}, controls, "modrdn")
+      def initialize(dn, controls, change_type,
+                     new_rdn, delete_old_rdn, new_superior)
+        super(dn, {}, controls, change_type)
         @new_rdn = new_rdn
         @delete_old_rdn = normalize_delete_old_rdn(delete_old_rdn)
         @new_superior = new_superior
@@ -716,6 +723,18 @@ module ActiveLdap
         result << "deleteoldrdn: #{@delete_old_rdn ? 1 : 0}\n"
         result << Attribute.encode("newsuperior", @new_superior) if @new_superior
         result
+      end
+    end
+
+    class ModifyDNRecord < ModifyNameRecord
+      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
+        super(dn, controls, "moddn", new_rdn, delete_old_rdn, new_superior)
+      end
+    end
+
+    class ModifyRDNRecord < ModifyNameRecord
+      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
+        super(dn, controls, "modrdn", new_rdn, delete_old_rdn, new_superior)
       end
     end
 
