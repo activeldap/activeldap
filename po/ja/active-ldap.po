@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-07 23:52+0900\n"
-"PO-Revision-Date: 2007-12-07 23:52+0900\n"
+"POT-Creation-Date: 2007-12-07 23:55+0900\n"
+"PO-Revision-Date: 2007-12-07 23:56+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3462,11 +3462,15 @@ msgstr "変更型の値がありません"
 msgid "attribute spec is missing"
 msgstr "属性指定がありません"
 
-#: lib/active_ldap/ldif.rb:702
+#: lib/active_ldap/ldif.rb:451
+msgid "'newrdn:' is missing"
+msgstr "'newrdn:'がありません"
+
+#: lib/active_ldap/ldif.rb:706
 msgid "invalid criticality value: %s"
 msgstr "不正な臨界指定値です: %s"
 
-#: lib/active_ldap/ldif.rb:745
+#: lib/active_ldap/ldif.rb:749
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 

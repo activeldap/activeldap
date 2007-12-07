@@ -7,6 +7,22 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_newrdn_mark_is_missing
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: moddn
+EOL
+
+    ldif_source_with_error_mark = <<-EOL.chomp
+changetype: moddn
+|@|
+EOL
+
+    assert_invalid_ldif("'newrdn:' is missing",
+                        ldif_source, 4, 1, ldif_source_with_error_mark)
+  end
+
   def test_add_change_type_without_attribute
     ldif_source = <<-EOL
 version: 1

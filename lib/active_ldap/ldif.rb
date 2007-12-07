@@ -446,6 +446,10 @@ module ActiveLdap
       def attribute_spec_is_missing
         invalid_ldif(_("attribute spec is missing"))
       end
+
+      def newrdn_mark_is_missing
+        invalid_ldif(_("'newrdn:' is missing"))
+      end
     end
 
     class Scanner
