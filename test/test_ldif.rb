@@ -1393,6 +1393,8 @@ EOL
     assert_invalid_ldif("DN is missing",
                         "version: 1\ndn:", 2, 4, "dn:|@|")
     assert_invalid_ldif("DN is missing",
+                        "version: 1\ndn::", 2, 5, "dn::|@|")
+    assert_invalid_ldif("DN is missing",
                         "version: 1\ndn:\n", 2, 4, "dn:|@|\n")
     assert_invalid_ldif("DN is missing",
                         "version: 1\ndn: \n", 2, 5, "dn: |@|\n")

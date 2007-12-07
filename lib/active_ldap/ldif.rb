@@ -328,7 +328,9 @@ module ActiveLdap
         raise dn_mark_is_missing unless @scanner.scan(/dn:/)
         if @scanner.scan(/:/)
           @scanner.scan(FILL)
-          dn = parse_dn(read_base64_value)
+          dn = read_base64_value
+          raise dn_is_missing if dn.nil?
+          dn = parse_dn(dn)
         else
           @scanner.scan(FILL)
           dn = @scanner.scan(/#{SAFE_STRING}$/)
