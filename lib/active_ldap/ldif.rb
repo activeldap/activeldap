@@ -437,6 +437,10 @@ module ActiveLdap
       def criticality_is_missing
         invalid_ldif(_("criticality is missing"))
       end
+
+      def change_type_value_is_missing
+        invalid_ldif(_("change type value is missing"))
+      end
     end
 
     class Scanner
