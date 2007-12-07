@@ -247,7 +247,7 @@ module ActiveLdap
       end
 
       def parse_modify_name_record(klass, dn, controls)
-        raise newrdn_mark_is_missing unless @scanner.scan(/newrdn\b/)
+        raise new_rdn_mark_is_missing unless @scanner.scan(/newrdn\b/)
         new_rdn = parse_attribute_value(false)
         raise new_rdn_value_is_missing if new_rdn.nil?
         raise separator_is_missing unless @scanner.scan_separator
@@ -448,12 +448,16 @@ module ActiveLdap
         invalid_ldif(_("attribute spec is missing"))
       end
 
-      def newrdn_mark_is_missing
+      def new_rdn_mark_is_missing
         invalid_ldif(_("'newrdn:' is missing"))
       end
 
       def new_rdn_value_is_missing
         invalid_ldif(_("new RDN value is missing"))
+      end
+
+      def delete_old_rdn_mark_is_missing
+        invalid_ldif(_("'deleteoldrdn:' is missing"))
       end
     end
 
