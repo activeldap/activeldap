@@ -73,6 +73,7 @@ module AlTestUtils
       File.join(@example_dir, 'example.der')
     end
 
+    @@certificate = nil
     def certificate
       return @@certificate if @@certificate
       if File.exists?(certificate_path)
@@ -221,7 +222,6 @@ module AlTestUtils
   module TemporaryEntry
     include ExampleFile
 
-    @@certificate = nil
     def setup
       super
       @user_index = 0
