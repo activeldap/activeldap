@@ -7,6 +7,8 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+
+  priority :normal
   def test_unknown_change_type
     ldif_source = <<-EOL
 version: 1
@@ -1805,8 +1807,6 @@ EOL
     assert_invalid_ldif("version number is missing",
                         "version: XXX", 1, 10, "version: |@|XXX")
   end
-
-  priority :normal
 
   private
   def assert_ldif(version, records, ldif_source)

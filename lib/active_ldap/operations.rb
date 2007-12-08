@@ -324,7 +324,7 @@ module ActiveLdap
           when ActiveLdap::LDIF::ContentRecord
             add_entry(record.dn, record.attributes, options)
           else
-            raise "unsupported yet"
+            raise ArgumentError, _("unsupported record: %s") % record.class
           end
         end
       end
