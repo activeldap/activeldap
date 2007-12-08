@@ -1228,7 +1228,7 @@ module ActiveLdap
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
         end
-        attributes.push([k, value])
+        attributes.push([:replace, k, value])
       end
       data.each do |k, v|
         value = v || []
@@ -1237,7 +1237,7 @@ module ActiveLdap
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
-        attributes.push([k, value])
+        attributes.push([:replace, k, value])
       end
 
       attributes

@@ -323,6 +323,11 @@ module ActiveLdap
           case record
           when ActiveLdap::LDIF::ContentRecord
             add_entry(record.dn, record.attributes, options)
+          when ActiveLdap::LDIF::AddRecord
+            entries = record.attributes.collect do |key, value|
+              [:add, key, value]
+            end
+            modify_entry(record.dn, entries, options)
           else
             raise ArgumentError, _("unsupported record: %s") % record.class
           end
@@ -386,8 +391,8 @@ module ActiveLdap
       end
 
       def modify_entry(dn, attributes, options={})
-        unnormalized_attributes = attributes.collect do |key, value|
-          [:replace, key, unnormalize_attribute(key, value)]
+        unnormalized_attributes = attributes.collect do |type, key, value|
+          [type, key, unnormalize_attribute(key, value)]
         end
         options[:connection] ||= connection
         options[:connection].modify(dn, unnormalized_attributes, options)
