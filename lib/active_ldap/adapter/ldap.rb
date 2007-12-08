@@ -90,19 +90,36 @@ module ActiveLdap
 
       def delete(targets, options={})
         super do |target|
-          execute(:delete, target)
+          controls = options[:controls]
+          if controls
+            execute(:delete_ext, target, controls, [])
+          else
+            execute(:delete, target)
+          end
         end
       end
 
       def add(dn, entries, options={})
         super do |dn, entries|
-          execute(:add, dn, parse_entries(entries))
+          controls = options[:controls]
+          attributes = parse_entries(entries)
+          if controls
+            execute(:add_ext, dn, attributes, controls, [])
+          else
+            execute(:add, dn, attributes)
+          end
         end
       end
 
       def modify(dn, entries, options={})
         super do |dn, entries|
-          execute(:modify, dn, parse_entries(entries))
+          controls = options[:controls]
+          attributes = parse_entries(entries)
+          if controls
+            execute(:modify_ext, dn, attributes, controls, [])
+          else
+            execute(:modify, dn, attributes)
+          end
         end
       end
 

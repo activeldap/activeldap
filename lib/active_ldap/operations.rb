@@ -327,12 +327,15 @@ module ActiveLdap
             entries = record.attributes.collect do |key, value|
               [:add, key, value]
             end
-            modify_entry(record.dn, entries, options)
+            modify_entry(record.dn, entries,
+                         {:controls => record.controls}.merge(options))
           when ActiveLdap::LDIF::DeleteRecord
-            delete_entry(record.dn, options)
+            delete_entry(record.dn,
+                         {:controls => record.controls}.merge(options))
           when ActiveLdap::LDIF::ModifyNameRecord
             modify_rdn_entry(record.dn, record.new_rdn, record.delete_old_rdn?,
-                             record.new_superior, options)
+                             record.new_superior,
+                             {:controls => record.controls}.merge(options))
           else
             raise ArgumentError, _("unsupported record: %s") % record.class
           end
