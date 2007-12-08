@@ -742,13 +742,13 @@ module ActiveLdap
     end
 
     class AddRecord < ChangeRecord
-      def initialize(dn, controls, attributes)
+      def initialize(dn, controls=[], attributes={})
         super(dn, attributes, controls, "add")
       end
     end
 
     class DeleteRecord < ChangeRecord
-      def initialize(dn, controls)
+      def initialize(dn, controls=[])
         super(dn, {}, controls, "delete")
       end
     end

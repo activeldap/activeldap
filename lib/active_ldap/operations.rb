@@ -328,6 +328,8 @@ module ActiveLdap
               [:add, key, value]
             end
             modify_entry(record.dn, entries, options)
+          when ActiveLdap::LDIF::DeleteRecord
+            delete_entry(record.dn, options)
           else
             raise ArgumentError, _("unsupported record: %s") % record.class
           end
@@ -362,8 +364,12 @@ module ActiveLdap
         targets = targets.collect do |target|
           ensure_dn_attribute(ensure_base(target))
         end
+        delete_entry(targets, options)
+      end
+
+      def delete_entry(dn, options={})
         options[:connection] ||= connection
-        options[:connection].delete(targets, options)
+        options[:connection].delete(dn, options)
       end
 
       def delete_all(filter=nil, options={})

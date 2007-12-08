@@ -4,6 +4,17 @@ class TestLoad < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_load_delete_record
+    ldif = ActiveLdap::LDIF.new
+    make_temporary_user do |user, password|
+      record = ActiveLdap::LDIF::DeleteRecord.new(user.dn)
+      ldif << record
+      assert_true(@user_class.exists?(user.dn))
+      ActiveLdap::Base.load(ldif.to_s)
+      assert_false(@user_class.exists?(user.dn))
+    end
+  end
+
   def test_load_add_record
     ldif = ActiveLdap::LDIF.new
     make_temporary_user do |user, password|
