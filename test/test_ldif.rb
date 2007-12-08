@@ -7,6 +7,21 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_unknown_change_type
+    ldif_source = <<-EOL
+version: 1
+dn: ou=Product Development, dc=airius, dc=com
+changetype: XXX
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+changetype: |@|XXX
+EOL
+
+    assert_invalid_ldif(["unknown change type: %s", "XXX"],
+                        ldif_source, 3, 13, ldif_source_with_error_mark)
+  end
+
   def test_unknown_modify_type
     ldif_source = <<-EOL
 version: 1

@@ -239,8 +239,11 @@ module ActiveLdap
       def parse_change_type
         return nil unless @scanner.scan(/changetype:/)
         @scanner.scan(FILL)
-        type = @scanner.scan(/add|delete|modrdn|moddn|modify/)
+        type = @scanner.check(ATTRIBUTE_TYPE_CHARS)
         raise change_type_value_is_missing if type.nil?
+        unless @scanner.scan(/add|delete|modrdn|moddn|modify/)
+          raise unknown_change_type(type)
+        end
 
         raise separator_is_missing unless @scanner.scan_separator
         type
@@ -273,7 +276,7 @@ module ActiveLdap
       def parse_modify_spec
         return nil unless @scanner.check(/(#{ATTRIBUTE_TYPE_CHARS}):/)
         type = @scanner[1]
-        unless @scanner.scan(/(:?add|delete|replace):/)
+        unless @scanner.scan(/(?:add|delete|replace):/)
           raise unknown_modify_type(type)
         end
         @scanner.scan(FILL)
