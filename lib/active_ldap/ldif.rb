@@ -271,19 +271,17 @@ module ActiveLdap
       end
 
       def parse_modify_spec
-        return nil if @scanner.scan(/(add|delete|replace):/).nil?
+        return nil unless @scanner.check(/(#{ATTRIBUTE_TYPE_CHARS}):/)
         type = @scanner[1]
+        unless @scanner.scan(/(:?add|delete|replace):/)
+          raise unknown_modify_type(type)
+        end
         @scanner.scan(FILL)
         attribute, options = parse_attribute_description
         raise separator_is_missing unless @scanner.scan_separator
-        attributes = parse_attributes do
-          if @scanner.scan(/-/)
-            raise separator_is_missing unless @scanner.scan_separator
-            true
-          else
-            false
-          end
-        end
+        attributes = parse_attributes {@scanner.check(/-/)}
+        raise modify_spec_separator_is_missing unless @scanner.scan(/-/)
+        raise separator_is_missing unless @scanner.scan_separator
         [type, attribute, options, attributes]
       end
 
@@ -466,6 +464,10 @@ module ActiveLdap
 
       def new_superior_value_is_missing
         invalid_ldif(_("new superior value is missing"))
+      end
+
+      def unknown_modify_type(type)
+        invalid_ldif(_("unknown modify type: %s") % type)
       end
     end
 

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-08 00:16+0900\n"
-"PO-Revision-Date: 2007-12-08 00:17+0900\n"
+"POT-Creation-Date: 2007-12-08 11:08+0900\n"
+"PO-Revision-Date: 2007-12-08 11:09+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3386,107 +3386,111 @@ msgstr "すべての%sを見つけられませんでした: DN (%s): フィル�
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
-#: lib/active_ldap/ldif.rb:376
+#: lib/active_ldap/ldif.rb:374
 msgid "version spec is missing"
 msgstr "バージョン指定がありません"
 
-#: lib/active_ldap/ldif.rb:380
+#: lib/active_ldap/ldif.rb:378
 msgid "version number is missing"
 msgstr "バージョン番号がありません"
 
-#: lib/active_ldap/ldif.rb:384
+#: lib/active_ldap/ldif.rb:382
 msgid "unsupported version: %d"
 msgstr "対応していないバージョンです: %d"
 
-#: lib/active_ldap/ldif.rb:388
+#: lib/active_ldap/ldif.rb:386
 msgid "separator is missing"
 msgstr "分離記号（改行）がありません"
 
-#: lib/active_ldap/ldif.rb:392
+#: lib/active_ldap/ldif.rb:390
 msgid "'dn:' is missing"
 msgstr "'dn:'がありません"
 
-#: lib/active_ldap/ldif.rb:396
+#: lib/active_ldap/ldif.rb:394
 msgid "DN is missing"
 msgstr "DNがありません"
 
-#: lib/active_ldap/ldif.rb:400
+#: lib/active_ldap/ldif.rb:398
 msgid "DN is invalid: %s: %s"
 msgstr "不正なDNです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:404
+#: lib/active_ldap/ldif.rb:402
 msgid "DN has an invalid character: %s"
 msgstr "DNは不正な文字を含んでいます: %s"
 
-#: lib/active_ldap/ldif.rb:408 lib/active_ldap/distinguished_name.rb:140
+#: lib/active_ldap/ldif.rb:406 lib/active_ldap/distinguished_name.rb:140
 msgid "attribute type is missing"
 msgstr "属性の種類がありません"
 
-#: lib/active_ldap/ldif.rb:412
+#: lib/active_ldap/ldif.rb:410
 msgid "option is missing"
 msgstr "オプションがありません"
 
-#: lib/active_ldap/ldif.rb:416
+#: lib/active_ldap/ldif.rb:414
 msgid "':' is missing"
 msgstr "':'がありません"
 
-#: lib/active_ldap/ldif.rb:420
+#: lib/active_ldap/ldif.rb:418
 msgid "URI is invalid: %s: %s"
 msgstr "不正なURIです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:424
+#: lib/active_ldap/ldif.rb:422
 msgid "'-' is missing"
 msgstr "'-'がありません"
 
-#: lib/active_ldap/ldif.rb:428
+#: lib/active_ldap/ldif.rb:426
 msgid "unknown change type: %s"
 msgstr "未知の変更型です: %s"
 
-#: lib/active_ldap/ldif.rb:432
+#: lib/active_ldap/ldif.rb:430
 msgid "change type is missing"
 msgstr "変更型がありません"
 
-#: lib/active_ldap/ldif.rb:436
+#: lib/active_ldap/ldif.rb:434
 msgid "control type is missing"
 msgstr "制御型がありません"
 
-#: lib/active_ldap/ldif.rb:440
+#: lib/active_ldap/ldif.rb:438
 msgid "criticality is missing"
 msgstr "臨界指定がありません"
 
-#: lib/active_ldap/ldif.rb:444
+#: lib/active_ldap/ldif.rb:442
 msgid "change type value is missing"
 msgstr "変更型の値がありません"
 
-#: lib/active_ldap/ldif.rb:448
+#: lib/active_ldap/ldif.rb:446
 msgid "attribute spec is missing"
 msgstr "属性指定がありません"
 
-#: lib/active_ldap/ldif.rb:452
+#: lib/active_ldap/ldif.rb:450
 msgid "'newrdn:' is missing"
 msgstr "'newrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:456
+#: lib/active_ldap/ldif.rb:454
 msgid "new RDN value is missing"
 msgstr "新しいRDNの値がありません"
 
-#: lib/active_ldap/ldif.rb:460
+#: lib/active_ldap/ldif.rb:458
 msgid "'deleteoldrdn:' is missing"
 msgstr "deleteoldrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:464
+#: lib/active_ldap/ldif.rb:462
 msgid "delete old RDN value is missing"
 msgstr "古いRDNを削除するかどうかの指定値がありません"
 
-#: lib/active_ldap/ldif.rb:468
+#: lib/active_ldap/ldif.rb:466
 msgid "new superior value is missing"
 msgstr "新しい親エントリの値がありません"
 
-#: lib/active_ldap/ldif.rb:723
+#: lib/active_ldap/ldif.rb:470
+msgid "unknown modify type: %s"
+msgstr "未知の変更種類です: %s"
+
+#: lib/active_ldap/ldif.rb:725
 msgid "invalid criticality value: %s"
 msgstr "不正な臨界指定値です: %s"
 
-#: lib/active_ldap/ldif.rb:766
+#: lib/active_ldap/ldif.rb:768
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 
