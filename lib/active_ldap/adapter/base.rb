@@ -187,6 +187,12 @@ module ActiveLdap
         end
       end
 
+      def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
+        operation(options) do
+          yield(dn, new_rdn, delete_old_rdn, new_superior)
+        end
+      end
+
       private
       def prepare_connection(options)
       end

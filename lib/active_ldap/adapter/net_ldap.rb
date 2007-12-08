@@ -106,6 +106,15 @@ module ActiveLdap
         end
       end
 
+      def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
+        super do |dn, new_rdn, delete_old_rdn, new_superior|
+          execute(:rename,
+                  :olddn => dn,
+                  :newrdn => new_rdn,
+                  :delete_attributes => delete_old_rdn)
+        end
+      end
+
       private
       def execute(method, *args, &block)
         result = @connection.send(method, *args, &block)

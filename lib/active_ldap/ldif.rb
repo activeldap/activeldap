@@ -792,13 +792,13 @@ module ActiveLdap
     end
 
     class ModifyDNRecord < ModifyNameRecord
-      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
+      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior=nil)
         super(dn, controls, "moddn", new_rdn, delete_old_rdn, new_superior)
       end
     end
 
     class ModifyRDNRecord < ModifyNameRecord
-      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior)
+      def initialize(dn, controls, new_rdn, delete_old_rdn, new_superior=nil)
         super(dn, controls, "modrdn", new_rdn, delete_old_rdn, new_superior)
       end
     end

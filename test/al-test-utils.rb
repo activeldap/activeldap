@@ -286,8 +286,9 @@ module AlTestUtils
       yield(uid)
     ensure
       if @user_class.exists?(uid)
-        @user_class.find(uid).remove_connection
-        @user_class.delete(uid)
+        user = @user_class.find(uid)
+        user.remove_connection
+        @user_class.delete(user.dn)
       end
     end
 

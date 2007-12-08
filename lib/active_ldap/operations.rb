@@ -330,6 +330,9 @@ module ActiveLdap
             modify_entry(record.dn, entries, options)
           when ActiveLdap::LDIF::DeleteRecord
             delete_entry(record.dn, options)
+          when ActiveLdap::LDIF::ModifyNameRecord
+            modify_rdn_entry(record.dn, record.new_rdn, record.delete_old_rdn?,
+                             record.new_superior, options)
           else
             raise ArgumentError, _("unsupported record: %s") % record.class
           end
@@ -402,6 +405,12 @@ module ActiveLdap
         end
         options[:connection] ||= connection
         options[:connection].modify(dn, unnormalized_attributes, options)
+      end
+
+      def modify_rdn_entry(dn, new_rdn, delete_old_rdn, new_superior, options={})
+        options[:connection] ||= connection
+        options[:connection].modify_rdn(dn, new_rdn, delete_old_rdn,
+                                        new_superior, options)
       end
 
       def update(dn, attributes, options={})
