@@ -110,7 +110,7 @@ module ActiveLdap
 
         records = parse_records
 
-        @ldif = LDIF.new(version, records)
+        @ldif = LDIF.new(records)
       end
 
       private
@@ -568,10 +568,20 @@ module ActiveLdap
       end
     end
 
+    include Enumerable
+
     attr_reader :version, :records
-    def initialize(version, records)
-      @version = version
+    def initialize(records=[])
+      @version = 1
       @records = records
+    end
+
+    def <<(record)
+      @records << record
+    end
+
+    def each(&block)
+      @records.each(&block)
     end
 
     def to_s

@@ -302,23 +302,31 @@ module ActiveLdap
 
     module LDIF
       def dump(options={})
-        ldifs = []
+        ldif = ActiveLdap::LDIF.new
         options = {:base => base, :scope => scope}.merge(options)
         options[:connection] ||= connection
         options[:connection].search(options) do |dn, attributes|
-          ldifs << to_ldif(dn, attributes)
+          ldif << ActiveLdap::LDIF::Record.new(dn, attributes)
         end
-        ldifs.join("\n")
+        return "" if ldif.records.empty?
+        ldif.to_s
       end
 
-      def to_ldif(dn, attributes, options={})
-        options[:connection] ||= connection
-        options[:connection].to_ldif(dn, unnormalize_attributes(attributes))
+      def to_ldif(dn, attributes)
+        record = ActiveLdap::LDIF::Record.new(dn, attributes)
+        ActiveLdap::LDIF.new([record]).to_s
       end
 
-      def load(ldifs, options={})
-        options[:connection] ||= connection
-        options[:connection].load(ldifs)
+      def load(ldif, options={})
+        return if ldif.blank?
+        ActiveLdap::LDIF.parse(ldif).each do |record|
+          case record
+          when ActiveLdap::LDIF::ContentRecord
+            add_entry(record.dn, record.attributes, options)
+          else
+            raise "unsupported yet"
+          end
+        end
       end
     end
 
@@ -370,16 +378,16 @@ module ActiveLdap
 
     module Update
       def add_entry(dn, attributes, options={})
-        unnormalized_attributes = attributes.collect do |type, key, value|
-          [type, key, unnormalize_attribute(key, value)]
+        unnormalized_attributes = attributes.collect do |key, value|
+          [:add, key, unnormalize_attribute(key, value)]
         end
         options[:connection] ||= connection
         options[:connection].add(dn, unnormalized_attributes, options)
       end
 
       def modify_entry(dn, attributes, options={})
-        unnormalized_attributes = attributes.collect do |type, key, value|
-          [type, key, unnormalize_attribute(key, value)]
+        unnormalized_attributes = attributes.collect do |key, value|
+          [:replace, key, unnormalize_attribute(key, value)]
         end
         options[:connection] ||= connection
         options[:connection].modify(dn, unnormalized_attributes, options)

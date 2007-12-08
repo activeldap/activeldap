@@ -88,22 +88,6 @@ module ActiveLdap
         end
       end
 
-      def to_ldif(dn, attributes)
-        ldif = LDAP::LDIF.to_ldif("dn", [dn.dup])
-        attributes.sort_by do |key, value|
-          key
-        end.each do |key, values|
-          ldif << LDAP::LDIF.to_ldif(key, values)
-        end
-        ldif
-      end
-
-      def load(ldifs, options={})
-        super do |ldif|
-          LDAP::LDIF.parse_entry(ldif).send(@connection)
-        end
-      end
-
       def delete(targets, options={})
         super do |target|
           execute(:delete, target)

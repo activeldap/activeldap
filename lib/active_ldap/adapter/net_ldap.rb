@@ -80,28 +80,6 @@ module ActiveLdap
         end
       end
 
-      def to_ldif(dn, attributes)
-        entry = Net::LDAP::Entry.new(dn.dup)
-        attributes.each do |key, values|
-          entry[key] = values.flatten
-        end
-        entry.to_ldif
-      end
-
-      def load(ldifs, options={})
-        super do |ldif|
-          entry = Net::LDAP::Entry.from_single_ldif_string(ldif)
-          attributes = {}
-          entry.each do |name, values|
-            attributes[name] = values
-          end
-          attributes.delete(:dn)
-          execute(:add,
-                  :dn => entry.dn,
-                  :attributes => attributes)
-        end
-      end
-
       def delete(targets, options={})
         super do |target|
           execute(:delete, :dn => target)

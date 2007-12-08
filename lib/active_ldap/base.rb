@@ -735,7 +735,7 @@ module ActiveLdap
     end
 
     def to_ldif
-      super(dn, normalize_data(@data))
+      super(dn, @data)
     end
 
     def to_xml(options={})
@@ -1228,7 +1228,7 @@ module ActiveLdap
           # Ditched delete then replace because attribs with no equality
           # match rules will fails
         end
-        attributes.push([:replace, k, value])
+        attributes.push([k, value])
       end
       data.each do |k, v|
         value = v || []
@@ -1237,7 +1237,7 @@ module ActiveLdap
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
-        attributes.push([:replace, k, value])
+        attributes.push([k, value])
       end
 
       attributes
@@ -1248,14 +1248,14 @@ module ActiveLdap
       dn_value = data[dn_attr]
 
       attributes = []
-      attributes.push([:add, dn_attr, dn_value])
+      attributes.push([dn_attr, dn_value])
 
       oc_value = data['objectClass']
-      attributes.push([:add, 'objectClass', oc_value])
+      attributes.push(['objectClass', oc_value])
       data.each do |key, value|
         next if value.empty? or key == 'objectClass' or key == dn_attr
 
-        attributes.push([:add, key, value])
+        attributes.push([key, value])
       end
 
       attributes

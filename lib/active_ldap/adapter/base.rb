@@ -109,14 +109,6 @@ module ActiveLdap
         end
       end
 
-      def load(ldifs, options={})
-        operation(options) do
-          ldifs.split(/(?:\r?\n){2,}/).each do |ldif|
-            yield(ldif)
-          end
-        end
-      end
-
       def search(options={})
         filter = parse_filter(options[:filter]) || 'objectClass=*'
         attrs = options[:attributes] || []

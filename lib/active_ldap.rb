@@ -950,6 +950,7 @@ require 'active_ldap/human_readable'
 require 'active_ldap/acts/tree'
 
 require 'active_ldap/distinguished_name'
+require 'active_ldap/ldif'
 require 'active_ldap/populate'
 require 'active_ldap/escape'
 require 'active_ldap/helper'
