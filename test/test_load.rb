@@ -5,33 +5,13 @@ class TestLoad < Test::Unit::TestCase
 
   priority :must
   def test_load_move_dn_record
-    ldif = ActiveLdap::LDIF.new
-    make_temporary_user do |user, password|
-      new_rdn = "uid=XXX"
-      record = ActiveLdap::LDIF::ModifyDNRecord.new(user.dn, [], new_rdn, true)
-      ldif << record
-      assert_true(@user_class.exists?(user.dn))
-      assert_false(@user_class.exists?(new_rdn))
-      ActiveLdap::Base.load(ldif.to_s)
-      assert_false(@user_class.exists?(user.dn))
-      assert_true(@user_class.exists?(new_rdn))
-      assert_equal(user.cn, @user_class.find(new_rdn).cn)
-    end
+    assert_load_move_dn_record(ActiveLdap::LDIF::ModifyDNRecord)
+    assert_load_move_dn_record(ActiveLdap::LDIF::ModifyRDNRecord)
   end
 
   def test_load_copy_dn_record
-    ldif = ActiveLdap::LDIF.new
-    make_temporary_user do |user, password|
-      new_rdn = "uid=XXX"
-      record = ActiveLdap::LDIF::ModifyDNRecord.new(user.dn, [], new_rdn, false)
-      ldif << record
-      assert_true(@user_class.exists?(user.dn))
-      assert_false(@user_class.exists?(new_rdn))
-      ActiveLdap::Base.load(ldif.to_s)
-      assert_true(@user_class.exists?(user.dn))
-      assert_true(@user_class.exists?(new_rdn))
-      assert_equal(user.cn, @user_class.find(new_rdn).cn)
-    end
+    assert_load_copy_dn_record(ActiveLdap::LDIF::ModifyDNRecord)
+    assert_load_copy_dn_record(ActiveLdap::LDIF::ModifyRDNRecord)
   end
 
   def test_load_delete_record
@@ -75,4 +55,39 @@ class TestLoad < Test::Unit::TestCase
   end
 
   priority :normal
+
+  private
+  def assert_load_copy_dn_record(record_class)
+    ldif = ActiveLdap::LDIF.new
+    make_temporary_user do |user, password|
+      new_rdn = "uid=XXX"
+      ensure_delete_user(new_rdn) do
+        record = record_class.new(user.dn, [], new_rdn, false)
+        ldif << record
+        assert_true(@user_class.exists?(user.dn))
+        assert_false(@user_class.exists?(new_rdn))
+        ActiveLdap::Base.load(ldif.to_s)
+        assert_true(@user_class.exists?(user.dn))
+        assert_true(@user_class.exists?(new_rdn))
+        assert_equal(user.cn, @user_class.find(new_rdn).cn)
+      end
+    end
+  end
+
+  def assert_load_move_dn_record(record_class)
+    ldif = ActiveLdap::LDIF.new
+    make_temporary_user do |user, password|
+      new_rdn = "uid=XXX"
+      ensure_delete_user(new_rdn) do
+        record = record_class.new(user.dn, [], new_rdn, true)
+        ldif << record
+        assert_true(@user_class.exists?(user.dn))
+        assert_false(@user_class.exists?(new_rdn))
+        ActiveLdap::Base.load(ldif.to_s)
+        assert_false(@user_class.exists?(user.dn))
+        assert_true(@user_class.exists?(new_rdn))
+        assert_equal(user.cn, @user_class.find(new_rdn).cn)
+      end
+    end
+  end
 end
