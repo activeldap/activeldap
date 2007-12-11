@@ -4,6 +4,13 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_with_integer_value
+    make_temporary_user do |user, password|
+      found_user = @user_class.find(:attribute => "gidNumber",
+                                    :value => user.gid_number)
+      assert_equal(user.dn, found_user.dn)
+    end
+  end
 
   priority :normal
   def test_find_with_limit

@@ -33,10 +33,6 @@ module ActiveLdap
         classes = options[:classes]
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
-        if filter.nil? and !value.is_a?(String)
-          message = _("Search value must be a String: %s") % value.inspect
-          raise ArgumentError, message
-        end
 
         _attr, value, _prefix = split_search_value(value)
         attr ||= _attr || ensure_search_attribute
@@ -144,6 +140,8 @@ module ActiveLdap
 
       def split_search_value(value)
         attr = prefix = nil
+        return [attr, value, prefix] unless value.is_a?(String)
+
         begin
           dn = DN.parse(value)
           attr, value = dn.rdns.first.to_a.first
