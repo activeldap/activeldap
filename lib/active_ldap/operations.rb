@@ -300,77 +300,101 @@ module ActiveLdap
 
     module LDIF
       def dump(options={})
-        ldif = ActiveLdap::LDIF.new
+        ldif = Ldif.new
         options = {:base => base, :scope => scope}.merge(options)
         options[:connection] ||= connection
         options[:connection].search(options) do |dn, attributes|
-          ldif << ActiveLdap::LDIF::Record.new(dn, attributes)
+          ldif << Ldif::Record.new(dn, attributes)
         end
         return "" if ldif.records.empty?
         ldif.to_s
       end
 
       def to_ldif(dn, attributes)
-        record = ActiveLdap::LDIF::Record.new(dn, attributes)
-        ActiveLdap::LDIF.new([record]).to_s
+        record = Ldif::Record.new(dn, attributes)
+        Ldif.new([record]).to_s
       end
 
       def load(ldif, options={})
         return if ldif.blank?
-        ActiveLdap::LDIF.parse(ldif).each do |record|
-          case record
-          when ActiveLdap::LDIF::ContentRecord
-            add_entry(record.dn, record.attributes, options)
-          when ActiveLdap::LDIF::AddRecord
-            entries = record.attributes.collect do |key, value|
-              [:add, key, value]
-            end
-            modify_entry(record.dn, entries,
-                         {:controls => record.controls}.merge(options))
-          when ActiveLdap::LDIF::DeleteRecord
-            delete_entry(record.dn,
-                         {:controls => record.controls}.merge(options))
-          when ActiveLdap::LDIF::ModifyNameRecord
-            modify_rdn_entry(record.dn, record.new_rdn, record.delete_old_rdn?,
-                             record.new_superior,
-                             {:controls => record.controls}.merge(options))
-          when ActiveLdap::LDIF::ModifyRecord
-            record.each do |operation|
-              case operation
-              when ActiveLdap::LDIF::ModifyRecord::AddOperation
-                entries = operation.attributes.collect do |key, value|
-                  [:add, key, value]
-                end
-                modify_entry(record.dn, entries,
-                             {:controls => record.controls}.merge(options))
-              when ActiveLdap::LDIF::ModifyRecord::DeleteOperation
-                entries = operation.attributes.collect do |key, value|
-                  [:delete, key, value]
-                end
-                if entries.empty?
-                  entries << [:delete, operation.full_attribute_name, []]
-                end
-                modify_entry(record.dn, entries,
-                             {:controls => record.controls}.merge(options))
-              when ActiveLdap::LDIF::ModifyRecord::ReplaceOperation
-                entries = operation.attributes.collect do |key, value|
-                  [:replace, key, value]
-                end
-                if entries.empty?
-                  entries << [:replace, operation.full_attribute_name, []]
-                end
-                modify_entry(record.dn, entries,
-                             {:controls => record.controls}.merge(options))
-              else
-                raise ArgumentError,
-                      _("unsupported operation: %s") % operation.class
-              end
-            end
-          else
-            raise ArgumentError, _("unsupported record: %s") % record.class
-          end
+        Ldif.parse(ldif).each do |record|
+          record.load(self, options)
         end
       end
+
+      module ContentRecordLoadable
+        def load(operator, options)
+          operator.add_entry(dn, attributes, options)
+        end
+      end
+      Ldif::ContentRecord.send(:include, ContentRecordLoadable)
+
+      module AddRecordLoadable
+        def load(operator, options)
+          entries = attributes.collect do |key, value|
+            [:add, key, value]
+          end
+          options = {:controls => controls}.merge(options)
+          operator.modify_entry(dn, entries, options)
+        end
+      end
+      Ldif::AddRecord.send(:include, AddRecordLoadable)
+
+      module DeleteRecordLoadable
+        def load(operator, options)
+          operator.delete_entry(dn, {:controls => controls}.merge(options))
+        end
+      end
+      Ldif::DeleteRecord.send(:include, DeleteRecordLoadable)
+
+      module ModifyNameRecordLoadable
+        def load(operator, options)
+          operator.modify_rdn_entry(dn, new_rdn, delete_old_rdn?, new_superior,
+                                    {:controls => controls}.merge(options))
+        end
+      end
+      Ldif::ModifyNameRecord.send(:include, ModifyNameRecordLoadable)
+
+      module ModifyRecordLoadable
+        def load(operator, options)
+          each do |operation|
+            operator.modify_entry(dn, operation.to_modify_entries,
+                                  {:controls => controls}.merge(options))
+          end
+        end
+
+        module AddOperationModifiable
+          def to_modify_entries
+            attributes.collect do |key, value|
+              [:add, key, value]
+            end
+          end
+        end
+        Ldif::ModifyRecord::AddOperation.send(:include, AddOperationModifiable)
+
+        module DeleteOperationModifiable
+          def to_modify_entries
+            return [[:delete, full_attribute_name, []]] if attributes.empty?
+            attributes.collect do |key, value|
+              [:delete, key, value]
+            end
+          end
+        end
+        Ldif::ModifyRecord::DeleteOperation.send(:include,
+                                                 DeleteOperationModifiable)
+
+        module ReplaceOperationModifiable
+          def to_modify_entries
+            return [[:replace, full_attribute_name, []]] if attributes.empty?
+            attributes.collect do |key, value|
+              [:replace, key, value]
+            end
+          end
+        end
+        Ldif::ModifyRecord::ReplaceOperation.send(:include,
+                                                  ReplaceOperationModifiable)
+      end
+      Ldif::ModifyRecord.send(:include, ModifyRecordLoadable)
     end
 
     module Delete
