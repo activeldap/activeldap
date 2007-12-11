@@ -4,6 +4,39 @@ class TestLoad < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_load_modify_record
+    ldif = ActiveLdap::LDIF.new
+    make_temporary_user do |user, password|
+      user.display_name = "Display Name"
+      assert(user.save)
+
+      user = @user_class.find(user.dn)
+      assert_equal("Display Name", user.display_name)
+
+      record = ActiveLdap::LDIF::ModifyRecord.new(user.dn)
+      ldif << record
+
+      original_descriptions = user.description(true)
+      new_description = "new description"
+      record.add_operation(:add, "description", [],
+                           {"description" => [new_description]})
+
+      record.add_operation(:delete, "DisplayName", [], {})
+
+      original_sn = user.sn
+      new_sn = ["New SN1", "New SN2"]
+      record.add_operation(:replace, "sn", [], {"sn" => new_sn})
+
+      ActiveLdap::Base.load(ldif.to_s)
+
+      user = @user_class.find(user.dn)
+      assert_equal(original_descriptions + [new_description],
+                   user.description(true))
+      assert_nil(user.display_name)
+      assert_equal(new_sn, user.sn)
+    end
+  end
+
   def test_load_move_dn_record
     assert_load_move_dn_record(ActiveLdap::LDIF::ModifyDNRecord)
     assert_load_move_dn_record(ActiveLdap::LDIF::ModifyRDNRecord)

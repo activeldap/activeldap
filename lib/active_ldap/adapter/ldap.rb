@@ -227,7 +227,7 @@ module ActiveLdap
 
       def ensure_mod_type(type)
         case type
-        when :replace, :add
+        when :replace, :add, :delete
           LDAP.const_get("LDAP_MOD_#{type.to_s.upcase}")
         else
           raise ArgumentError, _("unknown type: %s") % type

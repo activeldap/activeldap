@@ -807,13 +807,22 @@ module ActiveLdap
       include Enumerable
 
       attr_reader :operations
-      def initialize(dn, controls, operations)
+      def initialize(dn, controls=[], operations=[])
         super(dn, {}, controls, "modify")
         @operations = operations
       end
 
       def each(&block)
         @operations.each(&block)
+      end
+
+      def <<(operation)
+        @operations << operation
+      end
+
+      def add_operation(type, attribute, options, attributes)
+        klass = self.class.const_get("#{type.to_s.capitalize}Operation")
+        self << klass.new(attribute, options, attributes)
       end
 
       def ==(other)

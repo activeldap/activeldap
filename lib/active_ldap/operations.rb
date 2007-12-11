@@ -336,6 +336,38 @@ module ActiveLdap
             modify_rdn_entry(record.dn, record.new_rdn, record.delete_old_rdn?,
                              record.new_superior,
                              {:controls => record.controls}.merge(options))
+          when ActiveLdap::LDIF::ModifyRecord
+            record.each do |operation|
+              case operation
+              when ActiveLdap::LDIF::ModifyRecord::AddOperation
+                entries = operation.attributes.collect do |key, value|
+                  [:add, key, value]
+                end
+                modify_entry(record.dn, entries,
+                             {:controls => record.controls}.merge(options))
+              when ActiveLdap::LDIF::ModifyRecord::DeleteOperation
+                entries = operation.attributes.collect do |key, value|
+                  [:delete, key, value]
+                end
+                if entries.empty?
+                  entries << [:delete, operation.full_attribute_name, []]
+                end
+                modify_entry(record.dn, entries,
+                             {:controls => record.controls}.merge(options))
+              when ActiveLdap::LDIF::ModifyRecord::ReplaceOperation
+                entries = operation.attributes.collect do |key, value|
+                  [:replace, key, value]
+                end
+                if entries.empty?
+                  entries << [:replace, operation.full_attribute_name, []]
+                end
+                modify_entry(record.dn, entries,
+                             {:controls => record.controls}.merge(options))
+              else
+                raise ArgumentError,
+                      _("unsupported operation: %s") % operation.class
+              end
+            end
           else
             raise ArgumentError, _("unsupported record: %s") % record.class
           end
