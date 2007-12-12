@@ -524,6 +524,14 @@ module ActiveLdap
         return [] if dse.nil?
         dse[key] || dse[key.downcase] || []
       end
+
+      def root_dse(attrs, options={})
+        search(:base => "",
+               :scope => :base,
+               :attributes => attrs).collect do |dn, attributes|
+          attributes
+        end
+      end
     end
   end
 end

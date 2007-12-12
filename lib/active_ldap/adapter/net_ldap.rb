@@ -131,14 +131,6 @@ module ActiveLdap
         end
       end
 
-      def root_dse(attrs, options={})
-        search(:base => "",
-               :scope => :base,
-               :attributes => attrs).collect do |dn, attributes|
-          attributes
-        end
-      end
-
       def ensure_method(method)
         method ||= "plain"
         normalized_method = method.to_s.downcase.to_sym

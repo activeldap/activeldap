@@ -976,7 +976,7 @@ ActiveLdap::Base.class_eval do
 end
 
 unless defined?(ACTIVE_LDAP_CONNECTION_ADAPTERS)
-  ACTIVE_LDAP_CONNECTION_ADAPTERS = %w(ldap net_ldap)
+  ACTIVE_LDAP_CONNECTION_ADAPTERS = %w(ldap net_ldap jndi)
 end
 
 ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
