@@ -939,6 +939,9 @@ require 'active_ldap/get_text'
 
 require 'active_ldap/base'
 
+require 'active_ldap/distinguished_name'
+require 'active_ldap/ldif'
+
 require 'active_ldap/associations'
 require 'active_ldap/attributes'
 require 'active_ldap/configuration'
@@ -949,8 +952,6 @@ require 'active_ldap/human_readable'
 
 require 'active_ldap/acts/tree'
 
-require 'active_ldap/distinguished_name'
-require 'active_ldap/ldif'
 require 'active_ldap/populate'
 require 'active_ldap/escape'
 require 'active_ldap/helper'
