@@ -147,7 +147,11 @@ module ActiveLdap
     private
     def detect_nearest(line, column)
       nearest = @ldif.to_a[line - 1] || ""
-      nearest[column - 1, 0] = NEAREST_MARK
+      if column - 1 == nearest.size # for JRuby 1.0.2 :<
+        nearest << NEAREST_MARK
+      else
+        nearest[column - 1, 0] = NEAREST_MARK
+      end
       nearest = "#{@ldif.to_a[line - 2]}#{nearest}" if nearest == NEAREST_MARK
       nearest
     end
