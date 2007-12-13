@@ -64,22 +64,49 @@ module Command
   def java_run(cmd, *args, &block)
     runtime = java.lang.Runtime.get_runtime
     process = runtime.exec([cmd, *args].to_java(:string))
-    input = java_stream_reader(process.get_input_stream)
-    output = process.get_output_stream
+    input = JavaReaderWrapper.new(process.get_input_stream)
+    output = JavaWriterWrapper.new(process.get_output_stream)
+    error = JavaReaderWrapper.new(process.get_error_stream)
     yield(input, output) if block_given?
+    output.close
     success = process.wait_for.zero?
 
-    result = ""
-    error = java_stream_reader(process.get_error_stream)
-    [input, error].each do |stream|
-      while line = stream.read_line
-        result << "#{line}\n"
-      end
-    end
-    [success, result]
+    [success, input.read + error.read]
   end
 
-  def java_stream_reader(input)
-    java.io.BufferedReader.new(java.io.InputStreamReader.new(input))
+  class JavaReaderWrapper
+    def initialize(input)
+      @input = input
+    end
+
+    def read
+      result = ""
+      while (c = @input.read) != -1
+        result << c.chr
+      end
+      result
+    end
+  end
+
+  class JavaWriterWrapper
+    def initialize(output)
+      output = java.io.OutputStreamWriter.new(output)
+      @output = java.io.BufferedWriter.new(output)
+    end
+
+    def puts(*messages)
+      messages.each do |message|
+        message += "\n" if /\n/ !~ message
+        @output.write(message)
+      end
+    end
+
+    def flush
+      @output.flush
+    end
+
+    def close
+      @output.close
+    end
   end
 end
