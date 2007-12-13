@@ -27,11 +27,12 @@ module Command
     end
   end
 
-  def run(cmd, *args)
+  def run(cmd, *args, &block)
     raise ArgumentError, "command isn't specified" if cmd.nil?
     if args.any? {|x| x.nil?}
       raise ArgumentError, "args has nil: #{args.inspect}"
     end
+    return java_run(cmd, *args, &block) unless Kernel.respond_to?(:fork)
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
     pid = exit_status = nil
@@ -58,5 +59,27 @@ module Command
     out_w.close unless out_w.closed?
     pid, status = Process.waitpid2(pid)
     [status.exited? && status.exitstatus.zero?, out_r.read]
+  end
+
+  def java_run(cmd, *args, &block)
+    runtime = java.lang.Runtime.get_runtime
+    process = runtime.exec([cmd, *args].to_java(:string))
+    input = java_stream_reader(process.get_input_stream)
+    output = process.get_output_stream
+    yield(input, output) if block_given?
+    success = process.wait_for.zero?
+
+    result = ""
+    error = java_stream_reader(process.get_error_stream)
+    [input, error].each do |stream|
+      while line = stream.read_line
+        result << "#{line}\n"
+      end
+    end
+    [success, result]
+  end
+
+  def java_stream_reader(input)
+    java.io.BufferedReader.new(java.io.InputStreamReader.new(input))
   end
 end
