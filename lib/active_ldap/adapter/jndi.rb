@@ -31,12 +31,6 @@ module ActiveLdap
         end
       end
 
-      def bind(options={})
-        super do
-          @connection.error_message
-        end
-      end
-
       def bind_as_anonymous(options={})
         super do
           execute(:bind_as_anonymous, options)
