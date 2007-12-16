@@ -52,7 +52,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
 
   private
   def connect(klass, config)
-    klass.establish_connection(config)
+    klass.establish_connection({:adapter => adapter}.merge(config))
     klass.connection.connect
   end
 end

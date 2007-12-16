@@ -22,7 +22,8 @@ class TestConnection < Test::Unit::TestCase
     exception = nil
     assert_raises(ArgumentError) do
       begin
-        connector.establish_connection(:bind_format => "uid=%s,dc=test",
+        connector.establish_connection(:adapter => adapter,
+                                       :bind_format => "uid=%s,dc=test",
                                        :allow_anonymous => false)
         connector.connection.connect
       rescue Exception

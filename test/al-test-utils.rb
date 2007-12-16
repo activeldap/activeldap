@@ -60,11 +60,15 @@ module AlTestUtils
         raise "config file for testing doesn't exist: #{@config_file}"
       end
       config = YAML.load(ERB.new(File.read(@config_file)).result)
+      _adapter = adapter
       config.each do |key, value|
-        adapter = ENV["ACTIVE_LDAP_TEST_ADAPTER"]
-        value[:adapter] = adapter if adapter
+        value[:adapter] = _adapter if _adapter
       end
       config
+    end
+
+    def adapter
+      ENV["ACTIVE_LDAP_TEST_ADAPTER"]
     end
   end
 
