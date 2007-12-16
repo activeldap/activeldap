@@ -65,6 +65,12 @@ module ActiveLdap
         end
       end
 
+      def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
+        super do |dn, new_rdn, delete_old_rdn, new_superior|
+          execute(:modify_rdn, dn, new_rdn, delete_old_rdn)
+        end
+      end
+
       private
 #       def with_timeout(try_reconnect=true, options={}, &block)
 #         begin

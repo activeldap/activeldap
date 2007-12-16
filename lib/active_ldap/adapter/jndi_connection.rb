@@ -128,6 +128,11 @@ module ActiveLdap
         @context.modify_attributes(dn, items.to_java(ModificationItem))
       end
 
+      def modify_rdn(dn, new_rdn, delete_old_rdn)
+        @context.rename(dn, new_rdn)
+        @context.destroy_subcontext(dn) if delete_old_rdn
+      end
+
       def delete(dn)
         @context.destroy_subcontext(dn)
       end
