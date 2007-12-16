@@ -78,13 +78,18 @@ module ActiveLdap
         not @context.nil?
       end
 
+      def sasl_bind(bind_dn, mechanism, quiet)
+        setup_context(bind_dn, password, mechanism)
+        bound?
+      end
+
       def simple_bind(bind_dn, password)
-        setup_context(bind_dn, password)
+        setup_context(bind_dn, password, "simple")
         bound?
       end
 
       def bind_as_anonymous
-        setup_context(nil, nil)
+        setup_context(nil, nil, "none")
         bound?
       end
 
@@ -128,12 +133,13 @@ module ActiveLdap
       end
 
       private
-      def setup_context(bind_dn, password)
+      def setup_context(bind_dn, password, authentication)
         unbind
         environment = {
           Context::INITIAL_CONTEXT_FACTORY => "com.sun.jndi.ldap.LdapCtxFactory",
           Context::PROVIDER_URL => ldap_uri,
         }
+        environment[Context::SECURITY_AUTHENTICATION] = authentication
         environment[Context::SECURITY_PRINCIPAL] = bind_dn if bind_dn
         environment[Context::SECURITY_CREDENTIALS] = password if password
         environment = HashTable.new(environment)
