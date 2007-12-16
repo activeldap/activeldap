@@ -19,6 +19,7 @@ module ActiveLdap
       ModificationItem = javax.naming.directory.ModificationItem
       BasicAttributes = javax.naming.directory.BasicAttributes
       Context = javax.naming.Context
+      StartTlsRequest = javax.naming.ldap.StartTlsRequest
 
       NamingException = javax.naming.NamingException
       NameNotFoundException = javax.naming.NameNotFoundException
@@ -63,9 +64,12 @@ module ActiveLdap
         @port = port
         @method = method
         @context = nil
+        @tls = nil
       end
 
       def unbind
+        @tls.close if @tls
+        @tls = nil
         @context.close if @context
         @context = nil
       end
@@ -74,15 +78,14 @@ module ActiveLdap
         not @context.nil?
       end
 
-      def sasl_bind(bind_dn, mechanism, quiet)
-      end
-
       def simple_bind(bind_dn, password)
-        @context = make_context(bind_dn, password)
+        setup_context(bind_dn, password)
+        bound?
       end
 
       def bind_as_anonymous
-        @context = make_context(nil, nil)
+        setup_context(nil, nil)
+        bound?
       end
 
       def search(base, scope, filter, attrs, limit, callback, &block)
@@ -125,7 +128,8 @@ module ActiveLdap
       end
 
       private
-      def make_context(bind_dn, password)
+      def setup_context(bind_dn, password)
+        unbind
         environment = {
           Context::INITIAL_CONTEXT_FACTORY => "com.sun.jndi.ldap.LdapCtxFactory",
           Context::PROVIDER_URL => ldap_uri,
@@ -133,7 +137,12 @@ module ActiveLdap
         environment[Context::SECURITY_PRINCIPAL] = bind_dn if bind_dn
         environment[Context::SECURITY_CREDENTIALS] = password if password
         environment = HashTable.new(environment)
-        InitialDirContext.new(environment)
+        @context = InitialDirContext.new(environment)
+        if @method == :start_tls
+          @tls = context.extended_operation(StartTlsRequest.new)
+          @tls.negotiate
+        end
+        @context
       end
 
       def ldap_uri
