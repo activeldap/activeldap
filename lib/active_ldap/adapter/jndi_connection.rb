@@ -129,8 +129,12 @@ module ActiveLdap
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn)
+        # should use mutex
+        delete_rdn_key = "java.naming.ldap.deleteRDN"
+        @context.add_to_environment(delete_rdn_key, delete_old_rdn.to_s)
         @context.rename(dn, new_rdn)
-        @context.destroy_subcontext(dn) if delete_old_rdn
+      ensure
+        @context.remove_from_environment(delete_rdn_key)
       end
 
       def delete(dn)
