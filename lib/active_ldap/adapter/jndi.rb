@@ -33,7 +33,7 @@ module ActiveLdap
 
       def bind_as_anonymous(options={})
         super do
-          execute(:bind_as_anonymous, options)
+          execute(:bind_as_anonymous)
         end
       end
 
