@@ -144,15 +144,16 @@ module ActiveLdap
           Context::INITIAL_CONTEXT_FACTORY => "com.sun.jndi.ldap.LdapCtxFactory",
           Context::PROVIDER_URL => ldap_uri,
         }
-        environment[Context::SECURITY_AUTHENTICATION] = authentication
-        environment[Context::SECURITY_PRINCIPAL] = bind_dn if bind_dn
-        environment[Context::SECURITY_CREDENTIALS] = password if password
         environment = HashTable.new(environment)
         @context = InitialDirContext.new(environment)
         if @method == :start_tls
           @tls = context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
         end
+        @context.add_to_environment(Context::SECURITY_AUTHENTICATION,
+                                    authentication)
+        @context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
+        @context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
         @context
       end
 
