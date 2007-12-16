@@ -145,16 +145,16 @@ module ActiveLdap
           Context::PROVIDER_URL => ldap_uri,
         }
         environment = HashTable.new(environment)
-        @context = InitialDirContext.new(environment)
+        context = InitialDirContext.new(environment)
         if @method == :start_tls
           @tls = context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
         end
-        @context.add_to_environment(Context::SECURITY_AUTHENTICATION,
-                                    authentication)
-        @context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
-        @context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
-        @context
+        context.add_to_environment(Context::SECURITY_AUTHENTICATION,
+                                   authentication)
+        context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
+        context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
+        @context = context
       end
 
       def ldap_uri
