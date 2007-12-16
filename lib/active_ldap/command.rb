@@ -38,11 +38,11 @@ module ActiveLdap
     end
 
     def read_password(prompt, input=$stdin, output=$stdout)
-      output.print prompt
-      system "/bin/stty -echo" if input.tty?
+      output.print(prompt)
+      system("/bin/stty -echo") if input.tty?
       input.gets.chomp
     ensure
-      system "/bin/stty echo" if input.tty?
+      system("/bin/stty echo") if input.tty?
       output.puts
     end
   end
