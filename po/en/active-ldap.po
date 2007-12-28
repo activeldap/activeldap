@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2007-12-08 11:08+0900\n"
+"Project-Id-Version: Ruby/ActiveLdap 0.9.1\n"
+"POT-Creation-Date: 2007-12-28 12:28+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3254,27 +3254,30 @@ msgstr ""
 msgid "Can't remove required objectClass: %s"
 msgstr ""
 
+#: lib/active_ldap/adapter/jndi.rb:103 lib/active_ldap/adapter/ldap.rb:174
+#: lib/active_ldap/adapter/net_ldap.rb:140
+msgid "%s is not one of the available connect methods: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/jndi.rb:116 lib/active_ldap/adapter/ldap.rb:187
+#: lib/active_ldap/adapter/net_ldap.rb:153
+msgid "%s is not one of the available LDAP scope: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/jndi.rb:154 lib/active_ldap/adapter/ldap.rb:233
+#: lib/active_ldap/adapter/net_ldap.rb:266
+msgid "unknown type: %s"
+msgstr ""
+
 #: lib/active_ldap/adapter/ldap.rb:82
 msgid "No matches: filter: %s: attributes: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:151
+#: lib/active_ldap/adapter/ldap.rb:158
 msgid "LDAP server is down: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/ldap.rb:167 lib/active_ldap/adapter/net_ldap.rb:161
-msgid "%s is not one of the available connect methods: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/ldap.rb:180 lib/active_ldap/adapter/net_ldap.rb:174
-msgid "%s is not one of the available LDAP scope: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/ldap.rb:226 lib/active_ldap/adapter/net_ldap.rb:287
-msgid "unknown type: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/net_ldap.rb:207
+#: lib/active_ldap/adapter/net_ldap.rb:186
 msgid "unsupported qops: %s"
 msgstr ""
 
@@ -3294,41 +3297,41 @@ msgstr ""
 msgid "All authentication methods exhausted."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:144
+#: lib/active_ldap/adapter/base.rb:136
 msgid "Ignore error %s(%s): filter %s: attributes: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:162 lib/active_ldap/adapter/base.rb:172
+#: lib/active_ldap/adapter/base.rb:154 lib/active_ldap/adapter/base.rb:164
 msgid "No such entry: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:176 lib/active_ldap/adapter/base.rb:178
-#: lib/active_ldap/adapter/base.rb:180 lib/active_ldap/adapter/base.rb:182
-#: lib/active_ldap/adapter/base.rb:194
+#: lib/active_ldap/adapter/base.rb:168 lib/active_ldap/adapter/base.rb:170
+#: lib/active_ldap/adapter/base.rb:172 lib/active_ldap/adapter/base.rb:174
+#: lib/active_ldap/adapter/base.rb:186
 msgid "%s: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:236
+#: lib/active_ldap/adapter/base.rb:234
 msgid "password_block not nil or Proc object. Ignoring."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:255
+#: lib/active_ldap/adapter/base.rb:253
 msgid "Requested action timed out."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:465
+#: lib/active_ldap/adapter/base.rb:463
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:482
+#: lib/active_ldap/adapter/base.rb:480
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:485
+#: lib/active_ldap/adapter/base.rb:483
 msgid "Attempting to reconnect"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:496
+#: lib/active_ldap/adapter/base.rb:494
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -3339,143 +3342,139 @@ msgstr ""
 msgid "parent must be an entry or parent DN: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:37
-msgid "Search value must be a String: %s"
-msgstr ""
-
-#: lib/active_ldap/operations.rb:50
+#: lib/active_ldap/operations.rb:46
 msgid ":ldap_scope search option is deprecated. Use :scope instead."
 msgstr ""
 
-#: lib/active_ldap/operations.rb:201
+#: lib/active_ldap/operations.rb:199
 msgid "Invalid order: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:236
+#: lib/active_ldap/operations.rb:234
 msgid "Couldn't find %s without a DN"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:258
+#: lib/active_ldap/operations.rb:256
 msgid "Couldn't find %s: DN: %s: filter: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:261
+#: lib/active_ldap/operations.rb:259
 msgid "Couldn't find %s: DN: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:288
+#: lib/active_ldap/operations.rb:286
 msgid "Couldn't find all %s: DNs (%s): filter: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:291
+#: lib/active_ldap/operations.rb:289
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:374
+#: lib/active_ldap/ldif.rb:377
 msgid "version spec is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:378
+#: lib/active_ldap/ldif.rb:381
 msgid "version number is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:382
+#: lib/active_ldap/ldif.rb:385
 msgid "unsupported version: %d"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:386
+#: lib/active_ldap/ldif.rb:389
 msgid "separator is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:390
+#: lib/active_ldap/ldif.rb:393
 msgid "'dn:' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:394
+#: lib/active_ldap/ldif.rb:397
 msgid "DN is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:398
+#: lib/active_ldap/ldif.rb:401
 msgid "DN is invalid: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:402
+#: lib/active_ldap/ldif.rb:405
 msgid "DN has an invalid character: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:406 lib/active_ldap/distinguished_name.rb:140
+#: lib/active_ldap/ldif.rb:409 lib/active_ldap/distinguished_name.rb:140
 msgid "attribute type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:410
+#: lib/active_ldap/ldif.rb:413
 msgid "option is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:414
+#: lib/active_ldap/ldif.rb:417
 msgid "':' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:418
+#: lib/active_ldap/ldif.rb:421
 msgid "URI is invalid: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:422
+#: lib/active_ldap/ldif.rb:425
 msgid "'-' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:426
+#: lib/active_ldap/ldif.rb:429
 msgid "unknown change type: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:430
+#: lib/active_ldap/ldif.rb:433
 msgid "change type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:434
+#: lib/active_ldap/ldif.rb:437
 msgid "control type is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:438
+#: lib/active_ldap/ldif.rb:441
 msgid "criticality is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:442
+#: lib/active_ldap/ldif.rb:445
 msgid "change type value is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:446
+#: lib/active_ldap/ldif.rb:449
 msgid "attribute spec is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:450
+#: lib/active_ldap/ldif.rb:453
 msgid "'newrdn:' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:454
+#: lib/active_ldap/ldif.rb:457
 msgid "new RDN value is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:458
+#: lib/active_ldap/ldif.rb:461
 msgid "'deleteoldrdn:' is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:462
+#: lib/active_ldap/ldif.rb:465
 msgid "delete old RDN value is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:466
+#: lib/active_ldap/ldif.rb:469
 msgid "new superior value is missing"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:470
+#: lib/active_ldap/ldif.rb:473
 msgid "unknown modify type: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:725
+#: lib/active_ldap/ldif.rb:738
 msgid "invalid criticality value: %s"
 msgstr ""
 
-#: lib/active_ldap/ldif.rb:768
+#: lib/active_ldap/ldif.rb:781
 msgid "invalid deleteoldrdn value: %s"
 msgstr ""
 
@@ -3563,44 +3562,45 @@ msgstr ""
 msgid "invalid LDIF:"
 msgstr ""
 
-#: lib/active_ldap/base.rb:207
+#: lib/active_ldap/base.rb:211
 msgid "LDAP configuration specifies nonexistent %s adapter"
 msgstr ""
 
-#: lib/active_ldap/base.rb:215
+#: lib/active_ldap/base.rb:219
 msgid "%s is unknown attribute"
 msgstr ""
 
-#: lib/active_ldap/base.rb:379
+#: lib/active_ldap/base.rb:383
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:486
+#: lib/active_ldap/base.rb:491
 msgid ""
-"'%s' must be either nil, DN value as String or Array or attributes as Hash"
+"'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
+"attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:571
+#: lib/active_ldap/base.rb:576
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:608
+#: lib/active_ldap/base.rb:613
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:627
+#: lib/active_ldap/base.rb:632
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:648 lib/active_ldap/base.rb:659
+#: lib/active_ldap/base.rb:653 lib/active_ldap/base.rb:664
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:776
+#: lib/active_ldap/base.rb:781
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1267
+#: lib/active_ldap/base.rb:1273
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 
