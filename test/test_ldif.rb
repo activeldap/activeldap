@@ -1836,8 +1836,8 @@ EOL
       ActiveLdap::Ldif.parse(ldif)
     end
     reason, *params = reason
-    assert_equal([_(reason) % params.collect {|param| _(param)},
-                  line, column, nearest, ldif],
+    params = params.collect {|param| param.is_a?(String) ? _(param) : param}
+    assert_equal([_(reason) % params, line, column, nearest, ldif],
                  [exception.reason, exception.line, exception.column,
                   exception.nearest, exception.ldif])
   end
