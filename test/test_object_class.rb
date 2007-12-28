@@ -4,6 +4,8 @@ class TestObjectClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_pass_nil_to_replace_class
     make_temporary_group do |group|
       assert_raises(ActiveLdap::RequiredObjectClassMissed) do
@@ -12,14 +14,16 @@ class TestObjectClass < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_case_insensitive_match
     assert_nothing_raised do
-      @group_class.instantiate(["cn=test-group,#{@group_class.base}",
-                                {
-                                  :cn => "test-group",
-                                  :objectClass => ["TOP", "posixgroup"],
-                                }])
+      @group_class.send(:instantiate,
+                        [
+                         "cn=test-group,#{@group_class.base}",
+                         {
+                           :cn => "test-group",
+                           :objectClass => ["TOP", "posixgroup"],
+                         }
+                        ])
     end
   end
 
