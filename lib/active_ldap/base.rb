@@ -471,12 +471,13 @@ module ActiveLdap
       init_base
       @new_entry = true
       initial_classes = required_classes | recommended_classes
-      if attributes.nil?
+      case attributes
+      when nil
         apply_object_class(initial_classes)
-      elsif attributes.is_a?(String) or attributes.is_a?(Array)
+      when String, Array, DN
         apply_object_class(initial_classes)
         self.dn = attributes
-      elsif attributes.is_a?(Hash)
+      when Hash
         classes, attributes = extract_object_class(attributes)
         apply_object_class(classes | initial_classes)
         normalized_attributes = {}
@@ -487,9 +488,9 @@ module ActiveLdap
         self.dn = normalized_attributes[dn_attribute]
         self.attributes = normalized_attributes
       else
-        message = _("'%s' must be either nil, DN value as String or Array " \
-                    "or attributes as Hash") % attributes.inspect
-        raise ArgumentError, message
+        format = _("'%s' must be either nil, DN value as ActiveLdap::DN, " \
+                   "String or Array or attributes as Hash")
+        raise ArgumentError, format % attributes.inspect
       end
       yield self if block_given?
       assert_dn_attribute
@@ -1129,7 +1130,8 @@ module ActiveLdap
     def split_dn_value(value)
       dn_value = relative_dn_value = nil
       begin
-        dn_value = DN.parse(value)
+        dn_value = value if value.is_a?(DN)
+        dn_value ||= DN.parse(value)
       rescue DistinguishedNameInvalid
         dn_value = DN.parse("#{dn_attribute}=#{value}")
       end

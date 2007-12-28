@@ -4,6 +4,13 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_new_with_dn
+    cn = "XXX"
+    dn = "cn=#{cn},#{@user_class.base}"
+    user = @user_class.new(ActiveLdap::DN.parse(dn))
+    assert_equal(cn, user.cn)
+    assert_equal(dn, user.dn)
+  end
 
   priority :normal
   def test_dn_attribute_per_instance_with_invalid_value
