@@ -104,6 +104,7 @@ class TestUser < Test::Unit::TestCase
 
   # This tests the reload of a binary_required type
   def test_binary_required
+    require 'openssl'
     make_temporary_user do |user, password|
       # validate add
       user.user_certificate = nil
