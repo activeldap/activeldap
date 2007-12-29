@@ -192,9 +192,9 @@
 #
 # Under ou=People I store user objects, and under ou=Groups, I store group
 # objects.  What |ldap_mapping| has done is mapped the class in to the LDAP tree
-# abstractly. With the given :dnattr and :prefix, it will only work for entries
-# under ou=Groups,dc=dataspill,dc=org using the primary attribute 'cn' as the
-# beginning of the distinguished name.
+# abstractly. With the given :dn_attributes and :prefix, it will only work for
+# entries under ou=Groups,dc=dataspill,dc=org using the primary attribute 'cn'
+# as the beginning of the distinguished name.
 #
 # Just for clarity, here's how the arguments map out:
 #
@@ -205,7 +205,8 @@
 #                :base from configuration.rb
 #
 # :scope tells ActiveLdap to only search under ou=Groups, and not to look deeper
-# for dnattr matches. (e.g. cn=develop,ou=DevGroups,ou=Groups,dc=dataspill,dc=org)
+# for dn_attribute matches.
+# (e.g. cn=develop,ou=DevGroups,ou=Groups,dc=dataspill,dc=org)
 #
 # Something's missing: :classes.  :classes is used to tell Ruby/ActiveLdap what
 # the minimum requirement is when creating a new object. LDAP uses objectClasses
@@ -293,7 +294,7 @@
 # mind, the above definition could become:
 #
 #   irb> class User < ActiveLdap::Base
-#   irb*   ldap_mapping :dnattr => 'uid', :prefix => 'People', :classes => ['top','account']
+#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
 #   irb*   belongs_to :groups, :class => 'Group', :many => 'memberUid'
 #   irb* end
 #
@@ -348,8 +349,8 @@
 #   => "root"
 #
 # In this simple example, Group.find took the search string of 'deve*' and
-# searched for the first match in Group where the dnattr matched the query. This
-# is the simplest example of .find.
+# searched for the first match in Group where the dn_attribute matched the
+# query. This is the simplest example of .find.
 #
 #   irb> Group.find(:all, '*').collect {|group| group.cn}
 #   => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
