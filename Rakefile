@@ -56,6 +56,7 @@ project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.extra_deps = ['activerecord']
   project.rdoc_pattern = /(?:^(?:lib|bin)|\AREADME\z)/
   project.remote_rdoc_dir = "doc"
+  project.rsync_args += " --chmod=Dg+ws,Fg+w"
   project.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap',
