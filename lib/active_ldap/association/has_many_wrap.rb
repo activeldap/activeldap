@@ -33,7 +33,7 @@ module ActiveLdap
         found_targets = {}
         foreign_base_key = primary_key
         targets.each do |target|
-          found_targets[target.send(foreign_base_key)] ||= target
+          found_targets[target[foreign_base_key]] ||= target
         end
 
         klass = foreign_class
