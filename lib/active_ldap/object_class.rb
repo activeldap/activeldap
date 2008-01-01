@@ -31,6 +31,7 @@ module ActiveLdap
         set_attribute('objectClass', new_classes)
       end
     end
+    alias_method(:classes=, :replace_class)
 
     def classes
       (get_attribute('objectClass', true) || []).dup
