@@ -260,7 +260,7 @@ module ActiveLdap
 
       def ensure_mod_type(type)
         case type
-        when :replace, :add
+        when :replace, :add, :delete
           type
         else
           raise ArgumentError, _("unknown type: %s") % type
