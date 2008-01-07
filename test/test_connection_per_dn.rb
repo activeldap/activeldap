@@ -4,9 +4,37 @@ class TestConnectionPerDN < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_rebind_with_empty_password
+    make_temporary_user do |user, password|
+      assert_equal(user.class.connection, user.connection)
+      assert_nothing_raised do
+        user.bind(password)
+      end
+      assert_not_equal(user.class.connection, user.connection)
+
+      # or ActiveLdap::LdapError::UnwillingToPerform?
+      assert_raises(ActiveLdap::AuthenticationError) do
+        user.bind("")
+      end
+    end
+  end
 
   priority :normal
-  def test_establish_connection
+  def test_rebind_with_invalid_password
+    make_temporary_user do |user, password|
+      assert_equal(user.class.connection, user.connection)
+      assert_nothing_raised do
+        user.bind(password)
+      end
+      assert_not_equal(user.class.connection, user.connection)
+
+      assert_raises(ActiveLdap::AuthenticationError) do
+        user.bind(password + "-WRONG")
+      end
+    end
+  end
+
+  def test_bind
     make_temporary_user do |user, password|
       assert_equal(user.class.connection, user.connection)
       assert_raises(ActiveLdap::AuthenticationError) do
