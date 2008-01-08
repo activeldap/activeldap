@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 0.9.1\n"
-"POT-Creation-Date: 2007-12-28 12:28+0900\n"
+"POT-Creation-Date: 2008-01-08 21:06+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -3242,15 +3242,15 @@ msgstr ""
 msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
 msgstr ""
 
-#: lib/active_ldap/object_class.rb:51
+#: lib/active_ldap/object_class.rb:52
 msgid "Value in objectClass array is not a String: %s"
 msgstr ""
 
-#: lib/active_ldap/object_class.rb:65
+#: lib/active_ldap/object_class.rb:66
 msgid "unknown objectClass in LDAP server: %s"
 msgstr ""
 
-#: lib/active_ldap/object_class.rb:83
+#: lib/active_ldap/object_class.rb:84
 msgid "Can't remove required objectClass: %s"
 msgstr ""
 
@@ -3281,57 +3281,65 @@ msgstr ""
 msgid "unsupported qops: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:62
+#: lib/active_ldap/adapter/base.rb:63
 msgid "Bound by SASL as %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:64
+#: lib/active_ldap/adapter/base.rb:65
 msgid "Bound by simple as %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:66
+#: lib/active_ldap/adapter/base.rb:67
 msgid "Bound as anonymous"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:69
+#: lib/active_ldap/adapter/base.rb:70
 msgid "All authentication methods exhausted."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:136
+#: lib/active_ldap/adapter/base.rb:137
 msgid "Ignore error %s(%s): filter %s: attributes: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:154 lib/active_ldap/adapter/base.rb:164
+#: lib/active_ldap/adapter/base.rb:155 lib/active_ldap/adapter/base.rb:165
 msgid "No such entry: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:168 lib/active_ldap/adapter/base.rb:170
-#: lib/active_ldap/adapter/base.rb:172 lib/active_ldap/adapter/base.rb:174
-#: lib/active_ldap/adapter/base.rb:186
+#: lib/active_ldap/adapter/base.rb:169 lib/active_ldap/adapter/base.rb:171
+#: lib/active_ldap/adapter/base.rb:173 lib/active_ldap/adapter/base.rb:175
+#: lib/active_ldap/adapter/base.rb:187
 msgid "%s: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:234
+#: lib/active_ldap/adapter/base.rb:235
 msgid "password_block not nil or Proc object. Ignoring."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:253
+#: lib/active_ldap/adapter/base.rb:254
 msgid "Requested action timed out."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:463
+#: lib/active_ldap/adapter/base.rb:294
+msgid "Skip simple bind with empty password."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:298
+msgid "Can't use empty password for simple bind."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:474
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:480
+#: lib/active_ldap/adapter/base.rb:491
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:483
+#: lib/active_ldap/adapter/base.rb:494
 msgid "Attempting to reconnect"
 msgstr ""
 
-#: lib/active_ldap/adapter/base.rb:494
+#: lib/active_ldap/adapter/base.rb:505
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -3600,7 +3608,7 @@ msgstr ""
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1273
+#: lib/active_ldap/base.rb:1271
 msgid "dn_attribute isn't set for this class: %s"
 msgstr ""
 

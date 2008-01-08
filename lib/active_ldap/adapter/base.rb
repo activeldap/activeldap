@@ -291,11 +291,11 @@ module ActiveLdap
 
         if passwd.empty?
           if options[:allow_anonymous]
-            @logger.info {_("Skip simple bind with empty password")}
+            @logger.info {_("Skip simple bind with empty password.")}
             return false
           else
             raise AuthenticationError,
-                  _("Can't use empty password for simple bind")
+                  _("Can't use empty password for simple bind.")
           end
         end
 
