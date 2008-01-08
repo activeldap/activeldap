@@ -53,6 +53,7 @@ module ActiveLdap
         else
           allow_anonymous = @allow_anonymous
         end
+        options = options.merge(:allow_anonymous => allow_anonymous)
 
         # Rough bind loop:
         # Attempt 1: SASL if available
@@ -287,6 +288,16 @@ module ActiveLdap
 
         passwd = password(bind_dn, options)
         return false unless passwd
+
+        if passwd.empty?
+          if options[:allow_anonymous]
+            @logger.info {_("Skip simple bind with empty password")}
+            return false
+          else
+            raise AuthenticationError,
+                  _("Can't use empty password for simple bind")
+          end
+        end
 
         begin
           operation(options) do

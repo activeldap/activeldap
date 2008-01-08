@@ -807,11 +807,9 @@ module ActiveLdap
       end
     end
 
-    def bind(config_or_password={}, &block)
+    def bind(config_or_password={}, config_or_ignore=nil, &block)
       if config_or_password.is_a?(String)
-        config = {:password => config_or_password}
-      elsif config_or_password.respond_to?(:call)
-        config = {:password_block => config_or_password}
+        config = (config_or_ignore || {}).merge(:password => config_or_password)
       else
         config = config_or_password
       end
