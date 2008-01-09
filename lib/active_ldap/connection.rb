@@ -88,7 +88,7 @@ module ActiveLdap
       end
 
       def instantiate_adapter(config)
-        adapter = (config[:adapter] || "ldap")
+        adapter = (config[:adapter] || default_adapter)
         normalized_adapter = adapter.downcase.gsub(/-/, "_")
         adapter_method = "#{normalized_adapter}_connection"
         unless Adapter::Base.respond_to?(adapter_method)
@@ -102,6 +102,10 @@ module ActiveLdap
         end
         config = remove_connection_related_configuration(config)
         Adapter::Base.send(adapter_method, config)
+      end
+
+      def default_adapter
+        @@default_adapter ||= guess_available_adapter
       end
 
       def connected?
@@ -178,6 +182,10 @@ module ActiveLdap
           @@active_connections.each_value {|conn| conn.disconnect!}
         end
         @@active_connections.clear
+      end
+
+      def guess_available_adapter
+        defined?(java) ? "jndi" : "ldap"
       end
     end
 
