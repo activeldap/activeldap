@@ -4,6 +4,8 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_new_with_dn
     cn = "XXX"
     dn = "cn=#{cn},#{@user_class.base}"
@@ -12,7 +14,6 @@ class TestBase < Test::Unit::TestCase
     assert_equal(dn, user.dn)
   end
 
-  priority :normal
   def test_dn_attribute_per_instance_with_invalid_value
     user = @user_class.new
     assert_equal("uid", user.dn_attribute)
@@ -139,6 +140,15 @@ class TestBase < Test::Unit::TestCase
     ou_class.required_classes += ["organization"]
     assert_equal([],
                  ou_class.search(:value => name).collect {|dn, attrs| dn})
+  end
+
+  def test_search_with_attributes_without_object_class
+    make_temporary_user do |user, password|
+      entries = @user_class.search(:filter => "#{user.dn_attribute}=#{user.id}",
+                                   :attributes => ["uidNumber"])
+      assert_equal([[user.dn, {"uidNumber" => [user.uid_number.to_s]}]],
+                    entries)
+    end
   end
 
   def test_new_without_argument

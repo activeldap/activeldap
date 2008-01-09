@@ -205,6 +205,7 @@ module ActiveLdap
         sort_by = options.delete(:sort_by) || sort_by
         order = options.delete(:order) || order
         limit = options.delete(:limit) if sort_by or order
+        options[:attributes] |= ["objectClass"] if options[:attributes]
 
         results = search(options).collect do |dn, attrs|
           instantiate([dn, attrs, {:connection => options[:connection]}])
