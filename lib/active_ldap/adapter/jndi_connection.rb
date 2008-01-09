@@ -14,19 +14,25 @@ module ActiveLdap
   module Adapter
     class JndiConnection
       HashTable = java.util.Hashtable
-      InitialDirContext = javax.naming.directory.InitialDirContext
-      SearchControls = javax.naming.directory.SearchControls
-      ModificationItem = javax.naming.directory.ModificationItem
-      BasicAttributes = javax.naming.directory.BasicAttributes
-      Context = javax.naming.Context
-      StartTlsRequest = javax.naming.ldap.StartTlsRequest
+      naming = javax.naming
+      directory = naming.directory
+      ldap = naming.ldap
+      InitialDirContext = directory.InitialDirContext
+      InitialLdapContext = ldap.InitialLdapContext
+      SearchControls = directory.SearchControls
+      ModificationItem = directory.ModificationItem
+      BasicAttributes = directory.BasicAttributes
+      Context = naming.Context
+      StartTlsRequest = ldap.StartTlsRequest
+      Control = ldap.Control
 
-      NamingException = javax.naming.NamingException
-      NameNotFoundException = javax.naming.NameNotFoundException
+      NamingException = naming.NamingException
+      NameNotFoundException = naming.NameNotFoundException
 
       class ModifyRecord
-        DirContext = javax.naming.directory.DirContext
-        BasicAttribute = javax.naming.directory.BasicAttribute
+        directory = javax.naming.directory
+        DirContext = directory.DirContext
+        BasicAttribute = directory.BasicAttribute
 
         ADD_ATTRIBUTE = DirContext::ADD_ATTRIBUTE
         REPLACE_ATTRIBUTE = DirContext::REPLACE_ATTRIBUTE
@@ -149,7 +155,7 @@ module ActiveLdap
           Context::PROVIDER_URL => ldap_uri,
         }
         environment = HashTable.new(environment)
-        context = InitialDirContext.new(environment)
+        context = InitialLdapContext.new(environment, nil)
         if @method == :start_tls
           @tls = context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
