@@ -72,16 +72,6 @@ module ActiveLdap
       end
 
       private
-#       def with_timeout(try_reconnect=true, options={}, &block)
-#         begin
-#           super
-#         rescue LDAP::ServerDown => e
-#           @logger.error {_("LDAP server is down: %s") % e.message}
-#           retry if try_reconnect and reconnect(options)
-#           raise ConnectionError.new(e.message)
-#         end
-#       end
-
       def execute(method, *args, &block)
         @connection.send(method, *args, &block)
       rescue JndiConnection::NamingException
