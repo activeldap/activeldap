@@ -200,8 +200,9 @@ module ActiveLdap
 
       def operation(options)
         retried = false
+        options = options.dup
         begin
-          reconnect_if_need
+          reconnect_if_need(options)
           try_reconnect = !options.has_key?(:try_reconnect) ||
                              options[:try_reconnect]
           with_timeout(try_reconnect, options) do
