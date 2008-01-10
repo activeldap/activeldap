@@ -38,6 +38,10 @@ class LdapUser < ActiveLdap::Base
       (ActiveLdap::DN.parse(dn) - ActiveLdap::DN.parse(self.class.base)).to_s
   end
 
+  def system_user
+    @system_user ||= User.find_by_dn(dn)
+  end
+
   private
   def encrypt_password
     return if password.blank?
