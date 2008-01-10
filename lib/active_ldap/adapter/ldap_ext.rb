@@ -3,6 +3,10 @@ require 'ldap/ldif'
 require 'ldap/schema'
 
 module LDAP
+  unless const_defined?(:LDAP_OPT_ERROR_NUMBER)
+    LDAP_OPT_ERROR_NUMBER = 0x0031
+  end
+
   class Mod
     unless instance_method(:to_s).arity.zero?
       alias_method :original_to_s, :to_s
@@ -47,12 +51,18 @@ module LDAP
 
   class Conn
     def failed?
-      not err.zero?
+      not error_code.zero?
+    end
+
+    def error_code
+      code = err
+      code = get_option(LDAP_OPT_ERROR_NUMBER) if code.zero?
+      code
     end
 
     def error_message
       if failed?
-        LDAP.err2string(err)
+        LDAP.err2string(error_code)
       else
         nil
       end
@@ -60,10 +70,11 @@ module LDAP
 
     def assert_error_code
       return unless failed?
-      klass = ActiveLdap::LdapError::ERRORS[err]
-      klass ||= IMPLEMENT_SPECIFIC_ERRORS[err]
+      code = error_code
+      klass = ActiveLdap::LdapError::ERRORS[code]
+      klass ||= IMPLEMENT_SPECIFIC_ERRORS[code]
       klass ||= ActiveLdap::LdapError
-      raise klass, LDAP.err2string(err)
+      raise klass, LDAP.err2string(code)
     end
   end
 end

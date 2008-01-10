@@ -201,20 +201,21 @@ module ActiveLdap
       def operation(options)
         retried = false
         options = options.dup
+        options[:try_reconnect] = true unless options.has_key?(:try_reconnect)
+        try_reconnect = false
         begin
           reconnect_if_need(options)
-          try_reconnect = !options.has_key?(:try_reconnect) ||
-                             options[:try_reconnect]
+          try_reconnect = options[:try_reconnect]
           with_timeout(try_reconnect, options) do
             yield
           end
-        rescue Errno::EPIPE
-          if retried or !try_reconnect
-            raise
-          else
+        rescue Errno::EPIPE, ConnectionError
+          if try_reconnect and !retried
             retried = true
             @disconnected = true
             retry
+          else
+            raise
           end
         end
       end
@@ -253,7 +254,7 @@ module ActiveLdap
           Timeout.alarm(@timeout, &block)
         rescue Timeout::Error => e
           @logger.error {_('Requested action timed out.')}
-          retry if try_reconnect and @retry_on_timeout and reconnect(options)
+          retry if @retry_on_timeout and try_reconnect and reconnect(options)
           @logger.error {e.message}
           raise TimeoutError, e.message
         end

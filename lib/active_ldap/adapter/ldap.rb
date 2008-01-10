@@ -76,6 +76,11 @@ module ActiveLdap
               break if limit and limit <= i
             end
           rescue RuntimeError
+            begin
+              @connection.assert_error_code
+            rescue LDAP::ServerDown
+              raise ConnectionError, $!.message
+            end
             if $!.message == "no result returned by search"
               @logger.debug do
                 args = [filter, attrs.inspect]
