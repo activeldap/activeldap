@@ -10,4 +10,8 @@ module UrlHelper
   def sign_up_path
     url_for(:controller => "/account", :action => "sign_up")
   end
+
+  def populate_path
+    url_for(:controller => "/directory", :action => "populate")
+  end
 end
