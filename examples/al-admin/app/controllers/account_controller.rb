@@ -21,9 +21,9 @@ class AccountController < ApplicationController
         }
       end
       redirect_back_or_default(top_url)
-      flash[:notice] = _("Logged in successfully")
+      flash.now[:notice] = _("Logged in successfully")
     else
-      flash[:notice] = _("Login or Password is incorrect")
+      flash.now[:notice] = _("Login or Password is incorrect")
     end
   end
 
