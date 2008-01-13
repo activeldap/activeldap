@@ -875,6 +875,9 @@ module ActiveLdap
       connection, @connection = @connection, nil
       schema, @schema = @schema, nil
       attribute_schemata, @attribute_schemata = @attribute_schemata, nil
+      normalized_attribute_names, @normalized_attribute_names =
+        @normalized_attribute_names, nil
+      attribute_aliases, @attribute_aliases = @attribute_aliases, nil
       must, may = @must, @may
       object_classes = @object_classes
       unless @abbreviating
@@ -887,6 +890,8 @@ module ActiveLdap
       @connection = connection
       @schema = schema
       @attribute_schemata = attribute_schemata
+      @normalized_attribute_names = normalized_attribute_names
+      @attribute_aliases = attribute_aliases
       @must = must
       @may = may
       @object_classes = object_classes
