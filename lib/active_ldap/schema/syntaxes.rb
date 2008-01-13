@@ -165,12 +165,32 @@ module ActiveLdap
 
       class GeneralizedTime < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.24"] = self
+        FORMAT = /\A
+                  (\d{4,4})?
+                  (\d{2,2})?
+                  (\d{2,2})?
+                  (\d{2,2})?
+                  (\d{2,2})?
+                  (\d{2,2})?
+                  ([,.]\d+)?
+                  ([+-]\d{4,4}|Z)?
+                 \z/x
 
         def type_cast(value)
           return value if value.nil? or value.is_a?(Time)
-          begin
-            Time.parse(value)
-          rescue ArgumentError
+          match_data = FORMAT.match(value)
+          if match_data
+            required_components = match_data.to_a[1, 6]
+            return value if required_components.any?(&:nil?)
+            year, month, day, hour, minute, second =
+              required_components.collect(&:to_i)
+            fraction = match_data[-2]
+            fraction = fraction.to_f if fraction
+            time_zone = match_data[-1]
+            Time.send(:make_time,
+                      year, month, day, hour, minute, second, fraction,
+                      time_zone, Time.now)
+          else
             value
           end
         end
@@ -190,20 +210,12 @@ module ActiveLdap
 
         private
         def validate_normalized_value(value, original_value)
-          match_data = /\A
-                         (\d{4,4})?
-                         (\d{2,2})?
-                         (\d{2,2})?
-                         (\d{2,2})?
-                         (\d{2,2})?
-                         (\d{2,2}(?:[,.]\d+)?)?
-                         ([+-]\d{4,4}|Z)?
-                        \z/x.match(value)
+          match_data = FORMAT.match(value)
           if match_data
-            year, month, day, hour, minute, second, time_zone =
+            year, month, day, hour, minute, second, fraction, time_zone =
               match_data.to_a[1..-1]
             missing_components = []
-            %w(year month day hour minute).each do |component|
+            %w(year month day hour minute second).each do |component|
               missing_components << component unless eval(component)
             end
             if missing_components.empty?

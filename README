@@ -101,4 +101,6 @@ list, please point out.
 * Perry Smith: Patches, bug reports and indications.
 * Marc Dequènes: API suggestions.
 * Jeremy Pruitt: A bug report.
-* Bodaniel Jeanes: A suggestion for behavior on simple bind with empty password.
+* Bodaniel Jeanes:
+  * A suggestion for behavior on simple bind with empty password.
+  * Bug reports.

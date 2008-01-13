@@ -84,11 +84,12 @@ class TestSyntax < Test::Unit::TestCase
 
   def test_generalized_time_type_cast
     assert_type_cast_without_validation(nil, nil, "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32"), "199412161032",
+    assert_type_cast(Time.parse("1994/12/16 10:32:12"), "19941216103212",
                      "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32Z"), "199412161032Z",
+    assert_type_cast(Time.parse("1994/12/16 10:32:12Z"), "19941216103212Z",
                      "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32 +09:00"), "199412161032+0900",
+    assert_type_cast(Time.parse("1994/12/16 10:32:12.345 +09:00"),
+                     "19941216103212.345+0900",
                      "Generalized Time")
   end
 
@@ -165,12 +166,18 @@ class TestSyntax < Test::Unit::TestCase
   end
 
   def test_generalized_time_validate
-    assert_valid("199412161032", "Generalized Time")
-    assert_valid("199412161032Z", "Generalized Time")
-    assert_valid("199412161032+0900", "Generalized Time")
+    assert_valid("19941216103201", "Generalized Time")
+    assert_valid("19941216103212Z", "Generalized Time")
+    assert_valid("19941216103230+0900", "Generalized Time")
+    assert_valid("20080107034615.0Z", "Generalized Time")
+    assert_valid("20080107034615,123-0900", "Generalized Time")
 
     value = "1994"
-    params = [value.inspect, %w(month day hour minute).join(", ")]
+    params = [value.inspect, %w(month day hour minute second).join(", ")]
+    assert_invalid(_("%s has missing components: %s") % params,
+                   value, "Generalized Time")
+    value = "199412161032"
+    params = [value.inspect, %w(second).join(", ")]
     assert_invalid(_("%s has missing components: %s") % params,
                    value, "Generalized Time")
   end
