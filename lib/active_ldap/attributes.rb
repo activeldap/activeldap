@@ -47,13 +47,7 @@ module ActiveLdap
         end
 
         name = normalize_attribute_name(name)
-        rubyish_class_name = Inflector.underscore(value.class.name)
-        handler = "normalize_attribute_value_of_#{rubyish_class_name}"
-        if respond_to?(handler, true)
-          [name, send(handler, name, value)]
-        else
-          [name, [schema.attribute(name).normalize_value(value)]]
-        end
+        [name, normalize_attribute_value(name, value, nil, nil)]
       end
 
       def unnormalize_attributes(attributes)
@@ -84,8 +78,20 @@ module ActiveLdap
       end
 
       private
-      def normalize_attribute_value_of_array(name, value)
-	attribute = schema.attribute(name)
+      def normalize_attribute_value(name, value, rubyish_class_name, attribute)
+        rubyish_class_name ||= Inflector.underscore(value.class.name)
+        handler = "normalize_attribute_value_of_#{rubyish_class_name}"
+        if respond_to?(handler, true)
+          send(handler, name, value, rubyish_class_name, attribute)
+        else
+          attribute ||= schema.attribute(name)
+          [attribute.normalize_value(value)]
+        end
+      end
+
+      def normalize_attribute_value_of_array(name, value, rubyish_class_name,
+                                             attribute)
+	attribute ||= schema.attribute(name)
         if value.size > 1 and attribute.single_value?
           format = _("Attribute %s can only have a single value")
           message = format % self.class.human_attribute_name(attribute)
@@ -99,12 +105,13 @@ module ActiveLdap
           end
         else
           value.collect do |entry|
-            normalize_attribute(name, entry)[1][0]
+            normalize_attribute_value(name, entry, nil, attribute)[0]
           end
         end
       end
 
-      def normalize_attribute_value_of_hash(name, value)
+      def normalize_attribute_value_of_hash(name, value, rubyish_class_name,
+                                            attribute)
         if value.keys.size > 1
           format = _("Hashes must have one key-value pair only: %s")
           raise TypeError, format % value.inspect
@@ -115,8 +122,10 @@ module ActiveLdap
             format % value.keys[0]
           end
         end
+
         # Contents MUST be a String or an Array
-        if !value.has_key?('binary') and schema.attribute(name).binary_required?
+        attribute ||= schema.attribute(name)
+        if !value.has_key?('binary') and attribute.binary_required?
           suffix, real_value = extract_attribute_options(value)
           name, values =
             normalize_attribute_options("#{name}#{suffix};binary", real_value)
@@ -126,41 +135,48 @@ module ActiveLdap
         end
       end
 
-      def normalize_attribute_value_of_nil_class(name, value)
-        if schema.attribute(name).binary_required?
+      def normalize_attribute_value_of_nil_class(name, value,
+                                                 rubyish_class_name, attribute)
+        attribute ||= schema.attribute(name)
+        if attribute.binary_required?
           [{'binary' => []}]
         else
           []
         end
       end
 
-      def normalize_attribute_value_of_string(name, value)
-        if schema.attribute(name).binary_required?
+      def normalize_attribute_value_of_string(name, value, rubyish_class_name,
+                                              attribute)
+        attribute ||= schema.attribute(name)
+        if attribute.binary_required?
           [{'binary' => [value]}]
         else
           [value]
         end
       end
 
-      def normalize_attribute_value_of_date(name, value)
+      def normalize_attribute_value_of_date(name, value, rubyish_class_name,
+                                            attribute)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, 0, 0, 0,
                             '+0000')
-        normalize_attribute_value_of_string(name, new_value)
+        normalize_attribute_value_of_string(name, new_value, nil, attribute)
       end
 
-      def normalize_attribute_value_of_time(name, value)
+      def normalize_attribute_value_of_time(name, value, rubyish_class_name,
+                                            attribute)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             0, 0, 0, value.hour, value.min, value.sec,
                             value.zone)
-        normalize_attribute_value_of_string(name, new_value)
+        normalize_attribute_value_of_string(name, new_value, nil, attribute)
       end
 
-      def normalize_attribute_value_of_date_time(name, value)
+      def normalize_attribute_value_of_date_time(name, value, rubyish_class_name,
+                                                 attribute)
         new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
                             value.year, value.month, value.mday, value.hour,
                             value.min, value.sec, value.zone)
-        normalize_attribute_value_of_string(name, new_value)
+        normalize_attribute_value_of_string(name, new_value, nil, attribute)
       end
 
       # normalize_attribute_options
