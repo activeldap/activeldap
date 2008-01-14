@@ -796,8 +796,7 @@ module ActiveLdap
         @connection = nil
         connection.connect
         @connection = connection
-        @schema = nil
-        @entry_attribute = nil
+        clear_connection_based_cache
         clear_association_cache
       rescue ActiveLdap::Error
         remove_connection
@@ -805,6 +804,11 @@ module ActiveLdap
         raise
       end
       true
+    end
+
+    def clear_connection_based_cache
+      @schema = nil
+      @entry_attribute = nil
     end
 
     def schema
