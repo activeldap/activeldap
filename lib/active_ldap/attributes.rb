@@ -92,7 +92,7 @@ module ActiveLdap
           raise TypeError, message
         end
         if value.empty?
-          if schema.attribute(name).binary_required?
+          if attribute.binary_required?
             [{'binary' => value}]
           else
             value
