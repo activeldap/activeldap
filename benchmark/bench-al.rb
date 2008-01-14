@@ -26,6 +26,7 @@ LDAP_BASE = config[:base]
 LDAP_PREFIX = options.prefix
 LDAP_USER = config[:bind_dn]
 LDAP_PASSWORD = config[:password]
+LDAP_METHOD = config[:method]
 
 class ALUser < ActiveLdap::Base
   ldap_mapping :dn_attribute => 'uid', :prefix => LDAP_PREFIX,
@@ -74,7 +75,11 @@ end
 
 def ldap_connection
   require 'ldap'
-  conn = LDAP::Conn.new(LDAP_HOST, LDAP_PORT)
+  if LDAP_METHOD == :tls
+    conn = LDAP::SSLConn.new(LDAP_HOST, LDAP_PORT, true)
+  else
+    conn = LDAP::Conn.new(LDAP_HOST, LDAP_PORT)
+  end
   conn.set_option(LDAP::LDAP_OPT_PROTOCOL_VERSION, 3)
   conn.bind(LDAP_USER, LDAP_PASSWORD) if LDAP_USER and LDAP_PASSWORD
   conn
@@ -87,6 +92,7 @@ def net_ldap_connection
   net_ldap_conn = Net::LDAP::Connection.new(:host => LDAP_HOST,
                                             :port => LDAP_PORT)
   if LDAP_USER and LDAP_PASSWORD
+    net_ldap_conn.setup_encryption(:method => :start_tls) if LDAP_METHOD == :tls
     net_ldap_conn.bind(:method => :simple,
                        :username => LDAP_USER,
                        :password => LDAP_PASSWORD)
