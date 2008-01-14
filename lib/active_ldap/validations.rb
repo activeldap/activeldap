@@ -51,11 +51,6 @@ module ActiveLdap
         end
         alias_method_chain :save!, :active_ldap_support
 
-        def valid?
-          ensure_apply_object_class
-          super
-        end
-
         private
         def run_validations_with_active_ldap_support(validation_method)
           run_validations_without_active_ldap_support(validation_method)

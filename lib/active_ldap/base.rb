@@ -473,13 +473,13 @@ module ActiveLdap
       initial_classes = required_classes | recommended_classes
       case attributes
       when nil
-        apply_object_class(initial_classes)
+        self.classes = initial_classes
       when String, Array, DN
-        apply_object_class(initial_classes)
+        self.classes = initial_classes
         self.dn = attributes
       when Hash
         classes, attributes = extract_object_class(attributes)
-        apply_object_class(classes | initial_classes)
+        self.classes = classes | initial_classes
         normalized_attributes = {}
         attributes.each do |key, value|
           real_key = to_real_attribute_name(key) || key
@@ -519,12 +519,10 @@ module ActiveLdap
     end
 
     def may
-      ensure_apply_object_class
       entry_attribute.may
     end
 
     def must
-      ensure_apply_object_class
       entry_attribute.must
     end
 
@@ -533,7 +531,6 @@ module ActiveLdap
     # Return attribute methods so that a program can determine available
     # attributes dynamically without schema awareness
     def attribute_names(normalize=false)
-      ensure_apply_object_class
       entry_attribute.names(normalize)
     end
 
@@ -626,8 +623,6 @@ module ActiveLdap
     #       using class_eval instead of using method_missing.  This would
     #       give tab completion in irb.
     def method_missing(name, *args, &block)
-      ensure_apply_object_class
-
       key = name.to_s
       case key
       when /=$/
@@ -662,7 +657,6 @@ module ActiveLdap
 
     # Add available attributes to the methods
     def methods(inherited_too=true)
-      ensure_apply_object_class
       target_names = entry_attribute.all_names
       target_names -= ['objectClass', Inflector.underscore('objectClass')]
       super + target_names.uniq.collect do |x|
@@ -763,7 +757,7 @@ module ActiveLdap
 
       @ldap_data.update(attributes)
       classes, attributes = extract_object_class(attributes)
-      apply_object_class(classes)
+      self.classes = classes
       self.attributes = attributes
       @new_entry = false
       self
@@ -897,7 +891,7 @@ module ActiveLdap
       @dn_is_base = false
       @ldap_data = attributes
       classes, attributes = extract_object_class(attributes)
-      apply_object_class(classes)
+      self.classes = classes
       self.dn = dn
       self.attributes = attributes
       yield self if block_given?
@@ -918,14 +912,7 @@ module ActiveLdap
 
     def to_real_attribute_name(name, allow_normalized_name=false)
       return name if name.nil?
-      ensure_apply_object_class
       entry_attribute.normalize(name, allow_normalized_name)
-    end
-
-    def ensure_apply_object_class
-      current_object_class = @data['objectClass']
-      return if current_object_class.nil? or current_object_class == @last_oc
-      apply_object_class(current_object_class)
     end
 
     # enforce_type
@@ -934,7 +921,6 @@ module ActiveLdap
     # This means that if you set userCertificate to somebinary value, it will
     # wrap it up correctly.
     def enforce_type(key, value)
-      ensure_apply_object_class
       # Enforce attribute value formatting
       normalize_attribute(key, value)[1]
     end
@@ -943,30 +929,11 @@ module ActiveLdap
       @mutex = Mutex.new
       @data = {} # where the r/w entry data is stored
       @ldap_data = {} # original ldap entry data
-      @last_oc = false # for use in other methods for "caching"
       @dn_attribute = nil
       @base = nil
       @scope = nil
       @dn = nil
       @connection ||= nil
-    end
-
-    # apply_object_class
-    #
-    # objectClass= special case for updating appropriately
-    # This updates the objectClass entry in @data. It also
-    # updating all required and allowed attributes while
-    # removing defined attributes that are no longer valid
-    # given the new objectclasses.
-    def apply_object_class(val)
-      new_oc = val
-      new_oc = [val] if new_oc.class != Array
-      new_oc = new_oc.uniq
-      return new_oc if @last_oc == new_oc
-
-      @last_oc = new_oc.dup
-      replace_class(*new_oc)
-      @entry_attribute = nil
     end
 
     # get_attribute
