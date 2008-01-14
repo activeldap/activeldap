@@ -123,7 +123,7 @@ module ActiveLdap
     end
 
     def validate_ldap_values
-      entry_attribute.attribute_schemata.each do |name, attribute|
+      entry_attribute.schemata.each do |name, attribute|
         self[name, true].each do |value|
           validate_ldap_value(attribute, name, value)
         end

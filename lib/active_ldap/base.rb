@@ -534,7 +534,7 @@ module ActiveLdap
     # attributes dynamically without schema awareness
     def attribute_names(normalize=false)
       ensure_apply_object_class
-      entry_attribute.attribute_names(normalize)
+      entry_attribute.names(normalize)
     end
 
     def attribute_present?(name)
