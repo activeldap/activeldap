@@ -672,10 +672,12 @@ module ActiveLdap
 
     alias_method :respond_to_without_attributes?, :respond_to?
     def respond_to?(name, include_priv=false)
-      have_attribute?(name.to_s) or
-        (/(?:=|\?|_before_type_cast)$/ =~ name.to_s and
-         have_attribute?($PREMATCH)) or
-        super
+      return true if super
+
+      name = name.to_s
+      return true if have_attribute?(name)
+      return false if /(?:=|\?|_before_type_cast)$/ !~ name
+      have_attribute?($PREMATCH)
     end
 
     # Updates a given attribute and saves immediately
