@@ -900,17 +900,13 @@ module ActiveLdap
 
     def extract_object_class(attributes)
       classes = []
-      attrs = attributes.stringify_keys.reject do |key, value|
-        if key == 'objectClass' or
-            key.underscore == 'object_class' or
-            key.downcase == 'objectclass'
-          classes |= [value].flatten
-          true
-        else
-          false
-        end
+      attributes = attributes.stringify_keys
+      %w(objectClass object_class objectclass).each do |key|
+	value = attributes.delete(key)
+        next if value.nil?
+        classes.concat(value.to_a)
       end
-      [classes, attrs]
+      [classes.uniq, attributes]
     end
 
     def init_base
