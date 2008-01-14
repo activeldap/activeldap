@@ -166,19 +166,23 @@ def main(do_populate)
   al_count_without_object_creation = 0
   ldap_count = 0
   net_ldap_count = 0
-  Benchmark.bm(20) do |x|
+  Benchmark.bmbm(20) do |x|
     [1].each do |n|
+      GC.start
       x.report("%3dx: AL" % n) {n.times {al_count = search_al}}
+      GC.start
       x.report("%3dx: AL(No Obj)" % n) do
         n.times do
           al_count_without_object_creation = search_al_without_object_creation
         end
       end
+      GC.start
       if ldap_conn
         x.report("%3dx: LDAP" % n) do
           n.times {ldap_count = search_ldap(ldap_conn)}
         end
       end
+      GC.start
       if net_ldap_conn
         x.report("%3dx: Net::LDAP" % n) do
           n.times {net_ldap_count = search_net_ldap(net_ldap_conn)}
