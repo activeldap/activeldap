@@ -859,6 +859,7 @@ module ActiveLdap
     def abbreviate_instance_variables
       @abbreviating ||= nil
       connection, @connection = @connection, nil
+      entry_attribute, @entry_attribute = @entry_attribute, nil
       schema, @schema = @schema, nil
       unless @abbreviating
         @abbreviating = true
@@ -866,6 +867,7 @@ module ActiveLdap
       yield
     ensure
       @connection = connection
+      @entry_attribute = entry_attribute
       @schema = schema
       @abbreviating = false
     end
