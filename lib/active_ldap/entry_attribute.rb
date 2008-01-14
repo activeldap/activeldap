@@ -9,6 +9,8 @@ module ActiveLdap
       @schemata = {}
       @names = {}
       @normalized_names = {}
+      @cached_names = {}
+      @cached_normalized_names = {}
       @aliases = {}
       @must = []
       @may = []
@@ -43,15 +45,14 @@ module ActiveLdap
     def normalize(name, allow_normalized_name=false)
       return name if name.nil?
       name = name.to_s
-      real_name = @names[name]
-      real_name ||= @aliases[Inflector.underscore(name)]
-      if real_name
-        real_name
-      elsif allow_normalized_name
-        @normalized_names[normalize_attribute_name(name)]
+      if allow_normalized_name
+        cache = @cached_names
       else
-        nil
+        cache = @cached_normalized_names
       end
+
+      return cache[name] if cache.has_key?(name)
+      cache[name] = compute_normalized_name(name, allow_normalized_name)
     end
 
     def all_names
@@ -71,6 +72,18 @@ module ActiveLdap
         @names[name] = real_name
         @aliases[Inflector.underscore(name)] = real_name
         @normalized_names[normalize_attribute_name(name)] = real_name
+      end
+    end
+
+    def compute_normalized_name(name, allow_normalized_name=false)
+      real_name = @names[name]
+      real_name ||= @aliases[Inflector.underscore(name)]
+      if real_name
+        real_name
+      elsif allow_normalized_name
+        @normalized_names[normalize_attribute_name(name)]
+      else
+        nil
       end
     end
   end
