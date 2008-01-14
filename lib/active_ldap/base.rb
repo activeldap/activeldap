@@ -485,7 +485,7 @@ module ActiveLdap
           real_key = to_real_attribute_name(key) || key
           normalized_attributes[real_key] = value
         end
-        self.dn = normalized_attributes[dn_attribute]
+        self.dn = normalized_attributes.delete(dn_attribute)
         self.attributes = normalized_attributes
       else
         format = _("'%s' must be either nil, DN value as ActiveLdap::DN, " \
@@ -568,16 +568,7 @@ module ActiveLdap
     #
     # Return the authoritative dn
     def dn
-      return base if @dn_is_base
-
-      dn_value = id
-      if dn_value.nil?
-        raise DistinguishedNameNotSetError.new,
-                _("%s's DN attribute (%s) isn't set") % [self, dn_attribute]
-      end
-      _base = base
-      _base = nil if _base.empty?
-      ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
+      @dn ||= compute_dn
     end
 
     def id
@@ -590,6 +581,7 @@ module ActiveLdap
 
     def dn=(value)
       set_attribute(dn_attribute, value)
+      @dn = nil
     end
     alias_method(:id=, :dn=)
 
@@ -843,6 +835,7 @@ module ActiveLdap
 
     undef_method :base=
     def base=(object_local_base)
+      @dn = nil
       @base = object_local_base
     end
 
@@ -918,6 +911,7 @@ module ActiveLdap
 
     def initialize_by_ldap_data(dn, attributes)
       init_base
+      @dn = dn
       @new_entry = false
       @dn_is_base = false
       @ldap_data = attributes
@@ -986,6 +980,7 @@ module ActiveLdap
       @dn_attribute = nil
       @base = nil
       @scope = nil
+      @dn = nil
       @connection ||= nil
     end
 
@@ -1107,6 +1102,7 @@ module ActiveLdap
     end
 
     def update_dn(attr, value)
+      @dn = nil
       @dn_is_base = false
       return [attr, value] if value.blank?
 
@@ -1153,6 +1149,19 @@ module ActiveLdap
       dn_attribute_name, dn_attribute_value = val.to_a[0]
       [dn_attribute_name, dn_attribute_value,
        bases.empty? ? nil : DN.new(*bases).to_s]
+    end
+
+    def compute_dn
+      return base if @dn_is_base
+
+      dn_value = id
+      if dn_value.nil?
+        raise DistinguishedNameNotSetError.new,
+                _("%s's DN attribute (%s) isn't set") % [self, dn_attribute]
+      end
+      _base = base
+      _base = nil if _base.empty?
+      ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
     end
 
     # define_attribute_methods
