@@ -85,7 +85,7 @@ module ActiveLdap
     def validate_required_ldap_values
       _schema = nil
       # Make sure all MUST attributes have a value
-      @object_classes.each do |object_class|
+      entry_attribute.object_classes.each do |object_class|
         object_class.must.each do |required_attribute|
           # Normalize to ensure we catch schema problems
           # needed?
@@ -123,7 +123,7 @@ module ActiveLdap
     end
 
     def validate_ldap_values
-      @attribute_schemata.each do |name, attribute|
+      entry_attribute.attribute_schemata.each do |name, attribute|
         self[name, true].each do |value|
           validate_ldap_value(attribute, name, value)
         end

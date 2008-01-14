@@ -1,4 +1,5 @@
 require 'active_ldap/schema'
+require 'active_ldap/entry_attribute'
 require 'active_ldap/ldap_error'
 
 module ActiveLdap
@@ -16,6 +17,7 @@ module ActiveLdap
       def initialize(configuration={})
         @connection = nil
         @disconnected = false
+        @entry_attributes = {}
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
         @configuration.assert_valid_keys(VALID_ADAPTER_CONFIGURATION_KEYS)
@@ -108,6 +110,11 @@ module ActiveLdap
                                   :attributes => attrs).first
           Schema.new(attributes)
         end
+      end
+
+      def entry_attribute(object_classes)
+        @entry_attributes[object_classes.uniq.sort] ||=
+          EntryAttribute.new(schema, object_classes)
       end
 
       def search(options={})

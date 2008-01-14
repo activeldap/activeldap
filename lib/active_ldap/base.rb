@@ -520,12 +520,12 @@ module ActiveLdap
 
     def may
       ensure_apply_object_class
-      @may
+      entry_attribute.may
     end
 
     def must
       ensure_apply_object_class
-      @must
+      entry_attribute.must
     end
 
     # attributes
@@ -534,14 +534,7 @@ module ActiveLdap
     # attributes dynamically without schema awareness
     def attribute_names(normalize=false)
       ensure_apply_object_class
-      names = @attribute_names.keys
-      if normalize
-        names.collect do |name|
-          to_real_attribute_name(name)
-        end.uniq
-      else
-        names
-      end
+      entry_attribute.attribute_names(normalize)
     end
 
     def attribute_present?(name)
@@ -670,7 +663,7 @@ module ActiveLdap
     # Add available attributes to the methods
     def methods(inherited_too=true)
       ensure_apply_object_class
-      target_names = @attribute_names.keys + @attribute_aliases.keys
+      target_names = entry_attribute.all_names
       target_names -= ['objectClass', Inflector.underscore('objectClass')]
       super + target_names.uniq.collect do |x|
         [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
@@ -720,14 +713,7 @@ module ActiveLdap
       _schema = nil
       targets = remove_attributes_protected_from_mass_assignment(new_attributes)
       targets.each do |key, value|
-        setter = "#{key}="
-        unless respond_to?(setter)
-          _schema ||= schema
-          attribute = _schema.attribute(key)
-          next if attribute.id.nil?
-          define_attribute_methods(attribute)
-        end
-        send(setter, value)
+        send("#{key}=", value)
       end
     end
 
@@ -815,6 +801,7 @@ module ActiveLdap
         connection.connect
         @connection = connection
         @schema = nil
+        @entry_attribute = nil
         clear_association_cache
       rescue ActiveLdap::Error
         remove_connection
@@ -863,31 +850,21 @@ module ActiveLdap
     end
 
     private
+    def entry_attribute
+      @entry_attribute ||= connection.entry_attribute(@data["objectClass"] || [])
+    end
+
     def abbreviate_instance_variables
       @abbreviating ||= nil
       connection, @connection = @connection, nil
       schema, @schema = @schema, nil
-      attribute_schemata, @attribute_schemata = @attribute_schemata, nil
-      normalized_attribute_names, @normalized_attribute_names =
-        @normalized_attribute_names, nil
-      attribute_aliases, @attribute_aliases = @attribute_aliases, nil
-      must, may = @must, @may
-      object_classes = @object_classes
       unless @abbreviating
         @abbreviating = true
-        @must, @may = @must.collect(&:name), @may.collect(&:name)
-        @object_classes = @object_classes.collect(&:name)
       end
       yield
     ensure
       @connection = connection
       @schema = schema
-      @attribute_schemata = attribute_schemata
-      @normalized_attribute_names = normalized_attribute_names
-      @attribute_aliases = attribute_aliases
-      @must = must
-      @may = may
-      @object_classes = object_classes
       @abbreviating = false
     end
 
@@ -938,16 +915,7 @@ module ActiveLdap
     def to_real_attribute_name(name, allow_normalized_name=false)
       return name if name.nil?
       ensure_apply_object_class
-      name = name.to_s
-      real_name = @attribute_names[name]
-      real_name ||= @attribute_aliases[Inflector.underscore(name)]
-      if real_name
-        real_name
-      elsif allow_normalized_name
-        @normalized_attribute_names[normalize_attribute_name(name)]
-      else
-        nil
-      end
+      entry_attribute.normalize(name, allow_normalized_name)
     end
 
     def ensure_apply_object_class
@@ -971,11 +939,6 @@ module ActiveLdap
       @mutex = Mutex.new
       @data = {} # where the r/w entry data is stored
       @ldap_data = {} # original ldap entry data
-      @attribute_schemata = {}
-      @attribute_names = {} # list of valid method calls for attributes used
-                            # for dereferencing
-      @normalized_attribute_names = {} # list of normalized attribute name
-      @attribute_aliases = {} # aliases of @attribute_names
       @last_oc = false # for use in other methods for "caching"
       @dn_attribute = nil
       @base = nil
@@ -997,35 +960,9 @@ module ActiveLdap
       new_oc = new_oc.uniq
       return new_oc if @last_oc == new_oc
 
-      # Store for caching purposes
       @last_oc = new_oc.dup
-
-      # Set the actual objectClass data
-      define_attribute_methods(schema.attribute('objectClass'))
       replace_class(*new_oc)
-
-      # Build |data| from schema
-      # clear attribute name mapping first
-      @attribute_schemata = {}
-      @attribute_names = {}
-      @normalized_attribute_names = {}
-      @attribute_aliases = {}
-      @must = []
-      @may = []
-      @object_classes = []
-      new_oc.each do |objc|
-        # get all attributes for the class
-        object_class = schema.object_class(objc)
-        @object_classes << object_class
-        @must.concat(object_class.must)
-        @may.concat(object_class.may)
-      end
-      @must.uniq!
-      @may.uniq!
-      (@must + @may).each do |attr|
-        # Update attr_method with appropriate
-        define_attribute_methods(attr)
-      end
+      @entry_attribute = nil
     end
 
     # get_attribute
@@ -1162,21 +1099,6 @@ module ActiveLdap
       _base = base
       _base = nil if _base.empty?
       ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
-    end
-
-    # define_attribute_methods
-    #
-    # Make a method entry for _every_ alias of a valid attribute and map it
-    # onto the first attribute passed in.
-    def define_attribute_methods(attribute)
-      real_name = attribute.name
-      return if @attribute_schemata.has_key?(real_name)
-      @attribute_schemata[real_name] = attribute
-      ([real_name] + attribute.aliases).each do |name|
-        @attribute_names[name] = real_name
-        @attribute_aliases[Inflector.underscore(name)] = real_name
-        @normalized_attribute_names[normalize_attribute_name(name)] = real_name
-      end
     end
 
     # array_of
