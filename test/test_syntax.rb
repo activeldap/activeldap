@@ -224,7 +224,7 @@ class TestSyntax < Test::Unit::TestCase
     assert_valid("1.2.3.4", "OID")
     assert_valid("cn", "OID")
 
-    assert_invalid_oid("\#@!")
+    assert_invalid_oid("\#@!", "attribute type is missing")
   end
 
   def test_other_mailbox_validate
