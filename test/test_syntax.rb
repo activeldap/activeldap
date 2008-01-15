@@ -311,9 +311,13 @@ class TestSyntax < Test::Unit::TestCase
                    value, "Numeric String")
   end
 
-  def assert_invalid_oid(value)
-    assert_invalid(_("%s is invalid OID format") % value.inspect,
-                   value, "OID")
+  def assert_invalid_oid(value, reason=nil)
+    if reason
+      message = _("%s is invalid OID format: %s") % [value.inspect, _(reason)]
+    else
+      message = _("%s is invalid OID format") % value.inspect
+    end
+    assert_invalid(message, value, "OID")
   end
 
   def assert_type_cast_without_validation(type_casted_value, original_value,
