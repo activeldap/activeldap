@@ -818,6 +818,7 @@ module ActiveLdap
     def clear_connection_based_cache
       @schema = nil
       @entry_attribute = nil
+      @real_names = {}
     end
 
     def schema
@@ -866,16 +867,18 @@ module ActiveLdap
     def abbreviate_instance_variables
       @abbreviating ||= nil
       connection, @connection = @connection, nil
-      entry_attribute, @entry_attribute = @entry_attribute, nil
       schema, @schema = @schema, nil
+      entry_attribute, @entry_attribute = @entry_attribute, nil
+      real_names, @real_names = @real_names, nil
       unless @abbreviating
         @abbreviating = true
       end
       yield
     ensure
       @connection = connection
-      @entry_attribute = entry_attribute
       @schema = schema
+      @entry_attribute = entry_attribute
+      @real_names = real_names
       @abbreviating = false
     end
 
@@ -925,7 +928,11 @@ module ActiveLdap
 
     def to_real_attribute_name(name, allow_normalized_name=false)
       return name if name.nil?
-      entry_attribute.normalize(name, allow_normalized_name)
+      if allow_normalized_name
+        entry_attribute.normalize(name, allow_normalized_name)
+      else
+        @real_names[name] ||= entry_attribute.normalize(name, false)
+      end
     end
 
     # enforce_type
@@ -947,6 +954,7 @@ module ActiveLdap
       @scope = nil
       @dn = nil
       @connection ||= nil
+      clear_connection_based_cache
     end
 
     # get_attribute
