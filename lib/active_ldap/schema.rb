@@ -349,6 +349,8 @@ module ActiveLdap
     end
 
     class Attribute < Entry
+      include GetTextSupport
+
       attr_reader :super_attribute
       def initialize(name, schema)
         super(name, schema, "attributeTypes")
@@ -403,7 +405,23 @@ module ActiveLdap
       end
 
       def normalize_value(value)
-        send_to_syntax(value, :normalize_value, value)
+        case value
+        when Array
+          normalize_array_value(value)
+        when Hash
+          normalize_hash_value(value)
+        else
+          if value.nil?
+            value = []
+          else
+            value = send_to_syntax(value, :normalize_value, value)
+          end
+          if binary_required?
+            [{'binary' => value}]
+          else
+            [value]
+          end
+        end
       end
 
       def syntax_description
@@ -447,6 +465,54 @@ module ActiveLdap
           _syntax.send(method_name, *args)
         else
           default_value
+        end
+      end
+
+      def normalize_array_value(value)
+        if value.size > 1 and single_value?
+          format = _("Attribute %s can only have a single value")
+          message = format % target.class.human_attribute_name(attribute)
+          raise TypeError, message
+        end
+        if value.empty?
+          if binary_required?
+            [{'binary' => value}]
+          else
+            value
+          end
+        else
+          value.collect do |entry|
+            normalize_value(entry)[0]
+          end
+        end
+      end
+
+      def normalize_hash_value(value)
+        if value.size > 1
+          format = _("Hashes must have one key-value pair only: %s")
+          raise TypeError, format % value.inspect
+        end
+
+        if binary_required? and !have_binary_key?(value)
+          [append_binary_key(value)]
+        else
+          [value]
+        end
+      end
+
+      def have_binary_key?(hash)
+        key, value = hash.to_a[0]
+        return true if key == "binary"
+        return have_binary_key?(value) if value.is_a?(Hash)
+        false
+      end
+
+      def append_binary_key(hash)
+        key, value = hash.to_a[0]
+        if value.is_a?(Hash)
+          append_binary_key(value)
+        else
+          hash.merge(key => {"binary" => value})
         end
       end
     end
