@@ -1008,17 +1008,6 @@ module ActiveLdap
       attr, value = update_dn(attr, value) if attr == dn_attribute
       raise UnknownAttribute.new(name) if attr.nil?
 
-      case value
-      when nil, ""
-        value = []
-      when Array
-        value = value.collect {|c| c.blank? ? [] : c}.flatten
-      when String
-        value = [value]
-      when Numeric
-        value = [value.to_s]
-      end
-
       @data[attr] = enforce_type(attr, value)
     end
 
