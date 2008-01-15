@@ -360,7 +360,9 @@ class TestBase < Test::Unit::TestCase
                    user2.attributes.reject {|k, v| k == "cn"})
 
       user2.reload
-      assert_equal(user1.attributes, user2.attributes)
+      assert_equal(user1.cn, user2.cn)
+      assert_equal(user1.attributes.reject {|k, v| k == "cn"},
+                   user2.attributes.reject {|k, v| k == "cn"})
     end
   end
 

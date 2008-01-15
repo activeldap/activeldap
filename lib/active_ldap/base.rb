@@ -817,6 +817,10 @@ module ActiveLdap
 
     def clear_connection_based_cache
       @schema = nil
+      clear_object_class_based_cache
+    end
+
+    def clear_object_class_based_cache
       @entry_attribute = nil
       @real_names = {}
     end
@@ -987,11 +991,7 @@ module ActiveLdap
       name = to_real_attribute_name(name)
 
       value = @data[name] || []
-      if force_array
-        [name, value.dup]
-      else
-        [name, array_of(value.dup, false)]
-      end
+      [name, array_of(enforce_type(name, value), force_array)]
     end
 
     def get_attribute_as_query(name, force_array=false)
@@ -1016,24 +1016,13 @@ module ActiveLdap
       attr, value = update_dn(attr, value) if attr == dn_attribute
       raise UnknownAttribute.new(name) if attr.nil?
 
-      case value
-      when nil, ""
-        value = []
-      when Array
-        value = value.collect {|c| c.blank? ? [] : c}.flatten
-      when String
-        value = [value]
-      when Numeric
-        value = [value.to_s]
-      end
-
-      @data[attr] = enforce_type(attr, value)
+      @data[attr] = value
     end
 
     def update_dn(attr, value)
       @dn = nil
       @dn_is_base = false
-      return [attr, value] if value.blank?
+      return [attr, nil] if value.blank?
 
       new_dn_attribute, new_value, bases = split_dn_value(value)
       if new_dn_attribute.nil? and new_value.nil?
@@ -1100,7 +1089,7 @@ module ActiveLdap
       case value
       when Array
         if to_a or value.size > 1
-          value.collect {|v| array_of(v, to_a)}
+          value.collect {|v| array_of(v, false)}.compact
         else
           if value.empty?
             nil
@@ -1117,7 +1106,7 @@ module ActiveLdap
           result
         end
       else
-        to_a ? [value.to_s] : value.to_s
+        to_a ? [value] : value
       end
     end
 
@@ -1131,7 +1120,7 @@ module ActiveLdap
         real_name ||= key
         next if _schema.attribute(real_name).id.nil?
         result[real_name] ||= []
-        result[real_name].concat(values)
+        result[real_name].concat(enforce_type(real_name, values))
       end
       result
     end

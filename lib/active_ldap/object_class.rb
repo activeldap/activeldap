@@ -29,7 +29,7 @@ module ActiveLdap
       assert_object_classes(new_classes)
       if new_classes.sort != classes.sort
         set_attribute('objectClass', new_classes)
-        @entry_attribute = nil
+        clear_object_class_based_cache
       end
     end
     alias_method(:classes=, :replace_class)

@@ -411,7 +411,7 @@ module ActiveLdap
         when Hash
           normalize_hash_value(value)
         else
-          if value.nil?
+          if value.blank?
             value = []
           else
             value = send_to_syntax(value, :normalize_value, value)
@@ -419,7 +419,7 @@ module ActiveLdap
           if binary_required?
             [{'binary' => value}]
           else
-            [value]
+            value.is_a?(Array) ? value : [value]
           end
         end
       end
