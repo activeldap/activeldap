@@ -321,7 +321,12 @@ module ActiveLdap
           DN.parse("#{value}=dummy")
           nil
         rescue DistinguishedNameInvalid
-          _("%s is invalid OID format: %s") % [original_value.inspect, $!.reason]
+          reason = $!.reason
+          if reason
+            _("%s is invalid OID format: %s") % [original_value.inspect, reason]
+          else
+            _("%s is invalid OID format") % original_value.inspect
+          end
         end
       end
 
