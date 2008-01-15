@@ -3,8 +3,8 @@ module ActiveLdap
     def self.included(base)
       base.class_eval do
         extend(ClassMethods)
-        extend(Normalize)
-        include(Normalize)
+        extend(Normalizable)
+        include(Normalizable)
       end
     end
 
@@ -32,7 +32,7 @@ module ActiveLdap
       end
     end
 
-    module Normalize
+    module Normalizable
       def normalize_attribute_name(name)
         name.to_s.downcase
       end
@@ -47,7 +47,7 @@ module ActiveLdap
         end
 
         name = normalize_attribute_name(name)
-        [name, normalize_attribute_value(name, value, nil, nil)]
+        [name, Normalizer.new(name, value, self).normalize]
       end
 
       def unnormalize_attributes(attributes)
@@ -64,7 +64,7 @@ module ActiveLdap
         else
           values.each do |value|
             if value.is_a?(Hash)
-              suffix, real_value = extract_attribute_options(value)
+              suffix, real_value = unnormalize_attribute_options(value)
               new_name = name + suffix
               result[new_name] ||= []
               result[new_name].concat(real_value)
@@ -75,108 +75,6 @@ module ActiveLdap
           end
         end
         result
-      end
-
-      private
-      def normalize_attribute_value(name, value, rubyish_class_name, attribute)
-        rubyish_class_name ||= Inflector.underscore(value.class.name)
-        handler = "normalize_attribute_value_of_#{rubyish_class_name}"
-        if respond_to?(handler, true)
-          send(handler, name, value, rubyish_class_name, attribute)
-        else
-          attribute ||= schema.attribute(name)
-          [attribute.normalize_value(value)]
-        end
-      end
-
-      def normalize_attribute_value_of_array(name, value, rubyish_class_name,
-                                             attribute)
-	attribute ||= schema.attribute(name)
-        if value.size > 1 and attribute.single_value?
-          format = _("Attribute %s can only have a single value")
-          message = format % self.class.human_attribute_name(attribute)
-          raise TypeError, message
-        end
-        if value.empty?
-          if attribute.binary_required?
-            [{'binary' => value}]
-          else
-            value
-          end
-        else
-          value.collect do |entry|
-            normalize_attribute_value(name, entry, nil, attribute)[0]
-          end
-        end
-      end
-
-      def normalize_attribute_value_of_hash(name, value, rubyish_class_name,
-                                            attribute)
-        if value.keys.size > 1
-          format = _("Hashes must have one key-value pair only: %s")
-          raise TypeError, format % value.inspect
-        end
-        unless value.keys[0].match(/^(lang-[a-z][a-z]*)|(binary)$/)
-          logger.warn do
-            format = _("unknown option did not match lang-* or binary: %s")
-            format % value.keys[0]
-          end
-        end
-
-        # Contents MUST be a String or an Array
-        attribute ||= schema.attribute(name)
-        if !value.has_key?('binary') and attribute.binary_required?
-          suffix, real_value = extract_attribute_options(value)
-          name, values =
-            normalize_attribute_options("#{name}#{suffix};binary", real_value)
-          values
-        else
-          [value]
-        end
-      end
-
-      def normalize_attribute_value_of_nil_class(name, value,
-                                                 rubyish_class_name, attribute)
-        attribute ||= schema.attribute(name)
-        if attribute.binary_required?
-          [{'binary' => []}]
-        else
-          []
-        end
-      end
-
-      def normalize_attribute_value_of_string(name, value, rubyish_class_name,
-                                              attribute)
-        attribute ||= schema.attribute(name)
-        if attribute.binary_required?
-          [{'binary' => [value]}]
-        else
-          [value]
-        end
-      end
-
-      def normalize_attribute_value_of_date(name, value, rubyish_class_name,
-                                            attribute)
-        new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
-                            value.year, value.month, value.mday, 0, 0, 0,
-                            '+0000')
-        normalize_attribute_value_of_string(name, new_value, nil, attribute)
-      end
-
-      def normalize_attribute_value_of_time(name, value, rubyish_class_name,
-                                            attribute)
-        new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
-                            0, 0, 0, value.hour, value.min, value.sec,
-                            value.zone)
-        normalize_attribute_value_of_string(name, new_value, nil, attribute)
-      end
-
-      def normalize_attribute_value_of_date_time(name, value, rubyish_class_name,
-                                                 attribute)
-        new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
-                            value.year, value.month, value.mday, value.hour,
-                            value.min, value.sec, value.zone)
-        normalize_attribute_value_of_string(name, new_value, nil, attribute)
       end
 
       # normalize_attribute_options
@@ -192,23 +90,132 @@ module ActiveLdap
          [options.reverse.inject(value) {|result, option| {option => result}}]]
       end
 
-      # extract_attribute_options
+      # unnormalize_attribute_options
       #
-      # Extracts all of the subtypes from a given set of nested hashes
+      # Unnormalizes all of the subtypes from a given set of nested hashes
       # and returns the attribute suffix and the final true value
-      def extract_attribute_options(value)
+      def unnormalize_attribute_options(value)
         options = ''
         ret_val = value
         if value.class == Hash
           options = ';' + value.keys[0]
           ret_val = value[value.keys[0]]
           if ret_val.class == Hash
-            sub_options, ret_val = extract_attribute_options(ret_val)
+            sub_options, ret_val = unnormalize_attribute_options(ret_val)
             options += sub_options
           end
         end
         ret_val = [ret_val] unless ret_val.class == Array
         [options, ret_val]
+      end
+
+      class Normalizer
+        include GetTextSupport
+
+        def initialize(name, value, target)
+          @name = name
+          @value = value
+          @target = target
+          @attribute = nil
+        end
+
+        def normalize
+          _normalize(@value)
+        end
+
+        private
+        def attribute
+          @attribute ||= @target.schema.attribute(@name)
+        end
+
+        def _normalize(value)
+          rubyish_class_name = Inflector.underscore(value.class.name)
+          handler = "normalize_#{rubyish_class_name}"
+          if respond_to?(handler, true)
+            send(handler, value)
+          else
+            [attribute.normalize_value(value)]
+          end
+        end
+
+        def normalize_array(value)
+          if value.size > 1 and attribute.single_value?
+            format = _("Attribute %s can only have a single value")
+            message = format % target.class.human_attribute_name(attribute)
+            raise TypeError, message
+          end
+          if value.empty?
+            if attribute.binary_required?
+              [{'binary' => value}]
+            else
+              value
+            end
+          else
+            value.collect do |entry|
+              _normalize(entry)[0]
+            end
+          end
+        end
+
+        def normalize_hash(value)
+          if value.keys.size > 1
+            format = _("Hashes must have one key-value pair only: %s")
+            raise TypeError, format % value.inspect
+          end
+          unless value.keys[0].match(/^(lang-[a-z][a-z]*)|(binary)$/)
+            logger.warn do
+              format = _("unknown option did not match lang-* or binary: %s")
+              format % value.keys[0]
+            end
+          end
+
+          # Contents MUST be a String or an Array
+          if !value.has_key?('binary') and attribute.binary_required?
+            suffix, real_value = @target.unnormalize_attribute_options(value)
+            name = "#{@name}#{suffix};binary"
+            name, values = @target.normalize_attribute_options(name, real_value)
+            values
+          else
+            [value]
+          end
+        end
+
+        def normalize_nil_class(value)
+          if attribute.binary_required?
+            [{'binary' => []}]
+          else
+            []
+          end
+        end
+
+        def normalize_string(value)
+          if attribute.binary_required?
+            [{'binary' => [value]}]
+          else
+            [value]
+          end
+        end
+
+        def normalize_date(value)
+          new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
+                              value.year, value.month, value.mday, 0, 0, 0,
+                              '+0000')
+          normalize_string(new_value)
+        end
+
+        def normalize_time(value)
+          new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
+                              0, 0, 0, value.hour, value.min, value.sec,
+                              value.zone)
+          normalize_string(new_value)
+        end
+
+        def normalize_date_time(value)
+          new_value = sprintf('%.04d%.02d%.02d%.02d%.02d%.02d%s',
+                              value.year, value.month, value.mday, value.hour,
+                              value.min, value.sec, value.zone)
+          normalize_string(new_value)
+        end
       end
     end
 

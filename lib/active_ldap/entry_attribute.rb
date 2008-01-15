@@ -2,7 +2,7 @@ require "active_ldap/attributes"
 
 module ActiveLdap
   class EntryAttribute
-    include Attributes::Normalize
+    include Attributes::Normalizable
 
     attr_reader :must, :may, :object_classes, :schemata
     def initialize(schema, object_classes)
