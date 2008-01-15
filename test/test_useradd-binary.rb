@@ -46,7 +46,7 @@ class TestUseraddBinary < Test::Unit::TestCase
       assert_equal(['person', 'posixAccount', 'shadowAccount',
                     'strongAuthenticationUser'].sort, user.classes.sort)
       cert = File.read(File.join(@examples_dir, 'example.der'))
-      assert_equal({"binary" => cert}, user.user_certificate)
+      assert_equal(cert, user.user_certificate)
     end
   end
 

@@ -977,7 +977,11 @@ module ActiveLdap
         value.each do |option, val|
           result[option] = type_cast(attribute, val)
         end
-        result
+        if result.size == 1 and result.has_key?("binary")
+          result["binary"]
+        else
+          result
+        end
       when Array
         value.collect do |val|
           type_cast(attribute, val)
@@ -991,7 +995,7 @@ module ActiveLdap
       name = to_real_attribute_name(name)
 
       value = @data[name] || []
-      [name, array_of(enforce_type(name, value), force_array)]
+      [name, array_of(value, force_array)]
     end
 
     def get_attribute_as_query(name, force_array=false)

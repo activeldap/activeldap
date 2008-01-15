@@ -38,17 +38,15 @@ class TestUser < Test::Unit::TestCase
                    'This should have returned an array of a ' +
                    'normal cn and a lang-en-us cn.')
 
-      uid_number = 9000
+      uid_number = "9000"
       user.uid_number = uid_number
-      # Test to_s on Fixnums
-      assert_equal(uid_number, user.uid_number)
-      assert_equal(uid_number.to_s, user.uid_number_before_type_cast)
+      assert_equal(uid_number.to_i, user.uid_number)
+      assert_equal(uid_number, user.uid_number_before_type_cast)
 
       gid_number = 9000
       user.gid_number = gid_number
-      # Test to_s on Fixnums
       assert_equal(gid_number, user.gid_number)
-      assert_equal(gid_number.to_s, user.gid_number_before_type_cast)
+      assert_equal(gid_number, user.gid_number_before_type_cast)
 
       home_directory = '/home/foo'
       user.home_directory = home_directory
@@ -108,39 +106,31 @@ class TestUser < Test::Unit::TestCase
     make_temporary_user do |user, password|
       # validate add
       user.user_certificate = nil
-      assert_equal({'binary' => nil}, user.user_certificate)
+      assert_nil(user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_equal({'binary' => nil}, user.user_certificate)
+      assert_nil(user.user_certificate)
 
       user.user_certificate = {"binary" => [certificate]}
-      assert_equal({'binary' => certificate},
-                   user.user_certificate,
-                   'This should have been forced to be a binary subtype.')
+      assert_equal(certificate, user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_equal({'binary' => certificate},
-                   user.user_certificate,
-                   'This should have been forced to be a binary subtype.')
+      assert_equal(certificate, user.user_certificate)
 
       # now test modify
       user.user_certificate = nil
-      assert_equal({"binary" => nil}, user.user_certificate)
+      assert_nil(user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_equal({"binary" => nil}, user.user_certificate)
+      assert_nil(user.user_certificate)
 
       user.user_certificate = certificate
-      assert_equal({'binary' => certificate},
-                   user.user_certificate,
-                   'This should have been forced to be a binary subtype.')
+      assert_equal(certificate, user.user_certificate)
       assert_nothing_raised() { user.save! }
 
       # validate modify
       user = @user_class.find(user.uid)
-      assert_equal({'binary' => certificate},
-                   user.user_certificate,
-                   'This should have been forced to be a binary subtype.')
+      assert_equal(certificate, user.user_certificate)
 
       expected_cert = OpenSSL::X509::Certificate.new(certificate)
-      actual_cert = user.user_certificate['binary']
+      actual_cert = user.user_certificate
       actual_cert = OpenSSL::X509::Certificate.new(actual_cert)
       assert_equal(expected_cert.subject.to_s,
                    actual_cert.subject.to_s,
@@ -151,10 +141,10 @@ class TestUser < Test::Unit::TestCase
   def test_binary_required_nested
     make_temporary_user do |user, password|
       user.user_certificate = {"lang-en" => [certificate]}
-      assert_equal({'lang-en' => {'binary' => certificate}},
+      assert_equal({'lang-en' => certificate},
                    user.user_certificate)
       assert_nothing_raised() { user.save! }
-      assert_equal({'lang-en' => {'binary' => certificate}},
+      assert_equal({'lang-en' => certificate},
                    user.user_certificate)
     end
   end
