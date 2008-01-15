@@ -706,7 +706,6 @@ module ActiveLdap
     # Do not let URL/form hackers supply the keys.
     def attributes=(new_attributes)
       return if new_attributes.nil?
-      _schema = nil
       targets = remove_attributes_protected_from_mass_assignment(new_attributes)
       targets.each do |key, value|
         send("#{key}=", value)

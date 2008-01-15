@@ -112,6 +112,8 @@ module ActiveLdap
       class Normalizer
         include GetTextSupport
 
+        @@rubyish_class_names = {}
+
         def initialize(name, value, target)
           @name = name
           @value = value
@@ -128,9 +130,13 @@ module ActiveLdap
           @attribute ||= @target.schema.attribute(@name)
         end
 
+        def rubyish_class_name(value)
+          klass = value.class
+          @@rubyish_class_names[klass] ||= Inflector.underscore(klass.name)
+        end
+
         def _normalize(value)
-          rubyish_class_name = Inflector.underscore(value.class.name)
-          handler = "normalize_#{rubyish_class_name}"
+          handler = "normalize_#{rubyish_class_name(value)}"
           if respond_to?(handler, true)
             send(handler, value)
           else
