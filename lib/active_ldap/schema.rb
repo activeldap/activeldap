@@ -451,6 +451,7 @@ module ActiveLdap
         else
           @binary_required = false
           @binary = false
+          @derived_syntax = nil
           @derived_syntax = @super_attribute.syntax if @super_attribute
         end
       end

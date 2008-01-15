@@ -370,6 +370,16 @@ module ActiveLdap
         end.join(",")
       end
 
+      alias_method :base_without_parsed_cache_clear=, :base=
+      def base=(value)
+        self.base_without_parsed_cache_clear = value
+        @parsed_base = nil
+      end
+
+      def parsed_base
+        @parsed_base ||= DN.parse(base)
+      end
+
       alias_method :scope_without_validation=, :scope=
       def scope=(scope)
         validate_scope(scope)
@@ -1046,7 +1056,7 @@ module ActiveLdap
       end
 
       begin
-        relative_dn_value = dn_value - DN.parse(base_of_class)
+        relative_dn_value = dn_value - self.class.parsed_base
         if relative_dn_value.rdns.empty?
           val = []
           bases = dn_value.rdns
