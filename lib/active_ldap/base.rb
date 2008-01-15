@@ -1027,17 +1027,17 @@ module ActiveLdap
       @dn_is_base = false
       return [attr, value] if value.blank?
 
-      new_dn_attribute, new_value, base = split_dn_value(value)
+      new_dn_attribute, new_value, bases = split_dn_value(value)
       if new_dn_attribute.nil? and new_value.nil?
         @dn_is_base = true
         @base = nil
-        attr, value = DN.parse(base).rdns[0].to_a[0]
+        attr, value = bases[0].to_a[0]
         @dn_attribute = attr
       else
         new_dn_attribute = to_real_attribute_name(new_dn_attribute)
         if new_dn_attribute
           value = new_value
-          @base = base
+          @base = bases.empty? ? nil : DN.new(*bases).to_s
           if dn_attribute != new_dn_attribute
             @dn_attribute = attr = new_dn_attribute
           end
@@ -1068,8 +1068,7 @@ module ActiveLdap
       end
 
       dn_attribute_name, dn_attribute_value = val.to_a[0]
-      [dn_attribute_name, dn_attribute_value,
-       bases.empty? ? nil : DN.new(*bases).to_s]
+      [dn_attribute_name, dn_attribute_value, bases]
     end
 
     def compute_dn
