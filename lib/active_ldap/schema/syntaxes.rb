@@ -243,7 +243,7 @@ module ActiveLdap
         end
 
         def normalize_value(value)
-          if value.is_a?(Integer)
+          if value.is_a?(::Integer)
             value.to_s
           else
             value
