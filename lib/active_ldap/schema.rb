@@ -389,7 +389,7 @@ module ActiveLdap
       end
 
       def syntax
-        (@derived_syntax ||= [derived_syntax])[0]
+        @derived_syntax
       end
 
       def valid?(value)
@@ -447,16 +447,12 @@ module ActiveLdap
         if @syntax
           @binary_required = @syntax.binary_transfer_required?
           @binary = (@binary_required or !@syntax.human_readable?)
+          @derived_syntax = @syntax
         else
           @binary_required = false
           @binary = false
+          @derived_syntax = @super_attribute.syntax if @super_attribute
         end
-      end
-
-      def derived_syntax
-        return @syntax if @syntax
-        return @super_attribute.syntax if @super_attribute
-        nil
       end
 
       def send_to_syntax(default_value, method_name, *args)
