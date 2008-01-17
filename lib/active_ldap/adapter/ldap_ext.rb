@@ -73,6 +73,9 @@ module LDAP
       code = error_code
       klass = ActiveLdap::LdapError::ERRORS[code]
       klass ||= IMPLEMENT_SPECIFIC_ERRORS[code]
+      if klass.nil? and error_message == "Can't contact LDAP server"
+        klass = LDAP::ServerDown
+      end
       klass ||= ActiveLdap::LdapError
       raise klass, LDAP.err2string(code)
     end
