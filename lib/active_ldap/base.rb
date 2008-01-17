@@ -891,6 +891,7 @@ module ActiveLdap
       connection, @connection = @connection, nil
       schema, @schema = @schema, nil
       entry_attribute, @entry_attribute = @entry_attribute, nil
+      local_entry_attribute, @local_entry_attribute = @local_entry_attribute, nil
       real_names, @real_names = @real_names, nil
       unless @abbreviating
         @abbreviating = true
@@ -900,6 +901,7 @@ module ActiveLdap
       @connection = connection
       @schema = schema
       @entry_attribute = entry_attribute
+      @local_entry_attribute = local_entry_attribute
       @real_names = real_names
       @abbreviating = false
     end
