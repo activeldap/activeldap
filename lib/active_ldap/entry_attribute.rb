@@ -13,7 +13,7 @@ module ActiveLdap
       @must = []
       @may = []
       @object_classes = []
-      define_attribute_methods(schema.attribute('objectClass'))
+      register(schema.attribute('objectClass'))
       object_classes.each do |objc|
         # get all attributes for the class
         object_class = schema.object_class(objc)
@@ -25,7 +25,7 @@ module ActiveLdap
       @may.uniq!
       (@must + @may).each do |attr|
         # Update attr_method with appropriate
-        define_attribute_methods(attr)
+        register(attr)
       end
     end
 
@@ -42,12 +42,14 @@ module ActiveLdap
 
     def normalize(name, allow_normalized_name=false)
       return name if name.nil?
+      return nil if @names.empty? and @aliases.empty?
       name = name.to_s
       real_name = @names[name]
       real_name ||= @aliases[Inflector.underscore(name)]
       if real_name
         real_name
       elsif allow_normalized_name
+        return nil if @normalized_names.empty?
         @normalized_names[normalize_attribute_name(name)]
       else
         nil
@@ -58,12 +60,11 @@ module ActiveLdap
       @names.keys + @aliases.keys
     end
 
-    private
-    # define_attribute_methods
+    # register
     #
     # Make a method entry for _every_ alias of a valid attribute and map it
     # onto the first attribute passed in.
-    def define_attribute_methods(attribute)
+    def register(attribute)
       real_name = attribute.name
       return if @schemata.has_key?(real_name)
       @schemata[real_name] = attribute

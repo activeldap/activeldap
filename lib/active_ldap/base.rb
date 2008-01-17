@@ -716,9 +716,18 @@ module ActiveLdap
     # Do not let URL/form hackers supply the keys.
     def attributes=(new_attributes)
       return if new_attributes.nil?
+      _schema = _local_entry_attribute = nil
       targets = remove_attributes_protected_from_mass_assignment(new_attributes)
       targets.each do |key, value|
-        send("#{key}=", value)
+        setter = "#{key}="
+        unless respond_to?(setter)
+          _schema ||= schema
+          attribute = _schema.attribute(key)
+          next if attribute.id.nil?
+          _local_entry_attribute ||= local_entry_attribute
+          _local_entry_attribute.register(attribute)
+        end
+        send(setter, value)
       end
     end
 
@@ -817,6 +826,7 @@ module ActiveLdap
 
     def clear_connection_based_cache
       @schema = nil
+      @local_entry_attribute = nil
       clear_object_class_based_cache
     end
 
@@ -864,8 +874,16 @@ module ActiveLdap
     end
 
     private
+    def attribute_name_resolvable_without_connection?
+      @entry_attribute and @local_entry_attribute
+    end
+
     def entry_attribute
       @entry_attribute ||= connection.entry_attribute(@data["objectClass"] || [])
+    end
+
+    def local_entry_attribute
+      @local_entry_attribute ||= connection.entry_attribute([])
     end
 
     def abbreviate_instance_variables
@@ -933,9 +951,12 @@ module ActiveLdap
     def to_real_attribute_name(name, allow_normalized_name=false)
       return name if name.nil?
       if allow_normalized_name
-        entry_attribute.normalize(name, allow_normalized_name)
+        entry_attribute.normalize(name, allow_normalized_name) ||
+          local_entry_attribute.normalize(name, allow_normalized_name)
       else
-        @real_names[name] ||= entry_attribute.normalize(name, false)
+        @real_names[name] ||=
+          entry_attribute.normalize(name, false) ||
+          local_entry_attribute.normalize(name, false)
       end
     end
 

@@ -4,12 +4,18 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_operational_attributes
+    make_temporary_user do |user, password|
+      found_user = @user_class.find(user.uid, :attributes => ["*", "+"])
+      assert_equal(Time.now.utc.iso8601,
+                   found_user.modify_timestamp.utc.iso8601)
+    end
+  end
 
   priority :normal
   def test_find_with_attributes_without_object_class
     make_temporary_user do |user, password|
-      found_user = @user_class.find(user.uid,
-                                    :attributes => ["uidNumber"])
+      found_user = @user_class.find(user.uid, :attributes => ["uidNumber"])
       assert_equal(user.uid_number, found_user.uid_number)
       assert_equal(user.classes, found_user.classes)
       assert_nil(found_user.gid_number)

@@ -208,7 +208,8 @@ module ActiveLdap
       return conn if conn
 
       if @dn or
-          (@entry_attribute and get_attribute_before_type_cast(dn_attribute)[1])
+          (attribute_name_resolvable_without_connection? and
+           get_attribute_before_type_cast(dn_attribute)[1])
         conn = self.class.active_connections[dn] || retrieve_connection
       end
       conn || self.class.connection
