@@ -10,17 +10,17 @@ class TestFind < Test::Unit::TestCase
                              :scope => @user_class.scope,
                              :classes => @user_class_classes,
                              :sort_by => "uid",
-                             :order => "asc")
+                             :order => "desc")
     make_temporary_user(:uid => "user1") do |user1,|
       make_temporary_user(:uid => "user2") do |user2,|
         make_temporary_user(:uid => "user3") do |user3,|
           users = @user_class.find(:all)
-          assert_equal(["user3", "user2", "user1"].sort,
-                       users.collect {|u| u.uid}.sort)
+          assert_equal(["user3", "user2", "user1"],
+                       users.collect {|u| u.uid})
 
-          users = @user_class.find(:all, :order => "desc")
-          assert_equal(["user1", "user2", "user3"].sort,
-                       users.collect {|u| u.uid}.sort)
+          users = @user_class.find(:all, :order => "asc")
+          assert_equal(["user1", "user2", "user3"],
+                       users.collect {|u| u.uid})
         end
       end
     end

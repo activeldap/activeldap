@@ -202,8 +202,8 @@ module ActiveLdap
 
       def find_every(options)
         options = options.dup
-        sort_by = options.delete(:sort_by) || sort_by
-        order = options.delete(:order) || order
+        sort_by = options.delete(:sort_by) || self.sort_by
+        order = options.delete(:order) || self.order
         limit = options.delete(:limit) if sort_by or order
         options[:attributes] |= ["objectClass"] if options[:attributes]
 
