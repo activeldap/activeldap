@@ -336,24 +336,7 @@ module ActiveLdap
           construct_filter(components, operator)
         else
           operator, components = normalize_array_filter(filter, operator)
-
-          components = components.collect do |component|
-            if component.is_a?(Array) and component.size == 2
-              key, value = component
-              if filter_logical_operator?(key)
-                parse_filter(component)
-              elsif value.is_a?(Hash)
-                parse_filter(value, key)
-              else
-                construct_component(key, value, operator)
-              end
-            elsif component.is_a?(Symbol)
-              assert_filter_logical_operator(component)
-              nil
-            else
-              parse_filter(component, operator)
-            end
-          end
+          components = construct_components(components, operator)
           construct_filter(components, operator)
         end
       end
@@ -376,6 +359,7 @@ module ActiveLdap
           operator = filter_operator
         else
           components.unshift(filter_operator)
+          components = [components] unless filter_operator.is_a?(Array)
         end
         [operator, components]
       end
@@ -388,22 +372,53 @@ module ActiveLdap
             options = value[0]
             value = value[1]
           when "=", "~=", "<=", "=>"
-            options[:operator] = value[1]
-            value = value[1]
+            options[:operator] = value[0]
+            if value.size > 2
+              value = value[1..-1]
+            else
+              value = value[1]
+            end
           end
         end
         [value, options]
       end
 
+      def construct_components(components, operator)
+        components.collect do |component|
+          if component.is_a?(Array)
+            if filter_logical_operator?(component[0])
+              parse_filter(component)
+            elsif component.size == 2
+              key, value = component
+              if value.is_a?(Hash)
+                parse_filter(value, key)
+              else
+                construct_component(key, value, operator)
+              end
+            else
+              construct_component(component[0], component[1..-1], operator)
+            end
+          elsif component.is_a?(Symbol)
+            assert_filter_logical_operator(component)
+            nil
+          else
+            parse_filter(component, operator)
+          end
+        end
+      end
+
       def construct_component(key, value, operator=nil)
         value, options = extract_filter_value_options(value)
+	comparison_operator = options[:operator] || "="
         if collection?(value)
+          return nil if value.empty?
+          operator, value = normalize_array_filter(value, operator)
           values = []
           value.each do |val|
             if collection?(val)
-              values.concat(val.collect {|v| [key, v]})
+              values.concat(val.collect {|v| [key, comparison_operator, v]})
             else
-              values << [key, val]
+              values << [key, comparison_operator, val]
             end
           end
           values[0] = values[0][1] if filter_logical_operator?(values[0][1])
@@ -412,7 +427,7 @@ module ActiveLdap
           [
            "(",
            escape_filter_key(key),
-           options[:operator] || "=",
+           comparison_operator,
            escape_filter_value(value, options),
            ")"
           ].join

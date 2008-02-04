@@ -10,6 +10,19 @@ class TestAdapter < Test::Unit::TestCase
   end
 
   priority :must
+  def test_operator
+    assert_parse_filter("(uid~=Alice)", ["uid", "~=", "Alice"])
+    assert_parse_filter("(&(uid~=Alice)(uid~=Bob))",
+                        ["uid", "~=", "Alice", "Bob"])
+    assert_parse_filter("(uid~=Alice)", [["uid", "~=", "Alice"]])
+    assert_parse_filter("(|(uid~=Alice)(uid~=Bob))",
+                        [:or,
+                         ["uid", "~=", "Alice"],
+                         ["uid", "~=", "Bob"]])
+    assert_parse_filter("(|(uid~=Alice)(uid~=Bob))",
+                        [:or,
+                         ["uid", "~=", "Alice", "Bob"]])
+  end
 
   priority :normal
   def test_filter_with_escaped_character
@@ -73,8 +86,8 @@ class TestAdapter < Test::Unit::TestCase
     assert_parse_filter("(&(gidNumber=100001)" +
                         "(|(uid=temp-user1)(uid=temp-user2)))",
                         [:and,
-                         [:and, {"gidNumber"=>["100001"]}],
-                         [:or, {"uid"=>["temp-user1", "temp-user2"]}]])
+                         [:and, {"gidNumber" => ["100001"]}],
+                         [:or, {"uid" => ["temp-user1", "temp-user2"]}]])
     assert_parse_filter("(&(gidNumber=100001)" +
                         "(objectClass=person)(objectClass=posixAccount))",
                         [:and,
