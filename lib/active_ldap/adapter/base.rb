@@ -409,7 +409,7 @@ module ActiveLdap
 
       def construct_component(key, value, operator=nil)
         value, options = extract_filter_value_options(value)
-	comparison_operator = options[:operator] || "="
+        comparison_operator = options[:operator] || "="
         if collection?(value)
           return nil if value.empty?
           operator, value = normalize_array_filter(value, operator)
