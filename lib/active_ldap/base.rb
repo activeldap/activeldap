@@ -220,6 +220,15 @@ module ActiveLdap
     end
   end
 
+  class AttributeValueInvalid < Error
+    attr_reader :attribute, :value
+    def initialize(attribute, value, message)
+      @attribute = attribute
+      @value = value
+      super(message)
+    end
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core

@@ -217,6 +217,10 @@ module ActiveLdap
       end.join(",")
     end
 
+    def to_human_readable_format
+      to_s.inspect
+    end
+
     private
     def normalize(rdns)
       rdns.collect do |rdn|

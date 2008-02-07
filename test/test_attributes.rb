@@ -34,12 +34,25 @@ class TestAttributes < Test::Unit::TestCase
                  ActiveLdap::Base.normalize_attribute("userCertificate", []))
     assert_equal(["usercertificate", [{"binary" => []}]],
                  ActiveLdap::Base.normalize_attribute("userCertificate", nil))
+    assert_equal(["usercertificate", [{"binary" => "BINARY DATA"}]],
+                 ActiveLdap::Base.normalize_attribute("userCertificate",
+                                                      "BINARY DATA"))
+    assert_equal(["usercertificate", [{"binary" => ["BINARY DATA"]}]],
+                 ActiveLdap::Base.normalize_attribute("userCertificate",
+                                                      {"binary" =>
+                                                        ["BINARY DATA"]}))
   end
 
   def test_unnormalize_attribute
+    assert_equal({"sn" => ["Surname"]},
+                 ActiveLdap::Base.unnormalize_attribute("sn", ["Surname"]))
     assert_equal({"userCertificate;binary" => []},
                  ActiveLdap::Base.unnormalize_attribute("userCertificate",
                                                         [{"binary" => []}]))
+    assert_equal({"userCertificate;binary" => ["BINARY DATA"]},
+                 ActiveLdap::Base.unnormalize_attribute("userCertificate",
+                                                        [{"binary" =>
+                                                           ["BINARY DATA"]}]))
   end
 
   def test_attr_protected

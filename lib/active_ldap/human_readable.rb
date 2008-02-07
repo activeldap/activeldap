@@ -107,6 +107,26 @@ module ActiveLdap
         return nil if description.nil?
         "LDAP|Description|Syntax|#{syntax.id}|#{description}"
       end
+
+      def human_readable_format(object)
+        case object
+        when Array
+          "[#{object.collect {|value| human_readable_format(value)}.join(', ')}]"
+        when Hash
+          formatted_values = []
+          object.each do |key, value|
+            formatted_values << [human_readable_format(key),
+                                 human_readable_format(value)].join("=>")
+          end
+          "{#{formatted_values.join(', ')}}"
+        else
+          if object.respond_to?(:to_human_readable_format)
+            object.to_human_readable_format
+          else
+            object.inspect
+          end
+        end
+      end
     end
   end
 end

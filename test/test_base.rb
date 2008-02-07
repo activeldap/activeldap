@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 require 'al-test-utils'
 
 class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
-
   priority :normal
   def test_new_with_dn
     cn = "XXX"

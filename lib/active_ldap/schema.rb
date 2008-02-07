@@ -350,6 +350,7 @@ module ActiveLdap
 
     class Attribute < Entry
       include GetTextSupport
+      include HumanReadable
 
       attr_reader :super_attribute
       def initialize(name, schema)
@@ -397,7 +398,14 @@ module ActiveLdap
       end
 
       def validate(value)
-        send_to_syntax(nil, :validate, value)
+        error_info = validate_each_value(value)
+        return error_info if error_info
+        begin
+          normalize_value(value)
+          nil
+        rescue AttributeValueInvalid
+          [$!.message]
+        end
       end
 
       def type_cast(value)
@@ -405,27 +413,19 @@ module ActiveLdap
       end
 
       def normalize_value(value)
-        case value
-        when Array
-          normalize_array_value(value)
-        when Hash
-          normalize_hash_value(value)
-        else
-          if value.blank?
-            value = []
-          else
-            value = send_to_syntax(value, :normalize_value, value)
-          end
-          if binary_required?
-            [{'binary' => value}]
-          else
-            value.is_a?(Array) ? value : [value]
-          end
-        end
+        normalize_value_internal(value, false)
       end
 
       def syntax_description
         send_to_syntax(nil, :description)
+      end
+
+      def human_attribute_name
+        self.class.human_attribute_name(self)
+      end
+
+      def human_attribute_description
+        self.class.human_attribute_description(self)
       end
 
       private
@@ -465,35 +465,81 @@ module ActiveLdap
         end
       end
 
-      def normalize_array_value(value)
-        if value.size > 1 and single_value?
-          format = _("Attribute %s can only have a single value")
-          message = format % target.class.human_attribute_name(attribute)
-          raise TypeError, message
+      def validate_each_value(value, option=nil)
+        failed_reason = nil
+        case value
+        when Hash
+          original_option = option
+          value.each do |sub_option, val|
+            opt = [original_option, sub_option].compact.join(";")
+            failed_reason, option = validate_each_value(val, opt)
+            break if failed_reason
+          end
+        when Array
+          original_option = option
+          value.each do |val|
+            failed_reason, option = validate_each_value(val, original_option)
+            break if failed_reason
+          end
+        else
+          failed_reason = send_to_syntax(nil, :validate, value)
+        end
+        return nil if failed_reason.nil?
+        [failed_reason, option]
+      end
+
+      def normalize_value_internal(value, have_binary_mark)
+        case value
+        when Array
+          normalize_array_value(value, have_binary_mark)
+        when Hash
+          normalize_hash_value(value, have_binary_mark)
+        else
+          if value.blank?
+            value = []
+          else
+            value = send_to_syntax(value, :normalize_value, value)
+          end
+          if !have_binary_mark and binary_required?
+            [{'binary' => value}]
+          else
+            value.is_a?(Array) ? value : [value]
+          end
+        end
+      end
+
+      def normalize_array_value(value, have_binary_mark)
+        if single_value? and value.reject {|v| v.is_a?(Hash)}.size > 1
+          format = _("Attribute %s can only have a single value: %s")
+          message = format % [human_attribute_name, value.inspect]
+          raise AttributeValueInvalid.new(self, value, message)
         end
         if value.empty?
-          if binary_required?
+          if !have_binary_mark and binary_required?
             [{'binary' => value}]
           else
             value
           end
         else
           value.collect do |entry|
-            normalize_value(entry)[0]
+            normalize_value_internal(entry, have_binary_mark)[0]
           end
         end
       end
 
-      def normalize_hash_value(value)
+      def normalize_hash_value(value, have_binary_mark)
         if value.size > 1
-          format = _("Hashes must have one key-value pair only: %s")
-          raise TypeError, format % value.inspect
+          format = _("Attribute %s: Hash must have one key-value pair only: %s")
+          message = format % [human_attribute_name, value.inspect]
+          raise AttributeValueInvalid.new(self, value, message)
         end
 
-        if binary_required? and !have_binary_key?(value)
+        if !have_binary_mark and binary_required? and !have_binary_key?(value)
           [append_binary_key(value)]
         else
-          [value]
+          key = value.keys[0]
+          have_binary_mark ||= key == "binary"
+          [{key => normalize_value_internal(value.values[0], have_binary_mark)}]
         end
       end
 

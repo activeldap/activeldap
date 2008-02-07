@@ -2,6 +2,34 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_normalize_attribute_value
+    entry = {
+      "attributeTypes" =>
+      [
+       "( 0.9.2342.19200300.100.1.25 NAME ( 'dc' 'domainComponent' ) DESC " +
+       "'RFC1274/2247: domain component' EQUALITY caseIgnoreIA5Match SUBSTR " +
+       "caseIgnoreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 " +
+       "SINGLE-VALUE )",
+      ],
+      "ldapSyntaxes" =>
+      [
+       "( 1.3.6.1.4.1.1466.109.114.1 NAME 'caseExactIA5Match' " +
+       "SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )",
+      ],
+    }
+
+    schema = ActiveLdap::Schema.new(entry)
+    dc = schema.attribute("dc")
+    assert_equal(["com"], dc.normalize_value("com"))
+    assert_equal(["com"], dc.normalize_value(["com"]))
+    assert_raise(ActiveLdap::AttributeValueInvalid) do
+      dc.normalize_value(["com", "co.jp"])
+    end
+    assert_equal([{"lang-en" => ["com"]},
+                  {"lang-ja" => ["co.jp"]}],
+                 dc.normalize_value([{"lang-en" => "com"},
+                                     {"lang-ja" => "co.jp"}]))
+  end
 
   priority :normal
   def test_syntax_validation
