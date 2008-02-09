@@ -4,6 +4,31 @@ class TestConnectionPerClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_multi_establish_connections_with_association
+    make_ou("Sub,ou=Users")
+    make_ou("Sub2,ou=Users")
+
+    sub_user_class = Class.new(@user_class)
+    sub_user_class.prefix = "ou=Sub"
+    sub2_user_class = Class.new(@user_class)
+    sub2_user_class.prefix = "ou=Sub2"
+    sub_user_class.has_many(:related_entries, :wrap => "seeAlso")
+    sub_user_class.set_associated_class(:related_entries, sub2_user_class)
+
+    make_temporary_user(:uid => "uid=user1,ou=Sub") do |user,|
+      make_temporary_user(:uid => "uid=user2,ou=Sub2") do |user2,|
+        sub_user = sub_user_class.find(user.uid)
+        sub2_user = sub2_user_class.find(user2.uid)
+        sub_user.see_also = sub2_user.dn
+        assert(sub_user.save)
+
+        sub_user = sub_user_class.find(user.uid)
+        assert_equal(["ou=Sub2"],
+                     sub_user.related_entries.collect {|e| e.class.prefix})
+      end
+    end
+  end
+
   priority :normal
   def test_multi_establish_connections
     make_ou("Sub")
