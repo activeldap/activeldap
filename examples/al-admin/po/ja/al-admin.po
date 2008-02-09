@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AL Admin 0.9.0\n"
-"POT-Creation-Date: 2007-11-04 15:53+0900\n"
+"Project-Id-Version: AL Admin 0.9.1\n"
+"POT-Creation-Date: 2008-02-09 14:25+0900\n"
 "PO-Revision-Date: 2007-11-04 16:02+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
@@ -83,7 +83,7 @@ msgstr "登録ありがとうございます！"
 msgid "You have been logged out."
 msgstr "ログアウトしました。"
 
-#: app/controllers/users_controller.rb:27
+#: app/controllers/users_controller.rb:33
 msgid "User was successfully updated."
 msgstr "ユーザを正常に更新しました。"
 
@@ -95,247 +95,249 @@ msgstr "指定されたエントリの取得に失敗しました"
 msgid "Edit"
 msgstr "編集"
 
-#: app/views/directory/populate.rhtml:1
+#: app/views/directory/populate.html.erb:1
 msgid "Done."
 msgstr "完了。"
 
-#: app/views/directory/populate.rhtml:2 app/views/object_classes/show.rhtml:37
-#: app/views/users/edit.rhtml:13 app/views/users/show.rhtml:9
-#: app/views/syntaxes/show.rhtml:20 app/views/attributes/show.rhtml:29
+#: app/views/directory/populate.html.erb:2
+#: app/views/object_classes/show.html.erb:37 app/views/users/edit.html.erb:13
+#: app/views/users/show.html.erb:9 app/views/syntaxes/show.html.erb:20
+#: app/views/attributes/show.html.erb:29
 msgid "Menu|Index"
 msgstr "一覧"
 
-#: app/views/layouts/_header_menu.rhtml:5
+#: app/views/layouts/_header_menu.html.erb:5
 msgid "Menu|Logout"
 msgstr "ログアウト"
 
-#: app/views/layouts/_header_menu.rhtml:7
+#: app/views/layouts/_header_menu.html.erb:7
 msgid "Menu|Login"
 msgstr "ログイン"
 
-#: app/views/layouts/_header_menu.rhtml:9
+#: app/views/layouts/_header_menu.html.erb:9
 msgid "Menu|Sign up"
 msgstr "登録"
 
-#: app/views/layouts/_main_menu.rhtml:6
+#: app/views/layouts/_main_menu.html.erb:6
 msgid "Menu|Users list"
 msgstr "ユーザ一覧"
 
-#: app/views/layouts/_main_menu.rhtml:7
+#: app/views/layouts/_main_menu.html.erb:7
 msgid "Menu|Directory"
 msgstr "ディレクトリ"
 
-#: app/views/layouts/_main_menu.rhtml:8
+#: app/views/layouts/_main_menu.html.erb:8
 msgid "Menu|objectClass list"
 msgstr "オブジェクトクラス一覧"
 
-#: app/views/layouts/_main_menu.rhtml:9
+#: app/views/layouts/_main_menu.html.erb:9
 msgid "Menu|Attribute list"
 msgstr "属性一覧"
 
-#: app/views/layouts/_main_menu.rhtml:10
+#: app/views/layouts/_main_menu.html.erb:10
 msgid "Menu|Syntax list"
 msgstr "構文一覧"
 
-#: app/views/_entry/_attributes_information.rhtml:6
-#: app/views/attributes/_attributes.rhtml:5
+#: app/views/_entry/_attributes_information.html.erb:6
+#: app/views/attributes/_attributes.html.erb:5
 msgid "Attribute name"
 msgstr "属性名"
 
-#: app/views/_entry/_attributes_information.rhtml:7
+#: app/views/_entry/_attributes_information.html.erb:7
 msgid "Value"
 msgstr "値"
 
-#: app/views/_entry/_attributes_information.rhtml:8
-#: app/views/object_classes/show.rhtml:6
-#: app/views/object_classes/_attributes.rhtml:11
-#: app/views/users/_object_classes_update_form.rhtml:12
-#: app/views/syntaxes/_syntaxes.rhtml:6 app/views/syntaxes/show.rhtml:6
-#: app/views/attributes/show.rhtml:6 app/views/attributes/_attributes.rhtml:6
+#: app/views/_entry/_attributes_information.html.erb:8
+#: app/views/object_classes/show.html.erb:6
+#: app/views/object_classes/_attributes.html.erb:11
+#: app/views/users/_object_classes_update_form.html.erb:13
+#: app/views/syntaxes/show.html.erb:6 app/views/syntaxes/_syntaxes.html.erb:6
+#: app/views/attributes/show.html.erb:6
+#: app/views/attributes/_attributes.html.erb:6
 msgid "Description"
 msgstr "説明"
 
-#: app/views/_entry/_entry.rhtml:6
+#: app/views/_entry/_entry.html.erb:6
 msgid "objectClasses"
 msgstr "オブジェクトクラス一覧"
 
-#: app/views/_entry/_entry.rhtml:11
+#: app/views/_entry/_entry.html.erb:11
 msgid "Attributes"
 msgstr "属性一覧"
 
-#: app/views/object_classes/_object_classes.rhtml:5
-#: app/views/users/_object_classes_update_form.rhtml:11
-msgid "objectClass name"
-msgstr "オブジェクトクラス名"
-
-#: app/views/object_classes/_object_classes.rhtml:6
-#: app/views/users/_attributes_update_form.rhtml:13
-msgid "description"
-msgstr "説明"
-
-#: app/views/object_classes/show.rhtml:13
-msgid "Super classes"
-msgstr "親クラス一覧"
-
-#: app/views/object_classes/show.rhtml:15
-#: app/views/object_classes/_attributes.rhtml:4
-msgid "None"
-msgstr "なし"
-
-#: app/views/object_classes/show.rhtml:24
-msgid "Requeired attributes"
-msgstr "必須の属性一覧"
-
-#: app/views/object_classes/show.rhtml:30
-msgid "Optional attributes"
-msgstr "省略可能な属性一覧"
-
-#: app/views/object_classes/index.rhtml:1
+#: app/views/object_classes/index.html.erb:1
 msgid "objectClass list"
 msgstr "オブジェクトクラス一覧"
 
-#: app/views/object_classes/_attributes.rhtml:9
+#: app/views/object_classes/show.html.erb:13
+msgid "Super classes"
+msgstr "親クラス一覧"
+
+#: app/views/object_classes/show.html.erb:15
+#: app/views/object_classes/_attributes.html.erb:4
+msgid "None"
+msgstr "なし"
+
+#: app/views/object_classes/show.html.erb:24
+msgid "Requeired attributes"
+msgstr "必須の属性一覧"
+
+#: app/views/object_classes/show.html.erb:30
+msgid "Optional attributes"
+msgstr "省略可能な属性一覧"
+
+#: app/views/object_classes/_object_classes.html.erb:5
+#: app/views/users/_object_classes_update_form.html.erb:12
+msgid "objectClass name"
+msgstr "オブジェクトクラス名"
+
+#: app/views/object_classes/_object_classes.html.erb:6
+#: app/views/users/_attributes_update_form.html.erb:13
+msgid "description"
+msgstr "説明"
+
+#: app/views/object_classes/_attributes.html.erb:9
 msgid "Name"
 msgstr "名前"
 
-#: app/views/object_classes/_attributes.rhtml:10
+#: app/views/object_classes/_attributes.html.erb:10
 msgid "Inherited"
 msgstr "継承された属性"
 
-#: app/views/users/edit.rhtml:12
-msgid "Menu|Show"
-msgstr "表示"
-
-#: app/views/users/_form.rhtml:5 app/views/users/_form.rhtml:13
-msgid "Command|Update"
-msgstr "更新"
-
-#: app/views/users/_password_change_form.rhtml:2
-msgid "Change password"
-msgstr "パスワード変更"
-
-#: app/views/users/_password_change_form.rhtml:7
-#: app/views/account/sign_up.rhtml:7
-msgid "Password"
-msgstr "パスワード"
-
-#: app/views/users/_password_change_form.rhtml:15
-#: app/views/account/sign_up.rhtml:10
-msgid "Confirm Password"
-msgstr "確認用パスワード"
-
-#: app/views/users/_object_classes_update_form.rhtml:6
-msgid "Update objectClasses"
-msgstr "オブジェクトクラス更新"
-
-#: app/views/users/_object_classes_update_form.rhtml:10
-msgid "Use"
-msgstr "使う"
-
-#: app/views/users/index.rhtml:2
+#: app/views/users/index.html.erb:2
 msgid "No user."
 msgstr "ユーザがいません。"
 
-#: app/views/users/_attributes_update_form.rhtml:6
+#: app/views/users/edit.html.erb:12
+msgid "Menu|Show"
+msgstr "表示"
+
+#: app/views/users/_form.html.erb:5 app/views/users/_form.html.erb:13
+msgid "Command|Update"
+msgstr "更新"
+
+#: app/views/users/_object_classes_update_form.html.erb:7
+msgid "Update objectClasses"
+msgstr "オブジェクトクラス更新"
+
+#: app/views/users/_object_classes_update_form.html.erb:11
+msgid "Use"
+msgstr "使う"
+
+#: app/views/users/_attributes_update_form.html.erb:6
 msgid "Update attributes"
 msgstr "属性更新"
 
-#: app/views/users/_attributes_update_form.rhtml:11
+#: app/views/users/_attributes_update_form.html.erb:11
 msgid "attribute name"
 msgstr "属性名"
 
-#: app/views/users/_attributes_update_form.rhtml:12
+#: app/views/users/_attributes_update_form.html.erb:12
 msgid "value"
 msgstr "値"
 
-#: app/views/account/login.rhtml:5
-msgid "Login:"
-msgstr "ログイン名:"
+#: app/views/users/_password_change_form.html.erb:2
+msgid "Change password"
+msgstr "パスワード変更"
 
-#: app/views/account/login.rhtml:10
-msgid "Password:"
-msgstr "パスワード:"
+#: app/views/users/_password_change_form.html.erb:7
+#: app/views/account/sign_up.html.erb:7
+msgid "Password"
+msgstr "パスワード"
 
-#: app/views/account/login.rhtml:16
-msgid "Remember me:"
-msgstr "次回からパスワード入力を省略:"
+#: app/views/users/_password_change_form.html.erb:15
+#: app/views/account/sign_up.html.erb:10
+msgid "Confirm Password"
+msgstr "確認用パスワード"
 
-#: app/views/account/login.rhtml:22
-msgid "Log in"
-msgstr "ログイン"
-
-#: app/views/account/sign_up.rhtml:4
+#: app/views/account/sign_up.html.erb:4
 msgid "Login"
 msgstr "ログイン名"
 
-#: app/views/account/sign_up.rhtml:13 app/views/account/sign_up.rhtml:27
+#: app/views/account/sign_up.html.erb:13 app/views/account/sign_up.html.erb:27
 msgid "Sign up"
 msgstr "登録"
 
-#: app/views/syntaxes/_syntaxes.rhtml:5
-msgid "Syntax name"
-msgstr "構文名"
+#: app/views/account/login.html.erb:5
+msgid "Login:"
+msgstr "ログイン名:"
 
-#: app/views/syntaxes/show.rhtml:13 app/views/attributes/show.rhtml:22
-msgid "Detail"
-msgstr "詳細"
+#: app/views/account/login.html.erb:10
+msgid "Password:"
+msgstr "パスワード:"
 
-#: app/views/syntaxes/_detail.rhtml:4
-msgid "Binary tranfer required"
-msgstr "バイナリが必須"
+#: app/views/account/login.html.erb:16
+msgid "Remember me:"
+msgstr "次回からパスワード入力を省略:"
 
-#: app/views/syntaxes/_detail.rhtml:9
-msgid "Human readable"
-msgstr "可読"
+#: app/views/account/login.html.erb:22
+msgid "Log in"
+msgstr "ログイン"
 
-#: app/views/syntaxes/index.rhtml:1
+#: app/views/syntaxes/index.html.erb:1
 msgid "Syntax list"
 msgstr "構文一覧"
 
-#: app/views/welcome/index.rhtml:4
+#: app/views/syntaxes/_detail.html.erb:4
+msgid "Binary tranfer required"
+msgstr "バイナリが必須"
+
+#: app/views/syntaxes/_detail.html.erb:9
+msgid "Human readable"
+msgstr "可読"
+
+#: app/views/syntaxes/show.html.erb:13 app/views/attributes/show.html.erb:22
+msgid "Detail"
+msgstr "詳細"
+
+#: app/views/syntaxes/_syntaxes.html.erb:5
+msgid "Syntax name"
+msgstr "構文名"
+
+#: app/views/welcome/index.html.erb:4
 msgid "Menu|Populate"
 msgstr "構築"
 
-#: app/views/welcome/index.rhtml:6
+#: app/views/welcome/index.html.erb:6
 msgid "OK?"
 msgstr "いいですか？"
 
-#: app/views/welcome/index.rhtml:8
+#: app/views/welcome/index.html.erb:8
 msgid "Welcome %s!"
 msgstr "ようこそ%s！"
 
-#: app/views/welcome/index.rhtml:12 lib/authenticated_system.rb:68
+#: app/views/welcome/index.html.erb:12 lib/authenticated_system.rb:68
 msgid "Please login."
 msgstr "ログインしてください。"
 
-#: app/views/attributes/show.rhtml:14
-msgid "Super attribute"
-msgstr "親属性"
-
-#: app/views/attributes/_detail.rhtml:4
-msgid "Read only"
-msgstr "読み込み専用"
-
-#: app/views/attributes/_detail.rhtml:9
-msgid "Single value"
-msgstr "値は一つのみ"
-
-#: app/views/attributes/_detail.rhtml:14
-msgid "Binary"
-msgstr "バイナリ"
-
-#: app/views/attributes/_detail.rhtml:19
-msgid "Binary required"
-msgstr "バイナリが必須"
-
-#: app/views/attributes/_detail.rhtml:24
-msgid "Syntax"
-msgstr "構文"
-
-#: app/views/attributes/index.rhtml:1
+#: app/views/attributes/index.html.erb:1
 msgid "Attribute list"
 msgstr "属性一覧"
 
-#: app/views/_schema/_aliases.rhtml:2
+#: app/views/attributes/_detail.html.erb:4
+msgid "Read only"
+msgstr "読み込み専用"
+
+#: app/views/attributes/_detail.html.erb:9
+msgid "Single value"
+msgstr "値は一つのみ"
+
+#: app/views/attributes/_detail.html.erb:14
+msgid "Binary"
+msgstr "バイナリ"
+
+#: app/views/attributes/_detail.html.erb:19
+msgid "Binary required"
+msgstr "バイナリが必須"
+
+#: app/views/attributes/_detail.html.erb:24
+msgid "Syntax"
+msgstr "構文"
+
+#: app/views/attributes/show.html.erb:14
+msgid "Super attribute"
+msgstr "親属性"
+
+#: app/views/_schema/_aliases.html.erb:2
 msgid "Aliases"
 msgstr "別名一覧"

@@ -20,7 +20,7 @@ namespace :gettext do
       }
       GetText::RGetText.add_parser(ActiveLdap::GetText::Parser.new(options))
 
-      files = Dir.glob("{app,lib,components}/**/*.{rb,rhtml,rxml}")
+      files = Dir.glob("{app,lib,components}/**/*.{rb,erb,rxml}")
       GetText.update_pofiles("al-admin", files,
                              "AL Admin #{ActiveLdap::VERSION}")
     end
