@@ -29,7 +29,9 @@ module ActiveLdap
           }
           config[:encryption] = {:method => method} if method
           begin
-            Net::LDAP::Connection.new(config)
+            [Net::LDAP::Connection.new(config),
+             construct_uri(host, port, method == :simple_tls),
+             method == :start_tls]
           rescue Net::LDAP::LdapError
             raise ConnectionError, $!.message
           end

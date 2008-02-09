@@ -31,7 +31,7 @@ module ActiveLdap
         port = options[:port] || @port
         method = ensure_method(options[:method] || @method)
         @disconnected = false
-        @connection = yield(host, port, method)
+        @connection, @uri, @with_start_tls = yield(host, port, method)
         prepare_connection(options)
         bind(options)
       end
@@ -39,7 +39,7 @@ module ActiveLdap
       def disconnect!(options={})
         return if @connection.nil?
         unbind(options)
-        @connection = nil
+        @connection = @uri = @with_start_tls = nil
       end
 
       def rebind(options={})
@@ -62,14 +62,14 @@ module ActiveLdap
         # Attempt 2: SIMPLE with credentials if password block
         # Attempt 3: SIMPLE ANONYMOUS if 1 and 2 fail (or pwblock returns '')
         if try_sasl and sasl_bind(bind_dn, options)
-          @logger.info {_('Bound by SASL as %s') % bind_dn}
+          @logger.info {_('Bound to %s by SASL as %s') % [target, bind_dn]}
         elsif simple_bind(bind_dn, options)
-          @logger.info {_('Bound by simple as %s') % bind_dn}
+          @logger.info {_('Bound to %s by simple as %s') % [target, bind_dn]}
         elsif allow_anonymous and bind_as_anonymous(options)
-          @logger.info {_('Bound as anonymous')}
+          @logger.info {_('Bound to %s as anonymous') % target}
         else
           message = yield if block_given?
-          message ||= _('All authentication methods exhausted.')
+          message ||= _('All authentication methods for %s exhausted.') % target
           raise AuthenticationError, message
         end
 
@@ -565,6 +565,20 @@ module ActiveLdap
                :scope => :base,
                :attributes => attrs).collect do |dn, attributes|
           attributes
+        end
+      end
+
+      def construct_uri(host, port, ssl)
+        protocol = ssl ? "ldaps" : "ldap"
+        URI.parse("#{protocol}://#{host}:#{port}").to_s
+      end
+
+      def target
+        return nil if @uri.nil?
+        if @with_start_tls
+          "#{@uri}(StartTLS)"
+        else
+          @uri
         end
       end
     end

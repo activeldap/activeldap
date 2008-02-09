@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Ruby/ActiveLdap 0.9.0\n"
-"POT-Creation-Date: 2008-01-15 12:25+0900\n"
+"Project-Id-Version: Ruby/ActiveLdap 0.9.1\n"
+"POT-Creation-Date: 2008-02-09 14:01+0900\n"
 "PO-Revision-Date: 2007-08-19 09:49+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -192,6 +192,10 @@ msgid "LDAP|Attribute|drink"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|dynamicSubtrees"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|email"
 msgstr ""
 
@@ -209,6 +213,14 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|enhancedSearchGuide"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|entryDN"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|entryTtl"
 msgstr ""
 
 #: -:-
@@ -441,382 +453,6 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|objectClasses"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAccess"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAllows"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcArgsFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAttributeOptions"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAttributeTypes"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAuthIDRewrite"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAuthzPolicy"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcAuthzRegexp"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcBackend"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcConcurrency"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcConfigDir"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcConfigFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcConnMaxPending"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcConnMaxPendingAuth"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDatabase"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbCacheFree"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbCacheSize"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbCheckpoint"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbDirectory"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbDirtyRead"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbIDLcacheSize"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbIndex"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbLinearIndex"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbLockDetect"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbMode"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbNoSync"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbSearchStack"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDbShmKey"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDefaultSearchBase"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDisallows"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcDitContentRules"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcGentleHUP"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcIdleTimeout"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcInclude"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcIndexSubstrAnyLen"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcIndexSubstrAnyStep"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcIndexSubstrIfMaxLen"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcIndexSubstrIfMinLen"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcLastMod"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcLimits"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcLocalSSF"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcLogFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcLogLevel"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcMaxDerefDepth"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcModuleLoad"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcModulePath"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcObjectClasses"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcObjectIdentifier"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcOverlay"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcPasswordHash"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcPidFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcPlugin"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcPluginLogFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReadOnly"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReferral"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReplica"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReplicaArgsFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReplicaPidFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReplicationInterval"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReplogFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcRequires"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcRestrict"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcReverseLookup"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcRootDN"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcRootDSE"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcRootPW"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSaslHost"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSaslRealm"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSaslSecProps"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSchemaDN"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSecurity"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSizeLimit"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSockbufMaxIncoming"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSockbufMaxIncomingAuth"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSrvtab"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSubordinate"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSuffix"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcSyncrepl"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCACertificateFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCACertificatePath"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCRLCheck"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCertificateFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCertificateKeyFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSCipherSuite"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSDHParamFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSRandFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTLSVerifyClient"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcThreads"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcTimeLimit"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcToolThreads"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcUpdateDN"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Attribute|olcUpdateRef"
 msgstr ""
 
 #: -:-
@@ -1305,11 +941,11 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|aliasedObjectName|RFC2256: name of aliased object"
+"LDAP|Description|Attribute|aliasedObjectName|RFC4512: name of aliased object"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|altServer|RFC2252: alternative servers"
+msgid "LDAP|Description|Attribute|altServer|RFC4512: alternative servers"
 msgstr ""
 
 #: -:-
@@ -1325,7 +961,7 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|attributeTypes|RFC2252: attribute types"
+msgid "LDAP|Description|Attribute|attributeTypes|RFC4512: attribute types"
 msgstr ""
 
 #: -:-
@@ -1374,7 +1010,7 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|cn|RFC2256: common name(s) for which the entity "
+"LDAP|Description|Attribute|cn|RFC4519: common name(s) for which the entity "
 "is known by"
 msgstr ""
 
@@ -1384,12 +1020,12 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|createTimestamp|RFC2252: time which object was "
+"LDAP|Description|Attribute|createTimestamp|RFC4512: time which object was "
 "created"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|creatorsName|RFC2252: name of creator"
+msgid "LDAP|Description|Attribute|creatorsName|RFC4512: name of creator"
 msgstr ""
 
 #: -:-
@@ -1427,7 +1063,7 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|description|RFC2256: descriptive information"
+msgid "LDAP|Description|Attribute|description|RFC4519: descriptive information"
 msgstr ""
 
 #: -:-
@@ -1444,7 +1080,7 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|distinguishedName|RFC2256: common supertype of DN "
+"LDAP|Description|Attribute|distinguishedName|RFC4519: common supertype of DN "
 "attributes"
 msgstr ""
 
@@ -1491,6 +1127,10 @@ msgid "LDAP|Description|Attribute|drink|RFC1274: favorite drink"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Description|Attribute|dynamicSubtrees|RFC2589: dynamic subtrees"
+msgstr ""
+
+#: -:-
 msgid ""
 "LDAP|Description|Attribute|email|RFC3280: legacy attribute for email "
 "addresses in DNs"
@@ -1511,6 +1151,14 @@ msgstr ""
 #: -:-
 msgid ""
 "LDAP|Description|Attribute|enhancedSearchGuide|RFC2256: enhanced search guide"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|entryDN|DN of the entry"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|Attribute|entryTtl|RFC2589: entry time-to-live"
 msgstr ""
 
 #: -:-
@@ -1535,8 +1183,8 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|gidNumber|An integer uniquely identifying a group "
-"in an administrative domain"
+"LDAP|Description|Attribute|gidNumber|RFC2307: An integer uniquely "
+"identifying a group in an administrative domain"
 msgstr ""
 
 #: -:-
@@ -1621,7 +1269,7 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|ldapSyntaxes|RFC2252: LDAP syntaxes"
+msgid "LDAP|Description|Attribute|ldapSyntaxes|RFC4512: LDAP syntaxes"
 msgstr ""
 
 #: -:-
@@ -1652,11 +1300,11 @@ msgid "LDAP|Description|Attribute|manager|RFC1274: DN of manager"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|matchingRuleUse|RFC2252: matching rule uses"
+msgid "LDAP|Description|Attribute|matchingRuleUse|RFC4512: matching rule uses"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|matchingRules|RFC2252: matching rules"
+msgid "LDAP|Description|Attribute|matchingRules|RFC4512: matching rules"
 msgstr ""
 
 #: -:-
@@ -1668,22 +1316,22 @@ msgid "LDAP|Description|Attribute|mobile|RFC1274: mobile telephone number"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|modifiersName|RFC2252: name of last modifier"
+msgid "LDAP|Description|Attribute|modifiersName|RFC4512: name of last modifier"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|modifyTimestamp|RFC2252: time which object was "
+"LDAP|Description|Attribute|modifyTimestamp|RFC4512: time which object was "
 "last modified"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|name|RFC2256: common supertype of name attributes"
+"LDAP|Description|Attribute|name|RFC4519: common supertype of name attributes"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|namingContexts|RFC2252: naming contexts"
+msgid "LDAP|Description|Attribute|namingContexts|RFC4512: naming contexts"
 msgstr ""
 
 #: -:-
@@ -1691,127 +1339,12 @@ msgid "LDAP|Description|Attribute|nisNetgroupTriple|Netgroup triple"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|objectClasses|RFC2252: object classes"
+msgid "LDAP|Description|Attribute|objectClasses|RFC4512: object classes"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|objectClass|RFC2256: object classes of the entity"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcArgsFile|File for slapd command line options"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcAttributeTypes|OpenLDAP attributeTypes"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcBackend|A type of backend"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcConfigDir|Directory for slapd configuration "
-"backend"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcConfigFile|File for slapd configuration "
-"directives"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDatabase|The backend type for a database "
-"instance"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbCacheFree|Number of extra entries to free "
-"when max is reached"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbCacheSize|Entry cache size in entries"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval in "
-"kbytes and minutes"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbConfig|BerkeleyDB DB_CONFIG configuration "
-"directives"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbDirectory|Directory for database content"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbDirtyRead|Allow reads of uncommitted data"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbIDLcacheSize|IDL cache size in IDLs"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbIndex|Attribute index parameters"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbLinearIndex|Index attributes one at a time"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbLockDetect|Deadlock detection algorithm"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbMode|Unix permissions of database files"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbNoSync|Disable synchronous database writes"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcDbShmKey|Key for shared memory region"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
+"LDAP|Description|Attribute|objectClass|RFC4512: object classes of the entity"
 msgstr ""
 
 #: -:-
@@ -1899,7 +1432,7 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|ref|namedref: subordinate referral URL"
+msgid "LDAP|Description|Attribute|ref|RFC3296: subordinate referral URL"
 msgstr ""
 
 #: -:-
@@ -2072,8 +1605,8 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|sambaPasswordHistory|Concatenated MD5 hashes of "
-"the salted NT passwords used on this account"
+"LDAP|Description|Attribute|sambaPasswordHistory|Concatenated MD4 hashes of "
+"the unicode passwords used on this account"
 msgstr ""
 
 #: -:-
@@ -2156,7 +1689,7 @@ msgid "LDAP|Description|Attribute|secretary|RFC1274: DN of secretary"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|seeAlso|RFC2256: DN of related object"
+msgid "LDAP|Description|Attribute|seeAlso|RFC4519: DN of related object"
 msgstr ""
 
 #: -:-
@@ -2182,8 +1715,8 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|structuralObjectClass|X.500(93): structural "
-"object class of entry"
+"LDAP|Description|Attribute|structuralObjectClass|RFC4512: structural object "
+"class of entry"
 msgstr ""
 
 #: -:-
@@ -2194,7 +1727,7 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|subschemaSubentry|RFC2252: name of controlling "
+"LDAP|Description|Attribute|subschemaSubentry|RFC4512: name of controlling "
 "subschema entry"
 msgstr ""
 
@@ -2222,29 +1755,30 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|supportedControl|RFC2252: supported controls"
+msgid "LDAP|Description|Attribute|supportedControl|RFC4512: supported controls"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|supportedExtension|RFC2252: supported extended "
+"LDAP|Description|Attribute|supportedExtension|RFC4512: supported extended "
 "operations"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|supportedFeatures|features supported by the server"
+"LDAP|Description|Attribute|supportedFeatures|RFC4512: features supported by "
+"the server"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|supportedLDAPVersion|RFC2252: supported LDAP "
+"LDAP|Description|Attribute|supportedLDAPVersion|RFC4512: supported LDAP "
 "versions"
 msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|supportedSASLMechanisms|RFC2252: supported SASL "
+"LDAP|Description|Attribute|supportedSASLMechanisms|RFC4512: supported SASL "
 "mechanisms"
 msgstr ""
 
@@ -2269,12 +1803,12 @@ msgstr ""
 
 #: -:-
 msgid ""
-"LDAP|Description|Attribute|uidNumber|An integer uniquely identifying a user "
-"in an administrative domain"
+"LDAP|Description|Attribute|uidNumber|RFC2307: An integer uniquely "
+"identifying a user in an administrative domain"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|uid|RFC1274: user identifier"
+msgid "LDAP|Description|Attribute|uid|RFC4519: user identifier"
 msgstr ""
 
 #: -:-
@@ -2303,7 +1837,7 @@ msgid ""
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|Attribute|userPassword|RFC2256/2307: password of user"
+msgid "LDAP|Description|Attribute|userPassword|RFC4519/2307: password of user"
 msgstr ""
 
 #: -:-
@@ -2333,11 +1867,30 @@ msgid ""
 msgstr ""
 
 #: -:-
+msgid ""
+"LDAP|Description|ObjectClass|OpenLDAPdisplayableObject|OpenLDAP Displayable "
+"Object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|OpenLDAPorg|OpenLDAP Organizational Object"
+msgstr ""
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|OpenLDAPou|OpenLDAP Organizational Unit Object"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|OpenLDAPperson|OpenLDAP Person"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Description|ObjectClass|OpenLDAProotDSE|OpenLDAP Root DSE object"
 msgstr ""
 
 #: -:-
-msgid "LDAP|Description|ObjectClass|alias|RFC2256: an alias"
+msgid "LDAP|Description|ObjectClass|alias|RFC4512: an alias"
 msgstr ""
 
 #: -:-
@@ -2390,8 +1943,12 @@ msgid ""
 msgstr ""
 
 #: -:-
+msgid "LDAP|Description|ObjectClass|dynamicObject|RFC2589: Dynamic Object"
+msgstr ""
+
+#: -:-
 msgid ""
-"LDAP|Description|ObjectClass|extensibleObject|RFC2252: extensible object"
+"LDAP|Description|ObjectClass|extensibleObject|RFC4512: extensible object"
 msgstr ""
 
 #: -:-
@@ -2453,61 +2010,6 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Description|ObjectClass|nisObject|An entry in a NIS map"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcBackendConfig|OpenLDAP Backend-specific "
-"options"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcBdbConfig|BDB backend configuration"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcDatabaseConfig|OpenLDAP Database-specific "
-"options"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcFrontendConfig|OpenLDAP frontend "
-"configuration"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration options"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcIncludeFile|OpenLDAP configuration include "
-"file"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcLdifConfig|LDIF backend configuration"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcModuleList|OpenLDAP dynamic module info"
-msgstr ""
-
-#: -:-
-msgid ""
-"LDAP|Description|ObjectClass|olcOverlayConfig|OpenLDAP Overlay-specific "
-"options"
-msgstr ""
-
-#: -:-
-msgid "LDAP|Description|ObjectClass|olcSchemaConfig|OpenLDAP schema object"
 msgstr ""
 
 #: -:-
@@ -2633,8 +2135,12 @@ msgid ""
 msgstr ""
 
 #: -:-
+msgid "LDAP|Description|ObjectClass|subentry|RFC3672: subentry"
+msgstr ""
+
+#: -:-
 msgid ""
-"LDAP|Description|ObjectClass|subschema|RFC2252: controlling subschema (sub)"
+"LDAP|Description|ObjectClass|subschema|RFC4512: controlling subschema (sub)"
 "entry"
 msgstr ""
 
@@ -2787,6 +2293,22 @@ msgid "LDAP|ObjectClass|LDAProotDSE"
 msgstr ""
 
 #: -:-
+msgid "LDAP|ObjectClass|OpenLDAPdisplayableObject"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|OpenLDAPorg"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|OpenLDAPou"
+msgstr ""
+
+#: -:-
+msgid "LDAP|ObjectClass|OpenLDAPperson"
+msgstr ""
+
+#: -:-
 msgid "LDAP|ObjectClass|OpenLDAProotDSE"
 msgstr ""
 
@@ -2871,6 +2393,10 @@ msgid "LDAP|ObjectClass|domainRelatedObject"
 msgstr ""
 
 #: -:-
+msgid "LDAP|ObjectClass|dynamicObject"
+msgstr ""
+
+#: -:-
 msgid "LDAP|ObjectClass|extensibleObject"
 msgstr ""
 
@@ -2932,50 +2458,6 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|ObjectClass|nisObject"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcBackendConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcBdbConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcDatabaseConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcFrontendConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcGlobal"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcIncludeFile"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcLdifConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcModuleList"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcOverlayConfig"
-msgstr ""
-
-#: -:-
-msgid "LDAP|ObjectClass|olcSchemaConfig"
 msgstr ""
 
 #: -:-
@@ -3242,22 +2724,6 @@ msgstr ""
 msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
 msgstr ""
 
-#: lib/active_ldap/configuration.rb:70
-msgid "%s connection is not configured"
-msgstr ""
-
-#: lib/active_ldap/configuration.rb:111
-msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
-msgstr ""
-
-#: lib/active_ldap/configuration.rb:132
-msgid "invalid URI: %s"
-msgstr ""
-
-#: lib/active_ldap/configuration.rb:135
-msgid "not a LDAP URI: %s"
-msgstr ""
-
 #: lib/active_ldap/object_class.rb:53
 msgid "Value in objectClass array is not a String: %s"
 msgstr ""
@@ -3268,6 +2734,254 @@ msgstr ""
 
 #: lib/active_ldap/object_class.rb:85
 msgid "Can't remove required objectClass: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/jndi.rb:95 lib/active_ldap/adapter/ldap.rb:189
+#: lib/active_ldap/adapter/net_ldap.rb:142
+msgid "%s is not one of the available connect methods: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/jndi.rb:108 lib/active_ldap/adapter/ldap.rb:202
+#: lib/active_ldap/adapter/net_ldap.rb:155
+msgid "%s is not one of the available LDAP scope: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/jndi.rb:146 lib/active_ldap/adapter/ldap.rb:248
+#: lib/active_ldap/adapter/net_ldap.rb:268
+msgid "unknown type: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/ldap.rb:107
+msgid "No matches: filter: %s: attributes: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/net_ldap.rb:188
+msgid "unsupported qops: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:65
+msgid "Bound to %s by SASL as %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:67
+msgid "Bound to %s by simple as %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:69
+msgid "Bound to %s as anonymous"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:72
+msgid "All authentication methods for %s exhausted."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:144
+msgid "Ignore error %s(%s): filter %s: attributes: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:162 lib/active_ldap/adapter/base.rb:172
+msgid "No such entry: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:176 lib/active_ldap/adapter/base.rb:178
+#: lib/active_ldap/adapter/base.rb:180 lib/active_ldap/adapter/base.rb:182
+#: lib/active_ldap/adapter/base.rb:194
+msgid "%s: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:244
+msgid "password_block not nil or Proc object. Ignoring."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:263
+msgid "Requested action timed out."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:303
+msgid "Skip simple bind with empty password."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:307
+msgid "Can't use empty password for simple bind."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:498
+msgid "invalid logical operator: %s: available operators: %s"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:515
+msgid "Giving up trying to reconnect to LDAP server."
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:518
+msgid "Attempting to reconnect"
+msgstr ""
+
+#: lib/active_ldap/adapter/base.rb:529
+msgid ""
+"Reconnect to server failed: %s\n"
+"Reconnect to server failed backtrace:\n"
+"%s"
+msgstr ""
+
+#: lib/active_ldap/acts/tree.rb:66
+msgid "parent must be an entry or parent DN: %s"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:46
+msgid ":ldap_scope search option is deprecated. Use :scope instead."
+msgstr ""
+
+#: lib/active_ldap/operations.rb:199
+msgid "Invalid order: %s"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:235
+msgid "Couldn't find %s without a DN"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:257
+msgid "Couldn't find %s: DN: %s: filter: %s"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:260
+msgid "Couldn't find %s: DN: %s"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:287
+msgid "Couldn't find all %s: DNs (%s): filter: %s"
+msgstr ""
+
+#: lib/active_ldap/operations.rb:290
+msgid "Couldn't find all %s: DNs (%s)"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:377
+msgid "version spec is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:381
+msgid "version number is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:385
+msgid "unsupported version: %d"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:389
+msgid "separator is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:393
+msgid "'dn:' is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:397
+msgid "DN is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:401
+msgid "DN is invalid: %s: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:405
+msgid "DN has an invalid character: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:409 lib/active_ldap/distinguished_name.rb:140
+msgid "attribute type is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:413
+msgid "option is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:417
+msgid "':' is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:421
+msgid "URI is invalid: %s: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:425
+msgid "'-' is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:429
+msgid "unknown change type: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:433
+msgid "change type is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:437
+msgid "control type is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:441
+msgid "criticality is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:445
+msgid "change type value is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:449
+msgid "attribute spec is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:453
+msgid "'newrdn:' is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:457
+msgid "new RDN value is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:461
+msgid "'deleteoldrdn:' is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:465
+msgid "delete old RDN value is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:469
+msgid "new superior value is missing"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:473
+msgid "unknown modify type: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:738
+msgid "invalid criticality value: %s"
+msgstr ""
+
+#: lib/active_ldap/ldif.rb:781
+msgid "invalid deleteoldrdn value: %s"
+msgstr ""
+
+#: lib/active_ldap/distinguished_name.rb:132
+msgid "name component is missing"
+msgstr ""
+
+#: lib/active_ldap/distinguished_name.rb:136
+msgid "relative distinguished name (RDN) is missing"
+msgstr ""
+
+#: lib/active_ldap/distinguished_name.rb:144
+msgid "attribute value is missing"
+msgstr ""
+
+#: lib/active_ldap/distinguished_name.rb:148
+msgid "found unmatched quotation"
+msgstr ""
+
+#: lib/active_ldap/distinguished_name.rb:173
+msgid "%s isn't sub DN of %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:68
@@ -3286,20 +3000,36 @@ msgstr ""
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:148
+#: lib/active_ldap/validations.rb:137
 msgid "%{fn} (%s) has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:150
+#: lib/active_ldap/validations.rb:139
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:154
+#: lib/active_ldap/validations.rb:143
 msgid "(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:156
+#: lib/active_ldap/validations.rb:145
 msgid "has invalid format: %s: required syntax: %s: %s"
+msgstr ""
+
+#: lib/active_ldap/command.rb:16
+msgid "Common options:"
+msgstr ""
+
+#: lib/active_ldap/command.rb:19
+msgid "Specify configuration file written as YAML"
+msgstr ""
+
+#: lib/active_ldap/command.rb:26
+msgid "Show this message"
+msgstr ""
+
+#: lib/active_ldap/command.rb:31
+msgid "Show version"
 msgstr ""
 
 #: lib/active_ldap/base.rb:114
@@ -3326,46 +3056,58 @@ msgstr ""
 msgid "%s is unknown attribute"
 msgstr ""
 
-#: lib/active_ldap/base.rb:393
+#: lib/active_ldap/base.rb:402
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:501
+#: lib/active_ldap/base.rb:510
 msgid ""
 "'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
 "attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:605
+#: lib/active_ldap/base.rb:614
 msgid "Failed to delete LDAP entry: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:624
+#: lib/active_ldap/base.rb:633
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:643 lib/active_ldap/base.rb:654
+#: lib/active_ldap/base.rb:652 lib/active_ldap/base.rb:663
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:764
+#: lib/active_ldap/base.rb:782
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1071
+#: lib/active_ldap/base.rb:1113
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1180
+#: lib/active_ldap/base.rb:1222
 msgid "dn_attribute isn't set for this class: %s"
-msgstr ""
-
-#: lib/active_ldap/acts/tree.rb:66
-msgid "parent must be an entry or parent DN: %s"
 msgstr ""
 
 #: lib/active_ldap/attributes.rb:45
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
+msgstr ""
+
+#: lib/active_ldap/schema.rb:50
+msgid "Unknown schema group: %s"
+msgstr ""
+
+#: lib/active_ldap/schema.rb:513
+msgid "Attribute %s can only have a single value: %s"
+msgstr ""
+
+#: lib/active_ldap/schema.rb:532
+msgid "Attribute %s: Hash must have one key-value pair only: %s"
+msgstr ""
+
+#: lib/active_ldap/connection.rb:99
+msgid ":ldap_scope connection option is deprecated. Use :scope instead."
 msgstr ""
 
 #: lib/active_ldap/user_password.rb:11
@@ -3382,50 +3124,6 @@ msgstr ""
 
 #: lib/active_ldap/user_password.rb:52 lib/active_ldap/user_password.rb:69
 msgid "salt size must be == 4: %s"
-msgstr ""
-
-#: lib/active_ldap/connection.rb:99
-msgid ":ldap_scope connection option is deprecated. Use :scope instead."
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:132
-msgid "name component is missing"
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:136
-msgid "relative distinguished name (RDN) is missing"
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:140 lib/active_ldap/ldif.rb:409
-msgid "attribute type is missing"
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:144
-msgid "attribute value is missing"
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:148
-msgid "found unmatched quotation"
-msgstr ""
-
-#: lib/active_ldap/distinguished_name.rb:173
-msgid "%s isn't sub DN of %s"
-msgstr ""
-
-#: lib/active_ldap/command.rb:16
-msgid "Common options:"
-msgstr ""
-
-#: lib/active_ldap/command.rb:19
-msgid "Specify configuration file written as YAML"
-msgstr ""
-
-#: lib/active_ldap/command.rb:26
-msgid "Show this message"
-msgstr ""
-
-#: lib/active_ldap/command.rb:31
-msgid "Show version"
 msgstr ""
 
 #: lib/active_ldap/schema/syntaxes.rb:63
@@ -3502,240 +3200,24 @@ msgstr ""
 msgid "%s has unprintable character: '%s'"
 msgstr ""
 
-#: lib/active_ldap/schema.rb:50
-msgid "Unknown schema group: %s"
-msgstr ""
-
-#: lib/active_ldap/schema.rb:470
-msgid "Attribute %s can only have a single value"
-msgstr ""
-
-#: lib/active_ldap/schema.rb:489
-msgid "Hashes must have one key-value pair only: %s"
-msgstr ""
-
 #: lib/active_ldap/get_text/parser.rb:94
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr ""
 
-#: lib/active_ldap/operations.rb:46
-msgid ":ldap_scope search option is deprecated. Use :scope instead."
+#: lib/active_ldap/configuration.rb:70
+msgid "%s connection is not configured"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:199
-msgid "Invalid order: %s"
+#: lib/active_ldap/configuration.rb:111
+msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
 msgstr ""
 
-#: lib/active_ldap/operations.rb:235
-msgid "Couldn't find %s without a DN"
+#: lib/active_ldap/configuration.rb:132
+msgid "invalid URI: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:257
-msgid "Couldn't find %s: DN: %s: filter: %s"
-msgstr ""
-
-#: lib/active_ldap/operations.rb:260
-msgid "Couldn't find %s: DN: %s"
-msgstr ""
-
-#: lib/active_ldap/operations.rb:287
-msgid "Couldn't find all %s: DNs (%s): filter: %s"
-msgstr ""
-
-#: lib/active_ldap/operations.rb:290
-msgid "Couldn't find all %s: DNs (%s)"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:65
-msgid "Bound by SASL as %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:67
-msgid "Bound by simple as %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:69
-msgid "Bound as anonymous"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:72
-msgid "All authentication methods exhausted."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:144
-msgid "Ignore error %s(%s): filter %s: attributes: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:162 lib/active_ldap/adapter/base.rb:172
-msgid "No such entry: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:176 lib/active_ldap/adapter/base.rb:178
-#: lib/active_ldap/adapter/base.rb:180 lib/active_ldap/adapter/base.rb:182
-#: lib/active_ldap/adapter/base.rb:194
-msgid "%s: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:244
-msgid "password_block not nil or Proc object. Ignoring."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:263
-msgid "Requested action timed out."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:303
-msgid "Skip simple bind with empty password."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:307
-msgid "Can't use empty password for simple bind."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:483
-msgid "invalid logical operator: %s: available operators: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:500
-msgid "Giving up trying to reconnect to LDAP server."
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:503
-msgid "Attempting to reconnect"
-msgstr ""
-
-#: lib/active_ldap/adapter/base.rb:514
-msgid ""
-"Reconnect to server failed: %s\n"
-"Reconnect to server failed backtrace:\n"
-"%s"
-msgstr ""
-
-#: lib/active_ldap/adapter/net_ldap.rb:140 lib/active_ldap/adapter/jndi.rb:93
-#: lib/active_ldap/adapter/ldap.rb:169
-msgid "%s is not one of the available connect methods: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/net_ldap.rb:153 lib/active_ldap/adapter/jndi.rb:106
-#: lib/active_ldap/adapter/ldap.rb:182
-msgid "%s is not one of the available LDAP scope: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/net_ldap.rb:186
-msgid "unsupported qops: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/net_ldap.rb:266 lib/active_ldap/adapter/jndi.rb:144
-#: lib/active_ldap/adapter/ldap.rb:228
-msgid "unknown type: %s"
-msgstr ""
-
-#: lib/active_ldap/adapter/ldap.rb:87
-msgid "No matches: filter: %s: attributes: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:377
-msgid "version spec is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:381
-msgid "version number is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:385
-msgid "unsupported version: %d"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:389
-msgid "separator is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:393
-msgid "'dn:' is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:397
-msgid "DN is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:401
-msgid "DN is invalid: %s: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:405
-msgid "DN has an invalid character: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:413
-msgid "option is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:417
-msgid "':' is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:421
-msgid "URI is invalid: %s: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:425
-msgid "'-' is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:429
-msgid "unknown change type: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:433
-msgid "change type is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:437
-msgid "control type is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:441
-msgid "criticality is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:445
-msgid "change type value is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:449
-msgid "attribute spec is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:453
-msgid "'newrdn:' is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:457
-msgid "new RDN value is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:461
-msgid "'deleteoldrdn:' is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:465
-msgid "delete old RDN value is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:469
-msgid "new superior value is missing"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:473
-msgid "unknown modify type: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:738
-msgid "invalid criticality value: %s"
-msgstr ""
-
-#: lib/active_ldap/ldif.rb:781
-msgid "invalid deleteoldrdn value: %s"
+#: lib/active_ldap/configuration.rb:135
+msgid "not a LDAP URI: %s"
 msgstr ""
 
 #: rails/plugin/active_ldap/init.rb:7
@@ -3744,10 +3226,6 @@ msgstr ""
 
 #: rails/plugin/active_ldap/init.rb:19
 msgid "You should run 'script/generator scaffold_active_ldap' to make %s."
-msgstr ""
-
-#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
-msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
 msgstr ""
 
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
@@ -3762,6 +3240,10 @@ msgstr ""
 
 #: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:39
 msgid "Use PREFIX as prefix for this model"
+msgstr ""
+
+#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
+msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
 msgstr ""
 
 #: benchmark/bench-al.rb:14

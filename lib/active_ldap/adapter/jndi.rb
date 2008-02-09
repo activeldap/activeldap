@@ -20,7 +20,9 @@ module ActiveLdap
 
       def connect(options={})
         super do |host, port, method|
-          @connection = JndiConnection.new(host, port, method)
+          [JndiConnection.new(host, port, method),
+           construct_uri(host, port, method == :ssl),
+           method == :start_tls]
         end
       end
 

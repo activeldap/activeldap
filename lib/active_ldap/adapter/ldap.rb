@@ -13,19 +13,37 @@ module ActiveLdap
 
     class Ldap < Base
       module Method
-        class SSL
+        class Base
+          def ssl?
+            false
+          end
+
+          def start_tls?
+            false
+          end
+        end
+
+        class SSL < Base
           def connect(host, port)
             LDAP::SSLConn.new(host, port, false)
           end
-        end
 
-        class TLS
-          def connect(host, port)
-            LDAP::SSLConn.new(host, port, true)
+          def ssl?
+            true
           end
         end
 
-        class Plain
+        class TLS < Base
+          def connect(host, port)
+            LDAP::SSLConn.new(host, port, true)
+          end
+
+          def start_tls?
+            true
+          end
+        end
+
+        class Plain < Base
           def connect(host, port)
             LDAP::Conn.new(host, port)
           end
@@ -34,7 +52,9 @@ module ActiveLdap
 
       def connect(options={})
         super do |host, port, method|
-          method.connect(host, port)
+          [method.connect(host, port),
+           construct_uri(host, port, method.ssl?),
+           method.start_tls?]
         end
       end
 
