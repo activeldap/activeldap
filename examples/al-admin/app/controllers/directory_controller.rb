@@ -16,7 +16,9 @@ class DirectoryController < ApplicationController
     else
       @entry = Entry.find(dn, find_options)
     end
-    render(:partial => "_entry/entry", :object => @entry)
+    erb = "<%= render(:partial => '_entry/entry', :object => @entry) %>"
+    erb = "<div>\n#{erb}\n</div>"
+    render(:inline => erb)
   end
 
   def populate

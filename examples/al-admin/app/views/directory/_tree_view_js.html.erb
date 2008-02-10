@@ -18,9 +18,8 @@ treeView.addSelectItemCallback(function (element)
     $(<%= entry_id.to_json %>).update(message);
   }
 
-  new Ajax.Updater({success: <%= entry_id.to_json %>},
-                   <%= url_for(:action => "entry").to_json %>,
-                   {parameters: {dn: selectedDN},
-                    evalScripts: true,
-                    onFailure: failureHandler});
+  <%= remote_function(:update => {:success => entry_id},
+                      :url => url_for(:action => "entry"),
+                      :with => "'dn=' + selectedDN",
+                      :failure => "failureHandler") %>;
 });
