@@ -23,12 +23,16 @@ module Test
           end
         end
 
+        alias_method :method_added_without_priority, :method_added
         def method_added(name)
+          method_added_without_priority(name)
           set_priority(name) if defined?(@priority_initialized)
         end
 
         def priority(name, *tests)
-          unless private_methods.include?(priority_check_method_name(name))
+          singleton_class = (class << self; self; end)
+          priority_check_method = priority_check_method_name(name)
+          unless singleton_class.private_method_defined?(priority_check_method)
             raise ArgumentError, "unknown priority: #{name}"
           end
           if tests.empty?
@@ -106,15 +110,34 @@ module Test
       end
 
       def result_dir
-        dir = File.join(File.dirname($0), ".test-result",
-                        self.class.name, @method_name.to_s)
+        components = [".test-result", self.class.name, @method_name.to_s]
+        dir = File.join(File.dirname($0), *components)
         dir = File.expand_path(dir)
-        FileUtils.mkdir_p(dir)
+        begin
+          FileUtils.mkdir_p(dir)
+        rescue Errno::EACCES
+          retry_dir = File.join(File.dirname(__FILE__), "..", *components)
+          retry_dir = File.expand_path(retry_dir)
+          raise if retry_dir == dir
+          dir = retry_dir
+          retry
+        end
         dir
       end
 
       def passed_file
         File.join(result_dir, "passed")
+      end
+
+      def escaped_method_name
+        @method_name.to_s.gsub(/[!?]$/) do |matched|
+          case matched
+          when "!"
+            ".destructive"
+          when "?"
+            ".predicate"
+          end
+        end
       end
     end
 
@@ -150,9 +173,9 @@ module Test
     end
 
     class AutoRunner
-      alias_method :original_options, :options
+      alias_method :options_without_priority, :options
       def options
-        opts = original_options
+        opts = options_without_priority
         opts.on("--[no-]priority", "use priority mode") do |bool|
           TestSuite.priority_mode = bool
         end
