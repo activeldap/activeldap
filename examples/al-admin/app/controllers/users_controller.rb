@@ -55,7 +55,8 @@ class UsersController < ApplicationController
       attributes[key] = value if available_attributes.include?(key)
     end
     @user.attributes = attributes
-    render(:partial => "attributes_update_form")
+    erb = "<div>\n<%= render(:partial => 'attributes_update_form') %>\n</div>"
+    render(:inline => erb)
   end
 
   private
