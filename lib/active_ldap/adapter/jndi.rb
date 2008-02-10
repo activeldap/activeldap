@@ -20,9 +20,11 @@ module ActiveLdap
 
       def connect(options={})
         super do |host, port, method|
-          [JndiConnection.new(host, port, method),
-           construct_uri(host, port, method == :ssl),
-           method == :start_tls]
+          uri = construct_uri(host, port, method == :ssl)
+          with_start_tls = method == :start_tls
+          info = {:uri => uri, :with_start_tls => with_start_tls}
+          [log("LDAP: connect", info) {JndiConnection.new(host, port, method)},
+           uri, with_start_tls]
         end
       end
 
@@ -35,7 +37,7 @@ module ActiveLdap
 
       def bind_as_anonymous(options={})
         super do
-          execute(:bind_as_anonymous)
+          execute(:bind_as_anonymous, :name => "bind: anonymous")
         end
       end
 
@@ -45,37 +47,48 @@ module ActiveLdap
 
       def search(options={}, &block)
         super(options) do |base, scope, filter, attrs, limit, callback|
+          info = {
+            :base => base, :scope => scope_name(scope), :filter => filter,
+            :attributes => attributes,
+          }
           execute(:search, base, scope, filter, attrs, limit, callback, &block)
         end
       end
 
       def delete(targets, options={})
         super do |target|
-          execute(:delete, target)
+          execute(:delete, {:dn => target}, target)
         end
       end
 
       def add(dn, entries, options={})
         super do |dn, entries|
-          execute(:add, dn, parse_entries(entries))
+          info = {:dn => dn, :attributes => entries}
+          execute(:add, info, dn, parse_entries(entries))
         end
       end
 
       def modify(dn, entries, options={})
         super do |dn, entries|
-          execute(:modify, dn, parse_entries(entries))
+          info = {:dn => dn, :attributes => entries}
+          execute(:modify, info, dn, parse_entries(entries))
         end
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
         super do |dn, new_rdn, delete_old_rdn, new_superior|
+          info = {
+            :name => "modify: RDN", :dn => dn, :new_rdn => new_rdn,
+            :delete_old_rdn => delete_old_rdn,
+          }
           execute(:modify_rdn, dn, new_rdn, delete_old_rdn)
         end
       end
 
       private
-      def execute(method, *args, &block)
-        @connection.send(method, *args, &block)
+      def execute(method, info, *args, &block)
+        name = (info || {}).delete(:name) || method
+        log(name, info) {@connection.send(method, *args, &block)}
       rescue JndiConnection::NamingException
         if /\[LDAP: error code (\d+) - ([^\]]+)\]/ =~ $!.to_s
           message = $2
@@ -111,15 +124,25 @@ module ActiveLdap
         value
       end
 
+      def scope_name(scope)
+        {
+          0 => :base,
+          1 => :one,
+          2 => :sub,
+        }[scope]
+      end
+
       def sasl_bind(bind_dn, options={})
         super do |bind_dn, mechanism, quiet|
-          @connection.sasl_bind(bind_dn, mechanism, quiet)
+          info = {:name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism}
+          execute(:sasl_bind, info, bind_dn, mechanism, quiet)
         end
       end
 
       def simple_bind(bind_dn, options={})
         super do |bind_dn, passwd|
-          @connection.simple_bind(bind_dn, passwd)
+          info = {:name => "bind", :dn => bind_dn}
+          execute(:simple_bind, info, bind_dn, passwd)
         end
       end
 

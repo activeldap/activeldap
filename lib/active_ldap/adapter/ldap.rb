@@ -52,9 +52,11 @@ module ActiveLdap
 
       def connect(options={})
         super do |host, port, method|
-          [method.connect(host, port),
-           construct_uri(host, port, method.ssl?),
-           method.start_tls?]
+          uri = construct_uri(host, port, method.ssl?)
+          with_start_tls = method.start_tls?
+          info = {:uri => uri, :with_start_tls => with_start_tls}
+          [log("connect", info) {method.connect(host, port)},
+           uri, with_start_tls]
         end
       end
 
@@ -73,7 +75,7 @@ module ActiveLdap
 
       def bind_as_anonymous(options={})
         super do
-          execute(:bind)
+          execute(:bind, :name => "bind: anonymous")
           true
         end
       end
@@ -86,7 +88,11 @@ module ActiveLdap
         super(options) do |base, scope, filter, attrs, limit, callback|
           begin
             i = 0
-            execute(:search, base, scope, filter, attrs) do |entry|
+            info = {
+              :base => base, :scope => scope_name(scope),
+              :filter => filter, :attributes => attrs,
+            }
+            execute(:search, info, base, scope, filter, attrs) do |entry|
               i += 1
               attributes = {}
               entry.attrs.each do |attr|
@@ -116,10 +122,13 @@ module ActiveLdap
       def delete(targets, options={})
         super do |target|
           controls = options[:controls]
+          info = {:dn => target}
           if controls
-            execute(:delete_ext, target, controls, [])
+            info.merge!(:name => :delete, :controls => controls)
+            execute(:delete_ext, info,
+                    target, controls, [])
           else
-            execute(:delete, target)
+            execute(:delete, info, target)
           end
         end
       end
@@ -128,10 +137,12 @@ module ActiveLdap
         super do |dn, entries|
           controls = options[:controls]
           attributes = parse_entries(entries)
+          info = {:dn => dn, :attributes => entries}
           if controls
-            execute(:add_ext, dn, attributes, controls, [])
+            info.merge!(:name => :add, :controls => controls)
+            execute(:add_ext, info, dn, attributes, controls, [])
           else
-            execute(:add, dn, attributes)
+            execute(:add, info, dn, attributes)
           end
         end
       end
@@ -140,17 +151,23 @@ module ActiveLdap
         super do |dn, entries|
           controls = options[:controls]
           attributes = parse_entries(entries)
+          info = {:dn => dn, :attributes => entries}
           if controls
-            execute(:modify_ext, dn, attributes, controls, [])
+            info.merge!(:name => :modify, :controls => controls)
+            execute(:modify_ext, info, dn, attributes, controls, [])
           else
-            execute(:modify, dn, attributes)
+            execute(:modify, info, dn, attributes)
           end
         end
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
         super do |dn, new_rdn, delete_old_rdn, new_superior|
-          execute(:modrdn, dn, new_rdn, delete_old_rdn)
+          info = {
+            :name => "modify: RDN",
+            :dn => dn, :new_rdn => new_rdn, :delete_old_rdn => delete_old_rdn
+          }
+          execute(:modrdn, info, dn, new_rdn, delete_old_rdn)
         end
       end
 
@@ -161,15 +178,10 @@ module ActiveLdap
         end
       end
 
-      def root_dse(attributes, options={})
-        sec = options[:sec] || 0
-        usec = options[:usec] || 0
-        @connection.root_dse(attributes, sec, usec)
-      end
-
-      def execute(method, *args, &block)
+      def execute(method, info=nil, *args, &block)
         begin
-          @connection.send(method, *args, &block)
+          name = (info || {}).delete(:name) || method
+          log(name, info) {@connection.send(method, *args, &block)}
         rescue LDAP::ResultError
           @connection.assert_error_code
           raise $!.message
@@ -205,6 +217,14 @@ module ActiveLdap
         value
       end
 
+      def scope_name(scope)
+        {
+          LDAP::LDAP_SCOPE_BASE => :base,
+          LDAP::LDAP_SCOPE_SUBTREE => :sub,
+          LDAP::LDAP_SCOPE_ONELEVEL => :one,
+        }[scope]
+      end
+
       def sasl_bind(bind_dn, options={})
         super do |bind_dn, mechanism, quiet|
           begin
@@ -214,7 +234,10 @@ module ActiveLdap
             if need_credential_sasl_mechanism?(mechanism)
               args << password(bind_dn, options)
             end
-            execute(:sasl_bind, *args)
+            info = {
+              :name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism
+            }
+            execute(:sasl_bind, info, *args)
           ensure
             @connection.sasl_quiet = sasl_quiet
           end
@@ -223,7 +246,7 @@ module ActiveLdap
 
       def simple_bind(bind_dn, options={})
         super do |bind_dn, passwd|
-          execute(:bind, bind_dn, passwd)
+          execute(:bind, {:dn => bind_dn}, bind_dn, passwd)
         end
       end
 

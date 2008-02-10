@@ -246,6 +246,9 @@ module ActiveLdap
       end
     end
 
+    cattr_accessor :colorize_logging, :instance_writer => false
+    @@colorize_logging = true
+
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
                                   :classes, :recommended_classes,
                                   :sort_by, :order]

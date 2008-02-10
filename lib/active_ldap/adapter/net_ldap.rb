@@ -29,9 +29,11 @@ module ActiveLdap
           }
           config[:encryption] = {:method => method} if method
           begin
-            [Net::LDAP::Connection.new(config),
-             construct_uri(host, port, method == :simple_tls),
-             method == :start_tls]
+            uri = construct_uri(host, port, method == :simple_tls)
+            with_start_tls = method == :start_tls
+            info = {:uri => uri, :with_start_tls => with_start_tls}
+            [log("connect", info) {Net::LDAP::Connection.new(config)},
+             uri, with_start_tls]
           rescue Net::LDAP::LdapError
             raise ConnectionError, $!.message
           end
@@ -39,7 +41,7 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        @bound = false
+        log("unbind") {@bound = false}
       end
 
       def bind(options={})
@@ -54,7 +56,7 @@ module ActiveLdap
       def bind_as_anonymous(options={})
         super do
           @bound = false
-          execute(:bind, :method => :anonymous)
+          execute(:bind, {:name => "bind: anonymous"}, {:method => :anonymous})
           @bound = true
         end
       end
@@ -72,7 +74,11 @@ module ActiveLdap
             :attributes => attrs,
             :size => limit,
           }
-          execute(:search, args) do |entry|
+          info = {
+            :base => base, :scope => scope_name(scope),
+            :filter => filter, :attributes => attrs,
+          }
+          execute(:search, info, args) do |entry|
             attributes = {}
             entry.original_attribute_names.each do |name|
               attributes[name] = entry[name]
@@ -84,7 +90,9 @@ module ActiveLdap
 
       def delete(targets, options={})
         super do |target|
-          execute(:delete, :dn => target)
+          args = {:dn => target}
+          info = args.dup
+          execute(:delete, info, args)
         end
       end
 
@@ -96,13 +104,16 @@ module ActiveLdap
               attributes[name] = values
             end
           end
-          execute(:add, :dn => dn, :attributes => attributes)
+          args = {:dn => dn, :attributes => attributes}
+          info = args.dup
+          execute(:add, info, args)
         end
       end
 
       def modify(dn, entries, options={})
         super do |dn, entries|
-          execute(:modify,
+          info = {:dn => dn, :attributes => entries}
+          execute(:modify, info,
                   :dn => dn,
                   :operations => parse_entries(entries))
         end
@@ -110,7 +121,11 @@ module ActiveLdap
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
         super do |dn, new_rdn, delete_old_rdn, new_superior|
-          execute(:rename,
+          info = {
+            :name => "modify: RDN", :dn => dn, :new_rdn => new_rdn,
+            :delete_old_rdn => delete_old_rdn,
+          }
+          execute(:rename, info,
                   :olddn => dn,
                   :newrdn => new_rdn,
                   :delete_attributes => delete_old_rdn)
@@ -118,8 +133,11 @@ module ActiveLdap
       end
 
       private
-      def execute(method, *args, &block)
-        result = @connection.send(method, *args, &block)
+      def execute(method, info=nil, *args, &block)
+        name = (info || {}).delete(:name) || method
+        result = log("LDAP: #{name}", info) do
+          @connection.send(method, *args, &block)
+        end
         message = nil
         if result.is_a?(Hash)
           message = result[:errorMessage]
@@ -128,8 +146,8 @@ module ActiveLdap
         unless result.zero?
           klass = LdapError::ERRORS[result]
           klass ||= LdapError
-          raise klass,
-                [Net::LDAP.result2string(result), message].compact.join(": ")
+          message = [Net::LDAP.result2string(result), message].compact.join(": ")
+          raise klass, message
         end
       end
 
@@ -158,6 +176,14 @@ module ActiveLdap
         value
       end
 
+      def scope_name(scope)
+        {
+          Net::LDAP::SearchScope_BaseObject => :base,
+          Net::LDAP::SearchScope_WholeSubtree => :sub,
+          Net::LDAP::SearchScope_SingleLevel => :one,
+        }[scope]
+      end
+
       def sasl_bind(bind_dn, options={})
         super do |bind_dn, mechanism, quiet|
           normalized_mechanism = mechanism.downcase.gsub(/-/, '_')
@@ -172,7 +198,10 @@ module ActiveLdap
             :challenge_response => challenge_response,
           }
           @bound = false
-          execute(:bind, args)
+          info = {
+            :name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism,
+          }
+          execute(:bind, info, args)
           @bound = true
         end
       end
@@ -244,7 +273,7 @@ module ActiveLdap
             :password => passwd,
           }
           @bound = false
-          execute(:bind, args)
+          execute(:bind, {:dn => bind_dn}, args)
           @bound = true
         end
       end

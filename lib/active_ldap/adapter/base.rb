@@ -1,3 +1,5 @@
+require 'benchmark'
+
 require 'active_ldap/schema'
 require 'active_ldap/entry_attribute'
 require 'active_ldap/ldap_error'
@@ -14,7 +16,12 @@ module ActiveLdap
                                           :sasl_mechanisms, :sasl_quiet,
                                           :allow_anonymous, :store_password,
                                           :scope]
+
+      @@row_even = true
+
+      attr_reader :runtime
       def initialize(configuration={})
+        @runtime = 0
         @connection = nil
         @disconnected = false
         @entry_attributes = {}
@@ -24,6 +31,11 @@ module ActiveLdap
         VALID_ADAPTER_CONFIGURATION_KEYS.each do |name|
           instance_variable_set("@#{name}", configuration[name])
         end
+      end
+
+      def reset_runtime
+        runtime, @runtime = @runtime, 0
+        runtime
       end
 
       def connect(options={})
@@ -199,6 +211,13 @@ module ActiveLdap
         operation(options) do
           yield(dn, new_rdn, delete_old_rdn, new_superior)
         end
+      end
+
+      def log_info(name, runtime, info=nil)
+        return unless @logger
+        return unless @logger.debug?
+        message = "LDAP: #{name} (#{'%f' % runtime})"
+        @logger.debug(format_log_entry(message, info))
       end
 
       private
@@ -579,6 +598,43 @@ module ActiveLdap
           "#{@uri}(StartTLS)"
         else
           @uri
+        end
+      end
+
+      def log(name, info=nil)
+        if block_given?
+          if @logger and @logger.debug?
+            result = nil
+            runtime = Benchmark.realtime {result = yield}
+            @runtime += runtime
+            log_info(name, runtime, info)
+            result
+          else
+            yield
+          end
+        else
+          log_info(name, info, 0)
+          nil
+        end
+      end
+
+      def format_log_entry(message, info=nil)
+        if ActiveLdap::Base.colorize_logging
+          if @@row_even
+            message_color, dump_color = "4;36;1", "0;1"
+          else
+            @@row_even = true
+            message_color, dump_color = "4;35;1", "0"
+          end
+          @@row_even = !@@row_even
+
+          log_entry = "  \e[#{message_color}m#{message}\e[0m"
+          log_entry << ": \e[#{dump_color}m#{info.inspect}\e[0m" if info
+          log_entry
+        else
+          log_entry = message
+          log_entry += ": #{info.inspect}" if info
+          log_entry
         end
       end
     end

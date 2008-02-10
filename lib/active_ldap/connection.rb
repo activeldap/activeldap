@@ -156,6 +156,12 @@ module ActiveLdap
         connection.schema
       end
 
+      def reset_runtime
+        active_connections.inject(0) do |result, (name, connection)|
+          result + connection.reset_runtime
+        end
+      end
+
       private
       def active_connection_key(k=self)
         k.name.empty? ? k.object_id : k.name
