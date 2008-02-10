@@ -1,4 +1,3 @@
-- ldap_mapping :exclude_classes. (:excluded_classes is more better?)
 - Provide FormHelper for LDAP entry's attribute to handle multiple values
   (["foo", "bar", ...]) and option value ({"binary" => "..."},
   {"lang-en-us" => "..."})

@@ -5,6 +5,37 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_excluded_classes
+    mapping = {:classes => ["person"]}
+    person_class = Class.new(@user_class)
+    person_class.ldap_mapping(mapping)
+
+    no_organizational_person_class = Class.new(@user_class)
+    no_organizational_person_mapping =
+      mapping.merge(:excluded_classes => ["organizationalPerson"])
+    no_organizational_person_class.ldap_mapping(no_organizational_person_mapping)
+
+    no_simple_person_class = Class.new(@user_class)
+    no_simple_person_mapping =
+      mapping.merge(:excluded_classes => ['shadowAccount', 'inetOrgPerson',
+                                          "organizationalPerson"])
+    no_simple_person_class.ldap_mapping(no_simple_person_mapping)
+
+    make_temporary_user do |user1,|
+      make_temporary_user(:simple => true) do |user2,|
+        assert_equal([user1.dn, user2.dn].sort,
+                     person_class.find(:all).collect(&:dn).sort)
+
+        no_organizational_people = no_organizational_person_class.find(:all)
+        assert_equal([user2.dn].sort,
+                     no_organizational_people.collect(&:dn).sort)
+
+        assert_equal([user2.dn].sort,
+                     no_simple_person_class.find(:all).collect(&:dn).sort)
+      end
+    end
+  end
+
   priority :normal
   def test_new_with_dn
     cn = "XXX"

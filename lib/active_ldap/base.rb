@@ -251,7 +251,7 @@ module ActiveLdap
 
     VALID_LDAP_MAPPING_OPTIONS = [:dn_attribute, :prefix, :scope,
                                   :classes, :recommended_classes,
-                                  :sort_by, :order]
+                                  :excluded_classes, :sort_by, :order]
 
     cattr_accessor :logger
     cattr_accessor :configurations
@@ -287,6 +287,7 @@ module ActiveLdap
     class_local_attr_accessor false, :prefix, :base
     class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
+    class_local_attr_accessor true, :excluded_classes
 
     class << self
       # Hide new in Base
@@ -356,6 +357,7 @@ module ActiveLdap
         self.scope = options[:scope]
         self.required_classes = options[:classes]
         self.recommended_classes = options[:recommended_classes]
+        self.excluded_classes = options[:excluded_classes]
         self.sort_by = options[:sort_by]
         self.order = options[:order]
 
@@ -479,6 +481,7 @@ module ActiveLdap
     self.scope = :sub
     self.required_classes = ['top']
     self.recommended_classes = []
+    self.excluded_classes = []
 
     include Enumerable
 

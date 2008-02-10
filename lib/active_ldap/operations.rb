@@ -133,9 +133,20 @@ module ActiveLdap
       end
 
       def object_class_filters(classes=nil)
-        (classes || required_classes).collect do |name|
-          ["objectClass", Escape.ldap_filter_escape(name)]
+        expected_classes = (classes || required_classes).collect do |name|
+          Escape.ldap_filter_escape(name)
         end
+        unexpected_classes = excluded_classes.collect do |name|
+          Escape.ldap_filter_escape(name)
+        end
+        filters = []
+        unless expected_classes.empty?
+          filters << ["objectClass", "=", *expected_classes]
+        end
+        unless unexpected_classes.empty?
+          filters << [:not, [:or, ["objectClass", "=", *unexpected_classes]]]
+        end
+        filters
       end
 
       def split_search_value(value)
