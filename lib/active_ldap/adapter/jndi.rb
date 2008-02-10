@@ -23,7 +23,7 @@ module ActiveLdap
           uri = construct_uri(host, port, method == :ssl)
           with_start_tls = method == :start_tls
           info = {:uri => uri, :with_start_tls => with_start_tls}
-          [log("LDAP: connect", info) {JndiConnection.new(host, port, method)},
+          [log("connect", info) {JndiConnection.new(host, port, method)},
            uri, with_start_tls]
         end
       end
@@ -49,9 +49,10 @@ module ActiveLdap
         super(options) do |base, scope, filter, attrs, limit, callback|
           info = {
             :base => base, :scope => scope_name(scope), :filter => filter,
-            :attributes => attributes,
+            :attributes => attrs,
           }
-          execute(:search, base, scope, filter, attrs, limit, callback, &block)
+          execute(:search, info,
+                  base, scope, filter, attrs, limit, callback, &block)
         end
       end
 
@@ -86,7 +87,7 @@ module ActiveLdap
       end
 
       private
-      def execute(method, info, *args, &block)
+      def execute(method, info=nil, *args, &block)
         name = (info || {}).delete(:name) || method
         log(name, info) {@connection.send(method, *args, &block)}
       rescue JndiConnection::NamingException

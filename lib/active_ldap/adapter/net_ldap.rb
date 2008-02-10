@@ -135,9 +135,7 @@ module ActiveLdap
       private
       def execute(method, info=nil, *args, &block)
         name = (info || {}).delete(:name) || method
-        result = log("LDAP: #{name}", info) do
-          @connection.send(method, *args, &block)
-        end
+        result = log(name, info) {@connection.send(method, *args, &block)}
         message = nil
         if result.is_a?(Hash)
           message = result[:errorMessage]
