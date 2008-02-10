@@ -1,7 +1,7 @@
 <%
   using_object_classes = @user.classes
   available_object_classes = @user.schema.object_classes.collect(&:name)
-  update_failure_id = 'object-classes-obdate-failur'
+  update_failure_id = 'object-classes-obdate-failure'
 %>
 
 <% switcher("object-classes", _("Update objectClasses")) do %>
