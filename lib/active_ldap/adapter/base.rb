@@ -616,6 +616,11 @@ module ActiveLdap
           log_info(name, info, 0)
           nil
         end
+      rescue Exception
+        log_info("#{name}: FAILED", 0,
+                 (info || {}).merge(:error => $!.class.name,
+                                    :error_message => $!.message))
+        raise
       end
 
       def format_log_entry(message, info=nil)

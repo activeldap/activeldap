@@ -32,6 +32,7 @@ module ActiveLdap
         end
 
         validate_on_create :validate_duplicated_dn_creation
+        validate :validate_excluded_classes
         validate :validate_required_ldap_values
         validate :validate_ldap_values
 
@@ -71,6 +72,33 @@ module ActiveLdap
         end
         errors.add("dn", format % dn)
       end
+    end
+
+    def validate_excluded_classes
+      return if self.class.excluded_classes.empty?
+
+      _schema = schema
+      unexpected_classes = self.class.excluded_classes.collect do |name|
+        _schema.object_class(name)
+      end
+      unexpected_classes -= classes.collect do |name|
+        _schema.object_class(name)
+      end
+      return if unexpected_classes.empty?
+
+      names = unexpected_classes.collect do |object_class|
+        self.class.human_object_class_name(object_class)
+      end
+      if ActiveLdap.get_text_supported?
+        format = n_("%{fn} has excluded value: %s",
+                    "%{fn} has excluded values: %s",
+                    names.size)
+      else
+        format = n_("has excluded value: %s",
+                    "has excluded values: %s",
+                    names.size)
+      end
+      errors.add("objectClass", format % names.join(', '))
     end
 
     # validate_required_ldap_values

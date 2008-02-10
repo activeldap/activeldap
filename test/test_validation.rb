@@ -6,6 +6,26 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_validate_excluded_classes
+    make_temporary_user do |user,|
+      user.save
+      user.classes -= ['person']
+      assert(user.save)
+      user.class.excluded_classes = ['person']
+      assert(!user.save)
+      if ActiveLdap.get_text_supported?
+        format = n_("%{fn} has excluded value: %s",
+                    "%{fn} has excluded values: %s",
+                    1) % {:fn => la_("objectClass")}
+        message = format % loc_("person")
+      else
+        message = "ObjectClass has excluded value: person"
+      end
+      assert_equal([message], user.errors.full_messages)
+    end
+  end
+
+  priority :normal
   def test_valid_subtype_and_single_value
     make_temporary_user do |user, password|
       user.display_name = [{"lang-ja" => ["ユーザ"]},
@@ -31,7 +51,6 @@ class TestValidation < Test::Unit::TestCase
                                        {"lang-en" => ["U2", "U3"]}].inspect)
   end
 
-  priority :normal
   def test_validate_required_ldap_values
     make_temporary_user(:simple => true) do |user, password|
       assert(user.save)
