@@ -1,3 +1,33 @@
+0.9.1:
+  * Implemented LDIF parser.
+  * Improved validation:
+    * Added some validations.
+    * Fixed SINGLE-VALUE validation. [#17763]
+      (Reported by Naoto Morishima)
+  * Supported JNDI as backend.
+  * Improved auto reconnection.
+  * Supported Rails 2.0.2.
+  * Improved performance. (4x)
+  * [API CHANGE]: removed "'binary' =>" from getter result.
+      e.g.
+	before:
+	  user.user_certificate # => {"binary" => "..."}
+	now:
+	  user.user_certificate # => "..."
+  * Added :excluded_classed ldap_mapping option.
+  * Logged operation time used for LDAP operation.
+  * Improved API:
+    * Accepted non String value for find(:value => XXX).
+      (Suggested by Marc Dequèn)
+    * Accepted DN as ActiveLdap::Base.new(XXX).
+      (Reported by Jeremy Pruitt)
+    * Treated empty password for smiple bind as anonymous bind.
+      (Suggested by Bodaniel Jeans)
+    * Ensured adding "objectClass" for find's :attribute value. [#16946]
+      (Suggested by Nobody)
+    * Fixed a GeneralizedTime type casting bug.
+      (Reported by Bodaniel Jeanes)
+
 0.9.0:
   * Improved DN handling.
   * Supported attribute value validation by LDAP schema.
