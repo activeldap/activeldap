@@ -153,13 +153,24 @@ module ActiveLdap
       def parse(source)
         Parser.new(source).parse
       end
+
+      def escape_value(value)
+        if /(\A | \z)/.match(value)
+          '"' + value.gsub(/([\\\"])/, '\\\\\1') + '"'
+        else
+          value.gsub(/([,=\+<>#;\\\"])/, '\\\\\1')
+        end
+      end
     end
 
     attr_reader :rdns
     def initialize(*rdns)
       @rdns = rdns.collect do |rdn|
-        rdn = {rdn[0] => rdn[1]} if rdn.is_a?(Array) and rdn.size == 2
-        rdn
+        if rdn.is_a?(Array) and rdn.size == 2
+          {rdn[0] => rdn[1]}
+        else
+          rdn
+        end
       end
     end
 
@@ -212,7 +223,7 @@ module ActiveLdap
         rdn.sort_by do |type, value|
           type.upcase
         end.collect do |type, value|
-          "#{type}=#{escape(value)}"
+          "#{type}=#{self.class.escape_value(value)}"
         end.join("+")
       end.join(",")
     end
@@ -239,14 +250,6 @@ module ActiveLdap
         end
       end.collect do |key, value|
         [key, value]
-      end
-    end
-
-    def escape(value)
-      if /(\A | \z)/.match(value)
-        '"' + value.gsub(/([\\\"])/, '\\\\\1') + '"'
-      else
-        value.gsub(/([,=\+<>#;\\\"])/, '\\\\\1')
       end
     end
   end

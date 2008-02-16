@@ -27,6 +27,8 @@
       (Suggested by Nobody)
     * Fixed a GeneralizedTime type casting bug.
       (Reported by Bodaniel Jeanes)
+    * Supported :base and :prefix search/find option value escaping.
+      (Suggested by David Morton)
 
 0.9.0:
   * Improved DN handling.

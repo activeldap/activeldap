@@ -1110,7 +1110,7 @@ module ActiveLdap
       [dn_attribute_name, dn_attribute_value, bases]
     end
 
-    def compute_dn
+    def compute_dn(escape_dn_value=false)
       return base if @dn_is_base
 
       dn_value = id
@@ -1118,9 +1118,14 @@ module ActiveLdap
         raise DistinguishedNameNotSetError.new,
                 _("%s's DN attribute (%s) isn't set") % [self, dn_attribute]
       end
+      dn_value = DN.escape_value(dn_value) if escape_dn_value
       _base = base
       _base = nil if _base.empty?
       ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
+    end
+
+    def escaped_dn
+      compute_dn(true)
     end
 
     # array_of
@@ -1260,7 +1265,7 @@ module ActiveLdap
     def create
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_all_attributes(data)
-        add_entry(dn, attributes)
+        add_entry(escaped_dn, attributes)
         @new_entry = false
         true
       end
@@ -1269,7 +1274,7 @@ module ActiveLdap
     def update
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_modified_attributes(ldap_data, data)
-        modify_entry(dn, attributes)
+        modify_entry(escaped_dn, attributes)
         true
       end
     end

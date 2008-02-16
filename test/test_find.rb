@@ -4,6 +4,34 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_with_special_value_prefix
+    # \2C == ','
+    make_ou("a\\2Cb,ou=Users")
+    make_temporary_user(:uid => "user1,ou=a\\2Cb") do |user1,|
+      assert_equal([], @user_class.find(:all, :prefix => "ou=a,b").collect(&:dn))
+      params = {:prefix => "ou=a\\2Cb"}
+      assert_equal([user1.dn], @user_class.find(:all, params).collect(&:dn))
+      params = {:prefix => [["ou", "a,b"]]}
+      assert_equal([user1.dn], @user_class.find(:all, params).collect(&:dn))
+    end
+  end
+
+  def test_find_with_special_value_base
+    # \5C == '\'
+    make_ou("a\\5Cb,ou=Users")
+    make_temporary_user(:uid => "user1,ou=a\\5Cb") do |user1,|
+      base = @user_class.base
+      params = {:base => "ou=a\\b,#{base}"}
+      assert_equal([], @user_class.find(:all, params).collect(&:dn))
+      params = {:base => "ou=a\\5Cb,#{base}"}
+      assert_equal([user1.dn], @user_class.find(:all, params).collect(&:dn))
+      base_rdns = ActiveLdap::DN.parse(base).rdns
+      params = {:base => [["ou", "a\\b"]] + base_rdns}
+      assert_equal([user1.dn], @user_class.find(:all, params).collect(&:dn))
+    end
+  end
+
+  priority :normal
   def test_find_with_sort_by_in_ldap_mapping
     @user_class.ldap_mapping(:dn_attribute => @user_class.dn_attribute,
                              :prefix => @user_class.prefix,
@@ -26,7 +54,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_find_operational_attributes
     make_temporary_user do |user, password|
       found_user = @user_class.find(user.uid, :attributes => ["*", "+"])

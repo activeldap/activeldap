@@ -39,8 +39,8 @@ module ActiveLdap
         prefix ||= _prefix
         filter ||= [attr, value]
         filter = [:and, filter, *object_class_filters(classes)]
-        _base = options[:base]
-        _base ||= [prefix, base].compact.reject{|x| x.empty?}.join(",")
+        _base = options[:base] ? [options[:base]] : [prefix, base]
+        _base = prepare_search_base(_base)
         if options.has_key?(:ldap_scope)
           logger.warning do
             _(":ldap_scope search option is deprecated. Use :scope instead.")
@@ -130,6 +130,16 @@ module ActiveLdap
         else
           target
         end
+      end
+
+      def prepare_search_base(components)
+        components.compact.collect do |component|
+          if component.is_a?(String)
+            component
+          else
+            DN.new(*component).to_s
+          end
+        end.reject{|x| x.empty?}.join(",")
       end
 
       def object_class_filters(classes=nil)
