@@ -10,7 +10,9 @@ top_dir = File.expand_path(File.join(base_dir, ".."))
 $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
+$LOAD_PATH.unshift(File.join(top_dir, "test-unit-ext", "lib"))
 require 'test-unit-ext'
+Test::Unit::TestSuite.priority_mode = true
 
 test_file = "test/test_*.rb"
 Dir.glob(test_file) do |file|
