@@ -94,11 +94,13 @@ module ActiveLdap
                     "%{fn} has excluded values: %s",
                     names.size)
       else
-        format = n_("has excluded value: %s",
-                    "has excluded values: %s",
-                    names.size)
+        if names.size == 1
+          format = "has excluded value: %s"
+        else
+          format = "has excluded values: %s",
+        end
       end
-      errors.add("objectClass", format % names.join(', '))
+      errors.add("objectClass", format % names.join(", "))
     end
 
     # validate_required_ldap_values
@@ -132,11 +134,9 @@ module ActiveLdap
               args << aliases.join(', ')
             end
           else
-            if aliases.empty?
-              format = "is required attribute by objectClass '%s'"
-            else
-              format = "is required attribute by objectClass '%s'" \
-              ": aliases: %s"
+            format = "is required attribute by objectClass '%s'"
+            unless aliases.empty?
+              format << ": aliases: %s"
               args << aliases.join(', ')
             end
           end
