@@ -97,7 +97,7 @@ module ActiveLdap
         if names.size == 1
           format = "has excluded value: %s"
         else
-          format = "has excluded values: %s",
+          format = "has excluded values: %s"
         end
       end
       errors.add("objectClass", format % names.join(", "))
