@@ -459,6 +459,16 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
+  def test_ldap_mapping_symbol_dn_attribute
+    ou_class = Class.new(ActiveLdap::Base)
+    ou_class.ldap_mapping(:dn_attribute => :ou,
+                          :prefix => "",
+                          :classes => ["top", "organizationalUnit"])
+    assert_equal(["ou=Groups,#{current_configuration['base']}",
+                  "ou=Users,#{current_configuration['base']}"],
+                 ou_class.find(:all).collect(&:dn).sort)
+  end
+
   def test_ldap_mapping_validation
     ou_class = Class.new(ActiveLdap::Base)
     assert_raises(ArgumentError) do

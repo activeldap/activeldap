@@ -353,6 +353,7 @@ module ActiveLdap
         validate_ldap_mapping_options(options)
 
         self.dn_attribute = options[:dn_attribute] || default_dn_attribute
+        self.dn_attribute = dn_attribute.to_s if dn_attribute.is_a?(Symbol)
         self.prefix = options[:prefix] || default_prefix
         self.scope = options[:scope]
         self.required_classes = options[:classes]
