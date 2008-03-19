@@ -287,8 +287,6 @@ module ActiveLdap
       end
 
       def sasl_bind(bind_dn, options={})
-        return false unless bind_dn
-
         # Get all SASL mechanisms
         mechanisms = operation(options) do
           root_dse_values("supportedSASLMechanisms")
