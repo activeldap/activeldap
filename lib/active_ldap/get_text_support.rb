@@ -1,15 +1,7 @@
 module ActiveLdap
-  if const_defined?(:GetTextFallback)
-    class << self
-      def get_text_supported?
-        false
-      end
-    end
-  else
-    class << self
-      def get_text_supported?
-        true
-      end
+  class << self
+    def get_text_supported?
+      not const_defined?(:GetTextFallback)
     end
   end
 
