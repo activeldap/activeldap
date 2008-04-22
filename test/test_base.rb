@@ -1,10 +1,29 @@
 # -*- coding: utf-8 -*-
+
 require 'al-test-utils'
 
 class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_normalize_dn_attribute
+    make_ou("Ous")
+    ou_class = Class.new(ActiveLdap::Base)
+    ou_class.ldap_mapping(:dn_attribute => "OU",
+                          :prefix => "ou=OUS",
+                          :classes => ["top", "organizationalUnit"])
+    ou_class.new("ou1").save!
+    ou_class.new("ou2").save!
+
+    ou1 = ou_class.find("ou1")
+    assert_equal("ou1", ou1.ou)
+    assert_equal("ou=ou1,#{ou_class.base}", ou1.dn)
+    ou2 = ou_class.find("ou2")
+    assert_equal("ou2", ou2.ou)
+    assert_equal("ou=ou2,#{ou_class.base}", ou2.dn)
+  end
+
+  priority :normal
   def test_excluded_classes
     mapping = {:classes => ["person"]}
     person_class = Class.new(@user_class)
@@ -36,7 +55,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_new_with_dn
     cn = "XXX"
     dn = "cn=#{cn},#{@user_class.base}"

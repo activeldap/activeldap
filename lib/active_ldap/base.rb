@@ -603,7 +603,7 @@ module ActiveLdap
 
     alias_method(:dn_attribute_of_class, :dn_attribute)
     def dn_attribute
-      @dn_attribute || dn_attribute_of_class
+      to_real_attribute_name(@dn_attribute || dn_attribute_of_class)
     end
 
     def default_search_attribute
@@ -1211,7 +1211,7 @@ module ActiveLdap
     end
 
     def collect_all_attributes(data)
-      dn_attr = to_real_attribute_name(dn_attribute)
+      dn_attr = dn_attribute
       dn_value = data[dn_attr]
 
       attributes = []
