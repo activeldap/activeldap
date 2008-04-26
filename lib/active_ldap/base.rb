@@ -541,7 +541,11 @@ module ActiveLdap
     #   [ User.find("a"), User.find("b"), User.find("c") ] &
     #     [ User.find("a"), User.find("d") ] # => [ User.find("a") ]
     def hash
-      dn.hash
+      if dn_attribute
+        dn.hash
+      else
+        super
+      end
     end
 
     def may
