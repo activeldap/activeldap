@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'al-test-utils'
 
 class TestSyntax < Test::Unit::TestCase
@@ -283,8 +285,7 @@ class TestSyntax < Test::Unit::TestCase
 
   def test_telephone_number_validate
     assert_valid("+1 512 305 0280", "Telephone Number")
-
-    assert_invalid(_("empty string"), "", "Telephone Number")
+    assert_valid("", "Telephone Number")
 
     value = "+1 5!2 305 0280"
     params = [value.inspect, "!"]

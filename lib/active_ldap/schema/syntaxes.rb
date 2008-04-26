@@ -391,11 +391,13 @@ module ActiveLdap
         end
       end
 
-      class TelephoneNumber < Base
+      class TelephoneNumber < PrintableString
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.50"] = self
 
-        def validate(value)
-          PrintableString.new.validate(value)
+        private
+        def validate_normalized_value(value, original_value)
+          return nil if value.blank?
+          super
         end
       end
     end
