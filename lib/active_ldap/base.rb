@@ -541,11 +541,7 @@ module ActiveLdap
     #   [ User.find("a"), User.find("b"), User.find("c") ] &
     #     [ User.find("a"), User.find("d") ] # => [ User.find("a") ]
     def hash
-      if dn_attribute
-        dn.hash
-      else
-        super
-      end
+      dn.hash
     end
 
     def may
@@ -607,7 +603,8 @@ module ActiveLdap
 
     alias_method(:dn_attribute_of_class, :dn_attribute)
     def dn_attribute
-      to_real_attribute_name(@dn_attribute || dn_attribute_of_class)
+      _dn_attribute = @dn_attribute || dn_attribute_of_class
+      to_real_attribute_name(_dn_attribute) || _dn_attribute
     end
 
     def default_search_attribute

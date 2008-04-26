@@ -37,12 +37,14 @@ module ActiveLdap
         validate :validate_ldap_values
 
         class << self
-          def evaluate_condition_with_active_ldap_support(condition, entry)
-            evaluate_condition_without_active_ldap_support(condition, entry)
-          rescue ActiveRecord::ActiveRecordError
-            raise Error, $!.message
+          if method_defined?(:evaluate_condition)
+            def evaluate_condition_with_active_ldap_support(condition, entry)
+              evaluate_condition_without_active_ldap_support(condition, entry)
+            rescue ActiveRecord::ActiveRecordError
+              raise Error, $!.message
+            end
+            alias_method_chain :evaluate_condition, :active_ldap_support
           end
-          alias_method_chain :evaluate_condition, :active_ldap_support
         end
 
         def save_with_active_ldap_support!
@@ -58,7 +60,15 @@ module ActiveLdap
         rescue ActiveRecord::ActiveRecordError
           raise Error, $!.message
         end
-        alias_method_chain :run_validations, :active_ldap_support
+        if private_method_defined?(:run_validations)
+          alias_method_chain :run_validations, :active_ldap_support
+        else
+          alias_method(:run_callbacks_with_active_ldap_support,
+                       :run_validations_with_active_ldap_support)
+          alias_method_chain :run_callbacks, :active_ldap_support
+          alias_method(:run_validations_without_active_ldap_support,
+                       :run_callbacks_without_active_ldap_support)
+        end
       end
     end
 
