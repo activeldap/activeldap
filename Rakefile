@@ -44,6 +44,13 @@ at_exit do
   FileUtils.rm_f(manifest)
 end
 
+# For Hoe's no user friendly default behavior. :<
+File.open("README.txt", "w") {|file| file << "= Dummy README\n== XXX\n"}
+FileUtils.cp("CHANGES", "History.txt")
+at_exit do
+  FileUtils.rm_f("README.txt")
+  FileUtils.rm_f("History.txt")
+end
 
 project = Hoe.new('activeldap', ActiveLdap::VERSION) do |project|
   project.rubyforge_name = 'ruby-activeldap'
