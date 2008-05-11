@@ -6,6 +6,20 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_save_with_changes
+    make_temporary_user do |user, password|
+      user.cn += "!!!"
+      assert_true(detect_modify(user) {user.save})
+    end
+  end
+
+  def test_save_without_changes
+    make_temporary_user do |user, password|
+      assert_false(detect_modify(user) {user.save})
+    end
+  end
+
+  priority :normal
   def test_normalize_dn_attribute
     make_ou("Ous")
     ou_class = Class.new(ActiveLdap::Base)
@@ -23,7 +37,6 @@ class TestBase < Test::Unit::TestCase
     assert_equal("ou=ou2,#{ou_class.base}", ou2.dn)
   end
 
-  priority :normal
   def test_excluded_classes
     mapping = {:classes => ["person"]}
     person_class = Class.new(@user_class)
@@ -621,5 +634,26 @@ EOX
         assert_equal(new_cn2, new_user2.cn)
       end
     end
+  end
+
+  private
+  def detect_modify(object)
+    modify_called = false
+    singleton_class = class << object; self; end
+    singleton_class.send(:define_method, :modify_entry) do |*args|
+      dn, attributes, options = args
+      options ||= {}
+      modify_detector = Object.new
+      modify_detector.instance_variable_set("@called", false)
+      def modify_detector.modify(dn, entries, options)
+        @called = true
+      end
+      options[:connection] = modify_detector
+      result = super(dn, attributes, options)
+      modify_called = modify_detector.instance_variable_get("@called")
+      result
+    end
+    yield
+    modify_called
   end
 end

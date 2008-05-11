@@ -479,6 +479,7 @@ module ActiveLdap
       end
 
       def modify_entry(dn, attributes, options={})
+        return if attributes.empty?
         unnormalized_attributes = attributes.collect do |type, key, value|
           [type, key, unnormalize_attribute(key, value)]
         end
