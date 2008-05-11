@@ -1,3 +1,9 @@
+1.0.0:
+  * Fixed GSSAPI auth failure. [#18764] (Reported by Lennon Day-Reynolds)
+  * Supported Symbol as :dn_attribute_value. [#18921] (Requested by Nobody)
+  * Improved DN attribute detection. (Reported by Iain Pople)
+  * Avoided unnecesally modify operation. (Reported by Tilo)
+
 0.10.0:
   * Implemented LDIF parser.
   * Improved validation:
