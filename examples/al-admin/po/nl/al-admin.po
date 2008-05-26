@@ -1,12 +1,12 @@
 # translation of al-admin.po to Nederlands
 # Nederlands translations for AL Admin package.
-# Copyright (C) 2007 Ace Suares
+# Copyright (C) 2007,2008 Ace Suares
 # This file is distributed under the same license as the AL Admin package.
 #
-# Ace Suares <ace@suares.an>, 2007.
+# Ace Suares <ace@suares.an>, 2007,2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: AL Admin 0.10.0\n"
+"Project-Id-Version: AL Admin 1.0.0\n"
 "POT-Creation-Date: 2008-02-09 14:25+0900\n"
 "PO-Revision-Date: 2007-08-24 22:03+0900\n"
 "Last-Translator: Ace Suares <ace@suares.an>\n"
