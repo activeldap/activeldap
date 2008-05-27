@@ -293,6 +293,13 @@ module ActiveLdap
       # Hide new in Base
       private :new
 
+      def inherited(sub_class)
+        super
+        sub_class.module_eval do
+          include GetTextSupport
+        end
+      end
+
       # Connect and bind to LDAP creating a class variable for use by
       # all ActiveLdap objects.
       #
