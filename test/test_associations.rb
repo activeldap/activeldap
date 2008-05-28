@@ -18,6 +18,9 @@ class TestAssociations < Test::Unit::TestCase
           assert(group.save)
           assert_equal([group.cn], user1.groups.collect(&:cn))
           assert_equal([group.cn], user2.groups.collect(&:cn))
+          reloaded_group = @group_class.find(group.cn)
+          assert_equal([user1, user2].collect(&:cn).sort,
+                       reloaded_group.members.collect(&:cn).sort)
         end
       end
     end
@@ -44,7 +47,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_belongs_to_before_save
     make_temporary_group do |group1|
       make_temporary_group do |group2|
