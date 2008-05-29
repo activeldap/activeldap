@@ -105,6 +105,14 @@ module ActiveLdap
   class StrongAuthenticationRequired < Error
   end
 
+  class DistinguishedNameInputInvalid < Error
+    attr_reader :input
+    def initialize(input=nil)
+      @input = input
+      super(_("invalid distinguished name (DN) to parse: %s") % @input.inspect)
+    end
+  end
+
   class DistinguishedNameInvalid < Error
     attr_reader :dn, :reason
     def initialize(dn, reason=nil)

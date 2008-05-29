@@ -4,6 +4,14 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_find_with_dn
+    make_temporary_user do |user,|
+      assert_equal(user.dn, @user_class.find(user.dn).dn)
+      assert_equal(user.dn, @user_class.find(ActiveLdap::DN.parse(user.dn)).dn)
+    end
+  end
+
+  priority :normal
   def test_find_with_special_value_prefix
     # \2C == ','
     make_ou("a\\2Cb,ou=Users")
@@ -31,7 +39,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_find_with_sort_by_in_ldap_mapping
     @user_class.ldap_mapping(:dn_attribute => @user_class.dn_attribute,
                              :prefix => @user_class.prefix,

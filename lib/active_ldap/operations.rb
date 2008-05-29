@@ -161,13 +161,14 @@ module ActiveLdap
 
       def split_search_value(value)
         attr = prefix = nil
-        return [attr, value, prefix] unless value.is_a?(String)
 
         begin
           dn = DN.parse(value)
           attr, value = dn.rdns.first.to_a.first
           rest = dn.rdns[1..-1]
           prefix = DN.new(*rest).to_s unless rest.empty?
+        rescue DistinguishedNameInputInvalid
+          return [attr, value, prefix]
         rescue DistinguishedNameInvalid
           begin
             dn = DN.parse("DUMMY=#{value}")

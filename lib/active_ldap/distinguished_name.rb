@@ -11,6 +11,9 @@ module ActiveLdap
       def initialize(source)
         @dn = nil
         source = source.to_s if source.is_a?(DN)
+        unless source.is_a?(String)
+          raise DistinguishedNameInputInvalid.new(source)
+        end
         @source = source
       end
 
