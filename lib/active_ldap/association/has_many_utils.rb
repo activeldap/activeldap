@@ -8,18 +8,22 @@ module ActiveLdap
 
         requested_targets = @owner[@options[requested_target_key], true]
 
-        components = requested_targets.reject(&:nil?)
-        unless foreign_base_key == "dn"
-          components = components.collect do |value|
-            [foreign_base_key, value]
-          end
-        end
-
-        if components.empty?
+        requested_targets = requested_targets.reject(&:nil?)
+        if requested_targets.empty?
           targets = []
         elsif foreign_base_key == "dn"
-          targets = foreign_class.find(components, find_options)
+          requested_targets = requested_targets.collect do |target|
+            if target.is_a?(DN)
+              target.to_s
+            else
+              target
+            end
+          end
+          targets = foreign_class.find(requested_targets, find_options)
         else
+          components = requested_targets.collect do |value|
+            [foreign_base_key, value]
+          end
           options = find_options(:filter => [:or, *components])
           targets = foreign_class.find(:all, options)
         end
