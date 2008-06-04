@@ -1021,6 +1021,7 @@ module ActiveLdap
     # Return the value of the attribute called by method_missing?
     def get_attribute(name, force_array=false)
       name, value = get_attribute_before_type_cast(name, force_array)
+      return value if name.nil?
       attribute = schema.attribute(name)
       type_cast(attribute, value)
     end

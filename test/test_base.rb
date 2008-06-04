@@ -6,6 +6,7 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  priority :normal
   def test_save_with_changes
     make_temporary_user do |user, password|
       user.cn += "!!!"
@@ -19,7 +20,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_normalize_dn_attribute
     make_ou("Ous")
     ou_class = Class.new(ActiveLdap::Base)
@@ -592,6 +592,12 @@ EOX
       assert(user.attribute_present?(:sn))
       user.sn = [nil]
       assert(!user.attribute_present?(:sn))
+    end
+  end
+
+  def test_attribute_present_with_unknown_attribute
+    make_temporary_user do |user, password|
+      assert(!user.attribute_present?(:unknown_attribute))
     end
   end
 
