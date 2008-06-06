@@ -435,7 +435,52 @@ module ActiveLdap
         dn_attribute
       end
 
+      def inspect
+        if self == Base
+          super
+        else
+          class_names = []
+          must = []
+          may = []
+          class_names = classes.collect do |object_class|
+            must.concat(object_class.must)
+            may.concat(object_class.may)
+            object_class.name
+          end
+          detail = ["objectClass:<#{class_names.join(', ')}>",
+                    "must:<#{inspect_attributes(must)}>",
+                    "may:<#{inspect_attributes(may)}>"].join(", ")
+          "#{super}(#{detail})"
+        end
+      end
+
       private
+      def inspect_attributes(attributes)
+	inspected_attribute_names = {}
+        attributes.collect do |attribute|
+          if inspected_attribute_names.has_key?(attribute.name)
+            nil
+          else
+            inspected_attribute_names[attribute.name] = true
+            inspect_attribute(attribute)
+          end
+        end.compact.join(', ')
+      end
+
+      def inspect_attribute(attribute)
+        syntax = attribute.syntax
+        result = "#{attribute.name}"
+        if syntax and !syntax.description.blank?
+          result << ": #{syntax.description}"
+        end
+        properties = []
+        properties << "read-only" if attribute.read_only?
+        properties << "binary" if attribute.binary?
+        properties << "binary-required" if attribute.binary_required?
+        result << "(#{properties.join(', ')})" unless properties.empty?
+        result
+      end
+
       def validate_ldap_mapping_options(options)
         options.assert_valid_keys(VALID_LDAP_MAPPING_OPTIONS)
       end
@@ -898,18 +943,36 @@ module ActiveLdap
     end
 
     def inspect
-      abbreviate_instance_variables do
-        super
-      end
-    end
-
-    def pretty_print(q)
-      abbreviate_instance_variables do
-        q.pp_object(self)
-      end
+      object_classes = entry_attribute.object_classes
+      inspected_object_classes = object_classes.collect do |object_class|
+        object_class.name
+      end.join(', ')
+      must_attributes = must.collect(&:name).sort.join(', ')
+      may_attributes = may.collect(&:name).sort.join(', ')
+      inspected_attributes = attribute_names.sort.collect do |name|
+        inspect_attribute(name)
+      end.join(', ')
+      result = "\#<#{self.class} objectClass:<#{inspected_object_classes}>, "
+      result << "must:<#{must_attributes}>, may:<#{may_attributes}>, "
+      result << "#{inspected_attributes}>"
+      result
     end
 
     private
+    def inspect_attribute(name)
+      values = get_attribute(name, true)
+      values.collect do |value|
+        if value.is_a?(String) and value.length > 50
+          "#{value[0, 50]}...".inspect
+        elsif value.is_a?(Date) || value.is_a?(Time)
+          "#{value.to_s(:db)}"
+        else
+          value.inspect
+        end
+      end
+      "#{name}: #{values.inspect}"
+    end
+
     def attribute_name_resolvable_without_connection?
       @entry_attribute and @local_entry_attribute
     end
@@ -920,26 +983,6 @@ module ActiveLdap
 
     def local_entry_attribute
       @local_entry_attribute ||= connection.entry_attribute([])
-    end
-
-    def abbreviate_instance_variables
-      @abbreviating ||= nil
-      connection, @connection = @connection, nil
-      schema, @schema = @schema, nil
-      entry_attribute, @entry_attribute = @entry_attribute, nil
-      local_entry_attribute, @local_entry_attribute = @local_entry_attribute, nil
-      real_names, @real_names = @real_names, nil
-      unless @abbreviating
-        @abbreviating = true
-      end
-      yield
-    ensure
-      @connection = connection
-      @schema = schema
-      @entry_attribute = entry_attribute
-      @local_entry_attribute = local_entry_attribute
-      @real_names = real_names
-      @abbreviating = false
     end
 
     def extract_object_class(attributes)
