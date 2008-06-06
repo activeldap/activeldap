@@ -763,8 +763,12 @@ module ActiveLdap
       end
     end
 
-    def to_ldif
+    def to_ldif_record
       super(dn, @data)
+    end
+
+    def to_ldif
+      Ldif.new([to_ldif_record]).to_s
     end
 
     def to_xml(options={})

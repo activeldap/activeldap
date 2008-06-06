@@ -333,9 +333,12 @@ module ActiveLdap
         ldif.to_s
       end
 
+      def to_ldif_record(dn, attributes)
+        Ldif::Record.new(dn, attributes)
+      end
+
       def to_ldif(dn, attributes)
-        record = Ldif::Record.new(dn, attributes)
-        Ldif.new([record]).to_s
+        Ldif.new([to_ldif_record(dn, attributes)]).to_s
       end
 
       def load(ldif, options={})
