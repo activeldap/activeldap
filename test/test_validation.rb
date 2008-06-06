@@ -33,8 +33,9 @@ class TestValidation < Test::Unit::TestCase
       assert(user.save)
 
       user = user.class.find(user.dn)
-      assert_equal([{"lang-ja" => "ユーザ"}, {"lang-en" => "User"}],
-                   user.display_name)
+      assert_equal([{"lang-ja" => "ユーザ"},
+                    {"lang-en" => "User"}].sort_by {|hash| hash.keys.first},
+                   user.display_name.sort_by {|hash| hash.keys.first})
     end
   end
 
