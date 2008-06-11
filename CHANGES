@@ -1,3 +1,12 @@
+1.0.1:
+  * Fixed GetText integration.
+  * Fixed ActiveLdap::Base.find with ActiveLdap::DN. (Reported by Jeremy Pruitt)
+  * Supported ActiveLdap::Base#attribute_present? with nonexistence attribute.
+    (Reported by Matt Mencel)
+  * Added ActiveLdap::Base#.to_ldif_record.
+  * Improved inspect.
+  * Supported ActiveSupport 2.1.0.
+
 1.0.0:
   * Fixed GSSAPI auth failure. [#18764] (Reported by Lennon Day-Reynolds)
   * Supported Symbol as :dn_attribute_value. [#18921] (Requested by Nobody)
