@@ -917,8 +917,14 @@ end
 
 require_gem_if_need.call("active_support", "activesupport")
 
-if Dependencies.respond_to?(:load_paths)
-  Dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
+if ActiveSupport.const_defined?(:Dependencies)
+  dependencies = ActiveSupport::Dependencies
+else
+  dependencies = Dependencies
+end
+
+if dependencies.respond_to?(:load_paths)
+  dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
 end
 
 module ActiveLdap

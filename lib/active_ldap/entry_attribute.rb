@@ -45,7 +45,7 @@ module ActiveLdap
       return nil if @names.empty? and @aliases.empty?
       name = name.to_s
       real_name = @names[name]
-      real_name ||= @aliases[Inflector.underscore(name)]
+      real_name ||= @aliases[name.underscore]
       if real_name
         real_name
       elsif allow_normalized_name
@@ -70,7 +70,7 @@ module ActiveLdap
       @schemata[real_name] = attribute
       ([real_name] + attribute.aliases).each do |name|
         @names[name] = real_name
-        @aliases[Inflector.underscore(name)] = real_name
+        @aliases[name.underscore] = real_name
         @normalized_names[normalize_attribute_name(name)] = real_name
       end
     end

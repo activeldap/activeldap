@@ -44,7 +44,7 @@ module ActiveLdap
       #
       def belongs_to(association_id, options={})
         validate_belongs_to_options(options)
-        klass = options[:class] || Inflector.classify(association_id)
+        klass = options[:class] || association_id.to_s.classify
         foreign_key = options[:foreign_key]
         primary_key = options[:primary_key]
         many = options[:many]
@@ -96,8 +96,8 @@ module ActiveLdap
       #            :wrap => "memberUid" # Group#memberUid
       def has_many(association_id, options = {})
         validate_has_many_options(options)
-        klass = options[:class] || Inflector.classify(association_id)
-        foreign_key = options[:foreign_key] || association_id.to_s + "_id"
+        klass = options[:class] || association_id.to_s.classify
+        foreign_key = options[:foreign_key] || "#{association_id}_id"
         primary_key = options[:primary_key]
         set_associated_class(association_id, klass)
 

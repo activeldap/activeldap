@@ -526,7 +526,7 @@ module ActiveLdap
           end
           dn_attribute || "cn"
         else
-          Inflector.underscore(Inflector.demodulize(name))
+          name.demodulize.underscore
         end
       end
 
@@ -534,7 +534,7 @@ module ActiveLdap
         if name.empty?
           nil
         else
-          "ou=#{Inflector.pluralize(Inflector.demodulize(name))}"
+          "ou=#{name.demodulize.pluralize}"
         end
       end
     end
@@ -745,7 +745,7 @@ module ActiveLdap
     # Add available attributes to the methods
     def methods(inherited_too=true)
       target_names = entry_attribute.all_names
-      target_names -= ['objectClass', Inflector.underscore('objectClass')]
+      target_names -= ['objectClass', 'objectClass'.underscore]
       super + target_names.uniq.collect do |x|
         [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
       end.flatten
@@ -817,7 +817,7 @@ module ActiveLdap
     end
 
     def to_xml(options={})
-      root = options[:root] || Inflector.underscore(self.class.name)
+      root = options[:root] || self.class.name.underscore
       result = "<#{root}>\n"
       result << "  <dn>#{dn}</dn>\n"
       normalize_data(@data).sort_by {|key, values| key}.each do |key, values|
