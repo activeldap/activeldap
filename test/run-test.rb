@@ -3,16 +3,15 @@
 $KCODE = 'u'
 
 require 'yaml'
-require "test/unit"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 top_dir = File.expand_path(File.join(base_dir, ".."))
 $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
-$LOAD_PATH.unshift(File.join(top_dir, "test-unit-ext", "lib"))
-require 'test-unit-ext'
-Test::Unit::TestSuite.priority_mode = true
+$LOAD_PATH.unshift(File.join(top_dir, "test-unit", "lib"))
+require "test/unit"
+ARGV.unshift("--priority-mode")
 
 test_file = "test/test_*.rb"
 Dir.glob(test_file) do |file|

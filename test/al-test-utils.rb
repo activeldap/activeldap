@@ -1,5 +1,4 @@
 require 'test/unit'
-require 'test-unit-ext'
 
 require 'erb'
 require 'yaml'
