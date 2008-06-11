@@ -1,5 +1,4 @@
 require 'English'
-require 'base64'
 require 'md5'
 require 'sha1'
 

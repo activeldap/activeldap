@@ -1,5 +1,4 @@
 require "strscan"
-require "base64"
 require "uri"
 require "open-uri"
 
@@ -117,7 +116,7 @@ module ActiveLdap
       def read_base64_value
         value = @scanner.scan(/[a-zA-Z0-9\+\/=]+/u)
         return nil if value.nil?
-        Base64.decode64(value).chomp
+        value.unpack("m")[0].chomp
       end
 
       def read_external_file
