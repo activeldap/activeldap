@@ -82,7 +82,7 @@ module ActiveLdap
             :name => "modify: RDN", :dn => dn, :new_rdn => new_rdn,
             :delete_old_rdn => delete_old_rdn,
           }
-          execute(:modify_rdn, dn, new_rdn, delete_old_rdn)
+          execute(:modify_rdn, info, dn, new_rdn, delete_old_rdn)
         end
       end
 
