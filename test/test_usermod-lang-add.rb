@@ -40,7 +40,8 @@ class TestUsermodLangAdd < Test::Unit::TestCase
 
       user = @user_class.find(name)
       assert_equal(name, user.uid)
-      assert_equal([cn, {'lang-en-us' => cn}], user.cn)
+      assert_equal([cn, {'lang-en-us' => cn}].sort_by(&:inspect),
+                   user.cn.sort_by(&:inspect))
       assert_equal(uid.to_i, user.uid_number)
       assert_equal(uid.to_i, user.gid_number)
       assert_equal(uid.to_s, user.uid_number_before_type_cast)
