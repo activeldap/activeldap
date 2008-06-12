@@ -19,7 +19,7 @@ class TestValidation < Test::Unit::TestCase
                     1) % {:fn => la_("objectClass")}
         message = format % loc_("person")
       else
-        message = "ObjectClass has excluded value: person"
+        message = "objectClass has excluded value: person"
       end
       assert_equal([message], user.errors.full_messages)
     end
