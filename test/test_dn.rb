@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'al-test-utils'
 
 class TestDN < Test::Unit::TestCase
