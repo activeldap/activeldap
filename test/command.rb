@@ -32,7 +32,7 @@ module Command
     if args.any? {|x| x.nil?}
       raise ArgumentError, "args has nil: #{args.inspect}"
     end
-    return java_run(cmd, *args, &block) unless Object.respond_to?(:java)
+    return java_run(cmd, *args, &block) if Object.respond_to?(:java)
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
     pid = exit_status = nil
