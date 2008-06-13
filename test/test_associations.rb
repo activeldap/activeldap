@@ -21,6 +21,20 @@ class TestAssociations < Test::Unit::TestCase
           reloaded_group = @group_class.find(group.cn)
           assert_equal([user1, user2].collect(&:cn).sort,
                        reloaded_group.members.collect(&:cn).sort)
+
+          user1.groups = []
+          assert(user1.save)
+          assert_equal([], user1.groups.collect(&:cn))
+          reloaded_group = @group_class.find(group.cn)
+          assert_equal([user2].collect(&:cn).sort,
+                       reloaded_group.members.collect(&:cn).sort)
+
+          user2.groups.delete(reloaded_group)
+          assert(user2.save)
+          assert_equal([], user2.groups.collect(&:cn))
+          reloaded_group = @group_class.find(group.cn)
+          assert_equal([].collect(&:cn).sort,
+                       reloaded_group.members.collect(&:cn).sort)
         end
       end
     end
