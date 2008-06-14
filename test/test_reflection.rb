@@ -102,7 +102,7 @@ class TestReflection < Test::Unit::TestCase
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| Inflector.underscore(x)}
+          attrs.collect(&:underscore)
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
@@ -119,7 +119,7 @@ class TestReflection < Test::Unit::TestCase
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
-          attrs.collect {|x| Inflector.underscore(x)}
+          attrs.collect(&:underscore)
         end
       end
       assert_methods_with_only_required_classes(user, attributes,
