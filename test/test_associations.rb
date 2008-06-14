@@ -86,9 +86,9 @@ class TestAssociations < Test::Unit::TestCase
 
   def test_belongs_to_many_with_dn_key
     @user_class.belongs_to :dn_groups, :many => "memberUid", :foreign_key => "dn"
-    @user_class.set_associated_class(:groups, @group_class)
+    @user_class.set_associated_class(:dn_groups, @group_class)
     @group_class.has_many :dn_members, :wrap => "memberUid", :primary_key => "dn"
-    @group_class.set_associated_class(:members, @user_class)
+    @group_class.set_associated_class(:dn_members, @user_class)
     make_temporary_group do |group|
       make_temporary_user do |user1,|
         make_temporary_user do |user2,|
