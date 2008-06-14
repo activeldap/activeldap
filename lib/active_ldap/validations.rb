@@ -13,6 +13,8 @@ module ActiveLdap
         end
         include ActiveRecord::Validations
         class << self
+          alias_method :human_attribute_name_active_record,
+                       :human_attribute_name
           alias_method :human_attribute_name,
                        :human_attribute_name_active_ldap
           unless method_defined?(:human_attribute_name_with_gettext)
