@@ -4,6 +4,46 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_many_with_dn_value
+    @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
+    @user_class.set_associated_class(:references, @group_class)
+    @group_class.belongs_to :related_users, :many => "seeAlso",
+                            :foreign_key => "dn"
+    @group_class.set_associated_class(:related_users, @user_class)
+    make_temporary_group do |group|
+      make_temporary_user do |user1,|
+        make_temporary_user do |user2,|
+          make_temporary_user do |user3,|
+            entries = [group, user1, user2, user3]
+
+            group.related_users = [user1, user2]
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_references([[group], [group], []],
+                              [user1, user2, user3])
+            assert_related_users([user1, user2], group)
+
+            group.related_users << user3
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_references([[group], [group], [group]],
+                              [user1, user2, user3])
+            assert_related_users([user1, user2, user3], group)
+
+            group.related_users.delete(user1)
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_references([[], [group], [group]],
+                              [user1, user2, user3])
+            assert_related_users([user2, user3], group)
+
+            group.related_users = []
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_references([[], [], []],
+                              [user1, user2, user3])
+            assert_related_users([], group)
+          end
+        end
+      end
+    end
+  end
 
   priority :normal
   def test_belongs_to_many_with_dn_key
@@ -14,27 +54,29 @@ class TestAssociations < Test::Unit::TestCase
     make_temporary_group do |group|
       make_temporary_user do |user1,|
         make_temporary_user do |user2,|
-          group.members = [user1, user2]
-          assert(group.save)
-          assert_equal([group.cn], user1.groups.collect(&:cn))
-          assert_equal([group.cn], user2.groups.collect(&:cn))
-          reloaded_group = @group_class.find(group.cn)
-          assert_equal([user1, user2].collect(&:cn).sort,
-                       reloaded_group.members.collect(&:cn).sort)
+          make_temporary_user do |user3,|
+            entries = [group, user1, user2, user3]
 
-          user1.groups = []
-          assert(user1.save)
-          assert_equal([], user1.groups.collect(&:cn))
-          reloaded_group = @group_class.find(group.cn)
-          assert_equal([user2].collect(&:cn).sort,
-                       reloaded_group.members.collect(&:cn).sort)
+            user1.groups << group
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_groups([[group], [], []], [user1, user2, user3])
+            assert_members([user1], group)
 
-          user2.groups.delete(reloaded_group)
-          assert(user2.save)
-          assert_equal([], user2.groups.collect(&:cn))
-          reloaded_group = @group_class.find(group.cn)
-          assert_equal([].collect(&:cn).sort,
-                       reloaded_group.members.collect(&:cn).sort)
+            user2.groups = [group]
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_groups([[group], [group], []], [user1, user2, user3])
+            assert_members([user1, user2], group)
+
+            user1.groups = []
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_groups([[], [group], []], [user1, user2, user3])
+            assert_members([user2], group)
+
+            user2.groups.delete(group)
+            group, user1, user2, user3 = reload_entries(*entries)
+            assert_groups([[], [], []], [user1, user2, user3])
+            assert_members([], group)
+          end
         end
       end
     end
@@ -365,5 +407,43 @@ class TestAssociations < Test::Unit::TestCase
         end
       end
     end
+  end
+
+  private
+  def reload_entries(*entries)
+    entries.collect do |entry|
+      entry.class.find(entry[entry.dn_attribute])
+    end
+  end
+
+  def assert_groups_relation(expected_groups_values, entries, relation_name)
+    expected_groups_values = expected_groups_values.collect do |groups|
+      groups.collect(&:cn).sort
+    end
+    actual_groups_values = entries.collect do |entry|
+      entry.send(relation_name).collect(&:cn).sort
+    end
+    assert_equal(expected_groups_values, actual_groups_values)
+  end
+
+  def assert_users_relation(expected_users, group, relation_name)
+    assert_equal(expected_users.collect(&:cn).sort,
+                 group.send(relation_name).collect(&:cn).sort)
+  end
+
+  def assert_references(expected_groups_values, users)
+    assert_groups_relation(expected_groups_values, users, :references)
+  end
+
+  def assert_related_users(expected_users, group)
+    assert_users_relation(expected_users, group, :related_users)
+  end
+
+  def assert_groups(expected_groups_values, users)
+    assert_groups_relation(expected_groups_values, users, :groups)
+  end
+
+  def assert_members(expected_users, group)
+    assert_users_relation(expected_users, group, :members)
   end
 end
