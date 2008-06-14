@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$VERBOSE = true
+
 $KCODE = 'u'
 
 require 'yaml'
