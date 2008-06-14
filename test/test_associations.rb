@@ -85,9 +85,9 @@ class TestAssociations < Test::Unit::TestCase
   end
 
   def test_belongs_to_many_with_dn_key
-    @user_class.belongs_to :groups, :many => "memberUid", :foreign_key => "dn"
+    @user_class.belongs_to :dn_groups, :many => "memberUid", :foreign_key => "dn"
     @user_class.set_associated_class(:groups, @group_class)
-    @group_class.has_many :members, :wrap => "memberUid", :primary_key => "dn"
+    @group_class.has_many :dn_members, :wrap => "memberUid", :primary_key => "dn"
     @group_class.set_associated_class(:members, @user_class)
     make_temporary_group do |group|
       make_temporary_user do |user1,|
@@ -95,25 +95,25 @@ class TestAssociations < Test::Unit::TestCase
           make_temporary_user do |user3,|
             entries = [group, user1, user2, user3]
 
-            user1.groups << group
+            user1.dn_groups << group
             group, user1, user2, user3 = reload_entries(*entries)
-            assert_groups([[group], [], []], [user1, user2, user3])
-            assert_members([user1], group)
+            assert_dn_groups([[group], [], []], [user1, user2, user3])
+            assert_dn_members([user1], group)
 
-            user2.groups = [group]
+            user2.dn_groups = [group]
             group, user1, user2, user3 = reload_entries(*entries)
-            assert_groups([[group], [group], []], [user1, user2, user3])
-            assert_members([user1, user2], group)
+            assert_dn_groups([[group], [group], []], [user1, user2, user3])
+            assert_dn_members([user1, user2], group)
 
-            user1.groups = []
+            user1.dn_groups = []
             group, user1, user2, user3 = reload_entries(*entries)
-            assert_groups([[], [group], []], [user1, user2, user3])
-            assert_members([user2], group)
+            assert_dn_groups([[], [group], []], [user1, user2, user3])
+            assert_dn_members([user2], group)
 
-            user2.groups.delete(group)
+            user2.dn_groups.delete(group)
             group, user1, user2, user3 = reload_entries(*entries)
-            assert_groups([[], [], []], [user1, user2, user3])
-            assert_members([], group)
+            assert_dn_groups([[], [], []], [user1, user2, user3])
+            assert_dn_members([], group)
           end
         end
       end
@@ -477,11 +477,11 @@ class TestAssociations < Test::Unit::TestCase
     assert_users_relation(expected_users, group, :related_users)
   end
 
-  def assert_groups(expected_groups_values, users)
-    assert_groups_relation(expected_groups_values, users, :groups)
+  def assert_dn_groups(expected_groups_values, users)
+    assert_groups_relation(expected_groups_values, users, :dn_groups)
   end
 
-  def assert_members(expected_users, group)
-    assert_users_relation(expected_users, group, :members)
+  def assert_dn_members(expected_users, group)
+    assert_users_relation(expected_users, group, :dn_members)
   end
 end
