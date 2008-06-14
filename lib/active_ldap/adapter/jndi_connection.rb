@@ -103,7 +103,7 @@ module ActiveLdap
         controls = SearchControls.new
         controls.search_scope = scope
 
-        if attrs && !attrs.empty?
+        unless attrs.blank?
           controls.returning_attributes = attrs.to_java(:string)
         end
 
