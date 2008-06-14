@@ -480,6 +480,7 @@ module ActiveLdap
       def initialize(source)
         @source = source
         @scanner = StringScanner.new(@source)
+        @sub_scanner = nil
         @sub_scanner = next_segment || StringScanner.new("")
       end
 
