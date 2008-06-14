@@ -191,7 +191,7 @@ module ActiveLdap
       end
 
       def guess_available_adapter
-        defined?(java) ? "jndi" : "ldap"
+        Object.respond_to?(:java) ? "jndi" : "ldap"
       end
     end
 
