@@ -289,9 +289,10 @@ module AlTestUtils
       yield(uid)
     ensure
       if @user_class.exists?(uid)
-        user = @user_class.find(uid)
-        user.remove_connection
-        @user_class.delete(user.dn)
+        @user_class.search(:value => uid) do |dn, attribute|
+          @user_class.remove_connection(dn)
+          @user_class.delete(dn)
+        end
       end
     end
 
