@@ -1,6 +1,7 @@
 1.0.1:
   * Fixed GetText integration.
   * Fixed ActiveLdap::Base.find with ActiveLdap::DN. (Reported by Jeremy Pruitt)
+  * Fixed associated bugs. (Reported by CultureSpy)
   * Supported ActiveLdap::Base#attribute_present? with nonexistence attribute.
     (Reported by Matt Mencel)
   * Added ActiveLdap::Base#.to_ldif_record.
