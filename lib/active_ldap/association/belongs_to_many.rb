@@ -45,16 +45,6 @@ module ActiveLdap
         options = find_options(:filter => [:or, *components])
         foreign_class.find(:all, options)
       end
-
-      def dn_values_to_string_values(values)
-        values.collect do |value|
-          if value.is_a?(DN)
-            value.to_s
-          else
-            value
-          end
-        end
-      end
     end
   end
 end

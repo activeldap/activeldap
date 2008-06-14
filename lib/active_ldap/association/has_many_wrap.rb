@@ -9,7 +9,11 @@ module ActiveLdap
       private
       def insert_entry(entry)
         old_value = @owner[@options[:wrap], true]
-        new_value = (old_value + entry[primary_key, true]).uniq.sort
+        _primary_key = primary_key
+        if _primary_key == "dn"
+          old_value = dn_values_to_string_values(old_value)
+        end
+        new_value = (old_value + entry[_primary_key, true]).uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value
           @owner.save
@@ -18,7 +22,11 @@ module ActiveLdap
 
       def delete_entries(entries)
         old_value = @owner[@options[:wrap], true]
-        new_value = old_value - entries.collect {|entry| entry[primary_key]}
+        _primary_key = primary_key
+        if _primary_key == "dn"
+          old_value = dn_values_to_string_values(old_value)
+        end
+        new_value = old_value - entries.collect {|entry| entry[_primary_key]}
         new_value = new_value.uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value

@@ -4,6 +4,45 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_has_many_wrap_with_dn_value
+    @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
+    @user_class.set_associated_class(:references, @group_class)
+    @group_class.belongs_to :related_users, :many => "seeAlso",
+                            :foreign_key => "dn"
+    @group_class.set_associated_class(:related_users, @user_class)
+    make_temporary_user do |user,|
+      make_temporary_group do |group1|
+        make_temporary_group do |group2|
+          make_temporary_group do |group3|
+            entries = [user, group1, group2, group3]
+
+            user.references << group1
+            user, group1, group2, group3 = reload_entries(*entries)
+            assert_references([[group1]], [user])
+            assert_related_users([user], group1)
+            assert_related_users([], group2)
+            assert_related_users([], group3)
+
+            user.references = [group2, group3]
+            user, group1, group2, group3 = reload_entries(*entries)
+            assert_references([[group2, group3]], [user])
+            assert_related_users([], group1)
+            assert_related_users([user], group2)
+            assert_related_users([user], group3)
+
+            user.references.delete(group2)
+            user, group1, group2, group3 = reload_entries(*entries)
+            assert_references([[group3]], [user])
+            assert_related_users([], group1)
+            assert_related_users([], group2)
+            assert_related_users([user], group3)
+          end
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_belongs_to_many_with_dn_value
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)
@@ -45,7 +84,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_belongs_to_many_with_dn_key
     @user_class.belongs_to :groups, :many => "memberUid", :foreign_key => "dn"
     @user_class.set_associated_class(:groups, @group_class)
