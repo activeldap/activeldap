@@ -96,9 +96,7 @@ class TestReflection < Test::Unit::TestCase
     make_temporary_user do |user, password|
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
       attributes -= ["objectClass"]
-      attributes = attributes.collect do |x|
-        Inflector.underscore(x)
-      end
+      attributes = attributes.collect(&:underscore)
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
@@ -115,9 +113,7 @@ class TestReflection < Test::Unit::TestCase
       user.remove_class("inetOrgPerson")
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
       attributes -= ["objectClass"]
-      attributes = attributes.collect do |x|
-        Inflector.underscore(x)
-      end
+      attributes = attributes.collect(&:underscore)
       assert_equal([], attributes - user.methods)
       assert_equal([], attributes - user.methods(false))
 
