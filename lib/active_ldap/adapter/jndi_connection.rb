@@ -168,6 +168,7 @@ module ActiveLdap
         if password
           context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
         end
+        context.reconnect(nil)
         @context = context
       end
 
