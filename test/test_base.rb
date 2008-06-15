@@ -6,6 +6,16 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_to_ldif
+    make_temporary_group do |group,|
+      assert_to_ldif(group)
+
+      group.gidNumber += 1
+      group.description = ["Description", {"en" => "Description(en)"}]
+      assert_to_ldif(group)
+    end
+  end
+
   priority :normal
   def test_save_with_changes
     make_temporary_user do |user, password|
@@ -661,5 +671,13 @@ EOX
     end
     yield
     modify_called
+  end
+
+  def assert_to_ldif(entry)
+    records = ActiveLdap::LDIF.parse(entry.to_ldif).records
+    parsed_entries = records.collect do |record|
+      entry.class.send(:instantiate, [record.dn, record.attributes])
+    end
+    assert_equal([entry], parsed_entries)
   end
 end

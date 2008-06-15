@@ -809,7 +809,7 @@ module ActiveLdap
     end
 
     def to_ldif_record
-      super(dn, @data)
+      super(dn, normalize_data(@data))
     end
 
     def to_ldif
