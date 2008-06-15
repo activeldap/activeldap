@@ -29,7 +29,6 @@ PREREQUISITES
 NOTES
 
   * Only GSSAPI SASL support exists due to Ruby/LDAP limitations
-  * The API is subject to change as this package slowly approaches 1.0.0
 
 
 INSTALL
