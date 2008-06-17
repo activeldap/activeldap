@@ -33,19 +33,41 @@ class ALUser < ActiveLdap::Base
                :classes => ['posixAccount', 'person']
 end
 
-# === search_al
-#
-def search_al
+class ALUserLdap < ALUser
+end
+ALUserLdap.establish_connection(config.merge(:adapter => "ldap"))
+
+class ALUserNetLdap < ALUser
+end
+ALUserNetLdap.establish_connection(config.merge(:adapter => "net-ldap"))
+
+def search_al_ldap
   count = 0
-  ALUser.find(:all).each do |e|
+  ALUserLdap.find(:all).each do |e|
     count += 1
   end
   count
-end # -- search_al
+end
 
-def search_al_without_object_creation
+def search_al_net_ldap
   count = 0
-  ALUser.search.each do |e|
+  ALUserNetLdap.find(:all).each do |e|
+    count += 1
+  end
+  count
+end
+
+def search_al_ldap_without_object_creation
+  count = 0
+  ALUserLdap.search.each do |e|
+    count += 1
+  end
+  count
+end
+
+def search_al_net_ldap_without_object_creation
+  count = 0
+  ALUserNetLdap.search.each do |e|
     count += 1
   end
   count
@@ -161,6 +183,7 @@ def main(do_populate)
     dumped_data = ActiveLdap::Base.dump(:scope => :sub)
     ActiveLdap::Base.delete_all(nil, :scope => :sub)
     populate
+    puts
   end
 
   # Standard connection
@@ -168,18 +191,33 @@ def main(do_populate)
   ldap_conn = ldap_connection
   net_ldap_conn = net_ldap_connection
 
-  al_count = 0
-  al_count_without_object_creation = 0
+  al_ldap_count = 0
+  al_net_ldap_count = 0
+  al_ldap_count_without_object_creation = 0
+  al_net_ldap_count_without_object_creation = 0
   ldap_count = 0
   net_ldap_count = 0
   Benchmark.bmbm(20) do |x|
     [1].each do |n|
       GC.start
-      x.report("%3dx: AL" % n) {n.times {al_count = search_al}}
+      x.report("%3dx: AL(LDAP)" % n) do
+        n.times {al_ldap_count = search_al_ldap}
+      end
       GC.start
-      x.report("%3dx: AL(No Obj)" % n) do
+      x.report("%3dx: AL(Net::LDAP)" % n) do
+        n.times {al_net_ldap_count = search_al_net_ldap}
+      end
+      GC.start
+      x.report("%3dx: AL(LDAP: No Obj)" % n) do
         n.times do
-          al_count_without_object_creation = search_al_without_object_creation
+          al_ldap_count_without_object_creation =
+            search_al_ldap_without_object_creation
+        end
+      end
+      x.report("%3dx: AL(Net::LDAP: No Obj)" % n) do
+        n.times do
+          al_net_ldap_count_without_object_creation =
+            search_al_net_ldap_without_object_creation
         end
       end
       GC.start
@@ -196,13 +234,22 @@ def main(do_populate)
       end
     end
   end
-  puts(_("Entries processed by Ruby/ActiveLdap: %d") % al_count)
-  puts(_("Entries processed by Ruby/ActiveLdap (without object creation): " \
-         "%d") % al_count_without_object_creation)
+
+  puts
+  puts(_("Entries processed by Ruby/ActiveLdap + LDAP: %d") % al_ldap_count)
+  puts(_("Entries processed by Ruby/ActiveLdap + Net::LDAP: %d") % \
+       al_net_ldap_count)
+  puts(_("Entries processed by Ruby/ActiveLdap + LDAP: " \
+         "(without object creation): %d") % \
+       al_ldap_count_without_object_creation)
+  puts(_("Entries processed by Ruby/ActiveLdap + Net::LDAP: " \
+         "(without object creation): %d") % \
+       al_net_ldap_count_without_object_creation)
   puts(_("Entries processed by Ruby/LDAP: %d") % ldap_count)
   puts(_("Entries processed by Net::LDAP: %d") % net_ldap_count)
 ensure
   if do_populate
+    puts
     puts(_("Cleaning..."))
     ActiveLdap::Base.delete_all(nil, :scope => :sub)
     ActiveLdap::Base.load(dumped_data)
