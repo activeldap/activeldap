@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 1.0.1\n"
-"POT-Creation-Date: 2008-02-10 22:36+0900\n"
-"PO-Revision-Date: 2008-02-10 22:37+0900\n"
+"POT-Creation-Date: 2008-06-17 21:42+0900\n"
+"PO-Revision-Date: 2008-06-17 21:53+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -454,6 +454,419 @@ msgstr "オブジェクトクラス(objectClass)"
 #: -:-
 msgid "LDAP|Attribute|objectClasses"
 msgstr "オブジェクトクラス(objectClasses)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAccess"
+msgstr "OpenLDAP設定: アクセス制御(olcAccess)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAllows"
+msgstr "OpenLDAP設定: 許可(olcAllows)"
+
+#: -:-
+msgid "LDAP|Attribute|olcArgsFile"
+msgstr "OpenLDAP設定: 引数で指定した設定ファイル(olcArgsFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAttributeOptions"
+msgstr "OpenLDAP設定: 属性オプション(olcAttributeOptions)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAttributeTypes"
+msgstr "OpenLDAP設定: 属性種別(olcAttributeTypes)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthIDRewrite"
+msgstr "OpenLDAP設定: 認証ID書き換え(olcAuthIDRewrite)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthzPolicy"
+msgstr "OpenLDAP設定: 認証ポリシー(olcAuthzPolicy)"
+
+#: -:-
+msgid "LDAP|Attribute|olcAuthzRegexp"
+msgstr "OpenLDAP設定: 認証正規表現(olcAuthzRegexp)"
+
+#: -:-
+msgid "LDAP|Attribute|olcBackend"
+msgstr "OpenLDAP設定: バックエンド(olcBackend)"
+
+#: -:-
+msgid "LDAP|Attribute|olcConcurrency"
+msgstr "OpenLDAP設定: 同時接続数(olcConcurrency)"
+
+#: -:-
+msgid "LDAP|Attribute|olcConfigDir"
+msgstr "OpenLDAP設定: 設定ディレクトリ(olcConfigDir)"
+
+#: -:-
+msgid "LDAP|Attribute|olcConfigFile"
+msgstr "OpenLDAP設定: 設定ファイル(olcConfigFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcConnMaxPending"
+msgstr "OpenLDAP設定: 最大接続待ち数(olcConnMaxPending)"
+
+#: -:-
+msgid "LDAP|Attribute|olcConnMaxPendingAuth"
+msgstr "OpenLDAP設定: 最大認証待ち接続数(olcConnMaxPendingAuth)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDatabase"
+msgstr "OpenLDAP設定: データベース(olcDatabase)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCacheFree"
+msgstr "OpenLDAP設定: DB: キャッシュ開放量(olcDbCacheFree)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCacheSize"
+msgstr "OpenLDAP設定: DB: キャッシュ量(olcDbCacheSize)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCheckpoint"
+msgstr "OpenLDAP設定: DB: チェックポイント(olcDbCheckpoint)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbConfig"
+msgstr "OpenLDAP設定: DB: 設定(olcDbConfig)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCryptFile"
+msgstr "OpenLDAP設定: DB: 暗号化鍵の入ったファイル(olcDbCryptFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbCryptKey"
+msgstr "OpenLDAP設定: DB: 暗号化鍵(olcDbCryptKey)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbDNcacheSize"
+msgstr "OpenLDAP設定: DB: DNキャッシュ量(olcDbDNcacheSize)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbDirectory"
+msgstr "OpenLDAP設定: DB: ディレクトリ(olcDbDirectory)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbDirtyRead"
+msgstr "OpenLDAP設定: DB: 不正読込(olcDbDirtyRead)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbIDLcacheSize"
+msgstr "OpenLDAP設定: DB: IDLキャッシュ量(olcDbIDLcacheSize)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbIndex"
+msgstr "OpenLDAP設定: DB: 索引(olcDbIndex)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbLinearIndex"
+msgstr "OpenLDAP設定: DB: 線形索引(olcDbLinearIndex)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbLockDetect"
+msgstr "OpenLDAP設定: DB: ロック検出(olcDbLockDetect)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbMode"
+msgstr "OpenLDAP設定: DB: モード(olcDbMode)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbNoSync"
+msgstr "OpenLDAP設定: DB: 非同期(olcDbNoSync)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbSearchStack"
+msgstr "OpenLDAP設定: DB: 検索スタック(olcDbSearchStack)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbShmKey"
+msgstr "OpenLDAP設定: DB: 共有メモリキー(olcDbShmKey)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDefaultSearchBase"
+msgstr "OpenLDAP設定: デフォルト検索ベース(olcDefaultSearchBase)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDisallows"
+msgstr "OpenLDAP設定: 拒否(olcDisallows)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDitContentRules"
+msgstr "OpenLDAP設定: DIT内容規則(olcDitContentRules)"
+
+#: -:-
+msgid "LDAP|Attribute|olcGentleHUP"
+msgstr "OpenLDAP設定: 穏やかなHUP(olcGentleHUP)"
+
+#: -:-
+msgid "LDAP|Attribute|olcHidden"
+msgstr "OpenLDAP設定: DBを隠すかどうか(olcHidden)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIdleTimeout"
+msgstr "OpenLDAP設定: 待ちタイムアウト(olcIdleTimeout)"
+
+#: -:-
+msgid "LDAP|Attribute|olcInclude"
+msgstr "OpenLDAP設定: 取り込み(olcInclude)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexIntLen"
+msgstr "OpenLDAP設定: 索引の整数長(olcIndexIntLen)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrAnyLen"
+msgstr "OpenLDAP設定: 索引に使用する部分文字列長(olcIndexSubstrAnyLen)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrAnyStep"
+msgstr "OpenLDAP設定: 索引検索時に使用する移動幅(olcIndexSubstrAnyStep)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrIfMaxLen"
+msgstr "OpenLDAP設定: 索引に使用する部分文字列の最大長(olcIndexSubstrIfMaxLen)"
+
+#: -:-
+msgid "LDAP|Attribute|olcIndexSubstrIfMinLen"
+msgstr "OpenLDAP設定 索引に使用する部分文字列の最小長(olcIndexSubstrIfMinLen)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLastMod"
+msgstr "OpenLDAP設定: 最終更新情報(olcLastMod)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLimits"
+msgstr "OpenLDAP設定: 制限(olcLimits)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLocalSSF"
+msgstr "OpenLDAP設定: ローカルSSF(olcLocalSSF)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLogFile"
+msgstr "OpenLDAP設定: ログファイル(olcLogFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLogLevel"
+msgstr "OpenLDAP設定: ログレベル(olcLogLevel)"
+
+#: -:-
+msgid "LDAP|Attribute|olcMaxDerefDepth"
+msgstr "OpenLDAP設定: 最大別名解決深度(olcMaxDerefDepth)"
+
+#: -:-
+msgid "LDAP|Attribute|olcMirrorMode"
+msgstr "OpenLDAP設定: ミラーモード(olcMirrorMode)"
+
+#: -:-
+msgid "LDAP|Attribute|olcModuleLoad"
+msgstr "OpenLDAP設定: ロードするモジュール(olcModuleLoad)"
+
+#: -:-
+msgid "LDAP|Attribute|olcModulePath"
+msgstr "OpenLDAP設定: モジュールの検索パス(olcModulePath)"
+
+#: -:-
+msgid "LDAP|Attribute|olcMonitoring"
+msgstr "OpenLDAP設定: 監視(olcMonitoring)"
+
+#: -:-
+msgid "LDAP|Attribute|olcObjectClasses"
+msgstr "OpenLDAP設定: オブジェクトクラス(olcObjectClasses)"
+
+#: -:-
+msgid "LDAP|Attribute|olcObjectIdentifier"
+msgstr "OpenLDAP設定: オブジェクト識別子(olcObjectIdentifier)"
+
+#: -:-
+msgid "LDAP|Attribute|olcOverlay"
+msgstr "OpenLDAP設定: オーバーレイ(olcOverlay)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
+msgstr ""
+"OpenLDAP設定: パスワード暗号化用サルトの書式(olcPasswordCryptSaltFormat)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPasswordHash"
+msgstr "OpenLDAP設定: パスワードハッシュ(olcPasswordHash)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPidFile"
+msgstr "OpenLDAP設定: PIDファイル(olcPidFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPlugin"
+msgstr "OpenLDAP設定: プラグイン(olcPlugin)"
+
+#: -:-
+msgid "LDAP|Attribute|olcPluginLogFile"
+msgstr "OpenLDAP設定: プラグイン: ログファイル(olcPluginLogFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReadOnly"
+msgstr "OpenLDAP設定: 読み込み専用(olcReadOnly)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReferral"
+msgstr "OpenLDAP設定: 照会(olcReferral)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReplica"
+msgstr "OpenLDAP設定: 複製(olcReplica)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicaArgsFile"
+msgstr "OpenLDAP設定: 複製: 引数で指定した設定ファイル(olcReplicaArgsFile0"
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicaPidFile"
+msgstr "OpenLDAP設定: 複製: PIDファイル(olcReplicaPidFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReplicationInterval"
+msgstr "OpenLDAP設定: 複製間隔(olcReplicationInterval)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReplogFile"
+msgstr "OpenLDAP設定: 複製用ログファイル(olcReplogFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcRequires"
+msgstr "OpenLDAP設定: 必須条件(olcRequires)"
+
+#: -:-
+msgid "LDAP|Attribute|olcRestrict"
+msgstr "OpenLDAP設定: 制限(olcRestrict)"
+
+#: -:-
+msgid "LDAP|Attribute|olcReverseLookup"
+msgstr "OpenLDAP設定: 逆引き(olcReverseLookup)"
+
+#: -:-
+msgid "LDAP|Attribute|olcRootDN"
+msgstr "OpenLDAP設定: ルートDN(olcRootDN)"
+
+#: -:-
+msgid "LDAP|Attribute|olcRootDSE"
+msgstr "OpenLDAP設定: ルートDSE(olcRootDSE)"
+
+#: -:-
+msgid "LDAP|Attribute|olcRootPW"
+msgstr "OpenLDAP設定: ルートパスワード(olcRootPW)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslHost"
+msgstr "OpenLDAP設定: SASL: ホスト(olcSaslHost)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslRealm"
+msgstr "OpenLDAP設定: SASL: 領域(olcSaslRealm)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSaslSecProps"
+msgstr "OpenLDAP設定: SASL: セキュリティプロパティ(olcSaslSecProps)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSchemaDN"
+msgstr "OpenLDAP設定: スキーマDN(olcSchemaDN)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSecurity"
+msgstr "OpenLDAP設定: セキュリティ(olcSecurity)"
+
+#: -:-
+msgid "LDAP|Attribute|olcServerID"
+msgstr "OpenLDAP設定: サーバID(olcServerID)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSizeLimit"
+msgstr "OpenLDAP設定: サイズ制限(olcSizeLimit)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSockbufMaxIncoming"
+msgstr "OpenLDAP設定: 匿名接続用最大受信量(olcSockbufMaxIncoming)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSockbufMaxIncomingAuth"
+msgstr "OpenLDAP設定: 認証接続用最大受信量(olcSockbufMaxIncomingAuth)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSortVals"
+msgstr "OpenLDAP設定: 並び替えておく値(olcSortVals)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSubordinate"
+msgstr "OpenLDAP設定: 下位データベース(olcSubordinate)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSuffix"
+msgstr "OpenLDAP設定: サフィックス(olcSuffix)"
+
+#: -:-
+msgid "LDAP|Attribute|olcSyncrepl"
+msgstr "OpenLDAP設定: 同期複製(olcSyncrepl)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCACertificateFile"
+msgstr "OpenLDAP設定: TLS: CA証明書ファイル(olcTLSCACertificateFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCACertificatePath"
+msgstr "OpenLDAP設定: TLS: CA証明書パス(olcTLSCACertificatePath)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCRLCheck"
+msgstr "OpenLDAP設定: TLS: 失効証明書一覧チェック(olcTLSCRLCheck)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCRLFile"
+msgstr "OpenLDAP設定: TLS: 失効証明書一覧ファイル(olcTLSCRLFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCertificateFile"
+msgstr "OpenLDAP設定: TLS: 証明書ファイル(olcTLSCertificateFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCertificateKeyFile"
+msgstr "OpenLDAP設定: TLS: 証明書鍵ファイル(olcTLSCertificateKeyFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSCipherSuite"
+msgstr "OpenLDAP設定: TLS: 暗号群(olcTLSCipherSuite)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSDHParamFile"
+msgstr "OpenLDAP設定: TLS: DHパラメタファイル(olcTLSDHParamFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSRandFile"
+msgstr "OpenLDAP設定: TLS: ランダムファイル(olcTLSRandFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSVerifyClient"
+msgstr "OpenLDAP設定: TLS: クライアント検証(olcTLSVerifyClient)"
+
+#: -:-
+msgid "LDAP|Attribute|olcThreads"
+msgstr "OpenLDAP設定: 最大スレッド数(olcThreads)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTimeLimit"
+msgstr "OpenLDAP設定: 時間制限(olcTimeLimit)"
+
+#: -:-
+msgid "LDAP|Attribute|olcToolThreads"
+msgstr "OpenLDAP設定: ツールモード時の最大スレッド数(olcToolThreads)"
+
+#: -:-
+msgid "LDAP|Attribute|olcUpdateDN"
+msgstr "OpenLDAP設定: 更新用DN(olcUpdateDN)"
+
+#: -:-
+msgid "LDAP|Attribute|olcUpdateRef"
+msgstr "OpenLDAP設定: 更新要求時の紹介URL(olcUpdateRef)"
 
 #: -:-
 msgid "LDAP|Attribute|oncRpcNumber"
@@ -1348,6 +1761,141 @@ msgid ""
 msgstr "RFC4512: 実体のオブジェクトクラス"
 
 #: -:-
+msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
+msgstr "アクセス制御リスト"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
+msgstr "使うことを許可する非推奨の機能群"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcArgsFile|File for slapd command line options"
+msgstr "slapdのコマンドラインオプションで指定した設定ファイル"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcAttributeTypes|OpenLDAP attributeTypes"
+msgstr "OpenLDAP用のattributeTypes"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcBackend|A type of backend"
+msgstr "バックエンドの種類"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcConfigDir|Directory for slapd configuration "
+"backend"
+msgstr "slapd設定バックエンド用のディレクトリ"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcConfigFile|File for slapd configuration "
+"directives"
+msgstr "slapd設定ディレクティブ用のファイル"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDatabase|The backend type for a database "
+"instance"
+msgstr "データベースインスタンス用のバックエンドの種類"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbCacheFree|Number of extra entries to free "
+"when max is reached"
+msgstr "最大数に達したときに開放する余分なエントリ数"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbCacheSize|Entry cache size in entries"
+msgstr "エントリをキャッシュする量"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval in "
+"kbytes and minutes"
+msgstr "データベースチェックポイント間隔(Kバイトと分で指定)"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbConfig|BerkeleyDB DB_CONFIG configuration "
+"directives"
+msgstr "バークレイDB(BDB)のDB_CONFIG設定ディレクティブ"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbCryptFile|Pathname of file containing the DB "
+"encryption key"
+msgstr "DB暗号化鍵を含むファイルのパス名"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbCryptKey|DB encryption key"
+msgstr "DB暗号化鍵"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbDNcacheSize|DN cache size"
+msgstr "DNのキャッシュ量"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbDirectory|Directory for database content"
+msgstr "データベースの内容用のディレクトリ"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbDirtyRead|Allow reads of uncommitted data"
+msgstr "コミット前のデータの読み込みを許可するかどうか"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbIDLcacheSize|IDL cache size in IDLs"
+msgstr "IDLのキャッシュ量"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbIndex|Attribute index parameters"
+msgstr "属性索引用のパラメタ"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbLinearIndex|Index attributes one at a time"
+msgstr "一度に一つだけ属性を索引化する"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbLockDetect|Deadlock detection algorithm"
+msgstr "デッドロック検出アルゴリズム"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbMode|Unix permissions of database files"
+msgstr "データベースファイルのUNIXのパーミッション"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbNoSync|Disable synchronous database writes"
+msgstr "データベースへの同期書き込みを無効にする"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
+msgstr "IDLを<検索するスタックの深さ"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcDbShmKey|Key for shared memory region"
+msgstr "共有メモリ領域のキー"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
+msgstr "OpenLDAPディレクトリ情報ツリー(DIT)の内容規則"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
+msgstr "OpenLDAP用のオブジェクトクラス"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcSortVals|Attributes whose values will always "
+"be sorted"
+msgstr "常に値を並び替えておく属性（複数）"
+
+#: -:-
 msgid ""
 "LDAP|Description|Attribute|organizationalStatus|RFC1274: organizational "
 "status"
@@ -2021,6 +2569,61 @@ msgid "LDAP|Description|ObjectClass|nisObject|An entry in a NIS map"
 msgstr "NISマップのエントリ"
 
 #: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcBackendConfig|OpenLDAP Backend-specific "
+"options"
+msgstr "OpenLDAPのバックエンド特有のオプション"
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcBdbConfig|BDB backend configuration"
+msgstr "BDBバックエンドの設定"
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
+msgstr "OpenLDAPの設定オブジェクト"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcDatabaseConfig|OpenLDAP Database-specific "
+"options"
+msgstr "OpenLDAPのデータベース特有のオプション"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcFrontendConfig|OpenLDAP frontend "
+"configuration"
+msgstr "OpenLDAPのフロントエンドの設定"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration options"
+msgstr "OpenLDAPのグローバルな設定オプション"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcIncludeFile|OpenLDAP configuration include "
+"file"
+msgstr "取り込むOpenLDAPの設定ファイル"
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcLdifConfig|LDIF backend configuration"
+msgstr "LDIFバックエンドの設定"
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcModuleList|OpenLDAP dynamic module info"
+msgstr "OpenLDAPの動的モジュールの情報"
+
+#: -:-
+msgid ""
+"LDAP|Description|ObjectClass|olcOverlayConfig|OpenLDAP Overlay-specific "
+"options"
+msgstr "OpenLDAPのオーバレイ特有のオプション"
+
+#: -:-
+msgid "LDAP|Description|ObjectClass|olcSchemaConfig|OpenLDAP schema object"
+msgstr "OpenLDAPのスキーマオブジェクト"
+
+#: -:-
 msgid "LDAP|Description|ObjectClass|oncRpc|Abstraction of an ONC/RPC binding"
 msgstr "ONC RPCバインディングの抽象化"
 
@@ -2469,6 +3072,50 @@ msgid "LDAP|ObjectClass|nisObject"
 msgstr "NISオブジェクト(nisObject)"
 
 #: -:-
+msgid "LDAP|ObjectClass|olcBackendConfig"
+msgstr "OpenLDAP設定: バックエンド設定(olcBackendConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcBdbConfig"
+msgstr "OpenLDAP設定: BDB設定(olcBdbConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcConfig"
+msgstr "OpenLDAP設定: 設定(olcConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcDatabaseConfig"
+msgstr "OpenLDAP設定: データベース設定(olcDatabaseConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcFrontendConfig"
+msgstr "OpenLDAP設定: フロントエンド設定(olcFrontendConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcGlobal"
+msgstr "OpenLDAP設定: グローバル(olcGlobal)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcIncludeFile"
+msgstr "OpenLDAP設定: ファイル取り込み(olcIncludeFile)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcLdifConfig"
+msgstr "OpenLDAP設定: LDIF設定(olcLdifConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcModuleList"
+msgstr "OpenLDAP設定: モジュール一覧(olcModuleList)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcOverlayConfig"
+msgstr "OpenLDAP設定: オーバレイ設定(olcOverlayConfig)"
+
+#: -:-
+msgid "LDAP|ObjectClass|olcSchemaConfig"
+msgstr "OpenLDAP設定: スキーマ設定(olcSchemaConfig)"
+
+#: -:-
 msgid "LDAP|ObjectClass|oncRpc"
 msgstr "ONC RPC(oncRpc)"
 
@@ -2805,27 +3452,27 @@ msgstr "password_blockがnilでもProcでもありません。無視します。
 msgid "Requested action timed out."
 msgstr "要求したアクションがタイムアウトしました。"
 
-#: lib/active_ldap/adapter/base.rb:322
+#: lib/active_ldap/adapter/base.rb:320
 msgid "Skip simple bind with empty password."
 msgstr "空パスワードでのシンプル認証を行いませんでした。"
 
-#: lib/active_ldap/adapter/base.rb:326
+#: lib/active_ldap/adapter/base.rb:324
 msgid "Can't use empty password for simple bind."
 msgstr "シンプル認証では空のパスワードを使うことはできません。"
 
-#: lib/active_ldap/adapter/base.rb:517
+#: lib/active_ldap/adapter/base.rb:515
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr "不正な論理演算子です: %s: 有効な演算子: %s\n"
 
-#: lib/active_ldap/adapter/base.rb:534
+#: lib/active_ldap/adapter/base.rb:532
 msgid "Giving up trying to reconnect to LDAP server."
 msgstr "LDAPサーバへの再接続を諦めました。"
 
-#: lib/active_ldap/adapter/base.rb:537
+#: lib/active_ldap/adapter/base.rb:535
 msgid "Attempting to reconnect"
 msgstr "再接続を試みています"
 
-#: lib/active_ldap/adapter/base.rb:548
+#: lib/active_ldap/adapter/base.rb:546
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -2844,127 +3491,127 @@ msgid ":ldap_scope search option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/operations.rb:210
+#: lib/active_ldap/operations.rb:221
 msgid "Invalid order: %s"
 msgstr "不正な順序です: %s"
 
-#: lib/active_ldap/operations.rb:246
+#: lib/active_ldap/operations.rb:257
 msgid "Couldn't find %s without a DN"
 msgstr "DNがないため%sが見つかりません"
 
-#: lib/active_ldap/operations.rb:268
+#: lib/active_ldap/operations.rb:279
 msgid "Couldn't find %s: DN: %s: filter: %s"
 msgstr "%sが見つかりません: DN: %s: フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:271
+#: lib/active_ldap/operations.rb:282
 msgid "Couldn't find %s: DN: %s"
 msgstr "%sが見つかりません: DN: %s"
 
-#: lib/active_ldap/operations.rb:298
+#: lib/active_ldap/operations.rb:309
 msgid "Couldn't find all %s: DNs (%s): filter: %s"
 msgstr "すべての%sを見つけられませんでした: DN (%s): フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:301
+#: lib/active_ldap/operations.rb:312
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
-#: lib/active_ldap/ldif.rb:377
+#: lib/active_ldap/ldif.rb:376
 msgid "version spec is missing"
 msgstr "バージョン指定がありません"
 
-#: lib/active_ldap/ldif.rb:381
+#: lib/active_ldap/ldif.rb:380
 msgid "version number is missing"
 msgstr "バージョン番号がありません"
 
-#: lib/active_ldap/ldif.rb:385
+#: lib/active_ldap/ldif.rb:384
 msgid "unsupported version: %d"
 msgstr "対応していないバージョンです: %d"
 
-#: lib/active_ldap/ldif.rb:389
+#: lib/active_ldap/ldif.rb:388
 msgid "separator is missing"
 msgstr "分離記号（改行）がありません"
 
-#: lib/active_ldap/ldif.rb:393
+#: lib/active_ldap/ldif.rb:392
 msgid "'dn:' is missing"
 msgstr "'dn:'がありません"
 
-#: lib/active_ldap/ldif.rb:397
+#: lib/active_ldap/ldif.rb:396
 msgid "DN is missing"
 msgstr "DNがありません"
 
-#: lib/active_ldap/ldif.rb:401
+#: lib/active_ldap/ldif.rb:400
 msgid "DN is invalid: %s: %s"
 msgstr "不正なDNです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:405
+#: lib/active_ldap/ldif.rb:404
 msgid "DN has an invalid character: %s"
 msgstr "DNは不正な文字を含んでいます: %s"
 
-#: lib/active_ldap/ldif.rb:409 lib/active_ldap/distinguished_name.rb:140
+#: lib/active_ldap/ldif.rb:408 lib/active_ldap/distinguished_name.rb:143
 msgid "attribute type is missing"
 msgstr "属性の種類がありません"
 
-#: lib/active_ldap/ldif.rb:413
+#: lib/active_ldap/ldif.rb:412
 msgid "option is missing"
 msgstr "オプションがありません"
 
-#: lib/active_ldap/ldif.rb:417
+#: lib/active_ldap/ldif.rb:416
 msgid "':' is missing"
 msgstr "':'がありません"
 
-#: lib/active_ldap/ldif.rb:421
+#: lib/active_ldap/ldif.rb:420
 msgid "URI is invalid: %s: %s"
 msgstr "不正なURIです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:425
+#: lib/active_ldap/ldif.rb:424
 msgid "'-' is missing"
 msgstr "'-'がありません"
 
-#: lib/active_ldap/ldif.rb:429
+#: lib/active_ldap/ldif.rb:428
 msgid "unknown change type: %s"
 msgstr "未知の変更型です: %s"
 
-#: lib/active_ldap/ldif.rb:433
+#: lib/active_ldap/ldif.rb:432
 msgid "change type is missing"
 msgstr "変更型がありません"
 
-#: lib/active_ldap/ldif.rb:437
+#: lib/active_ldap/ldif.rb:436
 msgid "control type is missing"
 msgstr "制御型がありません"
 
-#: lib/active_ldap/ldif.rb:441
+#: lib/active_ldap/ldif.rb:440
 msgid "criticality is missing"
 msgstr "臨界指定がありません"
 
-#: lib/active_ldap/ldif.rb:445
+#: lib/active_ldap/ldif.rb:444
 msgid "change type value is missing"
 msgstr "変更型の値がありません"
 
-#: lib/active_ldap/ldif.rb:449
+#: lib/active_ldap/ldif.rb:448
 msgid "attribute spec is missing"
 msgstr "属性指定がありません"
 
-#: lib/active_ldap/ldif.rb:453
+#: lib/active_ldap/ldif.rb:452
 msgid "'newrdn:' is missing"
 msgstr "'newrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:457
+#: lib/active_ldap/ldif.rb:456
 msgid "new RDN value is missing"
 msgstr "新しいRDNの値がありません"
 
-#: lib/active_ldap/ldif.rb:461
+#: lib/active_ldap/ldif.rb:460
 msgid "'deleteoldrdn:' is missing"
 msgstr "deleteoldrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:465
+#: lib/active_ldap/ldif.rb:464
 msgid "delete old RDN value is missing"
 msgstr "古いRDNを削除するかどうかの指定値がありません"
 
-#: lib/active_ldap/ldif.rb:469
+#: lib/active_ldap/ldif.rb:468
 msgid "new superior value is missing"
 msgstr "新しい親エントリの値がありません"
 
-#: lib/active_ldap/ldif.rb:473
+#: lib/active_ldap/ldif.rb:472
 msgid "unknown modify type: %s"
 msgstr "未知の変更種類です: %s"
 
@@ -2976,67 +3623,61 @@ msgstr "不正な臨界指定値です: %s"
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 
-#: lib/active_ldap/distinguished_name.rb:132
+#: lib/active_ldap/distinguished_name.rb:135
 msgid "name component is missing"
 msgstr "名前要素がありません"
 
-#: lib/active_ldap/distinguished_name.rb:136
+#: lib/active_ldap/distinguished_name.rb:139
 msgid "relative distinguished name (RDN) is missing"
 msgstr "相対識別名(RDN)がありません"
 
-#: lib/active_ldap/distinguished_name.rb:144
+#: lib/active_ldap/distinguished_name.rb:147
 msgid "attribute value is missing"
 msgstr "属性の値がありません"
 
-#: lib/active_ldap/distinguished_name.rb:148
+#: lib/active_ldap/distinguished_name.rb:151
 msgid "found unmatched quotation"
 msgstr "未対応の引用符が見つかりました"
 
-#: lib/active_ldap/distinguished_name.rb:173
+#: lib/active_ldap/distinguished_name.rb:187
 msgid "%s isn't sub DN of %s"
 msgstr "%sは%sのサブDNではありません"
 
-#: lib/active_ldap/validations.rb:69
+#: lib/active_ldap/validations.rb:81
 msgid "%{fn} is duplicated: %s"
 msgstr "%{fn}が重複しています: %s"
 
-#: lib/active_ldap/validations.rb:71
+#: lib/active_ldap/validations.rb:83
 msgid "is duplicated: %s"
 msgstr "が重複しています: %s"
 
-#: lib/active_ldap/validations.rb:95
+#: lib/active_ldap/validations.rb:107
 msgid "%{fn} has excluded value: %s"
 msgid_plural "%{fn} has excluded values: %s"
 msgstr[0] "%{fn}に除外した値があります: %s"
 msgstr[1] "%{fn}に除外した値があります: %s"
 
-#: lib/active_ldap/validations.rb:99
-msgid "has excluded value: %s"
-msgid_plural "has excluded values: %s"
-msgstr[0] "に除外した値があります: %s"
-msgstr[1] "に除外した値があります: %s"
-
-#: lib/active_ldap/validations.rb:128
+#: lib/active_ldap/validations.rb:142
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です"
 
-#: lib/active_ldap/validations.rb:130
+#: lib/active_ldap/validations.rb:144
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
-#: lib/active_ldap/validations.rb:165
+#: lib/active_ldap/validations.rb:177
 msgid "%{fn} (%s) has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:167
+#: lib/active_ldap/validations.rb:179
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:171
+#: lib/active_ldap/validations.rb:183
 msgid "(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr "(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:173
+#: lib/active_ldap/validations.rb:185
 msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr "は不正な書式です: %s: 要求されている構文: %s: %s"
 
@@ -3056,35 +3697,39 @@ msgstr "このメッセージを表示します"
 msgid "Show version"
 msgstr "バージョンを表示します"
 
-#: lib/active_ldap/base.rb:114
+#: lib/active_ldap/base.rb:112
+msgid "invalid distinguished name (DN) to parse: %s"
+msgstr "構文解析できない不正な識別名(DN)です: %s"
+
+#: lib/active_ldap/base.rb:122
 msgid "%s is invalid distinguished name (DN): %s"
 msgstr "%sは不正な識別名(DN)です: %s"
 
-#: lib/active_ldap/base.rb:116
+#: lib/active_ldap/base.rb:124
 msgid "%s is invalid distinguished name (DN)"
 msgstr "%sは不正な識別名(DN)です"
 
-#: lib/active_ldap/base.rb:134
+#: lib/active_ldap/base.rb:142
 msgid "invalid LDIF: %s:"
 msgstr "不正なLDIFです: %s:"
 
-#: lib/active_ldap/base.rb:136
+#: lib/active_ldap/base.rb:144
 msgid "invalid LDIF:"
 msgstr "不正なLDIFです:"
 
-#: lib/active_ldap/base.rb:211
+#: lib/active_ldap/base.rb:219
 msgid "LDAP configuration specifies nonexistent %s adapter"
 msgstr "LDAPの設定が存在しない%sアダプタが指定しています"
 
-#: lib/active_ldap/base.rb:219
+#: lib/active_ldap/base.rb:227
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です"
 
-#: lib/active_ldap/base.rb:407
+#: lib/active_ldap/base.rb:423
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません"
 
-#: lib/active_ldap/base.rb:516
+#: lib/active_ldap/base.rb:577
 msgid ""
 "'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
 "attributes as Hash"
@@ -3092,27 +3737,27 @@ msgstr ""
 "'%s'はnil、ActiveLdap::DNあるいはStringによるDN、DNの配列、Hashによる属性のど"
 "れかでなければいけません"
 
-#: lib/active_ldap/base.rb:620
+#: lib/active_ldap/base.rb:682
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:639
+#: lib/active_ldap/base.rb:701
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません"
 
-#: lib/active_ldap/base.rb:658 lib/active_ldap/base.rb:669
+#: lib/active_ldap/base.rb:720 lib/active_ldap/base.rb:731
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:788
+#: lib/active_ldap/base.rb:854
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません"
 
-#: lib/active_ldap/base.rb:1119
+#: lib/active_ldap/base.rb:1184
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません"
 
-#: lib/active_ldap/base.rb:1228
+#: lib/active_ldap/base.rb:1298
 msgid "dn_attribute isn't set for this class: %s"
 msgstr "このクラスのdn_attributeが設定されていません: %s"
 
@@ -3139,19 +3784,19 @@ msgid ":ldap_scope connection option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_scope接続オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/user_password.rb:11
+#: lib/active_ldap/user_password.rb:10
 msgid "Invalid hashed password: %s"
 msgstr "不正なハッシュ化されたパスワードです: %s"
 
-#: lib/active_ldap/user_password.rb:17
+#: lib/active_ldap/user_password.rb:16
 msgid "Unknown Hash type: %s"
 msgstr "未知のハッシュの種類です: %s"
 
-#: lib/active_ldap/user_password.rb:24
+#: lib/active_ldap/user_password.rb:23
 msgid "Can't extract salt from hashed password: %s"
 msgstr "ハッシュ化されたパスワードからsaltを取り出すことができません: %s"
 
-#: lib/active_ldap/user_password.rb:52 lib/active_ldap/user_password.rb:69
+#: lib/active_ldap/user_password.rb:51 lib/active_ldap/user_password.rb:68
 msgid "salt size must be == 4: %s"
 msgstr "saltは4文字でなければいけません: %s"
 
@@ -3283,489 +3928,45 @@ msgstr ""
 msgid "Specify prefix for benchmarking"
 msgstr "ベンチマーク用のプリフィックスを指定してください"
 
-#: benchmark/bench-al.rb:160
+#: benchmark/bench-al.rb:182
 msgid "Populating..."
 msgstr "データ投入中..."
 
-#: benchmark/bench-al.rb:199
-msgid "Entries processed by Ruby/ActiveLdap: %d"
-msgstr "Ruby/ActiveLdapで処理したエントリ数: %d"
+#: benchmark/bench-al.rb:239
+msgid "Entries processed by Ruby/ActiveLdap + LDAP: %d"
+msgstr "Ruby/ActiveLdap + LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:200
-msgid "Entries processed by Ruby/ActiveLdap (without object creation): %d"
-msgstr "Ruby/ActiveLdapで処理したエントリ数(オブジェクト生成無し): %d"
+#: benchmark/bench-al.rb:240
+msgid "Entries processed by Ruby/ActiveLdap + Net::LDAP: %d"
+msgstr "Ruby/ActiveLdap + Net::LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:202
+#: benchmark/bench-al.rb:242
+msgid ""
+"Entries processed by Ruby/ActiveLdap + LDAP: (without object creation): %d"
+msgstr "Ruby/ActiveLdap + LDAPで処理したエントリ数(オブジェクト生成無し): %d"
+
+#: benchmark/bench-al.rb:245
+msgid ""
+"Entries processed by Ruby/ActiveLdap + Net::LDAP: (without object creation): "
+"%d"
+msgstr "Ruby/ActiveLdap + Net::LDAPで処理したエントリ数(オブジェクト生成無し): %d"
+
+#: benchmark/bench-al.rb:248
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr "Ruby/LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:203
+#: benchmark/bench-al.rb:249
 msgid "Entries processed by Net::LDAP: %d"
 msgstr "Net::LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:206
+#: benchmark/bench-al.rb:253
 msgid "Cleaning..."
 msgstr "削除中..."
 
-#~ msgid "LDAP|Attribute|olcAccess"
-#~ msgstr "OpenLDAP設定: アクセス制御(olcAccess)"
-
-#~ msgid "LDAP|Attribute|olcAllows"
-#~ msgstr "OpenLDAP設定: 許可(olcAllows)"
-
-#~ msgid "LDAP|Attribute|olcArgsFile"
-#~ msgstr "OpenLDAP設定: 引数で指定した設定ファイル(olcArgsFile)"
-
-#~ msgid "LDAP|Attribute|olcAttributeOptions"
-#~ msgstr "OpenLDAP設定: 属性オプション(olcAttributeOptions)"
-
-#~ msgid "LDAP|Attribute|olcAttributeTypes"
-#~ msgstr "OpenLDAP設定: 属性種別(olcAttributeTypes)"
-
-#~ msgid "LDAP|Attribute|olcAuthIDRewrite"
-#~ msgstr "OpenLDAP設定: 認証ID書き換え(olcAuthIDRewrite)"
-
-#~ msgid "LDAP|Attribute|olcAuthzPolicy"
-#~ msgstr "OpenLDAP設定: 認証ポリシー(olcAuthzPolicy)"
-
-#~ msgid "LDAP|Attribute|olcAuthzRegexp"
-#~ msgstr "OpenLDAP設定: 認証正規表現(olcAuthzRegexp)"
-
-#~ msgid "LDAP|Attribute|olcBackend"
-#~ msgstr "OpenLDAP設定: バックエンド(olcBackend)"
-
-#~ msgid "LDAP|Attribute|olcConcurrency"
-#~ msgstr "OpenLDAP設定: 同時接続数(olcConcurrency)"
-
-#~ msgid "LDAP|Attribute|olcConfigDir"
-#~ msgstr "OpenLDAP設定: 設定ディレクトリ(olcConfigDir)"
-
-#~ msgid "LDAP|Attribute|olcConfigFile"
-#~ msgstr "OpenLDAP設定: 設定ファイル(olcConfigFile)"
-
-#~ msgid "LDAP|Attribute|olcConnMaxPending"
-#~ msgstr "OpenLDAP設定: 最大接続待ち数(olcConnMaxPending)"
-
-#~ msgid "LDAP|Attribute|olcConnMaxPendingAuth"
-#~ msgstr "OpenLDAP設定: 最大認証待ち接続数(olcConnMaxPendingAuth)"
-
-#~ msgid "LDAP|Attribute|olcDatabase"
-#~ msgstr "OpenLDAP設定: データベース(olcDatabase)"
-
-#~ msgid "LDAP|Attribute|olcDbCacheFree"
-#~ msgstr "OpenLDAP設定: DB: キャッシュ開放量(olcDbCacheFree)"
-
-#~ msgid "LDAP|Attribute|olcDbCacheSize"
-#~ msgstr "OpenLDAP設定: DB: キャッシュ量(olcDbCacheSize)"
-
-#~ msgid "LDAP|Attribute|olcDbCheckpoint"
-#~ msgstr "OpenLDAP設定: DB: チェックポイント(olcDbCheckpoint)"
-
-#~ msgid "LDAP|Attribute|olcDbConfig"
-#~ msgstr "OpenLDAP設定: DB: 設定(olcDbConfig)"
-
-#~ msgid "LDAP|Attribute|olcDbDirectory"
-#~ msgstr "OpenLDAP設定: DB: ディレクトリ(olcDbDirectory)"
-
-#~ msgid "LDAP|Attribute|olcDbDirtyRead"
-#~ msgstr "OpenLDAP設定: DB: 不正読込(olcDbDirtyRead)"
-
-#~ msgid "LDAP|Attribute|olcDbIDLcacheSize"
-#~ msgstr "OpenLDAP設定: DB: IDLキャッシュ量(olcDbIDLcacheSize)"
-
-#~ msgid "LDAP|Attribute|olcDbIndex"
-#~ msgstr "OpenLDAP設定: DB: 索引(olcDbIndex)"
-
-#~ msgid "LDAP|Attribute|olcDbLinearIndex"
-#~ msgstr "OpenLDAP設定: DB: 線形索引(olcDbLinearIndex)"
-
-#~ msgid "LDAP|Attribute|olcDbLockDetect"
-#~ msgstr "OpenLDAP設定: DB: ロック検出(olcDbLockDetect)"
-
-#~ msgid "LDAP|Attribute|olcDbMode"
-#~ msgstr "OpenLDAP設定: DB: モード(olcDbMode)"
-
-#~ msgid "LDAP|Attribute|olcDbNoSync"
-#~ msgstr "OpenLDAP設定: DB: 非同期(olcDbNoSync)"
-
-#~ msgid "LDAP|Attribute|olcDbSearchStack"
-#~ msgstr "OpenLDAP設定: DB: 検索スタック(olcDbSearchStack)"
-
-#~ msgid "LDAP|Attribute|olcDbShmKey"
-#~ msgstr "OpenLDAP設定: DB: 共有メモリキー(olcDbShmKey)"
-
-#~ msgid "LDAP|Attribute|olcDefaultSearchBase"
-#~ msgstr "OpenLDAP設定: デフォルト検索ベース(olcDefaultSearchBase)"
-
-#~ msgid "LDAP|Attribute|olcDisallows"
-#~ msgstr "OpenLDAP設定: 拒否(olcDisallows)"
-
-#~ msgid "LDAP|Attribute|olcDitContentRules"
-#~ msgstr "OpenLDAP設定: DIT内容規則(olcDitContentRules)"
-
-#~ msgid "LDAP|Attribute|olcGentleHUP"
-#~ msgstr "OpenLDAP設定: 穏やかなHUP(olcGentleHUP)"
-
-#~ msgid "LDAP|Attribute|olcIdleTimeout"
-#~ msgstr "OpenLDAP設定: 待ちタイムアウト(olcIdleTimeout)"
-
-#~ msgid "LDAP|Attribute|olcInclude"
-#~ msgstr "OpenLDAP設定: 取り込み(olcInclude)"
-
-#~ msgid "LDAP|Attribute|olcIndexSubstrAnyLen"
-#~ msgstr "OpenLDAP設定: 索引に使用する部分文字列長(olcIndexSubstrAnyLen)"
-
-#~ msgid "LDAP|Attribute|olcIndexSubstrAnyStep"
-#~ msgstr "OpenLDAP設定: 索引検索時に使用する移動幅(olcIndexSubstrAnyStep)"
-
-#~ msgid "LDAP|Attribute|olcIndexSubstrIfMaxLen"
-#~ msgstr ""
-#~ "OpenLDAP設定: 索引に使用する部分文字列の最大長(olcIndexSubstrIfMaxLen)"
-
-#~ msgid "LDAP|Attribute|olcIndexSubstrIfMinLen"
-#~ msgstr ""
-#~ "OpenLDAP設定 索引に使用する部分文字列の最小長(olcIndexSubstrIfMinLen)"
-
-#~ msgid "LDAP|Attribute|olcLastMod"
-#~ msgstr "OpenLDAP設定: 最終更新情報(olcLastMod)"
-
-#~ msgid "LDAP|Attribute|olcLimits"
-#~ msgstr "OpenLDAP設定: 制限(olcLimits)"
-
-#~ msgid "LDAP|Attribute|olcLocalSSF"
-#~ msgstr "OpenLDAP設定: ローカルSSF(olcLocalSSF)"
-
-#~ msgid "LDAP|Attribute|olcLogFile"
-#~ msgstr "OpenLDAP設定: ログファイル(olcLogFile)"
-
-#~ msgid "LDAP|Attribute|olcLogLevel"
-#~ msgstr "OpenLDAP設定: ログレベル(olcLogLevel)"
-
-#~ msgid "LDAP|Attribute|olcMaxDerefDepth"
-#~ msgstr "OpenLDAP設定: 最大別名解決深度(olcMaxDerefDepth)"
-
-#~ msgid "LDAP|Attribute|olcModuleLoad"
-#~ msgstr "OpenLDAP設定: ロードするモジュール(olcModuleLoad)"
-
-#~ msgid "LDAP|Attribute|olcModulePath"
-#~ msgstr "OpenLDAP設定: モジュールの検索パス(olcModulePath)"
-
-#~ msgid "LDAP|Attribute|olcObjectClasses"
-#~ msgstr "OpenLDAP設定: オブジェクトクラス(olcObjectClasses)"
-
-#~ msgid "LDAP|Attribute|olcObjectIdentifier"
-#~ msgstr "OpenLDAP設定: オブジェクト識別子(olcObjectIdentifier)"
-
-#~ msgid "LDAP|Attribute|olcOverlay"
-#~ msgstr "OpenLDAP設定: オーバーレイ(olcOverlay)"
-
-#~ msgid "LDAP|Attribute|olcPasswordCryptSaltFormat"
-#~ msgstr ""
-#~ "OpenLDAP設定: パスワード暗号化用サルトの書式(olcPasswordCryptSaltFormat)"
-
-#~ msgid "LDAP|Attribute|olcPasswordHash"
-#~ msgstr "OpenLDAP設定: パスワードハッシュ(olcPasswordHash)"
-
-#~ msgid "LDAP|Attribute|olcPidFile"
-#~ msgstr "OpenLDAP設定: PIDファイル(olcPidFile)"
-
-#~ msgid "LDAP|Attribute|olcPlugin"
-#~ msgstr "OpenLDAP設定: プラグイン(olcPlugin)"
-
-#~ msgid "LDAP|Attribute|olcPluginLogFile"
-#~ msgstr "OpenLDAP設定: プラグイン: ログファイル(olcPluginLogFile)"
-
-#~ msgid "LDAP|Attribute|olcReadOnly"
-#~ msgstr "OpenLDAP設定: 読み込み専用(olcReadOnly)"
-
-#~ msgid "LDAP|Attribute|olcReferral"
-#~ msgstr "OpenLDAP設定: 照会(olcReferral)"
-
-#~ msgid "LDAP|Attribute|olcReplica"
-#~ msgstr "OpenLDAP設定: 複製(olcReplica)"
-
-#~ msgid "LDAP|Attribute|olcReplicaArgsFile"
-#~ msgstr "OpenLDAP設定: 複製: 引数で指定した設定ファイル(olcReplicaArgsFile0"
-
-#~ msgid "LDAP|Attribute|olcReplicaPidFile"
-#~ msgstr "OpenLDAP設定: 複製: PIDファイル(olcReplicaPidFile)"
-
-#~ msgid "LDAP|Attribute|olcReplicationInterval"
-#~ msgstr "OpenLDAP設定: 複製間隔(olcReplicationInterval)"
-
-#~ msgid "LDAP|Attribute|olcReplogFile"
-#~ msgstr "OpenLDAP設定: 複製用ログファイル(olcReplogFile)"
-
-#~ msgid "LDAP|Attribute|olcRequires"
-#~ msgstr "OpenLDAP設定: 必須条件(olcRequires)"
-
-#~ msgid "LDAP|Attribute|olcRestrict"
-#~ msgstr "OpenLDAP設定: 制限(olcRestrict)"
-
-#~ msgid "LDAP|Attribute|olcReverseLookup"
-#~ msgstr "OpenLDAP設定: 逆引き(olcReverseLookup)"
-
-#~ msgid "LDAP|Attribute|olcRootDN"
-#~ msgstr "OpenLDAP設定: ルートDN(olcRootDN)"
-
-#~ msgid "LDAP|Attribute|olcRootDSE"
-#~ msgstr "OpenLDAP設定: ルートDSE(olcRootDSE)"
-
-#~ msgid "LDAP|Attribute|olcRootPW"
-#~ msgstr "OpenLDAP設定: ルートパスワード(olcRootPW)"
-
-#~ msgid "LDAP|Attribute|olcSaslHost"
-#~ msgstr "OpenLDAP設定: SASL: ホスト(olcSaslHost)"
-
-#~ msgid "LDAP|Attribute|olcSaslRealm"
-#~ msgstr "OpenLDAP設定: SASL: 領域(olcSaslRealm)"
-
-#~ msgid "LDAP|Attribute|olcSaslSecProps"
-#~ msgstr "OpenLDAP設定: SASL: セキュリティプロパティ(olcSaslSecProps)"
-
-#~ msgid "LDAP|Attribute|olcSchemaDN"
-#~ msgstr "OpenLDAP設定: スキーマDN(olcSchemaDN)"
-
-#~ msgid "LDAP|Attribute|olcSecurity"
-#~ msgstr "OpenLDAP設定: セキュリティ(olcSecurity)"
-
-#~ msgid "LDAP|Attribute|olcSizeLimit"
-#~ msgstr "OpenLDAP設定: サイズ制限(olcSizeLimit)"
-
-#~ msgid "LDAP|Attribute|olcSockbufMaxIncoming"
-#~ msgstr "OpenLDAP設定: 匿名接続用最大受信量(olcSockbufMaxIncoming)"
-
-#~ msgid "LDAP|Attribute|olcSockbufMaxIncomingAuth"
-#~ msgstr "OpenLDAP設定: 認証接続用最大受信量(olcSockbufMaxIncomingAuth)"
-
-#~ msgid "LDAP|Attribute|olcSrvtab"
-#~ msgstr "OpenLDAP設定: サービステーブル(olcSrvtab)"
-
-#~ msgid "LDAP|Attribute|olcSubordinate"
-#~ msgstr "OpenLDAP設定: 下位データベース(olcSubordinate)"
-
-#~ msgid "LDAP|Attribute|olcSuffix"
-#~ msgstr "OpenLDAP設定: サフィックス(olcSuffix)"
-
-#~ msgid "LDAP|Attribute|olcSyncrepl"
-#~ msgstr "OpenLDAP設定: 同期複製(olcSyncrepl)"
-
-#~ msgid "LDAP|Attribute|olcTLSCACertificateFile"
-#~ msgstr "OpenLDAP設定: TLS: CA証明書ファイル(olcTLSCACertificateFile)"
-
-#~ msgid "LDAP|Attribute|olcTLSCACertificatePath"
-#~ msgstr "OpenLDAP設定: TLS: CA証明書パス(olcTLSCACertificatePath)"
-
-#~ msgid "LDAP|Attribute|olcTLSCRLCheck"
-#~ msgstr "OpenLDAP設定: TLS: 失効証明書一覧チェック(olcTLSCRLCheck)"
-
-#~ msgid "LDAP|Attribute|olcTLSCertificateFile"
-#~ msgstr "OpenLDAP設定: TLS: 証明書ファイル(olcTLSCertificateFile)"
-
-#~ msgid "LDAP|Attribute|olcTLSCertificateKeyFile"
-#~ msgstr "OpenLDAP設定: TLS: 証明書鍵ファイル(olcTLSCertificateKeyFile)"
-
-#~ msgid "LDAP|Attribute|olcTLSCipherSuite"
-#~ msgstr "OpenLDAP設定: TLS: 暗号群(olcTLSCipherSuite)"
-
-#~ msgid "LDAP|Attribute|olcTLSDHParamFile"
-#~ msgstr "OpenLDAP設定: TLS: DHパラメタファイル(olcTLSDHParamFile)"
-
-#~ msgid "LDAP|Attribute|olcTLSRandFile"
-#~ msgstr "OpenLDAP設定: TLS: ランダムファイル(olcTLSRandFile)"
-
-#~ msgid "LDAP|Attribute|olcTLSVerifyClient"
-#~ msgstr "OpenLDAP設定: TLS: クライアント検証(olcTLSVerifyClient)"
-
-#~ msgid "LDAP|Attribute|olcThreads"
-#~ msgstr "OpenLDAP設定: 最大スレッド数(olcThreads)"
-
-#~ msgid "LDAP|Attribute|olcTimeLimit"
-#~ msgstr "OpenLDAP設定: 時間制限(olcTimeLimit)"
-
-#~ msgid "LDAP|Attribute|olcToolThreads"
-#~ msgstr "OpenLDAP設定: ツールモード時の最大スレッド数(olcToolThreads)"
-
-#~ msgid "LDAP|Attribute|olcUpdateDN"
-#~ msgstr "OpenLDAP設定: 更新用DN(olcUpdateDN)"
-
-#~ msgid "LDAP|Attribute|olcUpdateRef"
-#~ msgstr "OpenLDAP設定: 更新要求時の紹介URL(olcUpdateRef)"
-
-#~ msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
-#~ msgstr "アクセス制御リスト"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
-#~ msgstr "使うことを許可する非推奨の機能群"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcArgsFile|File for slapd command line options"
-#~ msgstr "slapdのコマンドラインオプションで指定した設定ファイル"
-
-#~ msgid "LDAP|Description|Attribute|olcAttributeTypes|OpenLDAP attributeTypes"
-#~ msgstr "OpenLDAP用のattributeTypes"
-
-#~ msgid "LDAP|Description|Attribute|olcBackend|A type of backend"
-#~ msgstr "バックエンドの種類"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcConfigDir|Directory for slapd configuration "
-#~ "backend"
-#~ msgstr "slapd設定バックエンド用のディレクトリ"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcConfigFile|File for slapd configuration "
-#~ "directives"
-#~ msgstr "slapd設定ディレクティブ用のファイル"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDatabase|The backend type for a database "
-#~ "instance"
-#~ msgstr "データベースインスタンス用のバックエンドの種類"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbCacheFree|Number of extra entries to free "
-#~ "when max is reached"
-#~ msgstr "最大数に達したときに開放する余分なエントリ数"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbCacheSize|Entry cache size in entries"
-#~ msgstr "エントリをキャッシュする量"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval "
-#~ "in kbytes and minutes"
-#~ msgstr "データベースチェックポイント間隔(Kバイトと分で指定)"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbConfig|BerkeleyDB DB_CONFIG configuration "
-#~ "directives"
-#~ msgstr "バークレイDB(BDB)のDB_CONFIG設定ディレクティブ"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbDirectory|Directory for database content"
-#~ msgstr "データベースの内容用のディレクトリ"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbDirtyRead|Allow reads of uncommitted data"
-#~ msgstr "コミット前のデータの読み込みを許可するかどうか"
-
-#~ msgid "LDAP|Description|Attribute|olcDbIDLcacheSize|IDL cache size in IDLs"
-#~ msgstr "IDLのキャッシュ量"
-
-#~ msgid "LDAP|Description|Attribute|olcDbIndex|Attribute index parameters"
-#~ msgstr "属性索引用のパラメタ"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbLinearIndex|Index attributes one at a time"
-#~ msgstr "一度に一つだけ属性を索引化する"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbLockDetect|Deadlock detection algorithm"
-#~ msgstr "デッドロック検出アルゴリズム"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbMode|Unix permissions of database files"
-#~ msgstr "データベースファイルのUNIXのパーミッション"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbNoSync|Disable synchronous database writes"
-#~ msgstr "データベースへの同期書き込みを無効にする"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
-#~ msgstr "IDLを<検索するスタックの深さ"
-
-#~ msgid "LDAP|Description|Attribute|olcDbShmKey|Key for shared memory region"
-#~ msgstr "共有メモリ領域のキー"
-
-#~ msgid ""
-#~ "LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
-#~ msgstr "OpenLDAPディレクトリ情報ツリー(DIT)の内容規則"
-
-#~ msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
-#~ msgstr "OpenLDAP用のオブジェクトクラス"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcBackendConfig|OpenLDAP Backend-specific "
-#~ "options"
-#~ msgstr "OpenLDAPのバックエンド特有のオプション"
-
-#~ msgid "LDAP|Description|ObjectClass|olcBdbConfig|BDB backend configuration"
-#~ msgstr "BDBバックエンドの設定"
-
-#~ msgid "LDAP|Description|ObjectClass|olcConfig|OpenLDAP configuration object"
-#~ msgstr "OpenLDAPの設定オブジェクト"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcDatabaseConfig|OpenLDAP Database-specific "
-#~ "options"
-#~ msgstr "OpenLDAPのデータベース特有のオプション"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcFrontendConfig|OpenLDAP frontend "
-#~ "configuration"
-#~ msgstr "OpenLDAPのフロントエンドの設定"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcGlobal|OpenLDAP Global configuration "
-#~ "options"
-#~ msgstr "OpenLDAPのグローバルな設定オプション"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcIncludeFile|OpenLDAP configuration "
-#~ "include file"
-#~ msgstr "取り込むOpenLDAPの設定ファイル"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcLdifConfig|LDIF backend configuration"
-#~ msgstr "LDIFバックエンドの設定"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcModuleList|OpenLDAP dynamic module info"
-#~ msgstr "OpenLDAPの動的モジュールの情報"
-
-#~ msgid ""
-#~ "LDAP|Description|ObjectClass|olcOverlayConfig|OpenLDAP Overlay-specific "
-#~ "options"
-#~ msgstr "OpenLDAPのオーバレイ特有のオプション"
-
-#~ msgid "LDAP|Description|ObjectClass|olcSchemaConfig|OpenLDAP schema object"
-#~ msgstr "OpenLDAPのスキーマオブジェクト"
-
-#~ msgid "LDAP|ObjectClass|olcBackendConfig"
-#~ msgstr "OpenLDAP設定: バックエンド設定(olcBackendConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcBdbConfig"
-#~ msgstr "OpenLDAP設定: BDB設定(olcBdbConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcConfig"
-#~ msgstr "OpenLDAP設定: 設定(olcConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcDatabaseConfig"
-#~ msgstr "OpenLDAP設定: データベース設定(olcDatabaseConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcFrontendConfig"
-#~ msgstr "OpenLDAP設定: フロントエンド設定(olcFrontendConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcGlobal"
-#~ msgstr "OpenLDAP設定: グローバル(olcGlobal)"
-
-#~ msgid "LDAP|ObjectClass|olcIncludeFile"
-#~ msgstr "OpenLDAP設定: ファイル取り込み(olcIncludeFile)"
-
-#~ msgid "LDAP|ObjectClass|olcLdifConfig"
-#~ msgstr "OpenLDAP設定: LDIF設定(olcLdifConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcModuleList"
-#~ msgstr "OpenLDAP設定: モジュール一覧(olcModuleList)"
-
-#~ msgid "LDAP|ObjectClass|olcOverlayConfig"
-#~ msgstr "OpenLDAP設定: オーバレイ設定(olcOverlayConfig)"
-
-#~ msgid "LDAP|ObjectClass|olcSchemaConfig"
-#~ msgstr "OpenLDAP設定: スキーマ設定(olcSchemaConfig)"
+#~ msgid "has excluded value: %s"
+#~ msgid_plural "has excluded values: %s"
+#~ msgstr[0] "に除外した値があります: %s"
+#~ msgstr[1] "に除外した値があります: %s"
 
 #~ msgid "LDAP|Attribute|dITContentRules"
 #~ msgstr "ディレクトリ情報ツリー内容規則(dITContentRules)"
