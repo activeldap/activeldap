@@ -45,18 +45,18 @@ class TestUserPassword < Test::Unit::TestCase
 
     password = "PASSWORD"
     hashed_password = ActiveLdap::UserPassword.smd5(password)
-    salt = Base64.decode64(hashed_password.sub(/^\{SMD5\}/, ''))[-4, 4]
+    salt = decode64(hashed_password.sub(/^\{SMD5\}/, ''))[-4, 4]
     assert_equal(hashed_password,
                  ActiveLdap::UserPassword.smd5(password, salt))
   end
 
   def test_extract_salt_for_smd5
-    assert_extract_salt(:smd5, nil, Base64.encode64("").chomp)
-    assert_extract_salt(:smd5, nil, Base64.encode64("1").chomp)
-    assert_extract_salt(:smd5, nil, Base64.encode64("12").chomp)
-    assert_extract_salt(:smd5, nil, Base64.encode64("123").chomp)
-    assert_extract_salt(:smd5, "ABCD", Base64.encode64("ABCD").chomp)
-    assert_extract_salt(:smd5, "BCDE", Base64.encode64("ABCDE").chomp)
+    assert_extract_salt(:smd5, nil, encode64(""))
+    assert_extract_salt(:smd5, nil, encode64("1"))
+    assert_extract_salt(:smd5, nil, encode64("12"))
+    assert_extract_salt(:smd5, nil, encode64("123"))
+    assert_extract_salt(:smd5, "ABCD", encode64("ABCD"))
+    assert_extract_salt(:smd5, "BCDE", encode64("ABCDE"))
   end
 
   def test_sha
@@ -70,18 +70,18 @@ class TestUserPassword < Test::Unit::TestCase
 
     password = "PASSWORD"
     hashed_password = ActiveLdap::UserPassword.ssha(password)
-    salt = Base64.decode64(hashed_password.sub(/^\{SSHA\}/, ''))[-4, 4]
+    salt = decode64(hashed_password.sub(/^\{SSHA\}/, ''))[-4, 4]
     assert_equal(hashed_password,
                  ActiveLdap::UserPassword.ssha(password, salt))
   end
 
   def test_extract_salt_for_ssha
-    assert_extract_salt(:ssha, nil, Base64.encode64("").chomp)
-    assert_extract_salt(:ssha, nil, Base64.encode64("1").chomp)
-    assert_extract_salt(:ssha, nil, Base64.encode64("12").chomp)
-    assert_extract_salt(:ssha, nil, Base64.encode64("123").chomp)
-    assert_extract_salt(:ssha, "ABCD", Base64.encode64("ABCD").chomp)
-    assert_extract_salt(:ssha, "BCDE", Base64.encode64("ABCDE").chomp)
+    assert_extract_salt(:ssha, nil, encode64(""))
+    assert_extract_salt(:ssha, nil, encode64("1"))
+    assert_extract_salt(:ssha, nil, encode64("12"))
+    assert_extract_salt(:ssha, nil, encode64("123"))
+    assert_extract_salt(:ssha, "ABCD", encode64("ABCD"))
+    assert_extract_salt(:ssha, "BCDE", encode64("ABCDE"))
   end
 
   private
@@ -89,5 +89,13 @@ class TestUserPassword < Test::Unit::TestCase
     actual = ActiveLdap::UserPassword.send("extract_salt_for_#{type}",
                                            hashed_password)
     assert_equal(expected, actual)
+  end
+
+  def encode64(string)
+    [string].pack('m').chomp
+  end
+
+  def decode64(string)
+    string.unpack('m')[0]
   end
 end

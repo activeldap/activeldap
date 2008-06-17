@@ -43,7 +43,7 @@ module ActiveLdap
     end
 
     def md5(password)
-      "{MD5}#{Base64.encode64(MD5.md5(password).digest).chomp}"
+      "{MD5}#{[MD5.md5(password).digest].pack('m').chomp}"
     end
 
     def smd5(password, salt=nil)
@@ -52,7 +52,7 @@ module ActiveLdap
       end
       salt ||= Salt.generate(4)
       md5_hash_with_salt = "#{MD5.md5(password + salt).digest}#{salt}"
-      "{SMD5}#{Base64.encode64(md5_hash_with_salt).chomp}"
+      "{SMD5}#{[md5_hash_with_salt].pack('m').chomp}"
     end
 
     def extract_salt_for_smd5(smd5ed_password)
@@ -60,7 +60,7 @@ module ActiveLdap
     end
 
     def sha(password)
-      "{SHA}#{Base64.encode64(SHA1.sha1(password).digest).chomp}"
+      "{SHA}#{[SHA1.sha1(password).digest].pack('m').chomp}"
     end
 
     def ssha(password, salt=nil)
@@ -69,7 +69,7 @@ module ActiveLdap
       end
       salt ||= Salt.generate(4)
       sha1_hash_with_salt = "#{SHA1.sha1(password + salt).digest}#{salt}"
-      "{SSHA}#{Base64.encode64(sha1_hash_with_salt).chomp}"
+      "{SSHA}#{[sha1_hash_with_salt].pack('m').chomp}"
     end
 
     def extract_salt_for_ssha(sshaed_password)
