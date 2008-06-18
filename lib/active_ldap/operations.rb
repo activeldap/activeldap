@@ -383,10 +383,12 @@ module ActiveLdap
 
       module ModifyRecordLoadable
         def load(operator, options)
-          each do |operation|
-            operator.modify_entry(dn, operation.to_modify_entries,
-                                  {:controls => controls}.merge(options))
+          modify_entries = operations.inject([]) do |result, operation|
+            result + operation.to_modify_entries
           end
+          return if modify_entries.empty?
+          operator.modify_entry(dn, modify_entries,
+                                {:controls => controls}.merge(options))
         end
 
         module AddOperationModifiable

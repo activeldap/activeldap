@@ -16,6 +16,12 @@ class TestLoad < Test::Unit::TestCase
       record = ActiveLdap::LDIF::ModifyRecord.new(user.dn)
       ldif << record
 
+      original_home_directory = user.home_directory
+      new_home_directory = "#{original_home_directory}-new"
+      record.add_operation(:delete, "homeDirectory", [], {})
+      record.add_operation(:add, "homeDirectory", [],
+                           {"homeDirectory" => [new_home_directory]})
+
       original_descriptions = user.description(true)
       new_description = "new description"
       record.add_operation(:add, "description", [],
@@ -30,6 +36,7 @@ class TestLoad < Test::Unit::TestCase
       ActiveLdap::Base.load(ldif.to_s)
 
       user = @user_class.find(user.dn)
+      assert_equal(new_home_directory, user.home_directory)
       assert_equal(original_descriptions + [new_description],
                    user.description(true))
       assert_nil(user.display_name)
