@@ -475,6 +475,7 @@ module ActiveLdap
 
     class Scanner
       SEPARATOR = /(?:\r\n|\n)/u
+      SEPARATORS = /(?:(?:^#.*)?#{SEPARATOR})+/u
 
       def initialize(source)
         @source = source
@@ -506,13 +507,13 @@ module ActiveLdap
       end
 
       def scan_separators
-        return @scanner.scan(/#{SEPARATOR}+/u) if @sub_scanner.eos?
+        return @scanner.scan(SEPARATORS) if @sub_scanner.eos?
 
-        sub_result = scan(/#{SEPARATOR}+/u)
+        sub_result = scan(SEPARATORS)
         return nil if sub_result.nil?
         return sub_result unless @sub_scanner.eos?
 
-        result = @scanner.scan(/#{SEPARATOR}+/u)
+        result = @scanner.scan(SEPARATORS)
         return sub_result if result.nil?
 
         sub_result + result

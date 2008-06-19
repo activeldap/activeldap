@@ -9,6 +9,36 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_command_lines_and_empty_lines_before_content
+    ldif_source = <<-EOL
+version: 1
+
+#
+# LDAPv3
+# base <dc=devel,dc=clear-code,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# devel.example.com
+dn: dc=devel,dc=example,dc=com
+dc: devel
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: devel
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: dc=devel,dc=example,dc=com
+dc: devel
+o: devel
+objectClass: dcObject
+objectClass: organization
+objectClass: top
+EOL
+  end
 
   priority :normal
   def test_unknown_change_type
