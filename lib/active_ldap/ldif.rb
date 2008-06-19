@@ -364,6 +364,8 @@ module ActiveLdap
           records << parse_record
           break if @scanner.eos?
           raise separator_is_missing if @scanner.scan_separator.nil?
+
+          break if @scanner.scan_separators and @scanner.eos?
         end
         records
       end

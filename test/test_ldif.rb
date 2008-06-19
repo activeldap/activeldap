@@ -9,7 +9,60 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
-  def test_command_lines_and_empty_lines_before_content
+  def test_accept_empty_lines_after_content
+    ldif_source = <<-EOL
+version: 1
+dn: dc=devel,dc=example,dc=com
+dc: devel
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: devel
+
+
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: dc=devel,dc=example,dc=com
+dc: devel
+o: devel
+objectClass: dcObject
+objectClass: organization
+objectClass: top
+EOL
+  end
+
+  def test_accept_comments_after_content
+    ldif_source = <<-EOL
+version: 1
+dn: dc=devel,dc=example,dc=com
+dc: devel
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: devel
+
+# search result
+
+# numResponse: 1
+# numEntries: 1
+
+EOL
+
+    assert_ldif_to_s(<<-EOL, ldif_source)
+version: 1
+dn: dc=devel,dc=example,dc=com
+dc: devel
+o: devel
+objectClass: dcObject
+objectClass: organization
+objectClass: top
+EOL
+  end
+
+  priority :normal
+  def test_comments_and_empty_lines_before_content
     ldif_source = <<-EOL
 version: 1
 
@@ -40,7 +93,6 @@ objectClass: top
 EOL
   end
 
-  priority :normal
   def test_unknown_change_type
     ldif_source = <<-EOL
 version: 1
