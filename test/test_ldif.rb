@@ -18,11 +18,9 @@ objectClass: top
 objectClass: dcObject
 objectClass: organization
 o: devel
-
-
 EOL
 
-    assert_ldif_to_s(<<-EOL, ldif_source)
+    expected_ldif_to_s = <<-EOL
 version: 1
 dn: dc=devel,dc=example,dc=com
 dc: devel
@@ -31,6 +29,12 @@ objectClass: dcObject
 objectClass: organization
 objectClass: top
 EOL
+
+
+    assert_ldif_to_s(expected_ldif_to_s, ldif_source)
+    assert_ldif_to_s(expected_ldif_to_s, ldif_source + "\n")
+    assert_ldif_to_s(expected_ldif_to_s, ldif_source + "\n\n")
+    assert_ldif_to_s(expected_ldif_to_s, ldif_source + ("\n" * 10))
   end
 
   def test_accept_comments_after_content
