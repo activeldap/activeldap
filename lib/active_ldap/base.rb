@@ -30,6 +30,7 @@
 
 require 'English'
 require 'thread'
+require 'erb'
 
 module ActiveLdap
   # OO-interface to LDAP assuming pam/nss_ldap-style organization with
@@ -792,7 +793,7 @@ module ActiveLdap
     # Also be sure to only pass in key-value pairs of your choosing.
     # Do not let URL/form hackers supply the keys.
     def attributes=(new_attributes)
-      return if new_attributes.nil?
+      return if new_attributes.blank?
       _schema = _local_entry_attribute = nil
       targets = remove_attributes_protected_from_mass_assignment(new_attributes)
       targets.each do |key, value|
@@ -819,8 +820,7 @@ module ActiveLdap
     def to_xml(options={})
       root = options[:root] || self.class.name.underscore
       result = "<#{root}>\n"
-      result << "  <dn>#{dn}</dn>\n"
-      normalize_data(@data).sort_by {|key, values| key}.each do |key, values|
+      to_xml_data(options).each do |key, values|
         targets = []
         values.each do |value|
           if value.is_a?(Hash)
@@ -832,11 +832,26 @@ module ActiveLdap
           end
         end
         targets.sort_by {|value, attr| value}.each do |value, attr|
-          result << "  <#{key}#{attr}>#{value}</#{key}>\n"
+          result << "  <#{key}#{attr}>#{ERB::Util.h(value)}</#{key}>\n"
         end
       end
       result << "</#{root}>\n"
       result
+    end
+
+    def to_xml_data(options={})
+      except_dn = false
+      data = normalize_data(@data)
+      (options[:except] || []).each do |name|
+        real_name = to_real_attribute_name(name)
+        data.delete(real_name) if real_name
+        if (real_name || name).to_s.downcase == "dn"
+          except_dn = true
+        end
+      end
+      data = data.sort_by {|key, values| key}
+      data.unshift(["dn", [dn]]) unless except_dn
+      data
     end
 
     def have_attribute?(name, except=[])

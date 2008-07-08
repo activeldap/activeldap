@@ -544,7 +544,7 @@ EOX
 EOX
 
     make_temporary_user do |user, password|
-    assert_equal(<<-EOX, user.to_xml(:root => "user"))
+      assert_equal(<<-EOX, user.to_xml(:root => "user"))
 <user>
   <dn>#{user.dn}</dn>
   <cn>#{user.cn}</cn>
@@ -560,6 +560,48 @@ EOX
   <uid>#{user.uid}</uid>
   <uidNumber>#{user.uid_number}</uidNumber>
   <userCertificate binary="true">#{certificate}</userCertificate>
+  <userPassword>#{user.user_password}</userPassword>
+</user>
+EOX
+    end
+  end
+
+  def test_to_xml_except
+    ou = ou_class.new("Sample")
+    assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => [:objectClass]))
+<sample>
+  <dn>#{ou.dn}</dn>
+  <ou>Sample</ou>
+</sample>
+EOX
+
+    except = [:dn, :object_class]
+    assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => except))
+<sample>
+  <ou>Sample</ou>
+</sample>
+EOX
+  end
+
+  def test_to_xml_escape
+    make_temporary_user do |user, password|
+      sn = user.sn
+      user.sn = "<#{sn}>"
+      except = [:jpeg_photo, :user_certificate]
+      assert_equal(<<-EOX, user.to_xml(:root => "user", :except => except))
+<user>
+  <dn>#{user.dn}</dn>
+  <cn>#{user.cn}</cn>
+  <gidNumber>#{user.gid_number}</gidNumber>
+  <homeDirectory>#{user.home_directory}</homeDirectory>
+  <objectClass>inetOrgPerson</objectClass>
+  <objectClass>organizationalPerson</objectClass>
+  <objectClass>person</objectClass>
+  <objectClass>posixAccount</objectClass>
+  <objectClass>shadowAccount</objectClass>
+  <sn>&lt;#{sn}&gt;</sn>
+  <uid>#{user.uid}</uid>
+  <uidNumber>#{user.uid_number}</uidNumber>
   <userPassword>#{user.user_password}</userPassword>
 </user>
 EOX
