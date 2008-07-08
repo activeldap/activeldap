@@ -818,40 +818,19 @@ module ActiveLdap
     end
 
     def to_xml(options={})
-      root = options[:root] || self.class.name.underscore
-      result = "<#{root}>\n"
-      to_xml_data(options).each do |key, values|
-        targets = []
-        values.each do |value|
-          if value.is_a?(Hash)
-            value.each do |option, real_value|
-              targets << [real_value, " #{option}=\"true\""]
-            end
+      options = options.dup
+      options[:root] ||= self.class.name.underscore
+      except = options[:except]
+      if except
+        options[:except] = except.collect do |name|
+          if name.to_s.downcase == "dn"
+            "dn"
           else
-            targets << [value]
+            to_real_attribute_name(name)
           end
-        end
-        targets.sort_by {|value, attr| value}.each do |value, attr|
-          result << "  <#{key}#{attr}>#{ERB::Util.h(value)}</#{key}>\n"
-        end
+        end.compact
       end
-      result << "</#{root}>\n"
-      result
-    end
-
-    def to_xml_data(options={})
-      except_dn = false
-      data = normalize_data(@data)
-      (options[:except] || []).each do |name|
-        real_name = to_real_attribute_name(name)
-        data.delete(real_name) if real_name
-        if (real_name || name).to_s.downcase == "dn"
-          except_dn = true
-        end
-      end
-      data = data.sort_by {|key, values| key}
-      data.unshift(["dn", [dn]]) unless except_dn
-      data
+      XML.new(dn, normalize_data(@data)).to_s(options)
     end
 
     def have_attribute?(name, except=[])

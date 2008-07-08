@@ -550,7 +550,7 @@ EOX
   <cn>#{user.cn}</cn>
   <gidNumber>#{user.gid_number}</gidNumber>
   <homeDirectory>#{user.home_directory}</homeDirectory>
-  <jpegPhoto>#{jpeg_photo}</jpegPhoto>
+  <jpegPhoto base64="true">#{base64(jpeg_photo)}</jpegPhoto>
   <objectClass>inetOrgPerson</objectClass>
   <objectClass>organizationalPerson</objectClass>
   <objectClass>person</objectClass>
@@ -559,7 +559,7 @@ EOX
   <sn>#{user.sn}</sn>
   <uid>#{user.uid}</uid>
   <uidNumber>#{user.uid_number}</uidNumber>
-  <userCertificate binary="true">#{certificate}</userCertificate>
+  <userCertificate binary="true" base64="true">#{base64(certificate)}</userCertificate>
   <userPassword>#{user.user_password}</userPassword>
 </user>
 EOX
@@ -721,5 +721,9 @@ EOX
       entry.class.send(:instantiate, [record.dn, record.attributes])
     end
     assert_equal([entry], parsed_entries)
+  end
+
+  def base64(string)
+    [string].pack("m").gsub(/\n/u, "")
   end
 end
