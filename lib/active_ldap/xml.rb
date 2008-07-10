@@ -17,11 +17,8 @@ module ActiveLdap
         root = @options[:root]
         result = "<#{root}>\n"
         target_attributes.each do |key, values|
-          values = normalize_values(values).sort_by {|value, attr| value}
-          values.each do |value, attr|
-            attr = " #{attr}" unless attr.blank?
-            result << "  <#{key}#{attr}>#{ERB::Util.h(value)}</#{key}>\n"
-          end
+          values = normalize_values(values).sort_by {|value, _| value}
+          result << serialize_attribute_values(key, values)
         end
         result << "</#{root}>\n"
         result
@@ -66,12 +63,45 @@ module ActiveLdap
             value = [value].pack("m").gsub(/\n/u, '')
             options += ["base64"]
           end
-          xml_attributes = options.collect do |name, val|
-            "#{ERB::Util.h(name)}=\"#{ERB::Util.h(val || 'true')}\""
-          end.join(" ")
+          xml_attributes = {}
+          options.each do |name, val|
+            xml_attributes[name] = val || "true"
+          end
           targets << [value, xml_attributes]
         end
         targets
+      end
+
+      def serialize_attribute_values(name, values)
+        return "" if values.blank?
+
+        result = ""
+        if name == "dn" or @options[:type].to_s.downcase == "ldif"
+          values.collect do |value, xml_attributes|
+            xml = serialize_attribute_value(name, value, xml_attributes)
+            result << "  #{xml}\n"
+          end
+        else
+          plural_name = name.pluralize
+          result << "  <#{plural_name} type=\"array\">\n"
+          values.each do |value, xml_attributes|
+            xml = serialize_attribute_value(name, value, xml_attributes)
+            result << "    #{xml}\n"
+          end
+          result << "  </#{plural_name}>\n"
+        end
+        result
+      end
+
+      def serialize_attribute_value(name, value, xml_attributes)
+        if xml_attributes.blank?
+          xml_attributes = ""
+        else
+          xml_attributes = " " + xml_attributes.collect do |n, v|
+            "#{ERB::Util.h(n)}=\"#{ERB::Util.h(v)}\""
+          end.join(" ")
+        end
+        "<#{name}#{xml_attributes}>#{ERB::Util.h(value)}</#{name}>"
       end
     end
 

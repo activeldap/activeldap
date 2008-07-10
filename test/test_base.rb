@@ -528,18 +528,26 @@ class TestBase < Test::Unit::TestCase
     assert_equal(<<-EOX, ou.to_xml(:root => "ou"))
 <ou>
   <dn>#{ou.dn}</dn>
-  <objectClass>organizationalUnit</objectClass>
-  <objectClass>top</objectClass>
-  <ou>Sample</ou>
+  <objectClasses type="array">
+    <objectClass>organizationalUnit</objectClass>
+    <objectClass>top</objectClass>
+  </objectClasses>
+  <ous type="array">
+    <ou>Sample</ou>
+  </ous>
 </ou>
 EOX
 
     assert_equal(<<-EOX, ou.to_xml)
 <>
   <dn>#{ou.dn}</dn>
-  <objectClass>organizationalUnit</objectClass>
-  <objectClass>top</objectClass>
-  <ou>Sample</ou>
+  <objectClasses type="array">
+    <objectClass>organizationalUnit</objectClass>
+    <objectClass>top</objectClass>
+  </objectClasses>
+  <ous type="array">
+    <ou>Sample</ou>
+  </ous>
 </>
 EOX
 
@@ -547,20 +555,40 @@ EOX
       assert_equal(<<-EOX, user.to_xml(:root => "user"))
 <user>
   <dn>#{user.dn}</dn>
-  <cn>#{user.cn}</cn>
-  <gidNumber>#{user.gid_number}</gidNumber>
-  <homeDirectory>#{user.home_directory}</homeDirectory>
-  <jpegPhoto base64="true">#{base64(jpeg_photo)}</jpegPhoto>
-  <objectClass>inetOrgPerson</objectClass>
-  <objectClass>organizationalPerson</objectClass>
-  <objectClass>person</objectClass>
-  <objectClass>posixAccount</objectClass>
-  <objectClass>shadowAccount</objectClass>
-  <sn>#{user.sn}</sn>
-  <uid>#{user.uid}</uid>
-  <uidNumber>#{user.uid_number}</uidNumber>
-  <userCertificate binary="true" base64="true">#{base64(certificate)}</userCertificate>
-  <userPassword>#{user.user_password}</userPassword>
+  <cns type="array">
+    <cn>#{user.cn}</cn>
+  </cns>
+  <gidNumbers type="array">
+    <gidNumber>#{user.gid_number}</gidNumber>
+  </gidNumbers>
+  <homeDirectories type="array">
+    <homeDirectory>#{user.home_directory}</homeDirectory>
+  </homeDirectories>
+  <jpegPhotos type="array">
+    <jpegPhoto base64="true">#{base64(jpeg_photo)}</jpegPhoto>
+  </jpegPhotos>
+  <objectClasses type="array">
+    <objectClass>inetOrgPerson</objectClass>
+    <objectClass>organizationalPerson</objectClass>
+    <objectClass>person</objectClass>
+    <objectClass>posixAccount</objectClass>
+    <objectClass>shadowAccount</objectClass>
+  </objectClasses>
+  <sns type="array">
+    <sn>#{user.sn}</sn>
+  </sns>
+  <uids type="array">
+    <uid>#{user.uid}</uid>
+  </uids>
+  <uidNumbers type="array">
+    <uidNumber>#{user.uid_number}</uidNumber>
+  </uidNumbers>
+  <userCertificates type="array">
+    <userCertificate binary="true" base64="true">#{base64(certificate)}</userCertificate>
+  </userCertificates>
+  <userPasswords type="array">
+    <userPassword>#{user.user_password}</userPassword>
+  </userPasswords>
 </user>
 EOX
     end
@@ -571,14 +599,18 @@ EOX
     assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => [:objectClass]))
 <sample>
   <dn>#{ou.dn}</dn>
-  <ou>Sample</ou>
+  <ous type="array">
+    <ou>Sample</ou>
+  </ous>
 </sample>
 EOX
 
     except = [:dn, :object_class]
     assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => except))
 <sample>
-  <ou>Sample</ou>
+  <ous type="array">
+    <ou>Sample</ou>
+  </ous>
 </sample>
 EOX
   end
@@ -589,6 +621,48 @@ EOX
       user.sn = "<#{sn}>"
       except = [:jpeg_photo, :user_certificate]
       assert_equal(<<-EOX, user.to_xml(:root => "user", :except => except))
+<user>
+  <dn>#{user.dn}</dn>
+  <cns type="array">
+    <cn>#{user.cn}</cn>
+  </cns>
+  <gidNumbers type="array">
+    <gidNumber>#{user.gid_number}</gidNumber>
+  </gidNumbers>
+  <homeDirectories type="array">
+    <homeDirectory>#{user.home_directory}</homeDirectory>
+  </homeDirectories>
+  <objectClasses type="array">
+    <objectClass>inetOrgPerson</objectClass>
+    <objectClass>organizationalPerson</objectClass>
+    <objectClass>person</objectClass>
+    <objectClass>posixAccount</objectClass>
+    <objectClass>shadowAccount</objectClass>
+  </objectClasses>
+  <sns type="array">
+    <sn>&lt;#{sn}&gt;</sn>
+  </sns>
+  <uids type="array">
+    <uid>#{user.uid}</uid>
+  </uids>
+  <uidNumbers type="array">
+    <uidNumber>#{user.uid_number}</uidNumber>
+  </uidNumbers>
+  <userPasswords type="array">
+    <userPassword>#{user.user_password}</userPassword>
+  </userPasswords>
+</user>
+EOX
+    end
+  end
+
+  def test_to_xml_type_ldif
+    make_temporary_user do |user, password|
+      sn = user.sn
+      user.sn = "<#{sn}>"
+      except = [:jpeg_photo, :user_certificate]
+      options = {:root => "user", :except => except, :type => :ldif}
+      assert_equal(<<-EOX, user.to_xml(options))
 <user>
   <dn>#{user.dn}</dn>
   <cn>#{user.cn}</cn>
