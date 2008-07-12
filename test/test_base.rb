@@ -558,12 +558,8 @@ EOX
   <cns type="array">
     <cn>#{user.cn}</cn>
   </cns>
-  <gidNumbers type="array">
-    <gidNumber>#{user.gid_number}</gidNumber>
-  </gidNumbers>
-  <homeDirectories type="array">
-    <homeDirectory>#{user.home_directory}</homeDirectory>
-  </homeDirectories>
+  <gidNumber>#{user.gid_number}</gidNumber>
+  <homeDirectory>#{user.home_directory}</homeDirectory>
   <jpegPhotos type="array">
     <jpegPhoto base64="true">#{base64(jpeg_photo)}</jpegPhoto>
   </jpegPhotos>
@@ -580,9 +576,7 @@ EOX
   <uids type="array">
     <uid>#{user.uid}</uid>
   </uids>
-  <uidNumbers type="array">
-    <uidNumber>#{user.uid_number}</uidNumber>
-  </uidNumbers>
+  <uidNumber>#{user.uid_number}</uidNumber>
   <userCertificates type="array">
     <userCertificate binary="true" base64="true">#{base64(certificate)}</userCertificate>
   </userCertificates>
@@ -626,12 +620,8 @@ EOX
   <cns type="array">
     <cn>#{user.cn}</cn>
   </cns>
-  <gidNumbers type="array">
-    <gidNumber>#{user.gid_number}</gidNumber>
-  </gidNumbers>
-  <homeDirectories type="array">
-    <homeDirectory>#{user.home_directory}</homeDirectory>
-  </homeDirectories>
+  <gidNumber>#{user.gid_number}</gidNumber>
+  <homeDirectory>#{user.home_directory}</homeDirectory>
   <objectClasses type="array">
     <objectClass>inetOrgPerson</objectClass>
     <objectClass>organizationalPerson</objectClass>
@@ -645,9 +635,7 @@ EOX
   <uids type="array">
     <uid>#{user.uid}</uid>
   </uids>
-  <uidNumbers type="array">
-    <uidNumber>#{user.uid_number}</uidNumber>
-  </uidNumbers>
+  <uidNumber>#{user.uid_number}</uidNumber>
   <userPasswords type="array">
     <userPassword>#{user.user_password}</userPassword>
   </userPasswords>

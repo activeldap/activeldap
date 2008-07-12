@@ -830,7 +830,7 @@ module ActiveLdap
           end
         end.compact
       end
-      XML.new(dn, normalize_data(@data)).to_s(options)
+      XML.new(dn, normalize_data(@data), schema).to_s(options)
     end
 
     def have_attribute?(name, except=[])

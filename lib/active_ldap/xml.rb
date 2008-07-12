@@ -7,9 +7,10 @@ module ActiveLdap
     class Serializer
       PRINTABLE_STRING = /[\x20-\x7e\w\s]*/um
 
-      def initialize(dn, attributes, options={})
+      def initialize(dn, attributes, schema, options={})
         @dn = dn
         @attributes = attributes
+        @schema = schema
         @options = options
       end
 
@@ -18,7 +19,11 @@ module ActiveLdap
         result = "<#{root}>\n"
         target_attributes.each do |key, values|
           values = normalize_values(values).sort_by {|value, _| value}
-          result << serialize_attribute_values(key, values)
+          if @schema.attribute(key).single_value?
+            result << "  #{serialize_attribute_value(key, *values[0])}\n"
+          else
+            result << serialize_attribute_values(key, values)
+          end
         end
         result << "</#{root}>\n"
         result
@@ -105,13 +110,14 @@ module ActiveLdap
       end
     end
 
-    def initialize(dn, attributes)
+    def initialize(dn, attributes, schema)
       @dn = dn
       @attributes = attributes
+      @schema = schema
     end
 
     def to_s(options={})
-      Serializer.new(@dn, @attributes, options).to_s
+      Serializer.new(@dn, @attributes, @schema, options).to_s
     end
   end
 
