@@ -93,6 +93,18 @@ class TestSyntax < Test::Unit::TestCase
     assert_type_cast(Time.parse("1994/12/16 10:32:12.345 +09:00"),
                      "19941216103212.345+0900",
                      "Generalized Time")
+    assert_type_cast(Time.parse("1970/01/01 09:00:00 +09:00"),
+                     "19700101090000+0900",
+                     "Generalized Time")
+    begin
+      Time.at(-1)
+    rescue ArgumentError
+      if $!.message == "argument out of range"
+        assert_type_cast(Time.parse("1969/12/31 23:59:59 +00:00"),
+                         "19691231235959+0000",
+                         "Generalized Time")
+      end
+    end
   end
 
   def test_integer_type_cast

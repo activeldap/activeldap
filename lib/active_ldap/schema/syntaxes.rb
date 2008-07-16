@@ -187,9 +187,19 @@ module ActiveLdap
             fraction = match_data[-2]
             fraction = fraction.to_f if fraction
             time_zone = match_data[-1]
-            Time.send(:make_time,
-                      year, month, day, hour, minute, second, fraction,
-                      time_zone, Time.now)
+            begin
+              Time.send(:make_time,
+                        year, month, day, hour, minute, second, fraction,
+                        time_zone, Time.now)
+            rescue ArgumentError
+              raise if year >= 1700
+              raise if $!.message != "argument out of range"
+              Time.at(0)
+            rescue RangeError
+              raise if year >= 1700
+              raise if $!.message != "bignum too big to convert into `long'"
+              Time.at(0)
+            end
           else
             value
           end
