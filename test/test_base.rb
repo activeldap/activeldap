@@ -6,6 +6,13 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_to_s
+    make_temporary_group do |group,|
+      assert_equal(group.to_s, group.to_ldif)
+    end
+  end
+
+  priority :normal
   def test_to_ldif
     make_temporary_group do |group,|
       assert_to_ldif(group)
@@ -16,7 +23,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_save_with_changes
     make_temporary_user do |user, password|
       user.cn += "!!!"

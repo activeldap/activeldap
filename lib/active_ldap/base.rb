@@ -833,6 +833,10 @@ module ActiveLdap
       XML.new(dn, normalize_data(@data), schema).to_s(options)
     end
 
+    def to_s
+      to_ldif
+    end
+
     def have_attribute?(name, except=[])
       real_name = to_real_attribute_name(name)
       real_name and !except.include?(real_name)
