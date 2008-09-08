@@ -34,7 +34,11 @@ module ActiveLdap
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
 
-        _attr, value, _prefix = split_search_value(value)
+        _attr = nil
+        _prefix = nil
+        if attr.nil? or attr == dn_attribute
+          _attr, value, _prefix = split_search_value(value)
+        end
         attr ||= _attr || ensure_search_attribute
         prefix ||= _prefix
         filter ||= [attr, value]

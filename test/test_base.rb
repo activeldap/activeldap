@@ -6,13 +6,29 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_search_value_with_no_dn_attribute
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        options = {:attribute => "seeAlso", :value => user2.dn}
+        assert_equal([],
+                     user1.class.find(:all, options).collect(&:dn))
+
+        user1.see_also = user2.dn
+        user1.save!
+
+        assert_equal([user1.dn],
+                     user1.class.find(:all, options).collect(&:dn))
+      end
+    end
+  end
+
+  priority :normal
   def test_to_s
     make_temporary_group do |group,|
       assert_equal(group.to_s, group.to_ldif)
     end
   end
 
-  priority :normal
   def test_to_ldif
     make_temporary_group do |group,|
       assert_to_ldif(group)
