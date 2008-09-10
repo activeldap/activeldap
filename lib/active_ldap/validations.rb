@@ -129,6 +129,8 @@ module ActiveLdap
           real_name = to_real_attribute_name(required_attribute.name, true)
           raise UnknownAttribute.new(required_attribute) if real_name.nil?
 
+          next if required_attribute.read_only?
+
           value = @data[real_name] || []
           next unless self.class.blank_value?(value)
 
