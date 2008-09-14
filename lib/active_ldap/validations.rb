@@ -162,7 +162,7 @@ module ActiveLdap
     def validate_ldap_values
       entry_attribute.schemata.each do |name, attribute|
         value = self[name]
-        next if value.nil?
+        next if value.blank?
         validate_ldap_value(attribute, name, value)
       end
     end

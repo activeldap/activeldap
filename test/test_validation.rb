@@ -6,6 +6,24 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_not_validate_empty_string
+    make_temporary_user do |user,|
+      assert(user.valid?)
+      user.uid_number = ""
+      assert(!user.valid?)
+      if ActiveLdap.get_text_supported?
+        format = _("%{fn} is required attribute by objectClass '%s'")
+        format = format % {:fn => la_("uidNumber")}
+        blank_message = format % loc_("posixAccount")
+      else
+        blank_message = "objectClass is required attribute by " +
+          "objectClass 'posixAccount'"
+      end
+      assert_equal([blank_message], user.errors.full_messages)
+    end
+  end
+
+  priority :normal
   def test_validate_excluded_classes
     make_temporary_user do |user,|
       user.save
@@ -25,7 +43,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_valid_subtype_and_single_value
     make_temporary_user do |user, password|
       user.display_name = [{"lang-ja" => ["ユーザ"]},
