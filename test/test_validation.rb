@@ -11,14 +11,8 @@ class TestValidation < Test::Unit::TestCase
       assert(user.valid?)
       user.uid_number = ""
       assert(!user.valid?)
-      if ActiveLdap.get_text_supported?
-        format = _("%{fn} is required attribute by objectClass '%s'")
-        format = format % {:fn => la_("uidNumber")}
-        blank_message = format % loc_("posixAccount")
-      else
-        blank_message = "objectClass is required attribute by " +
-          "objectClass 'posixAccount'"
-      end
+      format = _("is required attribute by objectClass '%s'")
+      blank_message = la_("uidNumber") + ' ' + (format % loc_("posixAccount"))
       assert_equal([blank_message], user.errors.full_messages)
     end
   end
@@ -31,14 +25,10 @@ class TestValidation < Test::Unit::TestCase
       assert(user.save)
       user.class.excluded_classes = ['person']
       assert(!user.save)
-      if ActiveLdap.get_text_supported?
-        format = n_("%{fn} has excluded value: %s",
-                    "%{fn} has excluded values: %s",
-                    1) % {:fn => la_("objectClass")}
-        message = format % loc_("person")
-      else
-        message = "objectClass has excluded value: person"
-      end
+      format = n_("has excluded value: %s",
+                  "has excluded values: %s",
+                  1)
+      message = la_("objectClass") + ' ' + (format % loc_("person"))
       assert_equal([message], user.errors.full_messages)
     end
   end
@@ -106,12 +96,8 @@ class TestValidation < Test::Unit::TestCase
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
     assert(!ou.save)
-    if ActiveLdap.get_text_supported?
-      format = _("%{fn} is duplicated: %s") % {:fn => la_("DN")}
-    else
-      format = "Dn " + _("is duplicated: %s")
-    end
-    assert_equal([format % ou.dn], ou.errors.full_messages)
+    message = la_("DN") + ' ' + (_("is duplicated: %s") % ou.dn)
+    assert_equal([message], ou.errors.full_messages)
   end
 
   def test_save!
@@ -123,6 +109,9 @@ class TestValidation < Test::Unit::TestCase
       end
 
       @group_class.validates_presence_of(:description)
+      def @group_class.name
+        "Group"
+      end
       assert_raises(ActiveLdap::EntryInvalid) do
         group.save!
       end
@@ -138,6 +127,9 @@ class TestValidation < Test::Unit::TestCase
       assert_equal([], group.errors.to_a)
 
       @group_class.validates_presence_of(:description)
+      def @group_class.name
+        "Group"
+      end
       assert(!group.valid?)
       assert(group.errors.invalid?(:description))
       assert_equal(1, group.errors.size)
@@ -150,22 +142,13 @@ class TestValidation < Test::Unit::TestCase
     assert_not_nil(syntax_description)
     params = [formatted_value, syntax_description, reason]
     params.unshift(option) if option
-    if ActiveLdap.get_text_supported?
-      if option
-        format = _("%{fn} (%s) has invalid format: %s: required syntax: %s: %s")
-      else
-        format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
-      end
-      format = format % {:fn => la_(name)}
-      assert_equal([format % params], model.errors.full_messages)
+    if option
+      format = _("(%s) has invalid format: %s: required syntax: %s: %s")
     else
-      if option
-        format = _("(%s) has invalid format: %s: required syntax: %s: %s")
-      else
-        format = _("has invalid format: %s: required syntax: %s: %s")
-      end
-      assert_equal(["#{name} #{format % params}"], model.errors.full_messages)
+      format = _("has invalid format: %s: required syntax: %s: %s")
     end
+    message = la_(name) + ' ' + (format % params)
+    assert_equal([message], model.errors.full_messages)
   end
 
   def assert_invalid_see_also_value(invalid_value, value, option=nil)

@@ -77,11 +77,7 @@ module ActiveLdap
     private
     def validate_duplicated_dn_creation
       if id and exist?
-        if ActiveLdap.get_text_supported?
-          format = _("%{fn} is duplicated: %s")
-        else
-          format = _("is duplicated: %s")
-        end
+        format = _("is duplicated: %s")
         errors.add("dn", format % dn)
       end
     end
@@ -101,17 +97,9 @@ module ActiveLdap
       names = unexpected_classes.collect do |object_class|
         self.class.human_object_class_name(object_class)
       end
-      if ActiveLdap.get_text_supported?
-        format = n_("%{fn} has excluded value: %s",
-                    "%{fn} has excluded values: %s",
-                    names.size)
-      else
-        if names.size == 1
-          format = "has excluded value: %s"
-        else
-          format = "has excluded values: %s"
-        end
-      end
+      format = n_("has excluded value: %s",
+                  "has excluded values: %s",
+                  names.size)
       errors.add("objectClass", format % names.join(", "))
     end
 
@@ -139,20 +127,12 @@ module ActiveLdap
             self.class.human_attribute_name(name)
           end
           args = [self.class.human_object_class_name(object_class)]
-          if ActiveLdap.get_text_supported?
-            if aliases.empty?
-              format = _("%{fn} is required attribute by objectClass '%s'")
-            else
-              format = _("%{fn} is required attribute by objectClass " \
-                         "'%s': aliases: %s")
-              args << aliases.join(', ')
-            end
+          if aliases.empty?
+            format = _("is required attribute by objectClass '%s'")
           else
-            format = "is required attribute by objectClass '%s'"
-            unless aliases.empty?
-              format << ": aliases: %s"
-              args << aliases.join(', ')
-            end
+            format = _("is required attribute by objectClass " \
+                       "'%s': aliases: %s")
+            args << aliases.join(', ')
           end
           errors.add(real_name, format % args)
         end
@@ -173,19 +153,10 @@ module ActiveLdap
       params = [self.class.human_readable_format(value),
                 self.class.human_syntax_description(attribute.syntax),
                 failed_reason]
-      if ActiveLdap.get_text_supported?
-        if option
-          format =
-            _("%{fn} (%s) has invalid format: %s: required syntax: %s: %s")
-        else
-          format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
-        end
+      if option
+        format = _("(%s) has invalid format: %s: required syntax: %s: %s")
       else
-        if option
-          format = _("(%s) has invalid format: %s: required syntax: %s: %s")
-        else
-          format = _("has invalid format: %s: required syntax: %s: %s")
-        end
+        format = _("has invalid format: %s: required syntax: %s: %s")
       end
       params.unshift(option) if option
       errors.add(name, format % params)

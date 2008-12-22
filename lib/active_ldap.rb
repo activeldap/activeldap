@@ -939,7 +939,7 @@ end
 
 require_gem_if_need.call("active_record", "activerecord")
 begin
-  require_gem_if_need.call("gettext/active_record", "gettext")
+  require_gem_if_need.call("gettext", "gettext")
 rescue LoadError
 end
 require 'active_ldap/get_text'

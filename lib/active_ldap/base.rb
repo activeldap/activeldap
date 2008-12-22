@@ -439,6 +439,8 @@ module ActiveLdap
       def inspect
         if self == Base
           super
+        elsif abstract_class?
+          "#{super}(abstract)"
         else
           class_names = []
           must = []
@@ -453,6 +455,56 @@ module ActiveLdap
                     "may:<#{inspect_attributes(may)}>"].join(", ")
           "#{super}(#{detail})"
         end
+      end
+
+      def base_class
+        if self == Base
+          self
+        else
+          class_of_active_ldap_descendant(self)
+        end
+      end
+
+      attr_accessor :abstract_class
+      def abstract_class?
+        defined?(@abstract_class) && @abstract_class
+      end
+
+      def class_of_active_ldap_descendant(klass)
+        if klass.superclass == Base or klass.superclass.abstract_class?
+          klass
+        elsif klass.superclass.nil?
+          raise Error, _("%s doesn't belong in a hierarchy descending " \
+                         "from ActiveLdap") % (name || to_s)
+        else
+          class_of_active_ldap_descendant(klass.superclass)
+        end
+      end
+
+      def self_and_descendents_from_active_ldap
+        klass = self
+        classes = [klass]
+        while klass != klass.base_class
+          classes << klass = klass.superclass
+        end
+        classes
+      rescue
+        [self]
+      end
+      alias_method(:self_and_descendents_from_active_record,
+                   :self_and_descendents_from_active_ldap)
+
+      def human_name(options={})
+        defaults = self_and_descendents_from_active_ldap.collect do |klass|
+          if klass.name.blank?
+            nil
+          else
+            :"#{klass.name.underscore}"
+          end
+        end
+        defaults << name.humanize
+        defaults = defaults.compact
+        defaults.first || name || to_s
       end
 
       private
