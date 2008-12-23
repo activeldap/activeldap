@@ -907,6 +907,9 @@
 
 require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   begin
+    if !gem_args.empty? and Kernel.private_method_defined?(:gem)
+      gem gem_name, *gem_args
+    end
     require library_name
   rescue LoadError
     require 'rubygems'
