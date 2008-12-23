@@ -213,10 +213,10 @@ module ActiveLdap
         end
       end
 
-      def log_info(name, runtime, info=nil)
+      def log_info(name, runtime_in_seconds, info=nil)
         return unless @logger
         return unless @logger.debug?
-        message = "LDAP: #{name} (#{'%f' % runtime})"
+        message = "LDAP: #{name} (#{'%.1f' % (runtime_in_seconds * 1000)}ms)"
         @logger.debug(format_log_entry(message, info))
       end
 
