@@ -3,7 +3,7 @@ module ActiveLdap
     module LdapBenchmarking
       def self.included(base)
         base.class_eval do
-          alias_method_chain :render_with_benchmark, :active_ldap_benchmark
+          alias_method_chain :render_with_benchmark, :active_ldap
           if private_method_defined?(:view_runtime)
             alias_method_chain :view_runtime, :active_ldap
           else
@@ -13,12 +13,11 @@ module ActiveLdap
       end
 
       protected
-      def render_with_benchmark_with_active_ldap_benchmark(*args, &block)
+      def render_with_benchmark_with_active_ldap(*args, &block)
         if logger
           ldap_runtime_before_render = ActiveLdap::Base.reset_runtime
         end
-        result = render_with_benchmark_without_active_ldap_benchmark(*args,
-                                                                     &block)
+        result = render_with_benchmark_without_active_ldap(*args, &block)
         if logger
           @ldap_runtime_before_render = ldap_runtime_before_render
           @ldap_runtime_after_render = ActiveLdap::Base.reset_runtime
