@@ -1,1 +1,0 @@
-require 'accept_http_rails_relative_url_root'

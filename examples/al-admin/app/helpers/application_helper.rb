@@ -24,14 +24,12 @@ module ApplicationHelper
     "#{flash_box_div}\n#{javascript_tag(javascript_content)}"
   end
 
-  def switcher(prefix, title, options={}, &proc)
+  def switcher(prefix, title, options={})
     concat(render(:partial => "_switcher/before",
-                  :locals => {:prefix => prefix, :title => title}),
-           proc.binding)
+                  :locals => {:prefix => prefix, :title => title}))
     yield
     concat(render(:partial => "_switcher/after",
-                  :locals => {:prefix => prefix, :options => options}),
-           proc.binding)
+                  :locals => {:prefix => prefix, :options => options}))
   end
 
   def switcher_element(prefix, options={})
