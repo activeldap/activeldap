@@ -1,6 +1,3 @@
-# deprecated. Use rails/init.rb.
-# This will be removed after ActiveLdap 1.0.2 is released.
-
 require_library_or_gem 'active_ldap'
 ActiveLdap::Base.logger ||= RAILS_DEFAULT_LOGGER
 
