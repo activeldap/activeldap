@@ -601,17 +601,13 @@ module ActiveLdap
 
       def log(name, info=nil)
         if block_given?
-          if @logger and @logger.debug?
-            result = nil
-            runtime = Benchmark.realtime {result = yield}
-            @runtime += runtime
-            log_info(name, runtime, info)
-            result
-          else
-            yield
-          end
+          result = nil
+          seconds = Benchmark.realtime {result = yield}
+          @runtime += seconds
+          log_info(name, seconds, info)
+          result
         else
-          log_info(name, info, 0)
+          log_info(name, 0, info)
           nil
         end
       rescue Exception
