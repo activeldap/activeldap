@@ -905,12 +905,12 @@
 # package, and I'd like to see it prove helpful to more people than just myself.
 #
 
-require_gem_if_need = Proc.new do |library_name, gem_name|
+require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   begin
     require library_name
   rescue LoadError
     require 'rubygems'
-    gem gem_name
+    gem gem_name, *gem_args
     require library_name
   end
 end
@@ -939,7 +939,8 @@ end
 
 require_gem_if_need.call("active_record", "activerecord")
 begin
-  require_gem_if_need.call("gettext", "gettext")
+  require_gem_if_need.call("locale")
+  require_gem_if_need.call("gettext", "gettext", ">= 1.94")
 rescue LoadError
 end
 require 'active_ldap/get_text'

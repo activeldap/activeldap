@@ -457,14 +457,6 @@ module ActiveLdap
         end
       end
 
-      def base_class
-        if self == Base
-          self
-        else
-          class_of_active_ldap_descendant(self)
-        end
-      end
-
       attr_accessor :abstract_class
       def abstract_class?
         defined?(@abstract_class) && @abstract_class
