@@ -708,6 +708,7 @@ module ActiveLdap
 
     alias_method(:dn_attribute_of_class, :dn_attribute)
     def dn_attribute
+      ensure_update_dn
       _dn_attribute = @dn_attribute || dn_attribute_of_class
       to_real_attribute_name(_dn_attribute) || _dn_attribute
     end
@@ -964,6 +965,7 @@ module ActiveLdap
 
     alias_method :base_of_class, :base
     def base
+      ensure_update_dn
       [@base, base_of_class].compact.join(",")
     end
 
@@ -1101,6 +1103,8 @@ module ActiveLdap
       @base = nil
       @scope = nil
       @dn = nil
+      @dn_is_base = false
+      @dn_split_value = nil
       @connection ||= nil
       clear_connection_based_cache
     end
@@ -1161,35 +1165,54 @@ module ActiveLdap
     #
     # Set the value of the attribute called by method_missing?
     def set_attribute(name, value)
-      attr = to_real_attribute_name(name)
-      attr, value = update_dn(attr, value) if attr == dn_attribute
-      raise UnknownAttribute.new(name) if attr.nil?
+      real_name = to_real_attribute_name(name)
+      if real_name == dn_attribute
+        real_name, value = register_new_dn_attribute(real_name, value)
+      end
+      raise UnknownAttribute.new(name) if real_name.nil?
 
-      @data[attr] = value
+      @data[real_name] = value
     end
 
-    def update_dn(attr, value)
+    def register_new_dn_attribute(name, value)
       @dn = nil
       @dn_is_base = false
-      return [attr, nil] if value.blank?
+      if value.blank?
+        @dn_split_value = nil
+        [name, nil]
+      else
+        new_name, new_value, raw_new_value, new_bases = split_dn_value(value)
+        @dn_split_value = [new_name, new_value, new_bases]
+        if new_name.nil? and new_value.nil?
+          new_bases[0].to_a[0]
+        else
+          [new_name || name, raw_new_value || value]
+        end
+      end
+    end
 
-      new_dn_attribute, new_value, bases = split_dn_value(value)
-      if new_dn_attribute.nil? and new_value.nil?
+    def update_dn(new_name, new_value, bases)
+      if new_name.nil? and new_value.nil?
         @dn_is_base = true
         @base = nil
         attr, value = bases[0].to_a[0]
         @dn_attribute = attr
       else
-        new_dn_attribute = to_real_attribute_name(new_dn_attribute)
-        if new_dn_attribute
-          value = new_value
-          @base = bases.empty? ? nil : DN.new(*bases).to_s
-          if dn_attribute != new_dn_attribute
-            @dn_attribute = attr = new_dn_attribute
-          end
+        new_name ||= @dn_attribute || dn_attribute_of_class
+        new_name = to_real_attribute_name(new_name)
+        if new_name.nil?
+          new_name = @dn_attribute || dn_attribute_of_class
+          new_name = to_real_attribute_name(new_name)
         end
+        new_bases = bases.empty? ? nil : DN.new(*bases).to_s
+        dn_components = ["#{new_name}=#{new_value}",
+                         new_bases,
+                         base_of_class]
+        dn_components = dn_components.find_all {|component| !component.blank?}
+        DN.parse(dn_components.join(','))
+        @base = new_bases
+        @dn_attribute = new_name
       end
-      [attr, value]
     end
 
     def split_dn_value(value)
@@ -1198,9 +1221,14 @@ module ActiveLdap
         dn_value = value if value.is_a?(DN)
         dn_value ||= DN.parse(value)
       rescue DistinguishedNameInvalid
-        dn_value = DN.parse("#{dn_attribute}=#{value}")
+        begin
+          dn_value = DN.parse("#{dn_attribute}=#{value}")
+        rescue DistinguishedNameInvalid
+          return [nil, value, value, []]
+        end
       end
 
+      val = bases = nil
       begin
         relative_dn_value = dn_value - self.class.parsed_base
         if relative_dn_value.rdns.empty?
@@ -1214,16 +1242,37 @@ module ActiveLdap
       end
 
       dn_attribute_name, dn_attribute_value = val.to_a[0]
-      [dn_attribute_name, dn_attribute_value, bases]
+      escaped_dn_attribute_value = nil
+      unless dn_attribute_value.nil?
+        escaped_dn_attribute_value = DN.escape_value(dn_attribute_value)
+      end
+      [dn_attribute_name, escaped_dn_attribute_value,
+       dn_attribute_value, bases]
+    end
+
+    def need_update_dn?
+      not @dn_split_value.nil?
+    end
+
+    def ensure_update_dn
+      return unless need_update_dn?
+      @mutex.synchronize do
+        if @dn_split_value
+          update_dn(*@dn_split_value)
+          @dn_split_value = nil
+        end
+      end
     end
 
     def compute_dn(escape_dn_value=false)
       return base if @dn_is_base
 
+      ensure_update_dn
       dn_value = id
       if dn_value.nil?
-        raise DistinguishedNameNotSetError.new,
-                _("%s's DN attribute (%s) isn't set") % [self, dn_attribute]
+        format =_("%s's DN attribute (%s) isn't set")
+        message = format % [self.inspect, dn_attribute]
+        raise DistinguishedNameNotSetError.new, message
       end
       dn_value = DN.escape_value(dn_value) if escape_dn_value
       _base = base

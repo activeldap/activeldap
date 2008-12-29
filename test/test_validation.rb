@@ -6,6 +6,20 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_dn_validate
+    make_temporary_user do |user,|
+      user.uid = "="
+      assert(!user.valid?)
+      reason = _("attribute value is missing")
+      invalid_format = _("%s is invalid distinguished name (DN): %s")
+      invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
+      message = _("is invalid: %s") % invalid_message
+      message = "Dn" + " " + message
+      assert_equal([message], user.errors.full_messages)
+    end
+  end
+
+  priority :normal
   def test_not_validate_empty_string
     make_temporary_user do |user,|
       assert(user.valid?)
@@ -17,7 +31,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_validate_excluded_classes
     make_temporary_user do |user,|
       user.save

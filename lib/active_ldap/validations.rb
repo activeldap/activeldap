@@ -34,6 +34,7 @@ module ActiveLdap
         end
 
         validate_on_create :validate_duplicated_dn_creation
+        validate :validate_dn
         validate :validate_excluded_classes
         validate :validate_required_ldap_values
         validate :validate_ldap_values
@@ -80,6 +81,12 @@ module ActiveLdap
         format = _("is duplicated: %s")
         errors.add("dn", format % dn)
       end
+    end
+
+    def validate_dn
+      dn
+    rescue DistinguishedNameInvalid
+      errors.add("dn", _("is invalid: %s") % $!.message)
     end
 
     def validate_excluded_classes
