@@ -6,6 +6,16 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_empty_base_of_class
+    make_temporary_user do |user,|
+      user.class.prefix = ""
+      user.class.base = ""
+      user.base = "dc=net"
+      assert_equal("dc=net", user.base)
+    end
+  end
+
+  priority :normal
   def test_search_value_with_no_dn_attribute
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|
@@ -22,7 +32,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_to_s
     make_temporary_group do |group,|
       assert_equal(group.to_s, group.to_ldif)

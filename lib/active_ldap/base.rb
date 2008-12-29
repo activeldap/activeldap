@@ -966,7 +966,9 @@ module ActiveLdap
     alias_method :base_of_class, :base
     def base
       ensure_update_dn
-      [@base, base_of_class].compact.join(",")
+      [@base, base_of_class].find_all do |component|
+        not component.blank?
+      end.join(",")
     end
 
     undef_method :base=
@@ -1276,7 +1278,7 @@ module ActiveLdap
       end
       dn_value = DN.escape_value(dn_value) if escape_dn_value
       _base = base
-      _base = nil if _base.empty?
+      _base = nil if _base.blank?
       ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
     end
 
