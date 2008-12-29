@@ -1,3 +1,5 @@
+- Add parsing position to DistinguishedNameInvalid error like
+  <NAME=VALUE,INVALID_HERE>@<REST=INPUT>.
 - Support TLS optioins (e.g. CA certification file and so on)
 - Provide FormHelper for LDAP entry's attribute to handle multiple values
   (["foo", "bar", ...]) and option value ({"binary" => "..."},
