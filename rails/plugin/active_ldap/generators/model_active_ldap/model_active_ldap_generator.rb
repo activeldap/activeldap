@@ -54,7 +54,7 @@ class ModelActiveLdapGenerator < Rails::Generator::NamedBase
   end
 
   def default_prefix
-    "ou=#{Inflector.pluralize(Inflector.demodulize(name))}"
+    "ou=#{name.demodulize.pluralize}"
   end
 
   def ldap_mapping(indent='  ')
