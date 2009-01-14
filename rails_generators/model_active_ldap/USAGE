@@ -1,5 +1,5 @@
 Description:
-    The model_activeldap generator creates stubs for a new model.
+    The model_active_ldap generator creates stubs for a new model.
 
     The generator takes a model name as its argument.  The model name may be given in CamelCase or under_score and
     should not be suffixed with 'Model'.
@@ -8,7 +8,7 @@ Description:
     test/fixtures/singular_name.yml. It will not create a migration.
 
 Examples:
-    ./script/generate model_activeldap user
+    ./script/generate model_active_ldap user
     
         This will create a User model:
             Model:      app/models/user.rb
