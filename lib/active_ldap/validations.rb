@@ -77,9 +77,15 @@ module ActiveLdap
 
     private
     def validate_duplicated_dn_creation
-      if id and exist?
+      _dn = nil
+      begin
+        _dn = dn
+      rescue DistinguishedNameInvalid
+        return
+      end
+      if _dn and exist?
         format = _("is duplicated: %s")
-        errors.add("dn", format % dn)
+        errors.add("dn", format % _dn)
       end
     end
 

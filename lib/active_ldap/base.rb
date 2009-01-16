@@ -624,7 +624,6 @@ module ActiveLdap
         raise ArgumentError, format % attributes.inspect
       end
       yield self if block_given?
-      assert_dn_attribute
     end
 
     # Returns true if the +comparison_object+ is the same object, or is of
@@ -1060,7 +1059,6 @@ module ActiveLdap
       self.dn = dn
       self.attributes = attributes
       yield self if block_given?
-      assert_dn_attribute
     end
 
     def instantiate(args)
@@ -1383,13 +1381,6 @@ module ActiveLdap
       end
 
       attributes
-    end
-
-    def assert_dn_attribute
-      unless dn_attribute
-        raise ConfigurationError,
-                _("dn_attribute isn't set for this class: %s") % self.class
-      end
     end
 
     def create_or_update
