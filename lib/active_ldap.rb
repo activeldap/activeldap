@@ -966,6 +966,7 @@ require 'active_ldap/acts/tree'
 
 require 'active_ldap/populate'
 require 'active_ldap/escape'
+require 'active_ldap/user_password'
 require 'active_ldap/helper'
 
 require 'active_ldap/validations'
