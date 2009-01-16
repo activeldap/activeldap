@@ -6,6 +6,21 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_destroy_with_empty_base_of_class
+    make_temporary_user do |user,|
+      base = user.class.base
+      begin
+        user.class.base = ""
+        user.prefix = ""
+        user.base = base
+        user.destroy
+      ensure
+        user.class.base = base
+      end
+    end
+  end
+
+  priority :normal
   def test_empty_base_of_class
     make_temporary_user do |user,|
       user.class.prefix = ""
@@ -15,7 +30,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_search_value_with_no_dn_attribute
     make_temporary_user do |user1,|
       make_temporary_user do |user2,|

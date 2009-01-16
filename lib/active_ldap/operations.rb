@@ -121,7 +121,9 @@ module ActiveLdap
       end
 
       def ensure_base(target)
-        [truncate_base(target),  base].join(',')
+        [truncate_base(target), base].reject do |component|
+          component.blank?
+        end.join(',')
       end
 
       def truncate_base(target)
