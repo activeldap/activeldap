@@ -611,8 +611,12 @@ module ActiveLdap
         end
       end
 
+      UNWRITABLE_MUST_ATTRIBUTES = ["nTSecurityDescriptor"]
       def collect_attributes
-        must = attribute('MUST').collect {|name| @schema.attribute(name)}
+        must = attribute('MUST').reject do |name|
+          UNWRITABLE_MUST_ATTRIBUTES.include?(name)
+        end
+        must = must.collect {|name| @schema.attribute(name)}
         may = attribute('MAY').collect {|name| @schema.attribute(name)}
 
         all_must = must.dup
