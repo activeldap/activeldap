@@ -1,3 +1,5 @@
+- How to support dSCorePropagationData? ignore it?
+  all systemOnly == "TRUE" attribute can be ignored?
 - Add parsing position to DistinguishedNameInvalid error like
   <NAME=VALUE,INVALID_HERE>@<REST=INPUT>.
 - Support TLS optioins (e.g. CA certification file and so on)
