@@ -6,6 +6,15 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_set_dn_with_unnormalized_dn_attribute
+    make_temporary_user do |user,|
+      assert_not_equal("ZZZ", user.cn)
+      user.dn = "CN=ZZZ"
+      assert_equal("ZZZ", user.cn)
+    end
+  end
+
+  priority :normal
   def test_destroy_with_empty_base_of_class
     make_temporary_user do |user,|
       base = user.class.base
@@ -20,7 +29,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_empty_base_of_class
     make_temporary_user do |user,|
       user.class.prefix = ""

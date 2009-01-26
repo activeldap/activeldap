@@ -1184,10 +1184,10 @@ module ActiveLdap
         new_name, new_value, raw_new_value, new_bases = split_dn_value(value)
         @dn_split_value = [new_name, new_value, new_bases]
         if new_name.nil? and new_value.nil?
-          new_bases[0].to_a[0]
-        else
-          [new_name || name, raw_new_value || value]
+          new_name, raw_new_value = new_bases[0].to_a[0]
         end
+        [to_real_attribute_name(new_name) || name,
+         raw_new_value || value]
       end
     end
 
