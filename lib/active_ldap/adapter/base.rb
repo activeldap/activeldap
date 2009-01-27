@@ -167,7 +167,11 @@ module ActiveLdap
         begin
           operation(options) do
             targets.each do |target|
-              yield(target)
+              begin
+                yield(target)
+              rescue LdapError::UnwillingToPerform, LdapError::InsuffifientAccess
+                raise OperationNotPermitted, _("%s: %s") % [$!.message, target]
+              end
             end
           end
         rescue LdapError::NoSuchObject
