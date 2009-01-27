@@ -31,7 +31,8 @@ module ActiveLdap
       #
       # This defines a method for an extension class map its DN key
       # attribute value on to multiple items which reference it by
-      # |:foreign_key| in the other LDAP entry covered by class |:class|.
+      # |:foreign_key| in the other LDAP entry covered by class
+      # |:class_name|.
       #
       # Example:
       #  belongs_to :groups, :class_name => "Group",
