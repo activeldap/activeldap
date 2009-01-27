@@ -2,6 +2,37 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_oid_list_with_just_only_one_oid
+    ou_schema = "( 2.5.6.5 NAME 'organizationalUnit' SUP top STRUCTURAL MUST " +
+      "(ou ) MAY (c $ l $ st $ street $ searchGuide $ businessCategory $ " +
+      "postalAddress $ postalCode $ postOfficeBox $ " +
+      "physicalDeliveryOfficeName $ telephoneNumber $ telexNumber $ " +
+      "teletexTerminalIdentifier $ facsimileTelephoneNumber $ x121Address $ " +
+      "internationalISDNNumber $ registeredAddress $ destinationIndicator $ " +
+      "preferredDeliveryMethod $ seeAlso $ userPassword $ co $ countryCode $ " +
+      "desktopProfile $ defaultGroup $ managedBy $ uPNSuffixes $ gPLink $ " +
+      "gPOptions $ msCOM-UserPartitionSetLink $ thumbnailLogo ) ) "
+
+    expect = {
+      :name => ["organizationalUnit"],
+      :sup => ["top"],
+      :structural => ["TRUE"],
+      :must => %w(ou),
+      :may => %w(c l st street searchGuide businessCategory
+                 postalAddress postalCode postOfficeBox
+                 physicalDeliveryOfficeName telephoneNumber telexNumber
+                 teletexTerminalIdentifier facsimileTelephoneNumber
+                 x121Address internationalISDNNumber registeredAddress
+                 destinationIndicator preferredDeliveryMethod seeAlso
+                 userPassword co countryCode desktopProfile defaultGroup
+                 managedBy uPNSuffixes gPLink gPOptions
+                 msCOM-UserPartitionSetLink thumbnailLogo),
+    }
+    assert_schema(expect, "2.5.6.5", ou_schema)
+    assert_schema(expect, "organizationalUnit", ou_schema)
+  end
+
+  priority :normal
   def test_normalize_attribute_value
     entry = {
       "attributeTypes" =>
@@ -31,7 +62,6 @@ class TestSchema < Test::Unit::TestCase
                                      {"lang-ja" => "co.jp"}]))
   end
 
-  priority :normal
   def test_syntax_validation
     entry = {
       "attributeTypes" =>
