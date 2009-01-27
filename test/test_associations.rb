@@ -243,14 +243,15 @@ class TestAssociations < Test::Unit::TestCase
                              :scope => :sub,
                              :classes => ["posixGroup"]
     assert_raises(ArgumentError) do
-      group_class.has_many :members, :class_name => "User"
+      group_class.has_many :users, :unknown_name => "value"
     end
 
     mod = Module.new
     assert_nothing_raised do
-      group_class.has_many :members, :class => "User", :wrap => "memberUid",
+      group_class.has_many :users, :class_name => "User"
+      group_class.has_many :members, :class => @user_class, :wrap => "memberUid",
                            :extend => mod
-      group_class.has_many :primary_members, :class => "User",
+      group_class.has_many :primary_members, :class => @user_class,
                            :foreign_key => "gidNumber",
                            :primary_key => "gidNumber",
                            :extend => mod
@@ -264,14 +265,16 @@ class TestAssociations < Test::Unit::TestCase
                             :scope => :sub,
                             :classes => ["posixAccount", "person"]
     assert_raises(ArgumentError) do
-      user_class.belongs_to :groups, :class_name => "Group"
+      user_class.belongs_to :groups, :unknown_name => "value"
     end
 
     mod = Module.new
     assert_nothing_raised do
-      user_class.belongs_to :groups, :class => "Group", :many => "memberUid",
+      user_class.belongs_to :string_groups, :class_name => "Group"
+      user_class.belongs_to :groups, :class => @group_class,
+                            :many => "memberUid",
                             :extend => mod
-      user_class.belongs_to :primary_group, :class => "Group",
+      user_class.belongs_to :primary_group, :class => @group_class,
                             :foreign_key => "gidNumber",
                             :primary_key => "gidNumber",
                             :extend => mod

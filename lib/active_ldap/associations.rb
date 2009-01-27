@@ -34,17 +34,18 @@ module ActiveLdap
       # |:foreign_key| in the other LDAP entry covered by class |:class|.
       #
       # Example:
-      #  belongs_to :groups, :class => "Group",
+      #  belongs_to :groups, :class_name => "Group",
       #             :many => "memberUid" # Group#memberUid
       #             # :foreign_key => "uid" # User#uid
       #             # dn attribute value is used by default
-      #  belongs_to :primary_group, :class => "Group",
+      #  belongs_to :primary_group, :class_name => "Group",
       #             :foreign_key => "gidNumber", # User#gidNumber
       #             :primary_key => "gidNumber"  # Group#gidNumber
       #
       def belongs_to(association_id, options={})
         validate_belongs_to_options(options)
-        klass = options[:class] || association_id.to_s.classify
+        klass = options[:class]
+        klass ||= (options[:class_name] || association_id.to_s).classify
         foreign_key = options[:foreign_key]
         primary_key = options[:primary_key]
         many = options[:many]
@@ -89,14 +90,15 @@ module ActiveLdap
       # don't exist in LDAP!
       #
       # Example:
-      #   has_many :primary_members, :class => "User",
+      #   has_many :primary_members, :class_name => "User",
       #            :primary_key => "gidNumber", # User#gidNumber
       #            :foreign_key => "gidNumber"  # Group#gidNumber
-      #   has_many :members, :class => "User",
+      #   has_many :members, :class_name => "User",
       #            :wrap => "memberUid" # Group#memberUid
       def has_many(association_id, options = {})
         validate_has_many_options(options)
-        klass = options[:class] || association_id.to_s.classify
+        klass = options[:class]
+        klass ||= (options[:class_name] || association_id.to_s).classify
         foreign_key = options[:foreign_key] || "#{association_id}_id"
         primary_key = options[:primary_key]
         set_associated_class(association_id, klass)
@@ -149,13 +151,15 @@ module ActiveLdap
         EOM
       end
 
-      VALID_BELONGS_TO_OPTIONS = [:class, :foreign_key, :primary_key, :many,
+      VALID_BELONGS_TO_OPTIONS = [:class, :class_name,
+                                  :foreign_key, :primary_key, :many,
                                   :extend]
       def validate_belongs_to_options(options)
         options.assert_valid_keys(VALID_BELONGS_TO_OPTIONS)
       end
 
-      VALID_HAS_MANY_OPTIONS = [:class, :foreign_key, :primary_key, :wrap,
+      VALID_HAS_MANY_OPTIONS = [:class, :class_name,
+                                :foreign_key, :primary_key, :wrap,
                                 :extend]
       def validate_has_many_options(options)
         options.assert_valid_keys(VALID_HAS_MANY_OPTIONS)
