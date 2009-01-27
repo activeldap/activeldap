@@ -31,14 +31,14 @@ module ActiveLdap
       #
       # This defines a method for an extension class map its DN key
       # attribute value on to multiple items which reference it by
-      # |:foreign_key| in the other LDAP entry covered by class |:class_name|.
+      # |:foreign_key| in the other LDAP entry covered by class |:class|.
       #
       # Example:
-      #  belongs_to :groups, :class_name => "Group",
+      #  belongs_to :groups, :class => "Group",
       #             :many => "memberUid" # Group#memberUid
       #             # :foreign_key => "uid" # User#uid
       #             # dn attribute value is used by default
-      #  belongs_to :primary_group, :class_name => "Group",
+      #  belongs_to :primary_group, :class => "Group",
       #             :foreign_key => "gidNumber", # User#gidNumber
       #             :primary_key => "gidNumber"  # Group#gidNumber
       #
@@ -89,10 +89,10 @@ module ActiveLdap
       # don't exist in LDAP!
       #
       # Example:
-      #   has_many :primary_members, :class_name => "User",
+      #   has_many :primary_members, :class => "User",
       #            :primary_key => "gidNumber", # User#gidNumber
       #            :foreign_key => "gidNumber"  # Group#gidNumber
-      #   has_many :members, :class_name => "User",
+      #   has_many :members, :class => "User",
       #            :wrap => "memberUid" # Group#memberUid
       def has_many(association_id, options = {})
         validate_has_many_options(options)
