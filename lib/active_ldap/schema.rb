@@ -189,7 +189,7 @@ module ActiveLdap
 
     def parse_attributes(str, attributes)
       str.scan(/([A-Z\-_]+)\s+
-                (?:\(\s*([\w\-]+(?:\s+\$\s+[\w\-]+)+)\s*\)|
+                (?:\(\s*(\w[\w\-;]*(?:\s+\$\s+\w[\w\-;]*)*)\s*\)|
                    \(\s*([^\)]*)\s*\)|
                    '([^\']*)'|
                    ((?!#{RESERVED_NAMES_RE})[a-zA-Z][a-zA-Z\d\-;]*)|
