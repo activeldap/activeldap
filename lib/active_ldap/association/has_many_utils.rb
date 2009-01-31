@@ -19,7 +19,13 @@ module ActiveLdap
               target
             end
           end
-          targets = foreign_class.find(requested_targets, find_options)
+          targets = []
+          requested_targets.each do |target|
+            begin
+              targets << foreign_class.find(target, find_options)
+            rescue EntryNotFound
+            end
+          end
         else
           components = requested_targets.collect do |value|
             [foreign_base_key, value]

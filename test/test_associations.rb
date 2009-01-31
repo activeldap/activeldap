@@ -4,6 +4,35 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_has_many_wrap_with_nonexistent_entry
+    @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
+    @user_class.set_associated_class(:references, @group_class)
+    @group_class.belongs_to :related_users, :many => "seeAlso",
+                            :foreign_key => "dn"
+    @group_class.set_associated_class(:related_users, @user_class)
+    make_temporary_user do |user,|
+      make_temporary_group do |group1|
+        make_temporary_group do |group2|
+          user.references = [group1, group2]
+          group3_dn = group2.dn.sub(/cn=(.*?),/, "cn=\\1-nonexistent,")
+          user.see_also += [group3_dn]
+          user.save!
+
+          user = @user_class.find(user.dn)
+          assert_equal([group1.dn, group2.dn, group3_dn],
+                       user.see_also.collect(&:to_s))
+          assert_equal([group1.dn, group2.dn, group3_dn],
+                       user.references.collect(&:dn))
+          assert_equal([group1.gid_number, group2.gid_number, nil],
+                       user.references.collect(&:gid_number))
+          assert_equal([false, false, true],
+                       user.references.collect(&:new_entry?))
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_has_many_wrap_with_dn_value
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)
@@ -42,7 +71,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_belongs_to_many_with_dn_value
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)
