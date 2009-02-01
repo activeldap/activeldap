@@ -6,6 +6,15 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_set_attribute_to_invalid_dn_attribute_value_object
+    user = @user_class.new("=")
+    assert_nothing_raised do
+      user.uid_number = 11111
+    end
+    assert_equal(11111, user.uid_number)
+  end
+
+  priority :normal
   def test_dn_validate_on_new
     user = @user_class.new("=")
     assert(!user.valid?)
@@ -18,7 +27,6 @@ class TestValidation < Test::Unit::TestCase
                  user.errors.full_messages.find_all {|m| /DN/ =~ m})
   end
 
-  priority :normal
   def test_dn_validate
     make_temporary_user do |user,|
       user.uid = "="

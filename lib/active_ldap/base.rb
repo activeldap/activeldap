@@ -1166,7 +1166,14 @@ module ActiveLdap
     # Set the value of the attribute called by method_missing?
     def set_attribute(name, value)
       real_name = to_real_attribute_name(name)
-      if real_name == dn_attribute
+      _dn_attribute = nil
+      valid_dn_attribute = true
+      begin
+        _dn_attribute = dn_attribute
+      rescue DistinguishedNameInvalid
+        valid_dn_attribute = false
+      end
+      if valid_dn_attribute and real_name == _dn_attribute
         real_name, value = register_new_dn_attribute(real_name, value)
       end
       raise UnknownAttribute.new(name) if real_name.nil?
