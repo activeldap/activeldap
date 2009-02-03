@@ -126,7 +126,12 @@ module ActiveLdap
     end
 
     def attributes_protected_by_default
-      [dn_attribute, 'objectClass']
+      _dn_attribute = nil
+      begin
+        _dn_attribute = dn_attribute
+      rescue DistinguishedNameInvalid
+      end
+      [_dn_attribute, 'objectClass'].compact
     end
 
     def normalize_attribute_name(name)
