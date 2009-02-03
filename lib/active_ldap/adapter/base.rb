@@ -202,7 +202,11 @@ module ActiveLdap
       def modify(dn, entries, options={})
         begin
           operation(options) do
-            yield(dn, entries)
+            begin
+              yield(dn, entries)
+            rescue LdapError::UnwillingToPerform, LdapError::InsufficientAccess
+              raise OperationNotPermitted, _("%s: %s") % [$!.message, target]
+            end
           end
         rescue LdapError::UndefinedType
           raise
