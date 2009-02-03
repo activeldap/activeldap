@@ -87,7 +87,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
           assert_not_equal(group1.connection, user.connection)
           assert_equal(user.groups[0].connection, user.connection)
 
-          assert_raise(ActiveLdap::LdapError::InsufficientAccess) do
+          assert_raise(ActiveLdap::OperationNotPermitted) do
             user.groups << group2
           end
           assert_equal([group1.cn], user.groups.collect(&:cn))
