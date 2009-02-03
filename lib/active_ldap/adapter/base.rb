@@ -40,8 +40,9 @@ module ActiveLdap
 
       def connect(options={})
         host = options[:host] || @host
-        port = options[:port] || @port
-        method = ensure_method(options[:method] || @method)
+        method = options[:method] || @method || :plain
+        port = options[:port] || @port || ensure_port(method)
+        method = ensure_method(method)
         @disconnected = false
         @connection, @uri, @with_start_tls = yield(host, port, method)
         prepare_connection(options)
@@ -229,6 +230,14 @@ module ActiveLdap
       end
 
       private
+      def ensure_port(method)
+        if method == :ssl
+          URI::LDAPS::DEFAULT_PORT
+        else
+          URI::LDAP::DEFAULT_PORT
+        end
+      end
+
       def prepare_connection(options)
       end
 

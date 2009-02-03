@@ -23,7 +23,7 @@ module ActiveLdap
 
     DEFAULT_CONFIG = {}
     DEFAULT_CONFIG[:host] = '127.0.0.1'
-    DEFAULT_CONFIG[:port] = 389
+    DEFAULT_CONFIG[:port] = nil
     DEFAULT_CONFIG[:method] = :plain  # :ssl, :tls, :plain allowed
 
     DEFAULT_CONFIG[:bind_dn] = nil
