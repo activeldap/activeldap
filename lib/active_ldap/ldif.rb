@@ -31,11 +31,19 @@ module ActiveLdap
       SIZE = 75
 
       module_function
+      def binary_value?(value)
+        if /\A#{Parser::SAFE_STRING}\z/u =~ value
+          false
+        else
+          true
+        end
+      end
+
       def encode(name, value)
         return "#{name}:\n" if value.blank?
         result = "#{name}:"
 
-        if value[-1, 1] == ' ' or /\A#{Parser::SAFE_STRING}\z/u !~ value
+        if value[-1, 1] == ' ' or binary_value?(value)
           result << ":"
           value = [value].pack("m").gsub(/\n/u, '')
         end

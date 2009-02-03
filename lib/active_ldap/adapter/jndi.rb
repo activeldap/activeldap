@@ -153,8 +153,12 @@ module ActiveLdap
           mod_type = ensure_mod_type(type)
           binary = schema.attribute(key).binary?
           attributes.each do |name, values|
+            real_binary = binary
+            if values.any? {|value| Ldif::Attribute.binary_value?(value)}
+              real_binary = true
+            end
             result << JndiConnection::ModifyRecord.new(mod_type, name,
-                                                       values, binary)
+                                                       values, real_binary)
           end
         end
         result
