@@ -169,7 +169,7 @@ module ActiveLdap
             targets.each do |target|
               begin
                 yield(target)
-              rescue LdapError::UnwillingToPerform, LdapError::InsuffifientAccess
+              rescue LdapError::UnwillingToPerform, LdapError::InsufficientAccess
                 raise OperationNotPermitted, _("%s: %s") % [$!.message, target]
               end
             end
