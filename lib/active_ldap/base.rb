@@ -1281,7 +1281,7 @@ module ActiveLdap
         message = format % [self.inspect, dn_attribute]
         raise DistinguishedNameNotSetError.new, message
       end
-      dn_value = DN.escape_value(dn_value) if escape_dn_value
+      dn_value = DN.escape_value(dn_value.to_s) if escape_dn_value
       _base = base
       _base = nil if _base.blank?
       ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")

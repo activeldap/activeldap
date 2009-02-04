@@ -6,6 +6,17 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_non_string_dn_attribute_value
+    user = @user_class.new("uidNumber=10110")
+    user.uid = user.cn = user.sn = "test-user"
+    user.gid_number = 10000
+    user.home_directory = "/home/test-user"
+    assert_nothing_raised do
+      user.save!
+    end
+  end
+
+  priority :normal
   def test_set_dn_with_unnormalized_dn_attribute
     make_temporary_user do |user,|
       assert_not_equal("ZZZ", user.cn)
@@ -14,7 +25,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_destroy_with_empty_base_of_class
     make_temporary_user do |user,|
       base = user.class.base
