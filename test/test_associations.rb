@@ -4,6 +4,19 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_with_invalid_dn_attribute_value
+    make_temporary_user do |user,|
+      make_temporary_group do |group|
+        user.primary_group = group
+        user.uid = "#"
+        assert_nothing_raised do
+          user.primary_group.reload
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_has_many_wrap_with_nonexistent_entry
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)
@@ -32,7 +45,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_has_many_wrap_with_dn_value
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)

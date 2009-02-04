@@ -213,11 +213,14 @@ module ActiveLdap
       conn = @connection
       return conn if conn
 
-      if @dn or
-          (attribute_name_resolvable_without_connection? and
-           get_attribute_before_type_cast(dn_attribute)[1])
-        conn = self.class.active_connections[dn] || retrieve_connection
+      have_dn = !@dn.nil?
+      if !have_dn and attribute_name_resolvable_without_connection?
+        begin
+          have_dn = !get_attribute_before_type_cast(dn_attribute)[1].nil?
+        rescue DistinguishedNameInvalid
+        end
       end
+      conn = self.class.active_connections[dn] || retrieve_connection if have_dn
       conn || self.class.connection
     end
 
