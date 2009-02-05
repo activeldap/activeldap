@@ -6,6 +6,13 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_id_with_invalid_dn_attribute_value
+    user = @user_class.new("#")
+    assert_equal("#", user.uid)
+    assert_equal("#", user.id)
+  end
+
+  priority :normal
   def test_non_string_dn_attribute_value
     user = @user_class.new("uidNumber=10110")
     user.uid = user.cn = user.sn = "test-user"
@@ -16,7 +23,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_set_dn_with_unnormalized_dn_attribute
     make_temporary_user do |user,|
       assert_not_equal("ZZZ", user.cn)

@@ -692,7 +692,7 @@ module ActiveLdap
     end
 
     def id
-      get_attribute(dn_attribute)
+      get_attribute(dn_attribute_with_fallback)
     end
 
     def to_param
@@ -700,7 +700,7 @@ module ActiveLdap
     end
 
     def dn=(value)
-      set_attribute(dn_attribute, value)
+      set_attribute(dn_attribute_with_fallback, value)
       @dn = nil
     end
     alias_method(:id=, :dn=)
@@ -1004,6 +1004,17 @@ module ActiveLdap
     end
 
     private
+    def dn_attribute_with_fallback
+      begin
+        dn_attribute
+      rescue DistinguishedNameInvalid
+        _dn_attribute = @dn_attribute || dn_attribute_of_class
+        _dn_attribute = to_real_attribute_name(_dn_attribute) || _dn_attribute
+        raise if _dn_attribute.nil?
+        _dn_attribute
+      end
+    end
+
     def inspect_attribute(name)
       values = get_attribute(name, true)
       values.collect do |value|

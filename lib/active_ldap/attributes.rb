@@ -128,7 +128,7 @@ module ActiveLdap
     def attributes_protected_by_default
       _dn_attribute = nil
       begin
-        _dn_attribute = dn_attribute
+        _dn_attribute = dn_attribute_with_fallback
       rescue DistinguishedNameInvalid
       end
       [_dn_attribute, 'objectClass'].compact
