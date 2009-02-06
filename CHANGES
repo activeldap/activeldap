@@ -1,3 +1,35 @@
+1.0.2:
+  * Removed Base64 module use.
+  * Improved LDIF parser.
+  * Improved scheme parser.
+  * Supported Base64 in XML serialization.
+  * Supported TLS options.
+  * Supported ActiveRecord 2.2.2.
+  * Supported Ruby on Rails 2.2.2.
+  * Used rails/init.rb and rails_generators/ directory structure convention
+    for Rails and gem. rails/ directory will be removed after 1.0.2 is released.
+  * AL-Admin migrated to Ruby on Rails 2.2.2 form 2.0.2.
+  * Improved ActiveDirectory integration.
+  * Accepted :class_name for belong_to and has_many option.
+  * Improved default port guess.
+  * Bug fixes:
+    * [#4] ModifyRecord#load doesn't operate atomic. [gwarf12]
+    * [#5] to_xml supports :except option. [baptiste.grenier]
+    * [#6] to_xml uses ActiveResource format. [baptiste.grenier]
+    * Out of ranged GeneralizedTime uses Time.at(0) as fallback value.
+      [Richard Nicholas]
+    * ActiveLdap::Base#to_s uses #to_ldif. [Kazuhiro NISHIYAMA]
+    * Fixed excess prefix extraction. [Grzegorz Marszałek]
+    * Skiped read only attribute validation. [しまさわらさん]
+    * Treated "" as empty value. [Ted Lepich]
+    * [#9][#16] Reduced raising when DN value is invalid.
+      [danger1986][Alexey.Chebotar]
+    * [#10][#12] Fixed needless ',' is appeared. [michael.j.konopka]
+    * [#11] Required missing 'active_ldap/user_password'. [michael.j.konopka]
+    * [#13] Returned entries if has_many :wrap has nonexistent entry.
+      [ingersoll]
+    * [#15] Fixed type error on computing DN. [ery.lee]
+
 1.0.1:
   * Fixed GetText integration.
   * Fixed ActiveLdap::Base.find with ActiveLdap::DN. (Reported by Jeremy Pruitt)
