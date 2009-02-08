@@ -21,7 +21,8 @@ excluded_components = %w(.svn .test-result .config doc log tmp
 excluded_suffixes = %w(.help .sqlite3)
 white_list_paths =
   [
-   "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml"
+   "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml",
+   "rails_generators/scaffold_active_ldap/templates/ldap.yml",
   ]
 Find.find(base_dir + File::SEPARATOR) do |target|
   target = truncate_base_dir[target]
