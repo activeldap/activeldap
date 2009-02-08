@@ -1,3 +1,5 @@
+require 'active_ldap'
+
 class ModelActiveLdapGenerator < Rails::Generator::NamedBase
   include ActiveLdap::GetTextSupport
 
