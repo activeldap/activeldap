@@ -21,12 +21,16 @@ ActiveLdap::Base.establish_connection
 config = ActiveLdap::Base.configuration
 
 LDAP_HOST = config[:host]
-LDAP_PORT = config[:port]
+LDAP_METHOD = config[:method]
+if LDAP_METHOD == :ssl
+  LDAP_PORT = config[:port] || URI::LDAPS::DEFAULT_PORT
+else
+  LDAP_PORT = config[:port] || URI::LDAP::DEFAULT_PORT
+end
 LDAP_BASE = config[:base]
 LDAP_PREFIX = options.prefix
 LDAP_USER = config[:bind_dn]
 LDAP_PASSWORD = config[:password]
-LDAP_METHOD = config[:method]
 
 class ALUser < ActiveLdap::Base
   ldap_mapping :dn_attribute => 'uid', :prefix => LDAP_PREFIX,
