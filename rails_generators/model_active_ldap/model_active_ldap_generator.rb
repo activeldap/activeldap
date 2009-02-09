@@ -10,19 +10,16 @@ class ModelActiveLdapGenerator < Rails::Generator::NamedBase
       # Check for class naming collisions.
       m.class_collisions class_path, class_name, "#{class_name}Test"
 
-      # Model, test, and fixture directories.
+      # Model and test directories.
       m.directory File.join('app/models', class_path)
       m.directory File.join('test/unit', class_path)
-      m.directory File.join('test/fixtures', class_path)
 
-      # Model class, unit test, and fixtures.
+      # Model class and unit test.
       m.template('model_active_ldap.rb',
                  File.join('app/models', class_path, "#{file_name}.rb"),
                  :assigns => {:ldap_mapping => ldap_mapping})
       m.template('unit_test.rb',
                  File.join('test/unit', class_path, "#{file_name}_test.rb"))
-      m.template('fixtures.yml',
-                 File.join('test/fixtures', class_path, "#{table_name}.yml"))
     end
   end
 
@@ -33,20 +30,20 @@ class ModelActiveLdapGenerator < Rails::Generator::NamedBase
     opt.on("--dn-attribute=ATTRIBUTE",
            _("Use ATTRIBUTE as default DN attribute for " \
              "instances of this model"),
-           _("(default: %s)") % options[:dn_attribute]) do |attribute|
+           _("(default: %s)") % default_options[:dn_attribute]) do |attribute|
       options[:dn_attribute] = attribute
     end
 
     opt.on("--prefix=PREFIX",
            _("Use PREFIX as prefix for this model"),
-           _("(default: %s)") % default_prefix) do |prefix|
+           _("(default: %s)") % "ou=Names") do |prefix|
       options[:prefix] = prefix
     end
 
     opt.on("--classes=CLASS,CLASS,...",
            Array,
            "Use CLASSES as required objectClass for instances of this model",
-           "(default: %s)" % options[:classes]) do |classes|
+           "(default: %s)" % default_options[:classes]) do |classes|
       options[:classes] = classes
     end
   end
