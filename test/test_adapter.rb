@@ -11,7 +11,10 @@ class TestAdapter < Test::Unit::TestCase
 
   priority :must
   def test_operator
+    assert_parse_filter("(uid=Alice)", ["uid", "=", "Alice"])
     assert_parse_filter("(uid~=Alice)", ["uid", "~=", "Alice"])
+    assert_parse_filter("(uidNumber>=1000)", ["uidNumber", ">=", "1000"])
+    assert_parse_filter("(uidNumber<=1000)", ["uidNumber", "<=", "1000"])
     assert_parse_filter("(&(uid~=Alice)(uid~=Bob))",
                         ["uid", "~=", "Alice", "Bob"])
     assert_parse_filter("(uid~=Alice)", [["uid", "~=", "Alice"]])

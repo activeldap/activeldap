@@ -29,6 +29,7 @@
     * [#13] Returned entries if has_many :wrap has nonexistent entry.
       [ingersoll]
     * [#15] Fixed type error on computing DN. [ery.lee]
+    * ">=" filter operator doesn't work. [id:dicdak]
 
 1.0.1:
   * Fixed GetText integration.

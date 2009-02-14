@@ -405,7 +405,7 @@ module ActiveLdap
           when Hash
             options = value[0]
             value = value[1]
-          when "=", "~=", "<=", "=>"
+          when "=", "~=", "<=", ">="
             options[:operator] = value[0]
             if value.size > 2
               value = value[1..-1]
