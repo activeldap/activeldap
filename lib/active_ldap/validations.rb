@@ -80,7 +80,7 @@ module ActiveLdap
       _dn = nil
       begin
         _dn = dn
-      rescue DistinguishedNameInvalid
+      rescue DistinguishedNameInvalid, DistinguishedNameNotSetError
         return
       end
       if _dn and exist?
@@ -93,6 +93,8 @@ module ActiveLdap
       dn
     rescue DistinguishedNameInvalid
       errors.add("dn", _("is invalid: %s") % $!.message)
+    rescue DistinguishedNameNotSetError
+      errors.add("dn", _("isn't set: %s") % $!.message)
     end
 
     def validate_excluded_classes

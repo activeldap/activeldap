@@ -6,13 +6,18 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_create_invalid
+    user = @user_class.create
+    assert_not_predicate(user.errors, :empty?)
+  end
+
+  priority :normal
   def test_id_with_invalid_dn_attribute_value
     user = @user_class.new("#")
     assert_equal("#", user.uid)
     assert_equal("#", user.id)
   end
 
-  priority :normal
   def test_non_string_dn_attribute_value
     user = @user_class.new("uidNumber=10110")
     user.uid = user.cn = user.sn = "test-user"
