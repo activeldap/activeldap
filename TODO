@@ -1,3 +1,4 @@
+- [1.1.x] ActiveLdap::Base#dn returns ActiveLdap::DN. [#23932] [Marc Dequènes]
 - How to support dSCorePropagationData? ignore it?
   all systemOnly == "TRUE" attribute can be ignored?
 - Add parsing position to DistinguishedNameInvalid error like
