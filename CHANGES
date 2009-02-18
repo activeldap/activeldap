@@ -30,6 +30,7 @@
       [ingersoll]
     * [#15] Fixed type error on computing DN. [ery.lee]
     * ">=" filter operator doesn't work. [id:dicdak]
+    * [#17] ActiveLdap::Base.create doesn't raise exception. [Alexey.Chebotar]
 
 1.0.1:
   * Fixed GetText integration.
