@@ -93,9 +93,17 @@ class TestSyntax < Test::Unit::TestCase
     assert_type_cast(Time.parse("1994/12/16 10:32:12.345 +09:00"),
                      "19941216103212.345+0900",
                      "Generalized Time")
-    assert_type_cast(Time.parse("1970/01/01 09:00:00 +09:00"),
-                     "19700101090000+0900",
-                     "Generalized Time")
+    begin
+      Time.utc(1601)
+      assert_type_cast(Time.utc(1601, 1, 1, 0, 4, 17),
+                       "16010101000417.0Z",
+                       "Generalized Time")
+    rescue ArgumentError
+      assert_type_cast(Time.at(0),
+                       "16010101000417.0Z",
+                       "Generalized Time")
+    end
+
     begin
       Time.at(-1)
     rescue ArgumentError

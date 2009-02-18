@@ -193,7 +193,9 @@ module ActiveLdap
                         time_zone, Time.now)
             rescue ArgumentError
               raise if year >= 1700
-              raise if $!.message != "argument out of range"
+              out_of_range_messages = ["argument out of range",
+                                       "time out of range"]
+              raise unless out_of_range_messages.include?($!.message)
               Time.at(0)
             rescue RangeError
               raise if year >= 1700
