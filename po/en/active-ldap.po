@@ -1,13 +1,13 @@
-# English translations for Ruby/ActiveLdap package.
-# Copyright (C) 2007 Kouhei Sutou
-# This file is distributed under the same license as the Ruby/ActiveLdap package.
+# English translations for ActiveLdap package.
+# Copyright (C) 2007-2009 Kouhei Sutou
+# This file is distributed under the same license as the ActiveLdap package.
 # Kouhei Sutou <kou@cozmixng.org>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Ruby/ActiveLdap 1.0.2\n"
+"Project-Id-Version: ActiveLdap 1.1.0\n"
 "POT-Creation-Date: 2008-06-17 21:42+0900\n"
-"PO-Revision-Date: 2007-08-19 09:49+0900\n"
+"PO-Revision-Date: 2009-02-25 08:40+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
 "MIME-Version: 1.0\n"
