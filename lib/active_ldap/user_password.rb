@@ -77,7 +77,7 @@ module ActiveLdap
     end
 
     module Salt
-      CHARS = ['.', '/', '0'..'9', 'A'..'Z', 'a'..'z'].collect do |x|
+      CHARS = ['.', '/'] + ['0'..'9', 'A'..'Z', 'a'..'z'].collect do |x|
         x.to_a
       end.flatten
 
