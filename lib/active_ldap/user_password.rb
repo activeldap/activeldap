@@ -1,6 +1,6 @@
 require 'English'
-require 'md5'
-require 'sha1'
+require 'digest/md5'
+require 'digest/sha1'
 
 module ActiveLdap
   module UserPassword
@@ -43,7 +43,7 @@ module ActiveLdap
     end
 
     def md5(password)
-      "{MD5}#{[MD5.md5(password).digest].pack('m').chomp}"
+      "{MD5}#{[Digest::MD5.digest(password)].pack('m').chomp}"
     end
 
     def smd5(password, salt=nil)
@@ -51,7 +51,7 @@ module ActiveLdap
         raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
-      md5_hash_with_salt = "#{MD5.md5(password + salt).digest}#{salt}"
+      md5_hash_with_salt = "#{Digest::MD5.digest(password + salt)}#{salt}"
       "{SMD5}#{[md5_hash_with_salt].pack('m').chomp}"
     end
 
@@ -60,7 +60,7 @@ module ActiveLdap
     end
 
     def sha(password)
-      "{SHA}#{[SHA1.sha1(password).digest].pack('m').chomp}"
+      "{SHA}#{[Digest::SHA1.digest(password)].pack('m').chomp}"
     end
 
     def ssha(password, salt=nil)
@@ -68,7 +68,7 @@ module ActiveLdap
         raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
-      sha1_hash_with_salt = "#{SHA1.sha1(password + salt).digest}#{salt}"
+      sha1_hash_with_salt = "#{Digest::SHA1.digest(password + salt)}#{salt}"
       "{SSHA}#{[sha1_hash_with_salt].pack('m').chomp}"
     end
 
