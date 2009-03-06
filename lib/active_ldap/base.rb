@@ -666,7 +666,7 @@ module ActiveLdap
 
     def attribute_present?(name)
       values = get_attribute(name, true)
-      !values.empty? or values.any? {|x| not (x and x.empty?)}
+      !values.empty? or values.any? {|x| !(x and x.empty?)}
     end
 
     # exist?
