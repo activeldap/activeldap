@@ -164,7 +164,6 @@ module ActiveLdap
       def delete(targets, options={})
         targets = [targets] unless targets.is_a?(Array)
         return if targets.empty?
-        target = nil
         begin
           operation(options) do
             targets.each do |target|

@@ -63,26 +63,26 @@ module ActiveLdap
       end
 
       def add(dn, entries, options={})
-        super do |dn, entries|
-          info = {:dn => dn, :attributes => entries}
-          execute(:add, info, dn, parse_entries(entries))
+        super do |_dn, _entries|
+          info = {:dn => _dn, :attributes => _entries}
+          execute(:add, info, _dn, parse_entries(_entries))
         end
       end
 
       def modify(dn, entries, options={})
-        super do |dn, entries|
-          info = {:dn => dn, :attributes => entries}
-          execute(:modify, info, dn, parse_entries(entries))
+        super do |_dn, _entries|
+          info = {:dn => _dn, :attributes => _entries}
+          execute(:modify, info, _dn, parse_entries(_entries))
         end
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
-        super do |dn, new_rdn, delete_old_rdn, new_superior|
+        super do |_dn, _new_rdn, _delete_old_rdn, _new_superior|
           info = {
-            :name => "modify: RDN", :dn => dn, :new_rdn => new_rdn,
-            :delete_old_rdn => delete_old_rdn,
+            :name => "modify: RDN",
+            :dn => _dn, :new_rdn => _new_rdn, :delete_old_rdn => _delete_old_rdn,
           }
-          execute(:modify_rdn, info, dn, new_rdn, delete_old_rdn)
+          execute(:modify_rdn, info, _dn, _new_rdn, _delete_old_rdn)
         end
       end
 
@@ -134,16 +134,20 @@ module ActiveLdap
       end
 
       def sasl_bind(bind_dn, options={})
-        super do |bind_dn, mechanism, quiet|
-          info = {:name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism}
-          execute(:sasl_bind, info, bind_dn, mechanism, quiet)
+        super do |_bind_dn, mechanism, quiet|
+          info = {
+            :name => "bind: SASL",
+            :dn => _bind_dn,
+            :mechanism => mechanism
+          }
+          execute(:sasl_bind, info, _bind_dn, mechanism, quiet)
         end
       end
 
       def simple_bind(bind_dn, options={})
-        super do |bind_dn, passwd|
-          info = {:name => "bind", :dn => bind_dn}
-          execute(:simple_bind, info, bind_dn, passwd)
+        super do |_bind_dn, password|
+          info = {:name => "bind", :dn => _bind_dn}
+          execute(:simple_bind, info, _bind_dn, password)
         end
       end
 

@@ -97,38 +97,38 @@ module ActiveLdap
       end
 
       def add(dn, entries, options={})
-        super do |dn, entries|
+        super do |_dn, _entries|
           attributes = {}
-          entries.each do |type, key, attrs|
+          _entries.each do |type, key, attrs|
             attrs.each do |name, values|
               attributes[name] = values
             end
           end
-          args = {:dn => dn, :attributes => attributes}
+          args = {:dn => _dn, :attributes => attributes}
           info = args.dup
           execute(:add, info, args)
         end
       end
 
       def modify(dn, entries, options={})
-        super do |dn, entries|
-          info = {:dn => dn, :attributes => entries}
+        super do |_dn, _entries|
+          info = {:dn => _dn, :attributes => _entries}
           execute(:modify, info,
-                  :dn => dn,
-                  :operations => parse_entries(entries))
+                  :dn => _dn,
+                  :operations => parse_entries(_entries))
         end
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
-        super do |dn, new_rdn, delete_old_rdn, new_superior|
+        super do |_dn, _new_rdn, _delete_old_rdn, _new_superior|
           info = {
-            :name => "modify: RDN", :dn => dn, :new_rdn => new_rdn,
-            :delete_old_rdn => delete_old_rdn,
+            :name => "modify: RDN",
+            :dn => _dn, :new_rdn => _new_rdn, :delete_old_rdn => _delete_old_rdn,
           }
           execute(:rename, info,
-                  :olddn => dn,
-                  :newrdn => new_rdn,
-                  :delete_attributes => delete_old_rdn)
+                  :olddn => _dn,
+                  :newrdn => _new_rdn,
+                  :delete_attributes => _delete_old_rdn)
         end
       end
 
@@ -183,12 +183,12 @@ module ActiveLdap
       end
 
       def sasl_bind(bind_dn, options={})
-        super do |bind_dn, mechanism, quiet|
+        super do |_bind_dn, mechanism, quiet|
           normalized_mechanism = mechanism.downcase.gsub(/-/, '_')
           sasl_bind_setup = "sasl_bind_setup_#{normalized_mechanism}"
           next unless respond_to?(sasl_bind_setup, true)
           initial_credential, challenge_response =
-            send(sasl_bind_setup, bind_dn, options)
+            send(sasl_bind_setup, _bind_dn, options)
           args = {
             :method => :sasl,
             :initial_credential => initial_credential,
@@ -197,7 +197,7 @@ module ActiveLdap
           }
           @bound = false
           info = {
-            :name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism,
+            :name => "bind: SASL", :dn => _bind_dn, :mechanism => mechanism,
           }
           execute(:bind, info, args)
           @bound = true
@@ -264,14 +264,14 @@ module ActiveLdap
       end
 
       def simple_bind(bind_dn, options={})
-        super do |bind_dn, passwd|
+        super do |_bind_dn, password|
           args = {
             :method => :simple,
-            :username => bind_dn,
-            :password => passwd,
+            :username => _bind_dn,
+            :password => password,
           }
           @bound = false
-          execute(:bind, {:dn => bind_dn}, args)
+          execute(:bind, {:dn => _bind_dn}, args)
           @bound = true
         end
       end

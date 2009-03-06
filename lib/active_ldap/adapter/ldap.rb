@@ -134,40 +134,40 @@ module ActiveLdap
       end
 
       def add(dn, entries, options={})
-        super do |dn, entries|
+        super do |_dn, _entries|
           controls = options[:controls]
-          attributes = parse_entries(entries)
-          info = {:dn => dn, :attributes => entries}
+          attributes = parse_entries(_entries)
+          info = {:dn => _dn, :attributes => _entries}
           if controls
             info.merge!(:name => :add, :controls => controls)
-            execute(:add_ext, info, dn, attributes, controls, [])
+            execute(:add_ext, info, _dn, attributes, controls, [])
           else
-            execute(:add, info, dn, attributes)
+            execute(:add, info, _dn, attributes)
           end
         end
       end
 
       def modify(dn, entries, options={})
-        super do |dn, entries|
+        super do |_dn, _entries|
           controls = options[:controls]
-          attributes = parse_entries(entries)
-          info = {:dn => dn, :attributes => entries}
+          attributes = parse_entries(_entries)
+          info = {:dn => _dn, :attributes => _entries}
           if controls
             info.merge!(:name => :modify, :controls => controls)
-            execute(:modify_ext, info, dn, attributes, controls, [])
+            execute(:modify_ext, info, _dn, attributes, controls, [])
           else
-            execute(:modify, info, dn, attributes)
+            execute(:modify, info, _dn, attributes)
           end
         end
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
-        super do |dn, new_rdn, delete_old_rdn, new_superior|
+        super do |_dn, _new_rdn, _delete_old_rdn, _new_superior|
           info = {
             :name => "modify: RDN",
-            :dn => dn, :new_rdn => new_rdn, :delete_old_rdn => delete_old_rdn
+            :dn => _dn, :new_rdn => _new_rdn, :delete_old_rdn => _delete_old_rdn
           }
-          execute(:modrdn, info, dn, new_rdn, delete_old_rdn)
+          execute(:modrdn, info, _dn, _new_rdn, _delete_old_rdn)
         end
       end
 
@@ -226,16 +226,16 @@ module ActiveLdap
       end
 
       def sasl_bind(bind_dn, options={})
-        super do |bind_dn, mechanism, quiet|
+        super do |_bind_dn, mechanism, quiet|
           begin
             sasl_quiet = @connection.sasl_quiet
             @connection.sasl_quiet = quiet unless quiet.nil?
-            args = [bind_dn, mechanism]
+            args = [_bind_dn, mechanism]
             if need_credential_sasl_mechanism?(mechanism)
-              args << password(bind_dn, options)
+              args << password(_bind_dn, options)
             end
             info = {
-              :name => "bind: SASL", :dn => bind_dn, :mechanism => mechanism
+              :name => "bind: SASL", :dn => _bind_dn, :mechanism => mechanism
             }
             execute(:sasl_bind, info, *args)
           ensure
@@ -245,8 +245,8 @@ module ActiveLdap
       end
 
       def simple_bind(bind_dn, options={})
-        super do |bind_dn, passwd|
-          execute(:bind, {:dn => bind_dn}, bind_dn, passwd)
+        super do |_bind_dn, password|
+          execute(:bind, {:dn => _bind_dn}, _bind_dn, password)
         end
       end
 
