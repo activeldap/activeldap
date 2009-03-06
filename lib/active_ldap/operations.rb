@@ -64,9 +64,9 @@ module ActiveLdap
         options[:connection] ||= connection
         options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
-          attrs.each do |key, value|
+          attrs.each do |key, _value|
             normalized_attr, normalized_value =
-              normalize_attribute_options(key, value)
+              normalize_attribute_options(key, _value)
             attributes[normalized_attr] ||= []
             attributes[normalized_attr].concat(normalized_value)
           end
@@ -509,9 +509,9 @@ module ActiveLdap
         if dn.is_a?(Array)
           i = -1
           dns = dn
-          dns.collect do |dn|
+          dns.collect do |_dn|
             i += 1
-            update(dn, attributes[i], options)
+            update(_dn, attributes[i], options)
           end
         else
           object = find(dn, options)
