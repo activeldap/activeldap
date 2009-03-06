@@ -791,7 +791,7 @@ EOX
 
   def test_update_all
     make_temporary_user do |user, password|
-      make_temporary_user do |user2, password|
+      make_temporary_user do |user2, password2|
         user2_cn = user2.cn
         new_cn = "New #{user.cn}"
         @user_class.update_all({:cn => new_cn}, user.uid)
@@ -817,7 +817,7 @@ EOX
       new_user = @user_class.update(user.dn, {:cn => new_cn})
       assert_equal(new_cn, new_user.cn)
 
-      make_temporary_user do |user2, password|
+      make_temporary_user do |user2, password2|
         new_sns = ["New SN1", "New SN2"]
         new_cn2 = "New #{user2.cn}"
         new_user, new_user2 = @user_class.update([user.dn, user2.dn],
