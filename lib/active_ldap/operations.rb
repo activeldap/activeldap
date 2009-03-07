@@ -62,7 +62,7 @@ module ActiveLdap
         }
 
         options[:connection] ||= connection
-        options[:connection].search(search_options) do |dn, attrs|
+        values = options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
           attrs.each do |key, _value|
             normalized_attr, normalized_value =
@@ -70,10 +70,10 @@ module ActiveLdap
             attributes[normalized_attr] ||= []
             attributes[normalized_attr].concat(normalized_value)
           end
-          value = [dn, attributes]
-          value = yield(value) if block_given?
-          value
+          [dn, attributes]
         end
+        values = values.collect {|value| yield(value)} if block_given?
+        values
       end
 
       def exist?(dn, options={})
