@@ -576,7 +576,7 @@ module ActiveLdap
       end
 
       def default_prefix
-        if name.empty?
+        if name.blank?
           nil
         else
           "ou=#{name.demodulize.pluralize}"
