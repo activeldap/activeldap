@@ -21,7 +21,6 @@ module ActiveLdap
       }
 
       def connect(options={})
-        @bound = false
         super do |host, port, method|
           config = {
             :host => host,
@@ -41,15 +40,14 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        return if @connection.nil?
-        log("unbind") do
-          @bound = false
-          @connection.close # Net::LDAP doesn't implement unbind.
+        super do
+          log("unbind") do
+            @connection.close # Net::LDAP doesn't implement unbind.
+          end
         end
       end
 
       def bind(options={})
-        @bound = false
         begin
           super
         rescue Net::LDAP::LdapError
@@ -59,14 +57,9 @@ module ActiveLdap
 
       def bind_as_anonymous(options={})
         super do
-          @bound = false
           execute(:bind, {:name => "bind: anonymous"}, {:method => :anonymous})
-          @bound = true
+          true
         end
-      end
-
-      def bound?
-        connecting? and @bound
       end
 
       def search(options={}, &block)
@@ -199,12 +192,11 @@ module ActiveLdap
             :mechanism => mechanism,
             :challenge_response => challenge_response,
           }
-          @bound = false
           info = {
             :name => "bind: SASL", :dn => _bind_dn, :mechanism => mechanism,
           }
           execute(:bind, info, args)
-          @bound = true
+          true
         end
       end
 
@@ -274,9 +266,8 @@ module ActiveLdap
             :username => _bind_dn,
             :password => password,
           }
-          @bound = false
           execute(:bind, {:dn => _bind_dn}, args)
-          @bound = true
+          true
         end
       end
 

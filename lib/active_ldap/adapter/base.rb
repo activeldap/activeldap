@@ -24,6 +24,8 @@ module ActiveLdap
         @runtime = 0
         @connection = nil
         @disconnected = false
+        @bound = false
+        @bind_tried = false
         @entry_attributes = {}
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
@@ -44,6 +46,8 @@ module ActiveLdap
         port = options[:port] || @port || ensure_port(method)
         method = ensure_method(method)
         @disconnected = false
+        @bound = false
+        @bind_tried = false
         @connection, @uri, @with_start_tls = yield(host, port, method)
         prepare_connection(options)
         bind(options)
@@ -53,6 +57,7 @@ module ActiveLdap
         return if @connection.nil?
         unbind(options)
         @connection = @uri = @with_start_tls = nil
+        @disconnected = true
       end
 
       def rebind(options={})
@@ -61,6 +66,8 @@ module ActiveLdap
       end
 
       def bind(options={})
+        @bind_tried = true
+
         bind_dn = options[:bind_dn] || @bind_dn
         try_sasl = options.has_key?(:try_sasl) ? options[:try_sasl] : @try_sasl
         if options.has_key?(:allow_anonymous)
@@ -86,7 +93,13 @@ module ActiveLdap
           raise AuthenticationError, message
         end
 
-        bound?
+        @bound = true
+        @bound
+      end
+
+      def unbind(options={})
+        yield if @bind_tried or bound?
+        @bind_tried = @bound = false
       end
 
       def bind_as_anonymous(options={})
@@ -97,6 +110,10 @@ module ActiveLdap
 
       def connecting?
         !@connection.nil? and !@disconnected
+      end
+
+      def bound?
+        connecting? and @bound
       end
 
       def schema(options={})
@@ -318,8 +335,7 @@ module ActiveLdap
         sasl_mechanisms.each do |mechanism|
           next unless mechanisms.include?(mechanism)
           operation(options) do
-            yield(bind_dn, mechanism, sasl_quiet)
-            return true if bound?
+            return true if yield(bind_dn, mechanism, sasl_quiet)
           end
         end
         false
@@ -344,7 +360,6 @@ module ActiveLdap
         begin
           operation(options) do
             yield(bind_dn, passwd)
-            bound?
           end
         rescue LdapError::InvalidDnSyntax
           raise DistinguishedNameInvalid.new(bind_dn)

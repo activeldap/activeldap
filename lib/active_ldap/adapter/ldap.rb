@@ -61,8 +61,9 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        return if @connection.nil?
-        execute(:unbind)
+        super do
+          execute(:unbind)
+        end
       end
 
       def bind(options={})
@@ -76,10 +77,6 @@ module ActiveLdap
           execute(:bind, :name => "bind: anonymous")
           true
         end
-      end
-
-      def bound?
-        connecting? and @connection.bound?
       end
 
       def search(options={}, &block)
@@ -237,6 +234,7 @@ module ActiveLdap
               :name => "bind: SASL", :dn => _bind_dn, :mechanism => mechanism
             }
             execute(:sasl_bind, info, *args)
+            true
           ensure
             @connection.sasl_quiet = sasl_quiet
           end
@@ -246,6 +244,7 @@ module ActiveLdap
       def simple_bind(bind_dn, options={})
         super do |_bind_dn, password|
           execute(:bind, {:dn => _bind_dn}, _bind_dn, password)
+          true
         end
       end
 
