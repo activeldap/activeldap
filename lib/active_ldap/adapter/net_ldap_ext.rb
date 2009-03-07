@@ -18,12 +18,6 @@ module Net
       def original_attribute_names
         @original_attribute_names.compact.uniq
       end
-
-      def each_attribute
-        attribute_names.sort_by {|name| name.to_s}.each do |name|
-          yield name, self[name]
-        end
-      end
     end
   end
 end
