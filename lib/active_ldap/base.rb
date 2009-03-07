@@ -563,7 +563,7 @@ module ActiveLdap
       end
 
       def default_dn_attribute
-        if name.empty?
+        if name.blank?
           dn_attribute = nil
           parent_class = ancestors[1]
           if parent_class.respond_to?(:dn_attribute)
