@@ -128,7 +128,7 @@ module ActiveLdap
       end
 
       def read_external_file
-        uri_string = @scanner.scan(URI::REGEXP::ABS_URI)
+        uri_string = @scanner.scan(URI::ABS_URI)
         raise uri_is_missing if uri_string.nil?
         uri = nil
         begin
@@ -543,7 +543,7 @@ module ActiveLdap
         _consumed_source = consumed_source
         return 1 if _consumed_source.empty?
 
-        n = _consumed_source.to_a.size
+        n = _consumed_source.lines.count
         n += 1 if _consumed_source[-1, 1] == "\n"
         n
       end
@@ -570,7 +570,7 @@ module ActiveLdap
       end
 
       def consumed_source
-        @source[0,  position]
+        @source[0, position]
       end
     end
 
