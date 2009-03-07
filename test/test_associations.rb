@@ -270,7 +270,7 @@ class TestAssociations < Test::Unit::TestCase
           group.members = [user1]
           assert_equal([user1.uid].sort,
                        group.members.collect {|x| x.uid}.sort)
-          assert_equal([user1.uid].sort, group.member_uid.sort)
+          assert_equal(user1.uid, group.member_uid)
           assert_equal(gid_number1, user1.gid_number.to_i)
         end
       end
@@ -452,7 +452,7 @@ class TestAssociations < Test::Unit::TestCase
           group.members << user1
           assert_equal([user1.uid].sort,
                        group.members.collect {|x| x.uid}.sort)
-          assert_equal([user1.uid].sort, group.member_uid.sort)
+          assert_equal(user1.uid, group.member_uid)
           assert_equal(gid_number1, user1.gid_number.to_i)
 
           assert_equal(gid_number2, user2.gid_number.to_i)
