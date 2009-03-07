@@ -556,7 +556,7 @@ module ActiveLdap
       end
 
       def position
-        @scanner.pos - (@sub_scanner.string.length - @sub_scanner.pos)
+        @scanner.pos - (@sub_scanner.string.bytesize - @sub_scanner.pos)
       end
 
       private
