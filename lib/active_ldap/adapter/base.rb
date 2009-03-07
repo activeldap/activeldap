@@ -483,7 +483,11 @@ module ActiveLdap
             s
           else
             s = "*" if s == "**"
-            "\\%02X" % s[0]
+            if s.respond_to?(:getbyte)
+              "\\%02X" % s.getbyte(0)
+            else
+              "\\%02X" % s[0]
+            end
           end
         end
       end
