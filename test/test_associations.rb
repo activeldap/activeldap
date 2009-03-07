@@ -225,12 +225,12 @@ class TestAssociations < Test::Unit::TestCase
     mod = Module.new
     mod.__send__(:mattr_accessor, :called)
     mod.__send__(:define_method, :replace) do |entries|
-      super
+      super(entries)
       mod.called = true
     end
     mod.called = false
 
-    @group_class.send(:undef_method, :members, :members=)
+    @group_class.send(:undef_method, :members, :members=, :__make_members)
     @group_class.has_many :members, :wrap => "memberUid",
                           :extend => mod
     @group_class.set_associated_class(:members, @user_class)
