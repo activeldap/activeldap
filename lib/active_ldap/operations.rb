@@ -72,7 +72,7 @@ module ActiveLdap
           end
           [dn, attributes]
         end
-        values = values.collect {|value| yield(value)} if block_given?
+        values = values.collect {|_value| yield(_value)} if block_given?
         values
       end
 
