@@ -61,10 +61,8 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        return unless bound?
-        operation(options) do
-          execute(:unbind)
-        end
+        return if @connection.nil?
+        execute(:unbind)
       end
 
       def bind(options={})

@@ -41,7 +41,11 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        log("unbind") {@bound = false}
+        return if @connection.nil?
+        log("unbind") do
+          @bound = false
+          @connection.close # Net::LDAP doesn't implement unbind.
+        end
       end
 
       def bind(options={})
