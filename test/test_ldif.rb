@@ -1212,6 +1212,7 @@ uid: hjensen
 telephonenumber: +1 408 555 1212
 jpegphoto:< file://#{jpeg_photo_path}
 EOL
+    set_encoding(ldif_source, "utf-8")
 
     jpeg_photo_attribute = "jpegphoto:: "
     value = [jpeg_photo].pack("m").gsub(/\n/, '')
@@ -1295,6 +1296,7 @@ sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 EOL
+    set_encoding(ldif_source, "utf-8")
 
     record1 = {
       "dn" => "ou=営業部,o=Airius",
@@ -1422,6 +1424,7 @@ sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 EOL
+    set_encoding(ldif_source, "utf-8")
 
     assert_ldif_to_s(<<-EOL, ldif_source)
 version: 1
@@ -1833,12 +1836,15 @@ EOL
 
   private
   def assert_ldif(version, records, ldif_source)
+    encoding = ldif_source.encoding if ldif_source.respond_to?(:encoding)
     ldif = ActiveLdap::Ldif.parse(ldif_source)
     assert_equal(version, ldif.version)
     assert_equal(records,
                  ldif.records.collect {|record| record.to_hash})
 
-    reparsed_ldif = ActiveLdap::Ldif.parse(ldif.to_s)
+    regenerated_ldif = ldif.to_s
+    set_encoding(regenerated_ldif, encoding)
+    reparsed_ldif = ActiveLdap::Ldif.parse(regenerated_ldif)
     assert_equal(ldif, reparsed_ldif)
 
     ldif
@@ -1868,5 +1874,9 @@ EOL
   def assert_ldif_to_s(expected_ldif_source, original_ldif_source)
     ldif = ActiveLdap::Ldif.parse(original_ldif_source)
     assert_equal(expected_ldif_source, ldif.to_s)
+  end
+
+  def set_encoding(string, encoding)
+    string.force_encoding("utf-8") if string.respond_to?(:force_encoding)
   end
 end

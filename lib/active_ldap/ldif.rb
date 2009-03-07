@@ -32,7 +32,10 @@ module ActiveLdap
 
       module_function
       def binary_value?(value)
-        if /\A#{Parser::SAFE_STRING}\z/u =~ value
+        if value.respond_to?(:encoding)
+          return true if value.encoding == Encoding.find("ascii-8bit")
+        end
+        if /\A#{Parser::SAFE_STRING}\z/ =~ value
           false
         else
           true
@@ -45,7 +48,7 @@ module ActiveLdap
 
         if value[-1, 1] == ' ' or binary_value?(value)
           result << ":"
-          value = [value].pack("m").gsub(/\n/u, '')
+          value = [value].pack("m").gsub(/\n/, '')
         end
         result << " "
 
@@ -61,7 +64,7 @@ module ActiveLdap
         result << "#{first_line_value}\n"
         return result if rest_value.nil?
 
-        rest_value.scan(/.{1,#{SIZE - 1}}/u).each do |line|
+        rest_value.scan(/.{1,#{SIZE - 1}}/).each do |line| # FIXME
           result << " #{line}\n"
         end
         result
@@ -95,19 +98,19 @@ module ActiveLdap
         @source = source
       end
 
-      ATTRIBUTE_TYPE_CHARS = /[a-zA-Z][a-zA-Z0-9\-]*/u
-      SAFE_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x7F]/u
-      SAFE_INIT_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x1F\x21-\x39\x3B\x3D-\x7F]/u
-      SAFE_STRING = /#{SAFE_INIT_CHAR}#{SAFE_CHAR}*/u
-      FILL = / */u
+      ATTRIBUTE_TYPE_CHARS = /[a-zA-Z][a-zA-Z0-9\-]*/
+      SAFE_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x7F]/
+      SAFE_INIT_CHAR = /[\x01-\x09\x0B-\x0C\x0E-\x1F\x21-\x39\x3B\x3D-\x7F]/
+      SAFE_STRING = /#{SAFE_INIT_CHAR}#{SAFE_CHAR}*/
+      FILL = / */
       def parse
         return @ldif if @ldif
 
         @scanner = Scanner.new(@source)
-        raise version_spec_is_missing unless @scanner.scan(/version:/u)
+        raise version_spec_is_missing unless @scanner.scan(/version:/)
         @scanner.scan(FILL)
 
-        version = @scanner.scan(/\d+/u)
+        version = @scanner.scan(/\d+/)
         raise version_number_is_missing if version.nil?
 
         version = Integer(version)
@@ -122,9 +125,15 @@ module ActiveLdap
 
       private
       def read_base64_value
-        value = @scanner.scan(/[a-zA-Z0-9\+\/=]+/u)
+        value = @scanner.scan(/[a-zA-Z0-9\+\/=]+/)
         return nil if value.nil?
-        value.unpack("m")[0].chomp
+        encoding = value.encoding if value.respond_to?(:encoding)
+        value = value.unpack("m")[0].chomp
+        if value.respond_to?(:force_encoding)
+          value.force_encoding(encoding)
+          value.force_encoding("ascii-8bit") unless value.valid_encoding?
+        end
+        value
       end
 
       def read_external_file
@@ -138,7 +147,7 @@ module ActiveLdap
         end
 
         if uri.scheme == "file"
-          File.open(uri.path, "rb").read
+          File.open(uri.path, "rb") {|file| file.read}
         else
           uri.read
         end
@@ -196,7 +205,7 @@ module ActiveLdap
 
       def parse_options
         options = []
-        while @scanner.scan(/;/u)
+        while @scanner.scan(/;/)
           option = @scanner.scan(ATTRIBUTE_TYPE_CHARS)
           raise option_is_missing if option.nil?
           options << option
@@ -205,11 +214,11 @@ module ActiveLdap
       end
 
       def parse_attribute_value(accept_external_file=true)
-        raise attribute_value_separator_is_missing if @scanner.scan(/:/u).nil?
-        if @scanner.scan(/:/u)
+        raise attribute_value_separator_is_missing if @scanner.scan(/:/).nil?
+        if @scanner.scan(/:/)
           @scanner.scan(FILL)
           read_base64_value
-        elsif accept_external_file and @scanner.scan(/</u)
+        elsif accept_external_file and @scanner.scan(/</)
           @scanner.scan(FILL)
           read_external_file
         else
@@ -219,16 +228,16 @@ module ActiveLdap
       end
 
       def parse_control
-        return nil if @scanner.scan(/control:/u).nil?
+        return nil if @scanner.scan(/control:/).nil?
         @scanner.scan(FILL)
-        type = @scanner.scan(/\d+(?:\.\d+)*/u)
+        type = @scanner.scan(/\d+(?:\.\d+)*/)
         raise control_type_is_missing if type.nil?
         criticality = nil
-        if @scanner.scan(/ +/u)
-          criticality = @scanner.scan(/true|false/u)
+        if @scanner.scan(/ +/)
+          criticality = @scanner.scan(/true|false/)
           raise criticality_is_missing if criticality.nil?
         end
-        value = parse_attribute_value if @scanner.check(/:/u)
+        value = parse_attribute_value if @scanner.check(/:/)
         raise separator_is_missing unless @scanner.scan_separator
         ChangeRecord::Control.new(type, criticality, value)
       end
@@ -244,11 +253,11 @@ module ActiveLdap
       end
 
       def parse_change_type
-        return nil unless @scanner.scan(/changetype:/u)
+        return nil unless @scanner.scan(/changetype:/)
         @scanner.scan(FILL)
         type = @scanner.check(ATTRIBUTE_TYPE_CHARS)
         raise change_type_value_is_missing if type.nil?
-        unless @scanner.scan(/add|delete|modrdn|moddn|modify/u)
+        unless @scanner.scan(/add|delete|modrdn|moddn|modify/)
           raise unknown_change_type(type)
         end
 
@@ -257,20 +266,20 @@ module ActiveLdap
       end
 
       def parse_modify_name_record(klass, dn, controls)
-        raise new_rdn_mark_is_missing unless @scanner.scan(/newrdn\b/u)
+        raise new_rdn_mark_is_missing unless @scanner.scan(/newrdn\b/)
         new_rdn = parse_attribute_value(false)
         raise new_rdn_value_is_missing if new_rdn.nil?
         raise separator_is_missing unless @scanner.scan_separator
 
-        unless @scanner.scan(/deleteoldrdn:/u)
+        unless @scanner.scan(/deleteoldrdn:/)
           raise delete_old_rdn_mark_is_missing
         end
         @scanner.scan(FILL)
-        delete_old_rdn = @scanner.scan(/[01]/u)
+        delete_old_rdn = @scanner.scan(/[01]/)
         raise delete_old_rdn_value_is_missing if delete_old_rdn.nil?
         raise separator_is_missing unless @scanner.scan_separator
 
-        if @scanner.scan(/newsuperior\b/u)
+        if @scanner.scan(/newsuperior\b/)
           @scanner.scan(FILL)
           new_superior = parse_attribute_value(false)
           raise new_superior_value_is_missing if new_superior.nil?
@@ -281,16 +290,16 @@ module ActiveLdap
       end
 
       def parse_modify_spec
-        return nil unless @scanner.check(/(#{ATTRIBUTE_TYPE_CHARS}):/u)
+        return nil unless @scanner.check(/(#{ATTRIBUTE_TYPE_CHARS}):/)
         type = @scanner[1]
-        unless @scanner.scan(/(?:add|delete|replace):/u)
+        unless @scanner.scan(/(?:add|delete|replace):/)
           raise unknown_modify_type(type)
         end
         @scanner.scan(FILL)
         attribute, options = parse_attribute_description
         raise separator_is_missing unless @scanner.scan_separator
-        attributes = parse_attributes {@scanner.check(/-/u)}
-        raise modify_spec_separator_is_missing unless @scanner.scan(/-/u)
+        attributes = parse_attributes {@scanner.check(/-/)}
+        raise modify_spec_separator_is_missing unless @scanner.scan(/-/)
         raise separator_is_missing unless @scanner.scan_separator
         [type, attribute, options, attributes]
       end
@@ -335,18 +344,18 @@ module ActiveLdap
       end
 
       def parse_record
-        raise dn_mark_is_missing unless @scanner.scan(/dn:/u)
-        if @scanner.scan(/:/u)
+        raise dn_mark_is_missing unless @scanner.scan(/dn:/)
+        if @scanner.scan(/:/)
           @scanner.scan(FILL)
           dn = read_base64_value
           raise dn_is_missing if dn.nil?
           dn = parse_dn(dn)
         else
           @scanner.scan(FILL)
-          dn = @scanner.scan(/#{SAFE_STRING}$/u)
+          dn = @scanner.scan(/#{SAFE_STRING}$/)
           if dn.nil?
             partial_dn = @scanner.scan(SAFE_STRING)
-            raise dn_has_invalid_character(@scanner.check(/./u)) if partial_dn
+            raise dn_has_invalid_character(@scanner.check(/./)) if partial_dn
             raise dn_is_missing
           end
           dn = parse_dn(dn)
@@ -485,8 +494,8 @@ module ActiveLdap
     end
 
     class Scanner
-      SEPARATOR = /(?:\r\n|\n)/u
-      SEPARATORS = /(?:(?:^#.*)?#{SEPARATOR})+/u
+      SEPARATOR = /(?:\r\n|\n)/
+      SEPARATORS = /(?:(?:^#.*)?#{SEPARATOR})+/
 
       def initialize(source)
         @source = source
@@ -562,10 +571,10 @@ module ActiveLdap
       private
       def next_segment
         loop do
-          segment = @scanner.scan(/.+(?:#{SEPARATOR} .*)*#{SEPARATOR}?/u)
+          segment = @scanner.scan(/.+(?:#{SEPARATOR} .*)*#{SEPARATOR}?/)
           return @sub_scanner if segment.nil?
           next if segment[0, 1] == "#"
-          return StringScanner.new(segment.gsub(/\r?\n /u, ''))
+          return StringScanner.new(segment.gsub(/\r?\n /, ''))
         end
       end
 
