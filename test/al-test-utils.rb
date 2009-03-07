@@ -80,7 +80,7 @@ module AlTestUtils
     def certificate
       return @@certificate if @@certificate
       if File.exists?(certificate_path)
-        @@certificate = File.read(certificate_path)
+        @@certificate = read_binary_file(certificate_path)
         return @@certificate
       end
 
@@ -123,7 +123,14 @@ module AlTestUtils
     end
 
     def jpeg_photo
-      File.open(jpeg_photo_path, "rb") {|f| f.read}
+      read_binary_file(jpeg_photo_path)
+    end
+
+    def read_binary_file(path)
+      File.open(path, "rb") do |input|
+        input.set_encoding("ascii-8bit") if input.respond_to?(:set_encoding)
+        input.read
+      end
     end
   end
 
