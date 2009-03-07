@@ -187,8 +187,9 @@ module ActiveLdap
       end
 
       def ensure_method(method)
+        normalized_method = method.to_s.downcase
         Method.constants.each do |name|
-          if method.to_s.downcase == name.downcase
+          if normalized_method == name.to_s.downcase
             return Method.const_get(name).new
           end
         end
