@@ -54,7 +54,6 @@ module ActiveLdap
       end
 
       def disconnect!(options={})
-        return if @connection.nil?
         unbind(options)
         @connection = @uri = @with_start_tls = nil
         @disconnected = true
@@ -98,14 +97,12 @@ module ActiveLdap
       end
 
       def unbind(options={})
-        yield if @bind_tried or bound?
+        yield if @connection and (@bind_tried or bound?)
         @bind_tried = @bound = false
       end
 
       def bind_as_anonymous(options={})
-        operation(options) do
-          yield
-        end
+        yield
       end
 
       def connecting?
@@ -334,9 +331,7 @@ module ActiveLdap
         sasl_mechanisms = options[:sasl_mechanisms] || @sasl_mechanisms
         sasl_mechanisms.each do |mechanism|
           next unless mechanisms.include?(mechanism)
-          operation(options) do
-            return true if yield(bind_dn, mechanism, sasl_quiet)
-          end
+          return true if yield(bind_dn, mechanism, sasl_quiet)
         end
         false
       end
@@ -358,9 +353,7 @@ module ActiveLdap
         end
 
         begin
-          operation(options) do
-            yield(bind_dn, passwd)
-          end
+          yield(bind_dn, passwd)
         rescue LdapError::InvalidDnSyntax
           raise DistinguishedNameInvalid.new(bind_dn)
         rescue LdapError::InvalidCredentials
