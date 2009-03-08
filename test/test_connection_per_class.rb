@@ -4,7 +4,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
-  def test_multi_establish_connections_with_association
+  def test_multi_setup_connections_with_association
     make_ou("Sub,ou=Users")
     make_ou("Sub2,ou=Users")
 
@@ -30,7 +30,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
   end
 
   priority :normal
-  def test_multi_establish_connections
+  def test_multi_setup_connections
     make_ou("Sub")
     make_ou("Sub2")
     sub_class = ou_class("ou=Sub")
@@ -46,9 +46,9 @@ class TestConnectionPerClass < Test::Unit::TestCase
     sub2_base = "ou=Sub2,#{current_base}"
     sub2_configuration[:base] = sub2_base
 
-    sub_class.establish_connection(sub_configuration)
+    sub_class.setup_connection(sub_configuration)
     sub_class.prefix = nil
-    sub2_class.establish_connection(sub2_configuration)
+    sub2_class.setup_connection(sub2_configuration)
     sub2_class.prefix = nil
 
     assert_equal([sub_base], sub_class.find(:all).collect(&:dn))
@@ -106,7 +106,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
 
   private
   def connect(klass, config)
-    klass.establish_connection({:adapter => adapter}.merge(config))
+    klass.setup_connection({:adapter => adapter}.merge(config))
     klass.connection.connect
   end
 end

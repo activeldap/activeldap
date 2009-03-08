@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rake test
+rake -s test:all TESTOPTS="$@"

@@ -137,7 +137,7 @@ module AlTestUtils
   module Connection
     def setup
       super
-      ActiveLdap::Base.establish_connection
+      ActiveLdap::Base.setup_connection
     end
 
     def teardown
@@ -160,7 +160,7 @@ module AlTestUtils
 
     def teardown
       if @dumped_data
-        ActiveLdap::Base.establish_connection
+        ActiveLdap::Base.setup_connection
         ActiveLdap::Base.delete_all(nil, :scope => :sub)
         ActiveLdap::Base.load(@dumped_data)
       end

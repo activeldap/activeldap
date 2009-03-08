@@ -81,7 +81,7 @@ module ActiveLdap
           config = adapter
           self.connection = instantiate_adapter(config)
         elsif adapter.nil?
-          raise ConnectionNotEstablished
+          raise ConnectionNotSetup
         else
           establish_connection(adapter)
         end
@@ -115,15 +115,15 @@ module ActiveLdap
       def retrieve_connection
         conn = nil
         name = active_connection_name
-        raise ConnectionNotEstablished unless name
+        raise ConnectionNotSetup unless name
         conn = active_connections[name]
         if conn.nil?
           config = configuration(name)
-          raise ConnectionNotEstablished unless config
+          raise ConnectionNotSetup unless config
           self.connection = config
           conn = active_connections[name]
         end
-        raise ConnectionNotEstablished if conn.nil?
+        raise ConnectionNotSetup if conn.nil?
         conn
       end
 
@@ -141,7 +141,7 @@ module ActiveLdap
         config
       end
 
-      def establish_connection(config=nil)
+      def setup_connection(config=nil)
         config = ensure_configuration(config)
         remove_connection
 
@@ -149,6 +149,15 @@ module ActiveLdap
         key = active_connection_key
         @active_connection_name = key
         define_configuration(key, merge_configuration(config))
+      end
+
+      def establish_connection(config=nil)
+        message =
+          _("ActiveLdap::Connection.establish_connection has been deprecated " \
+            "since 1.1.0. " \
+            "Please use ActiveLdap::Connection.setup_connection instead.")
+        ActiveSupport::Deprecation.warn(message)
+        setup_connection(config)
       end
 
       # Return the schema object
@@ -195,13 +204,22 @@ module ActiveLdap
       end
     end
 
-    def establish_connection(config=nil)
+    def setup_connection(config=nil)
       config = self.class.ensure_configuration(config)
       config = self.class.configuration.merge(config)
       config = self.class.merge_configuration(config, self)
 
       remove_connection
       self.class.define_configuration(dn, config)
+    end
+
+    def establish_connection(config=nil)
+      message =
+        _("ActiveLdap::Connection#establish_connection has been deprecated " \
+          "since 1.1.0. " \
+          "Please use ActiveLdap::Connection#setup_connection instead.")
+      ActiveSupport::Deprecation.warn(message)
+      setup_connection(config)
     end
 
     def remove_connection

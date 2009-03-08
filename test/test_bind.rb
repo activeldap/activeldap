@@ -56,7 +56,7 @@ class TestBind < Test::Unit::TestCase
 
   private
   def connect(config)
-    ActiveLdap::Base.establish_connection(config)
+    ActiveLdap::Base.setup_connection(config)
     ActiveLdap::Base.connection.connect
   end
 end

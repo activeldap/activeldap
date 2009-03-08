@@ -1,3 +1,12 @@
+test_unit_dir = File.dirname(__FILE__) + "/../../../test-unit/lib"
+if File.directory?(test_unit_dir)
+  $LOAD_PATH.unshift(test_unit_dir)
+else
+  require 'rubygems'
+  gem 'test-unit'
+end
+require 'test/unit'
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'

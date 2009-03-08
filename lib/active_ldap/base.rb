@@ -44,6 +44,24 @@ module ActiveLdap
   # Multiple entries become lists.
   # If this isn't read-only then lists become multiple entries, etc.
 
+  class << self
+    include GetTextSupport
+    def const_missing(id)
+      case id
+      when :ConnectionNotEstablished
+        message =
+          _("ActiveLdap::ConnectionNotEstablished has been deprecated " \
+            "since 1.1.0. " \
+            "Please use ActiveLdap::ConnectionNotSetup instead.")
+        ActiveSupport::Deprecation.warn(message)
+        const_set("ConnectionNotEstablished", ConnectionNotSetup)
+        ConnectionNotEstablished
+      else
+        super
+      end
+    end
+  end
+
   class Error < StandardError
     include GetTextSupport
   end
@@ -210,7 +228,7 @@ module ActiveLdap
   class OperationNotPermitted < Error
   end
 
-  class ConnectionNotEstablished < Error
+  class ConnectionNotSetup < Error
   end
 
   class AdapterNotSpecified < Error
@@ -343,11 +361,22 @@ module ActiveLdap
       #   search() requests. Be warned.
       # :retry_on_timeout - whether to reconnect when timeouts occur. Defaults
       #   to true
-      # See lib/configuration.rb for defaults for each option
-      def establish_connection(config=nil)
+      # See lib/active_ldap/configuration.rb for defaults for each option
+      def setup_connection(config=nil)
         super
         ensure_logger
         nil
+      end
+
+      # establish_connection is deprecated since 1.1.0. Please use
+      # setup_connection() instead.
+      def establish_connection(config=nil)
+        message =
+          _("ActiveLdap::Base.establish_connection has been deprecated " \
+            "since 1.1.0. " \
+            "Please use ActiveLdap::Base.setup_connection instead.")
+        ActiveSupport::Deprecation.warn(message)
+        setup_connection(config)
       end
 
       def create(attributes=nil, &block)
@@ -933,7 +962,7 @@ module ActiveLdap
       end
       config = {:bind_dn => dn, :allow_anonymous => false}.merge(config)
       config[:password_block] ||= block if block_given?
-      establish_connection(config)
+      setup_connection(config)
 
       before_connection = @connection
       begin

@@ -23,8 +23,8 @@ pwb = Proc.new do |user|
   ActiveLdap::Command.read_password("[#{user}] Password: ")
 end
 
-ActiveLdap::Base.establish_connection(:password_block => pwb,
-                                      :allow_anonymous => false)
+ActiveLdap::Base.setup_connection(:password_block => pwb,
+                                  :allow_anonymous => false)
 
 unless User.exists?(name)
   $stderr.puts("User #{name} doesn't exist.")
