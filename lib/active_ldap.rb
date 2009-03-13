@@ -948,6 +948,8 @@ rescue LoadError
 end
 require 'active_ldap/get_text'
 
+require 'active_ldap/compatible'
+
 require 'active_ldap/base'
 
 require 'active_ldap/distinguished_name'
