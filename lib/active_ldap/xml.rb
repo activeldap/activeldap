@@ -5,7 +5,7 @@ require 'active_ldap/ldif'
 module ActiveLdap
   class Xml
     class Serializer
-      PRINTABLE_STRING = /[\x20-\x7e\w\s]*/um
+      PRINTABLE_STRING = /[\x20-\x7e\w\s]*/
 
       def initialize(dn, attributes, schema, options={})
         @dn = dn
@@ -64,7 +64,7 @@ module ActiveLdap
             targets.concat(normalize_value(real_value, options))
           end
         else
-          if /\A#{PRINTABLE_STRING}\z/u !~ value
+          if /\A#{PRINTABLE_STRING}\z/ !~ value
             value = [value].pack("m").gsub(/\n/u, '')
             options += ["base64"]
           end
