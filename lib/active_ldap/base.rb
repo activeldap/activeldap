@@ -1093,10 +1093,12 @@ module ActiveLdap
 
     def initialize_by_ldap_data(dn, attributes)
       init_base
-      @dn = Compatible.convert_to_utf8_encoded_object(dn)
+      dn = Compatible.convert_to_utf8_encoded_object(dn)
+      attributes = Compatible.convert_to_utf8_encoded_object(attributes)
+      @dn = dn
       @new_entry = false
       @dn_is_base = false
-      @ldap_data = Compatible.convert_to_utf8_encoded_object(attributes)
+      @ldap_data = attributes
       classes, attributes = extract_object_class(attributes)
       self.classes = classes
       self.dn = dn

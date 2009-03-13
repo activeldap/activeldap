@@ -15,16 +15,10 @@ module ActiveLdap
           end
           encoded
         when String
-          if object.respond_to?(:force_encoding)
-            encoded = object.dup
-            encoded.force_encoding("utf-8")
-            unless encoded.valid_encoding?
-              encoded.force_encoding(object.encoding)
-            end
-            encoded
-          else
-            object
-          end
+          encoded = object.dup
+          encoded.force_encoding("utf-8")
+          encoded = object unless encoded.valid_encoding?
+          encoded
         else
           object
         end
