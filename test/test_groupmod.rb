@@ -12,7 +12,7 @@ class TestGroupmod < Test::Unit::TestCase
 
   priority :normal
   def test_non_exist_group
-    ensure_delete_group("test-group") do |name,|
+    ensure_delete_group("test-group") do |name|
       assert(!@group_class.exists?(name))
       assert_equal([false, "Group #{name} doesn't exist.\n"],
                    run_command(name, 111111))
@@ -21,7 +21,7 @@ class TestGroupmod < Test::Unit::TestCase
   end
 
   def test_modify_group
-    make_temporary_group do |group, password|
+    make_temporary_group do |group|
       assert_groupmod_successfully(group.cn, group.gid_number.succ)
     end
   end

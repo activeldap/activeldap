@@ -12,7 +12,7 @@ class TestGroupdel < Test::Unit::TestCase
 
   priority :normal
   def test_non_exist_group
-    ensure_delete_group("test-group") do |name,|
+    ensure_delete_group("test-group") do |name|
       assert(!@group_class.exists?(name))
       assert_equal([false, "Group #{name} doesn't exist.\n"], run_command(name))
       assert(!@group_class.exists?(name))
@@ -20,7 +20,7 @@ class TestGroupdel < Test::Unit::TestCase
   end
 
   def test_delete_group
-    make_temporary_group do |group, password|
+    make_temporary_group do |group|
       assert_groupdel_successfully(group.id)
     end
   end

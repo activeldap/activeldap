@@ -14,7 +14,7 @@ class TestGroupls < Test::Unit::TestCase
 
   priority :normal
   def test_non_exist_group
-    ensure_delete_group("test-group") do |name,|
+    ensure_delete_group("test-group") do |name|
       assert(!@group_class.exists?(name))
       assert_equal([false, "Group #{name} doesn't exist.\n"], run_command(name))
       assert(!@group_class.exists?(name))
