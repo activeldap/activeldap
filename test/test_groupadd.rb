@@ -12,7 +12,7 @@ class TestGroupadd < Test::Unit::TestCase
 
   priority :normal
   def test_exist_group
-    make_temporary_group do |group, password|
+    make_temporary_group do |group|
       assert(@group_class.exists?(group.id))
       assert_equal([false, "Group #{group.id} already exists.\n"],
                    run_command(group.id))
@@ -21,7 +21,7 @@ class TestGroupadd < Test::Unit::TestCase
   end
 
   def test_add_group
-    ensure_delete_group("test-group") do |gid,|
+    ensure_delete_group("test-group") do |gid|
       assert_groupadd_successfully(gid)
     end
   end
