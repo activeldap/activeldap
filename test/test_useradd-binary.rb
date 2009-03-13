@@ -46,6 +46,7 @@ class TestUseraddBinary < Test::Unit::TestCase
       assert_equal(['person', 'posixAccount', 'shadowAccount',
                     'strongAuthenticationUser'].sort, user.classes.sort)
       cert = File.read(File.join(@examples_dir, 'example.der'))
+      cert.force_encoding('ascii-8bit') if cert.respond_to?(:force_encoding)
       assert_equal(cert, user.user_certificate)
     end
   end
