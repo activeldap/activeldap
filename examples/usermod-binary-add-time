@@ -39,7 +39,10 @@ end
 
   user.add_class('strongAuthenticationUser')
   cert_file = File.join(File.dirname(__FILE__), 'example.der')
-  user.user_certificate = File.read(cert_file)
+  File.open(cert_file) do |input|
+    input.set_encoding("ascii-8bit") if input.respond_to?(:set_encoding)
+    user.user_certificate = input.read
+  end
 
   unless user.save
     puts "failed #{i}"
