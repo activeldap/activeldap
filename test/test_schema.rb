@@ -2,6 +2,42 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_dit_content_rule
+    object_class_schema = "( 2.5.6.6 NAME 'person' DESC " +
+      "'RFC2256: a person' SUP top STRUCTURAL MUST sn " +
+      "MAY ( userPassword $ telephoneNumber ) )"
+    dit_content_rule_schema = "( 2.5.6.6 NAME 'person' MUST cn " +
+      "MAY ( seeAlso $ description ) )"
+    attributes_schema =
+      [
+       "( 2.5.4.3 NAME 'cn' SYNTAX '1.3.6.1.4.1.1466.115.121.1.15' SINGLE-VALUE )",
+       "( 2.5.4.4 NAME 'sn' SYNTAX '1.3.6.1.4.1.1466.115.121.1.15' SINGLE-VALUE )",
+       "( 2.5.4.35 NAME 'userPassword' SYNTAX '1.3.6.1.4.1.1466.115.121.1.40' )",
+       "( 2.5.4.20 NAME 'telephoneNumber' SYNTAX '1.3.6.1.4.1.1466.115.121.1.15' SINGLE-VALUE )",
+       "( 2.5.4.34 NAME 'seeAlso' SYNTAX '1.3.6.1.4.1.1466.115.121.1.12' )",
+       "( 2.5.4.13 NAME 'description' SYNTAX '1.3.6.1.4.1.1466.115.121.1.15' )",
+      ]
+
+    entry = {
+      "objectClasses" => [object_class_schema],
+      "dITContentRules" => [dit_content_rule_schema],
+      "attributeTypes" => attributes_schema,
+    }
+
+    schema = ActiveLdap::Schema.new(entry)
+    object_class = schema.object_class("person")
+    assert_equal({
+                   :must => ["sn", "cn"],
+                   :may => ["userPassword", "telephoneNumber",
+                            "seeAlso", "description"],
+                 },
+                 {
+                   :must => object_class.must.collect(&:name),
+                   :may => object_class.may.collect(&:name),
+                 })
+  end
+
+  priority :normal
   def test_oid_list_with_just_only_one_oid
     ou_schema = "( 2.5.6.5 NAME 'organizationalUnit' SUP top STRUCTURAL MUST " +
       "(ou ) MAY (c $ l $ st $ street $ searchGuide $ businessCategory $ " +
@@ -32,7 +68,6 @@ class TestSchema < Test::Unit::TestCase
     assert_schema(expect, "organizationalUnit", ou_schema)
   end
 
-  priority :normal
   def test_normalize_attribute_value
     entry = {
       "attributeTypes" =>
@@ -455,7 +490,7 @@ class TestSchema < Test::Unit::TestCase
 
   private
   def assert_schema(expect, name, schema)
-    sub = "objectClass"
+    sub = "objectClasses"
     entry = {sub => [schema]}
     schema = ActiveLdap::Schema.new(entry)
     actual = {}
@@ -466,6 +501,7 @@ class TestSchema < Test::Unit::TestCase
       actual[normalized_key] = schema[sub, name, normalized_key]
     end
     assert_equal(normalized_expect, actual)
+    schema
   end
 
   def assert_make_schema_with_empty_entries(entries)

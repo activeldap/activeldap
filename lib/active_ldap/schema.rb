@@ -1,5 +1,7 @@
 module ActiveLdap
   class Schema
+    include GetTextSupport
+
     def initialize(entries)
       @entries = default_entries.merge(entries || {})
       @schema_info = {}
@@ -123,6 +125,12 @@ module ActiveLdap
       end
     end
 
+    def dit_content_rule_attribute(name, attribute_name)
+      cache([:dit_content_rule_attribute, name, attribute_name]) do
+        fetch("dITContentRules", name, attribute_name)
+      end
+    end
+
     def ldap_syntax(name)
       cache([:ldap_syntax, name]) do
         Syntax.new(name, self)
@@ -242,6 +250,7 @@ module ActiveLdap
         "objectClasses" => [],
         "attributeTypes" => [],
         "ldapSyntaxes" => [],
+        "dITContentRules" => [],
       }
     end
 
@@ -260,11 +269,12 @@ module ActiveLdap
 
       def eql?(other)
         self.class == other.class and
-          id == other.id
+          (id == other.id or
+           (id.nil? and other.nil? and name == other.name))
       end
 
       def hash
-        id.hash
+        id.nil? ? name.hash : id.hash
       end
 
       def <=>(other)
@@ -615,9 +625,9 @@ module ActiveLdap
       def collect_attributes
         must = attribute('MUST').reject do |name|
           UNWRITABLE_MUST_ATTRIBUTES.include?(name)
-        end
+        end.uniq
         must = must.collect {|name| @schema.attribute(name)}
-        may = attribute('MAY').collect {|name| @schema.attribute(name)}
+        may = attribute('MAY').uniq.collect {|name| @schema.attribute(name)}
 
         all_must = must.dup
         all_may = may.dup
@@ -634,7 +644,8 @@ module ActiveLdap
       end
 
       def attribute(attribute_name, name=@name)
-        @schema.object_class_attribute(name, attribute_name)
+        @schema.object_class_attribute(name, attribute_name) +
+          @schema.dit_content_rule_attribute(name, attribute_name)
       end
     end
   end
