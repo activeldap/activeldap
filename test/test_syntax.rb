@@ -182,7 +182,12 @@ class TestSyntax < Test::Unit::TestCase
     assert_valid("これはDirectoryString文字列です。",
                  "Directory String")
 
-    value = NKF.nkf("-We", "これはDirectoryString文字列です。")
+    value = "これはDirectoryString文字列です。"
+    if value.respond_to?(:encode)
+      value = value.encode("euc-jp")
+    else
+      value = NKF.nkf("-We", value)
+    end
     assert_invalid(_("%s has invalid UTF-8 character") % value.inspect,
                    value, "Directory String")
   end
@@ -281,7 +286,12 @@ class TestSyntax < Test::Unit::TestCase
 
     assert_invalid(_("empty string"), "", "Postal Address")
 
-    value = NKF.nkf("-We", "東京")
+    value = "東京"
+    if value.respond_to?(:encode)
+      value = value.encode("euc-jp")
+    else
+      value = NKF.nkf("-We", value)
+    end
     assert_invalid(_("%s has invalid UTF-8 character") % value.inspect,
                    value, "Postal Address")
   end
