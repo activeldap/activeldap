@@ -76,13 +76,13 @@ class TestBase < Test::Unit::TestCase
   end
 
   def test_to_s
-    make_temporary_group do |group,|
+    make_temporary_group do |group|
       assert_equal(group.to_s, group.to_ldif)
     end
   end
 
   def test_to_ldif
-    make_temporary_group do |group,|
+    make_temporary_group do |group|
       assert_to_ldif(group)
 
       group.gidNumber += 1
