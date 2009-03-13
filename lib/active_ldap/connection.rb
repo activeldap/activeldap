@@ -200,7 +200,18 @@ module ActiveLdap
       end
 
       def guess_available_adapter
-        Object.respond_to?(:java) ? "jndi" : "ldap"
+        if Object.respond_to?(:java)
+          "jndi"
+        else
+          ldap_ldif_path = $LOAD_PATH.find do |path|
+            File.exist?(File.join(path, "ldap", "ldif.rb"))
+          end
+          if ldap_ldif_path
+            "ldap"
+          else
+            "net-ldap"
+          end
+        end
       end
     end
 
