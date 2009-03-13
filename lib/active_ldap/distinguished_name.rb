@@ -124,6 +124,7 @@ module ActiveLdap
             result << scanner[1]
           end
         end
+        result.force_encoding("utf-8") if result.respond_to?(:force_encoding)
         result
       end
 
