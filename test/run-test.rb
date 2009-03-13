@@ -20,7 +20,11 @@ Dir.glob(test_file) do |file|
   require file
 end
 
-[nil, "ldap", "net-ldap"].each do |adapter|
+target_adapters = [nil]
+# target_adapters << "ldap"
+# target_adapters << "net-ldap"
+# target_adapters << "jndi"
+target_adapters.each do |adapter|
   ENV["ACTIVE_LDAP_TEST_ADAPTER"] = adapter
   puts "using adapter: #{adapter ? adapter : 'default'}"
   args = [File.dirname($0), ARGV.dup]
