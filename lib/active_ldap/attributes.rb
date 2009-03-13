@@ -26,6 +26,10 @@ module ActiveLdap
           value.values.all? {|val| blank_value?(val)}
         when Array
           value.all? {|val| blank_value?(val)}
+        when String
+          /\A\s*\z/ =~ value
+        when nil
+          true
         else
           value.blank?
         end
