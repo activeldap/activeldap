@@ -224,6 +224,7 @@ module ActiveLdap
       def sasl_bind(bind_dn, options={})
         super do |_bind_dn, mechanism, quiet|
           begin
+            _bind_dn ||= ''
             sasl_quiet = @connection.sasl_quiet
             @connection.sasl_quiet = quiet unless quiet.nil?
             args = [_bind_dn, mechanism]
