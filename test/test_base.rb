@@ -626,7 +626,8 @@ EOX
 EOX
 
     make_temporary_user do |user, password|
-      assert_equal(<<-EOX, user.to_xml(:root => "user"))
+      xml = normalize_attributes_order(user.to_xml(:root => "user"))
+      assert_equal(<<-EOX, xml)
 <user>
   <dn>#{user.dn}</dn>
   <cns type="array">
@@ -652,7 +653,7 @@ EOX
   </uids>
   <uidNumber>#{user.uid_number}</uidNumber>
   <userCertificates type="array">
-    <userCertificate binary="true" base64="true">#{base64(certificate)}</userCertificate>
+    <userCertificate base64="true" binary="true">#{base64(certificate)}</userCertificate>
   </userCertificates>
   <userPasswords type="array">
     <userPassword>#{user.user_password}</userPassword>
@@ -861,5 +862,20 @@ EOX
 
   def base64(string)
     [string].pack("m").gsub(/\n/u, "")
+  end
+
+  def normalize_attributes_order(xml)
+    xml.gsub(/<(\S+) (.+?)(\/?)>/) do |matched|
+      name = $1
+      attributes = $2
+      close_mark = $3
+      attributes = attributes.scan(/(\S+)="(.+?)"/)
+      normalized_attributes = attributes.sort_by do |key, value|
+        key
+      end.collect do |key, value|
+        "#{key}=\"#{value}\""
+      end.join(' ')
+      "<#{name} #{normalized_attributes}#{close_mark}>"
+    end
   end
 end
