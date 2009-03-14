@@ -1,3 +1,7 @@
+1.1.0:
+  * Supported Ruby 1.9.1.
+    * [#20] [Ruby 1.9 Support] :: Running Tests [Alexey.Chebotar]
+
 1.0.2:
   * Removed Base64 module use.
   * Improved LDIF parser.
