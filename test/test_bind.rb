@@ -47,6 +47,7 @@ class TestBind < Test::Unit::TestCase
       config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
       config = ActiveLdap::Base.prepare_configuration(config)
       config.delete(:bind_dn)
+      config[:try_sasl] = false
       config[:allow_anonymous] = false
       connect(config)
     end
