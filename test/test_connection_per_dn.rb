@@ -39,6 +39,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
       assert_equal(user.class.connection, user.connection)
       assert_raises(ActiveLdap::AuthenticationError) do
         user.bind(:bind_dn => nil,
+                  :try_sasl => false,
                   :allow_anonymous => false,
                   :retry_limit => 0)
       end
@@ -46,6 +47,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
 
       assert_nothing_raised do
         user.bind(:bind_dn => nil,
+                  :try_sasl => false,
                   :allow_anonymous => true)
       end
       assert_not_equal(user.class.connection, user.connection)
