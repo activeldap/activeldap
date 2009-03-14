@@ -8,12 +8,12 @@ class TestConnectionPerDN < Test::Unit::TestCase
     make_temporary_user do |user, password|
       assert_equal(user.class.connection, user.connection)
       assert_raises(ActiveLdap::AuthenticationError) do
-        user.bind("")
+        user.bind("", :try_sasl => false)
       end
       assert_equal(user.class.connection, user.connection)
 
       assert_nothing_raised do
-        user.bind("", :allow_anonymous => true)
+        user.bind("", :try_sasl => false, :allow_anonymous => true)
       end
       assert_not_equal(user.class.connection, user.connection)
     end
@@ -29,7 +29,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
       assert_not_equal(user.class.connection, user.connection)
 
       assert_raises(ActiveLdap::AuthenticationError) do
-        user.bind(password + "-WRONG")
+        user.bind(password + "-WRONG", :try_sasl => false)
       end
     end
   end
@@ -84,7 +84,7 @@ class TestConnectionPerDN < Test::Unit::TestCase
           user.groups = [group1]
           assert_equal(group1.connection, user.connection)
 
-          user.bind(password)
+          user.bind(password, :try_sasl => false)
           assert_not_equal(user.class.connection, user.connection)
           assert_not_equal(group1.connection, user.connection)
           assert_equal(user.groups[0].connection, user.connection)
