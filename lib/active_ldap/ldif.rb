@@ -565,7 +565,13 @@ module ActiveLdap
       end
 
       def position
-        @scanner.pos - (@sub_scanner.string.bytesize - @sub_scanner.pos)
+        sub_scanner_string = @sub_scanner.string
+        if sub_scanner_string.respond_to?(:bytesize)
+          sub_scanner_string_size = sub_scanner_string.bytesize
+        else
+          sub_scanner_string_size = sub_scanner_string.size
+        end
+        @scanner.pos - (sub_scanner_string_size - @sub_scanner.pos)
       end
 
       private
