@@ -29,9 +29,8 @@ class TestBind < Test::Unit::TestCase
     assert(!ActiveLdap::Base.connected?)
     config = ActiveLdap::Base.configurations[LDAP_ENV].symbolize_keys
     config = ActiveLdap::Base.prepare_configuration(config)
-    if config[:bind_dn].nil?
-      puts "pass this test for no user configuration"
-      return
+    if config[:bind_dn].nil? and !config[:try_sasl]
+      omit("need user configuration")
     end
     assert_nothing_raised do
       config[:allow_anonymous] = false
