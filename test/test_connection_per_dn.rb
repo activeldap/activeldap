@@ -53,7 +53,11 @@ class TestConnectionPerDN < Test::Unit::TestCase
       assert_not_equal(user.class.connection, user.connection)
 
       assert_equal(user.connection, user.class.find(user.dn).connection)
-      assert_equal(user.connection, user.find(user.dn).connection)
+      begin
+        assert_equal(user.connection, user.find(user.dn).connection)
+      rescue ActiveLdap::EntryNotFound
+        omit("requires permission for searching by 'uid' to anonymous user.")
+      end
     end
   end
 
