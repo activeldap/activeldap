@@ -104,7 +104,9 @@ list, please point out.
   * A suggestion for behavior on simple bind with empty password.
   * Bug reports.
 * Naoto Morishima: Bug reports.
-* David Morton: An API improvement idea.
+* David Morton:
+  * An API improvement idea.
+  * A bug report.
 * Lennon Day-Reynolds: Bug reports.
 * Tilo: A bug report.
 * Matt Mencel: A bug report.

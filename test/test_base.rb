@@ -6,12 +6,19 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_set_attributes_with_blank_values
+    make_temporary_user(:simple => true) do |user,|
+      user.attributes = {"description" => [""]}
+      assert(user.save)
+    end
+  end
+
+  priority :normal
   def test_create_invalid
     user = @user_class.create
     assert_not_predicate(user.errors, :empty?)
   end
 
-  priority :normal
   def test_id_with_invalid_dn_attribute_value
     user = @user_class.new("#")
     assert_equal("#", user.uid)

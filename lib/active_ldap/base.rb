@@ -1391,7 +1391,7 @@ module ActiveLdap
         next if v == value
 
         # Create mod entries
-        if value.empty?
+        if self.class.blank_value?(value)
           # Since some types do not have equality matching rules,
           # delete doesn't work
           # Replacing with nothing is equivalent.
@@ -1406,7 +1406,7 @@ module ActiveLdap
       end
       data.each do |k, v|
         value = v || []
-        next if ldap_data.has_key?(k) or value.empty?
+        next if ldap_data.has_key?(k) or self.class.blank_value?(value)
 
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
@@ -1427,7 +1427,10 @@ module ActiveLdap
       oc_value = data['objectClass']
       attributes.push(['objectClass', oc_value])
       data.each do |key, value|
-        next if value.empty? or key == 'objectClass' or key == dn_attr
+        if self.class.blank_value?(value) or
+            key == 'objectClass' or key == dn_attr
+          next
+        end
 
         attributes.push([key, value])
       end
