@@ -505,7 +505,7 @@ module ActiveLdap
         end
       end
 
-      def self_and_descendents_from_active_ldap
+      def self_and_descendants_from_active_ldap
         klass = self
         classes = [klass]
         while klass != klass.base_class
@@ -515,11 +515,11 @@ module ActiveLdap
       rescue
         [self]
       end
-      alias_method(:self_and_descendents_from_active_record,
-                   :self_and_descendents_from_active_ldap)
+      alias_method(:self_and_descendants_from_active_record,
+                   :self_and_descendants_from_active_ldap)
 
       def human_name(options={})
-        defaults = self_and_descendents_from_active_ldap.collect do |klass|
+        defaults = self_and_descendants_from_active_ldap.collect do |klass|
           if klass.name.blank?
             nil
           else
