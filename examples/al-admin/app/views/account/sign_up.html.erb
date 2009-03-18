@@ -1,21 +1,22 @@
 <%= error_messages_for(:user) %>
 <%= error_messages_for(:system_user) %>
 <% form_for(:user) do |f| %>
-  <p><label for="<%= @user.dn_attribute %>"><%= _("Login") %></label><br/>
+  <p><%= f.label @user.dn_attribute, _("Login") %><br/>
   <%= f.text_field(@user.dn_attribute) %></p>
 
-  <p><label for="password"><%= _("Password") %></label><br/>
+  <p><%= f.label(:password, _("Password")) %><br/>
   <%= f.password_field(:password) %></p>
 
-  <p><label for="password_confirmation"><%= _("Confirm Password") %></label><br/>
+  <p><%= f.label(:password_confirmation, _("Confirm Password")) %><br/>
   <%= f.password_field(:password_confirmation) %></p>
 
   <p><%= submit_tag(_('Sign up')) %></p>
 
-  <% names = @user.attribute_names(true) - ["objectClass", "userPassword"] %>
+  <% names = @user.attribute_names(true) -
+               ["objectClass", @user.dn_attribute, "userPassword"] %>
   <% names.sort.each do |name| %>
     <p>
-      <label for="<%= h name %>"><%=h la_(name) %>
+      <%= f.label(name, la_(name)) %>
     <% if @required_attributes.include?(name) %>
       <span class="required-attribute-mark">*</span>
     <% end %>
