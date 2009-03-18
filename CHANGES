@@ -2,6 +2,8 @@
   * Added documents in Japanese. [tashen]
   * Supported Ruby 1.9.1.
     * [#20] [Ruby 1.9 Support] :: Running Tests [Alexey.Chebotar]
+  * Supported Rails 2.3.2.
+    * [#18] [Rails 2.3 Support] :: Running WEBrick Hangs [Alexey.Chebotar]
   * Bug fixes:
     * Fixed blank values detection. [David Morton]
 
