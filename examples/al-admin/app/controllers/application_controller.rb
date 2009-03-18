@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   before_filter :login_from_cookie
 
+  filter_parameter_logging :password, :password_confirmation
+
   private
   def default_url_options(options)
     default_options = {}
