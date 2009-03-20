@@ -515,8 +515,14 @@ module ActiveLdap
       rescue
         [self]
       end
-      alias_method(:self_and_descendants_from_active_record,
-                   :self_and_descendants_from_active_ldap)
+      if ActiveRecord::Base.respond_to?(:self_and_descendents_from_active_record)
+        # ActiveRecord 2.2.2 has a typo. :<
+        alias_method(:self_and_descendents_from_active_record,
+                     :self_and_descendants_from_active_ldap)
+      else
+        alias_method(:self_and_descendants_from_active_record,
+                     :self_and_descendants_from_active_ldap)
+      end
 
       def human_name(options={})
         defaults = self_and_descendants_from_active_ldap.collect do |klass|
