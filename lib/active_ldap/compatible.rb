@@ -28,5 +28,15 @@ module ActiveLdap
         object
       end
     end
+
+    if "".respond_to?(:lines)
+      def string_to_lines(string)
+        string.to_a
+      end
+    else
+      def string_to_lines(string)
+        string.lines
+      end
+    end
   end
 end

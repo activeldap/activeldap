@@ -173,7 +173,7 @@ module ActiveLdap
     NEAREST_MARK = "|@|"
     private
     def detect_nearest(line, column)
-      lines = @ldif.lines.to_a
+      lines = Compatible.string_to_lines(@ldif).to_a
       nearest = lines[line - 1] || ""
       if column - 1 == nearest.size # for JRuby 1.0.2 :<
         nearest << NEAREST_MARK
@@ -203,7 +203,7 @@ module ActiveLdap
 
     def numbered_ldif
       return @ldif if @ldif.blank?
-      lines = @ldif.lines
+      lines = Compatible.string_to_lines(@ldif)
       format = "%#{Math.log10(lines.count).truncate + 1}d: %s"
       i = 0
       lines.collect do |line|

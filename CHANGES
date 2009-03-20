@@ -6,6 +6,7 @@
     * [#18] [Rails 2.3 Support] :: Running WEBrick Hangs [Alexey.Chebotar]
   * Bug fixes:
     * Fixed blank values detection. [David Morton]
+    * [#22] Ruby 1.8.6 p287 :: Undefined methods [Alexey.Chebotar]
 
 1.0.2:
   * Removed Base64 module use.
