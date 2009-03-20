@@ -31,11 +31,13 @@ module ActiveLdap
 
     if "".respond_to?(:lines)
       def string_to_lines(string)
-        string.to_a
+        string.lines.to_a
       end
     else
       def string_to_lines(string)
-        string.lines
+        ary = []
+        string.each_line{|l| ary << l}
+        ary
       end
     end
   end
