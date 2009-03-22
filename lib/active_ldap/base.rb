@@ -1396,8 +1396,9 @@ module ActiveLdap
 
         next if v == value
 
-        value = self.class.remove_blank_value(value)
-        next if value.nil? or v == value
+        x = value
+        value = self.class.remove_blank_value(value) || []
+        next if v == value
 
         # Create mod entries
         if self.class.blank_value?(value)
@@ -1417,7 +1418,7 @@ module ActiveLdap
         value = v || []
         next if ldap_data.has_key?(k)
 
-        value = self.class.remove_blank_value(value)
+        value = self.class.remove_blank_value(value) || []
         next if self.class.blank_value?(value)
 
 
