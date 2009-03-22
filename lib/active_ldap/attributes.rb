@@ -34,6 +34,37 @@ module ActiveLdap
           value.blank?
         end
       end
+
+      def remove_blank_value(value)
+        case value
+        when Hash
+          result = {}
+          value.each do |k, v|
+            v = remove_blank_value(v)
+            next if v.nil?
+            result[k] = v
+          end
+          result = nil if result.blank?
+          result
+        when Array
+          result = []
+          value.each do |v|
+            v = remove_blank_value(v)
+            next if v.nil?
+            result << v
+          end
+          result = nil if result.blank?
+          result
+        when String
+          if /\A\s*\z/ =~ value
+            nil
+          else
+            value
+          end
+        else
+          value
+        end
+      end
     end
 
     module Normalizable
