@@ -555,11 +555,6 @@ module ActiveLdap
         options[:reconnect_attempts] ||= 0
 
         loop do
-          unless can_reconnect?(options)
-            raise ConnectionError,
-                  _('Giving up trying to reconnect to LDAP server.')
-          end
-
           @logger.debug {_('Attempting to reconnect')}
           disconnect!
 
@@ -577,6 +572,11 @@ module ActiveLdap
             end
             # Do not loop if forced
             raise ConnectionError, detail.message if force
+          end
+
+          unless can_reconnect?(options)
+            raise ConnectionError,
+                  _('Giving up trying to reconnect to LDAP server.')
           end
 
           # Sleep before looping
@@ -597,7 +597,7 @@ module ActiveLdap
         retry_limit = options[:retry_limit] || @retry_limit
         reconnect_attempts = options[:reconnect_attempts] || 0
 
-        retry_limit < 0 or reconnect_attempts < (retry_limit - 1)
+        retry_limit < 0 or reconnect_attempts <= retry_limit
       end
 
       def root_dse_values(key, options={})

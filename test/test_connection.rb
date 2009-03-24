@@ -14,6 +14,15 @@ class TestConnection < Test::Unit::TestCase
   end
 
   priority :must
+  def test_retry_limit_0_with_existent_host
+    config = current_configuration.merge("retry_limit" => 0)
+    ActiveLdap::Base.setup_connection(config)
+    assert_nothing_raised do
+      ActiveLdap::Base.find(:all)
+    end
+  end
+
+  priority :normal
   def test_retry_limit_0_with_nonexistent_host
     config = current_configuration.merge("host" => "192.168.29.29",
                                          "retry_limit" => 0)
@@ -23,7 +32,6 @@ class TestConnection < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_bind_format_check
     connector = Class.new(ActiveLdap::Base)
     assert(!connector.connected?)
