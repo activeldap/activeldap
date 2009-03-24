@@ -29,8 +29,9 @@ class TestValidation < Test::Unit::TestCase
     reason = _("attribute value is missing")
     invalid_format = _("%s is invalid distinguished name (DN): %s")
     invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-    message = _("is invalid: %s") % invalid_message
-    message = "Dn" + " " + message
+    format = _("%{fn} is invalid: %s")
+    format = format.sub(/^%\{fn\}/, la_('DN'))
+    message = format % invalid_message
     assert_equal([message],
                  user.errors.full_messages.find_all {|m| /DN/ =~ m})
   end
@@ -42,8 +43,9 @@ class TestValidation < Test::Unit::TestCase
       reason = _("attribute value is missing")
       invalid_format = _("%s is invalid distinguished name (DN): %s")
       invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-      message = _("is invalid: %s") % invalid_message
-      message = "Dn" + " " + message
+      format = _("%{fn} is invalid: %s")
+      format = format.sub(/^%\{fn\}/, la_('DN'))
+      message = format % invalid_message
       assert_equal([message], user.errors.full_messages)
     end
   end
@@ -53,8 +55,9 @@ class TestValidation < Test::Unit::TestCase
       assert(user.valid?)
       user.uid_number = ""
       assert(!user.valid?)
-      format = _("is required attribute by objectClass '%s'")
-      blank_message = la_("uidNumber") + ' ' + (format % loc_("posixAccount"))
+      format = _("%{fn} is required attribute by objectClass '%s'")
+      format = format.sub(/^%\{fn\}/, la_('uidNumber'))
+      blank_message = format % loc_("posixAccount")
       assert_equal([blank_message], user.errors.full_messages)
     end
   end
@@ -66,10 +69,11 @@ class TestValidation < Test::Unit::TestCase
       assert(user.save)
       user.class.excluded_classes = ['person']
       assert(!user.save)
-      format = n_("has excluded value: %s",
-                  "has excluded values: %s",
+      format = n_("%{fn} has excluded value: %s",
+                  "%{fn} has excluded values: %s",
                   1)
-      message = la_("objectClass") + ' ' + (format % loc_("person"))
+      format = format.sub(/^%\{fn\}/, la_("objectClass"))
+      message = format % loc_("person")
       assert_equal([message], user.errors.full_messages)
     end
   end
@@ -137,7 +141,9 @@ class TestValidation < Test::Unit::TestCase
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
     assert(!ou.save)
-    message = la_("DN") + ' ' + (_("is duplicated: %s") % ou.dn)
+    format = _("%{fn} is duplicated: %s")
+    format = format.sub(/^%\{fn\}/, la_("DN"))
+    message = format % ou.dn
     assert_equal([message], ou.errors.full_messages)
   end
 
@@ -184,11 +190,12 @@ class TestValidation < Test::Unit::TestCase
     params = [formatted_value, syntax_description, reason]
     params.unshift(option) if option
     if option
-      format = _("(%s) has invalid format: %s: required syntax: %s: %s")
+      format = _("%{fn}(%s) has invalid format: %s: required syntax: %s: %s")
     else
-      format = _("has invalid format: %s: required syntax: %s: %s")
+      format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
     end
-    message = la_(name) + ' ' + (format % params)
+    format = format.sub(/^%\{fn\}/, la_(name))
+    message = format % params
     assert_equal([message], model.errors.full_messages)
   end
 

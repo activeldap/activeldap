@@ -944,6 +944,16 @@ require_gem_if_need.call("active_record", "activerecord")
 begin
   require_gem_if_need.call("locale")
   require_gem_if_need.call("gettext")
+
+  require 'active_record/version'
+  active_record_version = [ActiveRecord::VERSION::MAJOR,
+                           ActiveRecord::VERSION::MINOR,
+                           ActiveRecord::VERSION::TINY]
+  if (active_record_version <=> [2, 2, 0]) < 0
+    require "gettext/active_record"
+  else
+    require_gem_if_need.call("gettext_activerecord")
+  end
 rescue LoadError
 end
 require 'active_ldap/get_text'
