@@ -943,7 +943,7 @@ end
 require_gem_if_need.call("active_record", "activerecord")
 begin
   require_gem_if_need.call("locale")
-  require_gem_if_need.call("gettext", "gettext", ">= 1.94")
+  require_gem_if_need.call("gettext")
 rescue LoadError
 end
 require 'active_ldap/get_text'
