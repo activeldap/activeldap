@@ -587,7 +587,8 @@ module ActiveLdap
       end
 
       def reconnect_if_need(options={})
-        reconnect(options) if !connecting? and can_reconnect?(options)
+        return if connecting?
+        reconnect(options)
       end
 
       # Determine if we have exceed the retry limit or not.

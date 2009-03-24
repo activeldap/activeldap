@@ -1,5 +1,3 @@
-- [bug] .find fails with nil.search error when retry_limit is 0 or 1 and
-  can't connect to LDAP searver. reconnect_if_need should raises ConnectionError.
 - [1.1.x] ActiveLdap::Base#dn returns ActiveLdap::DN. [#23932] [Marc Dequènes]
 - How to support dSCorePropagationData? ignore it?
   all systemOnly == "TRUE" attribute can be ignored?
