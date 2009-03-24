@@ -1,6 +1,3 @@
-require 'active_record/base'
-require 'active_record/validations'
-
 module ActiveLdap
   module Validations
     def self.append_features(base)
