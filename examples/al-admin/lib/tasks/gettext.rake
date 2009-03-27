@@ -7,7 +7,8 @@ namespace :gettext do
   namespace :environment do
     desc "Setup environment for GetText"
     task :setup => :environment do
-      require "gettext/utils"
+      require 'gettext_rails/tools'
+      Locale.module_eval("@@locale_driver_module = nil")
     end
   end
 
@@ -29,7 +30,7 @@ namespace :gettext do
   namespace :mo do
     desc "Create *.mo from *.po (GetText)"
     task :create => "gettext:environment:setup" do
-      GetText.create_mofiles(false, 'po', 'locale')
+      GetText.create_mofiles
     end
   end
 end
