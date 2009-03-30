@@ -50,12 +50,10 @@
 #
 # === Requirements
 #
-# * Ruby[http://www.ruby-lang.org] 1.8.x
-# * Ruby/LDAP[http://ruby-ldap.sourceforge.net]
-# * (Optional) Ruby/LDAP+GSSAPI[http://caliban.org/files/redhat/RPMS/i386/ruby-ldap-0.8.2-4.i386.rpm]
-# * An LDAP server compatible with Ruby/LDAP: OpenLDAP[http://www.openldap.org], etc
+# * A Ruby implementation: Ruby[http://www.ruby-lang.org] 1.8.x, 1.9.1 or JRuby[http://jruby.codehaus.org/]
+# * A LDAP library: Ruby/LDAP[http://code.google.com/p/ruby-activeldap/wiki/RubyLDAP] (for Ruby), Net::LDAP[http://rubyforge.org/projects/net-ldap/] (for Ruby or JRuby) or JNDI (for JRuby)
+# * A LDAP server: OpenLDAP[http://www.openldap.org], etc
 #   - Your LDAP server must allow root_dse queries to allow for schema queries
-# * Examples also require: Ruby/Password[http://raa.ruby-lang.org/project/ruby-password/]
 #
 # === Installation
 #
