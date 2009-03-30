@@ -1,14 +1,14 @@
 #!/usr/bin/ruby
-# = Ruby/ActiveLdap
+# = ActiveLdap
 #
-# "Ruby/ActiveLdap" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
+# "ActiveLdap" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
 #
 # == Introduction
 #
-# Ruby/ActiveLdap is a novel way of interacting with LDAP.  Most interaction with
+# ActiveLdap is a novel way of interacting with LDAP.  Most interaction with
 # LDAP is done using clunky LDIFs, web interfaces, or with painful APIs that
-# required a thick reference manual nearby. Ruby/ActiveLdap aims to fix that.
-# Inspired by ActiveRecord[http://activerecord.rubyonrails.org], Ruby/ActiveLdap provides an
+# required a thick reference manual nearby. ActiveLdap aims to fix that.
+# Inspired by ActiveRecord[http://activerecord.rubyonrails.org], ActiveLdap provides an
 # object oriented interface to LDAP entries.
 #
 # The target audience is system administrators and LDAP users everywhere that
@@ -29,22 +29,22 @@
 # * RFC1777[http://www.faqs.org/rfcs/rfc1777.html] - Lightweight Directory Access Protocol
 # * OpenLDAP[http://www.openldap.org]
 #
-# === So why use Ruby/ActiveLdap?
+# === So why use ActiveLdap?
 #
 # Well if you like to fumble around in the dark, dank innards of LDAP, you can
 # quit reading now.  However, if you'd like a cleaner way to integrate LDAP in to
-# your existing code, hopefully that's why you'll want to use Ruby/ActiveLdap.
+# your existing code, hopefully that's why you'll want to use ActiveLdap.
 #
 # Using LDAP directly (even with the excellent Ruby/LDAP), leaves you bound to
 # the world of the predefined LDAP API.  While this API is important for many
 # reasons, having to extract code out of LDAP search blocks and create huge
 # arrays of LDAP.mod entries make code harder to read, less intuitive, and just
-# less fun to write.  Hopefully, Ruby/ActiveLdap will remedy all of these
+# less fun to write.  Hopefully, ActiveLdap will remedy all of these
 # problems!
 #
 # == Getting Started
 #
-# Ruby/ActiveLdap does have some overhead when you get started.  You must not
+# ActiveLdap does have some overhead when you get started.  You must not
 # only install the package and all of it's requirements, but you must also make
 # customizations that will let it work in your environment.
 #
@@ -62,7 +62,7 @@
 # Assuming all the requirements are installed, you can install by grabbing the latest tgz file from
 # the download site[http://rubyforge.org/frs/?group_id=381].
 #
-# The following steps will get the Ruby/ActiveLdap installed in no time!
+# The following steps will get the ActiveLdap installed in no time!
 #
 #   $ tar -xzvf ruby-activeldap-current.tgz
 #   $ cd ruby-activeldap-VERSION
@@ -90,7 +90,7 @@
 #
 # === Customizations
 #
-# Now that Ruby/ActiveLdap is installed and working, we still have a few more
+# Now that ActiveLdap is installed and working, we still have a few more
 # steps to make it useful for programming.
 #
 # Let's say that you are writing a Ruby program for managing user and group
@@ -116,7 +116,7 @@
 #
 # == Usage
 #
-# This section covers using Ruby/ActiveLdap from writing extension classes to
+# This section covers using ActiveLdap from writing extension classes to
 # writing applications that use them.
 #
 # Just to give a taste of what's to come, here is a quick example using irb:
@@ -155,7 +155,7 @@
 #
 # ==== Why do I need them?
 #
-# Extension classes are what make Ruby/ActiveLdap "active"! They do all the
+# Extension classes are what make ActiveLdap "active"! They do all the
 # background work to make easy-to-use objects by mapping the LDAP object's
 # attributes on to a Ruby class.
 #
@@ -169,7 +169,7 @@
 # ===== ldap_mapping
 #
 # ldap_mapping is the only required method to setup an extension class for use
-# with Ruby/ActiveLdap. It must be called inside of a subclass as shown above.
+# with ActiveLdap. It must be called inside of a subclass as shown above.
 #
 # Below is a much more realistic Group class:
 #
@@ -208,9 +208,9 @@
 # for dn_attribute matches.
 # (e.g. cn=develop,ou=DevGroups,ou=Groups,dc=dataspill,dc=org)
 #
-# Something's missing: :classes.  :classes is used to tell Ruby/ActiveLdap what
+# Something's missing: :classes.  :classes is used to tell ActiveLdap what
 # the minimum requirement is when creating a new object. LDAP uses objectClasses
-# to define what attributes a LDAP object may have. Ruby/ActiveLdap needs to know
+# to define what attributes a LDAP object may have. ActiveLdap needs to know
 # what classes are required when creating a new object.  Of course, you can leave
 # that field out to default to ['top'] only.  Then you can let each application
 # choose what objectClasses their objects should have by calling the method e.g.
@@ -412,7 +412,7 @@
 #
 # ==== What is it?
 #
-# ActiveLdap::Base is the heart of Ruby/ActiveLdap.  It does all the schema
+# ActiveLdap::Base is the heart of ActiveLdap.  It does all the schema
 # parsing for validation and attribute-to-method mangling as well as manage the
 # connection to LDAP.
 #
@@ -498,7 +498,7 @@
 #
 # === Exceptions
 #
-# There are a few custom exceptions used in Ruby/ActiveLdap. They are detailed below.
+# There are a few custom exceptions used in ActiveLdap. They are detailed below.
 #
 # ==== DeleteError
 #
@@ -538,7 +538,7 @@
 #
 # === Putting it all together
 #
-# Now that all of the components of Ruby/ActiveLdap have been covered, it's time
+# Now that all of the components of ActiveLdap have been covered, it's time
 # to put it all together! The rest of this section will show the steps to setup
 # example user and group management scripts for use with the LDAP tree described
 # above.
@@ -694,7 +694,7 @@
 #
 # === Advanced Topics
 #
-# Below are some situation tips and tricks to get the most out of Ruby/ActiveLdap.
+# Below are some situation tips and tricks to get the most out of ActiveLdap.
 #
 #
 # ==== Binary data and other subtypes
@@ -729,7 +729,7 @@
 #
 # You should note that some binary data does not use the binary subtype all the time.
 # One example is jpegPhoto. You can use it as jpegPhoto;binary or just as jpegPhoto.
-# Since the schema dictates that it is a binary value, Ruby/ActiveLdap will write
+# Since the schema dictates that it is a binary value, ActiveLdap will write
 # it as binary, but the subtype will not be automatically appended as above. The
 # use of the subtype on attributes like jpegPhoto is ultimately decided by the
 # LDAP site policy and not by any programmatic means.
@@ -791,7 +791,7 @@
 #
 # ==== force array results for single values
 #
-# Even though Ruby/ActiveLdap attempts to maintain programmatic ease by
+# Even though ActiveLdap attempts to maintain programmatic ease by
 # returning Array values only. By specifying 'true' as an argument to
 # any attribute method you will get back a Array if it is single value.
 # Here's an example:
@@ -893,7 +893,7 @@
 #
 # === Speed
 #
-# Currently, Ruby/ActiveLdap could be faster.  I have some recursive type
+# Currently, ActiveLdap could be faster.  I have some recursive type
 # checking going on which slows object creation down, and I'm sure there
 # are many, many other places optimizations can be done.  Feel free
 # to send patches, or just hang in there until I can optimize away the
