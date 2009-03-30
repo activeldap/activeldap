@@ -414,21 +414,21 @@
 # parsing for validation and attribute-to-method mangling as well as manage the
 # connection to LDAP.
 #
-# ===== establish_connection
+# ===== setup_connection
 #
-# Base.establish_connection takes many (optional) arguments and is used to
+# Base.setup_connection takes many (optional) arguments and is used to
 # connect to the LDAP server. Sometimes you will want to connect anonymously
-# and other times over TLS with user credentials. Base.establish_connection is
+# and other times over TLS with user credentials. Base.setup_connection is
 # here to do all of that for you.
 #
 #
 # By default, if you call any subclass of Base, such as Group, it will call
-# Base.establish_connection() if these is no active LDAP connection. If your
+# Base.setup_connection() if these is no active LDAP connection. If your
 # server allows anonymous binding, and you only want to access data in a
-# read-only fashion, you won't need to call Base.establish_connection. Here
+# read-only fashion, you won't need to call Base.setup_connection. Here
 # is a fully parameterized call:
 #
-#   Base.establish_connection(
+#   Base.setup_connection(
 #     :host => 'ldap.dataspill.org',
 #     :port => 389,
 #     :base => 'dc=dataspill,dc=org',
@@ -476,7 +476,7 @@
 # * :retry_on_timeout - whether to reconnect when timeouts occur. Defaults to true
 # See lib/configuration.rb for defaults for each option
 #
-# Base.establish_connection both connects and binds in one step. It follows
+# Base.setup_connection both connects and binds in one step. It follows
 # roughly the following approach:
 #
 # * Connect to host:port using :method
@@ -512,14 +512,14 @@
 #
 # ==== AuthenticationError
 #
-# This exception is raised during Base.establish_connection if no valid authentication methods
+# This exception is raised during Base.setup_connection if no valid authentication methods
 # succeeded.
 #
 # ==== ConnectionError
 #
-# This exception is raised during Base.establish_connection if no valid
+# This exception is raised during Base.setup_connection if no valid
 # connection to the LDAP server could be created. Check you configuration.rb,
-# Base.establish_connection arguments, and network connectivity! Also check
+# Base.setup_connection arguments, and network connectivity! Also check
 # your LDAP server logs to see if it ever saw the request.
 #
 # ==== ObjectClassError
@@ -590,7 +590,7 @@
 #     ActiveLdap::Command.read_password("[#{user}] Password: ")
 #   end
 #
-#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#   ActiveLdap::Base.setup_connection(:password_block => pwb,
 #                                         :allow_anonymous => false)
 #
 #   if User.exists?(name)
@@ -636,7 +636,7 @@
 #     ActiveLdap::Command.read_password("[#{user}] Password: ")
 #   end
 #
-#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#   ActiveLdap::Base.setup_connection(:password_block => pwb,
 #                                         :allow_anonymous => false)
 #
 #   unless User.exists?(name)
@@ -680,7 +680,7 @@
 #     ActiveLdap::Command.read_password("[#{user}] Password: ")
 #   end
 #
-#   ActiveLdap::Base.establish_connection(:password_block => pwb,
+#   ActiveLdap::Base.setup_connection(:password_block => pwb,
 #                                         :allow_anonymous => false)
 #
 #   unless User.exists?(name)
@@ -818,11 +818,11 @@
 #
 #   irb> anon_class = Class.new(Base)
 #   => ...
-#   irb> anon_class.establish_connection
+#   irb> anon_class.setup_connection
 #   => ...
 #   irb> auth_class = Class.new(Base)
 #   => ...
-#   irb> auth_class.establish_connection(:password_block => {'mypass'})
+#   irb> auth_class.setup_connection(:password_block => {'mypass'})
 #   => ...
 #
 # This can be useful for doing authentication tests and other such tricks.
