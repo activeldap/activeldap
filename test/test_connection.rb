@@ -56,17 +56,12 @@ class TestConnection < Test::Unit::TestCase
     config = current_configuration.merge("retry_limit" => 10)
     ActiveLdap::Base.setup_connection(config)
     connection = ActiveLdap::Base.connection
-    assert(!connection.send(:can_reconnect?, :reconnect_attempts => 10))
+    assert(!connection.send(:can_reconnect?, :reconnect_attempts => 11))
 
     config = current_configuration.merge("retry_limit" => 10)
     ActiveLdap::Base.setup_connection(config)
     connection = ActiveLdap::Base.connection
-    assert(!connection.send(:can_reconnect?, :reconnect_attempts => 9))
-
-    config = current_configuration.merge("retry_limit" => 10)
-    ActiveLdap::Base.setup_connection(config)
-    connection = ActiveLdap::Base.connection
-    assert(connection.send(:can_reconnect?, :reconnect_attempts => 8))
+    assert(connection.send(:can_reconnect?, :reconnect_attempts => 10))
 
     config = current_configuration.merge("retry_limit" => -1)
     ActiveLdap::Base.setup_connection(config)
