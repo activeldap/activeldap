@@ -83,7 +83,7 @@ module ActiveLdap
         elsif adapter.nil?
           raise ConnectionNotSetup
         else
-          establish_connection(adapter)
+          setup_connection(adapter)
         end
       end
 
@@ -264,7 +264,7 @@ module ActiveLdap
         config = adapter
         @connection = self.class.instantiate_adapter(config)
       else
-        establish_connection(adapter)
+        setup_connection(adapter)
       end
     end
 
