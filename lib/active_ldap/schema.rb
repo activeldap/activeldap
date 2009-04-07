@@ -151,6 +151,17 @@ module ActiveLdap
       end
     end
 
+    def dump(output=nil)
+      require 'pp'
+      output ||= STDOUT
+      if output.respond_to?(:write)
+        PP.pp(@entries, output)
+      else
+        open(output, "w") {|out| PP.pp(@entries, out)}
+      end
+      nil
+    end
+
     private
     def cache(key)
       (@cache[key] ||= [yield])[0]
