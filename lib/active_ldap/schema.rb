@@ -3,7 +3,7 @@ module ActiveLdap
     include GetTextSupport
 
     def initialize(entries)
-      @entries = default_entries.merge(entries || {})
+      @entries = normalize_entries(entries || {})
       @schema_info = {}
       @class_attributes_info = {}
       @cache = {}
@@ -262,7 +262,20 @@ module ActiveLdap
         "attributeTypes" => [],
         "ldapSyntaxes" => [],
         "dITContentRules" => [],
+        "matchingRules" => [],
       }
+    end
+
+    def normalize_entries(entries)
+      normalized_entries = default_entries
+      normalized_keys = normalized_entries.keys
+      entries.each do |name, values|
+        normalized_name = normalized_keys.find do |key|
+          key.downcase == name
+        end
+        normalized_entries[normalized_name || name] = values
+      end
+      normalized_entries
     end
 
     class Entry
