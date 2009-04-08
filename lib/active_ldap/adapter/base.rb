@@ -564,6 +564,8 @@ module ActiveLdap
           begin
             connect(options)
             break
+          rescue AuthenticationError
+            raise
           rescue => detail
             @logger.error do
               _("Reconnect to server failed: %s\n" \
