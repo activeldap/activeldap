@@ -776,13 +776,13 @@ EOX
 
   def test_have_attribute?
     make_temporary_user do |user, password|
-      assert(user.have_attribute?(:cn))
-      assert(user.have_attribute?(:commonName))
-      assert(user.have_attribute?(:common_name))
-      assert(!user.have_attribute?(:commonname))
-      assert(!user.have_attribute?(:COMMONNAME))
+      assert_true(user.have_attribute?(:cn))
+      assert_true(user.have_attribute?(:commonName))
+      assert_true(user.have_attribute?(:common_name))
+      assert_true(user.have_attribute?(:commonname))
+      assert_true(user.have_attribute?(:COMMONNAME))
 
-      assert(!user.have_attribute?(:unknown_attribute))
+      assert_false(user.have_attribute?(:unknown_attribute))
     end
   end
 

@@ -921,7 +921,7 @@ module ActiveLdap
 
     def have_attribute?(name, except=[])
       real_name = to_real_attribute_name(name)
-      real_name and !except.include?(real_name)
+      !real_name.nil? and !except.include?(real_name)
     end
     alias_method :has_attribute?, :have_attribute?
 

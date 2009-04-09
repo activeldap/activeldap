@@ -8,9 +8,11 @@ class TestAttributes < Test::Unit::TestCase
   priority :normal
   def test_to_real_attribute_name
     user = @user_class.new("user")
-    assert_nil(user.__send__(:to_real_attribute_name, "objectclass"))
+    assert_equal("objectClass",
+                 user.__send__(:to_real_attribute_name, "objectclass"))
     assert_equal("objectClass",
                  user.__send__(:to_real_attribute_name, "objectclass", true))
+    assert_nil(user.__send__(:to_real_attribute_name, "objectclass", false))
   end
 
   def test_protect_object_class_from_mass_assignment
