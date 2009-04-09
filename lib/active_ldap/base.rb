@@ -1124,7 +1124,7 @@ module ActiveLdap
       obj
     end
 
-    def to_real_attribute_name(name, allow_normalized_name=false)
+    def to_real_attribute_name(name, allow_normalized_name=true)
       return name if name.nil?
       if allow_normalized_name
         entry_attribute.normalize(name, allow_normalized_name) ||
