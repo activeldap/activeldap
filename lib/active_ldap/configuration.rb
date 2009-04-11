@@ -37,8 +37,8 @@ module ActiveLdap
     DEFAULT_CONFIG[:sasl_mechanisms] = ["GSSAPI", "DIGEST-MD5",
                                         "CRAM-MD5", "EXTERNAL"]
 
-    DEFAULT_CONFIG[:retry_limit] = 3
-    DEFAULT_CONFIG[:retry_wait] = 3
+    DEFAULT_CONFIG[:retry_limit] = 1
+    DEFAULT_CONFIG[:retry_wait] = 1
     DEFAULT_CONFIG[:timeout] = 0 # in seconds; 0 <= Never timeout
     # Whether or not to retry on timeouts
     DEFAULT_CONFIG[:retry_on_timeout] = true
