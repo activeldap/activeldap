@@ -3,12 +3,13 @@ module ActiveLdap
     class Proxy
       alias_method :proxy_respond_to?, :respond_to?
       alias_method :proxy_extend, :extend
+      delegate :to_param, :to => :target
 
       def initialize(owner, options)
         @owner = owner
         @options = options
-        extend(options[:extend]) if options[:extend]
         reset
+        extend(options[:extend]) if options[:extend]
       end
 
       def respond_to?(symbol, include_priv=false)
