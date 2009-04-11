@@ -310,7 +310,13 @@ module ActiveLdap
           Timeout.alarm(@timeout, &block)
         rescue Timeout::Error => e
           @logger.error {_('Requested action timed out.')}
-          retry if @retry_on_timeout and try_reconnect and reconnect(options)
+          if @retry_on_timeout
+            if connecting?
+              retry
+            elsif try_reconnect and reconnect(options)
+              retry
+            end
+          end
           @logger.error {e.message}
           raise TimeoutError, e.message
         end
