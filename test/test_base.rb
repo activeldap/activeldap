@@ -50,16 +50,19 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  def test_destroy_with_empty_base_of_class
+  def test_destroy_with_empty_base_and_prefix_of_class
     make_temporary_user do |user,|
+      p user.dn
       base = user.class.base
+      prefix = user.class.prefix
       begin
         user.class.base = ""
-        user.prefix = ""
+        user.class.prefix = ""
         user.base = base
         user.destroy
       ensure
         user.class.base = base
+        user.class.prefix = prefix
       end
     end
   end
