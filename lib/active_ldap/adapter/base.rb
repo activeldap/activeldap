@@ -306,15 +306,17 @@ module ActiveLdap
       end
 
       def with_timeout(try_reconnect=true, options={}, &block)
+        n_retries = 0
+        retry_limit = options[:retry_limit] || @retry_limit
         begin
           Timeout.alarm(@timeout, &block)
         rescue Timeout::Error => e
           @logger.error {_('Requested action timed out.')}
-          if @retry_on_timeout
+          if @retry_on_timeout and retry_limit < 0 and n_retries <= retry_limit
             if connecting?
               retry
-            elsif try_reconnect and reconnect(options)
-              retry
+            elsif try_reconnect
+              retry if with_timeout(false, options) {reconnect(options)}
             end
           end
           @logger.error {e.message}
@@ -596,7 +598,9 @@ module ActiveLdap
 
       def reconnect_if_need(options={})
         return if connecting?
-        reconnect(options)
+        with_timeout(false, options) do
+          reconnect(options)
+        end
       end
 
       # Determine if we have exceed the retry limit or not.
