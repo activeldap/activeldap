@@ -309,7 +309,6 @@ module ActiveLdap
           end
           def #{sym}; self.class.#{sym}; end
           def self.#{sym}=(value); @#{sym} = value; end
-          def #{sym}=(value); self.class.#{sym} = value; end
         EOS
       end
     end
@@ -1008,7 +1007,6 @@ module ActiveLdap
       end.join(",")
     end
 
-    undef_method :base=
     def base=(object_local_base)
       @dn = nil
       @base = object_local_base
@@ -1019,7 +1017,6 @@ module ActiveLdap
       @scope || scope_of_class
     end
 
-    undef_method :scope=
     def scope=(scope)
       self.class.validate_scope(scope)
       @scope = scope
