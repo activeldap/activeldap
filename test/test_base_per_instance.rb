@@ -9,6 +9,13 @@ class TestBasePerInstance < Test::Unit::TestCase
   end
 
   priority :must
+  def test_set_base
+    guest = @user_class.new("guest")
+    guest.base = "ou=Sub"
+    assert_equal("uid=guest,ou=Sub,#{@user_class.base}", guest.dn)
+  end
+
+  priority :normal
   def test_dn_is_base
     entry_class = Class.new(ActiveLdap::Base)
     entry_class.ldap_mapping :prefix => "",
@@ -21,7 +28,6 @@ class TestBasePerInstance < Test::Unit::TestCase
     assert_equal(entry_class.base, entry.base)
   end
 
-  priority :normal
   def test_loose_dn
     user = @user_class.new("test-user , ou = Sub")
     assert_equal("uid=test-user,ou=Sub,#{@user_class.base}", user.dn)

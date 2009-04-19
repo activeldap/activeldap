@@ -1008,6 +1008,7 @@ module ActiveLdap
     end
 
     def base=(object_local_base)
+      ensure_update_dn
       @dn = nil
       @base = object_local_base
     end
