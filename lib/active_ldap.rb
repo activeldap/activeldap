@@ -904,6 +904,7 @@
 #
 
 require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
+  gem_name ||= library_name
   begin
     if !gem_args.empty? and Object.const_defined?(:Gem)
       gem gem_name, *gem_args
