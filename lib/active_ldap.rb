@@ -319,7 +319,7 @@
 #   irb> develop = Group.find('develop')
 #   => ...
 #   irb> develop.members
-#   => [#<User:0x000001 ...>, #<User:...>]
+#   => [#<User ...>, #<User ...>]
 #
 #
 # The arguments for has_many follow the exact same idea that belongs_to's
@@ -337,21 +337,21 @@
 #
 # ==== .find
 #
-# .find is a class method that is accessible from any subclass of Base that has
-# 'ldap_mapping' called. When called it returns the first match of the given
-# class.
+# .find is a class method that is accessible from
+# any subclass of Base that has 'ldap_mapping' called. When
+# called .first(:first) returns the first match of the given class.
 #
-#   irb> Group.find('*').cn
-#   => "root"
+#   irb> Group.find(:first, 'deve*").cn
+#   => "develop"
 #
 # In this simple example, Group.find took the search string of 'deve*' and
 # searched for the first match in Group where the dn_attribute matched the
 # query. This is the simplest example of .find.
 #
-#   irb> Group.find(:all, '*').collect {|group| group.cn}
+#   irb> Group.find(:all).collect {|group| group.cn}
 #   => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
 #
-# Here .find(:all) returns all matches to the same query.  Both .find and
+# Here .find(:all) returns all matches to the same query.  Both .find(:first) and
 # .find(:all) also can take more expressive arguments:
 #
 #   irb> Group.find(:all, :attribute => 'gidNumber', :value => '1003').collect {|group| group.cn}
@@ -442,7 +442,7 @@
 # * :port defaults to @@port from configuration.rb as well
 # * :base defaults to Base.base() from configuration.rb
 # * :bind_dn defaults @@bind_format from configuration.rb
-# * :logger defaults to a Log4r object that prints fatal messages to stderr
+# * :logger defaults to a Logger object that prints fatal messages to stderr
 # * :password_block defaults to nil
 # * :allow_anonymous defaults to true
 # * :try_sasl defaults to false - see Advanced Topics for more on this one.
@@ -474,8 +474,9 @@
 # * :retry_on_timeout - whether to reconnect when timeouts occur. Defaults to true
 # See lib/configuration.rb for defaults for each option
 #
-# Base.setup_connection both connects and binds in one step. It follows
-# roughly the following approach:
+# Base.setup_connection just setups connection
+# configuration. A connection is connected and bound when it
+# is needed. It follows roughly the following approach:
 #
 # * Connect to host:port using :method
 #
@@ -484,9 +485,10 @@
 #   anonymously.
 # * If that fails, error out.
 #
-# On connect, the configuration options passed in are stored in an internal class variable
-# @configuration which is used to cache the information without ditching the defaults passed in
-# from configuration.rb
+# On connect, the configuration options passed in are stored
+# in an internal class variable which is used to cache the
+# information without ditching the defaults passed in from
+# configuration.rb
 #
 # ===== connection
 #
@@ -566,36 +568,37 @@
 #
 # Now let's create a really dumb script for adding users - ldapadmin/useradd:
 #
-#   #!/usr/bin/ruby -W0
-#
+#   base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+#   $LOAD_PATH << File.join(base, "lib")
+#   $LOAD_PATH << File.join(base, "examples")
+#   
 #   require 'active_ldap'
-#   require 'lib/user'
-#   require 'lib/group'
-#   require 'password'
-#
+#   require 'objects/user'
+#   require 'objects/group'
+#   
 #   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
 #     opts.banner += " USER_NAME CN UID"
 #   end
-#
+#   
 #   if argv.size == 3
 #     name, cn, uid = argv
 #   else
 #     $stderr.puts opts
 #     exit 1
 #   end
-#
+#   
 #   pwb = Proc.new do |user|
 #     ActiveLdap::Command.read_password("[#{user}] Password: ")
 #   end
-#
+#   
 #   ActiveLdap::Base.setup_connection(:password_block => pwb,
-#                                         :allow_anonymous => false)
-#
+#                                     :allow_anonymous => false)
+#   
 #   if User.exists?(name)
 #     $stderr.puts("User #{name} already exists.")
 #     exit 1
 #   end
-#
+#   
 #   user = User.new(name)
 #   user.add_class('shadowAccount')
 #   user.cn = cn
@@ -614,34 +617,38 @@
 # Now let's create another dumb script for modifying users - ldapadmin/usermod:
 #
 #   #!/usr/bin/ruby -W0
-#
+#   
+#   base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+#   $LOAD_PATH << File.join(base, "lib")
+#   $LOAD_PATH << File.join(base, "examples")
+#   
 #   require 'active_ldap'
-#   require 'lib/user'
-#   require 'lib/group'
-#
+#   require 'objects/user'
+#   require 'objects/group'
+#   
 #   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
 #     opts.banner += " USER_NAME CN UID"
 #   end
-#
+#   
 #   if argv.size == 3
 #     name, cn, uid = argv
 #   else
 #     $stderr.puts opts
 #     exit 1
 #   end
-#
+#   
 #   pwb = Proc.new do |user|
 #     ActiveLdap::Command.read_password("[#{user}] Password: ")
 #   end
-#
+#   
 #   ActiveLdap::Base.setup_connection(:password_block => pwb,
-#                                         :allow_anonymous => false)
-#
+#                                     :allow_anonymous => false)
+#   
 #   unless User.exists?(name)
 #     $stderr.puts("User #{name} doesn't exist.")
 #     exit 1
 #   end
-#
+#   
 #   user = User.find(name)
 #   user.cn = cn
 #   user.uid_number = uid
@@ -651,42 +658,6 @@
 #     puts user.errors.full_messages
 #     exit 1
 #   end
-#
-# ==== Removing LDAP entries
-#
-# And finally, a dumb script for removing user - ldapadmin/userdel:
-#
-#
-#   #!/usr/bin/ruby -W0
-#
-#   require 'active_ldap'
-#   require 'lib/user'
-#   require 'lib/group'
-#
-#   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
-#     opts.banner += " USER_NAME"
-#   end
-#
-#   if argv.size == 1
-#     name = argv.shift
-#   else
-#     $stderr.puts opts
-#     exit 1
-#   end
-#
-#   pwb = Proc.new do |user|
-#     ActiveLdap::Command.read_password("[#{user}] Password: ")
-#   end
-#
-#   ActiveLdap::Base.setup_connection(:password_block => pwb,
-#                                         :allow_anonymous => false)
-#
-#   unless User.exists?(name)
-#     $stderr.puts("User #{name} doesn't exist.")
-#     exit 1
-#   end
-#
-#   User.destroy(name)
 #
 # === Advanced Topics
 #
@@ -702,7 +673,7 @@
 #   irb> user = User.new('drewry')
 #   => ...
 #   # This adds a cn entry in lang-en and whatever the server default is.
-#   irb> user.cn = [ 'wad', {'lang-en' => ['wad', 'foo']} ]
+#   irb> user.cn = [ 'wad', {'lang-en' => ['wad', 'Will Drewry']} ]
 #   => ...
 #   irb> user.cn
 #   => ["wad", {"lang-en-us" => ["wad", "Will Drewry"]}]
@@ -733,7 +704,7 @@
 # The only subtypes defined in LDAPv3 are lang-* and binary.  These can be nested
 # though:
 #
-#  irb> user.cn = [{'lang-JP-jp' => {'binary' => 'somejp'}}]
+#  irb> user.cn = [{'lang-ja' => {'binary' => 'some Japanese'}}]
 #
 # As I understand it, OpenLDAP does not support nested subtypes, but some
 # documentation I've read suggests that Netscape's LDAP server does. I only
