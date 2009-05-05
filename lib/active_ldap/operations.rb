@@ -196,15 +196,17 @@ module ActiveLdap
       #
       # Finds the first match for value where |value| is the value of some
       # |field|, or the wildcard match. This is only useful for derived classes.
-      # usage: Subclass.find(:attribute => "cn", :value => "some*val")
-      #        Subclass.find('some*val')
+      # usage: Subclass.find(:all, :attribute => "cn", :value => "some*val")
+      #        Subclass.find(:all, 'some*val')
       def find(*args)
         options = extract_options_from_args!(args)
         args = [:first] if args.empty? and !options.empty?
         case args.first
         when :first
+          options[:value] ||= args[1]
           find_initial(options)
         when :last
+          options[:value] ||= args[1]
           find_last(options)
         when :all
           options[:value] ||= args[1]

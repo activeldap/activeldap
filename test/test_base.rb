@@ -6,10 +6,20 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_first
+    make_temporary_user(:simple => true) do |user1,|
+      make_temporary_user(:simple => true) do |user2,|
+        assert_equal(user1, @user_class.find(:first))
+        assert_equal(user2, @user_class.find(:first, user2.cn))
+      end
+    end
+  end
+
   def test_last
     make_temporary_user(:simple => true) do |user1,|
       make_temporary_user(:simple => true) do |user2,|
         assert_equal(user2, @user_class.find(:last))
+        assert_equal(user1, @user_class.find(:last, user1.cn))
       end
     end
   end
