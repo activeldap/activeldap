@@ -22,17 +22,6 @@ class TestConnection < Test::Unit::TestCase
     end
   end
 
-  priority :normal
-  def test_retry_limit_0_with_nonexistent_host
-    config = current_configuration.merge("host" => "192.168.29.29",
-                                         "retry_limit" => 0)
-    ActiveLdap::Base.setup_connection(config)
-    notify("maybe take a long time")
-    assert_raise(ActiveLdap::ConnectionError) do
-      ActiveLdap::Base.find(:first)
-    end
-  end
-
   def test_retry_limit_0_with_nonexistent_host_with_timeout
     config = current_configuration.merge("host" => "192.168.29.29",
                                          "retry_limit" => 0,
@@ -78,5 +67,16 @@ class TestConnection < Test::Unit::TestCase
     ActiveLdap::Base.setup_connection(config)
     connection = ActiveLdap::Base.connection
     assert(connection.send(:can_reconnect?, :reconnect_attempts => -10))
+  end
+
+  priority :low
+  def test_retry_limit_0_with_nonexistent_host
+    config = current_configuration.merge("host" => "192.168.29.29",
+                                         "retry_limit" => 0)
+    ActiveLdap::Base.setup_connection(config)
+    notify("maybe take a long time")
+    assert_raise(ActiveLdap::ConnectionError) do
+      ActiveLdap::Base.find(:first)
+    end
   end
 end
