@@ -282,10 +282,10 @@
 # using the symbol :groups. The next collection of arguments are actually a Hash
 # (as with ldap_mapping). :class_name should be a string that has the name of a
 # class you've already included. If you class is inside of a module, be sure to
-# put the whole name, e.g. :class_name => "MyLdapModule::Group". :primary_key
+# put the whole name, e.g. :class_name => "MyLdapModule::Group". :foreign_key
 # tells belongs_to what attribute Group objects have that match the
 # :many. :many is the name of the local attribute whose value
-# should be looked up in Group under the primary key. If :foreign_key is left
+# should be looked up in Group under the foreign key. If :foreign_key is left
 # off of the argument list, it is assumed to be the dn_attribute. With this in
 # mind, the above definition could become:
 #
