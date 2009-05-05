@@ -600,16 +600,12 @@ module ActiveLdap
       end
 
       def default_dn_attribute
-        if name.blank?
-          dn_attribute = nil
-          parent_class = ancestors[1]
-          if parent_class.respond_to?(:dn_attribute)
-            dn_attribute = parent_class.dn_attribute
-          end
-          dn_attribute || "cn"
-        else
-          name.demodulize.underscore
+        dn_attribute = nil
+        parent_class = ancestors[1]
+        if parent_class.respond_to?(:dn_attribute)
+          dn_attribute = parent_class.dn_attribute
         end
+        dn_attribute || "cn"
       end
 
       def default_prefix
