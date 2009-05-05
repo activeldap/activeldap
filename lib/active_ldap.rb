@@ -2,6 +2,7 @@
 # = ActiveLdap
 #
 # "ActiveLdap" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
+#              Copyright (C) 2006-2009 Kouhei Sutou <kou@cozmixng.org>
 #
 # == Introduction
 #
@@ -251,7 +252,7 @@
 #
 #   irb> class User < ActiveLdap::Base
 #   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
-#   irb*   belongs_to :groups, :class => 'Group', :many => 'memberUid', :foreign_key => 'uid'
+#   irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid', :foreign_key => 'uid'
 #   irb* end
 #
 # Now, class User will have a method called 'groups' which will retrieve all
@@ -259,7 +260,7 @@
 #
 #   irb> me = User.find('drewry')
 #   irb> me.groups
-#   => [#<Group:0x000001 ...>, #<Group:0x000002 ...>, ...]
+#   => [#<Group ...>, #<Group ...>, ...]
 #   irb> me.groups.each { |group| p group.cn };nil
 #   "cdrom"
 #   "audio"
@@ -279,9 +280,9 @@
 # Now let's talk about the arguments.  The first argument is the name of the
 # method you wish to create. In this case, we created a method called groups
 # using the symbol :groups. The next collection of arguments are actually a Hash
-# (as with ldap_mapping). :class should be a string that has the name of a
+# (as with ldap_mapping). :class_name should be a string that has the name of a
 # class you've already included. If you class is inside of a module, be sure to
-# put the whole name, e.g. :class => "MyLdapModule::Group". :primary_key
+# put the whole name, e.g. :class_name => "MyLdapModule::Group". :primary_key
 # tells belongs_to what attribute Group objects have that match the
 # :many. :many is the name of the local attribute whose value
 # should be looked up in Group under the primary key. If :foreign_key is left
@@ -290,7 +291,7 @@
 #
 #   irb> class User < ActiveLdap::Base
 #   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
-#   irb*   belongs_to :groups, :class => 'Group', :many => 'memberUid'
+#   irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid'
 #   irb* end
 #
 # In addition, you can do simple membership tests by doing the following:
@@ -309,7 +310,7 @@
 #
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
-#     has_many :members, :class => "User", :wrap => "memberUid", :primary_key => 'uid'
+#     has_many :members, :class_name => "User", :wrap => "memberUid", :primary_key => 'uid'
 #   end
 #
 # Now we can see that group develop has user 'drewry' as a member, and it can
@@ -324,7 +325,7 @@
 # The arguments for has_many follow the exact same idea that belongs_to's
 # arguments followed. :wrap's contents are used to search for matching
 # :primary_key content.  If :primary_key is not specified, it defaults to the
-# dn_attribute of the specified :class.
+# dn_attribute of the specified :class_name.
 #
 # === Using these new classes
 #
@@ -546,7 +547,7 @@
 #   cat <<EOF
 #   class User < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
-#     belongs_to :groups, :class => 'Group', :wrap => 'memberUid'
+#     belongs_to :groups, :class_name => 'Group', :wrap => 'memberUid'
 #   end
 #   EOF
 #
@@ -554,8 +555,8 @@
 #   cat <<EOF
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
-#     has_many :members, :class => "User", :many => "memberUid"
-#     has_many :primary_members, :class => 'User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
+#     has_many :members, :class_name => "User", :many => "memberUid"
+#     has_many :primary_members, :class_name => 'User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
 #   end # Group
 #   EOF
 #
@@ -761,7 +762,7 @@
 #   module MyLDAP
 #   class User < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
-#     belongs_to :groups, :class => 'MyLDAP::Group', :many => 'memberUid'
+#     belongs_to :groups, :class_name => 'MyLDAP::Group', :many => 'memberUid'
 #   end
 #   end
 #
@@ -769,8 +770,8 @@
 #   module MyLDAP
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
-#     has_many :members, :class => 'MyLDAP::User', :wrap => 'memberUid'
-#     has_many :primary_members, :class => 'MyLDAP::User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
+#     has_many :members, :class_name => 'MyLDAP::User', :wrap => 'memberUid'
+#     has_many :primary_members, :class_name => 'MyLDAP::User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
 #   end
 #   end
 #
