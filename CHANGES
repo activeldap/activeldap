@@ -1,5 +1,5 @@
 1.1.0:
-  * Added documents in Japanese. [tashen]
+  * Added documents in Japanese. [Kazuaki Takase]
   * Supported Ruby 1.9.1.
     * [#20] [Ruby 1.9 Support] :: Running Tests [Alexey.Chebotar]
   * Supported Rails 2.3.2.
@@ -7,6 +7,23 @@
   * Bug fixes:
     * Fixed blank values detection. [David Morton]
     * [#22] Ruby 1.8.6 p287 :: Undefined methods [Alexey.Chebotar]
+    * Fixed gem loading. [Tiago Fernandes]
+    * Fixed DN change via #base=. [David Morton]
+    * Fixed infinite retry on timeout.
+    * Fixed needless reconnection.
+  * API improvements:
+    * Removed needless instance methods: #prefix=,
+      #dn_attribute=, #sort_by=, #order=, #required_classes=,
+      #recommended_classes= and #excluded_classes. [David Morton]
+    * Removed obsolete scafoold_al generator.
+    * Reduced default :retry_limit.
+    * Supported association as parameter. [Joe Francis]
+    * Normalized schema attribute name. [Tim Hermans]
+    * Suppressed AuthenticationError -> ConnectionError
+      conversion on reconnection. [Kazuaki Takase]
+    * Added ActiveLdap::Schema#dump.
+    * ActiveLdap::Base.establish_connection ->
+      ActiveLdap::Base.setup_connection.
 
 1.0.2:
   * Removed Base64 module use.
