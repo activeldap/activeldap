@@ -124,7 +124,7 @@
 # Here's an extension class that maps to the LDAP Group objects:
 #
 #   irb> class Group < ActiveLdap::Base
-#   irb* ldap_mapping
+#   irb*   ldap_mapping
 #   irb* end
 #
 # Here is the Group class in use:
@@ -133,10 +133,7 @@
 #   => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
 #
 #   irb> group = Group.find("develop")
-#   => #<Group:0x..........>
-#
-#   irb> group.members.collect {|member| member.uid}
-#   => ["drewry"]
+#   => #<Group objectClass:<...> ...>
 #
 #   irb> group.cn
 #   => "develop"
@@ -220,8 +217,8 @@
 # may help avoid programmer error later.
 #
 # :classes isn't the only optional argument.  If :dn_attribute is left off,
-# it defaults to underscored class name or 'cn'.  If :prefix is left off,
-# it will default to 'ou=PLURALIZED_CLASSNAME'. In this
+# it defaults to super class's value or 'cn'.  If :prefix is left off,
+# it will default to 'ou=PluralizedClassName'. In this
 # case, it would be 'ou=Groups'.
 #
 # :classes should be an Array. :dn_attribute should be a String and so should
