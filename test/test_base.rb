@@ -6,6 +6,25 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_last
+    make_temporary_user(:simple => true) do |user1,|
+      make_temporary_user(:simple => true) do |user2,|
+        assert_equal(user2, @user_class.find(:last))
+      end
+    end
+  end
+
+  def test_convenient_operation_methods
+    make_temporary_user(:simple => true) do |user1,|
+      make_temporary_user(:simple => true) do |user2,|
+        assert_equal(user1, @user_class.first)
+        assert_equal(user2, @user_class.last)
+        assert_equal([user1, user2], @user_class.all)
+      end
+    end
+  end
+
+  priority :normal
   def test_set_attributes_with_a_blank_value_in_values
     make_temporary_user(:simple => true) do |user,|
       user.attributes = {"description" => ["a", "b", ""]}
@@ -13,7 +32,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_set_attributes_with_a_blank_value
     make_temporary_user(:simple => true) do |user,|
       user.attributes = {"description" => [""]}

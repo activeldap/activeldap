@@ -204,6 +204,8 @@ module ActiveLdap
         case args.first
         when :first
           find_initial(options)
+        when :last
+          find_last(options)
         when :all
           options[:value] ||= args[1]
           find_every(options)
@@ -212,9 +214,36 @@ module ActiveLdap
         end
       end
 
+      # A convenience wrapper for <tt>find(:first,
+      # *args)</tt>. You can pass in all the same arguments
+      # to this method as you can to <tt>find(:first)</tt>.
+      def first(*args)
+        find(:first, *args)
+      end
+
+      # A convenience wrapper for <tt>find(:last,
+      # *args)</tt>. You can pass in all the same arguments
+      # to this method as you can to <tt>find(:last)</tt>.
+      def last(*args)
+        find(:last, *args)
+      end
+
+      # This is an alias for find(:all).  You can pass in
+      # all the same arguments to this method as you can
+      # to find(:all)
+      def all(*args)
+        find(:all, *args)
+      end
+
       private
       def find_initial(options)
         find_every(options.merge(:limit => 1)).first
+      end
+
+      def find_last(options)
+        order = options[:order] || self.order || 'ascend'
+        order = normalize_sort_order(order) == :ascend ? :descend : :ascend
+        find_initial(options.merge(:order => order))
       end
 
       def normalize_sort_order(value)

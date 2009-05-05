@@ -24,6 +24,11 @@
     * Added ActiveLdap::Schema#dump.
     * ActiveLdap::Base.establish_connection ->
       ActiveLdap::Base.setup_connection.
+    * Supported ActiveLdap::Base.find(:last).
+    * Added convenient methods:
+      * ActiveLdap::Base.first
+      * ActiveLdap::Base.last
+      * ActiveLdap::Base.all
 
 1.0.2:
   * Removed Base64 module use.
