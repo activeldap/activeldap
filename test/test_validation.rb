@@ -194,7 +194,11 @@ class TestValidation < Test::Unit::TestCase
     else
       format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
     end
-    format = format.sub(/^%\{fn\}/, la_(name))
+    localized_name = la_(name)
+    if option and !ActiveLdap.get_text_supported?
+      localized_name += ' '
+    end
+    format = format.sub(/^%\{fn\}/, localized_name)
     message = format % params
     assert_equal([message], model.errors.full_messages)
   end

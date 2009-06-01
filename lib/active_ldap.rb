@@ -910,6 +910,7 @@ end
 
 require_gem_if_need.call("active_record", "activerecord")
 begin
+  raise LoadError, "GetText is disabled."
   require_gem_if_need.call("locale")
   require_gem_if_need.call("gettext")
 

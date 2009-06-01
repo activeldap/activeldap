@@ -184,7 +184,7 @@ module ActiveLdap
       end
       params.unshift(option) if option
       unless ActiveLdap.get_text_supported?
-        format = format.sub(/^%\{fn\} /, '')
+        format = format.sub(/^%\{fn\} ?/, '')
       end
       errors.add(name, format % params)
     end
