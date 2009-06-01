@@ -108,9 +108,9 @@ module ActiveLdap
 
       def ensure_scope(scope)
         scope_map = {
-          :base => 0,
-          :one => 1,
-          :sub => 2,
+          :base => JndiConnection::Scope::OBJECT,
+          :one => JndiConnection::Scope::ONE_LEVEL,
+          :sub => JndiConnection::Scope::SUBTREE,
         }
         value = scope_map[scope || :sub]
         if value.nil?
@@ -123,9 +123,9 @@ module ActiveLdap
 
       def scope_name(scope)
         {
-          0 => :base,
-          1 => :one,
-          2 => :sub,
+          JndiConnection::Scope::OBJECT => :base,
+          JndiConnection::Scope::ONE_LEVEL => :one,
+          JndiConnection::Scope::SUBTREE => :sub,
         }[scope]
       end
 

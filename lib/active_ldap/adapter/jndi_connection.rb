@@ -29,6 +29,12 @@ module ActiveLdap
       NamingException = naming.NamingException
       NameNotFoundException = naming.NameNotFoundException
 
+      module Scope
+        OBJECT = SearchControls::OBJECT_SCOPE
+        ONE_LEVEL = SearchControls::ONELEVEL_SCOPE
+        SUBTREE = SearchControls::SUBTREE_SCOPE
+      end
+
       class ModifyRecord
         directory = javax.naming.directory
         DirContext = directory.DirContext
