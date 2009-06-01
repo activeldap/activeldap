@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '5965eefc93d824a9c145fe8edb6d1a36'
 
-  init_gettext "al-admin"
+#   init_gettext "al-admin"
 
   include ExceptionNotifiable
 
