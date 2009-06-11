@@ -53,26 +53,24 @@ at_exit do
   FileUtils.rm_f("History.txt")
 end
 
-project = nil
-Hoe.spec('activeldap') do |_project|
-  project = _project
-  project.version = ActiveLdap::VERSION
-  project.rubyforge_name = 'ruby-activeldap'
-  project.author = ['Will Drewry', 'Kouhei Sutou']
-  project.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
-  project.summary = 'Ruby/ActiveLdap is a object-oriented API to LDAP'
-  project.url = 'http://rubyforge.org/projects/ruby-activeldap/'
-  project.test_globs = ['test/test_*.rb']
-  project.changes = project.paragraphs_of('CHANGES', 0..1).join("\n\n")
-  project.extra_deps = ['activerecord']
-  project.remote_rdoc_dir = "doc"
-  project.rsync_args += " --chmod=Dg+ws,Fg+w"
-  project.spec_extras = {
+project = Hoe.spec('activeldap') do
+  self.version = ActiveLdap::VERSION
+  self.rubyforge_name = 'ruby-activeldap'
+  self.author = ['Will Drewry', 'Kouhei Sutou']
+  self.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
+  self.summary = 'Ruby/ActiveLdap is a object-oriented API to LDAP'
+  self.url = 'http://rubyforge.org/projects/ruby-activeldap/'
+  self.test_globs = ['test/test_*.rb']
+  self.changes = self.paragraphs_of('CHANGES', 0..1).join("\n\n")
+  self.extra_deps = ['activerecord']
+  self.remote_rdoc_dir = "doc"
+  self.rsync_args += " --chmod=Dg+ws,Fg+w"
+  self.spec_extras = {
     :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap',
     :executables => [],
   }
-  project.description = String.new(<<-EOF)
+  self.description = String.new(<<-EOF)
     'Ruby/ActiveLdap' is a ruby extension library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
     by ActiveRecord. This is not nearly as clean or as flexible as
