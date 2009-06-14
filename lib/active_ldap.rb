@@ -58,26 +58,13 @@
 #
 # === Installation
 #
-# Assuming all the requirements are installed, you can install by grabbing the latest tgz file from
-# the download site[http://rubyforge.org/frs/?group_id=381].
+# Assuming all the requirements are installed, you can install by gem.
 #
-# The following steps will get the ActiveLdap installed in no time!
-#
-#   $ tar -xzvf ruby-activeldap-current.tgz
-#   $ cd ruby-activeldap-VERSION
-#
-# Edit lib/active_ldap/configuration.rb replacing values to match what will work
-# with your LDAP servers. Please note that those variables are required, but can
-# be overridden in any program  as detailed later in this document. Also make
-# sure that "ROOT" stays all upcase.
-#
-# Now run:
-#
-#   $ (as root) rake install
+#   # gem install activeldap
 #
 # Now as a quick test, you can run:
 #
-#   $ irb
+#   $ irb -rubygems
 #   irb> require 'active_ldap'
 #   => true
 #   irb> exit
@@ -85,7 +72,6 @@
 # If the require returns false or an exception is raised, there has been a
 # problem with the installation.  You may need to customize what setup.rb does on
 # install.
-#
 #
 # === Customizations
 #
@@ -234,7 +220,7 @@
 #
 #   * dc=dataspill,dc=org
 #   |+ ou=People,dc=dataspill,dc=org
-#    \
+#    \ 
 #    |- uid=drewry,ou=People,dc=dataspill,dc=org
 #   |- ou=Groups,dc=dataspill,dc=org
 #
