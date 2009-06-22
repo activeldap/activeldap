@@ -6,6 +6,47 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_delete_tree
+    make_ou("base")
+    _ou_class = ou_class("ou=base")
+    root1 = _ou_class.create("root1")
+    child1 = _ou_class.create(:ou => "child1", :parent => root1)
+    child2 = _ou_class.create(:ou => "child2", :parent => root1)
+    root2 = _ou_class.create("root2")
+    assert_equal(["base", "root1", "child1", "child2", "root2"],
+                 _ou_class.find(:all).collect(&:ou))
+    _ou_class.delete_all(:base => root1.dn)
+    assert_equal(["base", "root2"],
+                 _ou_class.find(:all).collect(&:ou))
+  end
+
+  def test_delete_mixed_tree
+    make_ou("base")
+    _ou_class = ou_class("ou=base")
+    domain_class = Class.new(ActiveLdap::Base)
+    domain_class.ldap_mapping :dn_attribute => "dc",
+                              :prefix => "",
+                              :classes => ['domain']
+
+    root1 = _ou_class.create("root1")
+    child1 = _ou_class.create(:ou => "child1", :parent => root1)
+    domain1 = domain_class.create(:dc => "domain1", :parent => child1)
+    grandchild1 = _ou_class.create(:ou => "grandchild1", :parent => child1)
+    child2 = _ou_class.create(:ou => "child2", :parent => root1)
+    domain2 = domain_class.create(:dc => "domain2", :parent => child2)
+    root2 = _ou_class.create("root2")
+
+    entry_class = Class.new(ActiveLdap::Base)
+    entry_class.ldap_mapping :prefix => "ou=base",
+                             :classes => ["top"]
+    entry_class.dn_attribute = nil
+    assert_equal(["base", "root1", "child1", "domain1", "grandchild1",
+                  "child2", "domain2", "root2"],
+                 entry_class.find(:all).collect(&:id))
+    entry_class.delete_all(nil, :base => child2.dn)
+    assert_equal(["base", "root1", "child1", "domain1", "grandchild1", "root2"],
+                 entry_class.find(:all).collect(&:id))
+  end
 
   priority :normal
   def test_first

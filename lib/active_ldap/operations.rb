@@ -497,18 +497,23 @@ module ActiveLdap
         options[:connection].delete(dn, options)
       end
 
-      def delete_all(filter=nil, options={})
-        options = {:base => base, :scope => scope}.merge(options)
-        options = options.merge(:filter => filter) if filter
-        options[:connection] ||= connection
-        conn = options[:connection]
-        targets = conn.search(options).collect do |dn, attributes|
+      def delete_all(options_or_filter=nil, deprecated_options=nil)
+        if deprecated_options.nil?
+          if options_or_filter.is_a?(String)
+            options = {:filter => options_or_filter}
+          else
+            options = (options_or_filter || {}).dup
+          end
+        else
+          options = deprecated_options.merge(:filter => options_or_filter)
+        end
+        targets = search(options).collect do |dn, attributes|
           dn
         end.sort_by do |dn|
           dn.upcase.reverse
         end.reverse
 
-        conn.delete(targets)
+        options[:connection].delete(targets)
       end
     end
 
