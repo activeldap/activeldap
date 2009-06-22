@@ -826,7 +826,10 @@
 # any methods you write might need to figure it out. I'd suggest just
 # calling self[attribname] to get the value, but if that's not good enough,
 # you can call look up the stored name by #to_real_attribute_name as follows:
-#    irb> to_real_attribute_name('commonName')
+#
+#    irb> User.find(:first).instance_eval do
+#    irb>   to_real_attribute_name('commonName')
+#    irb> end
 #    => 'cn'
 #
 # This tells you the name the attribute is stored in behind the scenes (@data).
