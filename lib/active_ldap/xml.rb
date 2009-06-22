@@ -1,4 +1,5 @@
 require 'erb'
+require 'builder'
 
 require 'active_ldap/ldif'
 
@@ -16,17 +17,18 @@ module ActiveLdap
 
       def to_s
         root = @options[:root]
-        result = "<#{root}>\n"
-        target_attributes.each do |key, values|
-          values = normalize_values(values).sort_by {|value, _| value}
-          if @schema.attribute(key).single_value?
-            result << "  #{serialize_attribute_value(key, *values[0])}\n"
-          else
-            result << serialize_attribute_values(key, values)
+        indent = @options[:indent] || 2
+        xml = @options[:builder] || Builder::XmlMarkup.new(:indent => indent)
+        xml.tag!(root) do
+          target_attributes.each do |key, values|
+            values = normalize_values(values).sort_by {|value, _| value}
+            if @schema.attribute(key).single_value?
+              serialize_attribute_value(xml, key, *values[0])
+            else
+              serialize_attribute_values(xml, key, values)
+            end
           end
         end
-        result << "</#{root}>\n"
-        result
       end
 
       private
@@ -77,36 +79,26 @@ module ActiveLdap
         targets
       end
 
-      def serialize_attribute_values(name, values)
-        return "" if values.blank?
+      def serialize_attribute_values(xml, name, values)
+        return if values.blank?
 
-        result = ""
         if name == "dn" or @options[:type].to_s.downcase == "ldif"
-          values.collect do |value, xml_attributes|
-            xml = serialize_attribute_value(name, value, xml_attributes)
-            result << "  #{xml}\n"
+          values.each do |value, xml_attributes|
+            serialize_attribute_value(xml, name, value, xml_attributes)
           end
         else
           plural_name = name.pluralize
-          result << "  <#{plural_name} type=\"array\">\n"
-          values.each do |value, xml_attributes|
-            xml = serialize_attribute_value(name, value, xml_attributes)
-            result << "    #{xml}\n"
+          attributes = @options[:skip_types] ? {} : {"type" => "array"}
+          xml.tag!(plural_name, attributes) do
+            values.each do |value, xml_attributes|
+              serialize_attribute_value(xml, name, value, xml_attributes)
+            end
           end
-          result << "  </#{plural_name}>\n"
         end
-        result
       end
 
-      def serialize_attribute_value(name, value, xml_attributes)
-        if xml_attributes.blank?
-          xml_attributes = ""
-        else
-          xml_attributes = " " + xml_attributes.collect do |n, v|
-            "#{ERB::Util.h(n)}=\"#{ERB::Util.h(v)}\""
-          end.join(" ")
-        end
-        "<#{name}#{xml_attributes}>#{ERB::Util.h(value)}</#{name}>"
+      def serialize_attribute_value(xml, name, value, xml_attributes)
+        xml.tag!(name, value, xml_attributes)
       end
     end
 

@@ -4,6 +4,48 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_to_xml
+    make_temporary_user do |user,|
+      make_temporary_group do |group1|
+        make_temporary_group do |group2|
+          user.groups = [group1, group2]
+          assert_equal(<<-EOX, user.groups.to_xml(:root => "groups"))
+<?xml version="1.0" encoding="UTF-8"?>
+<groups type="array">
+  <group>
+    <dn>cn=temp-group1,ou=Groups,dc=temp,dc=test,dc=local,dc=net</dn>
+    <cns type="array">
+      <cn>temp-group1</cn>
+    </cns>
+    <gidNumber>100001</gidNumber>
+    <memberUids type="array">
+      <memberUid>temp-user1</memberUid>
+    </memberUids>
+    <objectClasses type="array">
+      <objectClass>posixGroup</objectClass>
+    </objectClasses>
+  </group>
+  <group>
+    <dn>cn=temp-group2,ou=Groups,dc=temp,dc=test,dc=local,dc=net</dn>
+    <cns type="array">
+      <cn>temp-group2</cn>
+    </cns>
+    <gidNumber>100002</gidNumber>
+    <memberUids type="array">
+      <memberUid>temp-user1</memberUid>
+    </memberUids>
+    <objectClasses type="array">
+      <objectClass>posixGroup</objectClass>
+    </objectClasses>
+  </group>
+</groups>
+EOX
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_belongs_to_with_invalid_dn_attribute_value
     make_temporary_user do |user,|
       make_temporary_group do |group|
@@ -16,7 +58,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_has_many_wrap_with_nonexistent_entry
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)

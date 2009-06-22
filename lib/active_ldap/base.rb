@@ -897,6 +897,7 @@ module ActiveLdap
     def to_xml(options={})
       options = options.dup
       options[:root] ||= (self.class.name || '').underscore
+      options[:root] = 'anonymous' if options[:root].blank?
       except = options[:except]
       if except
         options[:except] = except.collect do |name|

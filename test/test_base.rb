@@ -6,6 +6,8 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+
+  priority :normal
   def test_first
     make_temporary_user(:simple => true) do |user1,|
       make_temporary_user(:simple => true) do |user2,|
@@ -34,7 +36,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_set_attributes_with_a_blank_value_in_values
     make_temporary_user(:simple => true) do |user,|
       user.attributes = {"description" => ["a", "b", ""]}
@@ -657,7 +658,7 @@ class TestBase < Test::Unit::TestCase
 EOX
 
     assert_equal(<<-EOX, ou.to_xml)
-<>
+<anonymous>
   <dn>#{ou.dn}</dn>
   <objectClasses type="array">
     <objectClass>organizationalUnit</objectClass>
@@ -666,7 +667,7 @@ EOX
   <ous type="array">
     <ou>Sample</ou>
   </ous>
-</>
+</anonymous>
 EOX
 
     make_temporary_user do |user, password|
