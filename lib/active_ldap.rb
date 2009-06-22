@@ -839,8 +839,8 @@
 # Also, if you like to look up all aliases for an attribute, you can call the
 # following:
 #
-#  irb> schema.attribute_aliases('cn')
-#  => ['cn','commonName']
+#  irb> User.schema.attribute_type 'cn', 'NAME'
+#  => ["cn", "commonName"]
 #
 # This is discovered automagically from the LDAP server's schema.
 #
