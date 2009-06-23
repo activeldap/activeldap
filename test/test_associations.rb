@@ -4,6 +4,18 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_has_many_delete_required_attribute
+    make_temporary_group do |group|
+      make_temporary_user do |user,|
+        user.primary_group = group
+        assert_raise(ActiveLdap::RequiredAttributeMissed) do
+          group.primary_members.delete(user)
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_to_xml
     make_temporary_user do |user,|
       make_temporary_group do |group1|
@@ -45,7 +57,6 @@ EOX
     end
   end
 
-  priority :normal
   def test_belongs_to_with_invalid_dn_attribute_value
     make_temporary_user do |user,|
       make_temporary_group do |group|
