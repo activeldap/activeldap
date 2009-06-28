@@ -108,6 +108,11 @@
 #
 #   irb> require 'active_ldap'
 #
+# Call setup_connection method  for connect to LDAP server. In this case, LDAP server
+# is localhost, and base of LDAP tree is "dc=dataspill,dc=org".
+#
+#   irb> ActiveLdap::Base.setup_connection :host => 'localhost', :base => 'dc=dataspill,dc=org'
+#
 # Here's an extension class that maps to the LDAP Group objects:
 #
 #   irb> class Group < ActiveLdap::Base
