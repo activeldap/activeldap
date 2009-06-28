@@ -189,7 +189,7 @@
 #   ^^         ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^
 #  :dn_attribute |         |
 #              :prefix     |
-#                :base from configuration.rb
+#                :base from setup_connection
 #
 # :scope tells ActiveLdap to only search under ou=Groups, and not to look deeper
 # for dn_attribute matches.
@@ -430,10 +430,9 @@
 #   )
 #
 # There are quite a few arguments, but luckily many of them have safe defaults:
-# * :host defaults to @@host from configuration.rb waaay back at the setup.rb stage.@
-# * :port defaults to @@port from configuration.rb as well
-# * :base defaults to Base.base() from configuration.rb
-# * :bind_dn defaults @@bind_format from configuration.rb
+# * :host defaults to "127.0.0.1".
+# * :port defaults to nil. 389 is applied if not specified. 
+# * :bind_dn defaults to nil. anonymous binding is applied if not specified.
 # * :logger defaults to a Logger object that prints fatal messages to stderr
 # * :password_block defaults to nil
 # * :allow_anonymous defaults to true
@@ -463,7 +462,7 @@
 # * :scope - dictates how to find objects. (Default: :one)
 # * :timeout - time in seconds - defaults to disabled. This CAN interrupt search() requests. Be warned.
 # * :retry_on_timeout - whether to reconnect when timeouts occur. Defaults to true
-# See lib/configuration.rb for defaults for each option
+# See lib/configuration.rb(ActiveLdap::Configuration::DEFAULT_CONFIG) for defaults for each option
 #
 # Base.setup_connection just setups connection
 # configuration. A connection is connected and bound when it
@@ -509,7 +508,7 @@
 # ==== ConnectionError
 #
 # This exception is raised during Base.setup_connection if no valid
-# connection to the LDAP server could be created. Check you configuration.rb,
+# connection to the LDAP server could be created. Check you 
 # Base.setup_connection arguments, and network connectivity! Also check
 # your LDAP server logs to see if it ever saw the request.
 #
