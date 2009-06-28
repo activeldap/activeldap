@@ -194,6 +194,7 @@
 # :scope tells ActiveLdap to only search under ou=Groups, and not to look deeper
 # for dn_attribute matches.
 # (e.g. cn=develop,ou=DevGroups,ou=Groups,dc=dataspill,dc=org)
+# You can choose value from between :sub, :one and :base.
 #
 # Something's missing: :classes.  :classes is used to tell ActiveLdap what
 # the minimum requirement is when creating a new object. LDAP uses objectClasses
@@ -368,7 +369,7 @@
 # You can specify the :filter, :base, :scope, and :attributes, but they all have defaults --
 #  * :filter defaults to objectClass=* - usually this isn't what you want
 #  * :base defaults to the base of the class this is executed from (as set in ldap_mapping)
-#  * :scope defaults to :sub. Usually you won't need to change it
+#  * :scope defaults to :sub. Usually you won't need to change it (You can choose value also from between :one and :base)
 #  * :attributes defaults to [] and is the list of attributes you want back. Empty means all of them.
 #
 # ==== #valid?
