@@ -107,7 +107,7 @@ module ActiveLdap
             target.base = value.gsub(/['}{#]/, '')
           when :scope, :ldap_scope
             if key == :ldap_scope
-              logger.warning do
+              logger.warn do
                 _(":ldap_scope configuration option is deprecated. " \
                   "Use :scope instead.")
               end

@@ -46,7 +46,7 @@ module ActiveLdap
         _base = options[:base] ? [options[:base]] : [prefix, base]
         _base = prepare_search_base(_base)
         if options.has_key?(:ldap_scope)
-          logger.warning do
+          logger.warn do
             _(":ldap_scope search option is deprecated. Use :scope instead.")
           end
           options[:scope] ||= options[:ldap_scope]
