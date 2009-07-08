@@ -8,17 +8,17 @@ module ActiveLdap
 
       private
       def insert_entry(entry)
-        entry[primary_key] = @owner[@options[:foreign_key_name]]
+        entry[@options[:foreign_key_name]] = @owner[primary_key]
         entry.save
       end
 
       def find_target
-        collect_targets(:foreign_key_name)
+        collect_targets(:primary_key_name)
       end
 
       def delete_entries(entries)
-        key = primary_key
-        components = @owner[@options[:foreign_key_name], true].reject do |value|
+        key = @options[:foreign_key_name]
+        components = @owner[primary_key, true].reject do |value|
           value.nil?
         end
         filter = [:and,

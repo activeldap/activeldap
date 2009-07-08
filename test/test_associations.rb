@@ -359,8 +359,8 @@ EOX
       group_class.has_many :members, :class => @user_class, :wrap => "memberUid",
                            :extend => mod
       group_class.has_many :primary_members, :class => @user_class,
-                           :foreign_key => "gidNumber",
                            :primary_key => "gidNumber",
+                           :foreign_key => "gidNumber",
                            :extend => mod
     end
   end
