@@ -62,11 +62,16 @@ project = Hoe.spec('activeldap') do
   self.url = 'http://rubyforge.org/projects/ruby-activeldap/'
   self.test_globs = ['test/test_*.rb']
   self.changes = self.paragraphs_of('CHANGES', 0..1).join("\n\n")
-  self.extra_deps = ['activerecord']
+  self.extra_deps = [
+                     'ruby-ldap = 0.9.9',
+                     'activerecord = 2.3.2',
+                     'locale = 2.0.4',
+                     'gettext = 2.0.4',
+                     'gettext_activerecord = 2.0.4',
+                    ]
   self.remote_rdoc_dir = "doc"
   self.rsync_args += " --chmod=Dg+ws,Fg+w"
   self.spec_extras = {
-    :requirements => ['ruby-ldap >= 0.8.2', '(Open)LDAP server'],
     :autorequire => 'active_ldap',
     :executables => [],
   }
