@@ -879,7 +879,7 @@ require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   end
 end
 
-require_gem_if_need.call("active_support", "activesupport")
+require_gem_if_need.call("active_support", "activesupport", "= 2.3.2")
 
 if ActiveSupport.const_defined?(:Dependencies)
   dependencies = ActiveSupport::Dependencies
