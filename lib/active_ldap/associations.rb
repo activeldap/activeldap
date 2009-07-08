@@ -37,7 +37,8 @@ module ActiveLdap
       # Example:
       #  belongs_to :groups, :class_name => "Group",
       #             :many => "memberUid" # Group#memberUid
-      #             # :foreign_key => "uid" # User#uid
+      #             # :primary_key => "uid" # User#uid
+      #             ## :foreign_key => "uid" # User#uid # deprecated since 1.1.0
       #             # dn attribute value is used by default
       #  belongs_to :primary_group, :class_name => "Group",
       #             :foreign_key => "gidNumber", # User#gidNumber
@@ -61,7 +62,15 @@ module ActiveLdap
         }
         if opts[:many]
           association_class = Association::BelongsToMany
-          opts[:foreign_key_name] ||= dn_attribute
+          foreign_key_name = opts[:foreign_key_name]
+          if foreign_key_name
+            logger.warn do
+              _(":foreign_key belongs_to(:many) option is " \
+                "deprecated since 1.1.0. Use :primary_key instead.")
+            end
+            opts[:primary_key_name] ||= foreign_key_name
+          end
+          opts[:primary_key_name] ||= dn_attribute
         else
           association_class = Association::BelongsTo
           opts[:foreign_key_name] ||= "#{association_id}_id"
