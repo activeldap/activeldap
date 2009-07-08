@@ -901,21 +901,11 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-require_gem_if_need.call("active_record", "activerecord")
+require_gem_if_need.call("active_record", "activerecord", "= 2.3.2")
 begin
-  raise LoadError, "GetText is disabled."
-  require_gem_if_need.call("locale")
-  require_gem_if_need.call("gettext")
-
-  require 'active_record/version'
-  active_record_version = [ActiveRecord::VERSION::MAJOR,
-                           ActiveRecord::VERSION::MINOR,
-                           ActiveRecord::VERSION::TINY]
-  if (active_record_version <=> [2, 2, 0]) < 0
-    require "gettext/active_record"
-  else
-    require_gem_if_need.call("gettext_activerecord")
-  end
+  require_gem_if_need.call("locale", nil, "= 2.0.4")
+  require_gem_if_need.call("gettext", nil, "= 2.0.4")
+  require_gem_if_need.call("gettext_activerecord", nil, "= 2.0.4")
 rescue LoadError
 end
 require 'active_ldap/get_text'

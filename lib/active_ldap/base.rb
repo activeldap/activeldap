@@ -678,7 +678,17 @@ module ActiveLdap
     #   [ User.find("a"), User.find("b"), User.find("c") ] &
     #     [ User.find("a"), User.find("d") ] # => [ User.find("a") ]
     def hash
-      dn.hash
+      return super if @_hashing # workaround for GetText :<
+      _dn = nil
+      begin
+        @_hashing = true
+        _dn = dn
+      rescue DistinguishedNameInvalid, DistinguishedNameNotSetError
+        return super
+      ensure
+        @_hashing = false
+      end
+      _dn.hash
     end
 
     def may
@@ -1152,6 +1162,7 @@ module ActiveLdap
       @dn_is_base = false
       @dn_split_value = nil
       @connection ||= nil
+      @_hashing = false
       clear_connection_based_cache
     end
 
@@ -1323,7 +1334,7 @@ module ActiveLdap
       ensure_update_dn
       dn_value = id
       if dn_value.nil?
-        format =_("%s's DN attribute (%s) isn't set")
+        format = _("%s's DN attribute (%s) isn't set")
         message = format % [self.inspect, dn_attribute]
         raise DistinguishedNameNotSetError.new, message
       end
