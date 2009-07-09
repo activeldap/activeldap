@@ -95,9 +95,9 @@ module ActiveLdap
           raise AdapterNotFound.new(adapter)
         end
         if config.has_key?(:ldap_scope)
-          logger.warn do
-            _(":ldap_scope connection option is deprecated. Use :scope instead.")
-          end
+          message = _(":ldap_scope connection option is deprecated. " \
+                      "Use :scope instead.")
+          ActiveSupport::Deprecation.warn(message)
           config[:scope] ||= config.delete(:ldap_scope)
         end
         config = remove_connection_related_configuration(config)
