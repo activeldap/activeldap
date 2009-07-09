@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ActiveLdap 1.1.0\n"
-"POT-Creation-Date: 2008-06-17 21:42+0900\n"
-"PO-Revision-Date: 2009-02-25 08:40+0900\n"
+"Project-Id-Version: Ruby/ActiveLdap 1.0.9\n"
+"POT-Creation-Date: 2009-07-09 22:48+0900\n"
+"PO-Revision-Date: 2009-07-09 22:48+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -460,6 +460,10 @@ msgid "LDAP|Attribute|olcAccess"
 msgstr "OpenLDAP設定: アクセス制御(olcAccess)"
 
 #: -:-
+msgid "LDAP|Attribute|olcAddContentAcl"
+msgstr "OpenLDAP設定: 追加操作のアクセス制御(olcAddContentAcl)"
+
+#: -:-
 msgid "LDAP|Attribute|olcAllows"
 msgstr "OpenLDAP設定: 許可(olcAllows)"
 
@@ -528,6 +532,10 @@ msgid "LDAP|Attribute|olcDbCheckpoint"
 msgstr "OpenLDAP設定: DB: チェックポイント(olcDbCheckpoint)"
 
 #: -:-
+msgid "LDAP|Attribute|olcDbChecksum"
+msgstr "OpenLDAP設定: DB: チェックサム(olcDbChecksum)"
+
+#: -:-
 msgid "LDAP|Attribute|olcDbConfig"
 msgstr "OpenLDAP設定: DB: 設定(olcDbConfig)"
 
@@ -574,6 +582,10 @@ msgstr "OpenLDAP設定: DB: モード(olcDbMode)"
 #: -:-
 msgid "LDAP|Attribute|olcDbNoSync"
 msgstr "OpenLDAP設定: DB: 非同期(olcDbNoSync)"
+
+#: -:-
+msgid "LDAP|Attribute|olcDbPageSize"
+msgstr "OpenLDAP設定: DB: ページサイズ(olcDbPageSize)"
 
 #: -:-
 msgid "LDAP|Attribute|olcDbSearchStack"
@@ -634,6 +646,10 @@ msgstr "OpenLDAP設定 索引に使用する部分文字列の最小長(olcIndex
 #: -:-
 msgid "LDAP|Attribute|olcLastMod"
 msgstr "OpenLDAP設定: 最終更新情報(olcLastMod)"
+
+#: -:-
+msgid "LDAP|Attribute|olcLdapSyntaxes"
+msgstr "OpenLDAP設定: LDAP構文(olcLdapSyntaxes)"
 
 #: -:-
 msgid "LDAP|Attribute|olcLimits"
@@ -839,6 +855,10 @@ msgstr "OpenLDAP設定: TLS: 暗号群(olcTLSCipherSuite)"
 #: -:-
 msgid "LDAP|Attribute|olcTLSDHParamFile"
 msgstr "OpenLDAP設定: TLS: DHパラメタファイル(olcTLSDHParamFile)"
+
+#: -:-
+msgid "LDAP|Attribute|olcTLSProtocolMin"
+msgstr "OpenLDAP設定: TLS: 最小プロトコルバージョン(olcTLSProtocolMin)"
 
 #: -:-
 msgid "LDAP|Attribute|olcTLSRandFile"
@@ -1765,6 +1785,12 @@ msgid "LDAP|Description|Attribute|olcAccess|Access Control List"
 msgstr "アクセス制御リスト"
 
 #: -:-
+msgid ""
+"LDAP|Description|Attribute|olcAddContentAcl|Check ACLs against content of "
+"Add ops"
+msgstr "追加操作の内容に対するアクセス制御リストをチェック"
+
+#: -:-
 msgid "LDAP|Description|Attribute|olcAllows|Allowed set of deprecated features"
 msgstr "使うことを許可する非推奨の機能群"
 
@@ -1814,6 +1840,11 @@ msgid ""
 "LDAP|Description|Attribute|olcDbCheckpoint|Database checkpoint interval in "
 "kbytes and minutes"
 msgstr "データベースチェックポイント間隔(Kバイトと分で指定)"
+
+#: -:-
+msgid ""
+"LDAP|Description|Attribute|olcDbChecksum|Enable database checksum validation"
+msgstr "データベースのチェックサム検証を有効にする"
 
 #: -:-
 msgid ""
@@ -1873,6 +1904,11 @@ msgstr "データベースへの同期書き込みを無効にする"
 
 #: -:-
 msgid ""
+"LDAP|Description|Attribute|olcDbPageSize|Page size of specified DB, in Kbytes"
+msgstr "指定したデータベースのページサイズ（Kバイトで指定）"
+
+#: -:-
+msgid ""
 "LDAP|Description|Attribute|olcDbSearchStack|Depth of search stack in IDLs"
 msgstr "IDLを<検索するスタックの深さ"
 
@@ -1884,6 +1920,10 @@ msgstr "共有メモリ領域のキー"
 msgid ""
 "LDAP|Description|Attribute|olcDitContentRules|OpenLDAP DIT content rules"
 msgstr "OpenLDAPディレクトリ情報ツリー(DIT)の内容規則"
+
+#: -:-
+msgid "LDAP|Description|Attribute|olcLdapSyntaxes|OpenLDAP ldapSyntax"
+msgstr "OpenLDAP用のLDAPの構文"
 
 #: -:-
 msgid "LDAP|Description|Attribute|olcObjectClasses|OpenLDAP object classes"
@@ -2900,6 +2940,12 @@ msgid "LDAP|Description|Syntax|1.3.6.1.4.1.1466.115.121.1.9|Certificate List"
 msgstr "証明書一覧"
 
 #: -:-
+msgid ""
+"LDAP|Description|Syntax|1.3.6.1.4.1.4203.666.11.10.2.1|X.509 "
+"AttributeCertificate"
+msgstr "X.509属性証明書"
+
+#: -:-
 msgid "LDAP|ObjectClass|LDAProotDSE"
 msgstr "LDAPルートDSE(LDAProotDSE)"
 
@@ -3379,6 +3425,10 @@ msgstr "証明書(1.3.6.1.4.1.1466.115.121.1.8)"
 msgid "LDAP|Syntax|1.3.6.1.4.1.1466.115.121.1.9"
 msgstr "証明書一覧(1.3.6.1.4.1.1466.115.121.1.9)"
 
+#: -:-
+msgid "LDAP|Syntax|1.3.6.1.4.1.4203.666.11.10.2.1"
+msgstr "X.509属性証明書(1.3.6.1.4.1.4203.666.11.10.2.1)"
+
 #: lib/active_ldap/object_class.rb:53
 msgid "Value in objectClass array is not a String: %s"
 msgstr "objectClassの配列の中身がStringではありません: %s"
@@ -3391,88 +3441,85 @@ msgstr "LDAPサーバが知らないobjectClassです: %s"
 msgid "Can't remove required objectClass: %s"
 msgstr "必須のobjectClassは削除できません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:109 lib/active_ldap/adapter/ldap.rb:201
-#: lib/active_ldap/adapter/net_ldap.rb:158
+#: lib/active_ldap/adapter/jndi.rb:105 lib/active_ldap/adapter/ldap.rb:197
+#: lib/active_ldap/adapter/net_ldap.rb:155
 msgid "%s is not one of the available connect methods: %s"
 msgstr "%sは有効な接続方法ではありません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:122 lib/active_ldap/adapter/ldap.rb:214
-#: lib/active_ldap/adapter/net_ldap.rb:171
+#: lib/active_ldap/adapter/jndi.rb:118 lib/active_ldap/adapter/ldap.rb:210
+#: lib/active_ldap/adapter/net_ldap.rb:168
 msgid "%s is not one of the available LDAP scope: %s"
 msgstr "%sは有効なLDAPスコープではありません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:170 lib/active_ldap/adapter/ldap.rb:271
-#: lib/active_ldap/adapter/net_ldap.rb:295
+#: lib/active_ldap/adapter/jndi.rb:176 lib/active_ldap/adapter/ldap.rb:274
+#: lib/active_ldap/adapter/net_ldap.rb:290
 msgid "unknown type: %s"
 msgstr "未知の種類です: %s"
 
-#: lib/active_ldap/adapter/ldap.rb:113
+#: lib/active_ldap/adapter/ldap.rb:108
 msgid "No matches: filter: %s: attributes: %s"
 msgstr "マッチしませんでした: フィルタ: %s: 属性: %s"
 
-#: lib/active_ldap/adapter/net_ldap.rb:215
+#: lib/active_ldap/adapter/net_ldap.rb:211
 msgid "unsupported qops: %s"
 msgstr "対応していないqopsです: %s"
 
-#: lib/active_ldap/adapter/base.rb:77
+#: lib/active_ldap/adapter/base.rb:84
 msgid "Bound to %s by SASL as %s"
 msgstr "%sに%sとしてSASLで接続しました"
 
-#: lib/active_ldap/adapter/base.rb:79
+#: lib/active_ldap/adapter/base.rb:86
 msgid "Bound to %s by simple as %s"
 msgstr "%sに%sとしてシンプル認証で接続しました"
 
-#: lib/active_ldap/adapter/base.rb:81
+#: lib/active_ldap/adapter/base.rb:88
 msgid "Bound to %s as anonymous"
 msgstr "%sに匿名ユーザとして接続しました"
 
-#: lib/active_ldap/adapter/base.rb:84
+#: lib/active_ldap/adapter/base.rb:91
 msgid "All authentication methods for %s exhausted."
 msgstr "%sへのすべての認証方法が失敗しました。"
 
-#: lib/active_ldap/adapter/base.rb:156
+#: lib/active_ldap/adapter/base.rb:171
 msgid "Ignore error %s(%s): filter %s: attributes: %s"
 msgstr "エラー%s(%s)を無視します: フィルタ %s: 属性: %s"
 
-#: lib/active_ldap/adapter/base.rb:174 lib/active_ldap/adapter/base.rb:184
-msgid "No such entry: %s"
-msgstr "そのようなエントリはありません: %s"
-
-#: lib/active_ldap/adapter/base.rb:188 lib/active_ldap/adapter/base.rb:190
-#: lib/active_ldap/adapter/base.rb:192 lib/active_ldap/adapter/base.rb:194
-#: lib/active_ldap/adapter/base.rb:206
+#: lib/active_ldap/adapter/base.rb:187 lib/active_ldap/adapter/base.rb:206
+#: lib/active_ldap/adapter/base.rb:208 lib/active_ldap/adapter/base.rb:210
+#: lib/active_ldap/adapter/base.rb:212 lib/active_ldap/adapter/base.rb:222
+#: lib/active_ldap/adapter/base.rb:228
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: lib/active_ldap/adapter/base.rb:263
+#: lib/active_ldap/adapter/base.rb:192 lib/active_ldap/adapter/base.rb:202
+msgid "No such entry: %s"
+msgstr "そのようなエントリはありません: %s"
+
+#: lib/active_ldap/adapter/base.rb:293
 msgid "password_block not nil or Proc object. Ignoring."
 msgstr "password_blockがnilでもProcでもありません。無視します。"
 
-#: lib/active_ldap/adapter/base.rb:282
+#: lib/active_ldap/adapter/base.rb:314
 msgid "Requested action timed out."
 msgstr "要求したアクションがタイムアウトしました。"
 
-#: lib/active_ldap/adapter/base.rb:320
+#: lib/active_ldap/adapter/base.rb:355
 msgid "Skip simple bind with empty password."
 msgstr "空パスワードでのシンプル認証を行いませんでした。"
 
-#: lib/active_ldap/adapter/base.rb:324
+#: lib/active_ldap/adapter/base.rb:359
 msgid "Can't use empty password for simple bind."
 msgstr "シンプル認証では空のパスワードを使うことはできません。"
 
-#: lib/active_ldap/adapter/base.rb:515
+#: lib/active_ldap/adapter/base.rb:551
 msgid "invalid logical operator: %s: available operators: %s"
 msgstr "不正な論理演算子です: %s: 有効な演算子: %s\n"
 
-#: lib/active_ldap/adapter/base.rb:532
-msgid "Giving up trying to reconnect to LDAP server."
-msgstr "LDAPサーバへの再接続を諦めました。"
-
-#: lib/active_ldap/adapter/base.rb:535
+#: lib/active_ldap/adapter/base.rb:566
 msgid "Attempting to reconnect"
 msgstr "再接続を試みています"
 
-#: lib/active_ldap/adapter/base.rb:546
+#: lib/active_ldap/adapter/base.rb:579
 msgid ""
 "Reconnect to server failed: %s\n"
 "Reconnect to server failed backtrace:\n"
@@ -3482,204 +3529,220 @@ msgstr ""
 "サーバへの再接続失敗時のバックトレース:\n"
 "%s"
 
+#: lib/active_ldap/adapter/base.rb:589
+msgid "Giving up trying to reconnect to LDAP server."
+msgstr "LDAPサーバへの再接続を諦めました。"
+
 #: lib/active_ldap/acts/tree.rb:66
 msgid "parent must be an entry or parent DN: %s"
 msgstr "親はエントリかDNでなければいけません: %s"
 
-#: lib/active_ldap/operations.rb:46
+#: lib/active_ldap/operations.rb:49
 msgid ":ldap_scope search option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/operations.rb:221
+#: lib/active_ldap/operations.rb:258
 msgid "Invalid order: %s"
 msgstr "不正な順序です: %s"
 
-#: lib/active_ldap/operations.rb:257
+#: lib/active_ldap/operations.rb:294
 msgid "Couldn't find %s without a DN"
 msgstr "DNがないため%sが見つかりません"
 
-#: lib/active_ldap/operations.rb:279
+#: lib/active_ldap/operations.rb:316
 msgid "Couldn't find %s: DN: %s: filter: %s"
 msgstr "%sが見つかりません: DN: %s: フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:282
+#: lib/active_ldap/operations.rb:319
 msgid "Couldn't find %s: DN: %s"
 msgstr "%sが見つかりません: DN: %s"
 
-#: lib/active_ldap/operations.rb:309
+#: lib/active_ldap/operations.rb:346
 msgid "Couldn't find all %s: DNs (%s): filter: %s"
 msgstr "すべての%sを見つけられませんでした: DN (%s): フィルタ: %s"
 
-#: lib/active_ldap/operations.rb:312
+#: lib/active_ldap/operations.rb:349
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr "すべての%sを見つけられませんでした: DN (%s)"
 
-#: lib/active_ldap/ldif.rb:376
+#: lib/active_ldap/associations.rb:68
+msgid ""
+":foreign_key belongs_to(:many) option is deprecated since 1.1.0. Use :"
+"primary_key instead."
+msgstr ""
+"1.1.0からbelongs_to(:many)の:foreign_keyオプションは非推奨になりました。代わ"
+"りに:primary_keyを使ってください。"
+
+#: lib/active_ldap/associations.rb:135
+msgid ""
+":primary_key and :foreign_key has_many options are inverted their mean since "
+"1.1.0. Please invert them."
+msgstr ""
+"1.1.0からhas_manyの:primary_keyと:foreign_keyオプションの意味が反対になりまし"
+"た。オプションの値を入れかえてください。"
+
+#: lib/active_ldap/ldif.rb:396
 msgid "version spec is missing"
 msgstr "バージョン指定がありません"
 
-#: lib/active_ldap/ldif.rb:380
+#: lib/active_ldap/ldif.rb:400
 msgid "version number is missing"
 msgstr "バージョン番号がありません"
 
-#: lib/active_ldap/ldif.rb:384
+#: lib/active_ldap/ldif.rb:404
 msgid "unsupported version: %d"
 msgstr "対応していないバージョンです: %d"
 
-#: lib/active_ldap/ldif.rb:388
+#: lib/active_ldap/ldif.rb:408
 msgid "separator is missing"
 msgstr "分離記号（改行）がありません"
 
-#: lib/active_ldap/ldif.rb:392
+#: lib/active_ldap/ldif.rb:412
 msgid "'dn:' is missing"
 msgstr "'dn:'がありません"
 
-#: lib/active_ldap/ldif.rb:396
+#: lib/active_ldap/ldif.rb:416
 msgid "DN is missing"
 msgstr "DNがありません"
 
-#: lib/active_ldap/ldif.rb:400
+#: lib/active_ldap/ldif.rb:420
 msgid "DN is invalid: %s: %s"
 msgstr "不正なDNです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:404
+#: lib/active_ldap/ldif.rb:424
 msgid "DN has an invalid character: %s"
 msgstr "DNは不正な文字を含んでいます: %s"
 
-#: lib/active_ldap/ldif.rb:408 lib/active_ldap/distinguished_name.rb:143
+#: lib/active_ldap/ldif.rb:428 lib/active_ldap/distinguished_name.rb:144
 msgid "attribute type is missing"
 msgstr "属性の種類がありません"
 
-#: lib/active_ldap/ldif.rb:412
+#: lib/active_ldap/ldif.rb:432
 msgid "option is missing"
 msgstr "オプションがありません"
 
-#: lib/active_ldap/ldif.rb:416
+#: lib/active_ldap/ldif.rb:436
 msgid "':' is missing"
 msgstr "':'がありません"
 
-#: lib/active_ldap/ldif.rb:420
+#: lib/active_ldap/ldif.rb:440
 msgid "URI is invalid: %s: %s"
 msgstr "不正なURIです: %s: %s"
 
-#: lib/active_ldap/ldif.rb:424
+#: lib/active_ldap/ldif.rb:444
 msgid "'-' is missing"
 msgstr "'-'がありません"
 
-#: lib/active_ldap/ldif.rb:428
+#: lib/active_ldap/ldif.rb:448
 msgid "unknown change type: %s"
 msgstr "未知の変更型です: %s"
 
-#: lib/active_ldap/ldif.rb:432
+#: lib/active_ldap/ldif.rb:452
 msgid "change type is missing"
 msgstr "変更型がありません"
 
-#: lib/active_ldap/ldif.rb:436
+#: lib/active_ldap/ldif.rb:456
 msgid "control type is missing"
 msgstr "制御型がありません"
 
-#: lib/active_ldap/ldif.rb:440
+#: lib/active_ldap/ldif.rb:460
 msgid "criticality is missing"
 msgstr "臨界指定がありません"
 
-#: lib/active_ldap/ldif.rb:444
+#: lib/active_ldap/ldif.rb:464
 msgid "change type value is missing"
 msgstr "変更型の値がありません"
 
-#: lib/active_ldap/ldif.rb:448
+#: lib/active_ldap/ldif.rb:468
 msgid "attribute spec is missing"
 msgstr "属性指定がありません"
 
-#: lib/active_ldap/ldif.rb:452
+#: lib/active_ldap/ldif.rb:472
 msgid "'newrdn:' is missing"
 msgstr "'newrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:456
+#: lib/active_ldap/ldif.rb:476
 msgid "new RDN value is missing"
 msgstr "新しいRDNの値がありません"
 
-#: lib/active_ldap/ldif.rb:460
+#: lib/active_ldap/ldif.rb:480
 msgid "'deleteoldrdn:' is missing"
 msgstr "deleteoldrdn:'がありません"
 
-#: lib/active_ldap/ldif.rb:464
+#: lib/active_ldap/ldif.rb:484
 msgid "delete old RDN value is missing"
 msgstr "古いRDNを削除するかどうかの指定値がありません"
 
-#: lib/active_ldap/ldif.rb:468
+#: lib/active_ldap/ldif.rb:488
 msgid "new superior value is missing"
 msgstr "新しい親エントリの値がありません"
 
-#: lib/active_ldap/ldif.rb:472
+#: lib/active_ldap/ldif.rb:492
 msgid "unknown modify type: %s"
 msgstr "未知の変更種類です: %s"
 
-#: lib/active_ldap/ldif.rb:738
+#: lib/active_ldap/ldif.rb:765
 msgid "invalid criticality value: %s"
 msgstr "不正な臨界指定値です: %s"
 
-#: lib/active_ldap/ldif.rb:781
+#: lib/active_ldap/ldif.rb:808
 msgid "invalid deleteoldrdn value: %s"
 msgstr "不正なdeleteoldrdn値です: %s"
 
-#: lib/active_ldap/distinguished_name.rb:135
+#: lib/active_ldap/distinguished_name.rb:136
 msgid "name component is missing"
 msgstr "名前要素がありません"
 
-#: lib/active_ldap/distinguished_name.rb:139
+#: lib/active_ldap/distinguished_name.rb:140
 msgid "relative distinguished name (RDN) is missing"
 msgstr "相対識別名(RDN)がありません"
 
-#: lib/active_ldap/distinguished_name.rb:147
+#: lib/active_ldap/distinguished_name.rb:148
 msgid "attribute value is missing"
 msgstr "属性の値がありません"
 
-#: lib/active_ldap/distinguished_name.rb:151
+#: lib/active_ldap/distinguished_name.rb:152
 msgid "found unmatched quotation"
 msgstr "未対応の引用符が見つかりました"
 
-#: lib/active_ldap/distinguished_name.rb:187
+#: lib/active_ldap/distinguished_name.rb:188
 msgid "%s isn't sub DN of %s"
 msgstr "%sは%sのサブDNではありません"
 
-#: lib/active_ldap/validations.rb:81
+#: lib/active_ldap/validations.rb:85
 msgid "%{fn} is duplicated: %s"
 msgstr "%{fn}が重複しています: %s"
 
-#: lib/active_ldap/validations.rb:83
-msgid "is duplicated: %s"
-msgstr "が重複しています: %s"
+#: lib/active_ldap/validations.rb:96
+msgid "%{fn} is invalid: %s"
+msgstr "%{fn}が不正です: %s"
 
-#: lib/active_ldap/validations.rb:107
+#: lib/active_ldap/validations.rb:100
+msgid "%{fn} isn't set: %s"
+msgstr "%{fn}が設定されていません: %s"
+
+#: lib/active_ldap/validations.rb:122
 msgid "%{fn} has excluded value: %s"
 msgid_plural "%{fn} has excluded values: %s"
 msgstr[0] "%{fn}に除外した値があります: %s"
 msgstr[1] "%{fn}に除外した値があります: %s"
 
-#: lib/active_ldap/validations.rb:142
+#: lib/active_ldap/validations.rb:152
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です"
 
-#: lib/active_ldap/validations.rb:144
+#: lib/active_ldap/validations.rb:154
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
 
-#: lib/active_ldap/validations.rb:177
-msgid "%{fn} (%s) has invalid format: %s: required syntax: %s: %s"
+#: lib/active_ldap/validations.rb:181
+msgid "%{fn}(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
-#: lib/active_ldap/validations.rb:179
+#: lib/active_ldap/validations.rb:183
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s: %s"
-
-#: lib/active_ldap/validations.rb:183
-msgid "(%s) has invalid format: %s: required syntax: %s: %s"
-msgstr "(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
-
-#: lib/active_ldap/validations.rb:185
-msgid "has invalid format: %s: required syntax: %s: %s"
-msgstr "は不正な書式です: %s: 要求されている構文: %s: %s"
 
 #: lib/active_ldap/command.rb:16
 msgid "Common options:"
@@ -3697,39 +3760,59 @@ msgstr "このメッセージを表示します"
 msgid "Show version"
 msgstr "バージョンを表示します"
 
-#: lib/active_ldap/base.rb:112
+#: lib/active_ldap/base.rb:53
+msgid ""
+"ActiveLdap::ConnectionNotEstablished has been deprecated since 1.1.0. Please "
+"use ActiveLdap::ConnectionNotSetup instead."
+msgstr ""
+"1.1.0からActiveLdap::ConnectionNotEstablishedは非推奨になりました。代わりに"
+"ActiveLdap::ConnectionNotSetupを使ってください。"
+
+#: lib/active_ldap/base.rb:131
 msgid "invalid distinguished name (DN) to parse: %s"
 msgstr "構文解析できない不正な識別名(DN)です: %s"
 
-#: lib/active_ldap/base.rb:122
+#: lib/active_ldap/base.rb:141
 msgid "%s is invalid distinguished name (DN): %s"
 msgstr "%sは不正な識別名(DN)です: %s"
 
-#: lib/active_ldap/base.rb:124
+#: lib/active_ldap/base.rb:143
 msgid "%s is invalid distinguished name (DN)"
 msgstr "%sは不正な識別名(DN)です"
 
-#: lib/active_ldap/base.rb:142
+#: lib/active_ldap/base.rb:161
 msgid "invalid LDIF: %s:"
 msgstr "不正なLDIFです: %s:"
 
-#: lib/active_ldap/base.rb:144
+#: lib/active_ldap/base.rb:163
 msgid "invalid LDIF:"
 msgstr "不正なLDIFです:"
 
-#: lib/active_ldap/base.rb:219
+#: lib/active_ldap/base.rb:241
 msgid "LDAP configuration specifies nonexistent %s adapter"
 msgstr "LDAPの設定が存在しない%sアダプタが指定しています"
 
-#: lib/active_ldap/base.rb:227
+#: lib/active_ldap/base.rb:249
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です"
 
-#: lib/active_ldap/base.rb:423
+#: lib/active_ldap/base.rb:374
+msgid ""
+"ActiveLdap::Base.establish_connection has been deprecated since 1.1.0. "
+"Please use ActiveLdap::Base.setup_connection instead."
+msgstr ""
+"1.1.0からActiveLdap::Base.establish_connectionは非推奨になりました。代わりに"
+"ActiveLdap::Base.setup_connectionを使ってください。"
+
+#: lib/active_ldap/base.rb:455
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません"
 
-#: lib/active_ldap/base.rb:577
+#: lib/active_ldap/base.rb:500
+msgid "%s doesn't belong in a hierarchy descending from ActiveLdap"
+msgstr "%sはActiveLdapの子孫ではありません。"
+
+#: lib/active_ldap/base.rb:655
 msgid ""
 "'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
 "attributes as Hash"
@@ -3737,52 +3820,60 @@ msgstr ""
 "'%s'はnil、ActiveLdap::DNあるいはStringによるDN、DNの配列、Hashによる属性のど"
 "れかでなければいけません"
 
-#: lib/active_ldap/base.rb:682
+#: lib/active_ldap/base.rb:770
 msgid "Failed to delete LDAP entry: %s"
 msgstr "LDAPエントリの削除に失敗しました: %s"
 
-#: lib/active_ldap/base.rb:701
+#: lib/active_ldap/base.rb:789
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません"
 
-#: lib/active_ldap/base.rb:720 lib/active_ldap/base.rb:731
+#: lib/active_ldap/base.rb:808 lib/active_ldap/base.rb:819
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:854
+#: lib/active_ldap/base.rb:940
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません"
 
-#: lib/active_ldap/base.rb:1184
+#: lib/active_ldap/base.rb:1337
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません"
 
-#: lib/active_ldap/base.rb:1298
-msgid "dn_attribute isn't set for this class: %s"
-msgstr "このクラスのdn_attributeが設定されていません: %s"
-
-#: lib/active_ldap/attributes.rb:45
+#: lib/active_ldap/attributes.rb:76
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
 msgstr ""
 "最初の引数nameがnilになるはずがあってはいけません。バグとして報告してくださ"
 "い！"
 
-#: lib/active_ldap/schema.rb:50
+#: lib/active_ldap/schema.rb:52
 msgid "Unknown schema group: %s"
 msgstr "未知のスキーマグループです: %s"
 
-#: lib/active_ldap/schema.rb:513
+#: lib/active_ldap/schema.rb:547
 msgid "Attribute %s can only have a single value: %s"
 msgstr "属性%sは単一の値しか持てません: %s"
 
-#: lib/active_ldap/schema.rb:532
+#: lib/active_ldap/schema.rb:566
 msgid "Attribute %s: Hash must have one key-value pair only: %s"
 msgstr "属性 %s: ハッシュはひとつのキー・値のペアしか持ってはいけません: %s"
 
-#: lib/active_ldap/connection.rb:99
+#: lib/active_ldap/connection.rb:98
 msgid ":ldap_scope connection option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_scope接続オプションは廃止予定です。代わりに:scopeを使ってください。"
+
+#: lib/active_ldap/connection.rb:156
+msgid ""
+"ActiveLdap::Connection.establish_connection has been deprecated since 1.1.0. "
+"Please use ActiveLdap::Connection.setup_connection instead."
+msgstr ""
+"1.1.0からActiveLdap::Connection.establish_connectionは非推奨になりました。代"
+"わりにActiveLdap::Connection.setup_connectionを使ってください。"
+
+#: lib/active_ldap/connection.rb:229
+msgid "since 1.1.0. "
+msgstr "1.1.0から。"
 
 #: lib/active_ldap/user_password.rb:10
 msgid "Invalid hashed password: %s"
@@ -3821,56 +3912,56 @@ msgid "%s should be just 2 printable characters"
 msgstr "%sはちょうど2文字の印字可能な文字列でなければいけません"
 
 #: lib/active_ldap/schema/syntaxes.rb:162
-#: lib/active_ldap/schema/syntaxes.rb:369
+#: lib/active_ldap/schema/syntaxes.rb:381
 msgid "%s has invalid UTF-8 character"
 msgstr "%sは不正なUTF-8文字を含んでいます"
 
-#: lib/active_ldap/schema/syntaxes.rb:225
+#: lib/active_ldap/schema/syntaxes.rb:237
 msgid "%s has missing components: %s"
 msgstr "%sには要素が欠けています: %s"
 
-#: lib/active_ldap/schema/syntaxes.rb:228
+#: lib/active_ldap/schema/syntaxes.rb:240
 msgid "%s is invalid time format"
 msgstr "%sは不正な時刻の書式です"
 
-#: lib/active_ldap/schema/syntaxes.rb:258
+#: lib/active_ldap/schema/syntaxes.rb:270
 msgid "%s is invalid integer format"
 msgstr "%sは不正な整数の書式です"
 
-#: lib/active_ldap/schema/syntaxes.rb:270
+#: lib/active_ldap/schema/syntaxes.rb:282
 msgid "invalid JPEG format"
 msgstr "不正なJPEG形式です"
 
-#: lib/active_ldap/schema/syntaxes.rb:311
+#: lib/active_ldap/schema/syntaxes.rb:323
 msgid "%s is invalid numeric format"
 msgstr "%sは不正な数字の書式です"
 
-#: lib/active_ldap/schema/syntaxes.rb:326
+#: lib/active_ldap/schema/syntaxes.rb:338
 msgid "%s is invalid OID format: %s"
 msgstr "%sは不正なOIDの書式です: %s"
 
-#: lib/active_ldap/schema/syntaxes.rb:328
+#: lib/active_ldap/schema/syntaxes.rb:340
 msgid "%s is invalid OID format"
 msgstr "%sは不正なOIDの書式です"
 
-#: lib/active_ldap/schema/syntaxes.rb:341
+#: lib/active_ldap/schema/syntaxes.rb:353
 msgid "%s has no mailbox type"
 msgstr "%sにメールボックスの種類がありません"
 
-#: lib/active_ldap/schema/syntaxes.rb:345
+#: lib/active_ldap/schema/syntaxes.rb:357
 msgid "%s has unprintable character in mailbox type: '%s'"
 msgstr "%sはメールボックスの種類に印字不可能な文字を含んでいます: '%s'"
 
-#: lib/active_ldap/schema/syntaxes.rb:350
+#: lib/active_ldap/schema/syntaxes.rb:362
 msgid "%s has no mailbox"
 msgstr "%sにメールボックスがありませんん"
 
-#: lib/active_ldap/schema/syntaxes.rb:363
-#: lib/active_ldap/schema/syntaxes.rb:382
+#: lib/active_ldap/schema/syntaxes.rb:375
+#: lib/active_ldap/schema/syntaxes.rb:394
 msgid "empty string"
 msgstr "空の文字列です"
 
-#: lib/active_ldap/schema/syntaxes.rb:386
+#: lib/active_ldap/schema/syntaxes.rb:398
 msgid "%s has unprintable character: '%s'"
 msgstr "%sは印字不可能な文字を含んでいます: '%s'"
 
@@ -3882,100 +3973,68 @@ msgstr "'%{file}'を無視します。まず依存関係を解決してくださ
 msgid "%s connection is not configured"
 msgstr "%sの接続は設定されていません"
 
-#: lib/active_ldap/configuration.rb:111
+#: lib/active_ldap/configuration.rb:110
 msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
 
-#: lib/active_ldap/configuration.rb:132
+#: lib/active_ldap/configuration.rb:131
 msgid "invalid URI: %s"
 msgstr "不正なURIです: %s"
 
-#: lib/active_ldap/configuration.rb:135
+#: lib/active_ldap/configuration.rb:134
 msgid "not a LDAP URI: %s"
 msgstr "LDAP用のURIではありません: %s"
 
-#: rails/plugin/active_ldap/init.rb:7
+#: rails/init.rb:7
 msgid "You need ActiveLdap %s or later"
 msgstr "ActiveLdap %s以上が必要です"
 
-#: rails/plugin/active_ldap/init.rb:19
+#: rails/init.rb:19
 msgid "You should run 'script/generator scaffold_active_ldap' to make %s."
 msgstr ""
 "%sを作るために'script/generator scaffold_active_ldap'を実行してください。"
-
-#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:32
-msgid "Use ATTRIBUTE as default DN attribute for instances of this model"
-msgstr ""
-"このモデルのインスタンスのデフォルトのDN用属性としてATTRIBUTEを使います"
-
-#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:34
-#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:40
-#: benchmark/bench-al.rb:15
-msgid "(default: %s)"
-msgstr "(デフォルト: %s)"
-
-#: rails/plugin/active_ldap/generators/model_active_ldap/model_active_ldap_generator.rb:39
-msgid "Use PREFIX as prefix for this model"
-msgstr "このモデルのプリフィックスとしてPREFIXを使います"
-
-#: rails/plugin/active_ldap/generators/scaffold_al/scaffold_al_generator.rb:7
-msgid "scaffold_al is deprecated. Use scaffold_active_ldap instead."
-msgstr ""
-"scaffold_alは廃止予定です。代わりにscaffold_active_ldapを使ってください。"
 
 #: benchmark/bench-al.rb:14
 msgid "Specify prefix for benchmarking"
 msgstr "ベンチマーク用のプリフィックスを指定してください"
 
-#: benchmark/bench-al.rb:182
+#: benchmark/bench-al.rb:15
+msgid "(default: %s)"
+msgstr "(デフォルト: %s)"
+
+#: benchmark/bench-al.rb:219
 msgid "Populating..."
 msgstr "データ投入中..."
 
-#: benchmark/bench-al.rb:239
+#: benchmark/bench-al.rb:276
 msgid "Entries processed by Ruby/ActiveLdap + LDAP: %d"
 msgstr "Ruby/ActiveLdap + LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:240
+#: benchmark/bench-al.rb:277
 msgid "Entries processed by Ruby/ActiveLdap + Net::LDAP: %d"
 msgstr "Ruby/ActiveLdap + Net::LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:242
+#: benchmark/bench-al.rb:279
 msgid ""
 "Entries processed by Ruby/ActiveLdap + LDAP: (without object creation): %d"
 msgstr "Ruby/ActiveLdap + LDAPで処理したエントリ数(オブジェクト生成無し): %d"
 
-#: benchmark/bench-al.rb:245
+#: benchmark/bench-al.rb:282
 msgid ""
 "Entries processed by Ruby/ActiveLdap + Net::LDAP: (without object creation): "
 "%d"
-msgstr "Ruby/ActiveLdap + Net::LDAPで処理したエントリ数(オブジェクト生成無し): %d"
+msgstr ""
+"Ruby/ActiveLdap + Net::LDAPで処理したエントリ数(オブジェクト生成無し): %d"
 
-#: benchmark/bench-al.rb:248
+#: benchmark/bench-al.rb:285
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr "Ruby/LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:249
+#: benchmark/bench-al.rb:286
 msgid "Entries processed by Net::LDAP: %d"
 msgstr "Net::LDAPで処理したエントリ数: %d"
 
-#: benchmark/bench-al.rb:253
+#: benchmark/bench-al.rb:290
 msgid "Cleaning..."
 msgstr "削除中..."
-
-#~ msgid "has excluded value: %s"
-#~ msgid_plural "has excluded values: %s"
-#~ msgstr[0] "に除外した値があります: %s"
-#~ msgstr[1] "に除外した値があります: %s"
-
-#~ msgid "LDAP|Attribute|dITContentRules"
-#~ msgstr "ディレクトリ情報ツリー内容規則(dITContentRules)"
-
-#~ msgid "LDAP|Attribute|dITStructureRules"
-#~ msgstr "ディレクトリ情報ツリー構造規則(dITStructureRules)"
-
-#~ msgid "LDAP|Attribute|subtreeSpecification"
-#~ msgstr "サブツリー仕様(subtreeSpecification)"
-
-#~ msgid "LDAP|Attribute|nameForms"
-#~ msgstr "名前の構成(nameForms)"
