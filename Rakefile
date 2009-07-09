@@ -120,7 +120,7 @@ task :gettext => ["gettext:po:update", "gettext:mo:create"]
 namespace :gettext do
   desc "Setup environment for GetText"
   task :environment do
-    require "gettext/utils"
+    require "gettext/tools"
   end
 
   namespace :po do
