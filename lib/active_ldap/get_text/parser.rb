@@ -11,7 +11,7 @@ module ActiveLdap
         configuration = default_configuration.merge(configuration)
 
         configuration = extract_options(configuration)
-        ActiveLdap::Base.establish_connection(configuration)
+        ActiveLdap::Base.setup_connection(configuration)
       end
 
       def parse(file, targets=[])
