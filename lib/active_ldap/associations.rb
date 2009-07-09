@@ -113,7 +113,7 @@ module ActiveLdap
         validate_has_many_options(options)
         klass = options[:class]
         klass ||= (options[:class_name] || association_id.to_s).classify
-        foreign_key = options[:foreign_key] || "#{association_id}_id"
+        foreign_key = options[:foreign_key]
         primary_key = options[:primary_key]
         set_associated_class(association_id, klass)
 
@@ -125,6 +125,7 @@ module ActiveLdap
           :extend => options[:extend],
         }
         if opts[:wrap]
+          opts[:foreign_key_name] ||= "#{association_id}_id"
           association_class = Association::HasManyWrap
         else
           association_class = Association::HasMany
