@@ -1406,17 +1406,9 @@ module ActiveLdap
         value = self.class.remove_blank_value(value) || []
         next if v == value
 
-        # Create mod entries
-        if self.class.blank_value?(value)
-          # Since some types do not have equality matching rules,
-          # delete doesn't work
-          # Replacing with nothing is equivalent.
-          if !data.has_key?(k) and schema.attribute(k).binary_required?
-            value = [{'binary' => []}]
-          end
-        else
-          # Ditched delete then replace because attribs with no equality
-          # match rules will fails
+        if self.class.blank_value?(value) and
+            schema.attribute(k).binary_required?
+          value = [{'binary' => []}]
         end
         attributes.push([:replace, k, value])
       end
