@@ -40,8 +40,11 @@ module ActiveLdap
         when Hash
           result = {}
           value.each do |k, v|
-            result[k] = remove_blank_value(v) || []
+            v = remove_blank_value(v)
+            next if v.nil?
+            result[k] = v
           end
+          result = nil if result.blank?
           result
         when Array
           result = []
@@ -50,6 +53,7 @@ module ActiveLdap
             next if v.nil?
             result << v
           end
+          result = nil if result.blank?
           result
         when String
           if /\A\s*\z/ =~ value
