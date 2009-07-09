@@ -151,7 +151,7 @@ namespace :gettext do
   namespace :mo do
     desc "Create *.mo from *.po (GetText)"
     task :create => "gettext:environment" do
-      GetText.create_mofiles(false)
+      GetText.create_mofiles
     end
   end
 end
