@@ -13,7 +13,13 @@
 <% (entry.attribute_names(true) - ["objectClass"]).sort.each do |name| -%>
       <tr class="<%= cycle('even', 'odd') %>">
 	<th scope="row"><%= link_to_attribute(name) %></th>
-	<td><%= h(entry[name, true].join(", ")) %></td>
+	<td>
+          <%=
+	    entry[name, true].collect do |value|
+              h(value.inspect)
+            end.join("<br />")
+          %>
+        </td>
 	<td><%= h(lad_(name)) %></td>
       </tr>
 <% end -%>

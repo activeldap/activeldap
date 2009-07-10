@@ -23,7 +23,19 @@
       <span class="required-attribute-mark">*</span>
 <%   end -%>
     </th>
-    <td><%= text_field("user", name) %></td>
+    <td>
+       <%=
+          ldap_field(:text, :user, name,
+                     :ldap_options => ["lang-en"]) do |field, info|
+            ldap_options = info[:options]
+            if ldap_options.empty?
+              "#{field}<br />"
+            else
+              "#{ldap_options.join(';')}: #{field}<br />"
+            end
+          end
+       -%>
+    </td>
     <td><%= h lad_(name) %></td>
   </tr>
 <% end -%>
