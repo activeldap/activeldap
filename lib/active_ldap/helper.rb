@@ -70,11 +70,13 @@ module ActiveLdap
             collect_values.call(v, ldap_options)
           end
         else
+          id = "#{object_name}_#{method}"
           name = "#{object_name}[#{method}][]"
           ldap_options.collect.each do |ldap_option|
+            id << "_#{ldap_option}"
             name << "[#{ldap_option}][]"
           end
-          ldap_value_options = {:name => name, :value => value}
+          ldap_value_options = {:id => id, :name => name, :value => value}
           field = send(form_method, object_name, method,
                        ldap_value_options.merge(options))
            if block_given?
