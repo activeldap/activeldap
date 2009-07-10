@@ -1,8 +1,8 @@
 #!/usr/bin/ruby
 # = ActiveLdap
 #
-# "ActiveLdap" Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
-#              Copyright (C) 2006-2009 Kouhei Sutou <kou@cozmixng.org>
+#   Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
+#   Copyright (C) 2006-2009 Kouhei Sutou <kou@clear-code.com>
 #
 # == Introduction
 #
@@ -892,7 +892,7 @@ if dependencies.respond_to?(:load_paths)
 end
 
 module ActiveLdap
-  VERSION = "1.0.9"
+  VERSION = "1.1.0"
 end
 
 if RUBY_PLATFORM.match('linux')
