@@ -2,7 +2,23 @@
 
 == 1.1.0: 2009-07-18
 
-* ...
+* Improved tutorial. [Kazuaki Takase]
+* Improvements:
+  * API:
+    * [#26] Supported to_xml for associations. [achemze]
+    * ActiveLdap::Base.delete_all(filter=nil, options={}) ->
+      ActiveLdap::Base.delete_all(filter_or_options={}).
+      Sure, old method signature is also still supported.
+    * belongs_to(:many) with :foreign_key is deprecated.
+      Use :primary_key instead of :foreign_key. [Kazuaki Takase]
+    * Means of has_many's :primary_key and :foreign_key are inverted.
+      [Kazuaki Takase]
+    * [experimental] Added ldap_field ActionView helper to
+      generate form fileds for a LDAP entry.
+  * Suppressed needless attributes updating.
+* Dependencies:
+  * Re-supported GetText.
+  * ActiveRecord 2.3.2 is only supported.
 
 == 1.0.9
 
