@@ -1,12 +1,18 @@
-Ruby/ActiveLdap -- ruby library for object-oriented LDAP interction
-Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>, Kouhei Sutou <kou@cozmixng.org>
-Contributors:
- * Dick Davies <rasputnik@hellooperator.net>
- * Nathan Kinder <quicksilver02@mac.com>
- * Patrick Cole <pac@independent.com.au>
- * Google Inc.
+= Ruby/ActiveLdap
 
-DESCRIPTION
+ruby library for object-oriented LDAP interction
+
+* Copyright (C) 2004-2006 Will Drewry <tt><will@alum.bu.edu></tt>
+* Copyright (C) 2006-2009 Kouhei Sutou <tt><kou@clear-code.com></tt>
+
+Contributors::
+  * Dick Davies <tt><rasputnik AT hellooperator.net></tt>
+  * Nathan Kinder <tt><quicksilver02 AT mac.com></tt>
+  * Patrick Cole <tt><pac AT independent.com.au></tt>
+  * Google Inc.
+
+== DESCRIPTION
+
 'Ruby/ActiveLdap' is a ruby extension library which provides a clean objected
 oriented interface to the Ruby/LDAP[0] library.  It was inspired by
 ActivRecord[3]. This is not nearly as clean or as flexible as ActiveRecord, but
@@ -18,49 +24,56 @@ It is also available on the web at:
 
 http://ruby-activeldap.rubyforge.org/
 
-PREREQUISITES
+== PREREQUISITES
 
-  * Ruby 1.8.x [2]
-  * Ruby/LDAP [0] or Net::LDAP [1]
-  * ActiveRecord [3]
-  * An LDAP server compatible with Ruby/LDAP: OpenLDAP, etc
+[Ruby intepreter]
+  One of them:
+  * Ruby[http://www.ruby-lang.org] (1.8.x or 1.9.1)
+  * JRuby[http://jruby.codehaus.org/]
 
+[LDAP client]
+  JRuby doesn't need to install new library because JRuby
+  has builtin LDAP support. Ruby users need one of them:
+  * Ruby/LDAP[http://rubyforge.org/projects/ruby-ldap/]
+  * Net::LDAP[http://rubyforge.org/projects/net-ldap/]
 
-NOTES
+* ActiveRecord[http://activerecord.rubyonrails.org]
 
-  * Only GSSAPI SASL support exists due to Ruby/LDAP limitations
+== NOTES
 
+* Only GSSAPI SASL support exists due to Ruby/LDAP limitations
 
-INSTALL
+== INSTALL
 
-  - Edit active_ldap/configuration.rb with your LDAP preferences
-  - Run -
-    sudo rake install
+  % sudo gem install activeldap
 
-RAILS
+== RAILS
 
-There is a small rails plugin included that allows the use of a file named
-'ldap.yml' in the config directory of your rails app. This file has a similar
-function to the 'database.yml' file that allows you to set your database
-connection settings per environment. Similarly, the ldap.yml file allows
-settings to be set for development, test, and production environments. For
-instance, the development entry would look something like the following:
+There is a small rails plugin included that allows the use
+of a file named 'config/ldap.yml' in the config directory of
+your rails app. This file has a similar function to the
+'database.yml' file that allows you to set your database
+connection settings per environment. Similarly, the ldap.yml
+file allows settings to be set for development, test, and
+production environments. For instance, the development entry
+would look something like the following:
 
-          development:
-            host: 127.0.0.1
-            port: 389
-            base: dc=localhost
-            bind_dn: cn=admin,dc=localhost
-            password: secret
+  development:
+    host: 127.0.0.1
+    port: 389
+    base: dc=localhost
+    bind_dn: cn=admin,dc=localhost
+    password: secret
 
+To install, simply add the following codes to you config/environment.rb:
 
-To install, simply copy the rails/plugin/active_ldap folder into the
-vendor/plugins directory of your rails application and create config/ldap.yml.
-When your application starts up, the plugin will call #establish_connection
-using the parameters specified for your current environment.
+  config.gem "activeldap", :lib => "active_ldap"
 
+When your application starts up, the plugin will call
+ActiveLdap::Base.setup_connection using the parameters
+specified for your current environment.
 
-LICENCE
+== LICENCE
 
 This program is free software; you can redistribute it and/or modify it.  It is
 dual licensed under Ruby's license and under the terms of the GNU General
@@ -69,16 +82,7 @@ or (at your option) any later version.
 
 Please see the file LICENSE for the terms of the licence.
 
-
-REFERENCES
-
-[0] - http://ruby-ldap.sourceforge.net
-[1] - http://rubyforge.org/projects/net-ldap/
-[2] - http://www.ruby-lang.org
-[3] - http://activerecord.rubyonrails.org
-
-
-THANKS
+== THANKS
 
 This list may not be correct. If you notice mistakes of this
 list, please point out.
