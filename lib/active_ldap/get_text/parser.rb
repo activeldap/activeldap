@@ -72,7 +72,9 @@ module ActiveLdap
           if File.exists?(configuration)
             require 'erb'
             require 'yaml'
-            configuration = YAML.load(ERB.new(File.read(configuration)).result)
+            erb = ERB.new(File.read(configuration))
+            erb.filename = configuration
+            configuration = YAML.load(erb.result)
           else
             ENV["RAILS_ENV"] = configuration
             require 'config/environment'
