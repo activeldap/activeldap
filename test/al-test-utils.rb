@@ -58,7 +58,9 @@ module AlTestUtils
       unless File.exist?(@config_file)
         raise "config file for testing doesn't exist: #{@config_file}"
       end
-      config = YAML.load(ERB.new(File.read(@config_file)).result)
+      erb = ERB.new(File.read(@config_file))
+      erb.filename = @config_file
+      config = YAML.load(erb.result)
       _adapter = adapter
       config.each do |key, value|
         value[:adapter] = _adapter if _adapter
