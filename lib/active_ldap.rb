@@ -537,21 +537,19 @@
 # ==== Setting up lib/
 #
 # In ldapadmin/lib/ create the file user.rb:
-#   cat <<EOF
+#
 #   class User < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
 #     belongs_to :groups, :class_name => 'Group', :wrap => 'memberUid'
 #   end
-#   EOF
 #
 # In ldapadmin/lib/ create the file group.rb:
-#   cat <<EOF
+#
 #   class Group < ActiveLdap::Base
-#     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
+#     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Groups'
 #     has_many :members, :class_name => "User", :many => "memberUid"
 #     has_many :primary_members, :class_name => 'User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
-#   end # Group
-#   EOF
+#   end 
 #
 # Now, we can write some small scripts to do simple management tasks.
 #
@@ -731,7 +729,7 @@
 #   ./myldap/group.rb:
 #   module MyLDAP
 #   class Group < ActiveLdap::Base
-#     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Group'
+#     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Groups'
 #     has_many :members, :class_name => 'MyLDAP::User', :wrap => 'memberUid'
 #     has_many :primary_members, :class_name => 'MyLDAP::User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
 #   end
