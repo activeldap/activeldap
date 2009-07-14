@@ -172,7 +172,7 @@
 #   * dc=dataspill,dc=org
 #   |- ou=People,dc=dataspill,dc=org
 #   |+ ou=Groups,dc=dataspill,dc=org
-#     \
+#     \ 
 #      |- cn=develop,ou=Groups,dc=dataspill,dc=org
 #      |- cn=root,ou=Groups,dc=dataspill,dc=org
 #      |- ...
@@ -243,7 +243,7 @@
 # group 'develop'. In order to remedy that, we can use belongs_to
 #
 #   irb> class User < ActiveLdap::Base
-#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
+#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top','account']
 #   irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid', :foreign_key => 'uid'
 #   irb* end
 #
@@ -252,7 +252,7 @@
 #
 #   irb> me = User.find('drewry')
 #   irb> me.groups
-#   => [#<Group ...>, #<Group ...>, ...]
+#   =>  #<ActiveLdap::Association::BelongsToMany...>    # Enumerable object
 #   irb> me.groups.each { |group| p group.cn };nil
 #   "cdrom"
 #   "audio"
@@ -282,7 +282,7 @@
 # mind, the above definition could become:
 #
 #   irb> class User < ActiveLdap::Base
-#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
+#   irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top','account']
 #   irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid'
 #   irb* end
 #
