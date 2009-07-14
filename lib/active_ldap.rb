@@ -73,32 +73,6 @@
 # problem with the installation.  You may need to customize what setup.rb does on
 # install.
 #
-# === Customizations
-#
-# Now that ActiveLdap is installed and working, we still have a few more
-# steps to make it useful for programming.
-#
-# Let's say that you are writing a Ruby program for managing user and group
-# accounts in LDAP. I will use this as the running example throughout the
-# document.
-#
-# You will want to make a directory called 'ldapadmin' wherever is convenient. Under this directory,
-# you'll want to make sure you have a 'lib' directory.
-#
-#   $ cd ~
-#   $ mkdir ldapadmin
-#   $ cd ldapadmin
-#   $ mkdir lib
-#   $ cd lib
-#
-# The lib directory is where we'll be making customizations. You can, of course,
-# make this changes somewhere in Ruby's default search path to make this
-# accessible to every Ruby scripts. Enough of my babbling, I'm sure you'd like to
-# know what we're going to put in lib/.
-#
-# We're going to put extension classes in there. What are extension classes you say . . .
-#
-#
 # == Usage
 #
 # This section covers using ActiveLdap from writing extension classes to
@@ -534,22 +508,28 @@
 #
 # All of the scripts here are in the package's examples/ directory.
 #
-# ==== Setting up lib/
+# ==== Setting up 
 #
-# In ldapadmin/lib/ create the file user.rb:
+# Create directory for scripts.
 #
+#   mkdir -p ldapadmin/objects
+#
+# In ldapadmin/objects/ create the file user.rb:
+#
+#   require 'objects/group'
+# 
 #   class User < ActiveLdap::Base
-#     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top', 'account', 'posixAccount']
-#     belongs_to :groups, :class_name => 'Group', :wrap => 'memberUid'
+#     ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['person', 'posixAccount']
+#     belongs_to :groups, :class_name => 'Group', :many => 'memberUid'
 #   end
 #
-# In ldapadmin/lib/ create the file group.rb:
+# In ldapadmin/objects/ create the file group.rb:
 #
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :classes => ['top', 'posixGroup'], :prefix => 'ou=Groups'
-#     has_many :members, :class_name => "User", :many => "memberUid"
+#     has_many :members, :class_name => "User", :wrap => "memberUid"
 #     has_many :primary_members, :class_name => 'User', :foreign_key => 'gidNumber', :primary_key => 'gidNumber'
-#   end 
+#   end
 #
 # Now, we can write some small scripts to do simple management tasks.
 #
@@ -557,10 +537,13 @@
 #
 # Now let's create a really dumb script for adding users - ldapadmin/useradd:
 #
+#   #!/usr/bin/ruby -W0
+#   
 #   base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 #   $LOAD_PATH << File.join(base, "lib")
 #   $LOAD_PATH << File.join(base, "examples")
 #   
+#   require 'rubygems'
 #   require 'active_ldap'
 #   require 'objects/user'
 #   require 'objects/group'
@@ -611,6 +594,7 @@
 #   $LOAD_PATH << File.join(base, "lib")
 #   $LOAD_PATH << File.join(base, "examples")
 #   
+#   require 'rubygems'
 #   require 'active_ldap'
 #   require 'objects/user'
 #   require 'objects/group'
@@ -647,6 +631,45 @@
 #     puts user.errors.full_messages
 #     exit 1
 #   end
+#
+# ==== Removing LDAP entries
+# Now let's create more one for deleting users - ldapadmin/userdel:
+#
+#   #!/usr/bin/ruby -W0
+#   
+#   base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+#   $LOAD_PATH << File.join(base, "lib")
+#   $LOAD_PATH << File.join(base, "examples")
+# 
+#   require 'rubygems'
+#   require 'active_ldap'
+#   require 'objects/user'
+#   require 'objects/group'
+# 
+#   argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+#     opts.banner += " USER_NAME"
+#   end
+# 
+#   if argv.size == 1
+#     name = argv.shift
+#   else
+#     $stderr.puts opts
+#     exit 1
+#   end
+# 
+#   pwb = Proc.new do |user|
+#     ActiveLdap::Command.read_password("[#{user}] Password: ")
+#   end
+# 
+#   ActiveLdap::Base.setup_connection(:password_block => pwb,
+#                                     :allow_anonymous => false)
+# 
+#   unless User.exists?(name)
+#     $stderr.puts("User #{name} doesn't exist.")
+#     exit 1
+#   end
+# 
+#   User.destroy(name)
 #
 # === Advanced Topics
 #
