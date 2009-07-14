@@ -368,10 +368,10 @@
 #                    :scope => :sub, :attributes => ['uid', 'cn'])
 #   =>  [["uid=root,ou=People,dc=dataspill,dc=org",{"cn"=>["root"], "uidNumber"=>["0"]}]
 # You can specify the :filter, :base, :scope, and :attributes, but they all have defaults --
-#  * :filter defaults to objectClass=* - usually this isn't what you want
-#  * :base defaults to the base of the class this is executed from (as set in ldap_mapping)
-#  * :scope defaults to :sub. Usually you won't need to change it (You can choose value also from between :one and :base)
-#  * :attributes defaults to [] and is the list of attributes you want back. Empty means all of them.
+# * :filter defaults to objectClass=* - usually this isn't what you want
+# * :base defaults to the base of the class this is executed from (as set in ldap_mapping)
+# * :scope defaults to :sub. Usually you won't need to change it (You can choose value also from between :one and :base)
+# * :attributes defaults to [] and is the list of attributes you want back. Empty means all of them.
 #
 # ==== #valid?
 #
