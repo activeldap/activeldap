@@ -162,7 +162,7 @@
 #
 #   class Group < ActiveLdap::Base
 #     ldap_mapping :dn_attribute => 'cn',
-#                  :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
+#                  :prefix => 'ou=Groups', :classes => ['top', 'posixGroup'],
 #                  :scope => :one
 #   end
 #
