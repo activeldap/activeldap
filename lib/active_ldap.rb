@@ -311,8 +311,9 @@
 #   irb> develop = Group.find('develop')
 #   => ...
 #   irb> develop.members
-#   => [#<User ...>, #<User ...>]
-#
+#   => #<ActiveLdap::Association::HasManyWrap:..> # Enumerable object
+#   irb> develop.members.map{|member| member.id}
+#   => ["drewry", "builder"]
 #
 # The arguments for has_many follow the exact same idea that belongs_to's
 # arguments followed. :wrap's contents are used to search for matching
