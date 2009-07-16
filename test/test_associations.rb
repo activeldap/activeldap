@@ -25,26 +25,26 @@ class TestAssociations < Test::Unit::TestCase
 <?xml version="1.0" encoding="UTF-8"?>
 <groups type="array">
   <group>
-    <dn>cn=temp-group1,ou=Groups,dc=temp,dc=test,dc=local,dc=net</dn>
+    <dn>#{group1.dn}</dn>
     <cns type="array">
-      <cn>temp-group1</cn>
+      <cn>#{group1.cn}</cn>
     </cns>
-    <gidNumber>100001</gidNumber>
+    <gidNumber>#{group1.gid_number}</gidNumber>
     <memberUids type="array">
-      <memberUid>temp-user1</memberUid>
+      <memberUid>#{user.cn}</memberUid>
     </memberUids>
     <objectClasses type="array">
       <objectClass>posixGroup</objectClass>
     </objectClasses>
   </group>
   <group>
-    <dn>cn=temp-group2,ou=Groups,dc=temp,dc=test,dc=local,dc=net</dn>
+    <dn>#{group2.dn}</dn>
     <cns type="array">
-      <cn>temp-group2</cn>
+      <cn>#{group2.cn}</cn>
     </cns>
-    <gidNumber>100002</gidNumber>
+    <gidNumber>#{group2.gid_number}</gidNumber>
     <memberUids type="array">
-      <memberUid>temp-user1</memberUid>
+      <memberUid>#{user.cn}</memberUid>
     </memberUids>
     <objectClasses type="array">
       <objectClass>posixGroup</objectClass>
