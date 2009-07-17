@@ -53,6 +53,7 @@ at_exit do
   FileUtils.rm_f("History.txt")
 end
 
+ENV["VERSION"] = ActiveLdap::VERSION
 project = Hoe.spec('activeldap') do
   self.version = ActiveLdap::VERSION
   self.rubyforge_name = 'ruby-activeldap'
