@@ -1,5 +1,9 @@
 = CHANGES
 
+== 1.1.1: 20XX-XX-XX
+
+* [#26686] Supported Rails 2.3.3. [George Montana Harkin]
+
 == 1.1.0: 2009-07-18
 
 * Improved tutorial. [Kazuaki Takase]
