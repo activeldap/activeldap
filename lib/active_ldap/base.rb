@@ -763,12 +763,8 @@ module ActiveLdap
     #
     # Delete this entry from LDAP
     def destroy
-      begin
-        self.class.delete(dn)
-        @new_entry = true
-      rescue Error
-        raise DeleteError.new(_("Failed to delete LDAP entry: %s") % dn)
-      end
+      self.class.delete(dn)
+      @new_entry = true
     end
 
     def delete(options={})
@@ -1031,6 +1027,10 @@ module ActiveLdap
     end
 
     def delete_all(options={})
+      super({:base => dn}.merge(options || {}))
+    end
+
+    def destroy_all(options={})
       super({:base => dn}.merge(options || {}))
     end
 

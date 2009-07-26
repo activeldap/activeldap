@@ -470,13 +470,17 @@ module ActiveLdap
         end
       end
 
-      def destroy_all(filter=nil, options={})
-        targets = []
-        if filter.is_a?(Hash)
-          options = options.merge(filter)
-          filter = nil
+      def destroy_all(options_or_filter=nil, deprecated_options=nil)
+        if deprecated_options.nil?
+          if options_or_filter.is_a?(String)
+            options = {:filter => options_or_filter}
+          else
+            options = (options_or_filter || {}).dup
+          end
+        else
+          options = deprecated_options.merge(:filter => options_or_filter)
         end
-        options = options.merge(:filter => filter) if filter
+
         find(:all, options).sort_by do |target|
           target.dn.reverse
         end.reverse.each do |target|
@@ -494,7 +498,12 @@ module ActiveLdap
 
       def delete_entry(dn, options={})
         options[:connection] ||= connection
-        options[:connection].delete(dn, options)
+        begin
+          options[:connection].delete(dn, options)
+        rescue Error
+          format = _("Failed to delete LDAP entry: <%s>: %s")
+          raise DeleteError.new(format % [dn.inspect, $!.message])
+        end
       end
 
       def delete_all(options_or_filter=nil, deprecated_options=nil)
@@ -513,7 +522,7 @@ module ActiveLdap
           dn.upcase.reverse
         end.reverse
 
-        options[:connection].delete(targets)
+        delete_entry(targets, options)
       end
     end
 
