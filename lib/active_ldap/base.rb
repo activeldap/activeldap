@@ -1030,6 +1030,10 @@ module ActiveLdap
       @scope = scope
     end
 
+    def delete_all(options={})
+      super({:base => dn}.merge(options || {}))
+    end
+
     def inspect
       object_classes = entry_attribute.object_classes
       inspected_object_classes = object_classes.collect do |object_class|

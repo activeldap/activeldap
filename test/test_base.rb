@@ -6,6 +6,30 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_delete_mixed_tree_by_instance
+    make_ou("base")
+    _entry_class = entry_class("ou=base")
+    _ou_class = ou_class("ou=base")
+    _dc_class = dc_class("ou=base")
+
+    root1 = _ou_class.create("root1")
+    child1 = _ou_class.create(:ou => "child1", :parent => root1)
+    child2 = _ou_class.create(:ou => "child2", :parent => root1)
+    domain = _dc_class.create(:dc => "domain", :o => "domain", :parent => root1)
+    child3 = _ou_class.create(:ou => "child3", :parent => root1)
+    root2 = _ou_class.create("root2")
+    assert_equal(["base",
+                  "root1", "child1", "child2", "domain", "child3",
+                  "root2"],
+                 _entry_class.find(:all).collect(&:id))
+    assert_raise(ActiveLdap::LdapError::NotAllowedOnNonleaf) do
+      root1.delete_all
+    end
+    assert_equal(["base", "root1", "domain", "root2"],
+                 _entry_class.find(:all).collect(&:id))
+  end
+
+  priority :normal
   def test_delete_tree
     make_ou("base")
     _ou_class = ou_class("ou=base")
@@ -48,7 +72,6 @@ class TestBase < Test::Unit::TestCase
                  entry_class.find(:all).collect(&:id))
   end
 
-  priority :normal
   def test_first
     make_temporary_user(:simple => true) do |user1,|
       make_temporary_user(:simple => true) do |user2,|
