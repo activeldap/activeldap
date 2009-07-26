@@ -13,17 +13,8 @@ module ActiveLdap
         prefix = suffixes.join(",")
         suffixes.unshift("#{name}=#{value}")
         next unless name == "dc"
-        dc_class = Class.new(base_class)
-        dc_class.ldap_mapping :dn_attribute => "dc",
-                              :prefix => "",
-                              :scope => :base,
-                              :classes => ["top", "dcObject", "organization"]
-        dc_class.base = prefix
-        next if dc_class.exist?(value)
-        dc = dc_class.new(value)
-        dc.o = dc.dc
         begin
-          dc.save
+          ensure_dc(value, prefix, base_class)
         rescue ActiveLdap::OperationNotPermitted
         end
       end
@@ -31,7 +22,7 @@ module ActiveLdap
 
     def ensure_ou(name, base_class=nil)
       base_class ||= Base
-      name = name.gsub(/\Aou\s*=\s*/, '')
+      name = name.gsub(/\Aou\s*=\s*/i, '')
 
       ou_class = Class.new(base_class)
       ou_class.ldap_mapping(:dn_attribute => "ou",
@@ -39,6 +30,22 @@ module ActiveLdap
                             :classes => ["top", "organizationalUnit"])
       return if ou_class.exist?(name)
       ou_class.new(name).save
+    end
+
+    def ensure_dc(name, prefix, base_class=nil)
+      base_class ||= Base
+      name = name.gsub(/\Adc\s*=\s*/i, '')
+
+      dc_class = Class.new(base_class)
+      dc_class.ldap_mapping(:dn_attribute => "dc",
+                            :prefix => "",
+                            :scope => :base,
+                            :classes => ["top", "dcObject", "organization"])
+      dc_class.base = prefix
+      return if dc_class.exist?(name)
+      dc = dc_class.new(name)
+      dc.o = dc.dc
+      dc.save
     end
   end
 end

@@ -183,10 +183,27 @@ module AlTestUtils
 
     def ou_class(prefix="")
       ou_class = Class.new(ActiveLdap::Base)
-      ou_class.ldap_mapping :dn_attribute => "ou",
+      ou_class.ldap_mapping(:dn_attribute => "ou",
                             :prefix => prefix,
-                            :classes => ["top", "organizationalUnit"]
+                            :classes => ["top", "organizationalUnit"])
       ou_class
+    end
+
+    def dc_class(prefix="")
+      dc_class = Class.new(ActiveLdap::Base)
+      dc_class.ldap_mapping(:dn_attribute => "dc",
+                            :prefix => prefix,
+                            :classes => ["top", "dcObject", "organization"])
+      dc_class
+    end
+
+    def entry_class(prefix="")
+      entry_class = Class.new(ActiveLdap::Base)
+      entry_class.ldap_mapping(:prefix => prefix,
+                               :scope => :sub,
+                               :classes => ["top"])
+      entry_class.dn_attribute = nil
+      entry_class
     end
 
     def populate_ou
@@ -197,6 +214,10 @@ module AlTestUtils
 
     def make_ou(name)
       ActiveLdap::Populate.ensure_ou(name)
+    end
+
+    def make_dc(name)
+      ActiveLdap::Populate.ensure_dc(name)
     end
 
     def populate_user_class
