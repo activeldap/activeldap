@@ -473,17 +473,23 @@ module ActiveLdap
         elsif abstract_class?
           "#{super}(abstract)"
         else
-          class_names = []
-          must = []
-          may = []
-          class_names = classes.collect do |object_class|
-            must.concat(object_class.must)
-            may.concat(object_class.may)
-            object_class.name
+          detail = nil
+          begin
+            must = []
+            may = []
+            class_names = classes.collect do |object_class|
+              must.concat(object_class.must)
+              may.concat(object_class.may)
+              object_class.name
+            end
+            detail = ["objectClass:<#{class_names.join(', ')}>",
+                      "must:<#{inspect_attributes(must)}>",
+                      "may:<#{inspect_attributes(may)}>"].join(", ")
+          rescue ActiveLdap::ConnectionNotSetup
+            detail = "not-connected"
+          rescue ActiveLdap::Error
+            detail = "connection-failure"
           end
-          detail = ["objectClass:<#{class_names.join(', ')}>",
-                    "must:<#{inspect_attributes(must)}>",
-                    "may:<#{inspect_attributes(may)}>"].join(", ")
           "#{super}(#{detail})"
         end
       end
