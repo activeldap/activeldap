@@ -22,6 +22,10 @@ module ActiveLdap
           end
         end
 
+        class_local_attr_accessor true, :validation_skip_attributes
+        remove_method :validation_skip_attributes
+        self.validation_skip_attributes = []
+
         # Workaround for GetText's ugly implementation
         begin
           instance_method(:save_without_validation)
@@ -71,6 +75,14 @@ module ActiveLdap
                        :run_callbacks_without_active_ldap_support)
         end
       end
+    end
+
+    def validation_skip_attributes
+      @validation_skip_attributes ||= []
+    end
+
+    def validation_skip_attributes=(attributes)
+      @validation_skip_attributes = attributes
     end
 
     private
@@ -130,6 +142,10 @@ module ActiveLdap
     # - Verify that every 'MUST' specified in the schema has a value defined
     def validate_required_ldap_values
       _schema = nil
+      @validation_skip_attributes ||= []
+      _validation_skip_attributes =
+        @validation_skip_attributes +
+        (self.class.validation_skip_attributes || [])
       # Make sure all MUST attributes have a value
       entry_attribute.object_classes.each do |object_class|
         object_class.must.each do |required_attribute|
@@ -139,6 +155,7 @@ module ActiveLdap
           raise UnknownAttribute.new(required_attribute) if real_name.nil?
 
           next if required_attribute.read_only?
+          next if _validation_skip_attributes.include?(real_name)
 
           value = @data[real_name] || []
           next unless self.class.blank_value?(value)

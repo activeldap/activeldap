@@ -6,6 +6,20 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_validation_skip_attributes
+    make_temporary_group do |group|
+      group.gid_number = nil
+      assert_raise(ActiveLdap::EntryInvalid) do
+        group.save!
+      end
+      group.validation_skip_attributes << "gidNumber"
+      assert_raise(ActiveLdap::RequiredAttributeMissed) do
+        group.save!
+      end
+    end
+  end
+
+  priority :normal
   def test_set_attributes_with_invalid_dn_attribute_value
     user = nil
     assert_nothing_raised do
@@ -14,7 +28,6 @@ class TestValidation < Test::Unit::TestCase
     assert(!user.valid?)
   end
 
-  priority :normal
   def test_set_attribute_to_invalid_dn_attribute_value_object
     user = @user_class.new("=")
     assert_nothing_raised do
