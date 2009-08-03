@@ -6,6 +6,23 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_operational_attributes
+    make_temporary_group do |group|
+      dn, attributes = @group_class.search(:attributes => ["*"])[0]
+      normal_attributes = attributes.keys
+      dn, attributes = @group_class.search(:attributes => ["*", "+"])[0]
+      operational_attributes = attributes.keys - normal_attributes
+      operational_attribute = operational_attributes[0]
+
+      group = @group_class.find(:first, :attributes => ["*", "+"])
+      operational_attribute_value = group[operational_attribute]
+      assert_not_nil(operational_attribute_value)
+      group.save!
+      assert_equal(operational_attribute_value, group[operational_attribute])
+    end
+  end
+
+  priority :normal
   def test_destroy_mixed_tree_by_instance
     make_ou("base")
     _entry_class = entry_class("ou=base")
@@ -29,7 +46,6 @@ class TestBase < Test::Unit::TestCase
                  _entry_class.find(:all).collect(&:id))
   end
 
-  priority :normal
   def test_delete_mixed_tree_by_instance
     make_ou("base")
     _entry_class = entry_class("ou=base")

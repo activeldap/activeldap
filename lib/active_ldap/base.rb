@@ -1470,7 +1470,9 @@ module ActiveLdap
       ldap_data = normalize_data(@ldap_data)
 
       # Expand subtypes to real data attributes, but leave @data alone
-      bad_attrs = @data.keys - attribute_names
+      original_attributes =
+        connection.entry_attribute(@ldap_data["objectClass"] || []).names
+      bad_attrs = original_attributes - entry_attribute.names
       data = normalize_data(@data, bad_attrs)
 
       success = yield(data, ldap_data)
