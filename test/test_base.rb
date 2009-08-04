@@ -6,6 +6,33 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_rename_with_superior
+    make_ou("sub,ou=users")
+    make_temporary_user(:simple => true) do |user,|
+      assert_raise(ActiveLdap::NotImplemented) do
+        user.rename("user2", "ou=sub,#{@user_class.base}")
+      end
+    end
+  end
+
+  def test_rename
+    make_temporary_user(:simple => true) do |user,|
+      assert_not_equal("user2", user.id)
+      assert_raise(ActiveLdap::EntryNotFound) do
+        @user_class.find("user2")
+      end
+      user.rename("user2")
+      assert_equal("user2", user.id)
+
+      found_user = nil
+      assert_nothing_raised do
+        found_user = @user_class.find("user2")
+      end
+      assert_equal("user2", found_user.id)
+    end
+  end
+
+  priority :normal
   def test_operational_attributes
     make_temporary_group do |group|
       dn, attributes = @group_class.search(:attributes => ["*"])[0]
@@ -22,7 +49,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_destroy_mixed_tree_by_instance
     make_ou("base")
     _entry_class = entry_class("ou=base")

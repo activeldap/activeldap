@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ruby/ActiveLdap 1.1.1\n"
-"POT-Creation-Date: 2009-08-04 22:43+0900\n"
-"PO-Revision-Date: 2009-08-04 22:45+0900\n"
+"POT-Creation-Date: 2009-08-04 23:26+0900\n"
+"PO-Revision-Date: 2009-08-04 23:28+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -3449,17 +3449,17 @@ msgstr "LDAPサーバが知らないobjectClassです: %s"
 msgid "Can't remove required objectClass: %s"
 msgstr "必須のobjectClassは削除できません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:105 lib/active_ldap/adapter/ldap.rb:197
+#: lib/active_ldap/adapter/jndi.rb:105 lib/active_ldap/adapter/ldap.rb:203
 #: lib/active_ldap/adapter/net_ldap.rb:155
 msgid "%s is not one of the available connect methods: %s"
 msgstr "%sは有効な接続方法ではありません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:118 lib/active_ldap/adapter/ldap.rb:210
+#: lib/active_ldap/adapter/jndi.rb:118 lib/active_ldap/adapter/ldap.rb:216
 #: lib/active_ldap/adapter/net_ldap.rb:168
 msgid "%s is not one of the available LDAP scope: %s"
 msgstr "%sは有効なLDAPスコープではありません: %s"
 
-#: lib/active_ldap/adapter/jndi.rb:176 lib/active_ldap/adapter/ldap.rb:274
+#: lib/active_ldap/adapter/jndi.rb:176 lib/active_ldap/adapter/ldap.rb:280
 #: lib/active_ldap/adapter/net_ldap.rb:290
 msgid "unknown type: %s"
 msgstr "未知の種類です: %s"
@@ -3467,6 +3467,10 @@ msgstr "未知の種類です: %s"
 #: lib/active_ldap/adapter/ldap.rb:108
 msgid "No matches: filter: %s: attributes: %s"
 msgstr "マッチしませんでした: フィルタ: %s: 属性: %s"
+
+#: lib/active_ldap/adapter/ldap.rb:162
+msgid "modify RDN with new superior"
+msgstr "異なるツリー上のRDNへ変更"
 
 #: lib/active_ldap/adapter/net_ldap.rb:211
 msgid "unsupported qops: %s"
@@ -3812,7 +3816,11 @@ msgstr "LDAPの設定が存在しない%sアダプタが指定しています"
 msgid "%s is unknown attribute"
 msgstr "%sは未知の属性です"
 
-#: lib/active_ldap/base.rb:374
+#: lib/active_ldap/base.rb:266
+msgid "not implemented: %s"
+msgstr "未実装です: %s"
+
+#: lib/active_ldap/base.rb:382
 msgid ""
 "ActiveLdap::Base.establish_connection has been deprecated since 1.1.0. "
 "Please use ActiveLdap::Base.setup_connection instead."
@@ -3820,15 +3828,15 @@ msgstr ""
 "1.1.0からActiveLdap::Base.establish_connectionは非推奨になりました。代わりに"
 "ActiveLdap::Base.setup_connectionを使ってください。"
 
-#: lib/active_ldap/base.rb:455
+#: lib/active_ldap/base.rb:463
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません"
 
-#: lib/active_ldap/base.rb:506
+#: lib/active_ldap/base.rb:514
 msgid "%s doesn't belong in a hierarchy descending from ActiveLdap"
 msgstr "%sはActiveLdapの子孫ではありません。"
 
-#: lib/active_ldap/base.rb:661
+#: lib/active_ldap/base.rb:669
 msgid ""
 "'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
 "attributes as Hash"
@@ -3836,19 +3844,19 @@ msgstr ""
 "'%s'はnil、ActiveLdap::DNあるいはStringによるDN、DNの配列、Hashによる属性のど"
 "れかでなければいけません"
 
-#: lib/active_ldap/base.rb:791
+#: lib/active_ldap/base.rb:799
 msgid "entry %s can't be saved"
 msgstr "エントリ%sを保存できません"
 
-#: lib/active_ldap/base.rb:810 lib/active_ldap/base.rb:821
+#: lib/active_ldap/base.rb:832 lib/active_ldap/base.rb:843
 msgid "wrong number of arguments (%d for 1)"
 msgstr "引数の数が違います。(1つの引数なのに%d個指定しました)"
 
-#: lib/active_ldap/base.rb:942
+#: lib/active_ldap/base.rb:964
 msgid "Can't find DN '%s' to reload"
 msgstr "再読み込みするDN '%s'が見つかりません"
 
-#: lib/active_ldap/base.rb:1347
+#: lib/active_ldap/base.rb:1369
 msgid "%s's DN attribute (%s) isn't set"
 msgstr "%sのDN属性(%s)が設定されていません"
 

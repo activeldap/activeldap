@@ -259,6 +259,14 @@ module ActiveLdap
     end
   end
 
+  class NotImplemented < Error
+    attr_reader :target
+    def initialize(target)
+      @target = target
+      super(_("not implemented: %s") % @target)
+    end
+  end
+
   # Base
   #
   # Base is the primary class which contains all of the core
@@ -790,6 +798,20 @@ module ActiveLdap
       unless create_or_update
         raise EntryNotSaved, _("entry %s can't be saved") % dn
       end
+    end
+
+    # Renames RDN and reload the entry.
+    def rename(new_rdn, new_superior=nil)
+      begin
+        new_rdn = DN.parse(new_rdn) unless new_rdn.is_a?(DN)
+      rescue DistinguishedNameInvalid
+        new_rdn = DN.parse("#{dn_attribute}=#{new_rdn}")
+      end
+      new_rdn = DN.new(new_rdn.rdns[0]).to_s
+      modify_rdn_entry(dn, new_rdn, false, new_superior)
+      self.id = new_rdn
+      self.base = new_superior if new_superior
+      reload
     end
 
     # method_missing
