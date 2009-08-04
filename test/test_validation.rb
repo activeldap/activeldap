@@ -6,6 +6,24 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_not_show_binary_value
+    make_temporary_user do |user,|
+      user.user_certificate = nil
+      user.jpeg_photo = "XXX"
+      assert_not_predicate(user, :save)
+
+      format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
+      format = format.sub(/^%\{fn\}/, la_('jpegPhoto'))
+      arguments = [_("<binary-value>"),
+                   lsd_("1.3.6.1.4.1.1466.115.121.1.28"),
+                   _("invalid JPEG format")]
+      message = format % arguments
+      assert_equal([message],
+                   user.errors.full_messages)
+    end
+  end
+
+  priority :normal
   def test_validation_skip_attributes
     make_temporary_group do |group|
       group.gid_number = nil
@@ -19,7 +37,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_set_attributes_with_invalid_dn_attribute_value
     user = nil
     assert_nothing_raised do

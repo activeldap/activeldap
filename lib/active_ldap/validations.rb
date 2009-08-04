@@ -191,7 +191,12 @@ module ActiveLdap
     def validate_ldap_value(attribute, name, value)
       failed_reason, option = attribute.validate(value)
       return if failed_reason.nil?
-      params = [self.class.human_readable_format(value),
+      if attribute.binary?
+        inspected_value = _("<binary-value>")
+      else
+        inspected_value = self.class.human_readable_format(value)
+      end
+      params = [inspected_value,
                 self.class.human_syntax_description(attribute.syntax),
                 failed_reason]
       if option

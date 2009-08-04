@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Ruby/ActiveLdap 1.0.9\n"
-"POT-Creation-Date: 2009-07-09 22:48+0900\n"
+"Project-Id-Version: Ruby/ActiveLdap 1.1.1\n"
+"POT-Creation-Date: 2009-08-04 22:43+0900\n"
 "PO-Revision-Date: 2009-02-25 08:40+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: English\n"
@@ -772,6 +772,10 @@ msgid "LDAP|Attribute|olcRootPW"
 msgstr ""
 
 #: -:-
+msgid "LDAP|Attribute|olcSaslAuxprops"
+msgstr ""
+
+#: -:-
 msgid "LDAP|Attribute|olcSaslHost"
 msgstr ""
 
@@ -885,6 +889,10 @@ msgstr ""
 
 #: -:-
 msgid "LDAP|Attribute|olcUpdateRef"
+msgstr ""
+
+#: -:-
+msgid "LDAP|Attribute|olcWriteTimeout"
 msgstr ""
 
 #: -:-
@@ -3553,13 +3561,17 @@ msgstr ""
 msgid "Couldn't find all %s: DNs (%s)"
 msgstr ""
 
+#: lib/active_ldap/operations.rb:504
+msgid "Failed to delete LDAP entry: <%s>: %s"
+msgstr ""
+
 #: lib/active_ldap/associations.rb:68
 msgid ""
 ":foreign_key belongs_to(:many) option is deprecated since 1.1.0. Use :"
 "primary_key instead."
 msgstr ""
 
-#: lib/active_ldap/associations.rb:135
+#: lib/active_ldap/associations.rb:136
 msgid ""
 ":primary_key and :foreign_key has_many options are inverted their mean since "
 "1.1.0. Please invert them."
@@ -3693,37 +3705,41 @@ msgstr ""
 msgid "%s isn't sub DN of %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:85
+#: lib/active_ldap/validations.rb:97
 msgid "%{fn} is duplicated: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:96
+#: lib/active_ldap/validations.rb:108
 msgid "%{fn} is invalid: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:100
+#: lib/active_ldap/validations.rb:112
 msgid "%{fn} isn't set: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:122
+#: lib/active_ldap/validations.rb:134
 msgid "%{fn} has excluded value: %s"
 msgid_plural "%{fn} has excluded values: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/active_ldap/validations.rb:152
+#: lib/active_ldap/validations.rb:169
 msgid "%{fn} is required attribute by objectClass '%s'"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:154
+#: lib/active_ldap/validations.rb:171
 msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:181
+#: lib/active_ldap/validations.rb:195
+msgid "<binary-value>"
+msgstr ""
+
+#: lib/active_ldap/validations.rb:203
 msgid "%{fn}(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
-#: lib/active_ldap/validations.rb:183
+#: lib/active_ldap/validations.rb:205
 msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
@@ -3787,37 +3803,33 @@ msgstr ""
 msgid "scope '%s' must be a Symbol"
 msgstr ""
 
-#: lib/active_ldap/base.rb:500
+#: lib/active_ldap/base.rb:506
 msgid "%s doesn't belong in a hierarchy descending from ActiveLdap"
 msgstr ""
 
-#: lib/active_ldap/base.rb:655
+#: lib/active_ldap/base.rb:661
 msgid ""
 "'%s' must be either nil, DN value as ActiveLdap::DN, String or Array or "
 "attributes as Hash"
 msgstr ""
 
-#: lib/active_ldap/base.rb:770
-msgid "Failed to delete LDAP entry: %s"
-msgstr ""
-
-#: lib/active_ldap/base.rb:789
+#: lib/active_ldap/base.rb:791
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: lib/active_ldap/base.rb:808 lib/active_ldap/base.rb:819
+#: lib/active_ldap/base.rb:810 lib/active_ldap/base.rb:821
 msgid "wrong number of arguments (%d for 1)"
 msgstr ""
 
-#: lib/active_ldap/base.rb:940
+#: lib/active_ldap/base.rb:942
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: lib/active_ldap/base.rb:1337
+#: lib/active_ldap/base.rb:1347
 msgid "%s's DN attribute (%s) isn't set"
 msgstr ""
 
-#: lib/active_ldap/attributes.rb:76
+#: lib/active_ldap/attributes.rb:80
 msgid "The first argument, name, must not be nil. Please report this as a bug!"
 msgstr ""
 
@@ -3843,7 +3855,7 @@ msgid ""
 "Please use ActiveLdap::Connection.setup_connection instead."
 msgstr ""
 
-#: lib/active_ldap/connection.rb:229
+#: lib/active_ldap/connection.rb:236
 msgid "since 1.1.0. "
 msgstr ""
 
@@ -3937,7 +3949,7 @@ msgstr ""
 msgid "%s has unprintable character: '%s'"
 msgstr ""
 
-#: lib/active_ldap/get_text/parser.rb:94
+#: lib/active_ldap/get_text/parser.rb:96
 msgid "Ignored '%{file}'. Solve dependencies first."
 msgstr ""
 
@@ -3973,37 +3985,37 @@ msgstr ""
 msgid "(default: %s)"
 msgstr ""
 
-#: benchmark/bench-al.rb:219
+#: benchmark/bench-al.rb:186
 msgid "Populating..."
 msgstr ""
 
-#: benchmark/bench-al.rb:276
+#: benchmark/bench-al.rb:243
 msgid "Entries processed by Ruby/ActiveLdap + LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:277
+#: benchmark/bench-al.rb:244
 msgid "Entries processed by Ruby/ActiveLdap + Net::LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:279
+#: benchmark/bench-al.rb:246
 msgid ""
 "Entries processed by Ruby/ActiveLdap + LDAP: (without object creation): %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:282
+#: benchmark/bench-al.rb:249
 msgid ""
 "Entries processed by Ruby/ActiveLdap + Net::LDAP: (without object creation): "
 "%d"
 msgstr ""
 
-#: benchmark/bench-al.rb:285
+#: benchmark/bench-al.rb:252
 msgid "Entries processed by Ruby/LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:286
+#: benchmark/bench-al.rb:253
 msgid "Entries processed by Net::LDAP: %d"
 msgstr ""
 
-#: benchmark/bench-al.rb:290
+#: benchmark/bench-al.rb:257
 msgid "Cleaning..."
 msgstr ""
