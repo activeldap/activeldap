@@ -615,7 +615,11 @@ module ActiveLdap
       def root_dse_values(key, options={})
         dse = root_dse([key], options)[0]
         return [] if dse.nil?
-        dse[key] || dse[key.downcase] || []
+        normalized_key = key.downcase
+        dse.each do |_key, _value|
+          return _value if _key.downcase == normalized_key
+        end
+        []
       end
 
       def root_dse(attrs, options={})
