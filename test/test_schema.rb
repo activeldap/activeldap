@@ -2,6 +2,29 @@ require 'al-test-utils'
 
 class TestSchema < Test::Unit::TestCase
   priority :must
+  def test_directory_operation
+    attributes_schema =
+      "( 2.5.18.1 NAME 'createTimestamp' " +
+      "DESC 'RFC4512: time which ob ject was created' " +
+      "EQUALITY generalizedTimeMatch " +
+      "ORDERING generalizedTimeOrderingMatch " +
+      "SYNTAX 1.3.6.1.4.1.1466.115.121.1.24 " +
+      "SINGLE-VALUE NO-USER-MODIFICATION USAGE directoryOperation )"
+
+    assert_attribute_type({
+                            :read_only => true,
+                            :single_value => true,
+                            :binary => false,
+                            :binary_required => false,
+                            :directory_operation => true,
+                            :syntax => "1.3.6.1.4.1.1466.115.121.1.24",
+                            :syntax_description => nil,
+                          },
+                          "createTimestamp",
+                          [attributes_schema])
+  end
+
+  priority :normal
   def test_dit_content_rule
     object_class_schema = "( 2.5.6.6 NAME 'person' DESC " +
       "'RFC2256: a person' SUP top STRUCTURAL MUST sn " +
@@ -37,7 +60,6 @@ class TestSchema < Test::Unit::TestCase
                  })
   end
 
-  priority :normal
   def test_oid_list_with_just_only_one_oid
     ou_schema = "( 2.5.6.5 NAME 'organizationalUnit' SUP top STRUCTURAL MUST " +
       "(ou ) MAY (c $ l $ st $ street $ searchGuide $ businessCategory $ " +
@@ -523,5 +545,15 @@ class TestSchema < Test::Unit::TestCase
       [attribute.name, attribute.aliases]
     end
     assert_equal(expected, result)
+  end
+
+  def assert_attribute_type(expected, name, schemata)
+    group = 'attributeTypes'
+    entry = {group => schemata}
+    schema = ActiveLdap::Schema.new(entry)
+    attribute_hash = schema.attribute(name).to_hash
+    syntax = attribute_hash[:syntax]
+    attribute_hash[:syntax] = syntax.id if syntax
+    assert_equal(expected, attribute_hash)
   end
 end

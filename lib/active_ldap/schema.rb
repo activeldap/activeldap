@@ -423,6 +423,14 @@ module ActiveLdap
         @binary_required
       end
 
+      # directory_operation?
+      #
+      # Returns true if an attribute is directory operation.
+      # It means that USAGE contains directoryOperation.
+      def directory_operation?
+        @directory_operation
+      end
+
       def syntax
         @derived_syntax
       end
@@ -462,6 +470,18 @@ module ActiveLdap
         self.class.human_attribute_description(self)
       end
 
+      def to_hash
+        {
+          :read_only => read_only?,
+          :single_value => single_value?,
+          :binary => binary?,
+          :binary_required => binary_required?,
+          :directory_operation => directory_operation?,
+          :syntax => syntax,
+          :syntax_description => syntax_description,
+        }
+      end
+
       private
       def attribute(attribute_name, name=@name)
         @schema.attribute_type(name, attribute_name)
@@ -488,6 +508,7 @@ module ActiveLdap
           @derived_syntax = nil
           @derived_syntax = @super_attribute.syntax if @super_attribute
         end
+        @directory_operation = attribute("USAGE").include?("directoryOperation")
       end
 
       def send_to_syntax(default_value, method_name, *args)
