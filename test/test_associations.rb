@@ -96,13 +96,14 @@ EOX
       make_temporary_group do |group1|
         make_temporary_group do |group2|
           user.references = [group1, group2]
-          group3_dn = group2.dn.sub(/cn=(.*?),/, "cn=\\1-nonexistent,")
+          group3_dn = group2.dn.to_s.sub(/cn=(.*?),/, "cn=\\1-nonexistent,")
           user.see_also += [group3_dn]
           user.save!
 
+          group3_dn = dn(group3_dn)
           user = @user_class.find(user.dn)
           assert_equal([group1.dn, group2.dn, group3_dn],
-                       user.see_also.collect(&:to_s))
+                       user.see_also)
           assert_equal([group1.dn, group2.dn, group3_dn],
                        user.references.collect(&:dn))
           assert_equal([group1.gid_number, group2.gid_number, nil],

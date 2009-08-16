@@ -13,7 +13,9 @@ module ActiveLdap
         if _primary_key == "dn"
           old_value = dn_values_to_string_values(old_value)
         end
-        new_value = (old_value + entry[_primary_key, true]).uniq.sort
+        current_value = entry[_primary_key, true]
+        current_value = dn_values_to_string_values(current_value)
+        new_value = (old_value + current_value).uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value
           @owner.save
@@ -26,7 +28,9 @@ module ActiveLdap
         if _primary_key == "dn"
           old_value = dn_values_to_string_values(old_value)
         end
-        new_value = old_value - entries.collect {|entry| entry[_primary_key]}
+        current_value = entries.collect {|entry| entry[_primary_key]}
+        current_value = dn_values_to_string_values(current_value)
+        new_value = old_value - current_value
         new_value = new_value.uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value

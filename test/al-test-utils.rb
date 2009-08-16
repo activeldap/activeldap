@@ -16,6 +16,7 @@ module AlTestUtils
   def self.included(base)
     base.class_eval do
       include ActiveLdap::GetTextSupport
+      include Utilities
       include Assertions
       include Config
       include Connection
@@ -23,6 +24,12 @@ module AlTestUtils
       include TemporaryEntry
       include CommandSupport
       include MockLogger
+    end
+  end
+
+  module Utilities
+    def dn(string)
+      ActiveLdap::DN.parse(string)
     end
   end
 

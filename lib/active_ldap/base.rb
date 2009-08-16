@@ -1370,14 +1370,10 @@ module ActiveLdap
         message = format % [self.inspect, dn_attribute]
         raise DistinguishedNameNotSetError.new, message
       end
-      dn_value = DN.escape_value(dn_value.to_s) if escape_dn_value
+      dn_value = DN.escape_value(dn_value.to_s)
       _base = base
       _base = nil if _base.blank?
-      ["#{dn_attribute}=#{dn_value}", _base].compact.join(",")
-    end
-
-    def escaped_dn
-      compute_dn(true)
+      DN.parse(["#{dn_attribute}=#{dn_value}", _base].compact.join(","))
     end
 
     # array_of
@@ -1514,7 +1510,7 @@ module ActiveLdap
     def create
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_all_attributes(data)
-        add_entry(escaped_dn, attributes)
+        add_entry(dn, attributes)
         @new_entry = false
         true
       end
@@ -1523,7 +1519,7 @@ module ActiveLdap
     def update
       prepare_data_for_saving do |data, ldap_data|
         attributes = collect_modified_attributes(ldap_data, data)
-        modify_entry(escaped_dn, attributes)
+        modify_entry(dn, attributes)
         true
       end
     end

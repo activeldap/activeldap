@@ -140,8 +140,11 @@ module ActiveLdap
 
       def prepare_search_base(components)
         components.compact.collect do |component|
-          if component.is_a?(String)
+          case component
+          when String
             component
+          when DN
+            component.to_s
           else
             DN.new(*component).to_s
           end
@@ -482,8 +485,8 @@ module ActiveLdap
         end
 
         find(:all, options).sort_by do |target|
-          target.dn.reverse
-        end.reverse.each do |target|
+          target.dn
+        end.each do |target|
           target.destroy
         end
       end

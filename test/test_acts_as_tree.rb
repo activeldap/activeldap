@@ -17,7 +17,8 @@ class TestActsAsTree < Test::Unit::TestCase
     users = ou_class.find("Users")
     assert_equal(["SubUsers"], users.children.collect(&:ou))
 
-    assert_equal("ou=SubUsers,#{users.dn}", sub_users.dn)
+    assert_equal(dn("ou=SubUsers,#{users.dn}"),
+                 sub_users.dn)
 
     assert(ou_class.exists?("SubUsers"))
     users.children.replace([])
@@ -31,7 +32,8 @@ class TestActsAsTree < Test::Unit::TestCase
 
     sub_users = users.class.new("SubUsers")
     sub_users.parent = users
-    assert_equal("ou=SubUsers,#{users.dn}", sub_users.dn)
+    assert_equal(dn("ou=SubUsers,#{users.dn}"),
+                 sub_users.dn)
     assert_equal(["SubUsers"], users.children.collect(&:ou))
 
     sub_users = ou_class.find("SubUsers")
@@ -46,7 +48,8 @@ class TestActsAsTree < Test::Unit::TestCase
     assert_equal([], other_users.children.collect(&:ou))
 
     sub_users.parent = other_users.dn
-    assert_equal("ou=SubUsers,#{other_users.dn}", sub_users.dn)
+    assert_equal(dn("ou=SubUsers,#{other_users.dn}"),
+                 sub_users.dn)
 
     other_users.clear_association_cache
     assert_equal(["SubUsers"], other_users.children.collect(&:ou))

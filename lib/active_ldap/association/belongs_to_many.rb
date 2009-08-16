@@ -10,7 +10,9 @@ module ActiveLdap
         if primary_key_name == "dn"
           old_value = dn_values_to_string_values(old_value)
         end
-        new_value = old_value + @owner[primary_key_name, true]
+        current_value = @owner[primary_key_name, true]
+        current_value = dn_values_to_string_values(current_value)
+        new_value = old_value + current_value
         new_value = new_value.uniq.sort
         if old_value != new_value
           entry[@options[:many]] = new_value
@@ -25,7 +27,9 @@ module ActiveLdap
           if primary_key_name == "dn"
             old_value = dn_values_to_string_values(old_value)
           end
-          new_value = old_value - @owner[primary_key_name, true]
+          current_value = @owner[primary_key_name, true]
+          current_value = dn_values_to_string_values(current_value)
+          new_value = old_value - current_value
           new_value = new_value.uniq.sort
           if old_value != new_value
             entry[@options[:many]] = new_value

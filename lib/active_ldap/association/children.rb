@@ -5,7 +5,7 @@ module ActiveLdap
     class Children < Collection
       private
       def insert_entry(entry)
-        entry.dn = [entry.id, @owner.dn].join(",")
+        entry.dn = [entry.id, @owner.dn.to_s].join(",")
         entry.save
       end
 

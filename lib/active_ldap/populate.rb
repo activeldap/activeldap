@@ -29,7 +29,7 @@ module ActiveLdap
                             :prefix => "",
                             :classes => ["top", "organizationalUnit"])
       return if ou_class.exist?(name)
-      ou_class.new(name).save
+      ou_class.new(name).save!
     end
 
     def ensure_dc(name, prefix, base_class=nil)
@@ -45,7 +45,7 @@ module ActiveLdap
       return if dc_class.exist?(name)
       dc = dc_class.new(name)
       dc.o = dc.dc
-      dc.save
+      dc.save!
     end
   end
 end

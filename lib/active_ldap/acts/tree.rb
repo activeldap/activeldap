@@ -55,7 +55,7 @@ module ActiveLdap
       end
 
       def parent=(entry)
-        if entry.is_a?(String)
+        if entry.is_a?(String) or entry.is_a?(DN)
           base = entry
         elsif entry.respond_to?(:dn)
           base = entry.dn

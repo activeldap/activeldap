@@ -200,13 +200,27 @@ module ActiveLdap
     end
 
     def <=>(other)
+      other = DN.parse(other) if other.is_a?(String)
+      return nil unless other.is_a?(self.class)
       normalize_for_comparing(@rdns) <=>
         normalize_for_comparing(other.rdns)
     end
 
     def ==(other)
-      other.is_a?(self.class) and
+      case other
+      when self.class
         normalize(@rdns) == normalize(other.rdns)
+      when String
+        parsed_other = nil
+        begin
+          parsed_other = self.class.parse(other)
+        rescue DistinguishedNameInvalid
+          return false
+        end
+        self == parsed_other
+      else
+        false
+      end
     end
 
     def eql?(other)
@@ -230,6 +244,10 @@ module ActiveLdap
           "#{type}=#{self.class.escape_value(value)}"
         end.join("+")
       end.join(",")
+    end
+
+    def to_str
+      to_s
     end
 
     def to_human_readable_format

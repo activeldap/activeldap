@@ -14,9 +14,9 @@ module ActiveLdap
         elsif foreign_base_key == "dn"
           requested_targets = requested_targets.collect do |target|
             if target.is_a?(DN)
-              target.to_s
-            else
               target
+            else
+              DN.parse(target)
             end
           end
           targets = []

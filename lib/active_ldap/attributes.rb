@@ -105,7 +105,11 @@ module ActiveLdap
               result[new_name].concat(real_value)
             else
               result[name] ||= []
-              result[name] << value.dup
+              if value.is_a?(DN)
+                result[name] << value.to_s
+              else
+                result[name] << value.dup
+              end
             end
           end
         end

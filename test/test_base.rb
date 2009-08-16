@@ -378,7 +378,7 @@ class TestBase < Test::Unit::TestCase
     make_temporary_user(:uid => "test-user,ou=SUB") do |user, password|
       sub_user_class = Class.new(@user_class)
       sub_user_class.ldap_mapping :prefix => "ou=sub"
-      assert_equal("uid=test-user,ou=sub,#{@user_class.base}",
+      assert_equal(dn("uid=test-user,ou=sub,#{@user_class.base}"),
                    sub_user_class.find(user.uid).dn)
     end
   end
@@ -486,9 +486,9 @@ class TestBase < Test::Unit::TestCase
 
   def test_loose_dn
     make_temporary_user do |user,|
-      assert(user.class.exists?(user.dn))
-      assert(user.class.exists?(user.dn.gsub(/,/, " , ")))
-      assert(user.class.exists?(user.dn.gsub(/=/, " = ")))
+      assert(user.class.exists?(user.dn.to_s))
+      assert(user.class.exists?(user.dn.to_s.gsub(/,/, " , ")))
+      assert(user.class.exists?(user.dn.to_s.gsub(/=/, " = ")))
     end
   end
 
