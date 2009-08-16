@@ -7,7 +7,7 @@ class TestUseradd < Test::Unit::TestCase
     super
     @command = File.join(@examples_dir, "useradd")
     make_ou("People")
-    @user_class.instance_variable_set("@prefix", "ou=People")
+    @user_class.prefix = "ou=People"
   end
 
   priority :must

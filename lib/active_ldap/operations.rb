@@ -121,16 +121,18 @@ module ActiveLdap
       end
 
       def ensure_base(target)
-        [truncate_base(target), base].reject do |component|
+        [truncate_base(target), base.to_s].reject do |component|
           component.blank?
         end.join(',')
       end
 
       def truncate_base(target)
+        return nil if target.blank?
+        return target if base.nil?
         if /,/ =~ target
           begin
-            (DN.parse(target) - DN.parse(base)).to_s
-          rescue DistinguishedNameInvalid, ArgumentError
+            (DN.parse(target) - base).to_s
+          rescue DistinguishedNameInvalid
             target
           end
         else

@@ -178,6 +178,14 @@ module ActiveLdap
       end
     end
 
+    def blank?
+      @rdns.blank?
+    end
+
+    def +(other)
+      self.class.new(*(@rdns + other.rdns))
+    end
+
     def -(other)
       rdns = @rdns.dup
       normalized_rdns = normalize(@rdns)

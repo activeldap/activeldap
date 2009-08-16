@@ -321,7 +321,7 @@ module ActiveLdap
       end
     end
 
-    class_local_attr_accessor false, :prefix, :base
+    class_local_attr_accessor false, :inheritable_prefix, :inheritable_base
     class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
     class_local_attr_accessor true, :excluded_classes
@@ -420,7 +420,6 @@ module ActiveLdap
         public_class_method :new
       end
 
-      alias_method :base_inheritable, :base
       # Base.base
       #
       # This method when included into Base provides
@@ -432,22 +431,23 @@ module ActiveLdap
       # configuration.rb into this class.
       # When subclassing, the specified prefix will be concatenated.
       def base
-        _base = base_inheritable
-        _base = configuration[:base] if _base.nil? and configuration
-        _base ||= base_inheritable(true)
-        [prefix, _base].find_all do |component|
-          !component.blank?
-        end.join(",")
+        @base ||= compute_base
       end
+      alias_method :parsed_base, :base # for backward compatibility
 
-      alias_method :base_without_parsed_cache_clear=, :base=
       def base=(value)
-        self.base_without_parsed_cache_clear = value
-        @parsed_base = nil
+        self.inheritable_base = value
+        @base = nil
       end
 
-      def parsed_base
-        @parsed_base ||= DN.parse(base)
+      def prefix
+        @prefix ||= inheritable_prefix and DN.parse(inheritable_prefix)
+      end
+
+      def prefix=(value)
+        self.inheritable_prefix = value
+        @prefix = nil
+        @base = nil
       end
 
       alias_method :scope_without_validation=, :scope=
@@ -628,6 +628,27 @@ module ActiveLdap
         else
           "ou=#{name.demodulize.pluralize}"
         end
+      end
+
+      def compute_base
+        _base = inheritable_base
+        _base = configuration[:base] if _base.nil? and configuration
+        if _base.nil?
+          target = superclass
+          loop do
+            break unless target.respond_to?(:base)
+            _base = target.base
+            break if _base
+            target = target.superclass
+          end
+        end
+        _prefix = prefix
+
+        return _prefix if _base.blank?
+
+        _base = DN.parse(_base)
+        _base = _prefix + _base if _prefix
+        _base
       end
     end
 
@@ -1030,18 +1051,15 @@ module ActiveLdap
       @schema ||= super
     end
 
-    alias_method :base_of_class, :base
     def base
-      ensure_update_dn
-      [@base, base_of_class].find_all do |component|
-        not component.blank?
-      end.join(",")
+      @base ||= compute_base
     end
 
     def base=(object_local_base)
       ensure_update_dn
       @dn = nil
-      @base = object_local_base
+      @base = nil
+      @base_value = object_local_base
     end
 
     alias_method :scope_of_class, :scope
@@ -1139,6 +1157,8 @@ module ActiveLdap
       dn = Compatible.convert_to_utf8_encoded_object(dn)
       attributes = Compatible.convert_to_utf8_encoded_object(attributes)
       @dn = dn
+      @base = nil
+      @base_value = nil
       @new_entry = false
       @dn_is_base = false
       @ldap_data = attributes
@@ -1291,6 +1311,7 @@ module ActiveLdap
       if new_name.nil? and new_value.nil?
         @dn_is_base = true
         @base = nil
+        @base_value = nil
         attr, value = bases[0].to_a[0]
         @dn_attribute = attr
       else
@@ -1303,10 +1324,11 @@ module ActiveLdap
         new_bases = bases.empty? ? nil : DN.new(*bases).to_s
         dn_components = ["#{new_name}=#{new_value}",
                          new_bases,
-                         base_of_class]
+                         self.class.base.to_s]
         dn_components = dn_components.find_all {|component| !component.blank?}
         DN.parse(dn_components.join(','))
-        @base = new_bases
+        @base = nil
+        @base_value = new_bases
         @dn_attribute = new_name
       end
     end
@@ -1326,7 +1348,9 @@ module ActiveLdap
 
       val = bases = nil
       begin
-        relative_dn_value = dn_value - self.class.parsed_base
+        relative_dn_value = dn_value
+        base_of_class = self.class.base
+        relative_dn_value -= base_of_class if base_of_class
         if relative_dn_value.rdns.empty?
           val = []
           bases = dn_value.rdns
@@ -1360,7 +1384,7 @@ module ActiveLdap
       end
     end
 
-    def compute_dn(escape_dn_value=false)
+    def compute_dn
       return base if @dn_is_base
 
       ensure_update_dn
@@ -1374,6 +1398,17 @@ module ActiveLdap
       _base = base
       _base = nil if _base.blank?
       DN.parse(["#{dn_attribute}=#{dn_value}", _base].compact.join(","))
+    end
+
+    def compute_base
+      base_of_class = self.class.base
+      if @base_value.nil?
+        base_of_class
+      else
+        base_of_object = DN.parse(@base_value)
+        base_of_object += base_of_class if base_of_class
+        base_of_object
+      end
     end
 
     # array_of

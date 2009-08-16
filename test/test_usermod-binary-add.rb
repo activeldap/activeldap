@@ -7,7 +7,7 @@ class TestUsermodBinaryAdd < Test::Unit::TestCase
     super
     @command = File.join(@examples_dir, "usermod-binary-add")
     make_ou("People")
-    @user_class.instance_variable_set("@prefix", "ou=People")
+    @user_class.prefix = "ou=People"
   end
 
   priority :must
