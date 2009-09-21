@@ -131,7 +131,12 @@ module ActiveLdap
         return target if base.nil?
         if /,/ =~ target
           begin
-            (DN.parse(target) - base).to_s
+            parsed_target = DN.parse(target)
+            begin
+              (parsed_target - base).to_s
+            rescue ArgumentError
+              target
+            end
           rescue DistinguishedNameInvalid
             target
           end
