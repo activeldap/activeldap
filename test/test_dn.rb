@@ -12,6 +12,12 @@ class TestDN < Test::Unit::TestCase
   end
 
   priority :must
+  def test_parent
+    dn = parse("o=xxx,dc=local,dc=net")
+    assert_equal(parse("dc=local,dc=net"), dn.parent)
+    assert_equal(parse("dc=net"), dn.parent.parent)
+    assert_nil(dn.parent.parent.parent)
+  end
 
   priority :normal
   def test_case_insensitive_dn_minus
@@ -158,5 +164,9 @@ class TestDN < Test::Unit::TestCase
 
   def assert_dn_to_s(expected, dn)
     assert_equal(expected, ActiveLdap::DN.parse(dn).to_s)
+  end
+
+  def parse(dn)
+    ActiveLdap::DN.parse(dn)
   end
 end

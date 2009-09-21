@@ -201,10 +201,16 @@ module ActiveLdap
 
     def <<(rdn)
       @rdns << rdn
+      self
     end
 
     def unshift(rdn)
       @rdns.unshift(rdn)
+    end
+
+    def parent
+      return nil if @rdns.size <= 1
+      self.class.new(*@rdns[1..-1])
     end
 
     def <=>(other)
