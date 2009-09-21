@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
     else
       begin
         ldap_user = LdapUser.find(login)
-        self.dn = ldap_user.dn
+        self.dn = ldap_user.dn.to_s
       rescue ActiveLdap::EntryNotFound
         self.dn = nil
       end

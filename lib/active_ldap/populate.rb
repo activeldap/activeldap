@@ -22,6 +22,7 @@ module ActiveLdap
 
     def ensure_ou(name, base_class=nil)
       base_class ||= Base
+      name = name.to_s if name.is_a?(DN)
       name = name.gsub(/\Aou\s*=\s*/i, '')
 
       ou_class = Class.new(base_class)
@@ -34,6 +35,7 @@ module ActiveLdap
 
     def ensure_dc(name, prefix, base_class=nil)
       base_class ||= Base
+      name = name.to_s if name.is_a?(DN)
       name = name.gsub(/\Adc\s*=\s*/i, '')
 
       dc_class = Class.new(base_class)
