@@ -55,20 +55,6 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 
-  # Your secret key for verifying cookie session data integrity.
-  # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
-  # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_al_admin_session',
-    :secret      => '581ed74d26a88caa7cb2ff6d0ea0f0aeea1a49f98641ee6d3e7ba1dfcf6154e26cd2b3f9636c9cc02ed8139a4f74c64fdb529a53dcfd1b7ff7aa763f91083aad'
-  }
-
-  # Use the database for sessions instead of the cookie-based default,
-  # which shouldn't be used to store highly confidential information
-  # (create the session table with "rake db:sessions:create")
-  # config.action_controller.session_store = :active_record_store
-
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
