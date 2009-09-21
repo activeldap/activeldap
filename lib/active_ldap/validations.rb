@@ -36,6 +36,7 @@ module ActiveLdap
         end
 
         validate_on_create :validate_duplicated_dn_creation
+        validate_on_update :validate_duplicated_dn_rename
         validate :validate_dn
         validate :validate_excluded_classes
         validate :validate_required_ldap_values
@@ -87,6 +88,28 @@ module ActiveLdap
 
     private
     def validate_duplicated_dn_creation
+      _dn = nil
+      begin
+        _dn = dn
+      rescue DistinguishedNameInvalid, DistinguishedNameNotSetError
+        return
+      end
+      if _dn and exist?
+        format = _("%{fn} is duplicated: %s")
+        unless ActiveLdap.get_text_supported?
+          format = format.sub(/^%\{fn\} /, '')
+        end
+        errors.add("dn", format % _dn)
+      end
+    end
+
+    def validate_duplicated_dn_rename
+      _dn_attribute = dn_attribute_with_fallback
+      original_dn_value = @ldap_data[_dn_attribute]
+      current_dn_value = @data[_dn_attribute]
+      return if original_dn_value == current_dn_value
+      return if original_dn_value == [current_dn_value]
+
       _dn = nil
       begin
         _dn = dn

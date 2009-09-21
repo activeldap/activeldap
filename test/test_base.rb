@@ -9,8 +9,18 @@ class TestBase < Test::Unit::TestCase
   def test_rename_with_superior
     make_ou("sub,ou=users")
     make_temporary_user(:simple => true) do |user,|
+      user.id = "user2,ou=sub,#{@user_class.base}"
       assert_raise(ActiveLdap::NotImplemented) do
-        user.rename("user2", "ou=sub,#{@user_class.base}")
+        assert_true(user.save)
+
+        # the following codes aren't reached for now. :<
+        found_user = nil
+        assert_nothing_raised do
+          found_user = @user_class.find("user2")
+        end
+        base = @user_class.base
+        assert_equal("#{@user_class.dn_attribute}=user2,ou=sub,#{base}",
+                     found_user.dn.to_s)
       end
     end
   end
@@ -21,7 +31,8 @@ class TestBase < Test::Unit::TestCase
       assert_raise(ActiveLdap::EntryNotFound) do
         @user_class.find("user2")
       end
-      user.rename("user2")
+      user.id = "user2"
+      assert_true(user.save)
       assert_equal("user2", user.id)
 
       found_user = nil

@@ -6,6 +6,21 @@ class TestValidation < Test::Unit::TestCase
   include ActiveLdap::Helper
 
   priority :must
+  def test_rename_duplicated
+    make_temporary_user(:simple => true) do |user1,|
+      make_temporary_user(:simple => true) do |user2,|
+        user1.id = user2.id
+        assert_false(user1.save)
+
+        format = _("%{fn} is duplicated: %s")
+        format = format.sub(/^%\{fn\}/, la_('DN'))
+        assert_equal([format % [user2.dn.to_s]],
+                     user1.errors.full_messages)
+      end
+    end
+  end
+
+  priority :normal
   def test_not_show_binary_value
     make_temporary_user do |user,|
       user.user_certificate = nil
@@ -23,7 +38,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_validation_skip_attributes
     make_temporary_group do |group|
       group.gid_number = nil

@@ -821,20 +821,6 @@ module ActiveLdap
       end
     end
 
-    # Renames RDN and reload the entry.
-    def rename(new_rdn, new_superior=nil)
-      begin
-        new_rdn = DN.parse(new_rdn) unless new_rdn.is_a?(DN)
-      rescue DistinguishedNameInvalid
-        new_rdn = DN.parse("#{dn_attribute}=#{new_rdn}")
-      end
-      new_rdn = DN.new(new_rdn.rdns[0]).to_s
-      modify_rdn_entry(dn, new_rdn, false, new_superior)
-      self.id = new_rdn
-      self.base = new_superior if new_superior
-      reload
-    end
-
     # method_missing
     #
     # If a given method matches an attribute or an attribute alias
@@ -1156,6 +1142,7 @@ module ActiveLdap
       init_base
       dn = Compatible.convert_to_utf8_encoded_object(dn)
       attributes = Compatible.convert_to_utf8_encoded_object(attributes)
+      @original_dn = dn.clone
       @dn = dn
       @base = nil
       @base_value = nil
@@ -1384,11 +1371,11 @@ module ActiveLdap
       end
     end
 
-    def compute_dn
+    def compute_dn(dn_value=nil)
       return base if @dn_is_base
 
       ensure_update_dn
-      dn_value = id
+      dn_value ||= id
       if dn_value.nil?
         format = _("%s's DN attribute (%s) isn't set")
         message = format % [self.inspect, dn_attribute]
@@ -1456,7 +1443,11 @@ module ActiveLdap
     end
 
     def collect_modified_attributes(ldap_data, data)
+      klass = self.class
+      _dn_attribute = dn_attribute
+      new_dn_value = nil
       attributes = []
+
       # Now that all the options will be treated as unique attributes
       # we can see what's changed and add anything that is brand-spankin'
       # new.
@@ -1465,23 +1456,26 @@ module ActiveLdap
 
         next if v == value
 
-        x = value
-        value = self.class.remove_blank_value(value) || []
+        value = klass.remove_blank_value(value) || []
         next if v == value
 
-        if self.class.blank_value?(value) and
+        if klass.blank_value?(value) and
             schema.attribute(k).binary_required?
           value = [{'binary' => []}]
         end
-        attributes.push([:replace, k, value])
+        if k == _dn_attribute
+          new_dn_value = value[0]
+        else
+          attributes.push([:replace, k, value])
+        end
       end
+
       data.each do |k, v|
         value = v || []
         next if ldap_data.has_key?(k)
 
-        value = self.class.remove_blank_value(value) || []
-        next if self.class.blank_value?(value)
-
+        value = klass.remove_blank_value(value) || []
+        next if klass.blank_value?(value)
 
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
@@ -1489,7 +1483,7 @@ module ActiveLdap
         attributes.push([:replace, k, value])
       end
 
-      attributes
+      [new_dn_value, attributes]
     end
 
     def collect_all_attributes(data)
@@ -1537,6 +1531,7 @@ module ActiveLdap
         bad_attrs.each do |remove_me|
           @ldap_data.delete(remove_me)
         end
+        @original_dn = dn.clone
       end
 
       success
@@ -1553,8 +1548,21 @@ module ActiveLdap
 
     def update
       prepare_data_for_saving do |data, ldap_data|
-        attributes = collect_modified_attributes(ldap_data, data)
-        modify_entry(dn, attributes)
+        new_dn_value, attributes = collect_modified_attributes(ldap_data, data)
+        modify_entry(@original_dn, attributes)
+        if new_dn_value
+          old_dn_base = DN.parse(@original_dn).parent
+          new_dn_base = dn.clone.parent
+          if old_dn_base == new_dn_base
+            new_superior = nil
+          else
+            new_superior = new_dn_base
+          end
+          modify_rdn_entry(@original_dn,
+                           "#{dn_attribute}=#{DN.escape_value(new_dn_value)}",
+                           true,
+                           new_superior)
+        end
         true
       end
     end
