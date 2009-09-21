@@ -1371,11 +1371,11 @@ module ActiveLdap
       end
     end
 
-    def compute_dn(dn_value=nil)
+    def compute_dn
       return base if @dn_is_base
 
       ensure_update_dn
-      dn_value ||= id
+      dn_value = id
       if dn_value.nil?
         format = _("%s's DN attribute (%s) isn't set")
         message = format % [self.inspect, dn_attribute]
