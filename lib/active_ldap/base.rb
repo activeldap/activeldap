@@ -901,7 +901,7 @@ module ActiveLdap
     # This returns the key value pairs in @data with all values
     # cloned
     def attributes
-      Marshal.load(Marshal.dump(@data))
+      @data.clone
     end
 
     # This allows a bulk update to the attributes of a record
@@ -1525,7 +1525,7 @@ module ActiveLdap
       success = yield(data, ldap_data)
 
       if success
-        @ldap_data = Marshal.load(Marshal.dump(data))
+        @ldap_data = data.clone
         # Delete items disallowed by objectclasses.
         # They should have been removed from ldap.
         bad_attrs.each do |remove_me|
