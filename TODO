@@ -1,6 +1,5 @@
-- [1.1.1] add :readonly option to :has_many.
+- [1.1.x] add :readonly option to :has_many.
 - Work as framework on Rails.
-- [1.1.x] ActiveLdap::Base#dn returns ActiveLdap::DN. [#23932] [Marc Dequènes]
 - How to support dSCorePropagationData? ignore it?
   all systemOnly == "TRUE" attribute can be ignored?
 - Add parsing position to DistinguishedNameInvalid error like
