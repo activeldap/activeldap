@@ -2,7 +2,7 @@
 
 == 1.1.1: 20XX-XX-XX
 
-* [#26686] Supported Rails 2.3.3. [George Montana Harkin]
+* Supported Rails 2.3.4.
 * [IMCOMPATIBLE]
   [#23932] Inconsistant DN handling in object attributes [Marc Dequènes]
   (ActiveLdap::Base#dn and ActiveLdap::Base#base return
