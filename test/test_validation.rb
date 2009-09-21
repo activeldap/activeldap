@@ -13,7 +13,7 @@ class TestValidation < Test::Unit::TestCase
         assert_false(user1.save)
 
         format = _("%{fn} is duplicated: %s")
-        format = format.sub(/^%\{fn\}/, la_('DN'))
+        format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
         assert_equal([format % [user2.dn.to_s]],
                      user1.errors.full_messages)
       end
@@ -74,7 +74,7 @@ class TestValidation < Test::Unit::TestCase
     invalid_format = _("%s is invalid distinguished name (DN): %s")
     invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
     format = _("%{fn} is invalid: %s")
-    format = format.sub(/^%\{fn\}/, la_('DN'))
+    format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
     message = format % invalid_message
     assert_equal([message],
                  user.errors.full_messages.find_all {|m| /DN/ =~ m})
@@ -88,7 +88,7 @@ class TestValidation < Test::Unit::TestCase
       invalid_format = _("%s is invalid distinguished name (DN): %s")
       invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
       format = _("%{fn} is invalid: %s")
-      format = format.sub(/^%\{fn\}/, la_('DN'))
+      format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
       message = format % invalid_message
       assert_equal([message], user.errors.full_messages)
     end
@@ -186,7 +186,7 @@ class TestValidation < Test::Unit::TestCase
     ou = ou_class.new("YYY")
     assert(!ou.save)
     format = _("%{fn} is duplicated: %s")
-    format = format.sub(/^%\{fn\}/, la_("DN"))
+    format = format.sub(/^%\{fn\}/, la_("distinguishedName"))
     message = format % ou.dn
     assert_equal([message], ou.errors.full_messages)
   end
@@ -200,9 +200,6 @@ class TestValidation < Test::Unit::TestCase
       end
 
       @group_class.validates_presence_of(:description)
-      def @group_class.name
-        "Group"
-      end
       assert_raises(ActiveLdap::EntryInvalid) do
         group.save!
       end
@@ -218,9 +215,6 @@ class TestValidation < Test::Unit::TestCase
       assert_equal([], group.errors.to_a)
 
       @group_class.validates_presence_of(:description)
-      def @group_class.name
-        "Group"
-      end
       assert(!group.valid?)
       assert(group.errors.invalid?(:description))
       assert_equal(1, group.errors.size)

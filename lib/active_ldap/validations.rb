@@ -99,7 +99,7 @@ module ActiveLdap
         unless ActiveLdap.get_text_supported?
           format = format.sub(/^%\{fn\} /, '')
         end
-        errors.add("dn", format % _dn)
+        errors.add("distinguishedName", format % _dn)
       end
     end
 
@@ -121,7 +121,7 @@ module ActiveLdap
         unless ActiveLdap.get_text_supported?
           format = format.sub(/^%\{fn\} /, '')
         end
-        errors.add("dn", format % _dn)
+        errors.add("distinguishedName", format % _dn)
       end
     end
 
@@ -130,11 +130,11 @@ module ActiveLdap
     rescue DistinguishedNameInvalid
       format = _("%{fn} is invalid: %s")
       format = format.sub(/^%\{fn\} /, '') unless ActiveLdap.get_text_supported?
-      errors.add("dn", format % $!.message)
+      errors.add("distinguishedName", format % $!.message)
     rescue DistinguishedNameNotSetError
       format = _("%{fn} isn't set: %s")
       format = format.sub(/^%\{fn\} /, '') unless ActiveLdap.get_text_supported?
-      errors.add("dn", format % $!.message)
+      errors.add("distinguishedName", format % $!.message)
     end
 
     def validate_excluded_classes
