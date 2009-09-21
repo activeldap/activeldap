@@ -644,7 +644,7 @@ module ActiveLdap
         end
         _prefix = prefix
 
-        _base = connection.naming_contexts.first if _base.blank?
+        _base ||= connection.naming_contexts.first
         return _prefix if _base.blank?
 
         _base = DN.parse(_base)
