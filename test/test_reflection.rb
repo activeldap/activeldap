@@ -15,38 +15,28 @@ class TestReflection < Test::Unit::TestCase
 
   def test_respond_to?
     make_temporary_user do |user, password|
-      attributes = (user.must + user.may).collect(&:name)
+      attributes = (user.must + user.may).collect(&:name) - ["objectClass"]
       _wrap_assertion do
         attributes.each do |name|
-          assert(user.respond_to?(name), name)
-          assert(user.respond_to?("#{name}="), "#{name}=")
-          assert(user.respond_to?("#{name}?"), "#{name}?")
-          assert(user.respond_to?("#{name}_before_type_cast"),
-                 "#{name}_before_type_cast")
+          assert_respond_to(user, name)
         end
+        assert_not_respond_to(user, "objectClass")
       end
 
       user.replace_class(user.class.required_classes)
       new_attributes = collect_attributes(user.class.required_classes)
+      new_attributes -= ["objectClass"]
 
       _wrap_assertion do
         assert_not_equal([], new_attributes)
         new_attributes.each do |name|
-          assert(user.respond_to?(name), name)
-          assert(user.respond_to?("#{name}="), "#{name}=")
-          assert(user.respond_to?("#{name}?"), "#{name}?")
-          assert(user.respond_to?("#{name}_before_type_cast"),
-                 "#{name}_before_type_cast")
+          assert_respond_to(user, name)
         end
 
         remained_attributes = (attributes - new_attributes)
         assert_not_equal([], remained_attributes)
         remained_attributes.each do |name|
-          assert(!user.respond_to?(name), name)
-          assert(!user.respond_to?("#{name}="), "#{name}=")
-          assert(!user.respond_to?("#{name}?"), "#{name}?")
-          assert(!user.respond_to?("#{name}_before_type_cast"),
-                 "#{name}_before_type_cast")
+          assert_not_respond_to(user, name)
         end
       end
     end
@@ -135,6 +125,7 @@ class TestReflection < Test::Unit::TestCase
     end
   end
 
+  private
   def assert_methods_with_only_required_classes(object, attributes)
     old_classes = (object.classes - object.class.required_classes).uniq
     old_attributes = collect_attributes(old_classes, false).uniq.sort
@@ -155,6 +146,22 @@ class TestReflection < Test::Unit::TestCase
                  old_attributes -
                    (attributes - object.methods(false) - required_attributes) -
                    required_attributes)
+  end
+
+  def assert_respond_to(object, name)
+    assert_true(object.respond_to?(name), name)
+    assert_true(object.respond_to?("#{name}="), "#{name}=")
+    assert_true(object.respond_to?("#{name}?"), "#{name}?")
+    assert_true(object.respond_to?("#{name}_before_type_cast"),
+                "#{name}_before_type_cast")
+  end
+
+  def assert_not_respond_to(object, name)
+    assert_false(object.respond_to?(name), name)
+    assert_false(object.respond_to?("#{name}="), "#{name}=")
+    assert_false(object.respond_to?("#{name}?"), "#{name}?")
+    assert_false(object.respond_to?("#{name}_before_type_cast"),
+                 "#{name}_before_type_cast")
   end
 
   def collect_attributes(object_classes, with_aliases=true)
