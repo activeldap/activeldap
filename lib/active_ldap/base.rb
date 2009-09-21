@@ -878,7 +878,7 @@ module ActiveLdap
       name = name.to_s
       return true if have_attribute?(name, ["objectClass"])
       return false if /(?:=|\?|_before_type_cast)$/ !~ name
-      have_attribute?($PREMATCH)
+      have_attribute?($PREMATCH, ["objectClass"])
     end
 
     # Updates a given attribute and saves immediately
