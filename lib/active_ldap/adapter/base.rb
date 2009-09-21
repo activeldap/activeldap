@@ -139,6 +139,10 @@ module ActiveLdap
         end
       end
 
+      def naming_contexts
+        root_dse_values('namingContexts')
+      end
+
       def entry_attribute(object_classes)
         @entry_attributes[object_classes.uniq.sort] ||=
           EntryAttribute.new(schema, object_classes)
