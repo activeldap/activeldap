@@ -67,7 +67,7 @@ module ActiveLdap
       def bind(options={})
         @bind_tried = true
 
-        bind_dn = options[:bind_dn] || @bind_dn
+        bind_dn = ensure_dn_string(options[:bind_dn] || @bind_dn)
         try_sasl = options.has_key?(:try_sasl) ? options[:try_sasl] : @try_sasl
         if options.has_key?(:allow_anonymous)
           allow_anonymous = options[:allow_anonymous]
@@ -164,6 +164,7 @@ module ActiveLdap
           values << value
         end
 
+        base = ensure_dn_string(base)
         begin
           operation(options) do
             yield(base, scope, filter, attrs, limit, callback)
@@ -185,6 +186,7 @@ module ActiveLdap
         begin
           operation(options) do
             targets.each do |target|
+              target = ensure_dn_string(target)
               begin
                 yield(target)
               rescue LdapError::UnwillingToPerform, LdapError::InsufficientAccess
@@ -198,6 +200,7 @@ module ActiveLdap
       end
 
       def add(dn, entries, options={})
+        dn = ensure_dn_string(dn)
         begin
           operation(options) do
             yield(dn, entries)
@@ -218,6 +221,7 @@ module ActiveLdap
       end
 
       def modify(dn, entries, options={})
+        dn = ensure_dn_string(dn)
         begin
           operation(options) do
             begin
@@ -234,6 +238,7 @@ module ActiveLdap
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
+        dn = ensure_dn_string(dn)
         operation(options) do
           yield(dn, new_rdn, delete_old_rdn, new_superior)
         end
@@ -683,6 +688,14 @@ module ActiveLdap
           log_entry = message
           log_entry += ": #{info.inspect}" if info
           log_entry
+        end
+      end
+
+      def ensure_dn_string(dn)
+        if dn.is_a?(DN)
+          dn.to_s
+        else
+          dn
         end
       end
     end
