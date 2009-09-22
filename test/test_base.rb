@@ -314,17 +314,20 @@ class TestBase < Test::Unit::TestCase
     mapping = {:classes => ["person"]}
     person_class = Class.new(@user_class)
     person_class.ldap_mapping(mapping)
+    person_class.prefix = nil
 
     no_organizational_person_class = Class.new(@user_class)
     no_organizational_person_mapping =
       mapping.merge(:excluded_classes => ["organizationalPerson"])
     no_organizational_person_class.ldap_mapping(no_organizational_person_mapping)
+    no_organizational_person_class.prefix = nil
 
     no_simple_person_class = Class.new(@user_class)
     no_simple_person_mapping =
       mapping.merge(:excluded_classes => ['shadowAccount', 'inetOrgPerson',
                                           "organizationalPerson"])
     no_simple_person_class.ldap_mapping(no_simple_person_mapping)
+    no_simple_person_class.prefix = nil
 
     make_temporary_user do |user1,|
       make_temporary_user(:simple => true) do |user2,|
