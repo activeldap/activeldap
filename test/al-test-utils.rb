@@ -234,6 +234,11 @@ module AlTestUtils
                                :prefix => "ou=Users",
                                :scope => :sub,
                                :classes => @user_class_classes
+      unless ActiveLdap.get_text_supported?
+        def @user_class.name
+          "User"
+        end
+      end
     end
 
     def populate_group_class
