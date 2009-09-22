@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -W0
+#!/usr/bin/ruby
 
 base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 $LOAD_PATH << File.join(base, "lib")
