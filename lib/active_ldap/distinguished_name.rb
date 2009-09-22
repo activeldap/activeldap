@@ -246,21 +246,18 @@ module ActiveLdap
       normalize(@rdns).to_s.hash
     end
 
-    def inspect
-      super
-    end
-
     def to_s
+      klass = self.class
       @rdns.collect do |rdn|
         rdn.sort_by do |type, value|
           type.upcase
         end.collect do |type, value|
-          "#{type}=#{self.class.escape_value(value)}"
+          "#{type}=#{klass.escape_value(value)}"
         end.join("+")
       end.join(",")
     end
 
-    def to_str
+    def to_str # for backward compatibility
       to_s
     end
 
