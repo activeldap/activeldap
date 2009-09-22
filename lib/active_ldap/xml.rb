@@ -57,14 +57,17 @@ module ActiveLdap
 
       def normalize_value(value, options=[])
         targets = []
-        if value.is_a?(Hash)
+        case value
+        when Hash
           value.each do |real_option, real_value|
             targets.concat(normalize_value(real_value, options + [real_option]))
           end
-        elsif value.is_a?(Array)
+        when Array
           value.each do |real_value|
             targets.concat(normalize_value(real_value, options))
           end
+        when DN
+          targets.concat(normalize_value(value.to_s, options))
         else
           if /\A#{PRINTABLE_STRING}\z/ !~ value
             value = [value].pack("m").gsub(/\n/u, '')
