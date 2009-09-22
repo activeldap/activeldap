@@ -129,18 +129,21 @@ module ActiveLdap
       def truncate_base(target)
         return nil if target.blank?
         return target if base.nil?
-        if /,/ =~ target
+
+        parsed_target = nil
+        if target.is_a?(DN)
+          parsed_target = target
+        elsif /,/ =~ target
           begin
             parsed_target = DN.parse(target)
-            begin
-              (parsed_target - base).to_s
-            rescue ArgumentError
-              target
-            end
           rescue DistinguishedNameInvalid
-            target
           end
-        else
+        end
+
+        return target if parsed_target.nil?
+        begin
+          (parsed_target - base).to_s
+        rescue ArgumentError
           target
         end
       end
