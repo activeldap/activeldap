@@ -2,7 +2,7 @@
 
 == 1.2.0: 2009-09-22
 
-* Supported Rails 2.3.4.
+* Supported ActiveRecord 2.3.4 and Rails 2.3.4.
 * [IMCOMPATIBLE]
   [#23932] Inconsistant DN handling in object attributes [Marc Dequènes]
   (ActiveLdap::Base#dn and ActiveLdap::Base#base return
@@ -12,6 +12,8 @@
 * [#27] Error saving an ActiveLDAP user [brad@lucky-dip.net]
 * [#29] Raised on modify_rdn_entry when rdn already exists [Alexey.Chebotar]
 * Added ActiveLdap::DN.parent.
+* Supported renaming an entry. Renaming other DTI is only supported by
+  JNDI backend.
 
 == 1.1.0: 2009-07-18
 
