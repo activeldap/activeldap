@@ -3,7 +3,7 @@ require 'timeout'
 module Timeout
   # STUB
   def Timeout.alarm(sec, exception=Timeout::Error, &block)
-    return block.call
+    timeout(sec, exception, &block)
   end
 end # Timeout
 
