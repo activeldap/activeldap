@@ -76,8 +76,12 @@ module ActiveLdap
         super do |_dn, _new_rdn, _delete_old_rdn, _new_superior|
           info = {
             :name => "modify: RDN",
-            :dn => _dn, :new_rdn => _new_rdn, :delete_old_rdn => _delete_old_rdn,
+            :dn => _dn,
+            :new_rdn => _new_rdn,
+            :new_superior => _new_superior,
+            :delete_old_rdn => _delete_old_rdn
           }
+          _new_rdn = "#{_new_rdn},#{_new_superior}" if _new_superior
           execute(:modify_rdn, info, _dn, _new_rdn, _delete_old_rdn)
         end
       end

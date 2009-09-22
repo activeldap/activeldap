@@ -10,10 +10,10 @@ class TestBase < Test::Unit::TestCase
     make_ou("sub,ou=users")
     make_temporary_user(:simple => true) do |user,|
       user.id = "user2,ou=sub,#{@user_class.base}"
-      assert_raise(ActiveLdap::NotImplemented) do
+      case user.connection.class.to_s.demodulize
+      when "Jndi"
         assert_true(user.save)
 
-        # the following codes aren't reached for now. :<
         found_user = nil
         assert_nothing_raised do
           found_user = @user_class.find("user2")
@@ -21,6 +21,10 @@ class TestBase < Test::Unit::TestCase
         base = @user_class.base
         assert_equal("#{@user_class.dn_attribute}=user2,ou=sub,#{base}",
                      found_user.dn.to_s)
+      else
+        assert_raise(ActiveLdap::NotImplemented) do
+          user.save
+        end
       end
     end
   end
