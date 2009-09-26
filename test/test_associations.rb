@@ -4,6 +4,28 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_add_with_string
+    make_temporary_user do |user,|
+      make_temporary_group do |group1|
+        make_temporary_group do |group2|
+          assert_equal([[], []],
+                       [group1.members.collect(&:cn),
+                        group2.members.collect(&:cn)])
+
+          user.groups = [group1.cn, group2.cn]
+          user.save!
+
+          group1.reload
+          group2.reload
+          assert_equal([[user.cn], [user.cn]],
+                       [group1.members.collect(&:cn),
+                        group2.members.collect(&:cn)])
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_has_many_delete_required_attribute
     make_temporary_group do |group|
       make_temporary_user do |user,|
@@ -15,7 +37,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_to_xml
     make_temporary_user do |user,|
       make_temporary_group do |group1|
