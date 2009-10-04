@@ -6,6 +6,18 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_attributes
+    make_temporary_group do |group|
+      assert_equal({
+                     "cn" => group.cn,
+                     "gidNumber" => group.gidNumber,
+                     "objectClass" => group.classes,
+                   },
+                   group.attributes)
+    end
+  end
+
+  priority :normal
   def test_rename_with_superior
     make_ou("sub,ou=users")
     make_temporary_user(:simple => true) do |user,|
@@ -47,7 +59,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_operational_attributes
     make_temporary_group do |group|
       dn, attributes = @group_class.search(:attributes => ["*"])[0]

@@ -902,7 +902,8 @@ module ActiveLdap
     # This returns the key value pairs in @data with all values
     # cloned
     def attributes
-      @data.clone
+      @simplified_data ||= simplify_data(@data)
+      @simplified_data.clone
     end
 
     # This allows a bulk update to the attributes of a record
@@ -1276,6 +1277,7 @@ module ActiveLdap
       raise UnknownAttribute.new(name) if real_name.nil?
 
       @data[real_name] = value
+      @simplified_data = nil
     end
 
     def register_new_dn_attribute(name, value)
@@ -1439,6 +1441,19 @@ module ActiveLdap
         next if _schema.attribute(real_name).id.nil?
         result[real_name] ||= []
         result[real_name].concat(enforce_type(real_name, values))
+      end
+      result
+    end
+
+    def simplify_data(data)
+      _schema = schema
+      result = {}
+      data.each do |key, values|
+        attribute = _schema.attribute(key)
+        if attribute.single_value? and values.is_a?(Array) and values.size == 1
+          values = values[0]
+        end
+        result[key] = type_cast(attribute, values)
       end
       result
     end
