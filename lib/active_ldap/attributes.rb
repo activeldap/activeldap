@@ -157,7 +157,13 @@ module ActiveLdap
         needless_attributes[to_real_attribute_name(name)] = true
       end
 
+      _dn_attribute = nil
+      begin
+        _dn_attribute = dn_attribute_with_fallback
+      rescue DistinguishedNameInvalid
+      end
       targets.collect do |key, value|
+        key = _dn_attribute if ["id", "dn"].include?(key.to_s)
         [to_real_attribute_name(key) || key, value]
       end.reject do |key, value|
         needless_attributes[key]
@@ -165,7 +171,6 @@ module ActiveLdap
     end
 
     def attributes_protected_by_default
-      _dn_attribute = nil
       begin
         _dn_attribute = dn_attribute_with_fallback
       rescue DistinguishedNameInvalid
