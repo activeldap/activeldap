@@ -780,7 +780,6 @@ module ActiveLdap
 
     def dn=(value)
       set_attribute(dn_attribute_with_fallback, value)
-      @dn = nil
     end
     alias_method(:id=, :dn=)
 
