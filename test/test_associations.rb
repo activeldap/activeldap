@@ -4,6 +4,31 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_has_many_of_self
+    @user_class.has_many(:references,
+                         :class_name => "User",
+                         :primary_key => "dn",
+                         :foreign_key => "seeAlso")
+    @user_class.set_associated_class(:references, @user_class)
+    make_temporary_user do |user1, password1|
+      make_temporary_user(:see_also => user1.dn.to_s) do |user2, password2|
+        make_temporary_user(:see_also => user2.dn.to_s) do |user3, password3|
+          make_temporary_user(:see_also => user2.dn.to_s) do |user4, password4|
+            make_temporary_user(:see_also => user1.dn.to_s) do |user5, password5|
+              user1_references = user1.references.collect {|r| r.dn.to_s}
+              user2_references = user2.references.collect {|r| r.dn.to_s}
+              user1_expected_references = [user2, user5].collect {|r| r.dn.to_s}
+              user2_expected_references = [user3, user4].collect {|r| r.dn.to_s}
+              assert_equal(user1_expected_references, user1_references)
+              assert_equal(user2_expected_references, user2_references)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_belongs_to_add_with_string
     make_temporary_user do |user,|
       make_temporary_group do |group1|
@@ -25,7 +50,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_has_many_delete_required_attribute
     make_temporary_group do |group|
       make_temporary_user do |user,|

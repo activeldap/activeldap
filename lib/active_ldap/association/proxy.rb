@@ -70,7 +70,11 @@ module ActiveLdap
       end
 
       def primary_key
-        @options[:primary_key_name] || foreign_class.dn_attribute
+        @options[:primary_key_name] || @owner.dn_attribute
+      end
+
+      def foreign_key
+        @options[:foreign_key_name] || foreign_class.dn_attribute
       end
 
       def load_target

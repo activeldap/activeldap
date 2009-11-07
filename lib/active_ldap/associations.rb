@@ -125,13 +125,13 @@ module ActiveLdap
           :extend => options[:extend],
         }
         if opts[:wrap]
-          opts[:foreign_key_name] ||= "#{association_id}_id"
           association_class = Association::HasManyWrap
         else
           association_class = Association::HasMany
           primary_key_name = opts[:primary_key_name]
           foreign_key_name = opts[:foreign_key_name]
           if primary_key_name != foreign_key_name and
+              primary_key_name != "dn" and
               !new.have_attribute?(primary_key_name)
             message = _(":primary_key and :foreign_key has_many options are " \
                         "inverted their mean since 1.1.0. Please invert them.")

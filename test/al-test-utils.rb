@@ -289,6 +289,7 @@ module AlTestUtils
         uid_number = config[:uid_number] || default_uid
         gid_number = config[:gid_number] || default_gid
         home_directory = config[:home_directory] || "/nonexistent"
+        see_also = config[:see_also]
         _wrap_assertion do
           assert(!@user_class.exists?(uid))
           assert_raise(ActiveLdap::EntryNotFound) do
@@ -302,6 +303,7 @@ module AlTestUtils
           user.gid_number = gid_number
           user.home_directory = home_directory
           user.user_password = ActiveLdap::UserPassword.ssha(password)
+          user.see_also = see_also
           unless config[:simple]
             user.add_class('shadowAccount', 'inetOrgPerson',
                            'organizationalPerson')
