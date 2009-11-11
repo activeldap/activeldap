@@ -73,7 +73,7 @@ project = Hoe.spec('activeldap') do
   self.remote_rdoc_dir = "doc"
   self.rsync_args += " --chmod=Dg+ws,Fg+w"
   self.description = String.new(<<-EOF)
-    'Ruby/ActiveLdap' is a ruby extension library which provides a clean
+    'ActiveLdap' is a ruby extension library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
     by ActiveRecord. This is not nearly as clean or as flexible as
     ActiveRecord, but it is still trivial to define new objects and manipulate
