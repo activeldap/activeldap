@@ -1,5 +1,13 @@
 = CHANGES
 
+== 1.2.1: 2009-11-12
+
+* belongs_to(:many) support DN attribute.
+* [#31] ActiveLdap::Base#attributes returns data that reflects
+  schema definition. [Alexey.Chebotar]
+* blocks DN attribute change by mass assignment with :id => ....
+* [#35] fix has_many association is broken. [culturespy]
+
 == 1.2.0: 2009-09-22
 
 * Supported ActiveRecord 2.3.4 and Rails 2.3.4.
