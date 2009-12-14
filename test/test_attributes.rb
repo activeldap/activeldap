@@ -34,17 +34,20 @@ class TestAttributes < Test::Unit::TestCase
   end
 
   def test_normalize_attribute
-    assert_equal(["usercertificate", [{"binary" => []}]],
-                 ActiveLdap::Base.normalize_attribute("userCertificate", []))
-    assert_equal(["usercertificate", [{"binary" => []}]],
-                 ActiveLdap::Base.normalize_attribute("userCertificate", nil))
-    assert_equal(["usercertificate", [{"binary" => "BINARY DATA"}]],
-                 ActiveLdap::Base.normalize_attribute("userCertificate",
-                                                      "BINARY DATA"))
-    assert_equal(["usercertificate", [{"binary" => ["BINARY DATA"]}]],
-                 ActiveLdap::Base.normalize_attribute("userCertificate",
-                                                      {"binary" =>
-                                                        ["BINARY DATA"]}))
+    assert_normalize_attribute(["usercertificate", [{"binary" => []}]],
+                               "userCertificate",
+                               [])
+    assert_normalize_attribute(["usercertificate", [{"binary" => []}]],
+                               "userCertificate",
+                               nil)
+    assert_normalize_attribute(["usercertificate",
+                                [{"binary" => "BINARY DATA"}]],
+                               "userCertificate",
+                               "BINARY DATA")
+    assert_normalize_attribute(["usercertificate",
+                                [{"binary" => ["BINARY DATA"]}]],
+                               "userCertificate",
+                               {"binary" => ["BINARY DATA"]})
   end
 
   def test_unnormalize_attribute
@@ -104,6 +107,10 @@ class TestAttributes < Test::Unit::TestCase
   end
 
   private
+  def assert_normalize_attribute(expected, name, value)
+    assert_equal(expected, ActiveLdap::Base.normalize_attribute(name, value))
+  end
+
   def assert_unnormalize_attribute(expected, name, value)
     assert_equal(expected, ActiveLdap::Base.unnormalize_attribute(name, value))
   end
