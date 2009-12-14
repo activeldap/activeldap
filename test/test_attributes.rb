@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'al-test-utils'
 
 class TestAttributes < Test::Unit::TestCase
@@ -46,15 +48,24 @@ class TestAttributes < Test::Unit::TestCase
   end
 
   def test_unnormalize_attribute
-    assert_equal({"sn" => ["Surname"]},
-                 ActiveLdap::Base.unnormalize_attribute("sn", ["Surname"]))
-    assert_equal({"userCertificate;binary" => []},
-                 ActiveLdap::Base.unnormalize_attribute("userCertificate",
-                                                        [{"binary" => []}]))
-    assert_equal({"userCertificate;binary" => ["BINARY DATA"]},
-                 ActiveLdap::Base.unnormalize_attribute("userCertificate",
-                                                        [{"binary" =>
-                                                           ["BINARY DATA"]}]))
+    assert_unnormalize_attribute({"sn" => ["Surname"]},
+                                 "sn",
+                                 ["Surname"])
+    assert_unnormalize_attribute({"userCertificate;binary" => []},
+                                 "userCertificate",
+                                 [{"binary" => []}])
+    assert_unnormalize_attribute({"userCertificate;binary" => ["BINARY DATA"]},
+                                 "userCertificate",
+                                 [{"binary" => ["BINARY DATA"]}])
+    assert_unnormalize_attribute({
+                                   "sn" => ["Yamada"],
+                                   "sn;lang-ja" => ["山田"],
+                                   "sn;lang-ja;phonetic" => ["やまだ"]
+                                 },
+                                 "sn",
+                                 ["Yamada",
+                                  {"lang-ja" => ["山田",
+                                                 {"phonetic" => ["やまだ"]}]}])
   end
 
   def test_attr_protected
@@ -90,5 +101,10 @@ class TestAttributes < Test::Unit::TestCase
     assert_equal("XXX", user.uid)
     assert_nil(user.sn)
     assert_equal("Common Name", user.cn)
+  end
+
+  private
+  def assert_unnormalize_attribute(expected, name, value)
+    assert_equal(expected, ActiveLdap::Base.unnormalize_attribute(name, value))
   end
 end

@@ -101,8 +101,7 @@ module ActiveLdap
             if value.is_a?(Hash)
               suffix, real_value = unnormalize_attribute_options(value)
               new_name = name + suffix
-              result[new_name] ||= []
-              result[new_name].concat(real_value)
+              unnormalize_attribute(new_name, real_value, result)
             else
               result[name] ||= []
               if value.is_a?(DN)
