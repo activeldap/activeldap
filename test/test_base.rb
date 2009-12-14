@@ -6,6 +6,27 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_add_entry_with_attribute_with_nested_options
+    ensure_delete_user("temp-user") do |uid,|
+      user = @user_class.new
+      user.cn = uid
+      user.uid = uid
+      user.uid_number = 1000
+      user.gid_number = 1000
+      user.home_directory = "/home/#{uid}"
+
+      assert_not_predicate(user, :valid?)
+      user.sn = ["Yamada",
+                 {"lang-ja" => ["山田",
+                                {"phonetic" => ["やまだ"]}]}]
+      assert_predicate(user, :valid?)
+      assert_nothing_raised do
+        user.save!
+      end
+    end
+  end
+
+  priority :normal
   def test_not_rename_by_mass_update
     make_temporary_user(:simple => true) do |user,|
       original_id = user.id
@@ -14,7 +35,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_attributes
     make_temporary_group do |group|
       assert_equal({
