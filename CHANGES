@@ -3,6 +3,7 @@
 == 1.2.1: 2009-XX-XX
 
 * Supported ActiveRecord 2.3.5 and Rails 2.3.5.
+* Supported GetText 2.1.0 and Locale 2.0.5.
 * belongs_to(:many) support DN attribute.
 * [#31] ActiveLdap::Base#attributes returns data that reflects
   schema definition. [Alexey.Chebotar]
