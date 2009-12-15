@@ -1,5 +1,9 @@
 = CHANGES
 
+== 1.2.2: 2010-XX-XX
+
+* ...
+
 == 1.2.1: 2009-12-15
 
 * Supported ActiveRecord 2.3.5 and Rails 2.3.5.
