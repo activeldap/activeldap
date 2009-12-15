@@ -1,6 +1,6 @@
 = CHANGES
 
-== 1.2.1: 2009-XX-XX
+== 1.2.1: 2009-12-15
 
 * Supported ActiveRecord 2.3.5 and Rails 2.3.5.
 * Supported GetText 2.1.0 and Locale 2.0.5.
