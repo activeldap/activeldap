@@ -65,10 +65,10 @@ project = Hoe.spec('activeldap') do
   self.changes = self.paragraphs_of('CHANGES', 1..2).join("\n\n")
   self.extra_deps = [
                      # ['ruby-ldap', '= 0.9.9'],
-                     ['activerecord', '= 2.3.4'],
-                     ['locale', '= 2.0.4'],
-                     ['gettext', '= 2.0.4'],
-                     ['gettext_activerecord', '= 2.0.4'],
+                     ['activerecord', '= 2.3.5'],
+                     ['locale', '= 2.0.5'],
+                     ['gettext', '= 2.1.0'],
+                     ['gettext_activerecord', '= 2.1.0'],
                     ]
   self.remote_rdoc_dir = "doc"
   self.rsync_args += " --chmod=Dg+ws,Fg+w"
