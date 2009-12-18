@@ -6,6 +6,13 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_set_and_get_false
+    user = @user_class.new
+    user.sn = false
+    assert_equal(false, user.sn)
+  end
+
+  priority :normal
   def test_modify_entry_with_attribute_with_nested_options
     make_temporary_user(:simple => true) do |user,|
       user.sn = ["Yamada",
@@ -17,7 +24,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_add_entry_with_attribute_with_nested_options
     ensure_delete_user("temp-user") do |uid,|
       user = @user_class.new

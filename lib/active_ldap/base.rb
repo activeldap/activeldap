@@ -1240,7 +1240,8 @@ module ActiveLdap
     def get_attribute_before_type_cast(name, force_array=false)
       name = to_real_attribute_name(name)
 
-      value = @data[name] || []
+      value = @data[name]
+      value = [] if value.nil?
       [name, array_of(value, force_array)]
     end
 
