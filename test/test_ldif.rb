@@ -9,6 +9,16 @@ class TestLDIF < Test::Unit::TestCase
   include AlTestUtils::ExampleFile
 
   priority :must
+  def test_integer_attribute_value_to_s
+    dn = ActiveLdap::DN.parse("uid=user,ou=People,dc=example,dc=com")
+    record = ActiveLdap::Ldif::Record.new(dn, {"uidNumber" => [100]})
+    assert_equal(<<-EOL, record.to_s)
+dn: uid=user,ou=People,dc=example,dc=com
+uidNumber: 100
+EOL
+  end
+
+  priority :normal
   def test_accept_empty_lines_after_content
     ldif_source = <<-EOL
 version: 1
@@ -65,7 +75,6 @@ objectClass: top
 EOL
   end
 
-  priority :normal
   def test_comments_and_empty_lines_before_content
     ldif_source = <<-EOL
 version: 1

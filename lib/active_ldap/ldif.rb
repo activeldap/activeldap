@@ -46,7 +46,7 @@ module ActiveLdap
         return "#{name}:\n" if value.blank?
         result = "#{name}:"
 
-        value = value.to_s if value.is_a?(DN)
+        value = value.to_s unless value.is_a?(String)
         if value[-1, 1] == ' ' or binary_value?(value)
           result << ":"
           value = [value].pack("m").gsub(/\n/, '')

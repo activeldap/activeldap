@@ -4,6 +4,7 @@
 
 * [#37] Fixed gem dependencies in Rakefile. [zachwily]
 * Fixed a bug that setting 'false' but 'nil' is returned. [Hideyuki Yasuda]
+* Supported non-String attribute value as LDIF value. [Matt Mencel]
 
 == 1.2.1: 2009-12-15
 
