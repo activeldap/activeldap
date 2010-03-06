@@ -45,7 +45,7 @@ module ActiveLdap
         super(options) do |base, scope, filter, attrs, limit, callback|
           info = {
             :base => base, :scope => scope_name(scope), :filter => filter,
-            :attributes => attrs,
+            :attributes => attrs, :limit => limit,
           }
           execute(:search, info,
                   base, scope, filter, attrs, limit, callback, &block)
