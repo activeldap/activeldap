@@ -50,6 +50,27 @@ module LDAP
   end
 
   class Conn
+    begin
+      instance_method(:search_ext)
+      @@have_search_ext = true
+    rescue NameError
+      @@have_search_ext = false
+    end
+
+    def search_with_limit(base, scope, filter, attributes, limit, &block)
+      if @@have_search_ext
+        search_ext(base, scope, filter, attributes,
+                   false, nil, nil, 0, 0, limit || 0, &block)
+      else
+        i = 0
+        search(base, scope, filter, attributes) do |entry|
+          i += 1
+          block.call(entry)
+          break if limit and limit <= i
+        end
+      end
+    end
+
     def failed?
       not error_code.zero?
     end

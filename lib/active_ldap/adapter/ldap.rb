@@ -82,19 +82,17 @@ module ActiveLdap
       def search(options={}, &block)
         super(options) do |base, scope, filter, attrs, limit, callback|
           begin
-            i = 0
             info = {
               :base => base, :scope => scope_name(scope),
-              :filter => filter, :attributes => attrs,
+              :filter => filter, :attributes => attrs, :limit => limit,
             }
-            execute(:search, info, base, scope, filter, attrs) do |entry|
-              i += 1
+            execute(:search_with_limit,
+                    info, base, scope, filter, attrs, limit) do |entry|
               attributes = {}
               entry.attrs.each do |attr|
                 attributes[attr] = entry.vals(attr)
               end
               callback.call([entry.dn, attributes], block)
-              break if limit and limit <= i
             end
           rescue RuntimeError
             begin
