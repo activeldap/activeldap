@@ -109,13 +109,12 @@ module ActiveLdap
         controls = SearchControls.new
         controls.search_scope = scope
 
+        controls.count_limit = limit if limit
         unless attrs.blank?
           controls.returning_attributes = attrs.to_java(:string)
         end
 
-        i = 0
         @context.search(base, filter, controls).each do |result|
-          i += 1
           attributes = {}
           result.attributes.get_all.each do |attribute|
             attributes[attribute.get_id] = attribute.get_all.collect do |value|
@@ -123,7 +122,6 @@ module ActiveLdap
             end
           end
           callback.call([result.name_in_namespace, attributes], block)
-          break if limit and limit <= i
         end
       end
 
