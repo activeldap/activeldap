@@ -73,7 +73,7 @@ module ActiveLdap
           }
           info = {
             :base => base, :scope => scope_name(scope),
-            :filter => filter, :attributes => attrs,
+            :filter => filter, :attributes => attrs, :limit => limit
           }
           execute(:search, info, args) do |entry|
             attributes = {}
