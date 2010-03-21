@@ -65,6 +65,7 @@ project = Hoe.spec('activeldap') do
   self.changes = self.paragraphs_of('CHANGES', 1..2).join("\n\n")
   self.extra_deps = [
                      # ['ruby-ldap', '= 0.9.9'],
+                     # ['net-ldap', '= 0.1.1'],
                      ['activerecord', '= 2.3.5'],
                      ['locale', '= 2.0.5'],
                      ['gettext', '= 2.1.0'],
