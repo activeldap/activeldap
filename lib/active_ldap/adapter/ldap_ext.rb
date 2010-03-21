@@ -92,13 +92,14 @@ module LDAP
     def assert_error_code
       return unless failed?
       code = error_code
+      message = error_message
       klass = ActiveLdap::LdapError::ERRORS[code]
       klass ||= IMPLEMENT_SPECIFIC_ERRORS[code]
-      if klass.nil? and error_message == "Can't contact LDAP server"
-        klass = LDAP::ServerDown
+      if klass.nil? and message == "Can't contact LDAP server"
+        klass = ActiveLdap::ConnectionError
       end
       klass ||= ActiveLdap::LdapError
-      raise klass, LDAP.err2string(code)
+      raise klass, message
     end
   end
 end

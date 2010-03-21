@@ -138,7 +138,13 @@ module ActiveLdap
       private
       def execute(method, info=nil, *args, &block)
         name = (info || {}).delete(:name) || method
-        result = log(name, info) {@connection.send(method, *args, &block)}
+        result = log(name, info) do
+          begin
+            @connection.send(method, *args, &block)
+          rescue Errno::EPIPE
+            raise ConnectionError, "#{$!.class}: #{$!.message}"
+          end
+        end
         message = nil
         if result.is_a?(Hash)
           message = result[:errorMessage]
@@ -147,6 +153,7 @@ module ActiveLdap
         unless result.zero?
           klass = LdapError::ERRORS[result]
           klass ||= LdapError
+          return if klass == LdapError::SizeLimitExceeded
           message = [Net::LDAP.result2string(result), message].compact.join(": ")
           raise klass, message
         end

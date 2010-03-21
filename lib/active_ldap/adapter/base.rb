@@ -169,7 +169,7 @@ module ActiveLdap
           operation(options) do
             yield(base, scope, filter, attrs, limit, callback)
           end
-        rescue LdapError
+        rescue LdapError::NoSuchObject, LdapError::InvalidDnSyntax
           # Do nothing on failure
           @logger.info do
             args = [$!.class, $!.message, filter, attrs.inspect]
@@ -274,7 +274,7 @@ module ActiveLdap
           with_timeout(try_reconnect, options) do
             yield
           end
-        rescue Errno::EPIPE, ConnectionError
+        rescue ConnectionError
           if try_reconnect and !retried
             retried = true
             @disconnected = true
