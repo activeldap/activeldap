@@ -588,7 +588,7 @@ module ActiveLdap
           require 'logger'
           @@logger = Logger.new(STDERR)
           @@logger.progname = 'ActiveLdap'
-          @@logger.level = Logger::UNKNOWN
+          @@logger.level = Logger::ERROR
         end
         configuration[:logger] ||= @@logger
       end
