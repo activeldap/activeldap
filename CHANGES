@@ -9,6 +9,7 @@
   objectClass attribute name. [Tim Hermans]
 * [#41] Provide SASL-option support, primarily for authzid
   [Anthony M. Martinez]
+* [#43] Error with to_xml [ilusi0n.x]
 
 == 1.2.1: 2009-12-15
 

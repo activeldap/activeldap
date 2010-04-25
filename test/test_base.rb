@@ -1017,6 +1017,23 @@ EOX
     end
   end
 
+  def test_to_xml_nil
+    ou = ou_class.new("Sample")
+    ou.description = [nil]
+    assert_equal(<<-EOX, ou.to_xml(:root => "sample"))
+<sample>
+  <dn>#{ou.dn}</dn>
+  <objectClasses type="array">
+    <objectClass>organizationalUnit</objectClass>
+    <objectClass>top</objectClass>
+  </objectClasses>
+  <ous type="array">
+    <ou>Sample</ou>
+  </ous>
+</sample>
+EOX
+  end
+
   def test_save
     make_temporary_user do |user, password|
       user.sn = nil

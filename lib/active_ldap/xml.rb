@@ -68,6 +68,8 @@ module ActiveLdap
           end
         when DN
           targets.concat(normalize_value(value.to_s, options))
+        when nil
+          # ignore
         else
           if /\A#{PRINTABLE_STRING}\z/ !~ value
             value = [value].pack("m").gsub(/\n/u, '')
