@@ -83,6 +83,7 @@ module ActiveLdap
           :attribute => attr,
           :value => value,
           :prefix => prefix,
+          :limit => 1,
         }
 
         attribute = attr || ensure_search_attribute
@@ -90,6 +91,7 @@ module ActiveLdap
           :attribute => attr,
           :value => value,
           :prefix => ["#{attribute}=#{value}", prefix].compact.join(","),
+          :limit => 1,
           :scope => :base,
         }
 
