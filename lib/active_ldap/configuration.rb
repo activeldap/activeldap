@@ -33,6 +33,7 @@ module ActiveLdap
     DEFAULT_CONFIG[:allow_anonymous] = true
     DEFAULT_CONFIG[:sasl_quiet] = true
     DEFAULT_CONFIG[:try_sasl] = false
+    DEFAULT_CONFIG[:sasl_options] = nil
     # See http://www.iana.org/assignments/sasl-mechanisms
     DEFAULT_CONFIG[:sasl_mechanisms] = ["GSSAPI", "DIGEST-MD5",
                                         "CRAM-MD5", "EXTERNAL"]

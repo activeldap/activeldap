@@ -227,8 +227,15 @@ module ActiveLdap
             sasl_quiet = @connection.sasl_quiet
             @connection.sasl_quiet = quiet unless quiet.nil?
             args = [_bind_dn, mechanism]
+            credential = nil
             if need_credential_sasl_mechanism?(mechanism)
-              args << password(_bind_dn, options)
+              credential = password(_bind_dn, options)
+            end
+            if @sasl_options
+              credential ||= ""
+              args.concat([credential, nil, nil, @sasl_options])
+            else
+              args << credential if credential
             end
             info = {
               :name => "bind: SASL", :dn => _bind_dn, :mechanism => mechanism

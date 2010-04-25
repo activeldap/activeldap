@@ -15,7 +15,7 @@ module ActiveLdap
                                           :password_block, :try_sasl,
                                           :sasl_mechanisms, :sasl_quiet,
                                           :allow_anonymous, :store_password,
-                                          :scope]
+                                          :scope, :sasl_options]
 
       @@row_even = true
 

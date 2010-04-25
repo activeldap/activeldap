@@ -432,6 +432,7 @@
 #   bind methods fail
 # * :try_sasl, when true, tells ActiveLdap to attempt a SASL-GSSAPI bind
 # * :sasl_quiet, when true, tells the SASL libraries to not spew messages to STDOUT
+# * :sasl_options, if defined, should be a hash of options to pass through. This currently only works with the ruby-ldap adapter, which currently only supports :realm, :authcid, and :authzid.
 # * :retry_limit - indicates the number of attempts to reconnect that will be undertaken when a stale connection occurs. -1 means infinite.
 # * :retry_wait - seconds to wait before retrying a connection
 # * :scope - dictates how to find objects. (Default: :one)

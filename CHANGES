@@ -7,6 +7,8 @@
 * Supported non-String attribute value as LDIF value. [Matt Mencel]
 * Worked with a LDAP server that uses 'objectclass' not 'objectClass' as
   objectClass attribute name. [Tim Hermans]
+* [#41] Provide SASL-option support, primarily for authzid
+  [Anthony M. Martinez]
 
 == 1.2.1: 2009-12-15
 
