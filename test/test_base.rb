@@ -6,13 +6,37 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_lower_case_object_class
+    fixture_file = fixture("lower_case_object_class_schema.rb")
+    schema_entries = eval(File.read(fixture_file))
+    schema = ActiveLdap::Schema.new(schema_entries)
+    target_class = Class.new(ActiveLdap::Base) do
+      ldap_mapping :dn_attribute => "umpn",
+                   :prefix => "cn=site",
+                   :classes => ['top', 'umphone', 'umphonenumber']
+    end
+    target_class.connection.instance_variable_set("@schema", schema)
+    target_class.connection.instance_variable_set("@entry_attributes", {})
+    target = target_class.send(:instantiate,
+                               [
+                                "umpn=1.555.5551234,#{target_class.base}",
+                                {
+                                  "umpn" => "1.555.5551234",
+                                  "objectclass" => ["top",
+                                                    "umphone",
+                                                    "umphonenumber"],
+                                }
+                               ])
+    assert_equal("1.555.5551234", target.umpn)
+  end
+
+  priority :normal
   def test_set_and_get_false
     user = @user_class.new
     user.sn = false
     assert_equal(false, user.sn)
   end
 
-  priority :normal
   def test_modify_entry_with_attribute_with_nested_options
     make_temporary_user(:simple => true) do |user,|
       user.sn = ["Yamada",

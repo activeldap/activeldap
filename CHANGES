@@ -5,6 +5,8 @@
 * [#37] Fixed gem dependencies in Rakefile. [zachwily]
 * Fixed a bug that setting 'false' but 'nil' is returned. [Hideyuki Yasuda]
 * Supported non-String attribute value as LDIF value. [Matt Mencel]
+* Worked with a LDAP server that uses 'objectclass' not 'objectClass' as
+  objectClass attribute name. [Tim Hermans]
 
 == 1.2.1: 2009-12-15
 

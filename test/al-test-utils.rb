@@ -49,7 +49,8 @@ module AlTestUtils
       @base_dir = File.expand_path(File.dirname(__FILE__))
       @top_dir = File.expand_path(File.join(@base_dir, ".."))
       @example_dir = File.join(@top_dir, "examples")
-      @config_file = File.join(File.dirname(__FILE__), "config.yaml")
+      @fixtures_dir = File.join(@base_dir, "fixtures")
+      @config_file = File.join(@base_dir, "config.yaml")
       ActiveLdap::Base.configurations = read_config
     end
 
@@ -77,6 +78,10 @@ module AlTestUtils
 
     def adapter
       ENV["ACTIVE_LDAP_TEST_ADAPTER"]
+    end
+
+    def fixture(*components)
+      File.join(@fixtures_dir, *components)
     end
   end
 

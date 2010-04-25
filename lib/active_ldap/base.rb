@@ -1109,12 +1109,17 @@ module ActiveLdap
       "#{name}: #{values.inspect}"
     end
 
+    def find_object_class_values(data)
+      data["objectClass"] || data["objectclass"]
+    end
+
     def attribute_name_resolvable_without_connection?
       @entry_attribute and @local_entry_attribute
     end
 
     def entry_attribute
-      @entry_attribute ||= connection.entry_attribute(@data["objectClass"] || [])
+      @entry_attribute ||=
+        connection.entry_attribute(find_object_class_values(@data) || [])
     end
 
     def local_entry_attribute
@@ -1511,8 +1516,9 @@ module ActiveLdap
 
       oc_value = data['objectClass']
       attributes.push(['objectClass', oc_value])
+      except_keys = ['objectClass', dn_attr].collect(&:downcase)
       data.each do |key, value|
-        next if key == 'objectClass' or key == dn_attr
+        next if except_keys.include?(key)
         value = self.class.remove_blank_value(value)
         next if self.class.blank_value?(value)
 
@@ -1533,8 +1539,9 @@ module ActiveLdap
       ldap_data = normalize_data(@ldap_data)
 
       # Expand subtypes to real data attributes, but leave @data alone
+      object_classes = find_object_class_values(@ldap_data) || []
       original_attributes =
-        connection.entry_attribute(@ldap_data["objectClass"] || []).names
+        connection.entry_attribute(object_classes).names
       bad_attrs = original_attributes - entry_attribute.names
       data = normalize_data(@data, bad_attrs)
 
