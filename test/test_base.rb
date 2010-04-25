@@ -585,8 +585,8 @@ class TestBase < Test::Unit::TestCase
   def test_loose_dn
     make_temporary_user do |user,|
       assert(user.class.exists?(user.dn.to_s))
-      assert(user.class.exists?(user.dn.to_s.gsub(/,/, " , ")))
-      assert(user.class.exists?(user.dn.to_s.gsub(/=/, " = ")))
+      assert(user.class.exists?(user.dn.to_s.gsub(/\b,/, " , ")))
+      assert(user.class.exists?(user.dn.to_s.gsub(/\b=/, " = ")))
     end
   end
 
