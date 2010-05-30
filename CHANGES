@@ -11,6 +11,8 @@
   [Anthony M. Martinez]
 * [#43] Error with to_xml [ilusi0n.x]
 * [#44] Accept '0' and '1' as boolean value [projekttabla]
+* [#27429] Fixed inverted validatation by validate_excluded_classes
+  [Marc Dequènes]
 
 == 1.2.1: 2009-12-15
 

@@ -138,14 +138,19 @@ module ActiveLdap
     end
 
     def validate_excluded_classes
-      return if self.class.excluded_classes.empty?
+      excluded_classes = self.class.excluded_classes
+      return if excluded_classes.empty?
 
       _schema = schema
-      unexpected_classes = self.class.excluded_classes.collect do |name|
+      _classes = classes.collect do |name|
         _schema.object_class(name)
       end
-      unexpected_classes -= classes.collect do |name|
-        _schema.object_class(name)
+      unexpected_classes = excluded_classes.inject([]) do |classes, name|
+        excluded_class = _schema.object_class(name)
+        if _classes.include?(excluded_class)
+          classes << excluded_class
+        end
+        classes
       end
       return if unexpected_classes.empty?
 

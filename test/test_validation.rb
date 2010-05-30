@@ -108,8 +108,6 @@ class TestValidation < Test::Unit::TestCase
 
   def test_validate_excluded_classes
     make_temporary_user do |user,|
-      user.save
-      user.classes -= ['person']
       assert(user.save)
       user.class.excluded_classes = ['person']
       assert(!user.save)
