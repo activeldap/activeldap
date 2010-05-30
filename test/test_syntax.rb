@@ -79,6 +79,13 @@ class TestSyntax < Test::Unit::TestCase
     assert_type_cast(false, "FALSE", "Boolean")
   end
 
+  def test_boolean_normalize_value
+    assert_normalize_value("TRUE", true, 'Boolean')
+    assert_normalize_value("TRUE", "1", 'Boolean')
+    assert_normalize_value("FALSE", false, 'Boolean')
+    assert_normalize_value("FALSE", "0", 'Boolean')
+  end
+
   def test_dn_type_cast
     assert_type_cast_without_validation(nil, nil, 'Distinguished Name')
     assert_dn_type_cast("cn=test", 'Distinguished Name')
@@ -367,5 +374,10 @@ class TestSyntax < Test::Unit::TestCase
   def assert_dn_type_cast(original_value, syntax_name)
     assert_type_cast(ActiveLdap::DN.parse(original_value), original_value,
                      syntax_name)
+  end
+
+  def assert_normalize_value(normalized_value, original_value, syntax_name)
+    syntax = @syntaxes[syntax_name]
+    assert_equal(normalized_value, syntax.normalize_value(original_value))
   end
 end

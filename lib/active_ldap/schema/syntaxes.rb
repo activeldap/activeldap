@@ -91,9 +91,9 @@ module ActiveLdap
 
         def normalize_value(value)
           case value
-          when true
+          when true, "1"
             "TRUE"
-          when false
+          when false, "0"
             "FALSE"
           else
             value
