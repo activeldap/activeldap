@@ -1518,7 +1518,7 @@ module ActiveLdap
       attributes.push(['objectClass', oc_value])
       except_keys = ['objectClass', dn_attr].collect(&:downcase)
       data.each do |key, value|
-        next if except_keys.include?(key)
+        next if except_keys.include?(key.downcase)
         value = self.class.remove_blank_value(value)
         next if self.class.blank_value?(value)
 
