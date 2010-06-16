@@ -2,7 +2,7 @@
 # = ActiveLdap
 #
 #   Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
-#   Copyright (C) 2006-2009 Kouhei Sutou <kou@clear-code.com>
+#   Copyright (C) 2006-2010 Kouhei Sutou <kou@clear-code.com>
 #
 # == Introduction
 #
@@ -902,7 +902,7 @@ require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   end
 end
 
-require_gem_if_need.call("active_support", "activesupport", "= 2.3.5")
+require_gem_if_need.call("active_support", "activesupport", "= 2.3.8")
 
 if ActiveSupport.const_defined?(:Dependencies)
   dependencies = ActiveSupport::Dependencies
@@ -924,7 +924,7 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-require_gem_if_need.call("active_record", "activerecord", "= 2.3.5")
+require_gem_if_need.call("active_record", "activerecord", "= 2.3.8")
 begin
   require_gem_if_need.call("locale", nil, "= 2.0.5")
   require_gem_if_need.call("gettext", nil, "= 2.1.0")
