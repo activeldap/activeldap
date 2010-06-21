@@ -87,6 +87,20 @@ module ActiveLdap
     end
 
     private
+    def format_validation_message(format, parameters)
+      if ActiveLdap.get_text_supported?
+        if /\A(%\{fn\})/ =~ format
+          place_holder = $1
+          format = $POSTMATCH
+        else
+          place_holder = ""
+        end
+        "#{place_holder}#{format % parameters}"
+      else
+        format.sub(/\A%\{fn\} /, '') % parameters
+      end
+    end
+
     def validate_duplicated_dn_creation
       _dn = nil
       begin
@@ -96,10 +110,8 @@ module ActiveLdap
       end
       if _dn and exist?
         format = _("%{fn} is duplicated: %s")
-        unless ActiveLdap.get_text_supported?
-          format = format.sub(/^%\{fn\} /, '')
-        end
-        errors.add("distinguishedName", format % _dn)
+        message = format_validation_message(format, _dn)
+        errors.add("distinguishedName", message)
       end
     end
 
@@ -118,10 +130,8 @@ module ActiveLdap
       end
       if _dn and exist?
         format = _("%{fn} is duplicated: %s")
-        unless ActiveLdap.get_text_supported?
-          format = format.sub(/^%\{fn\} /, '')
-        end
-        errors.add("distinguishedName", format % _dn)
+        message = format_validation_message(format, _dn)
+        errors.add("distinguishedName", message)
       end
     end
 
@@ -129,12 +139,12 @@ module ActiveLdap
       dn
     rescue DistinguishedNameInvalid
       format = _("%{fn} is invalid: %s")
-      format = format.sub(/^%\{fn\} /, '') unless ActiveLdap.get_text_supported?
-      errors.add("distinguishedName", format % $!.message)
+      message = format_validation_message(format, $!.message)
+      errors.add("distinguishedName", message)
     rescue DistinguishedNameNotSetError
       format = _("%{fn} isn't set: %s")
-      format = format.sub(/^%\{fn\} /, '') unless ActiveLdap.get_text_supported?
-      errors.add("distinguishedName", format % $!.message)
+      message = format_validation_message(format, $!.message)
+      errors.add("distinguishedName", message)
     end
 
     def validate_excluded_classes
@@ -160,8 +170,8 @@ module ActiveLdap
       format = n_("%{fn} has excluded value: %s",
                   "%{fn} has excluded values: %s",
                   names.size)
-      format = format.sub(/^%\{fn\} /, '') unless ActiveLdap.get_text_supported?
-      errors.add("objectClass", format % names.join(", "))
+      message = format_validation_message(format, names.join(", "))
+      errors.add("objectClass", message)
     end
 
     # validate_required_ldap_values
@@ -200,10 +210,8 @@ module ActiveLdap
                        "'%s': aliases: %s")
             args << aliases.join(', ')
           end
-          unless ActiveLdap.get_text_supported?
-            format = format.sub(/^%\{fn\} /, '')
-          end
-          errors.add(real_name, format % args)
+          message = format_validation_message(format, args)
+          errors.add(real_name, message)
         end
       end
     end
@@ -233,10 +241,8 @@ module ActiveLdap
         format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
       end
       params.unshift(option) if option
-      unless ActiveLdap.get_text_supported?
-        format = format.sub(/^%\{fn\} ?/, '')
-      end
-      errors.add(name, format % params)
+      message = format_validation_message(format, params)
+      errors.add(name, message)
     end
   end
 end
