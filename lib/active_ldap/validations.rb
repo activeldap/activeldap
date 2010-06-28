@@ -97,7 +97,7 @@ module ActiveLdap
         end
         "#{place_holder}#{format % parameters}"
       else
-        format.sub(/\A%\{fn\} /, '') % parameters
+        format.sub(/\A%\{fn\} ?/, '') % parameters
       end
     end
 
