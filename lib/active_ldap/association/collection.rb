@@ -40,8 +40,20 @@ module ActiveLdap
 
       def replace(others)
         load_target
-        deleted_entries = @target - others
-        added_entries = others - @target
+
+        entry = @target.first
+        if entry.nil?
+          deleted_entries = []
+          added_entries = others
+        else
+          base_class = entry.class
+          others = others.collect do |other|
+            other = base_class.find(other) unless other.is_a?(base_class)
+            other
+          end
+          deleted_entries = @target - others
+          added_entries = others - @target
+        end
 
         delete(deleted_entries)
         concat(added_entries)

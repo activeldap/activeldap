@@ -4,6 +4,26 @@ class TestAssociations < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_belongs_to_replace_with_string
+    make_temporary_user do |user,|
+      make_temporary_group do |group1|
+        make_temporary_group do |group2|
+          user.groups = [group1, group2]
+          user.save!
+
+          user.groups = [group2.cn]
+
+          group1.reload
+          group2.reload
+          assert_equal([group2], user.groups.to_a)
+          assert_equal([], group1.member_uid(true))
+          assert_equal([user.id], group2.member_uid(true))
+        end
+      end
+    end
+  end
+
+  priority :normal
   def test_has_many_of_self
     @user_class.has_many(:references,
                          :class_name => "User",
@@ -28,7 +48,6 @@ class TestAssociations < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_belongs_to_add_with_string
     make_temporary_user do |user,|
       make_temporary_group do |group1|
