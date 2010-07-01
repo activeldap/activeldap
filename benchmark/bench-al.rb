@@ -17,7 +17,7 @@ argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
   end
 end
 
-ActiveLdap::Base.establish_connection
+ActiveLdap::Base.setup_connection
 config = ActiveLdap::Base.configuration
 
 LDAP_HOST = config[:host]
@@ -39,11 +39,11 @@ end
 
 class ALUserLdap < ALUser
 end
-ALUserLdap.establish_connection(config.merge(:adapter => "ldap"))
+ALUserLdap.setup_connection(config.merge(:adapter => "ldap"))
 
 class ALUserNetLdap < ALUser
 end
-ALUserNetLdap.establish_connection(config.merge(:adapter => "net-ldap"))
+ALUserNetLdap.setup_connection(config.merge(:adapter => "net-ldap"))
 
 def search_al_ldap
   count = 0
