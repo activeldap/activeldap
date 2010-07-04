@@ -1,0 +1,81 @@
+/*
+   CSS for Ruby-Locale
+                    by Masao Mutoh.
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  color: #000;
+  background-color: #fff;
+  line-height: 1.5em;
+}
+
+h1 {
+  color: #002288;
+  text-align: center;
+  clear: both;
+  padding: 1em;
+  margin: 5px;
+  border: solid;
+  background-color: #eeeeff;
+  border-color: #9999ff;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+h2 {
+  margin: 0px;
+  padding: 0.3em;
+  margin-top: 1em;
+  margin-left: 1.5em;
+  margin-right: 10px;
+  margin-bottom:0.8em;
+  border: solid thin;
+  border-left: solid;
+  border-color: #9999ff;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  border-left-width: 15px;
+
+}
+
+h3 {
+    font-weight: bold;
+    padding: 0em;
+    margin: 0em;
+    margin-left: 3em;
+    margin-top: 1em;
+}
+
+.result {
+  color: #181;
+  clear: both;
+  padding: 0.5em;
+  margin: 5em;
+  margin-top: 0px;
+  margin-bottom: 0.5em;
+  border: solid;
+  background-color: #ffffee;
+  border-color: #ffff99;
+  border-width: 1px;
+}
+
+p, ol, table {
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.copyright {
+    text-align: right;
+    margin-top: 3em;
+    margin-right: 3em;
+}
+
+th {
+    background-color: #eeffee;
+}

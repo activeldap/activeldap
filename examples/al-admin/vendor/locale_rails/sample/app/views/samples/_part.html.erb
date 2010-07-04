@@ -1,0 +1,68 @@
+<%
+  app_lang_tags = ["ja_JP", "fr", "pt_BR", "zh_CN", "en_Latn_US_NYNORSK", "uz_UZ", "nl"]
+%>
+
+<h2>Get the current locale</h2>
+<h3>Locale.candidates(with no option)</h3>
+<p>Requested Locales order by the priority. This method is added by Ruby-Locale for Ruby on Rails.</p>
+<div class="result">
+<%=h Locale.candidates.inspect %>
+</div>
+
+<h3>I18n.locale (with inspect)</h3>
+<p>I18n.locale is set the result(Locale::TagList) of Locale.candidates(:type => :rfc).<br/>
+This method is extended by Ruby-Locale for Ruby on Rails and returns all candidates as the Locale::TagList.
+</p>
+<div class="result">
+<%=h I18n.locale.inspect %>
+</div>
+
+<h3>I18n.locale (without inspect)</h3>
+<p>Locale::TagList(the result of I18n.locale) can behave like a single tag string to follow I18n.locale specification.</p>
+<div class="result">
+<%=h I18n.locale %>
+</div>
+
+<h2>Auto-Detect the locale from the WWW browser</h2>
+<p><a href="<%= samples_path %>">Reload this URL</a></p>
+
+<h2>Set locale as the "lang" parameter</h2>
+
+<ol>
+<% (app_lang_tags - ["uz_UZ", "nl"]).each do |lang|
+     url = samples_path(:lang => lang) %>
+    <li><%= link_to h(url), url %> [<%= lang %>]</li>
+<% end %>
+</ol>
+
+<h2>Set "lang" as the cookie value.</h2>
+<p>Click one of the link below, and then click "Auto-Detect the locale from the WWW browser".</p>
+
+<ol>
+<% (app_lang_tags - ["uz_UZ", "nl"]).each do |lang|
+     url = url_for(:controller => :samples, :action => :set_cookie, :id => lang) %>
+    <li><%= link_to h(url), {:action => :set_cookie, :id => lang} %> [<%= lang %>]</li>
+<% end %>
+    <li><%= link_to "Clear cookie", :action => :clear_cookie %> </li>
+</ol>
+
+<h2>Localized Routes</h2>
+<p>See config/routes.rb</p>
+
+<ol>
+<% (app_lang_tags - ["uz_UZ", "nl"]).each do |lang|
+     url = url_for(:controller => :samples, :lang => lang, :action => :index) %>
+   <li><%= link_to h(url),:controller => :samples, :lang => lang, :action => :index %> [<%= lang %>]</li>
+<% end %>
+</ol>
+
+<h2>Caching</h2>
+<p>Fragment/Action caching is supported. Here is the sample for action caching. <br/>
+Click the links then check %{RAILS_ROOT}/tmp/cache/ where Cached file is stored.
+</p>
+<ol>
+<% (app_lang_tags - ["uz_UZ", "nl"]).each do |lang|
+     url = url_for(:controller => :samples, :action => :cached_action, :lang => lang) %>
+    <li><%= link_to h(url), {:controller => :samples, :action => :cached_action, :lang => lang} %> [<%= lang %>]</li>
+<% end %>
+</ol>

@@ -1,0 +1,16 @@
+<h1>Ruby-Locale and Ruby on Rails 2.2 sample</h1>
+<p><a href ="http://locale.rubyforge.org/svn/trunk/locale_rails/sample">[source code]</a></p>
+
+<h2>The values from Rails</h2>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr><th>Variables</th><th>Values</th></tr>
+  <tr><td>HTTP_ACCEPT_LANGUAGE</td><td> <%= request.accept_language %></td></tr>
+  <tr><td>HTTP_ACCEPT_CHARSET</td><td> <%= request.accept_charset %></td></tr>
+  <tr><td>QUERY_STRING</td><td> <%= request.query_string %></td></tr>
+  <tr><td>params[:lang]</td><td><%= params[:lang] %></td></tr>
+  <tr><td>cookies[:lang]</td><td> <%= cookies[:lang] %></td></tr>
+  <tr><td>I18n.t :hello (*1)</td><td> <%= I18n.t :hello %></td></tr>
+</table>
+
+<p style="color:red">This page is for uz_UZ only. See app/views/samples/index_uz_UZ.html.erb.</p>
+<p><%= link_to "[BACK]", samples_path %></p>

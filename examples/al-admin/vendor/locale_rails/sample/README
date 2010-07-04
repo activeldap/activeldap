@@ -1,0 +1,22 @@
+== Ruby-Locale for Ruby on Rails sample application
+This is the sample application for localization.
+
+=== Includes
+1. How to get current language.
+2. Auto-Detect the locale from the WWW browser
+3. Set locale as the "lang" parameter
+4. Set "lang" as the cookie value
+5. Localized Routes
+6. Action caching
+7. Separate Localized View template file
+
+== Installation
+
+1. Instal rails-2.2.x.
+2. Install sqlite3-ruby
+   gem install sqlite3-ruby
+3. Install locale_rails
+   gem install locale_rails
+4. rake db:create 
+5. ruby script/server
+6. Access http://localhost:3000/ from the WWW browser.

@@ -1,0 +1,6 @@
+*.sqlite3
+pkg/*.gem
+test/log
+test/tmp
+.idea
+

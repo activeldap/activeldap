@@ -1,0 +1,62 @@
+= Ruby-Locale for Ruby on Rails
+
+This library provides some Rails localized functions.
+
+This is useful with Rails i18n backends which doesn't have
+auto-detection and some other features includes this library.
+
+== Features for Ruby on Rails
+* Auto-Detect the locales from the WWW browser
+* Action/Fragment caching
+* Separated Localized View template file
+* Localized Routes
+* I18n.t fallback to localized message candidates.
+
+== Website
+* http://www.yotabanana.com/hiki/ruby-locale-rails.html
+* http://locale.rubyforge.org/
+
+== Requirements
+* Ruby-1.8.7 or later <http://www.ruby-lang.org/ja/>
+* JRuby-1.1.4 or later <http://jruby.codehaus.org/>
+* Ruby-Locale-0.9.0 or later <http://locale.rubyforge.org/>
+
+== Install
+* gem:
+  ($ su)
+   # gem install locale_rails
+
+== Usage
+==== config/environment.rb
+  Rails::Initializer.run do |config|
+    :
+    :
+    config.gem 'locale'
+    config.gem 'locale_rails'
+  end
+
+==== config/initializer/locale.rb
+
+ # Tell the I18n library where to find your translations
+ I18n.supported_locales = ["ja", "en"]
+ I18n.default_locale = "ja" 
+
+== Support matrix
+* locale_rails-2.0.6 - rails-2.3.2,2.3.3,2.3.4,2.3.5
+* locale_rails-2.0.5 - rails-2.3.2,2.3.3,2.3.4
+* locale_rails-2.0.4 - rails-2.3.2
+* locale_rails-2.0.3 - rails-2.3.2
+* locale_rails-2.0.2 - rails-2.3.2
+* locale_rails-2.0.1 - rails-2.3.2
+* locale_rails-2.0.0 - rails-2.3.2
+* locale_rails-0.1.0 - rails-2.1.x
+
+== Tested Ruby version:
+* locale_rails-2.0.6 - 1.8.7-p249, 1.9.1-p378
+
+== License
+This program is licenced under the same licence as Ruby(See COPYING) or
+LGPL(Lesser General Public License: http://www.gnu.org/licenses/lgpl-3.0.txt).
+
+== Maintainer
+Masao Mutoh <mutomasa at gmail.com>

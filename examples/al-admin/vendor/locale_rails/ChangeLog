@@ -1,0 +1,35 @@
+= locale_rails-2.0.5 (2009-11-11)
+ * Update license information (explicit to use Ruby's or LGPL).
+   [Pointed out by Masateru Yoshikawa]
+ * Fixed to work expire_fragment/action.
+   [Reported by Sean Tan]
+ * Support Rails-2.3.2, 2.3.3 and 2.3.4.
+   Update the version information.
+
+= locale_rails-2.0.4 (2009-05-22)
+ * Fixed that localized views are not working correctly. [Reported by Dan Coutu]
+ * Add tests
+
+= locale_rails-2.0.3 (2009-05-09)
+ * Fixed a bug not to work with fragment cache. [Reported by Andy Lo-A-Foe]
+ * Fixed the dependencies. [Reported by Hans de Graaff]
+
+= locale_rails-2.0.2 (2009-05-04)
+ * Remove I18n.candidates. Use Locale.candidates directly.
+ * Improve documentations.
+ * Override I18n.default_locale= to call Locale.default.
+
+= locale_rails-2.0.1 (2009-04-17)
+ * Fixed to work localized view which was canceled.
+
+= locale_rails-2.0.0 (2009-03-22)
+ * I18n.translate fallbacks to the localized message in the locale candidates.
+ * Support localized view both of gettext-1.93.0 style and rails-2.3.x style.
+
+= locale_rails-0.1.0 (2008-12-04)
+ * Initial released.
+ * Auto-Detect the locales from the WWW browser
+ * Localized Routes
+ * Action/Fragment caching
+ * Separated Localized View template file
+
