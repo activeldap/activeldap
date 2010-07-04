@@ -1,7 +1,8 @@
 = CHANGES
 
-== 1.2.2: 2010-XX-XX
+== 1.2.2: 2010-07-04
 
+* Supported ActiveRecord 2.3.8 and Rails 2.3.8.
 * [#37] Fixed gem dependencies in Rakefile. [zachwily]
 * Fixed a bug that setting 'false' but 'nil' is returned. [Hideyuki Yasuda]
 * Supported non-String attribute value as LDIF value. [Matt Mencel]
@@ -13,6 +14,8 @@
 * [#44] Accept '0' and '1' as boolean value [projekttabla]
 * [#27429] Fixed inverted validatation by validate_excluded_classes
   [Marc Dequènes]
+* Supported DN attribute value for assosiation replacement.
+  [Jörg Herzinger]
 
 == 1.2.1: 2009-12-15
 
