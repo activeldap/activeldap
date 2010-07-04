@@ -10,7 +10,7 @@ module UsersHelper
                         :action => "show", :id => user)
     if with_edit and current_user and current_user.ldap_user == user
       edit_link = link_to(_('Edit'), :action => 'edit', :id => user)
-      result << "\n(#{edit_link})"
+      result << "\n(" << edit_link << ")"
     end
     result
   end
