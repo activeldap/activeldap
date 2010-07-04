@@ -915,7 +915,7 @@ if dependencies.respond_to?(:load_paths)
 end
 
 module ActiveLdap
-  VERSION = "1.2.2"
+  VERSION = "1.2.3"
 end
 
 if RUBY_PLATFORM.match('linux')
