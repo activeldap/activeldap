@@ -105,7 +105,7 @@ module ActiveLdap
         bound?
       end
 
-      def search(base, scope, filter, attrs, limit, callback, &block)
+      def search(base, scope, filter, attrs, limit)
         controls = SearchControls.new
         controls.search_scope = scope
 
@@ -121,7 +121,7 @@ module ActiveLdap
               value.is_a?(String) ? value : String.from_java_bytes(value)
             end
           end
-          callback.call([result.name_in_namespace, attributes], block)
+          yield([result.name_in_namespace, attributes])
         end
       end
 

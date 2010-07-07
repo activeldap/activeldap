@@ -79,8 +79,8 @@ module ActiveLdap
         end
       end
 
-      def search(options={}, &block)
-        super(options) do |base, scope, filter, attrs, limit, callback|
+      def search(options={})
+        super(options) do |base, scope, filter, attrs, limit|
           begin
             info = {
               :base => base, :scope => scope_name(scope),
@@ -92,7 +92,7 @@ module ActiveLdap
               entry.attrs.each do |attr|
                 attributes[attr] = entry.vals(attr)
               end
-              callback.call([entry.dn, attributes], block)
+              yield([entry.dn, attributes])
             end
           rescue RuntimeError
             if $!.message == "no result returned by search"

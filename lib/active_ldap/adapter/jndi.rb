@@ -42,13 +42,12 @@ module ActiveLdap
       end
 
       def search(options={}, &block)
-        super(options) do |base, scope, filter, attrs, limit, callback|
+        super(options) do |base, scope, filter, attrs, limit|
           info = {
             :base => base, :scope => scope_name(scope), :filter => filter,
             :attributes => attrs, :limit => limit,
           }
-          execute(:search, info,
-                  base, scope, filter, attrs, limit, callback, &block)
+          execute(:search, info, base, scope, filter, attrs, limit, &block)
         end
       end
 

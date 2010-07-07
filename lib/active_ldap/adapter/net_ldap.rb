@@ -62,8 +62,8 @@ module ActiveLdap
         end
       end
 
-      def search(options={}, &block)
-        super(options) do |base, scope, filter, attrs, limit, callback|
+      def search(options={})
+        super(options) do |base, scope, filter, attrs, limit|
           args = {
             :base => base,
             :scope => scope,
@@ -80,7 +80,7 @@ module ActiveLdap
             entry.original_attribute_names.each do |name|
               attributes[name] = entry[name]
             end
-            callback.call([entry.dn, attributes], block)
+            yield([entry.dn, attributes])
           end
         end
       end

@@ -131,11 +131,15 @@ module ActiveLdap
           ]
           base ||= root_dse_values('subschemaSubentry', options)[0]
           base ||= 'cn=schema'
-          dn, attributes = search(:base => base,
-                                  :scope => :base,
-                                  :filter => '(objectClass=subschema)',
-                                  :attributes => attrs).first
-          Schema.new(attributes)
+          schema = nil
+          search(:base => base,
+                 :scope => :base,
+                 :filter => '(objectClass=subschema)',
+                 :attributes => attrs,
+                 :limit => 1) do |dn, attributes|
+            schema = Schema.new(attributes)
+          end
+          schema || Schema.new([])
         end
       end
 
@@ -157,17 +161,10 @@ module ActiveLdap
         limit = nil if limit <= 0
 
         attrs = attrs.to_a # just in case
-
-        values = []
-        callback = Proc.new do |value, block|
-          value = block.call(value) if block
-          values << value
-        end
-
         base = ensure_dn_string(base)
         begin
           operation(options) do
-            yield(base, scope, filter, attrs, limit, callback)
+            yield(base, scope, filter, attrs, limit)
           end
         rescue LdapError::NoSuchObject, LdapError::InvalidDnSyntax
           # Do nothing on failure
@@ -176,8 +173,6 @@ module ActiveLdap
             _("Ignore error %s(%s): filter %s: attributes: %s") % args
           end
         end
-
-        values
       end
 
       def delete(targets, options={})
@@ -622,7 +617,7 @@ module ActiveLdap
       end
 
       def root_dse_values(key, options={})
-        dse = root_dse([key], options)[0]
+        dse = root_dse([key], options)
         return [] if dse.nil?
         normalized_key = key.downcase
         dse.each do |_key, _value|
@@ -632,11 +627,14 @@ module ActiveLdap
       end
 
       def root_dse(attrs, options={})
+        found_attributes = nil
         search(:base => "",
                :scope => :base,
-               :attributes => attrs).collect do |dn, attributes|
-          attributes
+               :attributes => attrs,
+               :limit => 1) do |dn, attributes|
+          found_attributes = attributes
         end
+        found_attributes
       end
 
       def construct_uri(host, port, ssl)
