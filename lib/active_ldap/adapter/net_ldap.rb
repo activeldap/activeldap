@@ -78,7 +78,8 @@ module ActiveLdap
           execute(:search, info, args) do |entry|
             attributes = {}
             entry.original_attribute_names.each do |name|
-              attributes[name] = entry[name]
+              value = entry[name]
+              attributes[name] = value if value
             end
             yield([entry.dn, attributes])
           end

@@ -90,7 +90,8 @@ module ActiveLdap
                     info, base, scope, filter, attrs, limit) do |entry|
               attributes = {}
               entry.attrs.each do |attr|
-                attributes[attr] = entry.vals(attr)
+                value = entry.vals(attr)
+                attributes[attr] = value if value
               end
               yield([entry.dn, attributes])
             end
