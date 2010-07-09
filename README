@@ -90,7 +90,9 @@ list, please point out.
 * Nobody: Bug reports and API improveent ideas.
 * James Hughes: Bug reports and advices and documentations.
 * Buzz Chopra: Documentations.
-* Christoph Lipp: Bug reports.
+* Christoph Lipp:
+  * Bug reports.
+  * Tell us character escape syntax.
 * Jeff Hall: Bug reports.
 * Ernie Miller: Bug reports and advices.
 * Daniel Pfile: Patches.
@@ -99,7 +101,6 @@ list, please point out.
   * Bug reports.
   * Nederlands translations.
 * Iain Pople: Bug reports and API improvement ideas.
-* Christoph Lipp: Tell us character escape syntax.
 * Kevin McCarthy: Patches.
 * Perry Smith: Patches, bug reports and indications.
 * Marc Dequènes: API suggestions.
