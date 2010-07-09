@@ -498,7 +498,7 @@ module ActiveLdap
         when Time
           value = Schema::GeneralizedTime.new.normalize_value(value)
         end
-        value.gsub(/(?:[()\\\0]|\*\*?)/) do |s|
+        value.gsub(/(?:[:()\\\0]|\*\*?)/) do |s|
           if s == "*"
             s
           else

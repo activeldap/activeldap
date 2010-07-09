@@ -6,6 +6,14 @@ class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
   priority :must
+  def test_search_colon_value
+    make_temporary_group(:cn => "temp:group") do |group|
+      assert_equal("temp:group", group.cn)
+      assert_not_nil(@group_class.find("temp:group"))
+    end
+  end
+
+  priority :normal
   def test_lower_case_object_class
     fixture_file = fixture("lower_case_object_class_schema.rb")
     schema_entries = eval(File.read(fixture_file))
@@ -30,7 +38,6 @@ class TestBase < Test::Unit::TestCase
     assert_equal("1.555.5551234", target.umpn)
   end
 
-  priority :normal
   def test_set_and_get_false
     user = @user_class.new
     user.sn = false

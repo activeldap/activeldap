@@ -37,6 +37,7 @@ class TestAdapter < Test::Unit::TestCase
     assert_parse_filter("(uid=Alice\\2ABob)", {:uid => "Alice**Bob"})
     assert_parse_filter("(uid=Alice\\2A*\\5CBob)", {:uid => "Alice***\\Bob"})
     assert_parse_filter("(uid=Alice\\5C\\2A*Bob)", {:uid => "Alice\\***Bob"})
+    assert_parse_filter("(uid=Alice\\3ABob)", {:uid => "Alice:Bob"})
   end
 
   def test_empty_filter
