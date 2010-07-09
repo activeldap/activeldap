@@ -183,6 +183,10 @@ module ActiveLdap
         end
       end
 
+      def do_in_timeout(timeout, &block)
+        Timeout.timeout(timeout, &block)
+      end
+
       def ensure_method(method)
         normalized_method = method.to_s.downcase
         Method.constants.each do |name|

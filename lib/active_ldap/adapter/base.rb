@@ -313,7 +313,7 @@ module ActiveLdap
         n_retries = 0
         retry_limit = options[:retry_limit] || @retry_limit
         begin
-          Timeout.alarm(@timeout, &block)
+          do_in_timeout(@timeout, &block)
         rescue Timeout::Error => e
           @logger.error {_('Requested action timed out.')}
           if @retry_on_timeout and retry_limit < 0 and n_retries <= retry_limit
@@ -326,6 +326,10 @@ module ActiveLdap
           @logger.error {e.message}
           raise TimeoutError, e.message
         end
+      end
+
+      def do_in_timeout(timeout, &block)
+        Timeout.alarm(timeout, &block)
       end
 
       def sasl_bind(bind_dn, options={})
