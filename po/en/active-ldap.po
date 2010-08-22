@@ -3710,29 +3710,29 @@ msgid "%s isn't sub DN of %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:97
-msgid "%{fn} is duplicated: %s"
+msgid "is duplicated: %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:108
-msgid "%{fn} is invalid: %s"
+msgid "is invalid: %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:112
-msgid "%{fn} isn't set: %s"
+msgid "isn't set: %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:134
-msgid "%{fn} has excluded value: %s"
-msgid_plural "%{fn} has excluded values: %s"
+msgid "has excluded value: %s"
+msgid_plural "has excluded values: %s"
 msgstr[0] ""
 msgstr[1] ""
 
 #: lib/active_ldap/validations.rb:169
-msgid "%{fn} is required attribute by objectClass '%s'"
+msgid "is required attribute by objectClass '%s'"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:171
-msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
+msgid "is required attribute by objectClass '%s': aliases: %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:195
@@ -3740,11 +3740,11 @@ msgid "<binary-value>"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:203
-msgid "%{fn}(%s) has invalid format: %s: required syntax: %s: %s"
+msgid "(%s) has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
 #: lib/active_ldap/validations.rb:205
-msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
+msgid "has invalid format: %s: required syntax: %s: %s"
 msgstr ""
 
 #: lib/active_ldap/command.rb:16

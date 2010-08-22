@@ -12,8 +12,8 @@ class TestValidation < Test::Unit::TestCase
         user1.id = user2.id
         assert_false(user1.save)
 
-        format = _("%{fn} is duplicated: %s")
-        format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
+        format = la_('distinguishedName')
+        format  << ' ' << _("is duplicated: %s")
         assert_equal([format % [user2.dn.to_s]],
                      user1.errors.full_messages)
       end
@@ -27,8 +27,8 @@ class TestValidation < Test::Unit::TestCase
       user.jpeg_photo = "XXX"
       assert_not_predicate(user, :save)
 
-      format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
-      format = format.sub(/^%\{fn\}/, la_('jpegPhoto'))
+      format = la_('jpegPhoto')
+      format << ' '  << _("has invalid format: %s: required syntax: %s: %s")
       arguments = [_("<binary-value>"),
                    lsd_("1.3.6.1.4.1.1466.115.121.1.28"),
                    _("invalid JPEG format")]
@@ -73,8 +73,8 @@ class TestValidation < Test::Unit::TestCase
     reason = _("attribute value is missing")
     invalid_format = _("%s is invalid distinguished name (DN): %s")
     invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-    format = _("%{fn} is invalid: %s")
-    format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
+    format = la_('distinguishedName')
+    format << ' ' << _("is invalid: %s")
     message = format % invalid_message
     assert_equal([message],
                  user.errors.full_messages.find_all {|m| /DN/ =~ m})
@@ -87,8 +87,8 @@ class TestValidation < Test::Unit::TestCase
       reason = _("attribute value is missing")
       invalid_format = _("%s is invalid distinguished name (DN): %s")
       invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-      format = _("%{fn} is invalid: %s")
-      format = format.sub(/^%\{fn\}/, la_('distinguishedName'))
+      format = la_('distinguishedName')
+      format << ' ' << _("is invalid: %s")
       message = format % invalid_message
       assert_equal([message], user.errors.full_messages)
     end
@@ -99,8 +99,8 @@ class TestValidation < Test::Unit::TestCase
       assert(user.valid?)
       user.uid_number = ""
       assert(!user.valid?)
-      format = _("%{fn} is required attribute by objectClass '%s'")
-      format = format.sub(/^%\{fn\}/, la_('uidNumber'))
+      format = la_('uidNumber')
+      format << ' ' << _("is required attribute by objectClass '%s'")
       blank_message = format % loc_("posixAccount")
       assert_equal([blank_message], user.errors.full_messages)
     end
@@ -111,10 +111,10 @@ class TestValidation < Test::Unit::TestCase
       assert(user.save)
       user.class.excluded_classes = ['person']
       assert(!user.save)
-      format = n_("%{fn} has excluded value: %s",
-                  "%{fn} has excluded values: %s",
-                  1)
-      format = format.sub(/^%\{fn\}/, la_("objectClass"))
+      format = la_("objectClass")
+      format << ' ' << n_("has excluded value: %s",
+                          "has excluded values: %s",
+                          1)
       message = format % loc_("person")
       assert_equal([message], user.errors.full_messages)
     end
@@ -183,8 +183,8 @@ class TestValidation < Test::Unit::TestCase
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
     assert(!ou.save)
-    format = _("%{fn} is duplicated: %s")
-    format = format.sub(/^%\{fn\}/, la_("distinguishedName"))
+    format = la_("distinguishedName")
+    format << ' ' << _("is duplicated: %s")
     message = format % ou.dn
     assert_equal([message], ou.errors.full_messages)
   end
@@ -225,16 +225,13 @@ class TestValidation < Test::Unit::TestCase
     assert_not_nil(syntax_description)
     params = [formatted_value, syntax_description, reason]
     params.unshift(option) if option
-    if option
-      format = _("%{fn}(%s) has invalid format: %s: required syntax: %s: %s")
-    else
-      format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
-    end
     localized_name = la_(name)
-    if option and !ActiveLdap.get_text_supported?
-      localized_name += ' '
+    format = localized_name << ' '
+    if option
+      format << _("(%s) has invalid format: %s: required syntax: %s: %s")
+    else
+      format << _("has invalid format: %s: required syntax: %s: %s")
     end
-    format = format.sub(/^%\{fn\}/, localized_name)
     message = format % params
     assert_equal([message], model.errors.full_messages)
   end

@@ -3727,42 +3727,42 @@ msgid "%s isn't sub DN of %s"
 msgstr "%sは%sのサブDNではありません"
 
 #: lib/active_ldap/validations.rb:97
-msgid "%{fn} is duplicated: %s"
-msgstr "%{fn}が重複しています: %s"
+msgid "is duplicated: %s"
+msgstr "が重複しています: %s"
 
 #: lib/active_ldap/validations.rb:108
-msgid "%{fn} is invalid: %s"
-msgstr "%{fn}が不正です: %s"
+msgid "is invalid: %s"
+msgstr "が不正です: %s"
 
 #: lib/active_ldap/validations.rb:112
-msgid "%{fn} isn't set: %s"
-msgstr "%{fn}が設定されていません: %s"
+msgid "isn't set: %s"
+msgstr "が設定されていません: %s"
 
 #: lib/active_ldap/validations.rb:134
-msgid "%{fn} has excluded value: %s"
-msgid_plural "%{fn} has excluded values: %s"
-msgstr[0] "%{fn}に除外した値があります: %s"
-msgstr[1] "%{fn}に除外した値があります: %s"
+msgid "has excluded value: %s"
+msgid_plural "has excluded values: %s"
+msgstr[0] "に除外した値があります: %s"
+msgstr[1] "に除外した値があります: %s"
 
 #: lib/active_ldap/validations.rb:169
-msgid "%{fn} is required attribute by objectClass '%s'"
-msgstr "%{fn}はobjectClass'%s'の必須の属性です"
+msgid "is required attribute by objectClass '%s'"
+msgstr "はobjectClass'%s'の必須の属性です"
 
 #: lib/active_ldap/validations.rb:171
-msgid "%{fn} is required attribute by objectClass '%s': aliases: %s"
-msgstr "%{fn}はobjectClass'%s'の必須の属性です: 別名: %s"
+msgid "is required attribute by objectClass '%s': aliases: %s"
+msgstr "はobjectClass'%s'の必須の属性です: 別名: %s"
 
 #: lib/active_ldap/validations.rb:195
 msgid "<binary-value>"
 msgstr "<バイナリ値>"
 
 #: lib/active_ldap/validations.rb:203
-msgid "%{fn}(%s) has invalid format: %s: required syntax: %s: %s"
-msgstr "%{fn}(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
+msgid "(%s) has invalid format: %s: required syntax: %s: %s"
+msgstr "(%s)は不正な書式です: %s: 要求されている構文: %s: %s"
 
 #: lib/active_ldap/validations.rb:205
-msgid "%{fn} has invalid format: %s: required syntax: %s: %s"
-msgstr "%{fn}は不正な書式です: %s: 要求されている構文: %s: %s"
+msgid "has invalid format: %s: required syntax: %s: %s"
+msgstr "は不正な書式です: %s: 要求されている構文: %s: %s"
 
 #: lib/active_ldap/command.rb:16
 msgid "Common options:"

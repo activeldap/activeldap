@@ -88,17 +88,7 @@ module ActiveLdap
 
     private
     def format_validation_message(format, parameters)
-      if ActiveLdap.get_text_supported?
-        if /\A(%\{fn\})/ =~ format
-          place_holder = $1
-          format = $POSTMATCH
-        else
-          place_holder = ""
-        end
-        "#{place_holder}#{format % parameters}"
-      else
-        format.sub(/\A%\{fn\} ?/, '') % parameters
-      end
+      format % parameters
     end
 
     def validate_duplicated_dn_creation
@@ -109,7 +99,7 @@ module ActiveLdap
         return
       end
       if _dn and exist?
-        format = _("%{fn} is duplicated: %s")
+        format = _("is duplicated: %s")
         message = format_validation_message(format, _dn)
         errors.add("distinguishedName", message)
       end
@@ -129,7 +119,7 @@ module ActiveLdap
         return
       end
       if _dn and exist?
-        format = _("%{fn} is duplicated: %s")
+        format = _("is duplicated: %s")
         message = format_validation_message(format, _dn)
         errors.add("distinguishedName", message)
       end
@@ -138,11 +128,11 @@ module ActiveLdap
     def validate_dn
       dn
     rescue DistinguishedNameInvalid
-      format = _("%{fn} is invalid: %s")
+      format = _("is invalid: %s")
       message = format_validation_message(format, $!.message)
       errors.add("distinguishedName", message)
     rescue DistinguishedNameNotSetError
-      format = _("%{fn} isn't set: %s")
+      format = _("isn't set: %s")
       message = format_validation_message(format, $!.message)
       errors.add("distinguishedName", message)
     end
@@ -167,8 +157,8 @@ module ActiveLdap
       names = unexpected_classes.collect do |object_class|
         self.class.human_object_class_name(object_class)
       end
-      format = n_("%{fn} has excluded value: %s",
-                  "%{fn} has excluded values: %s",
+      format = n_("has excluded value: %s",
+                  "has excluded values: %s",
                   names.size)
       message = format_validation_message(format, names.join(", "))
       errors.add("objectClass", message)
@@ -204,9 +194,9 @@ module ActiveLdap
           end
           args = [self.class.human_object_class_name(object_class)]
           if aliases.empty?
-            format = _("%{fn} is required attribute by objectClass '%s'")
+            format = _("is required attribute by objectClass '%s'")
           else
-            format = _("%{fn} is required attribute by objectClass " \
+            format = _("is required attribute by objectClass " \
                        "'%s': aliases: %s")
             args << aliases.join(', ')
           end
@@ -236,9 +226,9 @@ module ActiveLdap
                 self.class.human_syntax_description(attribute.syntax),
                 failed_reason]
       if option
-        format = _("%{fn}(%s) has invalid format: %s: required syntax: %s: %s")
+        format = _("(%s) has invalid format: %s: required syntax: %s: %s")
       else
-        format = _("%{fn} has invalid format: %s: required syntax: %s: %s")
+        format = _("has invalid format: %s: required syntax: %s: %s")
       end
       params.unshift(option) if option
       message = format_validation_message(format, params)
