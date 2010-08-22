@@ -1,1 +1,0 @@
-require 'locale_rails'
