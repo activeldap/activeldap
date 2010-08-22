@@ -1,5 +1,5 @@
-if Object.const_defined?(:GetText)
-  ActiveLdap.const_set("GetText", GetText)
+if Object.const_defined?(:FastGettext)
+  ActiveLdap.const_set("GetText", FastGettext)
 end
 
 unless ActiveLdap.const_defined?(:GetText)

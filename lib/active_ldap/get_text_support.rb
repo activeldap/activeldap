@@ -9,8 +9,10 @@ module ActiveLdap
     class << self
       def included(base)
         base.class_eval do
-          include(GetText)
-          bindtextdomain("active-ldap")
+          include(GetText::Translation)
+          GetText.add_text_domain('active-ldap',:path=>'po', :type=>:po)
+          GetText.default_available_locales = ['en', 'jp']
+          GetText.default_text_domain = "active-ldap"
         end
       end
     end

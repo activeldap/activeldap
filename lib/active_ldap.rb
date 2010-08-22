@@ -927,8 +927,7 @@ end
 require_gem_if_need.call("active_record", "activerecord", "= 2.3.8")
 begin
   require_gem_if_need.call("locale", nil, "= 2.0.5")
-  require_gem_if_need.call("gettext", nil, "= 2.1.0")
-  require_gem_if_need.call("gettext_activerecord", nil, "= 2.1.0")
+  require_gem_if_need.call("fast_gettext", nil, "= 0.5.8")
 rescue LoadError
 end
 require 'active_ldap/get_text'

@@ -70,6 +70,7 @@ project = Hoe.spec('activeldap') do
                      ['locale', '= 2.0.5'],
                      ['gettext', '= 2.1.0'],
                      ['gettext_activerecord', '= 2.1.0'],
+                     ['fast_gettext', '= 0.5.8'],
                     ]
   self.remote_rdoc_dir = "doc"
   self.rsync_args += " --chmod=Dg+ws,Fg+w"

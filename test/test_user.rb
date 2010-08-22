@@ -71,13 +71,13 @@ class TestUser < Test::Unit::TestCase
         if ActiveLdap.get_text_supported?
           format = _("%{fn} is required attribute by objectClass '%s': " \
                      "aliases: %s")
-          format = user.gettext(format)
+          format = user._(format)
           format = format % {:fn => user.class.human_attribute_name("sn")}
           format % [user.class.human_object_class_name(object_class),
                     user.class.human_attribute_name("surname")]
         else
           format = "is required attribute by objectClass '%s': aliases: %s"
-          user.gettext(format) % [object_class, "surname"]
+          user._(format) % [object_class, "surname"]
         end
       end
       assert_equal(errors.sort, user.errors.on(:sn).sort)
