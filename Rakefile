@@ -69,8 +69,8 @@ project = Hoe.spec('activeldap') do
                      ['activerecord', '= 2.3.8'],
                      ['locale', '= 2.0.5'],
                      ['gettext', '= 2.1.0'],
-                     ['gettext_activerecord', '= 2.1.0'],
                      ['fast_gettext', '= 0.5.8'],
+                     ['gettext_i18n_rails', '= 0.2.2'],
                     ]
   self.remote_rdoc_dir = "doc"
   self.rsync_args += " --chmod=Dg+ws,Fg+w"
@@ -107,54 +107,15 @@ ObjectSpace.each_object(Rake::RDocTask) do |task|
   task.rdoc_files = project.spec.require_paths + project.spec.extra_rdoc_files
 end
 
+begin
+  require "gettext_i18n_rails/tasks"
+rescue LoadError
+  puts "gettext_i18n_rails is not installed, you probably should run 'rake gems:install' or 'bundle install'."
+end
+
 desc 'Tag the repository for release.'
 task :tag do
   system "svn copy -m 'New release tag' https://ruby-activeldap.googlecode.com/svn/trunk https://ruby-activeldap.googlecode.com/svn/tags/r#{ActiveLdap::VERSION}"
 end
-
-
-desc "Update *.po/*.pot files and create *.mo from *.po files"
-task :gettext => ["gettext:po:update", "gettext:mo:create"]
-
-namespace :gettext do
-  desc "Setup environment for GetText"
-  task :environment do
-    require "gettext/tools"
-  end
-
-  namespace :po do
-    desc "Update po/pot files (GetText)"
-    task :update => "gettext:environment" do
-      require 'active_ldap/get_text/parser'
-      dummy_file = "@@@dummy-for-active-ldap@@@"
-      parser = Object.new
-      parser.instance_eval do
-        @parser = ActiveLdap::GetText::Parser.new
-        @dummy_file = dummy_file
-      end
-      def parser.target?(file)
-        file == @dummy_file
-      end
-      def parser.parse(file, targets)
-        @parser.extract_all_in_schema(targets)
-      end
-
-      GetText::RGetText.add_parser(parser)
-      files = [dummy_file] + Dir.glob("{lib,rails,benchmark}/**/*.rb")
-      GetText.update_pofiles("active-ldap",
-                             files,
-                             "Ruby/ActiveLdap #{ActiveLdap::VERSION}")
-    end
-  end
-
-  namespace :mo do
-    desc "Create *.mo from *.po (GetText)"
-    task :create => "gettext:environment" do
-      GetText.create_mofiles
-    end
-  end
-end
-
-task(:gem).prerequisites.unshift("gettext:mo:create")
 
 # vim: syntax=ruby

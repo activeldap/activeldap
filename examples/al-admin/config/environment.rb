@@ -28,7 +28,14 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   # config.gem "locale_rails", :version => "2.0.5"
-  config.gem "gettext_rails", :version => "2.1.0"
+  # config.gem "gettext_rails", :version => "2.1.0"
+  config.gem "fast_gettext", :version => '>=0.5.8'
+  #only used for mo/po file generation in development, !do not load(:lib=>false), will needlessly eat ram!
+  config.gem "gettext", :lib => false, :version => '>=2.1.0'
+  #this is needed for language/country translations
+  config.gem "gettext_i18n_rails", :version => '>=0.2.2'
+  #this is needed for language/country translations
+  config.gem "i18n_data", :version => '>=0.2.3'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -37,8 +44,7 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
-  config.load_paths += ["#{RAILS_ROOT}/../../lib",
-                        "#{RAILS_ROOT}/vendor/locale_rails/lib"]
+  config.load_paths += ["#{RAILS_ROOT}/../../lib"]
   config.plugin_paths += %W(#{RAILS_ROOT}/../..)
 
   # Force all environments to use the same logger level
