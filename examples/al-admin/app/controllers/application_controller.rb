@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_gettext_locale
-    FastGettext.text_domain= 'al-admin'
-    FastGettext.available_locales = ['en','ja','nl']
+    FastGettext.text_domain = 'al-admin'
+    FastGettext.available_locales = ['en', 'ja', 'nl']
     super
   end
 end
