@@ -12,7 +12,7 @@ $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
 test_unit_lib_dir = File.join(top_dir, "test-unit", "lib")
-if false or File.exist?(test_unit_lib_dir)
+if File.exist?(test_unit_lib_dir)
   $LOAD_PATH.unshift(test_unit_lib_dir)
 else
   require 'rubygems'
