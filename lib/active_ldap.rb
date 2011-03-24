@@ -910,7 +910,9 @@ else
   dependencies = Dependencies
 end
 
-if dependencies.respond_to?(:load_paths)
+if ActiveSupport::Dependencies.respond_to?(:autoload_paths)
+  dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
+else
   dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
 end
 

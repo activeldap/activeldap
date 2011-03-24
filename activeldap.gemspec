@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "activeldap"
-  s.version = '1.2.2'
+  s.version = '1.2.2.1'
   s.platform = Gem::Platform::RUBY
   s.authors = ["Will Drewry", "Kouhei Sutou", "koutou", "Kenny Ortmann"]
   s.email = ['kenny.ortmann@gmail.com']
