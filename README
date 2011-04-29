@@ -3,7 +3,7 @@
 ruby library for object-oriented LDAP interction
 
 * Copyright (C) 2004-2006 Will Drewry <tt><will@alum.bu.edu></tt>
-* Copyright (C) 2006-2009 Kouhei Sutou <tt><kou@clear-code.com></tt>
+* Copyright (C) 2006-2011 Kouhei Sutou <tt><kou@clear-code.com></tt>
 
 Contributors::
   * Dick Davies <tt><rasputnik AT hellooperator.net></tt>
