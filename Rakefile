@@ -68,7 +68,6 @@ project = Hoe.spec('activeldap') do
                      # ['net-ldap', '= 0.1.1'],
                      ['activerecord', '>= 2.3.8'],
                      ['locale', '= 2.0.5'],
-                     ['gettext', '= 2.1.0'],
                      ['fast_gettext', '= 0.5.8'],
                      ['gettext_i18n_rails', '= 0.2.2'],
                     ]
