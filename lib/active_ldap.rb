@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 # = ActiveLdap
 #
 #   Copyright (C) 2004,2005 Will Drewry mailto:will@alum.bu.edu
