@@ -77,7 +77,8 @@ class TestLoad < Test::Unit::TestCase
       ldif << record
       ActiveLdap::Base.load(ldif.to_s)
       user.reload
-      assert(original_descriptions + [new_description], user.description(true))
+      assert_equal(original_descriptions + [new_description],
+                   user.description(true))
     end
   end
 
