@@ -904,17 +904,8 @@ end
 
 require_gem_if_need.call("active_support", "activesupport", ">= 2.3.8")
 
-if ActiveSupport.const_defined?(:Dependencies)
-  dependencies = ActiveSupport::Dependencies
-else
-  dependencies = Dependencies
-end
-
-if ActiveSupport::Dependencies.respond_to?(:autoload_paths)
-  dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
-else
-  dependencies.load_paths << File.expand_path(File.dirname(__FILE__))
-end
+# TODO: This should be removed when Rails 3 is supported.
+ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
 
 module ActiveLdap
   VERSION = "1.2.3"
