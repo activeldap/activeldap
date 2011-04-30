@@ -53,9 +53,10 @@ at_exit do
   FileUtils.rm_f("History.txt")
 end
 
-ENV["VERSION"] = ActiveLdap::VERSION
+ENV["VERSION"] ||= ActiveLdap::VERSION
+version = ENV["VERSION"]
 project = Hoe.spec('activeldap') do
-  self.version = ActiveLdap::VERSION
+  self.version = version
   self.rubyforge_name = 'ruby-activeldap'
   self.author = ['Will Drewry', 'Kouhei Sutou']
   self.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
@@ -114,7 +115,7 @@ end
 
 desc 'Tag the repository for release.'
 task :tag do
-  system "svn copy -m 'New release tag' https://ruby-activeldap.googlecode.com/svn/trunk https://ruby-activeldap.googlecode.com/svn/tags/r#{ActiveLdap::VERSION}"
+  sh("git", "tag", "-a", version, "release #{version}!!!")
 end
 
 # vim: syntax=ruby
