@@ -1,5 +1,29 @@
 = CHANGES
 
+== 1.2.3: 2011-04-30
+
+* [#40] Ignored nil value attribute.
+  [christian.pennafort]
+* [#48] Escaped ":" in filter value.
+  [planetmcd]
+* Added missing rubygems require.
+  [spoidar]
+* Used fast_gettext instead of gettext.
+  [Peter Fern]
+* Supported Rails >= 2.3.8.
+  [Kris Wehner]
+* Fixed wrong assertion in test.
+  [Ryan Tandy]
+
+=== Thanks
+
+* christian.pennafort
+* planetmcd
+* spoidar
+* Peter Fern
+* Kris Wehner
+* Ryan Tandy
+
 == 1.2.2: 2010-07-04
 
 * Supported ActiveRecord 2.3.8 and Rails 2.3.8.
