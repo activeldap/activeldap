@@ -114,9 +114,20 @@ rescue LoadError
   puts "gettext_i18n_rails is not installed, you probably should run 'rake gems:install' or 'bundle install'."
 end
 
-desc 'Tag the repository for release.'
+desc "Publish HTML to Web site."
+task :publish_html do
+  config = YAML.load(File.read(File.expand_path("~/.rubyforge/user-config.yml")))
+  host = "#{config["username"]}@rubyforge.org"
+
+  rsync_args = "-av --exclude '*.erb' --exclude '*.svg' --exclude .svn"
+  remote_dir = "/var/www/gforge-projects/#{project.rubyforge_name}/"
+  sh "rsync #{rsync_args} html/ #{host}:#{remote_dir}"
+end
+
+desc "Tag the current revision."
 task :tag do
-  sh("git", "tag", "-a", version, "release #{version}!!!")
+  message = "Released ActiveLdap #{version}!"
+  sh 'git', 'tag', '-a', version, '-m', message
 end
 
 # vim: syntax=ruby
