@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="activeldap.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.png" />
+    <title>ActiveLdap - Ruby用オブジェクト指向LDAPインターフェイス</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">
+        <a href="index.html.ja">
+	  <span class="title">Ruby用オブジェクト指向LDAPインターフェイス</span>
+	  <span class="title-separator">-</span>
+	  <span class="title-project">ActiveLdap</span>
+        </a>
+      </div>
+      <ul class="other-languages">
+        <li id="other-language-english" lang="en" xml:lang="en"><a href="./">English</a></li>
+      </ul>
+      <ul class="menu">
+	<li id="menu-reference"><a href="activeldap/">リファレンスマニュアル</a></li>
+	<li id="menu-install"><a href="#activeldap-install">インストール</a></li>
+	<li id="menu-developer"><a href="#developer">開発者向け情報</a></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="main">
+	<h1>ActiveLdap</h1>
+	<p>
+	  ActiveLdapはオブジェクト指向にあったAPIでLDAPを操作するためのRuby用のライブラリです。LDAPのそれぞれのエントリをRubyの1オブジェクトとして扱います。LDAPのエントリが持つ属性はobjectClassから自動検出します。Rubyのオブジェクトには自動的にアクセスメソッドが追加されるので、通常のRubyの作法でLDAPエントリを操作できます。
+        </p>
+
+	<h2 id="activeldap-latest">ActiveLdap: 最新リリース</h2>
+	<p>
+	  2011-04-30にリリースされた1.2.3が最新リリースです。
+        </p>
+	<p>
+	  このバージョンはRails 2.3.11に対応しています。Rails 3にはまだ対応して居ません。Rails 3対応に協力してくれる人を募集しています！
+        </p>
+	<h2 id="activeldap-install">ActiveLdap: インストール</h2>
+        <p>
+          インストール:
+          <pre class="command">% sudo gem install activeldap</pre>
+        </p>
+        <p>
+          使い方:
+          <pre class="code">gem "activeldap"
+require "activeldap"</pre>
+        </p>
+
+	<h2 id="developer">開発者向け情報</h2>
+        <p>
+	  ActiveLdapはRubyでもっと便利にLDAPを操作できるようにするため、開発に参加してくれる人を募集しています。
+          以下は開発に必要となる情報です。
+        </p>
+
+	<h3 id="repository">リポジトリ</h3>
+	<p>
+	  <a href="https://github.com/activeldap/">GitHub上のgitリポジトリ</a>を利用しています。ソースコードは以下のように取得できます。
+        </p>
+        <dl>
+          <dt><a href="https://github.com/activeldap/activeldap/">activeldap</a></dt>
+          <dd><pre class="command">% git clone https://github.com/activeldap/activeldap.git</pre></dd>
+          <dt><a href="https://github.com/activeldap/al-admin/">al-admin</a></dt>
+          <dd><pre class="command">% git clone https://github.com/activeldap/al-admin.git</pre></dd>
+        </dl>
+      </div>
+
+      <div class="sidebar">
+        <h2>プロジェクトについて</h2>
+	<ul>
+	  <li><a href="http://rubyforge.org/projects/activeldap/">プロジェクトページ</a></li>
+	  <li>
+	    <a href="http://rubyforge.org/mailman/listinfo/activeldap-discuss-ja">メーリングリスト</a>
+	  </li>
+	  <li>
+	    <a href="http://github.com/activeldap/">GitHubページ</a>
+	  </li>
+	  <li>
+	    <a href="http://code.google.com/p/ruby-activeldap/">GoogleCodeページ</a>
+	  </li>
+	</ul>
+      </div>
+    </div>
+
+    <div class="sponsors">
+      <p id="sponsor-rubyforge">
+        <a href="http://rubyforge.org/projects/ruby-activeldap/">
+          <img src="rubyforge.png" width="120" height="24" border="0" alt="ラングバプロジェクトはRubyForge.orgにホスティングしてもらっています。" />
+        </a>
+      </p>
+      <p id="sponsor-github">
+        <a href="https://github.com/activeldap/">
+          <img src="github-logo.png" width="100" height="45" border="0" alt="GitHubの提供するgitリポジトリを利用しています。" />
+        </a>
+      </p>
+      <p id="sponsor-tango">
+	<a href="http://tango.freedesktop.org/">
+          <img width="120" height="53" border="0" alt="Tango Desktop Projectのアイコンを利用しています。" src="tango-logo.png" />
+        </a>
+      </p>
+      <p id="sponsor-famfamfam">
+	<a href="http://www.famfamfam.com/">
+          <img width="120" height="18" border="0" alt="famfamfam.comの国旗を利用しています。" src="famfamfam-logo.png" />
+        </a>
+      </p>
+    </div>
+  </body>
+</html>
