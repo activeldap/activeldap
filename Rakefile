@@ -1,5 +1,6 @@
 # -*- ruby -*-
 
+require 'thread'
 require 'rubygems'
 require 'hoe'
 require 'find'
@@ -67,7 +68,7 @@ project = Hoe.spec('activeldap') do
   self.extra_deps = [
                      # ['ruby-ldap', '= 0.9.9'],
                      # ['net-ldap', '= 0.1.1'],
-                     ['activerecord', '>= 2.3.8'],
+                     ['activerecord', '~> 2.3.11'],
                      ['locale', '= 2.0.5'],
                      ['fast_gettext', '= 0.5.8'],
                      ['gettext_i18n_rails', '= 0.2.2'],
