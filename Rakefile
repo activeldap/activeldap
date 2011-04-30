@@ -17,7 +17,7 @@ manifest = File.join(base_dir, "Manifest.txt")
 manifest_contents = []
 base_dir_included_components = %w(CHANGES COPYING LICENSE Manifest.txt
                                   README Rakefile TODO)
-excluded_components = %w(.svn .test-result .config doc log tmp
+excluded_components = %w(.svn .git .test-result .config doc log tmp
                          pkg html config.yaml database.yml ldap.yml)
 excluded_suffixes = %w(.help .sqlite3)
 white_list_paths =
