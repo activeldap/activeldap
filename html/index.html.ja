@@ -75,7 +75,7 @@ require "activeldap"</pre>
       <div class="sidebar">
         <h2>プロジェクトについて</h2>
 	<ul>
-	  <li><a href="http://rubyforge.org/projects/activeldap/">プロジェクトページ</a></li>
+	  <li><a href="http://rubyforge.org/projects/ruby-activeldap/">プロジェクトページ</a></li>
 	  <li>
 	    <a href="http://rubyforge.org/mailman/listinfo/activeldap-discuss-ja">メーリングリスト</a>
 	  </li>
