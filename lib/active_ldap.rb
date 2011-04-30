@@ -907,7 +907,7 @@ require_gem_if_need.call("active_support", "activesupport", "~> 2.3.11")
 ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
 
 module ActiveLdap
-  VERSION = "1.2.3"
+  VERSION = "3.0.0"
 end
 
 if RUBY_PLATFORM.match('linux')
