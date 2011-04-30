@@ -10,7 +10,7 @@
   [spoidar]
 * Used fast_gettext instead of gettext.
   [Peter Fern]
-* Supported Rails >= 2.3.8.
+* Supported Rails 2.3.11.
   [Kris Wehner]
 * Fixed wrong assertion in test.
   [Ryan Tandy]
