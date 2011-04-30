@@ -23,7 +23,7 @@
         <li id="other-language-english" lang="en" xml:lang="en"><a href="./">English</a></li>
       </ul>
       <ul class="menu">
-	<li id="menu-reference"><a href="activeldap/">リファレンスマニュアル</a></li>
+	<li id="menu-reference"><a href="doc/">リファレンスマニュアル</a></li>
 	<li id="menu-install"><a href="#activeldap-install">インストール</a></li>
 	<li id="menu-developer"><a href="#developer">開発者向け情報</a></li>
       </ul>
