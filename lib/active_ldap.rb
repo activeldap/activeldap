@@ -932,6 +932,8 @@ require 'active_ldap/distinguished_name'
 require 'active_ldap/ldif'
 require 'active_ldap/xml'
 
+require 'active_ldap/persistence'
+
 require 'active_ldap/associations'
 require 'active_ldap/attributes'
 require 'active_ldap/configuration'
@@ -959,6 +961,8 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Operations
   include ActiveLdap::ObjectClass
   include ActiveLdap::HumanReadable
+
+  include ActiveLdap::Persistence
 
   include ActiveLdap::Acts::Tree
 
