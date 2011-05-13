@@ -10,7 +10,9 @@ module ActiveLdap
       def included(base)
         base.class_eval do
           include(GetText::Translation)
-          GetText.add_text_domain('active-ldap',:path=>'po', :type=>:po)
+          po_dir = File.join(File.dirname(__FILE__), "..", "..", "po")
+          po_dir = File.expand_path(po_dir)
+          GetText.add_text_domain('active-ldap', :path => po_dir, :type => :po)
           GetText.default_available_locales = ['en', 'jp']
           GetText.default_text_domain = "active-ldap"
         end
