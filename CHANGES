@@ -1,5 +1,11 @@
 = CHANGES
 
+== 1.2.4: 2011-05-13
+
+* Splited AL-Admin into other repository: https://github.com/activeldap/al-admin
+* [GitHub:#2] Fixed "path po cound not be found" error by fast_gettext.
+  [rbq]
+
 == 1.2.3: 2011-04-30
 
 * [#40] Ignored nil value attribute.
