@@ -1,0 +1,5 @@
+version: 1
+dn: cn=config
+changetype: modify
+add: olcAttributeOptions
+olcAttributeOptions: phonetic lang-
