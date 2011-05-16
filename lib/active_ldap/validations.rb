@@ -37,8 +37,8 @@ module ActiveLdap
         #   alias_method_chain :update_attribute, :validation_skipping
         # end
 
-        validate_on_create :validate_duplicated_dn_creation
-        validate_on_update :validate_duplicated_dn_rename
+        validate :validate_duplicated_dn_creation, :on => :create
+        validate :validate_duplicated_dn_rename, :on => :update
         validate :validate_dn
         validate :validate_excluded_classes
         validate :validate_required_ldap_values
