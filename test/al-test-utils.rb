@@ -240,6 +240,7 @@ module AlTestUtils
                                :prefix => "ou=Users",
                                :scope => :sub,
                                :classes => @user_class_classes
+      @user_class.module_eval "def name; 'User'; end"
     end
 
     def populate_group_class
@@ -247,6 +248,7 @@ module AlTestUtils
       @group_class.ldap_mapping :prefix => "ou=Groups",
                                 :scope => :sub,
                                 :classes => ["posixGroup"]
+      @group_class.instance_eval "def name; 'Group'; end"
     end
 
     def populate_associations
