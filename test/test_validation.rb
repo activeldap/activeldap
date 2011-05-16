@@ -153,7 +153,7 @@ class TestValidation < Test::Unit::TestCase
       user.add_class("strongAuthenticationUser")
       user.user_certificate = nil
       assert(!user.save)
-      assert(user.errors.invalid?(:userCertificate))
+      assert(user.errors[:userCertificate].any?)
       assert_equal(1, user.errors.size)
     end
   end
