@@ -27,13 +27,15 @@ module ActiveLdap
         self.validation_skip_attributes = []
 
         # Workaround for GetText's ugly implementation
-        begin
-          instance_method(:save_without_validation)
-        rescue NameError
-          alias_method_chain :save, :validation
-          alias_method_chain :save!, :validation
-          alias_method_chain :update_attribute, :validation_skipping
-        end
+        # nari: Comment out, Because not found save_with_validation in rails3.
+        #       And, I don't know "GetText's ugly implementation".
+        # begin
+        #   instance_method(:save_without_validation)
+        # rescue NameError
+        #   alias_method_chain :save, :validation
+        #   alias_method_chain :save!, :validation
+        #   alias_method_chain :update_attribute, :validation_skipping
+        # end
 
         validate_on_create :validate_duplicated_dn_creation
         validate_on_update :validate_duplicated_dn_rename
