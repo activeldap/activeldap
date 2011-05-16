@@ -906,6 +906,7 @@ require "active_support/core_ext"
 
 module ActiveLdap
   VERSION = "3.0.0"
+  autoload :Command, "active_ldap/command"
 end
 
 if RUBY_PLATFORM.match('linux')
