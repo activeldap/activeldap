@@ -18,11 +18,11 @@ module ActiveLdap
     # Save and validate this object into LDAP
     # either adding or replacing attributes
     # TODO: Relative DN support
-    def save
+    def save(*)
       create_or_update
     end
 
-    def save!
+    def save!(*)
       unless create_or_update
         raise EntryNotSaved, _("entry %s can't be saved") % dn
       end

@@ -55,8 +55,8 @@ module ActiveLdap
           end
         end
 
-        def save_with_active_ldap_support!
-          save_without_active_ldap_support!
+        def save_with_active_ldap_support!(options={})
+          save_without_active_ldap_support!(options)
         rescue ActiveRecord::RecordInvalid
           raise EntryInvalid, $!.message
         end
