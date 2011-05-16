@@ -214,7 +214,7 @@ class TestValidation < Test::Unit::TestCase
 
       @group_class.validates_presence_of(:description)
       assert(!group.valid?)
-      assert(group.errors.invalid?(:description))
+      assert(group.errors[:description].any?)
       assert_equal(1, group.errors.size)
     end
   end
@@ -245,7 +245,7 @@ class TestValidation < Test::Unit::TestCase
 
       user.see_also = value
       assert(!user.save)
-      assert(user.errors.invalid?(:seeAlso))
+      assert(user.errors[:seeAlso].any?)
       assert_equal(1, user.errors.size)
 
       reason_params = [invalid_value, _("attribute value is missing")]
