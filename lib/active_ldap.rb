@@ -904,9 +904,6 @@ end
 require_gem_if_need.call("active_support", "activesupport", "~> 3.0.7")
 require "active_support/core_ext"
 
-# TODO: This should be removed when Rails 3 is supported.
-ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
-
 module ActiveLdap
   VERSION = "3.0.0"
 end
