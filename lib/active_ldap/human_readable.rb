@@ -6,7 +6,8 @@ module ActiveLdap
     end
 
     module ClassMethods
-      def human_attribute_name(attribute_or_name)
+      def human_attribute_name(attribute_or_name, options={})
+        logger.warn("options was ignored.") unless options.empty?
         msgid = human_attribute_name_msgid(attribute_or_name)
         msgid ||= human_attribute_name_with_gettext(attribute_or_name)
         s_(msgid)
@@ -16,10 +17,10 @@ module ActiveLdap
         if attribute_or_name.is_a?(Schema::Attribute)
           name = attribute_or_name.name
         else
-          attribute = schema.attribute(attribute_or_name)
+          attribute = schema.attribute(attribute_or_name.to_s)
           return nil if attribute.id.nil?
           if attribute.name == attribute_or_name or
-              attribute.aliases.include?(attribute_or_name)
+              attribute.aliases.include?(attribute_or_name.to_s)
             name = attribute_or_name
           else
             return nil
@@ -38,7 +39,7 @@ module ActiveLdap
         if attribute_or_name.is_a?(Schema::Attribute)
           attribute = attribute_or_name
         else
-          attribute = schema.attribute(attribute_or_name)
+          attribute = schema.attribute(attribute_or_name.to_s)
           return nil if attribute.nil?
         end
         description = attribute.description

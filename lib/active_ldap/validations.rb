@@ -16,8 +16,9 @@ module ActiveLdap
           alias_method :human_attribute_name,
                        :human_attribute_name_active_ldap
           unless method_defined?(:human_attribute_name_with_gettext)
-            def human_attribute_name_with_gettext(attribute_key_name)
-              s_("#{self}|#{attribute_key_name.humanize}")
+            def human_attribute_name_with_gettext(attribute_key_name, options={})
+              logger.warn("options was ignored.") unless options.empty?
+              s_("#{self}|#{attribute_key_name.to_s.humanize}")
             end
           end
         end
