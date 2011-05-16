@@ -28,8 +28,9 @@ module ActiveLdap
         self.validation_skip_attributes = []
 
         # Workaround for GetText's ugly implementation
-        # nari: Comment out, Because not found save_with_validation in rails3.
-        #       And, I don't know "GetText's ugly implementation".
+        # FIXME!!: Comment out, Because not found save_with_validation
+        #          in rails3.  And, I don't know "GetText's ugly
+        #          implementation".
         # begin
         #   instance_method(:save_without_validation)
         # rescue NameError
