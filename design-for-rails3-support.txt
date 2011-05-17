@@ -1,0 +1,10 @@
+--- must
+* We target to Rails 3.1.0. (Yes, it's not released yet
+  but it will be released before we support Rails 3.x.)
+* We don't support Rails 3.0.x.
+* We update the documentation and ensure that the procedure
+  for including ActiveLdap in a Rails 3 project is correct.
+
+--- may
+* We remove ActiveRecord dependency.
+* We depend on ActiveModel instead of ActiveRecord.
