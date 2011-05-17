@@ -901,7 +901,7 @@ require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   end
 end
 
-require_gem_if_need.call("active_support", "activesupport", "~> 3.0.7")
+require_gem_if_need.call("active_record", "activerecord", "~> 3.0.7")
 require "active_support/core_ext"
 
 module ActiveLdap
@@ -915,7 +915,6 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-require_gem_if_need.call("active_record", "activerecord", "~> 3.0.7")
 begin
   require_gem_if_need.call("locale", nil, "= 2.0.5")
   require_gem_if_need.call("fast_gettext", nil, "= 0.5.8")
