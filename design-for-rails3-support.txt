@@ -4,6 +4,7 @@
 * We don't support Rails 3.0.x.
 * We update the documentation and ensure that the procedure
   for including ActiveLdap in a Rails 3 project is correct.
+* We provide active_ldap/railtie to initialize ActiveLdap.
 
 --- may
 * We remove ActiveRecord dependency.
