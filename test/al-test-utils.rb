@@ -187,7 +187,6 @@ module AlTestUtils
       populate_user_class
       populate_group_class
       populate_associations
-      populate_get_text_fix
     end
 
     def populate_base
@@ -240,6 +239,9 @@ module AlTestUtils
                                :prefix => "ou=Users",
                                :scope => :sub,
                                :classes => @user_class_classes
+      def @user_class.name
+        "User"
+      end
     end
 
     def populate_group_class
@@ -247,6 +249,9 @@ module AlTestUtils
       @group_class.ldap_mapping :prefix => "ou=Groups",
                                 :scope => :sub,
                                 :classes => ["posixGroup"]
+      def @group_class.name
+        "Group"
+      end
     end
 
     def populate_associations
@@ -262,18 +267,6 @@ module AlTestUtils
       @user_class.set_associated_class(:primary_group, @group_class)
       @group_class.set_associated_class(:members, @user_class)
       @group_class.set_associated_class(:primary_members, @user_class)
-    end
-
-    def populate_get_text_fix
-      return if ActiveLdap.get_text_supported?
-
-      def @user_class.name
-        "User"
-      end
-
-      def @group_class.name
-        "Group"
-      end
     end
   end
 

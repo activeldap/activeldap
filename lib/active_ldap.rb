@@ -901,13 +901,12 @@ require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   end
 end
 
-require_gem_if_need.call("active_support", "activesupport", "~> 2.3.11")
-
-# TODO: This should be removed when Rails 3 is supported.
-ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.dirname(__FILE__))
+require_gem_if_need.call("active_support", "activesupport", "~> 3.0.7")
+require "active_support/core_ext"
 
 module ActiveLdap
   VERSION = "3.0.0"
+  autoload :Command, "active_ldap/command"
 end
 
 if RUBY_PLATFORM.match('linux')
@@ -916,7 +915,7 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-require_gem_if_need.call("active_record", "activerecord", "~> 2.3.11")
+require_gem_if_need.call("active_record", "activerecord", "~> 3.0.7")
 begin
   require_gem_if_need.call("locale", nil, "= 2.0.5")
   require_gem_if_need.call("fast_gettext", nil, "= 0.5.8")

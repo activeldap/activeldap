@@ -16,8 +16,9 @@ module ActiveLdap
           alias_method :human_attribute_name,
                        :human_attribute_name_active_ldap
           unless method_defined?(:human_attribute_name_with_gettext)
-            def human_attribute_name_with_gettext(attribute_key_name)
-              s_("#{self}|#{attribute_key_name.humanize}")
+            def human_attribute_name_with_gettext(attribute_key_name, options={})
+              logger.warn("options was ignored.") unless options.empty?
+              s_("#{self}|#{attribute_key_name.to_s.humanize}")
             end
           end
         end
@@ -27,16 +28,19 @@ module ActiveLdap
         self.validation_skip_attributes = []
 
         # Workaround for GetText's ugly implementation
-        begin
-          instance_method(:save_without_validation)
-        rescue NameError
-          alias_method_chain :save, :validation
-          alias_method_chain :save!, :validation
-          alias_method_chain :update_attribute, :validation_skipping
-        end
+        # FIXME!!: Comment out, Because not found save_with_validation
+        #          in rails3.  And, I don't know "GetText's ugly
+        #          implementation".
+        # begin
+        #   instance_method(:save_without_validation)
+        # rescue NameError
+        #   alias_method_chain :save, :validation
+        #   alias_method_chain :save!, :validation
+        #   alias_method_chain :update_attribute, :validation_skipping
+        # end
 
-        validate_on_create :validate_duplicated_dn_creation
-        validate_on_update :validate_duplicated_dn_rename
+        validate :validate_duplicated_dn_creation, :on => :create
+        validate :validate_duplicated_dn_rename, :on => :update
         validate :validate_dn
         validate :validate_excluded_classes
         validate :validate_required_ldap_values
@@ -53,8 +57,8 @@ module ActiveLdap
           end
         end
 
-        def save_with_active_ldap_support!
-          save_without_active_ldap_support!
+        def save_with_active_ldap_support!(options={})
+          save_without_active_ldap_support!(options)
         rescue ActiveRecord::RecordInvalid
           raise EntryInvalid, $!.message
         end

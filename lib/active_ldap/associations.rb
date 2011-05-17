@@ -198,4 +198,8 @@ module ActiveLdap
       end
     end
   end
+
+  module Association
+    autoload :Children, 'active_ldap/association/children'
+  end
 end

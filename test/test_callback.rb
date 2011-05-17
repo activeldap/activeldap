@@ -14,12 +14,8 @@ class TestCallback < Test::Unit::TestCase
       @group_class.instance_variable_set("@initialized_entries",
                                          initialized_entries)
       @group_class.module_eval do
-        define_method(:after_find) do
-          self.class.instance_variable_get("@found_entries") << self
-        end
-        define_method(:after_initialize) do
-          self.class.instance_variable_get("@initialized_entries") << self
-        end
+        after_find "self.class.instance_variable_get('@found_entries') << self"
+        after_initialize "self.class.instance_variable_get('@initialized_entries') << self"
       end
 
       assert_equal([], found_entries)
