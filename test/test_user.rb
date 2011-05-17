@@ -65,7 +65,7 @@ class TestUser < Test::Unit::TestCase
       assert_equal(see_also, user.see_also)
 
       assert(!user.valid?)
-      assert(user.errors.invalid?(:sn))
+      assert(user.errors[:sn].any?)
       errors = %w(person organizationalPerson
                   inetOrgPerson).collect do |object_class|
         if ActiveLdap.get_text_supported?
@@ -79,7 +79,7 @@ class TestUser < Test::Unit::TestCase
           user._(format) % [object_class, "surname"]
         end
       end
-      assert_equal(errors.sort, user.errors.on(:sn).sort)
+      assert_equal(errors.sort, user.errors[:sn].sort)
       user.sn = ['User']
       assert(user.valid?)
       assert_equal(0, user.errors.size)

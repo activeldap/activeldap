@@ -12,7 +12,7 @@ class TestValidation < Test::Unit::TestCase
         user1.id = user2.id
         assert_false(user1.save)
 
-        format = la_('distinguishedName')
+        format = la_('distinguishedName').humanize
         format  << ' ' << _("is duplicated: %s")
         assert_equal([format % [user2.dn.to_s]],
                      user1.errors.full_messages)
@@ -27,7 +27,7 @@ class TestValidation < Test::Unit::TestCase
       user.jpeg_photo = "XXX"
       assert_not_predicate(user, :save)
 
-      format = la_('jpegPhoto')
+      format = la_('jpegPhoto').humanize
       format << ' '  << _("has invalid format: %s: required syntax: %s: %s")
       arguments = [_("<binary-value>"),
                    lsd_("1.3.6.1.4.1.1466.115.121.1.28"),
@@ -73,7 +73,7 @@ class TestValidation < Test::Unit::TestCase
     reason = _("attribute value is missing")
     invalid_format = _("%s is invalid distinguished name (DN): %s")
     invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-    format = la_('distinguishedName')
+    format = la_('distinguishedName').humanize
     format << ' ' << _("is invalid: %s")
     message = format % invalid_message
     assert_equal([message],
@@ -87,7 +87,7 @@ class TestValidation < Test::Unit::TestCase
       reason = _("attribute value is missing")
       invalid_format = _("%s is invalid distinguished name (DN): %s")
       invalid_message = invalid_format % ["uid==,#{user.class.base}", reason]
-      format = la_('distinguishedName')
+      format = la_('distinguishedName').humanize
       format << ' ' << _("is invalid: %s")
       message = format % invalid_message
       assert_equal([message], user.errors.full_messages)
@@ -99,7 +99,7 @@ class TestValidation < Test::Unit::TestCase
       assert(user.valid?)
       user.uid_number = ""
       assert(!user.valid?)
-      format = la_('uidNumber')
+      format = la_('uidNumber').humanize
       format << ' ' << _("is required attribute by objectClass '%s'")
       blank_message = format % loc_("posixAccount")
       assert_equal([blank_message], user.errors.full_messages)
@@ -111,7 +111,7 @@ class TestValidation < Test::Unit::TestCase
       assert(user.save)
       user.class.excluded_classes = ['person']
       assert(!user.save)
-      format = la_("objectClass")
+      format = la_("objectClass").humanize
       format << ' ' << n_("has excluded value: %s",
                           "has excluded values: %s",
                           1)
@@ -153,7 +153,7 @@ class TestValidation < Test::Unit::TestCase
       user.add_class("strongAuthenticationUser")
       user.user_certificate = nil
       assert(!user.save)
-      assert(user.errors.invalid?(:userCertificate))
+      assert(user.errors[:userCertificate].any?)
       assert_equal(1, user.errors.size)
     end
   end
@@ -183,7 +183,7 @@ class TestValidation < Test::Unit::TestCase
     assert(ou_class.new("YYY").save)
     ou = ou_class.new("YYY")
     assert(!ou.save)
-    format = la_("distinguishedName")
+    format = la_("distinguishedName").humanize
     format << ' ' << _("is duplicated: %s")
     message = format % ou.dn
     assert_equal([message], ou.errors.full_messages)
@@ -214,7 +214,7 @@ class TestValidation < Test::Unit::TestCase
 
       @group_class.validates_presence_of(:description)
       assert(!group.valid?)
-      assert(group.errors.invalid?(:description))
+      assert(group.errors[:description].any?)
       assert_equal(1, group.errors.size)
     end
   end
@@ -225,7 +225,7 @@ class TestValidation < Test::Unit::TestCase
     assert_not_nil(syntax_description)
     params = [formatted_value, syntax_description, reason]
     params.unshift(option) if option
-    localized_name = la_(name)
+    localized_name = la_(name).humanize
     format = localized_name << ' '
     if option
       format << _("(%s) has invalid format: %s: required syntax: %s: %s")
@@ -245,7 +245,7 @@ class TestValidation < Test::Unit::TestCase
 
       user.see_also = value
       assert(!user.save)
-      assert(user.errors.invalid?(:seeAlso))
+      assert(user.errors[:seeAlso].any?)
       assert_equal(1, user.errors.size)
 
       reason_params = [invalid_value, _("attribute value is missing")]
