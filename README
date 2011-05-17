@@ -151,6 +151,8 @@ list, please point out.
 * planetmcd: A bug report.
 * spoidar: Rails 3 support.
 * Kris Wehner: Rails 2.3.8 support.
-* Ryan Tandy: A test bug fix.
+* Ryan Tandy:
+  * A test bug fix.
+  * Rails 3 support.
 * rbq: A bug report.
 * Narihiro Nakamura: Rails 3 support.
