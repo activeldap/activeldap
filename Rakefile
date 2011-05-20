@@ -64,6 +64,7 @@ project = Hoe.spec('activeldap') do
   self.summary = 'ActiveLdap is a object-oriented API to LDAP'
   self.url = 'http://rubyforge.org/projects/ruby-activeldap/'
   self.test_globs = ['test/test_*.rb']
+  self.test_prelude = 'gem "test-unit", "> 2"; $KCODE = "u" if RUBY_VERSION < "1.9"'
   self.changes = self.paragraphs_of('CHANGES', 1..2).join("\n\n")
   self.extra_deps = [
                      # ['ruby-ldap', '= 0.9.9'],
