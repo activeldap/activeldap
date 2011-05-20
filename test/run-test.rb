@@ -8,6 +8,7 @@ require 'yaml'
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 top_dir = File.expand_path(File.join(base_dir, ".."))
+$LOAD_PATH.unshift(File.join(top_dir))
 $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
