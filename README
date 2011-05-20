@@ -43,10 +43,6 @@ http://ruby-activeldap.rubyforge.org/
 
 * Only GSSAPI SASL support exists due to Ruby/LDAP limitations
 
-== INSTALL
-
-  % sudo gem install activeldap
-
 == RAILS
 
 There is a small rails plugin included that allows the use
@@ -65,9 +61,11 @@ would look something like the following:
     bind_dn: cn=admin,dc=localhost
     password: secret
 
-To install, simply add the following codes to you config/environment.rb:
+To install, simply add the following code to your Gemfile:
 
-  config.gem "activeldap", :lib => "active_ldap"
+  gem 'activeldap', '3.0.0', :require => 'active_ldap'
+
+Bundler will install the gem automatically when you run 'bundle install'.
 
 When your application starts up, the plugin will call
 ActiveLdap::Base.setup_connection using the parameters
