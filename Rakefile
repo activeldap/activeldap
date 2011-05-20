@@ -69,7 +69,7 @@ project = Hoe.spec('activeldap') do
   self.extra_deps = [
                      # ['ruby-ldap', '= 0.9.9'],
                      # ['net-ldap', '= 0.1.1'],
-                     ['activerecord', '~> 2.3.11'],
+                     ['activerecord', '~> 3.0.7'],
                      ['locale', '= 2.0.5'],
                      ['fast_gettext', '= 0.5.8'],
                      ['gettext_i18n_rails', '= 0.2.2'],
