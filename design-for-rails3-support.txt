@@ -9,3 +9,5 @@
 --- may
 * We remove ActiveRecord dependency.
 * We depend on ActiveModel instead of ActiveRecord.
+* We support Warden.
+* We support Devise.
