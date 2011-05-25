@@ -5,6 +5,9 @@ require 'rubygems'
 require 'hoe'
 require 'find'
 
+gem 'rdoc'
+require 'rdoc/task'
+
 base_dir = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(base_dir, 'lib'))
 require 'active_ldap'
@@ -104,7 +107,7 @@ rdoc_main = "lib/active_ldap.rb"
 project.spec.rdoc_options.each do |option|
   option.replace(rdoc_main) if option == "README.txt"
 end
-ObjectSpace.each_object(Rake::RDocTask) do |task|
+ObjectSpace.each_object(RDoc::Task) do |task|
   task.main = rdoc_main if task.main == "README.txt"
   task.rdoc_files = project.spec.require_paths + project.spec.extra_rdoc_files
 end
