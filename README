@@ -65,7 +65,17 @@ To install, simply add the following code to your Gemfile:
 
   gem 'activeldap', '3.0.0', :require => 'active_ldap'
 
-Bundler will install the gem automatically when you run 'bundle install'.
+You should also depend on an LDAP adapter such as Net::LDAP or Ruby/LDAP.
+The following example uses Ruby/LDAP:
+
+  gem  'ruby-ldap', :require => 'ldap'
+
+Bundler will install the gems automatically when you run 'bundle install'.
+
+You also need to include the ActiveLdap railtie in config/application.rb, after
+the other railties:
+
+  require "active_ldap/railtie"
 
 When your application starts up, the plugin will call
 ActiveLdap::Base.setup_connection using the parameters
