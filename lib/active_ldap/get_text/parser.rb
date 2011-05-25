@@ -81,8 +81,8 @@ module ActiveLdap
             configuration = ActiveLdap::Base.configurations[configuration]
           end
         end
-        if Object.const_defined?(:RAILS_ENV)
-          rails_configuration = ActiveLdap::Base.configurations[RAILS_ENV]
+        if defined?(Rails)
+          rails_configuration = ActiveLdap::Base.configurations[Rails.env]
           configuration = rails_configuration.merge(configuration)
         end
         configuration = configuration.symbolize_keys

@@ -57,8 +57,8 @@ module ActiveLdap
         if config.nil?
           if defined?(LDAP_ENV)
             config = LDAP_ENV
-          elsif defined?(RAILS_ENV)
-            config = RAILS_ENV
+          elsif defined?(Rails)
+            config = Rails.env
           else
             config = {}
           end
