@@ -1,85 +1,50 @@
 # -*- ruby -*-
 
 require 'thread'
-require 'rubygems'
-require 'hoe'
 require 'find'
 
-gem 'rdoc'
-require 'rdoc/task'
+require 'rubygems'
+require 'bundler/setup'
+
+require 'jeweler'
+require 'rake/testtask'
+
+begin
+  YAML::ENGINE.yamler = "psych"
+rescue LoadError
+end
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(base_dir, 'lib'))
 require 'active_ldap'
 
-truncate_base_dir = Proc.new do |x|
-  x.gsub(/\A#{Regexp.escape(base_dir + File::SEPARATOR)}/, '')
-end
-
-manifest = File.join(base_dir, "Manifest.txt")
-manifest_contents = []
-base_dir_included_components = %w(CHANGES COPYING LICENSE Manifest.txt
-                                  README Rakefile TODO)
-excluded_components = %w(.svn .git .test-result .config doc log tmp
-                         pkg html config.yaml database.yml ldap.yml)
-excluded_suffixes = %w(.help .sqlite3)
-white_list_paths =
-  [
-   "rails/plugin/active_ldap/generators/scaffold_al/templates/ldap.yml",
-   "rails_generators/scaffold_active_ldap/templates/ldap.yml",
-  ]
-Find.find(base_dir + File::SEPARATOR) do |target|
-  target = truncate_base_dir[target]
-  components = target.split(File::SEPARATOR)
-  next if components.empty?
-  if components.size == 1 and !File.directory?(target)
-    next unless base_dir_included_components.include?(components[0])
-  end
-  unless white_list_paths.include?(target)
-    Find.prune if (excluded_components - components) != excluded_components
-    next if excluded_suffixes.include?(File.extname(target))
-  end
-  manifest_contents << target if File.file?(target)
-end
-
-File.open(manifest, "w") do |f|
-  f.puts manifest_contents.sort.join("\n")
-end
-at_exit do
-  FileUtils.rm_f(manifest)
-end
-
-# For Hoe's no user friendly default behavior. :<
-File.open("README.txt", "w") {|file| file << "= Dummy README\n== XXX\n"}
-FileUtils.cp("CHANGES", "History.txt")
-at_exit do
-  FileUtils.rm_f("README.txt")
-  FileUtils.rm_f("History.txt")
-end
-
 ENV["VERSION"] ||= ActiveLdap::VERSION
 version = ENV["VERSION"]
-project = Hoe.spec('activeldap') do
-  self.version = version
-  self.rubyforge_name = 'ruby-activeldap'
-  self.author = ['Will Drewry', 'Kouhei Sutou']
-  self.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
-  self.summary = 'ActiveLdap is a object-oriented API to LDAP'
-  self.url = 'http://rubyforge.org/projects/ruby-activeldap/'
-  self.test_globs = ['test/test_*.rb']
-  self.test_prelude = 'gem "test-unit", "> 2"; $KCODE = "u" if RUBY_VERSION < "1.9"'
-  self.changes = self.paragraphs_of('CHANGES', 1..2).join("\n\n")
-  self.extra_deps = [
-                     # ['ruby-ldap', '= 0.9.9'],
-                     # ['net-ldap', '= 0.1.1'],
-                     ['activerecord', '~> 3.0.7'],
-                     ['locale', '= 2.0.5'],
-                     ['fast_gettext', '= 0.5.8'],
-                     ['gettext_i18n_rails', '= 0.2.2'],
-                    ]
-  self.remote_rdoc_dir = "doc"
-  self.rsync_args += " --chmod=Dg+ws,Fg+w"
-  self.description = String.new(<<-EOF)
+spec = nil
+Jeweler::Tasks.new do |_spec|
+  spec = _spec
+  spec.name = 'activeldap'
+  spec.version = version.dup
+  spec.rubyforge_project = 'ruby-activeldap'
+  spec.authors = ['Will Drewry', 'Kouhei Sutou']
+  spec.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
+  spec.summary = 'ActiveLdap is a object-oriented API to LDAP'
+  spec.homepage = 'http://ruby-activeldap.rubyforge.org/'
+  spec.files = FileList["{lib,rails,rails_generators}/**/*.rb",
+                        "{benchmark,examples,po}/**",
+                        "bin/*",
+                        "CHANGES",
+                        "COPYING",
+                        "Gemfile",
+                        "LICENSE",
+                        "README",
+                        "TODO",
+                        "*.txt"]
+  spec.test_files = FileList['test/test_*.rb']
+  Bundler.environment.dependencies.each do |dependency|
+    spec.add_runtime_dependency(dependency.name, dependency.requirement)
+  end
+  spec.description = <<-EOF
     'ActiveLdap' is a ruby extension library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
     by ActiveRecord. This is not nearly as clean or as flexible as
@@ -88,28 +53,10 @@ project = Hoe.spec('activeldap') do
   EOF
 end
 
-project.spec.extra_rdoc_files = ["README", "CHANGES", "COPYING", "LICENSE"]
-
-publish_docs_actions = task(:publish_docs).instance_variable_get("@actions")
-original_project_name = nil
-before_publish_docs = Proc.new do
-  original_project_name = project.name
-  project.name = "doc"
-end
-after_publish_docs = Proc.new do
-  project.name = original_project_name
-end
-publish_docs_actions.unshift(before_publish_docs)
-publish_docs_actions.push(after_publish_docs)
-
-
-rdoc_main = "lib/active_ldap.rb"
-project.spec.rdoc_options.each do |option|
-  option.replace(rdoc_main) if option == "README.txt"
-end
-ObjectSpace.each_object(RDoc::Task) do |task|
-  task.main = rdoc_main if task.main == "README.txt"
-  task.rdoc_files = project.spec.require_paths + project.spec.extra_rdoc_files
+Rake::TestTask.new(:test) do |test|
+  test.libs << "lib"
+  test.libs << "test"
+  test.pattern = "test/**/test_*.rb"
 end
 
 begin
@@ -118,14 +65,20 @@ rescue LoadError
   puts "gettext_i18n_rails is not installed, you probably should run 'rake gems:install' or 'bundle install'."
 end
 
-desc "Publish HTML to Web site."
-task :publish_html do
+def rsync_to_rubyforge(spec, source, destination, options={})
   config = YAML.load(File.read(File.expand_path("~/.rubyforge/user-config.yml")))
   host = "#{config["username"]}@rubyforge.org"
 
-  rsync_args = "-av --exclude '*.erb' --exclude '*.svg' --exclude .svn"
-  remote_dir = "/var/www/gforge-projects/#{project.rubyforge_name}/"
-  sh "rsync #{rsync_args} html/ #{host}:#{remote_dir}"
+  rsync_args = "-av --exclude '*.erb' --dry-run"
+  rsync_args << " --delete" if options[:delete]
+  remote_dir = "/var/www/gforge-projects/#{spec.rubyforge_name}/"
+  sh("rsync #{rsync_args} #{source} #{host}:#{remote_dir}#{destination}")
+end
+
+desc "Publish HTML to Web site."
+task :publish_html do
+  rsync_to_rubyforge(spec, "doc/", "/#{spec.name}",
+                     :delete => true)
 end
 
 desc "Tag the current revision."

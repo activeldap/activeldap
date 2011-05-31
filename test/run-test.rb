@@ -6,21 +6,17 @@ $KCODE = 'u' if RUBY_VERSION < "1.9"
 
 require 'yaml'
 
+require 'bundler/setup'
+
 base_dir = File.expand_path(File.dirname(__FILE__))
 top_dir = File.expand_path(File.join(base_dir, ".."))
 $LOAD_PATH.unshift(File.join(top_dir))
 $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
-test_unit_lib_dir = File.join(top_dir, "test-unit", "lib")
-if File.exist?(test_unit_lib_dir)
-  $LOAD_PATH.unshift(test_unit_lib_dir)
-else
-  require 'rubygems'
-  gem "test-unit", "> 2"
-end
+
 require "test/unit"
-ARGV.unshift("--priority-mode")
+Test::Unit::Priority.enable
 
 test_file = "test/test_*.rb"
 Dir.glob(test_file) do |file|
