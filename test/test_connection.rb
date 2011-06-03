@@ -71,10 +71,10 @@ class TestConnection < Test::Unit::TestCase
 
   priority :low
   def test_retry_limit_0_with_nonexistent_host
+    omit("this test will take a long time...")
     config = current_configuration.merge("host" => "192.168.29.29",
                                          "retry_limit" => 0)
     ActiveLdap::Base.setup_connection(config)
-    notify("maybe take a long time")
     assert_raise(ActiveLdap::ConnectionError) do
       ActiveLdap::Base.find(:first)
     end
