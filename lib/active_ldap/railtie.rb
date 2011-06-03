@@ -29,13 +29,12 @@ module ActiveLdap
       end
     end
 
-    #initializer "active_ldap.benchmarking" do
-    #  require 'active_ldap/action_controller/ldap_benchmarking'
-    #  module ::ActionController
-    #    class Base
-    #      include ActiveLdap::ActionController::LdapBenchmarking
-    #    end
-    #  end
-    #end
+    # Expose Ldap runtime to controller for logging.
+    initializer "active_ldap.log_runtime" do |app|
+      require "active_ldap/railties/controller_runtime"
+      ActiveSupport.on_load(:action_controller) do
+        include ActiveLdap::Railties::ControllerRuntime
+      end
+    end
   end
 end

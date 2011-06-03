@@ -1,5 +1,5 @@
 require_library_or_gem 'active_ldap'
-ActiveLdap::Base.logger ||= RAILS_DEFAULT_LOGGER
+ActiveLdap::Base.logger ||= Rails.logger 
 
 required_version = ["1", "1", "0"]
 if (ActiveLdap::VERSION.split(".") <=> required_version) < 0
@@ -9,7 +9,7 @@ if (ActiveLdap::VERSION.split(".") <=> required_version) < 0
   end
 end
 
-ldap_configuration_file = File.join(RAILS_ROOT, 'config', 'ldap.yml')
+ldap_configuration_file = File.join(Rails.root, 'config', 'ldap.yml')
 if File.exist?(ldap_configuration_file)
   configurations = YAML.load(ERB.new(IO.read(ldap_configuration_file)).result)
   ActiveLdap::Base.configurations = configurations
@@ -25,9 +25,9 @@ class ::ActionView::Base
   include ActiveLdap::Helper
 end
 
-require 'active_ldap/action_controller/ldap_benchmarking'
-module ::ActionController
-  class Base
-    include ActiveLdap::ActionController::LdapBenchmarking
-  end
+# Expose Ldap runtime to controller for logging.
+require "active_ldap/railties/controller_runtime"
+ActiveSupport.on_load(:action_controller) do
+  include ActiveLdap::Railties::ControllerRuntime
 end
+

@@ -33,6 +33,7 @@ module ActiveLdap
         VALID_ADAPTER_CONFIGURATION_KEYS.each do |name|
           instance_variable_set("@#{name}", configuration[name])
         end
+        @instrumenter = ActiveSupport::Notifications.instrumenter
       end
 
       def reset_runtime
@@ -658,9 +659,10 @@ module ActiveLdap
       def log(name, info=nil)
         if block_given?
           result = nil
-          seconds = Benchmark.realtime {result = yield}
-          @runtime += seconds
-          log_info(name, seconds, info)
+          @instrumenter.instrument(
+            "log_info.active_ldap",
+            :info => info,
+            :name => name) { result = yield }
           result
         else
           log_info(name, 0, info)

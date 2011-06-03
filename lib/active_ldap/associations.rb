@@ -13,8 +13,8 @@ module ActiveLdap
     def self.append_features(base)
       super
       base.extend(ClassMethods)
-      base.class_inheritable_array(:associations)
-      base.associations = []
+      base.class_attribute(:associations)
+      base.associations ||= []
     end
 
     module ClassMethods
