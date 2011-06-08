@@ -47,7 +47,7 @@ class TestConnection < Test::Unit::TestCase
         raise
       end
     end
-    assert_equal("Unknown key(s): bind_format", exception.message)
+    assert_equal("Unknown key: bind_format", exception.message)
   end
 
   def test_can_reconnect?

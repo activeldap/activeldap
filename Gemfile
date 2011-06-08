@@ -2,7 +2,7 @@
 
 source "http://rubygems.org"
 
-gem 'activemodel', '~> 3.0.7'
+gem 'activemodel', '~> 3.1.0.rc2'
 gem 'locale'
 gem 'fast_gettext'
 gem 'gettext_i18n_rails'
