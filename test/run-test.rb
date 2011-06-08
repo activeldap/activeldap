@@ -19,6 +19,9 @@ require "test/unit"
 Test::Unit::Priority.enable
 
 test_file = "test/test_*.rb"
+if ARGV[0]
+  test_file = File.join('test', ARGV[0])
+end
 Dir.glob(test_file) do |file|
   require file
 end

@@ -223,6 +223,12 @@ module ActiveLdap
   end
 
   class EntryInvalid < Error
+    attr_reader :entry
+    def initialize(entry)
+      @entry = entry
+      errors = @entry.errors.full_messages.join(", ")
+      super(errors)
+    end
   end
 
   class OperationNotPermitted < Error
@@ -528,14 +534,6 @@ module ActiveLdap
       rescue
         [self]
       end
-      if ActiveRecord::Base.respond_to?(:self_and_descendents_from_active_record)
-        # ActiveRecord 2.2.2 has a typo. :<
-        alias_method(:self_and_descendents_from_active_record,
-                     :self_and_descendants_from_active_ldap)
-      else
-        alias_method(:self_and_descendants_from_active_record,
-                     :self_and_descendants_from_active_ldap)
-      end
 
       def human_name(options={})
         defaults = self_and_descendants_from_active_ldap.collect do |klass|
@@ -552,7 +550,7 @@ module ActiveLdap
 
       private
       def inspect_attributes(attributes)
-	inspected_attribute_names = {}
+        inspected_attribute_names = {}
         attributes.collect do |attribute|
           if inspected_attribute_names.has_key?(attribute.name)
             nil

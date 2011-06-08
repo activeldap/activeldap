@@ -1,73 +1,29 @@
 module ActiveLdap
   module Validations
-    def self.append_features(base)
-      super
-
-      base.class_eval do
-        alias_method :new_record?, :new_entry?
-        class << self
-          alias_method :human_attribute_name_active_ldap,
-                       :human_attribute_name
-        end
-        include ActiveRecord::Validations
-        class << self
-          alias_method :human_attribute_name_active_record,
-                       :human_attribute_name
-          alias_method :human_attribute_name,
-                       :human_attribute_name_active_ldap
-          unless method_defined?(:human_attribute_name_with_gettext)
-            def human_attribute_name_with_gettext(attribute_key_name, options={})
-              logger.warn("options was ignored.") unless options.empty?
-              s_("#{self}|#{attribute_key_name.to_s.humanize}")
-            end
+    extend ActiveSupport::Concern
+    include ActiveModel::Validations
+    
+    included do
+      alias_method :new_record?, :new_entry?
+      class << self
+        unless method_defined?(:human_attribute_name_with_gettext)
+          def human_attribute_name_with_gettext(attribute_key_name, options={})
+            logger.warn("options was ignored.") unless options.empty?
+            s_("#{self}|#{attribute_key_name.to_s.humanize}")
           end
-        end
-
-        class_local_attr_accessor true, :validation_skip_attributes
-        remove_method :validation_skip_attributes
-        self.validation_skip_attributes = []
-
-        validate :validate_duplicated_dn_creation, :on => :create
-        validate :validate_duplicated_dn_rename, :on => :update
-        validate :validate_dn
-        validate :validate_excluded_classes
-        validate :validate_required_ldap_values
-        validate :validate_ldap_values
-
-        class << self
-          if method_defined?(:evaluate_condition)
-            def evaluate_condition_with_active_ldap_support(condition, entry)
-              evaluate_condition_without_active_ldap_support(condition, entry)
-            rescue ActiveRecord::ActiveRecordError
-              raise Error, $!.message
-            end
-            alias_method_chain :evaluate_condition, :active_ldap_support
-          end
-        end
-
-        def save_with_active_ldap_support!(options={})
-          save_without_active_ldap_support!(options)
-        rescue ActiveRecord::RecordInvalid
-          raise EntryInvalid, $!.message
-        end
-        alias_method_chain :save!, :active_ldap_support
-
-        private
-        def run_validations_with_active_ldap_support(validation_method)
-          run_validations_without_active_ldap_support(validation_method)
-        rescue ActiveRecord::ActiveRecordError
-          raise Error, $!.message
-        end
-        if private_method_defined?(:run_validations)
-          alias_method_chain :run_validations, :active_ldap_support
-        else
-          alias_method(:run_callbacks_with_active_ldap_support,
-                       :run_validations_with_active_ldap_support)
-          alias_method_chain :run_callbacks, :active_ldap_support
-          alias_method(:run_validations_without_active_ldap_support,
-                       :run_callbacks_without_active_ldap_support)
         end
       end
+
+      class_local_attr_accessor true, :validation_skip_attributes
+      remove_method :validation_skip_attributes
+      self.validation_skip_attributes = []
+
+      validate :validate_duplicated_dn_creation, :on => :create
+      validate :validate_duplicated_dn_rename, :on => :update
+      validate :validate_dn
+      validate :validate_excluded_classes
+      validate :validate_required_ldap_values
+      validate :validate_ldap_values
     end
 
     def validation_skip_attributes
@@ -76,6 +32,20 @@ module ActiveLdap
 
     def validation_skip_attributes=(attributes)
       @validation_skip_attributes = attributes
+    end
+
+    def valid?(context = nil)
+      context ||= (new_entry? ? :create : :update)
+      output = super(context)
+      errors.empty? && output
+    end
+
+    def save(*)
+      valid? ? super: false
+    end
+
+    def save!(*)
+      valid? ? super: raise(EntryInvalid.new(self))
     end
 
     private

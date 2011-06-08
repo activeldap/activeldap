@@ -901,7 +901,7 @@ require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
   end
 end
 
-require_gem_if_need.call("active_record", "activerecord", "~> 3.0.7")
+require_gem_if_need.call("active_model", "activemodel", "~> 3.0.7")
 require "active_support/core_ext"
 
 module ActiveLdap
@@ -958,7 +958,6 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Connection
   include ActiveLdap::Operations
   include ActiveLdap::ObjectClass
-  include ActiveLdap::HumanReadable
 
   include ActiveLdap::Persistence
 
@@ -966,6 +965,7 @@ ActiveLdap::Base.class_eval do
 
   include ActiveLdap::Validations
   include ActiveLdap::Callbacks
+  include ActiveLdap::HumanReadable
 end
 
 unless defined?(ACTIVE_LDAP_CONNECTION_ADAPTERS)

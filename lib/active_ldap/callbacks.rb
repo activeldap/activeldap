@@ -1,19 +1,34 @@
-require 'active_record/callbacks'
+require 'active_support/core_ext/array/wrap'
 
 module ActiveLdap
   module Callbacks
-    def self.append_features(base)
-      super
+    extend ActiveSupport::Concern
 
-      base.class_eval do
-        include ActiveRecord::Callbacks
+    CALLBACKS = [
+      :after_initialize, :after_find, :after_touch, :before_validation, :after_validation,
+      :before_save, :around_save, :after_save, :before_create, :around_create,
+      :after_create, :before_update, :around_update, :after_update,
+      :before_destroy, :around_destroy, :after_destroy, :after_commit, :after_rollback
+    ]
 
-        unless respond_to?(:instantiate_with_callbacks)
-          extend ClassMethods
-          class << self
-            alias_method_chain :instantiate, :callbacks
-          end
-          alias_method_chain :initialize, :callbacks
+    included do
+      extend ActiveModel::Callbacks
+      include ActiveModel::Validations::Callbacks
+      
+      define_model_callbacks :initialize, :find, :touch, :only => :after
+      define_model_callbacks :save, :create, :update, :destroy
+      
+      class << self
+        alias_method_chain :instantiate, :callbacks
+      end
+    end
+
+    module ClassMethods
+      def method_added(meth)
+        super
+        if CALLBACKS.include?(meth.to_sym)
+          ActiveSupport::Deprecation.warn("Base##{meth} has been deprecated, please use Base.#{meth} :method instead", caller[0,1])
+          send(meth.to_sym, meth.to_sym)
         end
       end
     end
@@ -27,11 +42,30 @@ module ActiveLdap
       end
     end
 
-    def initialize_with_callbacks(attributes = nil) #:nodoc:
-      initialize_without_callbacks(attributes)
-      result = yield self if block_given?
-      _run_initialize_callbacks
-      result
+    def initialize(*) #:nodoc:
+      run_callbacks(:initialize) { super }
+    end
+
+    def destroy #:nodoc:
+      run_callbacks(:destroy) { super }
+    end
+
+    def touch(*) #:nodoc:
+      run_callbacks(:touch) { super }
+    end
+
+  private
+
+    def create_or_update #:nodoc:
+      run_callbacks(:save) { super }
+    end
+
+    def create #:nodoc:
+      run_callbacks(:create) { super }
+    end
+
+    def update(*) #:nodoc:
+      run_callbacks(:update) { super }
     end
   end
 end
