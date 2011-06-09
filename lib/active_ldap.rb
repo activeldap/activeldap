@@ -976,7 +976,3 @@ ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
   require "active_ldap/adapter/#{adapter}"
 end
 
-if defined?(Rails)
-  require 'active_ldap/railtie'
-end
-
