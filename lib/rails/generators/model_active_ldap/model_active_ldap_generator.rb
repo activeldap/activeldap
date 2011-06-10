@@ -17,14 +17,8 @@ class ModelActiveLdapGenerator < Rails::Generators::NamedBase
     template 'model_active_ldap.rb', File.join('app/models', class_path, "#{file_name}.rb")
   end
   
-  def create_test
-    template 'unit_test.rb', "test/unit/#{file_name}_test.rb"
-  end
-  
-  def create_fixtures
-#    template 'fixture.yml', "test/fixtures/#{class_name}.yml"
-  end
-  
+  hook_for :test_framework, :as => :model
+
   private
   
   def prefix
