@@ -1127,6 +1127,15 @@ EOX
     end
   end
 
+
+  def test_to_key
+    cn = "XXX"
+    new_user = @user_class.new
+    assert_equal(nil, new_user.to_key)
+    
+    new_user.cn = cn
+    assert_equal([ new_user.dn ], new_user.to_key)
+  end
   private
   def detect_modify(object)
     modify_called = false

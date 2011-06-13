@@ -776,6 +776,13 @@ module ActiveLdap
       id
     end
 
+    # Returns this entity’s dn wrapped in an Array or nil if the entity' s dn is not set.
+    def to_key
+      [ dn ]
+    rescue DistinguishedNameNotSetError
+      nil
+    end
+
     def dn=(value)
       set_attribute(dn_attribute_with_fallback, value)
     end
