@@ -1,4 +1,4 @@
-require_library_or_gem 'net/ldap'
+require 'net/ldap'
 
 module Net
   class LDAP
