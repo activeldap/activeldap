@@ -81,6 +81,34 @@ When your application starts up, the plugin will call
 ActiveLdap::Base.setup_connection using the parameters
 specified for your current environment.
 
+== Model
+
+Here is some examples.
+
+app/model/member.rb:
+  class Member < ActiveLdap::Base
+    ldap_mapping :dn_attribute => 'uid',
+                 :classes => ['person', 'posixAccount']
+    belongs_to :primary_group, :class_name => "Group",
+               :foreign_key => "gidNumber", :primary_key => "gidNumber"
+    belongs_to :groups, :many => 'memberUid'
+  end
+
+app/model/group.rb:
+  class Group < ActiveLdap::Base
+    ldap_mapping :dn_attribute => "cn", :classes => ['posixGroup']
+    has_many :members, :wrap => "memberUid"
+    has_many :primary_members,
+             :foreign_key => 'gidNumber',
+             :primary_key => 'gidNumber'
+  end
+
+app/model/ou.rb:
+  class Ou < ActiveLdap::Base
+    ldap_mapping :prefix => "",
+                 :classes => ["top", "organizationalUnit"]
+  end
+
 == LICENCE
 
 This program is free software; you can redistribute it and/or modify it.  It is
