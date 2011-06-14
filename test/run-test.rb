@@ -19,7 +19,7 @@ require "test/unit"
 require "test/unit/notify"
 Test::Unit::Priority.enable
 
-target_adapters = [nil]
+target_adapters = [ENV["ACTIVE_LDAP_TEST_ADAPTER"]]
 # target_adapters << "ldap"
 # target_adapters << "net-ldap"
 # target_adapters << "jndi"
