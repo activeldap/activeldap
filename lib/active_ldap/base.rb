@@ -778,7 +778,7 @@ module ActiveLdap
 
     # Returns this entity’s dn wrapped in an Array or nil if the entity' s dn is not set.
     def to_key
-      [ dn ]
+      [dn]
     rescue DistinguishedNameNotSetError
       nil
     end
