@@ -71,7 +71,7 @@ module AlTestUtils
       config = YAML.load(erb.result)
       _adapter = adapter
       config.each do |key, value|
-        value[:adapter] = _adapter if _adapter
+        value["adapter"] = _adapter if _adapter
       end
       config
     end
