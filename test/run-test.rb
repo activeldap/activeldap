@@ -16,6 +16,7 @@ $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
 
 require "test/unit"
+require "test/unit/notify"
 Test::Unit::Priority.enable
 
 target_adapters = [nil]
