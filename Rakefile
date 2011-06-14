@@ -43,7 +43,7 @@ Jeweler::Tasks.new do |_spec|
                         "TODO",
                         "*.txt"]
   spec.test_files = FileList['test/test_*.rb']
-  Bundler.environment.dependencies.each do |dependency|
+  Bundler.load.dependencies_for(:default).each do |dependency|
     spec.add_runtime_dependency(dependency.name, dependency.requirement)
   end
   spec.description = <<-EOF
