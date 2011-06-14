@@ -23,7 +23,7 @@ module ActiveLdap
       ActiveLdap::Base.logger ||= ::Rails.logger
     end
 
-    initializer "active_ldap.actionview_helper" do
+    initializer "active_ldap.action_view_helper" do
       class ::ActionView::Base
         include ActiveLdap::Helper
       end
