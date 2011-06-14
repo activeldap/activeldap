@@ -9,9 +9,11 @@ require 'bundler/setup'
 require 'jeweler'
 require 'rake/testtask'
 
-begin
-  YAML::ENGINE.yamler = "psych"
-rescue LoadError
+if YAML.const_defined?(:ENGINE)
+  begin
+    YAML::ENGINE.yamler = "psych"
+  rescue LoadError
+  end
 end
 
 base_dir = File.expand_path(File.dirname(__FILE__))
