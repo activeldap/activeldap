@@ -13,7 +13,7 @@ module ActiveLdap
         ActiveLdap::Base.setup_connection
       else
         ActiveLdap::Base.class_eval do
-          format =_("You should run 'script/generator scaffold_active_ldap' to make %s.")
+          format =_("You should run 'rails generator active_ldap:scaffold' to make %s.")
           logger.error(format % ldap_configuration_file)
         end
       end
