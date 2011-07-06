@@ -43,9 +43,6 @@ Jeweler::Tasks.new do |_spec|
                         "TODO",
                         "*.txt"]
   spec.test_files = FileList['test/test_*.rb']
-  Bundler.load.dependencies_for(:default).each do |dependency|
-    spec.add_runtime_dependency(dependency.name, dependency.requirement)
-  end
   spec.description = <<-EOF
     'ActiveLdap' is a ruby extension library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
