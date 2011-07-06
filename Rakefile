@@ -32,7 +32,7 @@ Jeweler::Tasks.new do |_spec|
   spec.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
   spec.summary = 'ActiveLdap is a object-oriented API to LDAP'
   spec.homepage = 'http://ruby-activeldap.rubyforge.org/'
-  spec.files = FileList["{lib,rails,rails_generators}/**/*",
+  spec.files = FileList["lib/**/*",
                         "{benchmark,examples,po}/**",
                         "bin/*",
                         "CHANGES",
