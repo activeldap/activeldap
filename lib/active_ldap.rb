@@ -887,21 +887,8 @@
 # package, and I'd like to see it prove helpful to more people than just myself.
 #
 
-require_gem_if_need = Proc.new do |library_name, gem_name, *gem_args|
-  gem_name ||= library_name
-  begin
-    if !gem_args.empty? and Object.const_defined?(:Gem)
-      gem gem_name, *gem_args
-    end
-    require library_name
-  rescue LoadError
-    require 'rubygems'
-    gem gem_name, *gem_args
-    require library_name
-  end
-end
-
-require_gem_if_need.call("active_model", "activemodel", "~> 3.1.0.rc2")
+require "rubygems"
+require "active_model"
 require "active_support/core_ext"
 
 module ActiveLdap
@@ -916,8 +903,8 @@ else
 end
 
 begin
-  require_gem_if_need.call("locale", nil, "= 2.0.5")
-  require_gem_if_need.call("fast_gettext", nil, "= 0.5.8")
+  require "locale"
+  require "fast_gettext"
 rescue LoadError
 end
 require 'active_ldap/get_text'
