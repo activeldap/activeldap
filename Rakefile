@@ -165,9 +165,8 @@ namespace :reference do
   CLOBBER.include(reference_base_dir.to_s)
 
   po_dir = "doc/po"
+  pot_file = "#{po_dir}/#{spec.name}.pot"
   namespace :pot do
-    pot_file = "#{po_dir}/#{spec.name}.pot"
-
     directory po_dir
     file pot_file => ["po", *html_files] do |t|
       sh("xml2po", "--keep-entities", "--output", t.name, *html_files)
@@ -182,8 +181,17 @@ namespace :reference do
       namespace language do
         po_file = "#{po_dir}/#{language}.po"
 
-        file po_file => html_files do |t|
-          sh("xml2po", "--keep-entities", "--update", t.name, *html_files)
+        if File.exist?(po_file)
+          file po_file => html_files do |t|
+            sh("xml2po", "--keep-entities", "--update", t.name, *html_files)
+          end
+        else
+          file po_file => pot_file do |t|
+            sh("msginit",
+               "--input", pot_file,
+               "--output-file", t.name,
+               "--locale", language.to_s)
+          end
         end
 
         desc "Updates po file for #{language}."
