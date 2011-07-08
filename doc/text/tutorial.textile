@@ -28,10 +28,6 @@ Further reading:
 
 h3. So why use ActiveLdap?
 
-Well if you like to fumble around in the dark, dank innards of LDAP, you can
-quit reading now.  However, if you'd like a cleaner way to integrate LDAP in to
-your existing code, hopefully that's why you'll want to use ActiveLdap.
-
 Using LDAP directly (even with the excellent Ruby/LDAP), leaves you bound to
 the world of the predefined LDAP API.  While this API is important for many
 reasons, having to extract code out of LDAP search blocks and create huge
@@ -40,10 +36,6 @@ less fun to write.  Hopefully, ActiveLdap will remedy all of these
 problems!
 
 h2. Getting Started
-
-ActiveLdap does have some overhead when you get started.  You must not
-only install the package and all of it's requirements, but you must also make
-customizations that will let it work in your environment.
 
 h3. Requirements
 
@@ -99,18 +91,26 @@ irb*   ldap_mapping
 irb* end
 </pre>
 
+In the above code, Group class handles sub tree of ou=Groups
+tha is :base value specified by setup_connection. A instance
+of Group class represents a LDAP object under ou=Gruops.
+
 Here is the Group class in use:
 
 <pre>
+# Get all group names
 irb> all_groups = Group.find(:all, '*').collect {|group| group.cn}
 => ["root", "daemon", "bin", "sys", "adm", "tty", ..., "develop"]
 
+# Get LDAP objects in develop group
 irb> group = Group.find("develop")
 => #<Group objectClass:<...> ...>
 
+# Get cn of the develop group
 irb> group.cn
 => "develop"
 
+# Get gid_number of the develop group
 irb> group.gid_number
 => "1003"
 </pre>
@@ -135,7 +135,7 @@ I will briefly talk about each of the methods you can use when defining an
 extension class.  In the above example, I only made one special method call
 inside the Group class. More than likely, you will want to more than that.
 
-===== ldap_mapping
+h5. ldap_mapping
 
 ldap_mapping is the only required method to setup an extension class for use
 with ActiveLdap. It must be called inside of a subclass as shown above.
@@ -206,7 +206,7 @@ case, it would be 'ou=Groups'.
 :prefix.
 
 
-===== belongs_to
+h5. belongs_to
 
 This method allows an extension class to make use of other extension classes
 tying objects together across the LDAP tree. Often, user objects will be
@@ -267,24 +267,47 @@ irb> me.groups.each { |group| p group.id };nil
 => nil
 </pre>
 
-Now let's talk about the arguments.  The first argument is the name of the
-method you wish to create. In this case, we created a method called groups
-using the symbol :groups. The next collection of arguments are actually a Hash
-(as with ldap_mapping). :class_name should be a string that has the name of a
-class you've already included. If you class is inside of a module, be sure to
-put the whole name, e.g. :class_name => "MyLdapModule::Group". :foreign_key
-tells belongs_to what attribute Group objects have that match the
-:many. :many is the name of the local attribute whose value
-should be looked up in Group under the foreign key. If :foreign_key is left
-off of the argument list, it is assumed to be the dn_attribute. With this in
-mind, the above definition could become:
+Now let's talk about the arguments of belongs_to. We use the following code that extends Group group a bit for explain:
 
 <pre>
-irb> class User < ActiveLdap::Base
-irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top','account']
-irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid'
-irb* end
+class User < ActiveLdap::Base
+  ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
+
+  # Associate with primary belonged group
+  belongs_to :primary_group, :foreign_key => 'gidNumber',
+               :class_name => 'Group', :primary_key => 'gidNumber'
+
+  # Associate with all belonged groups
+  belongs_to :groups,  :foreign_key => 'uid',
+               :class_name => 'Group', :many => 'memberUid',
+end
 </pre>
+
+The first argument is the name of the method you wish to create. In this case, we created a method called primary_group and groups using the symbol :primary_group and :groups. The next collection of arguments are actually a Hash (as with ldap_mapping).
+
+:foreign_key tells belongs_to what attribute Group objects have that match the related object's attribute. If :foreign_key is left off of the argument list, it is assumed to be the dn_attribute.
+
+In the example, uid is used for :foreign_key. It may confuse you.
+
+ActiveLdap uses :foreign_key as "own attribute name". So it
+may not be "foreign key". You can consider :foreign_key just
+as a relation key.
+
+:primary_key is treated as "related object's attribute name"
+as we discussed later.
+
+:class_name should be a string that has the name of a class
+you've already included. If your class is inside of a module,
+be sure to put the whole name, e.g.
+@:class_name => "MyLdapModule::Group"@.
+
+:many and :primary_key are similar. Both of them specifies attribute name of related object specified by :foreign_key. Those values are attribute name that can be used by object of class specified by :class_name.
+
+Relation is resolved by searching entries of :class_name class with :foreign_key attribute value. Search target attribute for it is :primary_key or :many. primary_group method in the above example searches Group objects with User object's gidNumber value as Group object's gidNumber value. Matched Group objects are belonged objects.
+
+:parimary_key is used for an object just belongs to an object. The first matched object is treated as beloned object.
+
+:many is used for an object belongs to many objects. All of matched objects are treated as belonged objects.
 
 In addition, you can do simple membership tests by doing the following:
 
@@ -295,7 +318,7 @@ irb> me.groups.member? 'develop'
 => true
 </pre>
 
-===== has_many
+h5. has_many
 
 This method is the opposite of belongs_to. Instead of checking other objects in
 other parts of the LDAP tree to see if you belong to them, you have multiple
@@ -305,7 +328,14 @@ invert the example from above:
 <pre>
 class Group < ActiveLdap::Base
   ldap_mapping :dn_attribute => 'cn', :prefix => 'ou=Groups', :classes => ['top', 'posixGroup']
-  has_many :members, :class_name => "User", :wrap => "memberUid", :primary_key => 'uid'
+
+  # Associate with primary belonged users
+  has_many :primary_members, :foreign_key => 'gidNumber',
+           :class_name => "User", :primary_key => 'gidNumber'
+
+  # Associate with all belonged users
+  has_many :members,  :wrap => "memberUid",
+           :class_name => "User",  :primary_key => 'uid'
 end
 </pre>
 
@@ -370,6 +400,7 @@ It is also possible to override :attribute and :value by specifying :filter. Thi
 argument allows the direct specification of a LDAP filter to retrieve objects by.
 
 h4. .search
+
 .search is a class method that is accessible from any subclass of Base, and Base.
 It lets the user perform an arbitrary search against the current LDAP connection
 irrespetive of LDAP mapping data.  This is meant to be useful as a utility method
@@ -421,7 +452,7 @@ ActiveLdap::Base is the heart of ActiveLdap.  It does all the schema
 parsing for validation and attribute-to-method mangling as well as manage the
 connection to LDAP.
 
-===== setup_connection
+h5. setup_connection
 
 Base.setup_connection takes many (optional) arguments and is used to
 connect to the LDAP server. Sometimes you will want to connect anonymously
@@ -500,7 +531,7 @@ in an internal class variable which is used to cache the
 information without ditching the defaults passed in from
 configuration.rb
 
-===== connection
+h5. connection
 
 Base.connection returns the ActiveLdap::Connection object.
 
@@ -688,6 +719,7 @@ end
 </pre>
 
 h4. Removing LDAP entries
+
 Now let's create more one for deleting users - ldapadmin/userdel:
 
 <pre>
@@ -907,13 +939,14 @@ The internal structure of ActiveLdap::Base, and thus all its subclasses, is
 still in flux. I've tried to minimize the changes to the overall API, but
 the internals are still rough around the edges.
 
-===== Where's ldap_mapping data stored? How can I get to it?
+h5. Where's ldap_mapping data stored? How can I get to it?
 
 When you call ldap_mapping, it overwrites several class methods inherited
 from Base:
 * Base.base()
 * Base.required_classes()
 * Base.dn_attribute()
+
 You can access these from custom class methods by calling MyClass.base(),
 or whatever. There are predefined instance methods for getting to these
 from any new instance methods you define:
@@ -921,7 +954,7 @@ from any new instance methods you define:
 * Base#required_classes()
 * Base#dn_attribute()
 
-===== What else?
+h5. What else?
 
 Well if you want to use the LDAP connection for anything, I'd suggest still
 calling Base.connection to get it. There really aren't many other internals
