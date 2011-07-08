@@ -8,7 +8,8 @@ require 'bundler/setup'
 
 require 'jeweler'
 require 'rake/testtask'
-require 'yard'
+require "rake/clean"
+require "yard"
 
 if YAML.const_defined?(:ENGINE)
   begin
