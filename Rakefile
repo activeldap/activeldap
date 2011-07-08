@@ -110,27 +110,6 @@ relative_binary_dir = File.join("vendor", "local")
 vendor_dir = File.join(base_dir, relative_vendor_dir)
 binary_dir = File.join(base_dir, relative_binary_dir)
 
-groonga_win32_i386_p = ENV["GROONGA32"] == "yes"
-
-Rake::ExtensionTask.new("groonga", spec) do |ext|
-  if groonga_win32_i386_p
-    ext.cross_platform = ["x86-mingw32", "i386-mswin32"]
-  else
-    ext.cross_platform = ["x64-mingw32"]
-    # ext.cross_platform << "x64-mswin64" # We need to build with VC++ 2010. :<
-  end
-  if windows?
-    ext.gem_spec.files += collect_binary_files(relative_binary_dir)
-  else
-    ext.cross_compile = true
-    ext.cross_compiling do |_spec|
-      if windows?(_spec.platform.to_s)
-        _spec.files += collect_binary_files(relative_binary_dir)
-      end
-    end
-  end
-end
-
 include ERB::Util
 
 def apply_template(content, paths, templates, language)
