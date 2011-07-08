@@ -206,3 +206,4 @@ list, please point out.
 ** Rails 3 support.
 * rbq: A bug report.
 * Narihiro Nakamura: Rails 3 support.
+* Hidetoshi Yoshimoto: Rails 3 support.

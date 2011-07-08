@@ -1,5 +1,12 @@
 h1. NEWS
 
+h2. 3.1.0: 2011-07-08
+
+* Supported Rails 3.1.0.rc4.
+  [Ryan Tandy, Narihiro Nakamura, Hidetoshi Yoshimoto]
+* Removed ActiveRecord dependency and added ActiveModel dependency.
+* Used YARD instead of RDoc as documentation sysytem.
+
 h2. 1.2.4: 2011-05-13
 
 * Splited AL-Admin into other repository: https://github.com/activeldap/al-admin
