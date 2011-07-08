@@ -4,4 +4,5 @@
 /test/config.yaml
 /doc/reference/
 /doc/html/activeldap/
+/doc/po/*.pot
 /pkg/
