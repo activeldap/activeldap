@@ -40,9 +40,8 @@ Jeweler::Tasks.new do |_spec|
                         "COPYING",
                         "Gemfile",
                         "LICENSE",
-                        "README",
-                        "TODO",
-                        "*.txt"]
+                        "README.textile",
+                        "TODO"]
   spec.test_files = FileList['test/test_*.rb']
   spec.description = <<-EOF
     'ActiveLdap' is a ruby extension library which provides a clean
