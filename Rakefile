@@ -11,12 +11,7 @@ require 'rake/testtask'
 require "rake/clean"
 require "yard"
 
-if YAML.const_defined?(:ENGINE)
-  begin
-    YAML::ENGINE.yamler = "psych"
-  rescue LoadError
-  end
-end
+$KCODE = "u" if RUBY_VERSION < "1.9"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(base_dir, 'lib'))
