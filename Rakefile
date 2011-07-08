@@ -76,7 +76,8 @@ YARD::Rake::YardocTask.new do |task|
   task.options += ["--files", "doc/text/**/*"]
   task.options += ["--output-dir", doc_en_dir.to_s]
   task.options += ["--charset", "utf-8"]
-  task.files += FileList["lib/**/*.rb"]
+  template_files = FileList["lib/rails/generators/**/templates/*.rb"]
+  task.files += FileList["lib/**/*.rb"] - template_files
 end
 
 task :yard do
