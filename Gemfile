@@ -14,4 +14,5 @@ group :development, :test do
   gem 'test-unit'
   gem 'test-unit-notify'
   gem "yard"
+  gem "RedCloth"
 end
