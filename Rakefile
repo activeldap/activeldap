@@ -168,7 +168,7 @@ namespace :reference do
   pot_file = "#{po_dir}/#{spec.name}.pot"
   namespace :pot do
     directory po_dir
-    file pot_file => ["po", *html_files] do |t|
+    file pot_file => [po_dir, *html_files] do |t|
       sh("xml2po", "--keep-entities", "--output", t.name, *html_files)
     end
 
