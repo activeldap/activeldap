@@ -198,13 +198,16 @@ h2. 0.10.0
 * Supported Rails 2.0.2.
 * Improved performance. (4x)
 * [API CHANGE]: removed "'binary' =>" from getter result.
+
   <pre>
+  !!!plain
   e.g.:
     before:
         user.user_certificate # => {"binary" => "..."}
        now:
         user.user_certificate # => "..."
   </pre>
+
 * Added :excluded_classed ldap_mapping option.
 * Logged operation time used for LDAP operation.
 * Improved API:
@@ -527,6 +530,7 @@ h2. 0.4.2
 ** 100 usermod-binary-add calls
 
    <pre>
+   !!!plain
    Without attr parsing cache:
      real    13m53.129s
      user    13m11.350s
@@ -546,10 +550,13 @@ h2. 0.4.0
 
 * Added #<attribute>(arrays) argument which when true
   always returns arrays. e.g.
+
   <pre>
+  !!!plain
   irb> user.cn(true)
   => ['My Common Name']
   </pre>
+
   This makes things easier for larger programming tasks.
 * Added subtype support:
 ** Uses Hash objects to specify the subtype

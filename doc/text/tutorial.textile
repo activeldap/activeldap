@@ -798,6 +798,7 @@ you should put your extension classes inside a custom module.
 Example:
 
 ./myldap.rb:
+
 <pre>
 require 'active_ldap'
 require 'myldap/user'
@@ -807,6 +808,7 @@ end
 </pre>
 
 ./myldap/user.rb:
+
 <pre>
 module MyLDAP
   class User < ActiveLdap::Base
@@ -817,6 +819,7 @@ end
 </pre>
 
 ./myldap/group.rb:
+
 <pre>
 module MyLDAP
   class Group < ActiveLdap::Base
