@@ -1,15 +1,29 @@
---- must
+h1. Development
+
+h2. Repository
+
+We are using
+"GitHub":https://github.com/activeldap/activeldap as the
+official repository.
+
+h2. Rails 3 support
+
+Here is design about Rails 3 support.
+
+h3. must
+
 * We target to Rails 3.1.0. (Yes, it's not released yet
   but it will be released before we support Rails 3.x.)
 * We update the documentation and ensure that the procedure
   for including ActiveLdap in a Rails 3 project is correct.
 
---- may
+h3. may
+
 * We support Warden.
 * We support Devise
 * We support OmniAuth. (instead of Warden)
 
---- DONE
+h3. DONE
 * We don't support Rails 3.0.x.
 * We provide active_ldap/railtie to initialize ActiveLdap.
 * We remove ActiveRecord dependency.
