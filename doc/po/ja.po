@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
-"POT-Creation-Date: 2011-07-08 14:27+0900\n"
-"PO-Revision-Date: 2011-07-08 14:42+0900\n"
+"POT-Creation-Date: 2011-07-08 14:43+0900\n"
+"PO-Revision-Date: 2011-07-08 14:43+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -1510,8 +1510,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:785(span)
 #: doc/reference/en/file.tutorial.html:789(span)
 #: doc/reference/en/file.tutorial.html:791(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:834(span)
+#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:836(span)
 #: doc/reference/en/file.development.html:40(span)
 msgid "("
 msgstr ""
@@ -2977,8 +2977,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:785(span)
 #: doc/reference/en/file.tutorial.html:789(span)
 #: doc/reference/en/file.tutorial.html:791(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:834(span)
+#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:836(span)
 #: doc/reference/en/file.development.html:40(span)
 msgid ")"
 msgstr ""
@@ -3721,10 +3721,10 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:782(span)
 #: doc/reference/en/file.tutorial.html:796(span)
 #: doc/reference/en/file.tutorial.html:797(span)
-#: doc/reference/en/file.tutorial.html:823(span)
 #: doc/reference/en/file.tutorial.html:825(span)
-#: doc/reference/en/file.tutorial.html:828(span)
-#: doc/reference/en/file.tutorial.html:847(span)
+#: doc/reference/en/file.tutorial.html:827(span)
+#: doc/reference/en/file.tutorial.html:830(span)
+#: doc/reference/en/file.tutorial.html:849(span)
 msgid "LDAP"
 msgstr ""
 
@@ -8922,8 +8922,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:787(span)
 #: doc/reference/en/file.tutorial.html:789(span)
 #: doc/reference/en/file.tutorial.html:791(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "."
 msgstr ""
 
@@ -9783,7 +9783,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:740(span)
 #: doc/reference/en/file.tutorial.html:749(span)
 #: doc/reference/en/file.tutorial.html:750(span)
-#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:837(span)
 msgid "end"
 msgstr ""
 
@@ -11237,8 +11237,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:790(span)
 #: doc/reference/en/file.tutorial.html:791(span)
 #: doc/reference/en/file.tutorial.html:792(span)
-#: doc/reference/en/file.tutorial.html:836(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:838(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "="
 msgstr ""
 
@@ -11580,7 +11580,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:746(span)
 #: doc/reference/en/file.tutorial.html:769(span)
 #: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "["
 msgstr ""
 
@@ -11921,7 +11921,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:746(span)
 #: doc/reference/en/file.tutorial.html:769(span)
 #: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "]"
 msgstr ""
 
@@ -14657,8 +14657,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:747(span)
 #: doc/reference/en/file.tutorial.html:748(span)
 #: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:844(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:846(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid ","
 msgstr ""
 
@@ -17091,7 +17091,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:614(span)
 #: doc/reference/en/file.tutorial.html:650(span)
 #: doc/reference/en/file.tutorial.html:661(span)
-#: doc/reference/en/file.tutorial.html:833(span)
+#: doc/reference/en/file.tutorial.html:835(span)
 msgid "do"
 msgstr ""
 
@@ -17470,7 +17470,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Adapter/Base.html:1633(span)
 #: doc/reference/en/ActiveLdap/Xml.html:204(span)
 #: doc/reference/en/ActiveLdap/Xml.html:207(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "schema"
 msgstr ""
 
@@ -18559,7 +18559,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:354(span)
 #: doc/reference/en/file.tutorial.html:360(span)
 #: doc/reference/en/file.tutorial.html:626(span)
-#: doc/reference/en/file.tutorial.html:833(span)
+#: doc/reference/en/file.tutorial.html:835(span)
 msgid "find"
 msgstr ""
 
@@ -18569,7 +18569,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/Find.html:297(span)
 #: doc/reference/en/ActiveLdap/Operations/Find.html:349(span)
 #: doc/reference/en/file.tutorial.html:347(span)
-#: doc/reference/en/file.tutorial.html:833(span)
+#: doc/reference/en/file.tutorial.html:835(span)
 msgid ":first"
 msgstr ""
 
@@ -18857,12 +18857,12 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:790(span)
 #: doc/reference/en/file.tutorial.html:791(span)
 #: doc/reference/en/file.tutorial.html:792(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:834(span)
 #: doc/reference/en/file.tutorial.html:835(span)
 #: doc/reference/en/file.tutorial.html:836(span)
-#: doc/reference/en/file.tutorial.html:844(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:837(span)
+#: doc/reference/en/file.tutorial.html:838(span)
+#: doc/reference/en/file.tutorial.html:846(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "&gt;"
 msgstr ""
 
@@ -23440,7 +23440,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema.html:188(strong)
 #: doc/reference/en/ActiveLdap/Schema.html:657(strong)
 #: doc/reference/en/ActiveLdap/Schema.html:676(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "attribute_type"
 msgstr ""
 
@@ -24413,8 +24413,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:169(span)
 #: doc/reference/en/file.tutorial.html:312(span)
 #: doc/reference/en/file.tutorial.html:375(span)
-#: doc/reference/en/file.tutorial.html:836(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:838(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "'cn'"
 msgstr ""
 
@@ -28660,7 +28660,7 @@ msgid "ancestor"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:313(span)
-#: doc/reference/en/file.tutorial.html:833(span)
+#: doc/reference/en/file.tutorial.html:835(span)
 msgid "instance_eval"
 msgstr ""
 
@@ -36227,7 +36227,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Base.html:3764(span)
 #: doc/reference/en/ActiveLdap/Base.html:4055(span)
 #: doc/reference/en/ActiveLdap/Base.html:4766(span)
-#: doc/reference/en/file.tutorial.html:834(span)
+#: doc/reference/en/file.tutorial.html:836(span)
 msgid "to_real_attribute_name"
 msgstr ""
 
@@ -36384,10 +36384,10 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:787(span)
 #: doc/reference/en/file.tutorial.html:789(span)
 #: doc/reference/en/file.tutorial.html:791(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:834(span)
 #: doc/reference/en/file.tutorial.html:835(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:836(span)
+#: doc/reference/en/file.tutorial.html:837(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "irb"
 msgstr ""
 
@@ -37587,8 +37587,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:682(span)
 #: doc/reference/en/file.tutorial.html:736(span)
 #: doc/reference/en/file.tutorial.html:766(span)
-#: doc/reference/en/file.tutorial.html:833(span)
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "User"
 msgstr ""
 
@@ -44575,18 +44575,13 @@ msgid ".search"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:369(p)
-#, fuzzy
 msgid ""
 ".search is a class method that is accessible from any subclass of Base, and "
 "Base. It lets the user perform an arbitrary search against the current "
 "<placeholder-1/> connection irrespetive of <placeholder-2/> mapping data. "
 "This is meant to be useful as a utility method to cover 80% of the cases "
 "where a user would want to use Base.connection directly."
-msgstr ""
-".search は ActiveLdap::Base か、そのサブクラスから呼び出し可能なクラスメソッ"
-"ドです。拡張クラスと LDAPツリーとのマッピングを無視して検索することができま"
-"す。直接Base.connection を利用してもよいですが、このメソッドを利用すれば8割の"
-"目的は達成できるでしょう。"
+msgstr ".search は ActiveLdap::Base か、そのサブクラスから呼び出し可能なクラスメソッドです。拡張クラスと LDAPツリーとのマッピングを無視して検索することができます。直接Base.connection を利用してもよいですが、このメソッドを利用すれば8割の目的は達成できるでしょう。"
 
 #: doc/reference/en/file.tutorial.html:374(span)
 msgid "'dc=example,dc=com'"
@@ -44602,7 +44597,7 @@ msgstr ""
 
 #: doc/reference/en/file.tutorial.html:376(span)
 #: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "\"cn\""
 msgstr ""
 
@@ -45315,7 +45310,9 @@ msgstr "高度な話題"
 #: doc/reference/en/file.tutorial.html:676(p)
 msgid ""
 "Below are some situation tips and tricks to get the most out of ActiveLdap."
-msgstr "以降では、ActiveLdap を最大限に生かすために、さまざまなシチュエーションで役立つテクニックを紹介していきます。"
+msgstr ""
+"以降では、ActiveLdap を最大限に生かすために、さまざまなシチュエーションで役立"
+"つテクニックを紹介していきます。"
 
 #: doc/reference/en/file.tutorial.html:677(h4)
 msgid "Binary data and other subtypes"
@@ -45326,7 +45323,10 @@ msgid ""
 "Sometimes, you may want to store attributes with language specifiers, or "
 "perhaps in binary form. This is (finally!) fully supported. To do so, follow "
 "the examples below:"
-msgstr "しばしば、あなたは属性に言語指定子を指定して値を格納したくなるでしょう。それにバイナリデータ形式で投入したいかもしれません。これは十分にサポートされています。例を見てみましょう。"
+msgstr ""
+"しばしば、あなたは属性に言語指定子を指定して値を格納したくなるでしょう。それ"
+"にバイナリデータ形式で投入したいかもしれません。これは十分にサポートされてい"
+"ます。例を見てみましょう。"
 
 #: doc/reference/en/file.tutorial.html:684(span)
 msgid "# This adds a cn entry in lang-en and whatever the server default is."
@@ -45360,7 +45360,9 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:689(span)
 msgid ""
 "# Now let's add a binary X.509 certificate (assume objectClass is correct)"
-msgstr "# X.509 証明書をバイナリ形式で追加（objectClass の整合性は解決しているものとします）"
+msgstr ""
+"# X.509 証明書をバイナリ形式で追加（objectClass の整合性は解決しているものと"
+"します）"
 
 #: doc/reference/en/file.tutorial.html:690(span)
 #: doc/reference/en/file.tutorial.html:703(span)
@@ -45378,7 +45380,11 @@ msgid ""
 "<placeholder-1/> object’s cn to “wad” and cn:lang-en-us to [“wad”, “Will "
 "Drewry”]. Anytime a <placeholder-2/> subtype is required, you must "
 "encapsulate the data in a Hash."
-msgstr "この例には見るべき点が多くあります。順番に見てみましょう。例では、cn に\"wad\"と cn;lang-en-us に [\"wad\", \"Will Drewry\"] を追加しています。<placeholder-2/>属性のサブタイプが必要とされるとき、それらのデータは Hash で包む必要があります。"
+msgstr ""
+"この例には見るべき点が多くあります。順番に見てみましょう。例では、cn に\"wad"
+"\"と cn;lang-en-us に [\"wad\", \"Will Drewry\"] を追加しています。"
+"<placeholder-2/>属性のサブタイプが必要とされるとき、それらのデータは Hash で"
+"包む必要があります。"
 
 #: doc/reference/en/file.tutorial.html:698(em)
 msgid "that requires ;binary subtyping"
@@ -45395,7 +45401,12 @@ msgid ""
 "in <placeholder-2/> if you don’t do it. This keeps your #writes from "
 "breaking, and my code from crying. For correctness, I could have easily done "
 "the following:"
-msgstr "一方で、上記の例では Hash に包まずに X.509 証明書を格納しました。バイナリデータを格納するいくつかのの属性は <placeholder-1/>が必要です。これらの属性に対しては、プログラマがそうしなくても、自動で <placeholder-2/> の Hash で包まれます。これはコーディングの助けになりますが、正確性のために明示的に Hash で包むことも可能です。"
+msgstr ""
+"一方で、上記の例では Hash に包まずに X.509 証明書を格納しました。バイナリデー"
+"タを格納するいくつかのの属性は <placeholder-1/>が必要です。これらの属性に対し"
+"ては、プログラマがそうしなくても、自動で <placeholder-2/> の Hash で包まれま"
+"す。これはコーディングの助けになりますが、正確性のために明示的に Hash で包む"
+"ことも可能です。"
 
 #: doc/reference/en/file.tutorial.html:703(span)
 #: doc/reference/en/file.tutorial.html:714(span)
@@ -45411,13 +45422,25 @@ msgid ""
 "automatically appended as above. The use of the subtype on attributes like "
 "jpegPhoto is ultimately decided by the <placeholder-1/> site policy and not "
 "by any programmatic means."
-msgstr "バイナリデータを格納する場合であっても、必ずしも ;binary サブタイプを利用する訳ではないことに注意してください。例としては jpegPhoto があります。あなたはjpegPhoto;binaryか jpegPhoto を利用することができます。スキーマがバイナリ値だと指示するので ActiveLdap はバイナリ値として書き込むでしょうが、サブタイプは自動的には付与されません。jpegPhoto のような属性にサブタイプを利用するかどうかは、<placeholder-1/>のサイトポリシーによって決められることであって、プログラムが自動で判断できるものではありません。（訳注：userCertificate 属性については、RFC上で ;binary サブタイプを利用するよう指示されているため、自動的に ;binary 属性を付与できる一方、jpegPhoto についてそのような言及が RFC 上にないために、そのような対応を自動的に行うことは難しい、ということのようです）"
+msgstr ""
+"バイナリデータを格納する場合であっても、必ずしも ;binary サブタイプを利用する"
+"訳ではないことに注意してください。例としては jpegPhoto があります。あなたは"
+"jpegPhoto;binaryか jpegPhoto を利用することができます。スキーマがバイナリ値だ"
+"と指示するので ActiveLdap はバイナリ値として書き込むでしょうが、サブタイプは"
+"自動的には付与されません。jpegPhoto のような属性にサブタイプを利用するかどう"
+"かは、<placeholder-1/>のサイトポリシーによって決められることであって、プログ"
+"ラムが自動で判断できるものではありません。（訳注：userCertificate 属性につい"
+"ては、RFC上で ;binary サブタイプを利用するよう指示されているため、自動的に ;"
+"binary 属性を付与できる一方、jpegPhoto についてそのような言及が RFC 上にない"
+"ために、そのような対応を自動的に行うことは難しい、ということのようです）"
 
 #: doc/reference/en/file.tutorial.html:711(p)
 msgid ""
 "The only subtypes defined in LDAPv3 are lang-* and binary. These can be "
 "nested though:"
-msgstr "LDAPv3 で唯一定義されているサブタイプが lang-* と binary の組み合わせです。これらは以下のように Hash をネストさせることで実現できます。"
+msgstr ""
+"LDAPv3 で唯一定義されているサブタイプが lang-* と binary の組み合わせです。こ"
+"れらは以下のように Hash をネストさせることで実現できます。"
 
 #: doc/reference/en/file.tutorial.html:714(span)
 msgid "'lang-ja'"
@@ -45433,11 +45456,17 @@ msgid ""
 "documentation I’ve read suggests that Netscape’s <placeholder-1/> server "
 "does. I only have access to OpenLDAP. If anyone tests this out, please let "
 "me know how it goes!"
-msgstr "ネストされたサブタイプは OpenLDAP でサポートされていません。ですが、いくつかの文書を確認したところ、ネットスケープの <placeholder-1/> サーバは対応しているようです。私がアクセスしたのは OpenLDAP のみなので、どなたかこの機能をテストしたなら、どのように動作したかを連絡してもらえると助かります。"
+msgstr ""
+"ネストされたサブタイプは OpenLDAP でサポートされていません。ですが、いくつか"
+"の文書を確認したところ、ネットスケープの <placeholder-1/> サーバは対応してい"
+"るようです。私がアクセスしたのは OpenLDAP のみなので、どなたかこの機能をテス"
+"トしたなら、どのように動作したかを連絡してもらえると助かります。"
 
 #: doc/reference/en/file.tutorial.html:720(p)
 msgid "And that pretty much wraps up this section."
-msgstr "このセクションの他の項目についても同様です。どのように動作したか連絡もらえると助かります。"
+msgstr ""
+"このセクションの他の項目についても同様です。どのように動作したか連絡もらえる"
+"と助かります。"
 
 #: doc/reference/en/file.tutorial.html:721(h4)
 msgid "Further integration with your environment aka namespacing"
@@ -45447,7 +45476,9 @@ msgstr "環境とのさらなる統合 - 別名 名前空間の構築"
 msgid ""
 "If you want this to cleanly integrate into your system-wide Ruby include "
 "path, you should put your extension classes inside a custom module."
-msgstr "ActiveLdap を Ruby のインクルードパスに統合したいなら、拡張クラスをカスタムモジュールの中に統合するとよいでしょう。"
+msgstr ""
+"ActiveLdap を Ruby のインクルードパスに統合したいなら、拡張クラスをカスタムモ"
+"ジュールの中に統合するとよいでしょう。"
 
 #: doc/reference/en/file.tutorial.html:725(p)
 msgid "./myldap.rb:"
@@ -45493,7 +45524,8 @@ msgstr ""
 
 #: doc/reference/en/file.tutorial.html:752(p)
 msgid "Now in your local applications, you can call"
-msgstr "こうすれば、あなたのアプリケーションでは以下のように呼び出すことができます。"
+msgstr ""
+"こうすれば、あなたのアプリケーションでは以下のように呼び出すことができます。"
 
 #: doc/reference/en/file.tutorial.html:754(span)
 msgid "'myldap'"
@@ -45516,7 +45548,9 @@ msgid ""
 "Even though ActiveLdap attempts to maintain programmatic ease by returning "
 "Array values only. By specifying ‘true’ as an argument to any attribute "
 "method you will get back a Array if it is single value. Here’s an example:"
-msgstr "属性メソッドの引数に true を渡すことで、その属性の中身が単一の内容であっても配列で返すように挙動を変更することができます。"
+msgstr ""
+"属性メソッドの引数に true を渡すことで、その属性の中身が単一の内容であっても"
+"配列で返すように挙動を変更することができます。"
 
 #: doc/reference/en/file.tutorial.html:771(h4)
 msgid "Dynamic attribute crawling"
@@ -45527,7 +45561,10 @@ msgid ""
 "If you use tab completion in irb, you’ll notice that you /can/ tab complete "
 "the dynamic attribute methods. You can still see which methods are for "
 "attributes using Base#attribute_names:"
-msgstr "IRBでタブ補完機能を有効にしている場合、属性アクセサメソッドをタブ補完で呼び出すことができます。また、Base#attribute_names メソッドを利用すれば属性アクセサメソッドの一覧を得ることが可能です。"
+msgstr ""
+"IRBでタブ補完機能を有効にしている場合、属性アクセサメソッドをタブ補完で呼び出"
+"すことができます。また、Base#attribute_names メソッドを利用すれば属性アクセサ"
+"メソッドの一覧を得ることが可能です。"
 
 #: doc/reference/en/file.tutorial.html:776(span)
 #: doc/reference/en/file.tutorial.html:778(span)
@@ -45535,7 +45572,7 @@ msgid "d"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:845(span)
+#: doc/reference/en/file.tutorial.html:847(span)
 msgid "\"commonName\""
 msgstr ""
 
@@ -45555,7 +45592,9 @@ msgstr "複数の <placeholder-1/> 接続の切り替え"
 msgid ""
 "In the same vein as the last tip, you can use multiple <placeholder-1/> "
 "connections by per class as follows:"
-msgstr "最後に、クラスごとに別々の <placeholder-1/> コネクションを利用するには、以下のようにしてください。"
+msgstr ""
+"最後に、クラスごとに別々の <placeholder-1/> コネクションを利用するには、以下"
+"のようにしてください。"
 
 #: doc/reference/en/file.tutorial.html:785(span)
 #: doc/reference/en/file.tutorial.html:787(span)
@@ -45585,14 +45624,18 @@ msgid ""
 "If you have the Ruby/<placeholder-1/> package with the <placeholder-2/>/"
 "<placeholder-3/> patch from Ian MacDonald’s web site, you can use Kerberos "
 "to bind to your <placeholder-4/> server. By default, :try_sasl is false."
-msgstr ":try_sasl を利用することによって <placeholder-4/> サーバとのバインドに Kerberos を利用することができます。"
+msgstr ""
+":try_sasl を利用することによって <placeholder-4/> サーバとのバインドに "
+"Kerberos を利用することができます。"
 
 #: doc/reference/en/file.tutorial.html:799(p)
 msgid ""
 "Also note that you must be using OpenLDAP 2.1.29 or higher to use "
 "<placeholder-1/>/<placeholder-2/> due to some bugs in older versions of "
 "OpenLDAP."
-msgstr "またこの場合、OpenLDAP 2.1.29 かそれ以上が必要です。それ以前のバージョンには多数のバグが残っています。"
+msgstr ""
+"またこの場合、OpenLDAP 2.1.29 かそれ以上が必要です。それ以前のバージョンには"
+"多数のバグが残っています。"
 
 #: doc/reference/en/file.tutorial.html:801(h4)
 msgid "Don’t be afraid! [Internals]"
@@ -45603,24 +45646,33 @@ msgid ""
 "Don’t be afraid to add more methods to the extensions classes and to "
 "experiment. That’s exactly how I ended up with this package. If you come up "
 "with something cool, please share it!"
-msgstr "更にメソッドを追加することや、拡張クラスを定義することや、実験することを恐れないでください。私にとってこのパッケージの作成は一区切りつきましたが、もしクールな何かをあなたが見つけたなら、それを共有させてください！"
+msgstr ""
+"更にメソッドを追加することや、拡張クラスを定義することや、実験することを恐れ"
+"ないでください。私にとってこのパッケージの作成は一区切りつきましたが、もし"
+"クールな何かをあなたが見つけたなら、それを共有させてください！"
 
 #: doc/reference/en/file.tutorial.html:805(p)
 msgid ""
 "The internal structure of ActiveLdap::Base, and thus all its subclasses, is "
 "still in flux. I’ve tried to minimize the changes to the overall "
 "<placeholder-1/>, but the internals are still rough around the edges."
-msgstr "ActiveLdap::Base やそのサブクラスの構造は、まだ不安定です。外側の API については最小の変化で済ませてきましたが、内部についてはまだ荒削りです。"
+msgstr ""
+"ActiveLdap::Base やそのサブクラスの構造は、まだ不安定です。外側の API につい"
+"ては最小の変化で済ませてきましたが、内部についてはまだ荒削りです。"
 
 #: doc/reference/en/file.tutorial.html:808(h5)
 msgid "Where’s ldap_mapping data stored? How can I get to it?"
-msgstr "ldap_mapping データはどこに保存されていますか？ それらはどうやって取得しますか？"
+msgstr ""
+"ldap_mapping データはどこに保存されていますか？ それらはどうやって取得します"
+"か？"
 
 #: doc/reference/en/file.tutorial.html:809(p)
 msgid ""
 "When you call ldap_mapping, it overwrites several class methods inherited "
 "from Base:"
-msgstr "ldap_mapping をコールしたとき、ActiveLdap::Base のいくつかのクラスメソッドがオーバーライドされます。以下のメソッドです。"
+msgstr ""
+"ldap_mapping をコールしたとき、ActiveLdap::Base のいくつかのクラスメソッドが"
+"オーバーライドされます。以下のメソッドです。"
 
 #: doc/reference/en/file.tutorial.html:812(li)
 msgid "Base.base()"
@@ -45631,37 +45683,48 @@ msgid "Base.required_classes()"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:814(li)
-msgid ""
-"Base.dn_attribute() You can access these from custom class methods by "
-"calling MyClass.base(), or whatever. There are predefined instance methods "
-"for getting to these from any new instance methods you define:"
-msgstr "これらのクラスメソッドに MyClass.base() のようにアクセスすることができます。インスタンスからもこれらの情報を知るために、拡張クラスのインスタンスメソッドに以下のような定義済みメソッドが用意されています。"
+msgid "Base.dn_attribute()"
+msgstr ""
 
-#: doc/reference/en/file.tutorial.html:818(li)
+#: doc/reference/en/file.tutorial.html:816(p)
+msgid ""
+"You can access these from custom class methods by calling MyClass.base(), or "
+"whatever. There are predefined instance methods for getting to these from "
+"any new instance methods you define:"
+msgstr ""
+"これらのクラスメソッドに MyClass.base() のようにアクセスすることができます。"
+"インスタンスからもこれらの情報を知るために、拡張クラスのインスタンスメソッド"
+"に以下のような定義済みメソッドが用意されています。"
+
+#: doc/reference/en/file.tutorial.html:820(li)
 msgid "Base#base()"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:819(li)
+#: doc/reference/en/file.tutorial.html:821(li)
 msgid "Base#required_classes()"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:820(li)
+#: doc/reference/en/file.tutorial.html:822(li)
 msgid "Base#dn_attribute()"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:822(h5)
+#: doc/reference/en/file.tutorial.html:824(h5)
 msgid "What else?"
 msgstr "その他の話題"
 
-#: doc/reference/en/file.tutorial.html:823(p)
+#: doc/reference/en/file.tutorial.html:825(p)
 msgid ""
 "Well if you want to use the <placeholder-1/> connection for anything, I’d "
 "suggest still calling Base.connection to get it. There really aren’t many "
 "other internals that need to be worried about. You could get the "
 "<placeholder-2/> schema with Base.schema."
-msgstr "もしあなたが何らかの理由で <placeholder-1/> コネクションを扱いたいなら、それを取得するためにActiveLdap::Base.connection メソッドをコールすることを今のところ提案します。他の内部機構で接続を扱うものは少ないです。スキーマの情報についてはActiveLdap::Base.schema メソッドにより取得できます。"
+msgstr ""
+"もしあなたが何らかの理由で <placeholder-1/> コネクションを扱いたいなら、それ"
+"を取得するためにActiveLdap::Base.connection メソッドをコールすることを今のと"
+"ころ提案します。他の内部機構で接続を扱うものは少ないです。スキーマの情報につ"
+"いてはActiveLdap::Base.schema メソッドにより取得できます。"
 
-#: doc/reference/en/file.tutorial.html:827(p)
+#: doc/reference/en/file.tutorial.html:829(p)
 msgid ""
 "The only other useful tricks are dereferencing and accessing the stored "
 "data. Since <placeholder-1/> attributes can have multiple names, e.g. cn or "
@@ -45669,60 +45732,79 @@ msgid ""
 "just calling self[attribname] to get the value, but if that’s not good "
 "enough, you can call look up the stored name by #to_real_attribute_name as "
 "follows:"
-msgstr "残りの便利な機能は、格納されたデータをいろんな名前でアクセスできることです。<placeholder-1/>属性はcn / commonName のように複数の名前を持つことができるるので、どの名前でも同じ値にアクセスすることになります。値を取得するときは self['どれかの属性名'] とすることをオススメします。もし、これだけでは十分ではない場合は、本当の属性名を得るためにto_real_attribute_name プライベートメソッドを利用することができます。"
+msgstr ""
+"残りの便利な機能は、格納されたデータをいろんな名前でアクセスできることです。"
+"<placeholder-1/>属性はcn / commonName のように複数の名前を持つことができるる"
+"ので、どの名前でも同じ値にアクセスすることになります。値を取得するときは self"
+"['どれかの属性名'] とすることをオススメします。もし、これだけでは十分ではない"
+"場合は、本当の属性名を得るためにto_real_attribute_name プライベートメソッドを"
+"利用することができます。"
 
-#: doc/reference/en/file.tutorial.html:834(span)
+#: doc/reference/en/file.tutorial.html:836(span)
 msgid "'commonName'"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:838(p)
+#: doc/reference/en/file.tutorial.html:840(p)
 msgid ""
 "This tells you the name the attribute is stored in behind the scenes "
 "(@data). Again, self[attribname] should be enough for most extensions, but "
 "if not, it’s probably safe to dabble here."
-msgstr "このメソッドは背後（@data）で属性データが格納されている名前をあなたに教えます。再び、self[属性名] はほとんどの拡張に対して十分でなくてはなりませんが、そうでなくても、たぶんここでは問題にならないでしょう。"
+msgstr ""
+"このメソッドは背後（@data）で属性データが格納されている名前をあなたに教えま"
+"す。再び、self[属性名] はほとんどの拡張に対して十分でなくてはなりませんが、そ"
+"うでなくても、たぶんここでは問題にならないでしょう。"
 
-#: doc/reference/en/file.tutorial.html:841(p)
+#: doc/reference/en/file.tutorial.html:843(p)
 msgid ""
 "Also, if you like to look up all aliases for an attribute, you can call the "
 "following:"
-msgstr "また例えば、ユーザクラスの属性名のエイリアスを見つけるためには以下のようにするとよいでしょう。"
+msgstr ""
+"また例えば、ユーザクラスの属性名のエイリアスを見つけるためには以下のようにす"
+"るとよいでしょう。"
 
-#: doc/reference/en/file.tutorial.html:844(span)
+#: doc/reference/en/file.tutorial.html:846(span)
 msgid "'NAME'"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:847(p)
+#: doc/reference/en/file.tutorial.html:849(p)
 msgid ""
 "This is discovered automagically from the <placeholder-1/> server’s schema."
 msgstr "これは<placeholder-1/> サーバのスキーマから自動的に発見します。"
 
-#: doc/reference/en/file.tutorial.html:848(h2)
+#: doc/reference/en/file.tutorial.html:850(h2)
 msgid "Limitations"
 msgstr "制限"
 
-#: doc/reference/en/file.tutorial.html:849(h3)
+#: doc/reference/en/file.tutorial.html:851(h3)
 msgid "Speed"
 msgstr "実行速度"
 
-#: doc/reference/en/file.tutorial.html:850(p)
+#: doc/reference/en/file.tutorial.html:852(p)
 msgid ""
 "Currently, ActiveLdap could be faster. I have some recursive type checking "
 "going on which slows object creation down, and I’m sure there are many, many "
 "other places optimizations can be done. Feel free to send patches, or just "
 "hang in there until I can optimize away the slowness."
-msgstr "今のところ、ActiveLdap はまだ高速にできます。いくつかの再帰的な型チェックをオブジェクト作成時に行っており、それらがオブジェクトの生成速度を落としています。また、他のところでも多数の最適化が可能であることも認識しています。最適化できていない部分については私が最適化できるようになるまで我慢してもらうか、または気軽にパッチを送ってください。"
+msgstr ""
+"今のところ、ActiveLdap はまだ高速にできます。いくつかの再帰的な型チェックをオ"
+"ブジェクト作成時に行っており、それらがオブジェクトの生成速度を落としていま"
+"す。また、他のところでも多数の最適化が可能であることも認識しています。最適化"
+"できていない部分については私が最適化できるようになるまで我慢してもらうか、ま"
+"たは気軽にパッチを送ってください。"
 
-#: doc/reference/en/file.tutorial.html:855(h2)
+#: doc/reference/en/file.tutorial.html:857(h2)
 msgid "Feedback"
 msgstr "フィードバック"
 
-#: doc/reference/en/file.tutorial.html:856(p)
+#: doc/reference/en/file.tutorial.html:858(p)
 msgid ""
 "Any and all feedback and patches are welcome. I am very excited about this "
 "package, and I’d like to see it prove helpful to more people than just "
 "myself."
-msgstr "どんなものでも、またすべてのフィードバックやパッチを歓迎します。私はこのパッケージについて興奮しています。また、私以上に、人々の助けになることを見たいと思っています。"
+msgstr ""
+"どんなものでも、またすべてのフィードバックやパッチを歓迎します。私はこのパッ"
+"ケージについて興奮しています。また、私以上に、人々の助けになることを見たいと"
+"思っています。"
 
 #: doc/reference/en/file.development.html:6(title)
 msgid "File: development &mdash; activeldap - 3.1.0"
