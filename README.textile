@@ -1,49 +1,41 @@
 h1. ActiveLdap
 
-ruby library for object-oriented LDAP interction
+A ruby library for object-oriented LDAP interction.
 
-* Copyright (C) 2004-2006 Will Drewry <tt><will@alum.bu.edu></tt>
-* Copyright (C) 2006-2011 Kouhei Sutou <tt><kou@clear-code.com></tt>
+* Copyright (C) 2004-2006 Will Drewry _<will@alum.bu.edu>_
+* Copyright (C) 2006-2011 Kouhei Sutou _<kou@clear-code.com>_
 
-Contributors::
-  * Dick Davies <tt><rasputnik AT hellooperator.net></tt>
-  * Nathan Kinder <tt><quicksilver02 AT mac.com></tt>
-  * Patrick Cole <tt><pac AT independent.com.au></tt>
-  * Google Inc.
+h2. Description
 
-h2. DESCRIPTION
+'ActiveLdap' is a ruby extension library which provides a
+clean objected oriented interface to LDAP library.  It was
+inspired by ActivRecord. This is not nearly as clean or as
+flexible as ActiveRecord, but it is still trivial to define
+new objects and manipulate them with minimal difficulty.
 
-'ActiveLdap' is a ruby extension library which provides a clean objected
-oriented interface to the Ruby/LDAP[0] library.  It was inspired by
-ActivRecord[3]. This is not nearly as clean or as flexible as ActiveRecord, but
-it is still trivial to define new objects and manipulate them with minimal
-difficulty.
+For example and usage - read the
+"document":http://ruby-activeldap.rubyforge.org/.
 
-For example and usage - read the rdoc in doc/ from lib/activeldap.rb.
-It is also available on the web at:
+h2. Prerequisites
 
-http://ruby-activeldap.rubyforge.org/
+- Ruby intepreter :=
+One of them:
+* "Ruby":http://www.ruby-lang.org (1.8.x or 1.9.1)
+* "JRuby":http://jruby.codehaus.org/ =:
+- LDAP client :=
+JRuby doesn't need to install new library because JRuby
+has builtin LDAP support. Ruby users need one of them:
+* "Ruby/LDAP":http://rubyforge.org/projects/ruby-ldap/
+* "Net::LDAP":http://rubyforge.org/projects/net-ldap/ =:
+- ActiveModel :=
+A toolkit for building modeling frameworks like Active
+Record and Active Resource. =:
 
-h2. PREREQUISITES
-
-[Ruby intepreter]
-  One of them:
-  * Ruby[http://www.ruby-lang.org] (1.8.x or 1.9.1)
-  * JRuby[http://jruby.codehaus.org/]
-
-[LDAP client]
-  JRuby doesn't need to install new library because JRuby
-  has builtin LDAP support. Ruby users need one of them:
-  * Ruby/LDAP[http://rubyforge.org/projects/ruby-ldap/]
-  * Net::LDAP[http://rubyforge.org/projects/net-ldap/]
-
-* ActiveRecord[http://activerecord.rubyonrails.org]
-
-h2. NOTES
+h2. Notes
 
 * Only GSSAPI SASL support exists due to Ruby/LDAP limitations
 
-h2. RAILS
+h2. Rails
 
 There is a small rails plugin included that allows the use
 of a file named 'config/ldap.yml' in the config directory of
@@ -54,28 +46,37 @@ file allows settings to be set for development, test, and
 production environments. For instance, the development entry
 would look something like the following:
 
-  development:
-    host: 127.0.0.1
-    port: 389
-    base: dc=localhost
-    bind_dn: cn=admin,dc=localhost
-    password: secret
+<pre>
+!!!plain
+development:
+  host: 127.0.0.1
+  port: 389
+  base: dc=localhost
+  bind_dn: cn=admin,dc=localhost
+  password: secret
+</pre>
 
 To install, simply add the following code to your Gemfile:
 
-  gem 'activeldap', '3.0.0', :require => 'active_ldap'
+<pre>
+gem 'activeldap', '3.1.0', :require => 'active_ldap'
+</pre>
 
 You should also depend on an LDAP adapter such as Net::LDAP or Ruby/LDAP.
 The following example uses Ruby/LDAP:
 
-  gem  'ruby-ldap', :require => 'ldap'
+<pre>
+gem 'ruby-ldap', :require => 'ldap'
+</pre>
 
 Bundler will install the gems automatically when you run 'bundle install'.
 
 You also need to include the ActiveLdap railtie in config/application.rb, after
 the other railties:
 
-  require "active_ldap/railtie"
+<pre>
+require "active_ldap/railtie"
+</pre>
 
 When your application starts up, the plugin will call
 ActiveLdap::Base.setup_connection using the parameters
@@ -86,30 +87,39 @@ h2. Model
 Here is some examples.
 
 app/model/member.rb:
-  class Member < ActiveLdap::Base
-    ldap_mapping :dn_attribute => 'uid',
-                 :classes => ['person', 'posixAccount']
-    belongs_to :primary_group, :class_name => "Group",
-               :foreign_key => "gidNumber", :primary_key => "gidNumber"
-    belongs_to :groups, :many => 'memberUid'
-  end
+
+<pre>
+class Member < ActiveLdap::Base
+  ldap_mapping :dn_attribute => 'uid',
+               :classes => ['person', 'posixAccount']
+  belongs_to :primary_group, :class_name => "Group",
+             :foreign_key => "gidNumber", :primary_key => "gidNumber"
+  belongs_to :groups, :many => 'memberUid'
+end
+</pre>
 
 app/model/group.rb:
-  class Group < ActiveLdap::Base
-    ldap_mapping :dn_attribute => "cn", :classes => ['posixGroup']
-    has_many :members, :wrap => "memberUid"
-    has_many :primary_members,
-             :foreign_key => 'gidNumber',
-             :primary_key => 'gidNumber'
-  end
+
+<pre>
+class Group < ActiveLdap::Base
+  ldap_mapping :dn_attribute => "cn", :classes => ['posixGroup']
+  has_many :members, :wrap => "memberUid"
+  has_many :primary_members,
+           :foreign_key => 'gidNumber',
+           :primary_key => 'gidNumber'
+end
+</pre>
 
 app/model/ou.rb:
-  class Ou < ActiveLdap::Base
-    ldap_mapping :prefix => "",
-                 :classes => ["top", "organizationalUnit"]
-  end
 
-h2. LICENCE
+<pre>
+class Ou < ActiveLdap::Base
+  ldap_mapping :prefix => "",
+               :classes => ["top", "organizationalUnit"]
+end
+</pre>
+
+h2. Licence
 
 This program is free software; you can redistribute it and/or modify it.  It is
 dual licensed under Ruby's license and under the terms of the GNU General
@@ -118,42 +128,46 @@ or (at your option) any later version.
 
 Please see the file LICENSE for the terms of the licence.
 
-h2. THANKS
+h2. Thanks
 
 This list may not be correct. If you notice mistakes of this
 list, please point out.
 
+* Dick Davies
+* Nathan Kinder
+* Patrick Cole
+* Google Inc.
 * Nobody: Bug reports and API improveent ideas.
 * James Hughes: Bug reports and advices and documentations.
 * Buzz Chopra: Documentations.
 * Christoph Lipp:
-  * Bug reports.
-  * Tell us character escape syntax.
+** Bug reports.
+** Tell us character escape syntax.
 * Jeff Hall: Bug reports.
 * Ernie Miller: Bug reports and advices.
 * Daniel Pfile: Patches.
 * Jacob Wilkins: Bug reports.
 * Ace Suares:
-  * Bug reports.
-  * Nederlands translations.
+** Bug reports.
+** Nederlands translations.
 * Iain Pople: Bug reports and API improvement ideas.
 * Kevin McCarthy: Patches.
 * Perry Smith: Patches, bug reports and indications.
 * Marc Dequènes: API suggestions.
 * Jeremy Pruitt: Bug reports.
 * Bodaniel Jeanes:
-  * A suggestion for behavior on simple bind with empty password.
-  * Bug reports.
+** A suggestion for behavior on simple bind with empty password.
+** Bug reports.
 * Naoto Morishima: Bug reports.
 * David Morton:
-  * An API improvement idea.
-  * Bug reports.
+** An API improvement idea.
+** Bug reports.
 * Lennon Day-Reynolds: Bug reports.
 * Tilo: A bug report.
 * Matt Mencel: Bug reports.
 * CultureSpy:
-  * Bug reports.
-  * Bug fixes.
+** Bug reports.
+** Bug fixes.
 * gwarf12: A bug report.
 * Baptiste Grenier: API improvement ideas.
 * Richard 3 Nicholas: API improvement ideas.
@@ -188,7 +202,7 @@ list, please point out.
 * spoidar: Rails 3 support.
 * Kris Wehner: Rails 2.3.8 support.
 * Ryan Tandy:
-  * A test bug fix.
-  * Rails 3 support.
+** A test bug fix.
+** Rails 3 support.
 * rbq: A bug report.
 * Narihiro Nakamura: Rails 3 support.
