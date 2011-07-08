@@ -13,4 +13,5 @@ group :development, :test do
   gem 'jeweler'
   gem 'test-unit'
   gem 'test-unit-notify'
+  gem "yard"
 end
