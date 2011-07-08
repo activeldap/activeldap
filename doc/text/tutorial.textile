@@ -5,7 +5,7 @@ h2. Introduction
 ActiveLdap is a novel way of interacting with LDAP.  Most interaction with
 LDAP is done using clunky LDIFs, web interfaces, or with painful APIs that
 required a thick reference manual nearby. ActiveLdap aims to fix that.
-Inspired by ActiveRecord[http://activerecord.rubyonrails.org], ActiveLdap provides an
+Inspired by "ActiveRecord":http://activerecord.rubyonrails.org, ActiveLdap provides an
 object oriented interface to LDAP entries.
 
 The target audience is system administrators and LDAP users everywhere that
@@ -517,7 +517,7 @@ h4. SaveError
 
 This exception is raised when there is a problem in #save updating or creating
 an LDAP entry.  Often the error messages are cryptic. Looking at the server
-logs or doing an Ethereal[http://www.ethereal.com] dump of the connection will
+logs or doing an "Wireshark":http://www.wireshark.org dump of the connection will
 often provide better insight.
 
 h4. AuthenticationError
