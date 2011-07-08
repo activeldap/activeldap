@@ -1,4 +1,5 @@
-Gemfile.lock
+/Gemfile.lock
+/.yardoc/
 /test/.test-result/
 /test/config.yaml
 /doc/reference/
