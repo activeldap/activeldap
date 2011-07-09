@@ -23,29 +23,32 @@
         <li id="other-language-japanese" lang="ja" xml:lang="ja"><a href="index.html.ja">日本語</a></li>
       </ul>
       <ul class="menu">
-	<li id="menu-reference"><a href="activeldap/en/">Reference</a></li>
-	<li id="menu-tutorial"><a href="activeldap/en/file.tutorial.html">Tutorial</a></li>
-	<li id="menu-rails"><a href="activeldap/en/file.rails.html">Rails</a></li>
-	<li id="menu-install"><a href="#activeldap-install">Install</a></li>
-	<li id="menu-development"><a href="activeldap/en/file.development.html">Development</a></li>
+	<li><a href="#activeldap-about">ActiveLdap</a></li>
+	<li><a href="#activeldap-fabrication-about">ActiveLdap Fabrication</a></li>
       </ul>
     </div>
 
     <div class="content">
       <div class="main">
-	<h1>ActiveLdap</h1>
+	<h1>The ActiveLdap project</h1>
+        <ul>
+          <li><a href="#activeldap-about">ActiveLdap</a></li>
+          <li><a href="#activeldap-fabrication-about">ActiveLdap Fabrication</a></li>
+        </ul>
+
+	<h2 id="activeldap-about">ActiveLdap</h2>
 	<p>
 	  ActiveLdap provides an object oriented interface to LDAP. It maps LDAP entries to Ruby objects with LDAP attribute accessors based on your LDAP server's schema and each object's objectClasses.
 	</p>
 
-	<h2 id="activeldap-latest">ActiveLdap: The latest release</h3>
+	<h3 id="activeldap-latest">ActiveLdap: The latest release</h3>
 	<p>
 	  <a href="activeldap/en/file.news.html#3-1-0">3.1.0</a> is the latest release. It had been released at 2011-07-09.
         </p>
 	<p>
 	  This version supports Rails 3.1.0 (rc4).
         </p>
-	<h2 id="activeldap-install">ActiveLdap: Install</h3>
+	<h3 id="activeldap-install">ActiveLdap: Install</h3>
         <p>
           Install:
           <pre class="command">% sudo gem install activeldap</pre>
@@ -54,6 +57,22 @@
           Usage:
           <pre class="code">gem "activeldap"
 require "active_ldap"</pre>
+        </p>
+
+	<h2 id="activeldap-fabrication-about">ActiveLdap Fabrication</h2>
+	<p>
+	  ActiveLdap Fabrication is an ActiveLdap adapter
+	  for Fabrication. It means that you can use
+	  Fabrication as fixture replacement for ActiveLdap.
+	</p>
+
+	<h3 id="activeldap-fabrication-latest">ActiveLdap Fabrication: The latest release</h3>
+	<p>
+	  <a href="activeldap-fabrication/en/file.news.html#1-0-0">1.0.0</a> is the latest release. It had been released at 2011-07-09.
+        </p>
+	<h3 id="activeldap-fabriation-document">ActiveLdap Fabricatio: Document</h3>
+        <p>
+          See <a href="activeldap-fabrication/en/">reference manual</a> for details.
         </p>
       </div>
 
@@ -71,6 +90,32 @@ require "active_ldap"</pre>
 	    <a href="http://code.google.com/p/ruby-activeldap/">GoogleCode page</a>
 	  </li>
 	</ul>
+
+        <h2>About ActiveLdap</h2>
+	<ul>
+	  <li class="menu-reference">
+            <a href="/activeldap/en/">Reference</a>
+          </li>
+	  <li class="menu-tutorial">
+	    <a href="/activeldap/en/file.tutorial.html">Tutorial</a>
+	  </li>
+	  <li class="menu-rails">
+	    <a href="/activeldap/en/file.rails.html">Rails</a>
+	  </li>
+	  <li class="menu-install">
+	    <a href="/#activeldap-install">Install</a>
+	  </li>
+	  <li class="menu-development">
+	    <a href="/activeldap/en/file.development.html">Development</a>
+	  </li>
+	</ul>
+
+        <h2>About ActiveLdap Fabrication</h2>
+	<ul>
+	  <li class="menu-reference">
+            <a href="/activeldap-fabricaion/en/">Reference</a>
+          </li>
+        </ul>
       </div>
     </div>
 

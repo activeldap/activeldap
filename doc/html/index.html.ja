@@ -23,29 +23,32 @@
         <li id="other-language-english" lang="en" xml:lang="en"><a href="./">English</a></li>
       </ul>
       <ul class="menu">
-	<li id="menu-reference"><a href="activeldap/ja/">リファレンス</a></li>
-	<li id="menu-tutorial"><a href="activeldap/ja/file.tutorial.html">チュートリアル</a></li>
-	<li id="menu-rails"><a href="activeldap/ja/file.rails.html">Rails</a></li>
-	<li id="menu-install"><a href="#activeldap-install">インストール</a></li>
-	<li id="menu-development"><a href="activeldap/ja/file.development.html">開発者向け情報</a></li>
+	<li><a href="#activeldap-about">ActiveLdap</a></li>
+	<li><a href="#activeldap-fabrication-about">ActiveLdap Fabrication</a></li>
       </ul>
     </div>
 
     <div class="content">
       <div class="main">
-	<h1>ActiveLdap</h1>
+	<h1>ActiveLdapプロジェクト</h1>
+        <ul>
+          <li><a href="#activeldap-about">ActiveLdap</a></li>
+          <li><a href="#activeldap-fabrication-about">ActiveLdap Fabrication</a></li>
+        </ul>
+
+        <h2 id="activeldap-about">ActiveLdap</h2>
 	<p>
 	  ActiveLdapはオブジェクト指向にあったAPIでLDAPを操作するためのRuby用のライブラリです。LDAPのそれぞれのエントリをRubyの1オブジェクトとして扱います。LDAPのエントリが持つ属性はobjectClassから自動検出します。Rubyのオブジェクトには自動的にアクセスメソッドが追加されるので、通常のRubyの作法でLDAPエントリを操作できます。
         </p>
 
-	<h2 id="activeldap-latest">ActiveLdap: 最新リリース</h2>
+	<h3 id="activeldap-latest">ActiveLdap: 最新リリース</h3>
 	<p>
 	  2011-07-09にリリースされた<a href="activeldap/ja/file.news.html#3-1-0">3.1.0</a>が最新リリースです。
         </p>
 	<p>
 	  このバージョンはRails 3.1.0 (rc4)に対応しています。
         </p>
-	<h2 id="activeldap-install">ActiveLdap: インストール</h2>
+	<h3 id="activeldap-install">ActiveLdap: インストール</h3>
         <p>
           インストール:
           <pre class="command">% sudo gem install activeldap</pre>
@@ -54,6 +57,20 @@
           使い方:
           <pre class="code">gem "activeldap"
 require "active_ldap"</pre>
+        </p>
+
+	<h2 id="activeldap-fabrication-about">ActiveLdap Fabrication</h2>
+	<p>
+	  ActiveLdap FabricationはFabrication用のActiveLdapアダプタです。これを使うとActiveLdapの代替フィクスチャーシステムとしてFabricationを使えるようになります。
+	</p>
+
+	<h3 id="activeldap-fabrication-latest">ActiveLdap Fabrication: 最新リリース</h3>
+	<p>
+	  2011-07-09にリリースされた<a href="activeldap-fabrication/ja/file.news.html#1-0-0">1.0.0</a>が最新リリースです。
+        </p>
+	<h3 id="activeldap-fabriation-document">ActiveLdap Fabricatio: ドキュメント</h3>
+        <p>
+          詳細は<a href="activeldap-fabrication/ja/">リファレンスマニュアル</a>を見てください。
         </p>
       </div>
 
@@ -71,6 +88,32 @@ require "active_ldap"</pre>
 	    <a href="http://code.google.com/p/ruby-activeldap/">GoogleCodeページ</a>
 	  </li>
 	</ul>
+
+        <h2>ActiveLdapについて</h2>
+	<ul>
+	  <li class="menu-reference">
+            <a href="/activeldap/ja/">リファレンス</a>
+          </li>
+	  <li class="menu-tutorial">
+	    <a href="/activeldap/ja/file.tutorial.html">チュートリアル</a>
+	  </li>
+	  <li class="menu-rails">
+	    <a href="/activeldap/ja/file.rails.html">Rails</a>
+	  </li>
+	  <li class="menu-install">
+	    <a href="/index.html.ja#activeldap-install">インストール</a>
+	  </li>
+	  <li class="menu-development">
+	    <a href="/activeldap/ja/file.development.html">開発者向け情報</a>
+	  </li>
+	</ul>
+
+        <h2>ActiveLdap Fabricationについて</h2>
+	<ul>
+	  <li class="menu-reference">
+            <a href="/activeldap-fabricaion/ja/">リファレンス</a>
+          </li>
+        </ul>
       </div>
     </div>
 

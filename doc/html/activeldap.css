@@ -17,6 +17,12 @@ a:visited
   color: #ce5c00;
 }
 
+/* for YARD */
+div#header
+{
+  position: relative;
+}
+
 div.header
 {
   position: relative;
@@ -109,7 +115,7 @@ ul.menu
   padding: 0;
   margin: 0;
   padding-top: 12px;
-  padding-left: 50px;
+  padding-left: 34px;
   padding-bottom: 0px;
   margin-top: 16px;
   margin-left: 0px;
@@ -125,8 +131,6 @@ ul.menu li
   display: inline;
   padding: 0;
   margin: 0;
-  margin-right: 10px;
-  padding-left: 0px;
 }
 
 ul.menu li a
@@ -146,31 +150,6 @@ ul.menu li a:visited
   color: #f6ede0;
 }
 
-ul.menu li#menu-reference
-{
-  background: url(reference.png) no-repeat;
-}
-
-ul.menu li#menu-tutorial
-{
-  background: url(tutorial.png) no-repeat;
-}
-
-ul.menu li#menu-rails
-{
-  background: url(rails-mini.png) no-repeat;
-}
-
-ul.menu li#menu-install
-{
-  background: url(install.png) no-repeat;
-}
-
-ul.menu li#menu-development
-{
-  background: url(development.png) no-repeat;
-}
-
 div.content
 {
   position: relative;
@@ -180,6 +159,7 @@ div.content
 
 div.main
 {
+  position: relative;
   margin-right: 170px;
 }
 
@@ -213,10 +193,11 @@ div.sidebar
 
 div.sidebar h2
 {
-  font-size: 1em;
+  font-size: small;
   margin: 0px;
   padding: 0px;
   padding-bottom: 5px;
+  border-style: none;
 }
 
 div.sidebar ul
@@ -227,8 +208,35 @@ div.sidebar ul
 
 div.sidebar ul li
 {
+  font-size: 10px;
   list-style-type: none;
   margin-bottom: 5px;
+  padding-left: 25px;
+}
+
+div.sidebar li.menu-reference
+{
+  background: url(reference.png) no-repeat;
+}
+
+div.sidebar li.menu-tutorial
+{
+  background: url(tutorial.png) no-repeat;
+}
+
+div.sidebar li.menu-rails
+{
+  background: url(rails-mini.png) no-repeat;
+}
+
+div.sidebar li.menu-install
+{
+  background: url(install.png) no-repeat;
+}
+
+div.sidebar li.menu-development
+{
+  background: url(development.png) no-repeat;
 }
 
 div.sponsors
