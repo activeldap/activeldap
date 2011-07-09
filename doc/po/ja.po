@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
-"POT-Creation-Date: 2011-07-09 13:25+0900\n"
-"PO-Revision-Date: 2011-07-09 13:29+0900\n"
+"POT-Creation-Date: 2011-07-09 14:34+0900\n"
+"PO-Revision-Date: 2011-07-09 13:41+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -3558,7 +3558,8 @@ msgstr ""
 msgid "Fixed wrong assertion in test. [Ryan Tandy]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:86(h3)
+#: doc/reference/en/file.news.html:86(h3) doc/reference/en/index.html:165(h2)
+#: doc/reference/en/file.README.html:165(h2)
 msgid "Thanks"
 msgstr ""
 
@@ -3654,6 +3655,10 @@ msgstr ""
 #: doc/reference/en/Net/LDAP/Entry.html:37(a)
 #: doc/reference/en/Net/LDAP.html:39(span)
 #: doc/reference/en/index.html:58(span) doc/reference/en/index.html:65(span)
+#: doc/reference/en/index.html:80(span) doc/reference/en/index.html:82(span)
+#: doc/reference/en/index.html:84(span) doc/reference/en/index.html:85(span)
+#: doc/reference/en/index.html:94(span) doc/reference/en/index.html:116(span)
+#: doc/reference/en/index.html:117(span)
 #: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:606(span)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:178(span)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:199(span)
@@ -3663,6 +3668,13 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:548(span)
 #: doc/reference/en/Net.html:86(a) doc/reference/en/file.README.html:58(span)
 #: doc/reference/en/file.README.html:65(span)
+#: doc/reference/en/file.README.html:80(span)
+#: doc/reference/en/file.README.html:82(span)
+#: doc/reference/en/file.README.html:84(span)
+#: doc/reference/en/file.README.html:85(span)
+#: doc/reference/en/file.README.html:94(span)
+#: doc/reference/en/file.README.html:116(span)
+#: doc/reference/en/file.README.html:117(span)
 #: doc/reference/en/LDAP/Conn.html:37(a)
 #: doc/reference/en/LDAP/Conn.html:328(span)
 #: doc/reference/en/LDAP/Mod.html:37(a)
@@ -3731,7 +3743,7 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:827(span)
 #: doc/reference/en/file.tutorial.html:830(span)
 #: doc/reference/en/file.tutorial.html:849(span)
-#: doc/reference/en/_index.html:797(a) doc/reference/en/_index.html:802(a)
+#: doc/reference/en/_index.html:797(a) doc/reference/en/_index.html:804(a)
 #: doc/reference/en/LDAP.html:39(span)
 msgid "LDAP"
 msgstr ""
@@ -3745,6 +3757,9 @@ msgstr ""
 #: doc/reference/en/file.news.html:103(span)
 #: doc/reference/en/file.news.html:348(span)
 #: doc/reference/en/file.news.html:359(span)
+#: doc/reference/en/index.html:94(span) doc/reference/en/index.html:240(span)
+#: doc/reference/en/file.README.html:94(span)
+#: doc/reference/en/file.README.html:240(span)
 #: doc/reference/en/file.tutorial.html:456(span)
 #: doc/reference/en/file.tutorial.html:457(span)
 #: doc/reference/en/file.tutorial.html:796(span)
@@ -3892,6 +3907,15 @@ msgstr ""
 #: doc/reference/en/file.news.html:417(span)
 #: doc/reference/en/file.news.html:418(span)
 #: doc/reference/en/file.news.html:448(span)
+#: doc/reference/en/index.html:173(span) doc/reference/en/index.html:190(span)
+#: doc/reference/en/index.html:193(span) doc/reference/en/index.html:203(span)
+#: doc/reference/en/index.html:215(span) doc/reference/en/index.html:216(span)
+#: doc/reference/en/file.README.html:173(span)
+#: doc/reference/en/file.README.html:190(span)
+#: doc/reference/en/file.README.html:193(span)
+#: doc/reference/en/file.README.html:203(span)
+#: doc/reference/en/file.README.html:215(span)
+#: doc/reference/en/file.README.html:216(span)
 #: doc/reference/en/file.tutorial.html:82(span)
 #: doc/reference/en/file.tutorial.html:806(span)
 msgid "API"
@@ -4181,6 +4205,8 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/file.news.html:229(span)
+#: doc/reference/en/index.html:217(span)
+#: doc/reference/en/file.README.html:217(span)
 msgid "NISHIYAMA"
 msgstr ""
 
@@ -4291,6 +4317,8 @@ msgid "1.0.0"
 msgstr ""
 
 #: doc/reference/en/file.news.html:257(span)
+#: doc/reference/en/index.html:94(span)
+#: doc/reference/en/file.README.html:94(span)
 #: doc/reference/en/file.tutorial.html:456(span)
 #: doc/reference/en/file.tutorial.html:796(span)
 #: doc/reference/en/file.tutorial.html:799(span)
@@ -5786,7 +5814,8 @@ msgstr "モジュール:"
 #: doc/reference/en/method_list.html:1702(small)
 #: doc/reference/en/class_list.html:42(a)
 #: doc/reference/en/class_list.html:42(small)
-#: doc/reference/en/index.html:57(h1)
+#: doc/reference/en/index.html:57(h1) doc/reference/en/index.html:134(span)
+#: doc/reference/en/index.html:144(span) doc/reference/en/index.html:154(span)
 #: doc/reference/en/ActiveLdap/ActionController.html:37(a)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:37(a)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
@@ -5950,6 +5979,9 @@ msgstr "モジュール:"
 #: doc/reference/en/ActiveLdap/RequiredObjectClassMissed.html:37(a)
 #: doc/reference/en/ActiveLdap.html:39(span)
 #: doc/reference/en/file.README.html:57(h1)
+#: doc/reference/en/file.README.html:134(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.README.html:154(span)
 #: doc/reference/en/LDAP/Conn.html:255(span)
 #: doc/reference/en/LDAP/Conn.html:258(span)
 #: doc/reference/en/LDAP/Conn.html:260(span)
@@ -8099,12 +8131,17 @@ msgid "#ldap_filter_unescape"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2460(a)
+#: doc/reference/en/index.html:135(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:155(span)
 #: doc/reference/en/ActiveLdap/Base.html:460(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2593(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2607(span)
 #: doc/reference/en/ActiveLdap/Base.html:2643(span)
 #: doc/reference/en/ActiveLdap/Populate.html:263(span)
 #: doc/reference/en/ActiveLdap/Populate.html:314(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:155(span)
 #: doc/reference/en/file.tutorial.html:127(span)
 #: doc/reference/en/file.tutorial.html:163(h5)
 #: doc/reference/en/file.tutorial.html:169(span)
@@ -9354,6 +9391,8 @@ msgid "Adapter"
 msgstr ""
 
 #: doc/reference/en/class_list.html:42(a)
+#: doc/reference/en/index.html:134(span) doc/reference/en/index.html:144(span)
+#: doc/reference/en/index.html:154(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:795(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:917(span)
@@ -9472,6 +9511,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NumericString.html:106(a)
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NumericString.html:130(a)
 #: doc/reference/en/ActiveLdap.html:94(a)
+#: doc/reference/en/file.README.html:134(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.README.html:154(span)
 #: doc/reference/en/file.tutorial.html:122(span)
 #: doc/reference/en/file.tutorial.html:126(span)
 #: doc/reference/en/file.tutorial.html:168(span)
@@ -13695,6 +13737,13 @@ msgid "@original_attribute_names"
 msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:194(span)
+#: doc/reference/en/index.html:114(span) doc/reference/en/index.html:119(span)
+#: doc/reference/en/index.html:135(span) doc/reference/en/index.html:136(span)
+#: doc/reference/en/index.html:137(span) doc/reference/en/index.html:138(span)
+#: doc/reference/en/index.html:139(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:146(span) doc/reference/en/index.html:148(span)
+#: doc/reference/en/index.html:149(span) doc/reference/en/index.html:155(span)
+#: doc/reference/en/index.html:156(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:314(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:409(span)
@@ -14573,6 +14622,19 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:416(span)
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:417(span)
 #: doc/reference/en/ActiveLdap.html:244(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.README.html:119(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.README.html:148(span)
+#: doc/reference/en/file.README.html:149(span)
+#: doc/reference/en/file.README.html:155(span)
+#: doc/reference/en/file.README.html:156(span)
 #: doc/reference/en/LDAP/Conn.html:253(span)
 #: doc/reference/en/LDAP/Conn.html:254(span)
 #: doc/reference/en/LDAP/Conn.html:255(span)
@@ -14709,6 +14771,8 @@ msgid "="
 msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:194(span)
+#: doc/reference/en/index.html:136(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:156(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:381(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:410(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:462(span)
@@ -15023,6 +15087,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:331(span)
 #: doc/reference/en/ActiveLdap/Schema/ObjectClass.html:105(span)
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:417(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:156(span)
 #: doc/reference/en/LDAP/Conn.html:255(span)
 #: doc/reference/en/LDAP/Conn.html:256(span)
 #: doc/reference/en/LDAP/Mod.html:238(span)
@@ -15051,6 +15118,8 @@ msgid "["
 msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:194(span)
+#: doc/reference/en/index.html:136(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:156(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:381(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:410(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:462(span)
@@ -15364,6 +15433,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:332(span)
 #: doc/reference/en/ActiveLdap/Schema/ObjectClass.html:105(span)
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:417(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:156(span)
 #: doc/reference/en/LDAP/Conn.html:255(span)
 #: doc/reference/en/LDAP/Conn.html:256(span)
 #: doc/reference/en/LDAP/Mod.html:238(span)
@@ -15393,6 +15465,8 @@ msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:196(span)
 #: doc/reference/en/Net/LDAP.html:170(span)
+#: doc/reference/en/index.html:140(span) doc/reference/en/index.html:150(span)
+#: doc/reference/en/index.html:157(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:315(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:353(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:382(span)
@@ -16192,6 +16266,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap.html:253(span)
 #: doc/reference/en/ActiveLdap.html:254(span)
 #: doc/reference/en/ActiveLdap.html:304(span)
+#: doc/reference/en/file.README.html:140(span)
+#: doc/reference/en/file.README.html:150(span)
+#: doc/reference/en/file.README.html:157(span)
 #: doc/reference/en/LDAP/Conn.html:259(span)
 #: doc/reference/en/LDAP/Conn.html:262(span)
 #: doc/reference/en/LDAP/Conn.html:295(span)
@@ -17531,8 +17608,9 @@ msgid "File: README"
 msgstr "ファイル: はじめに"
 
 #: doc/reference/en/index.html:58(p) doc/reference/en/file.README.html:58(p)
-msgid "A ruby library for object-oriented <placeholder-1/> interction."
-msgstr ""
+#, fuzzy
+msgid "A ruby library for object-oriented <placeholder-1/> interface."
+msgstr "Ruby用オブジェクト指向<placeholder-1/>インターフェイス。"
 
 #: doc/reference/en/index.html:60(em) doc/reference/en/file.README.html:60(em)
 msgid "&lt;will@alum.bu.edu&gt;"
@@ -17552,7 +17630,7 @@ msgstr ""
 
 #: doc/reference/en/index.html:63(h2) doc/reference/en/file.README.html:63(h2)
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: doc/reference/en/index.html:64(p) doc/reference/en/file.README.html:64(p)
 msgid ""
@@ -17562,26 +17640,30 @@ msgid ""
 "it is still trivial to define new objects and manipulate them with minimal "
 "difficulty."
 msgstr ""
+"‘ActiveLdap’は<placeholder-1/>ライブラリをきれいなオブジェクト指向APIで利用す"
+"るためのライブラリです。ActiveRecordにインスパイアされています。ActiveRecord"
+"ほどきれいさや柔軟性がないかもしれませんが、ほとんど同じように新しいオブジェ"
+"クトを作ったり操作したりできます。"
 
 #: doc/reference/en/index.html:70(a) doc/reference/en/file.README.html:70(a)
 msgid "document"
-msgstr ""
+msgstr "ドキュメント"
 
 #: doc/reference/en/index.html:69(p) doc/reference/en/file.README.html:69(p)
 msgid "For example and usage – read the <placeholder-1/>."
-msgstr ""
+msgstr "例と使い方は<placeholder-1/>を読んでください。"
 
 #: doc/reference/en/index.html:71(h2) doc/reference/en/file.README.html:71(h2)
 msgid "Prerequisites"
-msgstr ""
+msgstr "必要なもの"
 
 #: doc/reference/en/index.html:73(dt) doc/reference/en/file.README.html:73(dt)
 msgid "Ruby intepreter"
-msgstr ""
+msgstr "Rubyインタプリタ"
 
 #: doc/reference/en/index.html:74(p) doc/reference/en/file.README.html:74(p)
 msgid "One of them:"
-msgstr ""
+msgstr "以下のいづれか:"
 
 #: doc/reference/en/index.html:76(a) doc/reference/en/file.README.html:76(a)
 #: doc/reference/en/file.tutorial.html:90(a)
@@ -17589,540 +17671,111 @@ msgid "Ruby"
 msgstr ""
 
 #: doc/reference/en/index.html:76(li) doc/reference/en/file.README.html:76(li)
-msgid "<placeholder-1/> (1.8.x or 1.9.1)"
-msgstr ""
+#, fuzzy
+msgid "<placeholder-1/> (1.8.x or 1.9.x)"
+msgstr "<placeholder-1/> (1.8.xまたは1.9.2)"
 
 #: doc/reference/en/index.html:77(a) doc/reference/en/file.README.html:77(a)
 #: doc/reference/en/file.tutorial.html:90(a)
 msgid "JRuby"
 msgstr ""
 
-#: doc/reference/en/index.html:77(li) doc/reference/en/file.README.html:77(li)
+#: doc/reference/en/index.html:79(p) doc/reference/en/index.html:87(p)
+#: doc/reference/en/file.README.html:79(p)
+#: doc/reference/en/file.README.html:87(p)
+msgid "See the above links for installation."
+msgstr ""
+
+#: doc/reference/en/index.html:80(dt) doc/reference/en/file.README.html:80(dt)
+#, fuzzy
+msgid "<placeholder-1/> client"
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:81(p) doc/reference/en/file.README.html:81(p)
 msgid ""
-"<placeholder-1/> LDAP client JRuby doesnt need to install new library "
-"because JRuby has builtin LDAP support. Ruby users need one of them: Ruby/"
-"LDAP Net::LDAP ActiveModel A toolkit for building modeling frameworks like "
-"Active Record and Active Resource. Notes Only GSSAPI SASL support exists due "
-"to Ruby/LDAP limitations Rails There is a small rails plugin included that "
-"allows the use of a file named config/ldap.yml in the config directory of "
-"your rails app. This file has a similar function to the database.yml file "
-"that allows you to set your database connection settings per environment. "
-"Similarly, the ldap.yml file allows settings to be set for development, "
-"test, and production environments. For instance, the development entry would "
-"look something like the following: development: host: 127.0.0.1 port: 389 "
-"base: dc=localhost bind_dn: cn=admin,dc=localhost password: secret To "
-"install, simply add the following code to your Gemfile: gem 'activeldap', "
-"'3.1.0', :require = 'active_ldap' You should also depend on an LDAP adapter "
-"such as Net::LDAP or Ruby/LDAP. The following example uses Ruby/LDAP: gem "
-"'ruby-ldap', :require = 'ldap' Bundler will install the gems automatically "
-"when you run bundle install. You also need to include the ActiveLdap railtie "
-"in config/application.rb, after the other railties: require active_ldap/"
-"railtie When your application starts up, the plugin will call ActiveLdap::"
-"Base.setup_connection using the parameters specified for your current "
-"environment. Model Here is some examples. app/model/member.rb: class Member "
-"ActiveLdap::Base ldap_mapping :dn_attribute = 'uid', :classes = ['person', "
-"'posixAccount'] belongs_to :primary_group, :class_name = Group, :foreign_key "
-"= gidNumber, :primary_key = gidNumber belongs_to :groups, :many = "
-"'memberUid' end app/model/group.rb: class Group ActiveLdap::Base "
-"ldap_mapping :dn_attribute = cn, :classes = ['posixGroup'] has_many :"
-"members, :wrap = memberUid has_many :primary_members, :foreign_key = "
-"'gidNumber', :primary_key = 'gidNumber' end app/model/ou.rb: class Ou "
-"ActiveLdap::Base ldap_mapping :prefix = , :classes = [top, "
-"organizationalUnit] end Licence This program is free software; you can "
-"redistribute it and/or modify it. It is dual licensed under Rubys license "
-"and under the terms of the GNU General Public License as published by the "
-"Free Software Foundation; either version 2, or (at your option) any later "
-"version. Please see the file LICENSE for the terms of the licence. Thanks "
-"This list may not be correct. If you notice mistakes of this list, please "
-"point out. Dick Davies Nathan Kinder Patrick Cole Google Inc. Nobody: Bug "
-"reports and API improveent ideas. James Hughes: Bug reports and advices and "
-"documentations. Buzz Chopra: Documentations. Christoph Lipp: Bug reports. "
-"Tell us character escape syntax. Jeff Hall: Bug reports. Ernie Miller: Bug "
-"reports and advices. Daniel Pfile: Patches. Jacob Wilkins: Bug reports. Ace "
-"Suares: Bug reports. Nederlands translations. Iain Pople: Bug reports and "
-"API improvement ideas. Kevin McCarthy: Patches. Perry Smith: Patches, bug "
-"reports and indications. Marc DequAPI suggestions. Jeremy Pruitt: Bug "
-"reports. Bodaniel Jeanes: A suggestion for behavior on simple bind with "
-"empty password. Bug reports. Naoto Morishima: Bug reports. David Morton: An "
-"API improvement idea. Bug reports. Lennon Day-Reynolds: Bug reports. Tilo: A "
-"bug report. Matt Mencel: Bug reports. CultureSpy: Bug reports. Bug fixes. "
-"gwarf12: A bug report. Baptiste Grenier: API improvement ideas. Richard 3 "
-"Nicholas: API improvement ideas. Kazuhiro NISHIYAMA: A bug report. Grzegorz "
-"Marsza Ted Lepich: A suggestion. danger1986: A suggestion. michael.j."
-"konopka: Bug reports. ingersoll: A suggestion. Alexey.Chebotar: Bug reports. "
-"ery.lee: A bug report. id:dicdak: A bug report. Raiko Mitsu: A bug report. "
-"Kazuaki Takase: Documents in Japanese. Tim Hermans: A bug report. Joe "
-"Francis: A suggestion. Tiago Fernandes: Bug reports. achemze: A suggestion. "
-"George Montana Harkin: A suggestion. Marc Dequ brad@lucky-dip.net: A bug "
-"report. Hideyuki Yasuda: Bug reports. zachwily: A bug report. syrius.ml@no-"
-"log.org: A bug report. Tim Hermans: A bug report. Anthony M. Martinez: "
-"Helped SASL options support ilusi0n.x: A bug report. projekttabla: A "
-"suggestion. christian.pennaforte: A bug report. planetmcd: A bug report. "
-"spoidar: Rails 3 support. Kris Wehner: Rails 2.3.8 support. Ryan Tandy: A "
-"test bug fix. Rails 3 support. rbq: A bug report. Narihiro Nakamura: Rails 3 "
-"support. Hidetoshi Yoshimoto: Rails 3 support."
+"JRuby doesn’t need to install new library because JRuby has builtin "
+"<placeholder-1/> support. Ruby users need one of them:"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/ActionController.html:6(title)
-msgid "Module: ActiveLdap::ActionController &mdash; ActiveLdap"
+#: doc/reference/en/index.html:84(a) doc/reference/en/file.README.html:84(a)
+#: doc/reference/en/file.tutorial.html:91(a)
+msgid "Ruby/<placeholder-1/>"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/ActionController.html:36(a)
-#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:36(a)
-#: doc/reference/en/ActiveLdap/Acts.html:36(a)
-#: doc/reference/en/ActiveLdap/Adapter.html:36(a)
-#: doc/reference/en/ActiveLdap/AuthenticationError.html:36(a)
-#: doc/reference/en/ActiveLdap/Attributes.html:36(a)
-#: doc/reference/en/ActiveLdap/AdapterNotSpecified.html:36(a)
-#: doc/reference/en/ActiveLdap/Association.html:36(a)
-#: doc/reference/en/ActiveLdap/AdapterNotFound.html:36(a)
-#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:36(a)
-#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:36(a)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:36(a)
-#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:36(a)
-#: doc/reference/en/ActiveLdap/AttributeAssignmentError.html:36(a)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/AddOperationModifiable.html:36(a)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:36(a)
-#: doc/reference/en/ActiveLdap/Associations.html:36(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:36(a)
-#: doc/reference/en/ActiveLdap.html:36(a)
-msgid "Index (A)"
+#: doc/reference/en/index.html:85(a) doc/reference/en/file.README.html:85(a)
+#: doc/reference/en/file.tutorial.html:91(a)
+msgid "Net::<placeholder-1/>"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/ActionController.html:59(h1)
-msgid "Module: ActiveLdap::ActionController"
+#: doc/reference/en/index.html:88(dt) doc/reference/en/file.README.html:88(dt)
+msgid "ActiveModel"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/ActionController.html:75(dd)
-#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:75(dd)
-msgid "lib/active_ldap/action_controller/ldap_benchmarking.rb"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:6(title)
-msgid "Class: ActiveLdap::LogSubscriber &mdash; ActiveLdap"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:59(h1)
-msgid "Class: ActiveLdap::LogSubscriber"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:69(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:74(li)
-msgid "ActiveSupport::LogSubscriber"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:92(dd)
-msgid "lib/active_ldap/log_subscriber.rb"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:105(h2)
-#: doc/reference/en/ActiveLdap/LdapError.html:134(h2)
-#: doc/reference/en/ActiveLdap/Ldif.html:178(h2)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:96(h2)
-#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:86(h2)
-#: doc/reference/en/ActiveLdap/Connection.html:96(h2)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:154(h2)
-#: doc/reference/en/ActiveLdap/GetTextSupport.html:90(h2)
-#: doc/reference/en/ActiveLdap/Attributes.html:96(h2)
-#: doc/reference/en/ActiveLdap/Base.html:192(h2)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:96(h2)
-#: doc/reference/en/ActiveLdap/HumanReadable.html:100(h2)
-#: doc/reference/en/ActiveLdap/Associations.html:111(h2)
-#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:86(h2)
-#: doc/reference/en/ActiveLdap/Configuration.html:125(h2)
-#: doc/reference/en/ActiveLdap/Operations.html:96(h2)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:181(h2)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:96(h2)
-#: doc/reference/en/ActiveLdap.html:142(h2)
-#: doc/reference/en/Timeout.html:88(h2)
-msgid "Class Method Summary <placeholder-1/>"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:115(a)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:136(a)
-#: doc/reference/en/ActiveLdap/Base.html:156(a)
-#: doc/reference/en/ActiveLdap/Base.html:223(a)
-#: doc/reference/en/ActiveLdap/Base.html:268(a)
-#: doc/reference/en/ActiveLdap/Base.html:352(a)
-#: doc/reference/en/ActiveLdap/Base.html:439(a)
-#: doc/reference/en/ActiveLdap/Base.html:485(a)
-#: doc/reference/en/ActiveLdap/Base.html:509(a)
-#: doc/reference/en/ActiveLdap/Base.html:572(a)
-#: doc/reference/en/ActiveLdap/Base.html:593(a)
-msgid "+ (Object) <placeholder-1/>"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:157(a)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:164(a)
-#: doc/reference/en/ActiveLdap/Base.html:247(a)
-#: doc/reference/en/ActiveLdap/Base.html:530(a)
-msgid "+ (Object) <placeholder-1/>(value)"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:187(a)
-msgid "- (LogSubscriber) <placeholder-1/>"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:202(p)
-msgid "A new instance of LogSubscriber."
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:213(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:427(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:457(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:478(strong)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1348(strong)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1368(span)
-msgid "log_info"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:213(a)
-msgid "- (Object) <placeholder-1/>(event)"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:234(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:459(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:482(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:499(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:576(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:477(span)
-msgid "logger"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:255(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:465(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:511(strong)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:549(span)
-msgid "odd?"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:255(a)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:202(a)
-#: doc/reference/en/ActiveLdap/Connection.html:136(a)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:320(a)
-#: doc/reference/en/ActiveLdap/Base.html:1153(a)
-#: doc/reference/en/ActiveLdap/Base.html:1385(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:191(a)
-#: doc/reference/en/ActiveLdap/Ldif/Scanner.html:214(a)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:209(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:226(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:247(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:294(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:315(a)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:336(a)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:249(a)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:270(a)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:338(a)
-#: doc/reference/en/ActiveLdap/Association/Collection.html:195(a)
-#: doc/reference/en/ActiveLdap/Association/Proxy.html:136(a)
-#: doc/reference/en/ActiveLdap/Association/Proxy.html:204(a)
-#: doc/reference/en/ActiveLdap/Association/BelongsTo.html:141(a)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:115(a)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:136(a)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:141(a)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:141(a)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:326(a)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:368(a)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:238(a)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:234(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:177(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:201(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:225(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:338(a)
-#: doc/reference/en/ActiveLdap/Schema/Attribute.html:362(a)
-#: doc/reference/en/ActiveLdap/Schema/Syntax.html:180(a)
-#: doc/reference/en/ActiveLdap/Schema/Syntax.html:201(a)
-#: doc/reference/en/LDAP/Conn.html:174(a)
-msgid "- (Boolean) <placeholder-1/>"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:281(p)
+#: doc/reference/en/index.html:89(p) doc/reference/en/file.README.html:89(p)
 msgid ""
-"- (<tt><span class=\"object_link\"><placeholder-1/></span></tt>) "
-"<placeholder-2/>"
+"A toolkit for building modeling frameworks like Active Record and Active "
+"Resource."
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:289(p)
-msgid "A new instance of LogSubscriber"
+#: doc/reference/en/index.html:92(h2) doc/reference/en/file.README.html:92(h2)
+msgid "Notes"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:301(pre)
-msgid "16 17 18 19"
+#: doc/reference/en/index.html:94(li) doc/reference/en/file.README.html:94(li)
+#, fuzzy
+msgid ""
+"Only <placeholder-1/> <placeholder-2/> support exists due to Ruby/"
+"<placeholder-3/> limitations"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:96(h2)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:469(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:470(span)
+#: doc/reference/en/file.README.html:96(h2)
+msgid "Rails"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:310(span)
-msgid "# File 'lib/active_ldap/log_subscriber.rb', line 16"
+#: doc/reference/en/index.html:97(p) doc/reference/en/file.README.html:97(p)
+msgid ""
+"There is a small rails plugin included that allows the use of a file named "
+"‘config/ldap.yml’ in the config directory of your rails app. This file has a "
+"similar function to the ‘database.yml’ file that allows you to set your "
+"database connection settings per environment. Similarly, the ldap.yml file "
+"allows settings to be set for development, test, and production "
+"environments. For instance, the development entry would look something like "
+"the following:"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:313(span)
-#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:271(span)
-#: doc/reference/en/ActiveLdap/Railties/ControllerRuntime/ClassMethods.html:146(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:344(span)
-#: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:242(span)
-#: doc/reference/en/ActiveLdap/Validations.html:242(span)
-#: doc/reference/en/ActiveLdap/Validations.html:271(span)
-#: doc/reference/en/ActiveLdap/Validations.html:324(span)
-#: doc/reference/en/ActiveLdap/LdifInvalid.html:391(span)
-#: doc/reference/en/ActiveLdap/Base.html:2005(span)
-#: doc/reference/en/ActiveLdap/Base.html:2504(span)
-#: doc/reference/en/ActiveLdap/Base.html:2560(span)
-#: doc/reference/en/ActiveLdap/Base.html:2972(span)
-#: doc/reference/en/ActiveLdap/Base.html:3626(span)
-#: doc/reference/en/ActiveLdap/Base.html:3655(span)
-#: doc/reference/en/ActiveLdap/Base.html:3990(span)
-#: doc/reference/en/ActiveLdap/Base.html:3996(span)
-#: doc/reference/en/ActiveLdap/Base.html:4213(span)
-#: doc/reference/en/ActiveLdap/Base.html:4410(span)
-#: doc/reference/en/ActiveLdap/Base.html:4469(span)
-#: doc/reference/en/ActiveLdap/Base.html:4657(span)
-#: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:281(span)
-#: doc/reference/en/ActiveLdap/AdapterNotFound.html:242(span)
-#: doc/reference/en/ActiveLdap/NotImplemented.html:242(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord.html:371(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:261(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:326(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:414(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:545(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:196(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:196(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:196(span)
-#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:237(span)
-#: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:237(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:261(span)
-#: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:206(span)
-#: doc/reference/en/ActiveLdap/EntryInvalid.html:244(span)
-#: doc/reference/en/ActiveLdap/HumanReadable.html:159(span)
-#: doc/reference/en/ActiveLdap/Callbacks.html:241(span)
-#: doc/reference/en/ActiveLdap/Callbacks.html:281(span)
-#: doc/reference/en/ActiveLdap/Callbacks.html:321(span)
-#: doc/reference/en/ActiveLdap/UnknownAttribute.html:242(span)
-#: doc/reference/en/ActiveLdap/Associations.html:202(span)
-#: doc/reference/en/ActiveLdap/Operations.html:167(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:376(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:411(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:449(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:486(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:520(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:562(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:607(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:644(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:400(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:441(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:475(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:513(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:558(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:607(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:658(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:724(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:780(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:410(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:454(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:489(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:536(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:584(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:622(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:671(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:735(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:788(span)
-#: doc/reference/en/ActiveLdap/Schema/Syntax.html:414(span)
-#: doc/reference/en/ActiveLdap.html:252(span)
-msgid "super"
+#: doc/reference/en/index.html:105(pre)
+#: doc/reference/en/file.README.html:105(pre)
+msgid ""
+"development: host: 127.0.0.1 port: 389 base: dc=localhost bind_dn: cn=admin,"
+"dc=localhost password: secret"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:314(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:550(span)
-msgid "@odd_or_even"
+#: doc/reference/en/index.html:112(p) doc/reference/en/file.README.html:112(p)
+msgid "To install, simply add the following code to your Gemfile:"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:314(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:94(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:710(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:284(span)
-#: doc/reference/en/ActiveLdap/Validations.html:242(span)
-#: doc/reference/en/ActiveLdap/Base.html:2906(span)
-#: doc/reference/en/ActiveLdap/Base.html:3115(span)
-#: doc/reference/en/ActiveLdap/Base.html:3202(span)
-#: doc/reference/en/ActiveLdap/Base.html:3488(span)
-#: doc/reference/en/ActiveLdap/Base.html:3998(span)
-#: doc/reference/en/ActiveLdap/Base.html:4354(span)
-#: doc/reference/en/ActiveLdap/Base.html:4409(span)
-#: doc/reference/en/ActiveLdap/Base.html:4414(span)
-#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:231(span)
-#: doc/reference/en/ActiveLdap/EntryAttribute.html:681(span)
-#: doc/reference/en/ActiveLdap/EntryAttribute.html:729(span)
-#: doc/reference/en/ActiveLdap/Association/Proxy.html:685(span)
-#: doc/reference/en/ActiveLdap/Association/Proxy.html:735(span)
-#: doc/reference/en/ActiveLdap/Helper.html:419(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:205(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:255(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:199(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:726(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:727(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:728(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1159(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1160(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1161(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1732(span)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:232(span)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:276(span)
-#: doc/reference/en/LDAP/Conn.html:422(span)
-#: doc/reference/en/file.tutorial.html:301(span)
-#: doc/reference/en/file.tutorial.html:397(span)
-#: doc/reference/en/file.tutorial.html:425(span)
-#: doc/reference/en/file.tutorial.html:426(span)
-#: doc/reference/en/file.tutorial.html:569(span)
-#: doc/reference/en/file.tutorial.html:619(span)
-#: doc/reference/en/file.tutorial.html:666(span)
-msgid "false"
+#: doc/reference/en/index.html:114(span) doc/reference/en/index.html:119(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.README.html:119(span)
+msgid "gem"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:326(h2)
-#: doc/reference/en/ActiveLdap/LdapError.html:184(h2)
-#: doc/reference/en/ActiveLdap/Ldif.html:469(h2)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:277(h2)
-#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:234(h2)
-#: doc/reference/en/ActiveLdap/Connection.html:307(h2)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:634(h2)
-#: doc/reference/en/ActiveLdap/GetTextSupport.html:124(h2)
-#: doc/reference/en/ActiveLdap/Attributes.html:130(h2)
-#: doc/reference/en/ActiveLdap/Base.html:2065(h2)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:246(h2)
-#: doc/reference/en/ActiveLdap/HumanReadable.html:134(h2)
-#: doc/reference/en/ActiveLdap/Associations.html:175(h2)
-#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:120(h2)
-#: doc/reference/en/ActiveLdap/Configuration.html:159(h2)
-#: doc/reference/en/ActiveLdap/Operations.html:130(h2)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:796(h2)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:130(h2)
-#: doc/reference/en/ActiveLdap.html:207(h2)
-#: doc/reference/en/Timeout.html:125(h2)
-msgid "Class Method Details"
+#: doc/reference/en/index.html:114(span)
+#: doc/reference/en/file.README.html:114(span)
+msgid "'activeldap'"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:330(p)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:361(p)
-#: doc/reference/en/ActiveLdap/Base.html:2022(p)
-#: doc/reference/en/ActiveLdap/Base.html:2069(p)
-#: doc/reference/en/ActiveLdap/Base.html:2119(p)
-#: doc/reference/en/ActiveLdap/Base.html:2200(p)
-#: doc/reference/en/ActiveLdap/Base.html:2354(p)
-#: doc/reference/en/ActiveLdap/Base.html:2516(p)
-#: doc/reference/en/ActiveLdap/Base.html:2666(p)
-#: doc/reference/en/ActiveLdap/Base.html:2716(p)
-#: doc/reference/en/ActiveLdap/Base.html:2809(p)
-#: doc/reference/en/ActiveLdap/Base.html:2834(p)
-#: doc/reference/en/ActiveLdap.html:262(p)
-msgid "+ (<placeholder-1/>) <placeholder-2/>"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:339(pre)
-msgid "11 12 13 14"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:348(span)
-msgid "# File 'lib/active_ldap/log_subscriber.rb', line 11"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:350(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:380(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:409(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:458(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:581(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:620(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:799(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:998(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1110(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:305(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:362(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:397(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:455(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:498(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:543(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:586(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:388(span)
-#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:258(span)
-#: doc/reference/en/ActiveLdap/Connection.html:330(span)
-#: doc/reference/en/ActiveLdap/Connection.html:387(span)
-#: doc/reference/en/ActiveLdap/Connection.html:437(span)
-#: doc/reference/en/ActiveLdap/Connection.html:438(span)
-#: doc/reference/en/ActiveLdap/Connection.html:478(span)
-#: doc/reference/en/ActiveLdap/Connection.html:550(span)
-#: doc/reference/en/ActiveLdap/Connection.html:588(span)
-#: doc/reference/en/ActiveLdap/Connection.html:591(span)
-#: doc/reference/en/ActiveLdap/Connection.html:594(span)
-#: doc/reference/en/ActiveLdap/Connection.html:595(span)
-#: doc/reference/en/ActiveLdap/Connection.html:659(span)
-#: doc/reference/en/ActiveLdap/Connection.html:660(span)
-#: doc/reference/en/ActiveLdap/Connection.html:661(span)
-#: doc/reference/en/ActiveLdap/Connection.html:664(span)
-#: doc/reference/en/ActiveLdap/Schema.html:645(span)
-#: doc/reference/en/ActiveLdap/Schema.html:1066(span)
-#: doc/reference/en/ActiveLdap/Schema.html:1198(span)
-#: doc/reference/en/ActiveLdap/Validations.html:271(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:730(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:774(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:777(span)
-#: doc/reference/en/ActiveLdap/Attributes.html:157(span)
-#: doc/reference/en/ActiveLdap/Base.html:1871(span)
-#: doc/reference/en/ActiveLdap/Base.html:1873(span)
-#: doc/reference/en/ActiveLdap/Base.html:1874(span)
-#: doc/reference/en/ActiveLdap/Base.html:1877(span)
-#: doc/reference/en/ActiveLdap/Base.html:1883(span)
-#: doc/reference/en/ActiveLdap/Base.html:1884(span)
-#: doc/reference/en/ActiveLdap/Base.html:1890(span)
-#: doc/reference/en/ActiveLdap/Base.html:2190(span)
-#: doc/reference/en/ActiveLdap/Base.html:2224(span)
-#: doc/reference/en/ActiveLdap/Base.html:2225(span)
-#: doc/reference/en/ActiveLdap/Base.html:2258(span)
-#: doc/reference/en/ActiveLdap/Base.html:2559(span)
-#: doc/reference/en/ActiveLdap/Base.html:2647(span)
-#: doc/reference/en/ActiveLdap/Base.html:2648(span)
-#: doc/reference/en/ActiveLdap/Base.html:2649(span)
-#: doc/reference/en/ActiveLdap/Base.html:2650(span)
-#: doc/reference/en/ActiveLdap/Base.html:2651(span)
-#: doc/reference/en/ActiveLdap/Base.html:2652(span)
-#: doc/reference/en/ActiveLdap/Base.html:2653(span)
-#: doc/reference/en/ActiveLdap/Base.html:2654(span)
-#: doc/reference/en/ActiveLdap/Base.html:2655(span)
-#: doc/reference/en/ActiveLdap/Base.html:2767(span)
-#: doc/reference/en/ActiveLdap/Base.html:2800(span)
-#: doc/reference/en/ActiveLdap/Base.html:2861(span)
-#: doc/reference/en/ActiveLdap/Base.html:2868(span)
-#: doc/reference/en/ActiveLdap/Base.html:3080(span)
-#: doc/reference/en/ActiveLdap/Base.html:3081(span)
-#: doc/reference/en/ActiveLdap/Base.html:3597(span)
-#: doc/reference/en/ActiveLdap/Base.html:3875(span)
-#: doc/reference/en/ActiveLdap/Base.html:3935(span)
-#: doc/reference/en/ActiveLdap/Base.html:4352(span)
-#: doc/reference/en/ActiveLdap/Base.html:4353(span)
-#: doc/reference/en/ActiveLdap/Base.html:4355(span)
-#: doc/reference/en/ActiveLdap/Base.html:4528(span)
-#: doc/reference/en/ActiveLdap/Base.html:4758(span)
-#: doc/reference/en/ActiveLdap/Base.html:4853(span)
-#: doc/reference/en/ActiveLdap/Base.html:4884(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:470(span)
-#: doc/reference/en/ActiveLdap/Ldif/Record.html:451(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:638(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:531(span)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:269(span)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:363(span)
-#: doc/reference/en/ActiveLdap/HumanReadable.html:158(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:265(span)
-#: doc/reference/en/ActiveLdap/Associations.html:201(span)
-#: doc/reference/en/ActiveLdap/Associations.html:244(span)
-#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:150(span)
-#: doc/reference/en/ActiveLdap/Configuration.html:182(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:361(span)
-msgid "self"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:352(span)
-msgid "rt"
-msgstr ""
-
+#: doc/reference/en/index.html:114(span) doc/reference/en/index.html:119(span)
+#: doc/reference/en/index.html:135(span) doc/reference/en/index.html:136(span)
+#: doc/reference/en/index.html:137(span) doc/reference/en/index.html:138(span)
+#: doc/reference/en/index.html:139(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:146(span) doc/reference/en/index.html:147(span)
+#: doc/reference/en/index.html:148(span) doc/reference/en/index.html:155(span)
+#: doc/reference/en/index.html:156(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:462(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:466(span)
@@ -18758,6 +18411,19 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:407(span)
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:414(span)
 #: doc/reference/en/ActiveLdap.html:249(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.README.html:119(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.README.html:147(span)
+#: doc/reference/en/file.README.html:148(span)
+#: doc/reference/en/file.README.html:155(span)
+#: doc/reference/en/file.README.html:156(span)
 #: doc/reference/en/LDAP/Conn.html:261(span)
 #: doc/reference/en/LDAP/Conn.html:419(span)
 #: doc/reference/en/LDAP/Conn.html:421(span)
@@ -18846,6 +18512,1836 @@ msgstr ""
 #: doc/reference/en/Timeout.html:159(span)
 #: doc/reference/en/Timeout.html:160(span)
 msgid ","
+msgstr ""
+
+#: doc/reference/en/index.html:114(span)
+#: doc/reference/en/file.README.html:114(span)
+msgid "'3.1.0'"
+msgstr ""
+
+#: doc/reference/en/index.html:114(span) doc/reference/en/index.html:119(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.README.html:119(span)
+#, fuzzy
+msgid ":require"
+msgstr "動作条件"
+
+#: doc/reference/en/index.html:114(span) doc/reference/en/index.html:119(span)
+#: doc/reference/en/index.html:135(span) doc/reference/en/index.html:136(span)
+#: doc/reference/en/index.html:137(span) doc/reference/en/index.html:138(span)
+#: doc/reference/en/index.html:139(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:146(span) doc/reference/en/index.html:148(span)
+#: doc/reference/en/index.html:149(span) doc/reference/en/index.html:155(span)
+#: doc/reference/en/index.html:156(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:400(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:144(span)
+#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:339(span)
+#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:369(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:570(span)
+#: doc/reference/en/ActiveLdap/GetTextSupport.html:159(span)
+#: doc/reference/en/ActiveLdap/Xml/Serializer.html:262(span)
+#: doc/reference/en/ActiveLdap/Base.html:1992(span)
+#: doc/reference/en/ActiveLdap/Base.html:2607(span)
+#: doc/reference/en/ActiveLdap/Base.html:2608(span)
+#: doc/reference/en/ActiveLdap/Base.html:2609(span)
+#: doc/reference/en/ActiveLdap/Base.html:3484(span)
+#: doc/reference/en/ActiveLdap/Base.html:3488(span)
+#: doc/reference/en/ActiveLdap/Base.html:3626(span)
+#: doc/reference/en/ActiveLdap/Base.html:3655(span)
+#: doc/reference/en/ActiveLdap/Base.html:4343(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:586(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:587(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:588(span)
+#: doc/reference/en/ActiveLdap/Ldif/Record.html:483(span)
+#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:299(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:610(span)
+#: doc/reference/en/ActiveLdap/Populate.html:202(span)
+#: doc/reference/en/ActiveLdap/Populate.html:263(span)
+#: doc/reference/en/ActiveLdap/Populate.html:264(span)
+#: doc/reference/en/ActiveLdap/Populate.html:265(span)
+#: doc/reference/en/ActiveLdap/Populate.html:266(span)
+#: doc/reference/en/ActiveLdap/Populate.html:314(span)
+#: doc/reference/en/ActiveLdap/Populate.html:315(span)
+#: doc/reference/en/ActiveLdap/Populate.html:316(span)
+#: doc/reference/en/ActiveLdap/Helper.html:427(span)
+#: doc/reference/en/ActiveLdap/Helper.html:448(span)
+#: doc/reference/en/ActiveLdap/Helper.html:452(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:282(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:287(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:416(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:421(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:144(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyNameRecordLoadable.html:146(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:151(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable.html:164(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:225(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:279(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:280(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:281(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:282(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:287(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:288(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:289(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:290(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:291(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:400(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:401(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:402(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:403(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:404(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:405(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:406(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:412(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:414(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:338(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:339(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:340(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:341(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:342(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:463(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:464(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:465(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:466(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:467(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:106(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:107(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:108(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:377(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:412(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:452(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:487(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:521(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:564(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:565(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:566(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:567(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:568(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:609(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:610(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1019(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1626(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1627(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1628(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1629(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1630(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:403(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:405(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:476(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:516(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:560(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:562(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:610(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:612(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:663(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:664(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:665(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:666(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:667(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:727(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:728(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:106(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:107(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:108(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:417(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:490(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:538(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:539(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:541(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:545(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:585(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:623(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:625(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:626(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:676(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:677(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:678(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:679(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:680(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:683(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:684(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:685(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:737(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:738(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:739(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:740(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:741(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:744(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:745(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.README.html:119(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.README.html:148(span)
+#: doc/reference/en/file.README.html:149(span)
+#: doc/reference/en/file.README.html:155(span)
+#: doc/reference/en/file.README.html:156(span)
+#: doc/reference/en/file.tutorial.html:105(span)
+#: doc/reference/en/file.tutorial.html:106(span)
+#: doc/reference/en/file.tutorial.html:107(span)
+#: doc/reference/en/file.tutorial.html:117(span)
+#: doc/reference/en/file.tutorial.html:122(span)
+#: doc/reference/en/file.tutorial.html:126(span)
+#: doc/reference/en/file.tutorial.html:136(span)
+#: doc/reference/en/file.tutorial.html:137(span)
+#: doc/reference/en/file.tutorial.html:140(span)
+#: doc/reference/en/file.tutorial.html:141(span)
+#: doc/reference/en/file.tutorial.html:144(span)
+#: doc/reference/en/file.tutorial.html:145(span)
+#: doc/reference/en/file.tutorial.html:148(span)
+#: doc/reference/en/file.tutorial.html:149(span)
+#: doc/reference/en/file.tutorial.html:169(span)
+#: doc/reference/en/file.tutorial.html:170(span)
+#: doc/reference/en/file.tutorial.html:171(span)
+#: doc/reference/en/file.tutorial.html:233(span)
+#: doc/reference/en/file.tutorial.html:234(span)
+#: doc/reference/en/file.tutorial.html:235(span)
+#: doc/reference/en/file.tutorial.html:236(span)
+#: doc/reference/en/file.tutorial.html:241(span)
+#: doc/reference/en/file.tutorial.html:242(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:249(span)
+#: doc/reference/en/file.tutorial.html:250(span)
+#: doc/reference/en/file.tutorial.html:251(span)
+#: doc/reference/en/file.tutorial.html:252(span)
+#: doc/reference/en/file.tutorial.html:256(span)
+#: doc/reference/en/file.tutorial.html:262(span)
+#: doc/reference/en/file.tutorial.html:266(span)
+#: doc/reference/en/file.tutorial.html:271(span)
+#: doc/reference/en/file.tutorial.html:274(span)
+#: doc/reference/en/file.tutorial.html:275(span)
+#: doc/reference/en/file.tutorial.html:278(span)
+#: doc/reference/en/file.tutorial.html:279(span)
+#: doc/reference/en/file.tutorial.html:300(span)
+#: doc/reference/en/file.tutorial.html:301(span)
+#: doc/reference/en/file.tutorial.html:302(span)
+#: doc/reference/en/file.tutorial.html:303(span)
+#: doc/reference/en/file.tutorial.html:312(span)
+#: doc/reference/en/file.tutorial.html:315(span)
+#: doc/reference/en/file.tutorial.html:316(span)
+#: doc/reference/en/file.tutorial.html:319(span)
+#: doc/reference/en/file.tutorial.html:320(span)
+#: doc/reference/en/file.tutorial.html:326(span)
+#: doc/reference/en/file.tutorial.html:327(span)
+#: doc/reference/en/file.tutorial.html:328(span)
+#: doc/reference/en/file.tutorial.html:329(span)
+#: doc/reference/en/file.tutorial.html:330(span)
+#: doc/reference/en/file.tutorial.html:331(span)
+#: doc/reference/en/file.tutorial.html:347(span)
+#: doc/reference/en/file.tutorial.html:354(span)
+#: doc/reference/en/file.tutorial.html:355(span)
+#: doc/reference/en/file.tutorial.html:360(span)
+#: doc/reference/en/file.tutorial.html:361(span)
+#: doc/reference/en/file.tutorial.html:374(span)
+#: doc/reference/en/file.tutorial.html:375(span)
+#: doc/reference/en/file.tutorial.html:376(span)
+#: doc/reference/en/file.tutorial.html:396(span)
+#: doc/reference/en/file.tutorial.html:397(span)
+#: doc/reference/en/file.tutorial.html:419(span)
+#: doc/reference/en/file.tutorial.html:420(span)
+#: doc/reference/en/file.tutorial.html:421(span)
+#: doc/reference/en/file.tutorial.html:422(span)
+#: doc/reference/en/file.tutorial.html:423(span)
+#: doc/reference/en/file.tutorial.html:424(span)
+#: doc/reference/en/file.tutorial.html:425(span)
+#: doc/reference/en/file.tutorial.html:426(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:533(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:568(span)
+#: doc/reference/en/file.tutorial.html:569(span)
+#: doc/reference/en/file.tutorial.html:618(span)
+#: doc/reference/en/file.tutorial.html:619(span)
+#: doc/reference/en/file.tutorial.html:665(span)
+#: doc/reference/en/file.tutorial.html:666(span)
+#: doc/reference/en/file.tutorial.html:682(span)
+#: doc/reference/en/file.tutorial.html:683(span)
+#: doc/reference/en/file.tutorial.html:685(span)
+#: doc/reference/en/file.tutorial.html:686(span)
+#: doc/reference/en/file.tutorial.html:687(span)
+#: doc/reference/en/file.tutorial.html:688(span)
+#: doc/reference/en/file.tutorial.html:690(span)
+#: doc/reference/en/file.tutorial.html:691(span)
+#: doc/reference/en/file.tutorial.html:692(span)
+#: doc/reference/en/file.tutorial.html:703(span)
+#: doc/reference/en/file.tutorial.html:714(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+#: doc/reference/en/file.tutorial.html:746(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+#: doc/reference/en/file.tutorial.html:766(span)
+#: doc/reference/en/file.tutorial.html:767(span)
+#: doc/reference/en/file.tutorial.html:768(span)
+#: doc/reference/en/file.tutorial.html:769(span)
+#: doc/reference/en/file.tutorial.html:776(span)
+#: doc/reference/en/file.tutorial.html:777(span)
+#: doc/reference/en/file.tutorial.html:778(span)
+#: doc/reference/en/file.tutorial.html:779(span)
+#: doc/reference/en/file.tutorial.html:785(span)
+#: doc/reference/en/file.tutorial.html:786(span)
+#: doc/reference/en/file.tutorial.html:787(span)
+#: doc/reference/en/file.tutorial.html:788(span)
+#: doc/reference/en/file.tutorial.html:789(span)
+#: doc/reference/en/file.tutorial.html:790(span)
+#: doc/reference/en/file.tutorial.html:791(span)
+#: doc/reference/en/file.tutorial.html:792(span)
+#: doc/reference/en/file.tutorial.html:835(span)
+#: doc/reference/en/file.tutorial.html:836(span)
+#: doc/reference/en/file.tutorial.html:837(span)
+#: doc/reference/en/file.tutorial.html:838(span)
+#: doc/reference/en/file.tutorial.html:846(span)
+#: doc/reference/en/file.tutorial.html:847(span)
+msgid "&gt;"
+msgstr ""
+
+#: doc/reference/en/index.html:114(span)
+#: doc/reference/en/file.README.html:114(span)
+#: doc/reference/en/file.tutorial.html:105(span)
+#: doc/reference/en/file.tutorial.html:117(span)
+#: doc/reference/en/file.tutorial.html:549(span)
+#: doc/reference/en/file.tutorial.html:599(span)
+#: doc/reference/en/file.tutorial.html:646(span)
+#: doc/reference/en/file.tutorial.html:727(span)
+msgid "'active_ldap'"
+msgstr ""
+
+#: doc/reference/en/index.html:116(p) doc/reference/en/file.README.html:116(p)
+#, fuzzy
+msgid ""
+"You should also depend on an <placeholder-1/> adapter such as Net::"
+"<placeholder-2/> or Ruby/<placeholder-3/>. The following example uses Ruby/"
+"<placeholder-4/>:"
+msgstr ""
+"<placeholder-1/>ライブラリ: <placeholder-2/> (Ruby の場合) または "
+"<placeholder-3/> (Ruby か JRuby の場合) または <placeholder-4/> (JRuby の場"
+"合)"
+
+#: doc/reference/en/index.html:119(span)
+#: doc/reference/en/file.README.html:119(span)
+msgid "'ruby-ldap'"
+msgstr ""
+
+#: doc/reference/en/index.html:119(span)
+#: doc/reference/en/file.README.html:119(span)
+msgid "'ldap'"
+msgstr ""
+
+#: doc/reference/en/index.html:121(p) doc/reference/en/file.README.html:121(p)
+msgid ""
+"Bundler will install the gems automatically when you run ‘bundle install’."
+msgstr ""
+
+#: doc/reference/en/index.html:122(p) doc/reference/en/file.README.html:122(p)
+msgid ""
+"You also need to include the ActiveLdap railtie in config/application.rb, "
+"after the other railties:"
+msgstr ""
+
+#: doc/reference/en/index.html:125(span)
+#: doc/reference/en/ActiveLdap/Schema.html:785(span)
+#: doc/reference/en/ActiveLdap/Command.html:223(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:821(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:852(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:883(span)
+#: doc/reference/en/file.README.html:125(span)
+#: doc/reference/en/file.tutorial.html:105(span)
+#: doc/reference/en/file.tutorial.html:117(span)
+#: doc/reference/en/file.tutorial.html:523(span)
+#: doc/reference/en/file.tutorial.html:548(span)
+#: doc/reference/en/file.tutorial.html:549(span)
+#: doc/reference/en/file.tutorial.html:550(span)
+#: doc/reference/en/file.tutorial.html:551(span)
+#: doc/reference/en/file.tutorial.html:598(span)
+#: doc/reference/en/file.tutorial.html:599(span)
+#: doc/reference/en/file.tutorial.html:600(span)
+#: doc/reference/en/file.tutorial.html:601(span)
+#: doc/reference/en/file.tutorial.html:645(span)
+#: doc/reference/en/file.tutorial.html:646(span)
+#: doc/reference/en/file.tutorial.html:647(span)
+#: doc/reference/en/file.tutorial.html:648(span)
+#: doc/reference/en/file.tutorial.html:727(span)
+#: doc/reference/en/file.tutorial.html:728(span)
+#: doc/reference/en/file.tutorial.html:729(span)
+#: doc/reference/en/file.tutorial.html:754(span)
+msgid "require"
+msgstr ""
+
+#: doc/reference/en/index.html:125(span)
+#: doc/reference/en/file.README.html:125(span)
+msgid "\"active_ldap/railtie\""
+msgstr ""
+
+#: doc/reference/en/index.html:127(p) doc/reference/en/file.README.html:127(p)
+msgid ""
+"When your application starts up, the plugin will call ActiveLdap::Base."
+"setup_connection using the parameters specified for your current environment."
+msgstr ""
+
+#: doc/reference/en/index.html:130(h2)
+#: doc/reference/en/file.README.html:130(h2)
+msgid "Model"
+msgstr ""
+
+#: doc/reference/en/index.html:131(p) doc/reference/en/file.README.html:131(p)
+msgid "Here is some examples."
+msgstr ""
+
+#: doc/reference/en/index.html:132(p) doc/reference/en/file.README.html:132(p)
+msgid "app/model/member.rb:"
+msgstr ""
+
+#: doc/reference/en/index.html:134(span) doc/reference/en/index.html:144(span)
+#: doc/reference/en/index.html:154(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:458(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:581(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:397(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:388(span)
+#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:491(span)
+#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:494(span)
+#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:499(span)
+#: doc/reference/en/ActiveLdap/Connection.html:387(span)
+#: doc/reference/en/ActiveLdap/Connection.html:437(span)
+#: doc/reference/en/ActiveLdap/Connection.html:438(span)
+#: doc/reference/en/ActiveLdap/Connection.html:478(span)
+#: doc/reference/en/ActiveLdap/Connection.html:550(span)
+#: doc/reference/en/ActiveLdap/Connection.html:588(span)
+#: doc/reference/en/ActiveLdap/Connection.html:591(span)
+#: doc/reference/en/ActiveLdap/Connection.html:594(span)
+#: doc/reference/en/ActiveLdap/Connection.html:595(span)
+#: doc/reference/en/ActiveLdap/Connection.html:659(span)
+#: doc/reference/en/ActiveLdap/Connection.html:660(span)
+#: doc/reference/en/ActiveLdap/Connection.html:661(span)
+#: doc/reference/en/ActiveLdap/Connection.html:664(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:730(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:777(span)
+#: doc/reference/en/ActiveLdap/Base.html:3081(span)
+#: doc/reference/en/ActiveLdap/Base.html:3597(span)
+#: doc/reference/en/ActiveLdap/Base.html:3935(span)
+#: doc/reference/en/ActiveLdap/Base.html:4528(span)
+#: doc/reference/en/ActiveLdap/Base.html:4758(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:470(span)
+#: doc/reference/en/ActiveLdap/Ldif/Record.html:451(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:638(span)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:363(span)
+#: doc/reference/en/ActiveLdap/Associations.html:244(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1698(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:361(span)
+#: doc/reference/en/file.README.html:134(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.README.html:154(span)
+#: doc/reference/en/file.tutorial.html:126(span)
+#: doc/reference/en/file.tutorial.html:168(span)
+#: doc/reference/en/file.tutorial.html:241(span)
+#: doc/reference/en/file.tutorial.html:270(span)
+#: doc/reference/en/file.tutorial.html:311(span)
+#: doc/reference/en/file.tutorial.html:525(span)
+#: doc/reference/en/file.tutorial.html:532(span)
+#: doc/reference/en/file.tutorial.html:736(span)
+#: doc/reference/en/file.tutorial.html:745(span)
+msgid "class"
+msgstr ""
+
+#: doc/reference/en/index.html:134(span)
+#: doc/reference/en/file.README.html:134(span)
+msgid "Member"
+msgstr ""
+
+#: doc/reference/en/index.html:134(span) doc/reference/en/index.html:144(span)
+#: doc/reference/en/index.html:154(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:620(span)
+#: doc/reference/en/ActiveLdap/GetText/Parser.html:363(span)
+#: doc/reference/en/file.README.html:134(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.README.html:154(span)
+#: doc/reference/en/file.tutorial.html:126(span)
+#: doc/reference/en/file.tutorial.html:168(span)
+#: doc/reference/en/file.tutorial.html:241(span)
+#: doc/reference/en/file.tutorial.html:270(span)
+#: doc/reference/en/file.tutorial.html:311(span)
+#: doc/reference/en/file.tutorial.html:525(span)
+#: doc/reference/en/file.tutorial.html:532(span)
+#: doc/reference/en/file.tutorial.html:736(span)
+#: doc/reference/en/file.tutorial.html:745(span)
+msgid "&lt;"
+msgstr ""
+
+#: doc/reference/en/index.html:134(span) doc/reference/en/index.html:144(span)
+#: doc/reference/en/index.html:154(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:795(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:871(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:917(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:923(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:927(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:309(span)
+#: doc/reference/en/ActiveLdap/GetText/Parser.html:259(span)
+#: doc/reference/en/ActiveLdap/GetText/Parser.html:307(span)
+#: doc/reference/en/ActiveLdap/GetText/Parser.html:363(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:437(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:521(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:603(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:674(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:810(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:881(span)
+#: doc/reference/en/ActiveLdap/Connection.html:474(span)
+#: doc/reference/en/ActiveLdap/Connection.html:519(span)
+#: doc/reference/en/ActiveLdap/GetTextSupport.html:156(span)
+#: doc/reference/en/ActiveLdap/Xml/Serializer.html:262(span)
+#: doc/reference/en/ActiveLdap/Base.html:2424(span)
+#: doc/reference/en/ActiveLdap/Base.html:2576(span)
+#: doc/reference/en/ActiveLdap/Base.html:2578(span)
+#: doc/reference/en/ActiveLdap/Base.html:3499(span)
+#: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:208(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:542(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:603(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:606(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:614(span)
+#: doc/reference/en/ActiveLdap/Command.html:226(span)
+#: doc/reference/en/ActiveLdap/Populate.html:214(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:228(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:324(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:396(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:345(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:350(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:355(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:470(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:472(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:480(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:178(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:199(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:199(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:736(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:941(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:943(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:945(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:947(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:949(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:951(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1266(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1271(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1419(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1423(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1425(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1695(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:115(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:121(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:127(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:88(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:94(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:100(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:455(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:546(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:548(span)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:159(span)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Integer.html:226(span)
+#: doc/reference/en/ActiveLdap.html:248(span)
+#: doc/reference/en/file.README.html:134(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.README.html:154(span)
+#: doc/reference/en/LDAP/Conn.html:255(span)
+#: doc/reference/en/LDAP/Conn.html:258(span)
+#: doc/reference/en/LDAP/Conn.html:260(span)
+#: doc/reference/en/file.tutorial.html:122(span)
+#: doc/reference/en/file.tutorial.html:126(span)
+#: doc/reference/en/file.tutorial.html:168(span)
+#: doc/reference/en/file.tutorial.html:241(span)
+#: doc/reference/en/file.tutorial.html:270(span)
+#: doc/reference/en/file.tutorial.html:311(span)
+#: doc/reference/en/file.tutorial.html:525(span)
+#: doc/reference/en/file.tutorial.html:532(span)
+#: doc/reference/en/file.tutorial.html:553(span)
+#: doc/reference/en/file.tutorial.html:565(span)
+#: doc/reference/en/file.tutorial.html:568(span)
+#: doc/reference/en/file.tutorial.html:603(span)
+#: doc/reference/en/file.tutorial.html:615(span)
+#: doc/reference/en/file.tutorial.html:618(span)
+#: doc/reference/en/file.tutorial.html:650(span)
+#: doc/reference/en/file.tutorial.html:662(span)
+#: doc/reference/en/file.tutorial.html:665(span)
+#: doc/reference/en/file.tutorial.html:736(span)
+#: doc/reference/en/file.tutorial.html:745(span)
+#: doc/reference/en/file.tutorial.html:756(span)
+#: doc/reference/en/Timeout.html:159(span)
+msgid "::"
+msgstr ""
+
+#: doc/reference/en/index.html:135(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/ActiveLdap/Base.html:122(span)
+#: doc/reference/en/ActiveLdap/Base.html:2607(span)
+#: doc/reference/en/ActiveLdap/Base.html:2647(span)
+#: doc/reference/en/ActiveLdap/Base.html:3790(span)
+#: doc/reference/en/ActiveLdap/Populate.html:263(span)
+#: doc/reference/en/ActiveLdap/Populate.html:314(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.tutorial.html:169(span)
+#: doc/reference/en/file.tutorial.html:194(span)
+#: doc/reference/en/file.tutorial.html:242(span)
+#: doc/reference/en/file.tutorial.html:271(span)
+#: doc/reference/en/file.tutorial.html:312(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+msgid ":dn_attribute"
+msgstr ""
+
+#: doc/reference/en/index.html:135(span)
+#: doc/reference/en/ActiveLdap/Base.html:2607(span)
+#: doc/reference/en/file.README.html:135(span)
+#: doc/reference/en/file.tutorial.html:242(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:271(span)
+#: doc/reference/en/file.tutorial.html:278(span)
+#: doc/reference/en/file.tutorial.html:320(span)
+#: doc/reference/en/file.tutorial.html:375(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+msgid "'uid'"
+msgstr ""
+
+#: doc/reference/en/index.html:136(span) doc/reference/en/index.html:145(span)
+#: doc/reference/en/index.html:156(span)
+#: doc/reference/en/ActiveLdap/Base.html:123(span)
+#: doc/reference/en/ActiveLdap/Base.html:2608(span)
+#: doc/reference/en/ActiveLdap/Base.html:2651(span)
+#: doc/reference/en/ActiveLdap/Populate.html:266(span)
+#: doc/reference/en/ActiveLdap/Populate.html:316(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:89(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:378(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.README.html:156(span)
+#: doc/reference/en/file.tutorial.html:170(span)
+#: doc/reference/en/file.tutorial.html:242(span)
+#: doc/reference/en/file.tutorial.html:271(span)
+#: doc/reference/en/file.tutorial.html:312(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:533(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+#: doc/reference/en/file.tutorial.html:746(span)
+msgid ":classes"
+msgstr ""
+
+#: doc/reference/en/index.html:136(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+msgid "'person'"
+msgstr ""
+
+#: doc/reference/en/index.html:136(span)
+#: doc/reference/en/ActiveLdap/Base.html:2608(span)
+#: doc/reference/en/file.README.html:136(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+msgid "'posixAccount'"
+msgstr ""
+
+#: doc/reference/en/index.html:137(span) doc/reference/en/index.html:139(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:140(strong)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:247(strong)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:253(p)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:328(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.tutorial.html:219(h5)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:274(span)
+#: doc/reference/en/file.tutorial.html:278(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+msgid "belongs_to"
+msgstr ""
+
+#: doc/reference/en/index.html:137(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.tutorial.html:274(span)
+msgid ":primary_group"
+msgstr ""
+
+#: doc/reference/en/index.html:137(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:88(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:96(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:331(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:457(span)
+#: doc/reference/en/file.README.html:137(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:275(span)
+#: doc/reference/en/file.tutorial.html:279(span)
+#: doc/reference/en/file.tutorial.html:316(span)
+#: doc/reference/en/file.tutorial.html:320(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid ":class_name"
+msgstr ""
+
+#: doc/reference/en/index.html:137(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
+#: doc/reference/en/file.README.html:137(span)
+msgid "\"Group\""
+msgstr ""
+
+#: doc/reference/en/index.html:138(span) doc/reference/en/index.html:148(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:332(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:458(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.README.html:148(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:274(span)
+#: doc/reference/en/file.tutorial.html:278(span)
+#: doc/reference/en/file.tutorial.html:315(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid ":foreign_key"
+msgstr ""
+
+#: doc/reference/en/index.html:138(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.tutorial.html:779(span)
+msgid "\"gidNumber\""
+msgstr ""
+
+#: doc/reference/en/index.html:138(span) doc/reference/en/index.html:149(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:333(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:459(span)
+#: doc/reference/en/file.README.html:138(span)
+#: doc/reference/en/file.README.html:149(span)
+#: doc/reference/en/file.tutorial.html:275(span)
+#: doc/reference/en/file.tutorial.html:316(span)
+#: doc/reference/en/file.tutorial.html:320(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid ":primary_key"
+msgstr ""
+
+#: doc/reference/en/index.html:139(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:278(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+msgid ":groups"
+msgstr ""
+
+#: doc/reference/en/index.html:139(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:334(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:341(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:344(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:279(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+msgid ":many"
+msgstr ""
+
+#: doc/reference/en/index.html:139(span)
+#: doc/reference/en/file.README.html:139(span)
+#: doc/reference/en/file.tutorial.html:243(span)
+#: doc/reference/en/file.tutorial.html:279(span)
+#: doc/reference/en/file.tutorial.html:527(span)
+#: doc/reference/en/file.tutorial.html:738(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+msgid "'memberUid'"
+msgstr ""
+
+#: doc/reference/en/index.html:142(p) doc/reference/en/file.README.html:142(p)
+msgid "app/model/group.rb:"
+msgstr ""
+
+#: doc/reference/en/index.html:144(span)
+#: doc/reference/en/file.README.html:144(span)
+#: doc/reference/en/file.tutorial.html:126(span)
+#: doc/reference/en/file.tutorial.html:136(span)
+#: doc/reference/en/file.tutorial.html:140(span)
+#: doc/reference/en/file.tutorial.html:168(span)
+#: doc/reference/en/file.tutorial.html:233(span)
+#: doc/reference/en/file.tutorial.html:311(span)
+#: doc/reference/en/file.tutorial.html:326(span)
+#: doc/reference/en/file.tutorial.html:347(span)
+#: doc/reference/en/file.tutorial.html:354(span)
+#: doc/reference/en/file.tutorial.html:360(span)
+#: doc/reference/en/file.tutorial.html:532(span)
+#: doc/reference/en/file.tutorial.html:745(span)
+#: doc/reference/en/file.tutorial.html:756(span)
+#: doc/reference/en/file.tutorial.html:776(span)
+msgid "Group"
+msgstr ""
+
+#: doc/reference/en/index.html:145(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.tutorial.html:376(span)
+#: doc/reference/en/file.tutorial.html:779(span)
+#: doc/reference/en/file.tutorial.html:847(span)
+msgid "\"cn\""
+msgstr ""
+
+#: doc/reference/en/index.html:145(span)
+#: doc/reference/en/file.README.html:145(span)
+#: doc/reference/en/file.tutorial.html:170(span)
+#: doc/reference/en/file.tutorial.html:312(span)
+#: doc/reference/en/file.tutorial.html:533(span)
+#: doc/reference/en/file.tutorial.html:746(span)
+msgid "'posixGroup'"
+msgstr ""
+
+#: doc/reference/en/index.html:146(span) doc/reference/en/index.html:147(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:164(strong)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:374(strong)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:380(p)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:454(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.README.html:147(span)
+#: doc/reference/en/file.tutorial.html:305(h5)
+#: doc/reference/en/file.tutorial.html:315(span)
+#: doc/reference/en/file.tutorial.html:319(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid "has_many"
+msgstr ""
+
+#: doc/reference/en/index.html:146(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.tutorial.html:319(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+msgid ":members"
+msgstr ""
+
+#: doc/reference/en/index.html:146(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:466(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:469(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.tutorial.html:319(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:747(span)
+msgid ":wrap"
+msgstr ""
+
+#: doc/reference/en/index.html:146(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
+#: doc/reference/en/file.README.html:146(span)
+#: doc/reference/en/file.tutorial.html:319(span)
+#: doc/reference/en/file.tutorial.html:534(span)
+#: doc/reference/en/file.tutorial.html:779(span)
+msgid "\"memberUid\""
+msgstr ""
+
+#: doc/reference/en/index.html:147(span)
+#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
+#: doc/reference/en/file.README.html:147(span)
+#: doc/reference/en/file.tutorial.html:315(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid ":primary_members"
+msgstr ""
+
+#: doc/reference/en/index.html:148(span) doc/reference/en/index.html:149(span)
+#: doc/reference/en/file.README.html:148(span)
+#: doc/reference/en/file.README.html:149(span)
+#: doc/reference/en/file.tutorial.html:274(span)
+#: doc/reference/en/file.tutorial.html:275(span)
+#: doc/reference/en/file.tutorial.html:315(span)
+#: doc/reference/en/file.tutorial.html:316(span)
+#: doc/reference/en/file.tutorial.html:360(span)
+#: doc/reference/en/file.tutorial.html:535(span)
+#: doc/reference/en/file.tutorial.html:748(span)
+msgid "'gidNumber'"
+msgstr ""
+
+#: doc/reference/en/index.html:152(p) doc/reference/en/file.README.html:152(p)
+msgid "app/model/ou.rb:"
+msgstr ""
+
+#: doc/reference/en/index.html:154(span)
+#: doc/reference/en/file.README.html:154(span)
+msgid "Ou"
+msgstr ""
+
+#: doc/reference/en/index.html:155(span)
+#: doc/reference/en/ActiveLdap/Base.html:122(span)
+#: doc/reference/en/ActiveLdap/Base.html:2607(span)
+#: doc/reference/en/ActiveLdap/Base.html:2649(span)
+#: doc/reference/en/ActiveLdap/Populate.html:264(span)
+#: doc/reference/en/ActiveLdap/Populate.html:315(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:88(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:281(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:289(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:377(span)
+#: doc/reference/en/file.README.html:155(span)
+#: doc/reference/en/file.tutorial.html:170(span)
+#: doc/reference/en/file.tutorial.html:195(span)
+#: doc/reference/en/file.tutorial.html:242(span)
+#: doc/reference/en/file.tutorial.html:271(span)
+#: doc/reference/en/file.tutorial.html:312(span)
+#: doc/reference/en/file.tutorial.html:526(span)
+#: doc/reference/en/file.tutorial.html:533(span)
+#: doc/reference/en/file.tutorial.html:737(span)
+#: doc/reference/en/file.tutorial.html:746(span)
+msgid ":prefix"
+msgstr ""
+
+#: doc/reference/en/index.html:155(span)
+#: doc/reference/en/ActiveLdap/UserPassword/Salt.html:159(span)
+#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:173(span)
+#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:175(span)
+#: doc/reference/en/ActiveLdap/Ldif/Scanner.html:407(span)
+#: doc/reference/en/ActiveLdap/Command.html:218(span)
+#: doc/reference/en/ActiveLdap/Populate.html:264(span)
+#: doc/reference/en/ActiveLdap/Populate.html:315(span)
+#: doc/reference/en/ActiveLdap/Helper.html:427(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:230(span)
+#: doc/reference/en/file.README.html:155(span)
+msgid "\"\""
+msgstr ""
+
+#: doc/reference/en/index.html:156(span)
+#: doc/reference/en/ActiveLdap/Populate.html:266(span)
+#: doc/reference/en/ActiveLdap/Populate.html:316(span)
+#: doc/reference/en/file.README.html:156(span)
+msgid "\"top\""
+msgstr ""
+
+#: doc/reference/en/index.html:156(span)
+#: doc/reference/en/ActiveLdap/Populate.html:316(span)
+#: doc/reference/en/file.README.html:156(span)
+msgid "\"organizationalUnit\""
+msgstr ""
+
+#: doc/reference/en/index.html:159(h2)
+#: doc/reference/en/file.README.html:159(h2)
+msgid "Licence"
+msgstr ""
+
+#: doc/reference/en/index.html:161(span)
+#: doc/reference/en/file.README.html:161(span)
+msgid "GNU"
+msgstr ""
+
+#: doc/reference/en/index.html:160(p) doc/reference/en/file.README.html:160(p)
+msgid ""
+"This program is free software; you can redistribute it and/or modify it. It "
+"is dual licensed under Ruby’s license and under the terms of the "
+"<placeholder-1/> General Public License as published by the Free Software "
+"Foundation; either version 2, or (at your option) any later version."
+msgstr ""
+
+#: doc/reference/en/index.html:164(span)
+#: doc/reference/en/file.README.html:164(span)
+msgid "LICENSE"
+msgstr ""
+
+#: doc/reference/en/index.html:164(p) doc/reference/en/file.README.html:164(p)
+msgid "Please see the file <placeholder-1/> for the terms of the licence."
+msgstr ""
+
+#: doc/reference/en/index.html:166(p) doc/reference/en/file.README.html:166(p)
+msgid ""
+"This list may not be correct. If you notice mistakes of this list, please "
+"point out."
+msgstr ""
+
+#: doc/reference/en/index.html:169(li)
+#: doc/reference/en/file.README.html:169(li)
+msgid "Dick Davies"
+msgstr ""
+
+#: doc/reference/en/index.html:170(li)
+#: doc/reference/en/file.README.html:170(li)
+msgid "Nathan Kinder"
+msgstr ""
+
+#: doc/reference/en/index.html:171(li)
+#: doc/reference/en/file.README.html:171(li)
+msgid "Patrick Cole"
+msgstr ""
+
+#: doc/reference/en/index.html:172(li)
+#: doc/reference/en/file.README.html:172(li)
+msgid "Google Inc."
+msgstr ""
+
+#: doc/reference/en/index.html:173(li)
+#: doc/reference/en/file.README.html:173(li)
+#, fuzzy
+msgid "Nobody: Bug reports and <placeholder-1/> improveent ideas."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:174(li)
+#: doc/reference/en/file.README.html:174(li)
+msgid "James Hughes: Bug reports and advices and documentations."
+msgstr ""
+
+#: doc/reference/en/index.html:175(li)
+#: doc/reference/en/file.README.html:175(li)
+msgid "Buzz Chopra: Documentations."
+msgstr ""
+
+#: doc/reference/en/index.html:178(li) doc/reference/en/index.html:187(li)
+#: doc/reference/en/index.html:198(li) doc/reference/en/index.html:204(li)
+#: doc/reference/en/index.html:211(li)
+#: doc/reference/en/file.README.html:178(li)
+#: doc/reference/en/file.README.html:187(li)
+#: doc/reference/en/file.README.html:198(li)
+#: doc/reference/en/file.README.html:204(li)
+#: doc/reference/en/file.README.html:211(li)
+msgid "Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:179(li)
+#: doc/reference/en/file.README.html:179(li)
+msgid "Tell us character escape syntax."
+msgstr ""
+
+#: doc/reference/en/index.html:176(li)
+#: doc/reference/en/file.README.html:176(li)
+#, fuzzy
+msgid ""
+"Christoph Lipp: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:181(li)
+#: doc/reference/en/file.README.html:181(li)
+msgid "Jeff Hall: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:182(li)
+#: doc/reference/en/file.README.html:182(li)
+msgid "Ernie Miller: Bug reports and advices."
+msgstr ""
+
+#: doc/reference/en/index.html:183(li)
+#: doc/reference/en/file.README.html:183(li)
+msgid "Daniel Pfile: Patches."
+msgstr ""
+
+#: doc/reference/en/index.html:184(li)
+#: doc/reference/en/file.README.html:184(li)
+msgid "Jacob Wilkins: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:188(li)
+#: doc/reference/en/file.README.html:188(li)
+msgid "Nederlands translations."
+msgstr ""
+
+#: doc/reference/en/index.html:185(li)
+#: doc/reference/en/file.README.html:185(li)
+#, fuzzy
+msgid ""
+"Ace Suares: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:190(li)
+#: doc/reference/en/file.README.html:190(li)
+#, fuzzy
+msgid "Iain Pople: Bug reports and <placeholder-1/> improvement ideas."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:191(li)
+#: doc/reference/en/file.README.html:191(li)
+msgid "Kevin McCarthy: Patches."
+msgstr ""
+
+#: doc/reference/en/index.html:192(li)
+#: doc/reference/en/file.README.html:192(li)
+msgid "Perry Smith: Patches, bug reports and indications."
+msgstr ""
+
+#: doc/reference/en/index.html:193(li)
+#: doc/reference/en/file.README.html:193(li)
+#, fuzzy
+msgid "Marc Dequènes: <placeholder-1/> suggestions."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:194(li)
+#: doc/reference/en/file.README.html:194(li)
+msgid "Jeremy Pruitt: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:197(li)
+#: doc/reference/en/file.README.html:197(li)
+msgid "A suggestion for behavior on simple bind with empty password."
+msgstr ""
+
+#: doc/reference/en/index.html:195(li)
+#: doc/reference/en/file.README.html:195(li)
+#, fuzzy
+msgid ""
+"Bodaniel Jeanes: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:200(li)
+#: doc/reference/en/file.README.html:200(li)
+msgid "Naoto Morishima: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:203(li)
+#: doc/reference/en/file.README.html:203(li)
+#, fuzzy
+msgid "An <placeholder-1/> improvement idea."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:201(li)
+#: doc/reference/en/file.README.html:201(li)
+#, fuzzy
+msgid ""
+"David Morton: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:206(li)
+#: doc/reference/en/file.README.html:206(li)
+msgid "Lennon Day-Reynolds: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:207(li)
+#: doc/reference/en/file.README.html:207(li)
+#, fuzzy
+msgid "Tilo: A bug report."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:208(li)
+#: doc/reference/en/file.README.html:208(li)
+msgid "Matt Mencel: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:212(li)
+#: doc/reference/en/file.README.html:212(li)
+msgid "Bug fixes."
+msgstr ""
+
+#: doc/reference/en/index.html:209(li)
+#: doc/reference/en/file.README.html:209(li)
+#, fuzzy
+msgid ""
+"CultureSpy: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:214(li)
+#: doc/reference/en/file.README.html:214(li)
+msgid "gwarf12: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:215(li)
+#: doc/reference/en/file.README.html:215(li)
+#, fuzzy
+msgid "Baptiste Grenier: <placeholder-1/> improvement ideas."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:216(li)
+#: doc/reference/en/file.README.html:216(li)
+#, fuzzy
+msgid "Richard 3 Nicholas: <placeholder-1/> improvement ideas."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:217(li)
+#: doc/reference/en/file.README.html:217(li)
+#, fuzzy
+msgid "Kazuhiro <placeholder-1/>: A bug report."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:218(li)
+#: doc/reference/en/file.README.html:218(li)
+msgid "Grzegorz Marszałek: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:219(li)
+#: doc/reference/en/file.README.html:219(li)
+msgid "しまさわらさん: A suggesetion."
+msgstr ""
+
+#: doc/reference/en/index.html:220(li)
+#: doc/reference/en/file.README.html:220(li)
+msgid "Ted Lepich: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:221(li)
+#: doc/reference/en/file.README.html:221(li)
+msgid "danger1986: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:222(li)
+#: doc/reference/en/file.README.html:222(li)
+msgid "michael.j.konopka: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:223(li)
+#: doc/reference/en/file.README.html:223(li)
+msgid "ingersoll: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:224(li)
+#: doc/reference/en/file.README.html:224(li)
+msgid "Alexey.Chebotar: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:225(li)
+#: doc/reference/en/file.README.html:225(li)
+#, fuzzy
+msgid "ery.lee: A bug report."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:226(li)
+#: doc/reference/en/file.README.html:226(li)
+msgid "id:dicdak: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:227(li)
+#: doc/reference/en/file.README.html:227(li)
+msgid "Raiko Mitsu: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:228(li)
+#: doc/reference/en/file.README.html:228(li)
+msgid "Kazuaki Takase: Documents in Japanese."
+msgstr ""
+
+#: doc/reference/en/index.html:229(li) doc/reference/en/index.html:239(li)
+#: doc/reference/en/file.README.html:229(li)
+#: doc/reference/en/file.README.html:239(li)
+msgid "Tim Hermans: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:230(li)
+#: doc/reference/en/file.README.html:230(li)
+msgid "Joe Francis: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:231(li)
+#: doc/reference/en/file.README.html:231(li)
+msgid "Tiago Fernandes: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:232(li)
+#: doc/reference/en/file.README.html:232(li)
+msgid "achemze: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:233(li)
+#: doc/reference/en/file.README.html:233(li)
+msgid "George Montana Harkin: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:234(li)
+#: doc/reference/en/file.README.html:234(li)
+#, fuzzy
+msgid "Marc Dequènes: Bug reports."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:235(li)
+#: doc/reference/en/file.README.html:235(li)
+msgid "brad@lucky-dip.net: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:236(li)
+#: doc/reference/en/file.README.html:236(li)
+msgid "Hideyuki Yasuda: Bug reports."
+msgstr ""
+
+#: doc/reference/en/index.html:237(li)
+#: doc/reference/en/file.README.html:237(li)
+#, fuzzy
+msgid "zachwily: A bug report."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:238(li)
+#: doc/reference/en/file.README.html:238(li)
+msgid "syrius.ml@no-log.org: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:240(li)
+#: doc/reference/en/file.README.html:240(li)
+msgid "Anthony M. Martinez: Helped <placeholder-1/> options support"
+msgstr ""
+
+#: doc/reference/en/index.html:241(li)
+#: doc/reference/en/file.README.html:241(li)
+msgid "ilusi0n.x: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:242(li)
+#: doc/reference/en/file.README.html:242(li)
+msgid "projekttabla: A suggestion."
+msgstr ""
+
+#: doc/reference/en/index.html:243(li)
+#: doc/reference/en/file.README.html:243(li)
+msgid "christian.pennaforte: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:244(li)
+#: doc/reference/en/file.README.html:244(li)
+#, fuzzy
+msgid "planetmcd: A bug report."
+msgstr "<placeholder-1/>エントリの作成"
+
+#: doc/reference/en/index.html:245(li)
+#: doc/reference/en/file.README.html:245(li)
+#, fuzzy
+msgid "spoidar: Rails 3 support."
+msgstr "Rails 3対応"
+
+#: doc/reference/en/index.html:246(li)
+#: doc/reference/en/file.README.html:246(li)
+#, fuzzy
+msgid "Kris Wehner: Rails 2.3.8 support."
+msgstr "Rails 3対応に関する設計です。"
+
+#: doc/reference/en/index.html:249(li)
+#: doc/reference/en/file.README.html:249(li)
+msgid "A test bug fix."
+msgstr ""
+
+#: doc/reference/en/index.html:250(li)
+#: doc/reference/en/file.README.html:250(li)
+#, fuzzy
+msgid "Rails 3 support."
+msgstr "Rails 3対応"
+
+#: doc/reference/en/index.html:247(li)
+#: doc/reference/en/file.README.html:247(li)
+#, fuzzy
+msgid ""
+"Ryan Tandy: <ul><placeholder-1/>\n"
+"\t\t<placeholder-2/></ul>"
+msgstr ""
+"<placeholder-1/> サーバ: <placeholder-2/> など <ul><placeholder-3/></ul>"
+
+#: doc/reference/en/index.html:252(li)
+#: doc/reference/en/file.README.html:252(li)
+msgid "rbq: A bug report."
+msgstr ""
+
+#: doc/reference/en/index.html:253(li)
+#: doc/reference/en/file.README.html:253(li)
+#, fuzzy
+msgid "Narihiro Nakamura: Rails 3 support."
+msgstr "Rails 3対応に関する設計です。"
+
+#: doc/reference/en/index.html:254(li)
+#: doc/reference/en/file.README.html:254(li)
+#, fuzzy
+msgid "Hidetoshi Yoshimoto: Rails 3 support."
+msgstr "Rails 3対応に関する設計です。"
+
+#: doc/reference/en/ActiveLdap/ActionController.html:6(title)
+msgid "Module: ActiveLdap::ActionController &mdash; ActiveLdap"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/ActionController.html:36(a)
+#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:36(a)
+#: doc/reference/en/ActiveLdap/Acts.html:36(a)
+#: doc/reference/en/ActiveLdap/Adapter.html:36(a)
+#: doc/reference/en/ActiveLdap/AuthenticationError.html:36(a)
+#: doc/reference/en/ActiveLdap/Attributes.html:36(a)
+#: doc/reference/en/ActiveLdap/AdapterNotSpecified.html:36(a)
+#: doc/reference/en/ActiveLdap/Association.html:36(a)
+#: doc/reference/en/ActiveLdap/AdapterNotFound.html:36(a)
+#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:36(a)
+#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:36(a)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:36(a)
+#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:36(a)
+#: doc/reference/en/ActiveLdap/AttributeAssignmentError.html:36(a)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/AddOperationModifiable.html:36(a)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:36(a)
+#: doc/reference/en/ActiveLdap/Associations.html:36(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:36(a)
+#: doc/reference/en/ActiveLdap.html:36(a)
+msgid "Index (A)"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/ActionController.html:59(h1)
+msgid "Module: ActiveLdap::ActionController"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/ActionController.html:75(dd)
+#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:75(dd)
+msgid "lib/active_ldap/action_controller/ldap_benchmarking.rb"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:6(title)
+msgid "Class: ActiveLdap::LogSubscriber &mdash; ActiveLdap"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:59(h1)
+msgid "Class: ActiveLdap::LogSubscriber"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:69(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:74(li)
+msgid "ActiveSupport::LogSubscriber"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:92(dd)
+msgid "lib/active_ldap/log_subscriber.rb"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:105(h2)
+#: doc/reference/en/ActiveLdap/LdapError.html:134(h2)
+#: doc/reference/en/ActiveLdap/Ldif.html:178(h2)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:96(h2)
+#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:86(h2)
+#: doc/reference/en/ActiveLdap/Connection.html:96(h2)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:154(h2)
+#: doc/reference/en/ActiveLdap/GetTextSupport.html:90(h2)
+#: doc/reference/en/ActiveLdap/Attributes.html:96(h2)
+#: doc/reference/en/ActiveLdap/Base.html:192(h2)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:96(h2)
+#: doc/reference/en/ActiveLdap/HumanReadable.html:100(h2)
+#: doc/reference/en/ActiveLdap/Associations.html:111(h2)
+#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:86(h2)
+#: doc/reference/en/ActiveLdap/Configuration.html:125(h2)
+#: doc/reference/en/ActiveLdap/Operations.html:96(h2)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:181(h2)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:96(h2)
+#: doc/reference/en/ActiveLdap.html:142(h2)
+#: doc/reference/en/Timeout.html:88(h2)
+msgid "Class Method Summary <placeholder-1/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:115(a)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:136(a)
+#: doc/reference/en/ActiveLdap/Base.html:156(a)
+#: doc/reference/en/ActiveLdap/Base.html:223(a)
+#: doc/reference/en/ActiveLdap/Base.html:268(a)
+#: doc/reference/en/ActiveLdap/Base.html:352(a)
+#: doc/reference/en/ActiveLdap/Base.html:439(a)
+#: doc/reference/en/ActiveLdap/Base.html:485(a)
+#: doc/reference/en/ActiveLdap/Base.html:509(a)
+#: doc/reference/en/ActiveLdap/Base.html:572(a)
+#: doc/reference/en/ActiveLdap/Base.html:593(a)
+msgid "+ (Object) <placeholder-1/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:157(a)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:164(a)
+#: doc/reference/en/ActiveLdap/Base.html:247(a)
+#: doc/reference/en/ActiveLdap/Base.html:530(a)
+msgid "+ (Object) <placeholder-1/>(value)"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:187(a)
+msgid "- (LogSubscriber) <placeholder-1/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:202(p)
+msgid "A new instance of LogSubscriber."
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:213(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:427(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:457(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:478(strong)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1348(strong)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1368(span)
+msgid "log_info"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:213(a)
+msgid "- (Object) <placeholder-1/>(event)"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:234(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:459(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:482(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:499(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:576(span)
+#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:477(span)
+msgid "logger"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:255(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:465(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:511(strong)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:549(span)
+msgid "odd?"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:255(a)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:202(a)
+#: doc/reference/en/ActiveLdap/Connection.html:136(a)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:320(a)
+#: doc/reference/en/ActiveLdap/Base.html:1153(a)
+#: doc/reference/en/ActiveLdap/Base.html:1385(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:191(a)
+#: doc/reference/en/ActiveLdap/Ldif/Scanner.html:214(a)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:209(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:226(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:247(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:294(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:315(a)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:336(a)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:249(a)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:270(a)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:338(a)
+#: doc/reference/en/ActiveLdap/Association/Collection.html:195(a)
+#: doc/reference/en/ActiveLdap/Association/Proxy.html:136(a)
+#: doc/reference/en/ActiveLdap/Association/Proxy.html:204(a)
+#: doc/reference/en/ActiveLdap/Association/BelongsTo.html:141(a)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:115(a)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:136(a)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:141(a)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:141(a)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:326(a)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:368(a)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:238(a)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:234(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:177(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:201(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:225(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:338(a)
+#: doc/reference/en/ActiveLdap/Schema/Attribute.html:362(a)
+#: doc/reference/en/ActiveLdap/Schema/Syntax.html:180(a)
+#: doc/reference/en/ActiveLdap/Schema/Syntax.html:201(a)
+#: doc/reference/en/LDAP/Conn.html:174(a)
+msgid "- (Boolean) <placeholder-1/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:281(p)
+msgid ""
+"- (<tt><span class=\"object_link\"><placeholder-1/></span></tt>) "
+"<placeholder-2/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:289(p)
+msgid "A new instance of LogSubscriber"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:301(pre)
+msgid "16 17 18 19"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:310(span)
+msgid "# File 'lib/active_ldap/log_subscriber.rb', line 16"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:313(span)
+#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:271(span)
+#: doc/reference/en/ActiveLdap/Railties/ControllerRuntime/ClassMethods.html:146(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:344(span)
+#: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:242(span)
+#: doc/reference/en/ActiveLdap/Validations.html:242(span)
+#: doc/reference/en/ActiveLdap/Validations.html:271(span)
+#: doc/reference/en/ActiveLdap/Validations.html:324(span)
+#: doc/reference/en/ActiveLdap/LdifInvalid.html:391(span)
+#: doc/reference/en/ActiveLdap/Base.html:2005(span)
+#: doc/reference/en/ActiveLdap/Base.html:2504(span)
+#: doc/reference/en/ActiveLdap/Base.html:2560(span)
+#: doc/reference/en/ActiveLdap/Base.html:2972(span)
+#: doc/reference/en/ActiveLdap/Base.html:3626(span)
+#: doc/reference/en/ActiveLdap/Base.html:3655(span)
+#: doc/reference/en/ActiveLdap/Base.html:3990(span)
+#: doc/reference/en/ActiveLdap/Base.html:3996(span)
+#: doc/reference/en/ActiveLdap/Base.html:4213(span)
+#: doc/reference/en/ActiveLdap/Base.html:4410(span)
+#: doc/reference/en/ActiveLdap/Base.html:4469(span)
+#: doc/reference/en/ActiveLdap/Base.html:4657(span)
+#: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:281(span)
+#: doc/reference/en/ActiveLdap/AdapterNotFound.html:242(span)
+#: doc/reference/en/ActiveLdap/NotImplemented.html:242(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord.html:371(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:261(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:326(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:414(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:545(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:196(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:196(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:196(span)
+#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:237(span)
+#: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:237(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:261(span)
+#: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:206(span)
+#: doc/reference/en/ActiveLdap/EntryInvalid.html:244(span)
+#: doc/reference/en/ActiveLdap/HumanReadable.html:159(span)
+#: doc/reference/en/ActiveLdap/Callbacks.html:241(span)
+#: doc/reference/en/ActiveLdap/Callbacks.html:281(span)
+#: doc/reference/en/ActiveLdap/Callbacks.html:321(span)
+#: doc/reference/en/ActiveLdap/UnknownAttribute.html:242(span)
+#: doc/reference/en/ActiveLdap/Associations.html:202(span)
+#: doc/reference/en/ActiveLdap/Operations.html:167(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:376(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:411(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:449(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:486(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:520(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:562(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:607(span)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:644(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:400(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:441(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:475(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:513(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:558(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:607(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:658(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:724(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:780(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:410(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:454(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:489(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:536(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:584(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:622(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:671(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:735(span)
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:788(span)
+#: doc/reference/en/ActiveLdap/Schema/Syntax.html:414(span)
+#: doc/reference/en/ActiveLdap.html:252(span)
+msgid "super"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:314(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:550(span)
+msgid "@odd_or_even"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:314(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:94(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:710(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:284(span)
+#: doc/reference/en/ActiveLdap/Validations.html:242(span)
+#: doc/reference/en/ActiveLdap/Base.html:2906(span)
+#: doc/reference/en/ActiveLdap/Base.html:3115(span)
+#: doc/reference/en/ActiveLdap/Base.html:3202(span)
+#: doc/reference/en/ActiveLdap/Base.html:3488(span)
+#: doc/reference/en/ActiveLdap/Base.html:3998(span)
+#: doc/reference/en/ActiveLdap/Base.html:4354(span)
+#: doc/reference/en/ActiveLdap/Base.html:4409(span)
+#: doc/reference/en/ActiveLdap/Base.html:4414(span)
+#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:231(span)
+#: doc/reference/en/ActiveLdap/EntryAttribute.html:681(span)
+#: doc/reference/en/ActiveLdap/EntryAttribute.html:729(span)
+#: doc/reference/en/ActiveLdap/Association/Proxy.html:685(span)
+#: doc/reference/en/ActiveLdap/Association/Proxy.html:735(span)
+#: doc/reference/en/ActiveLdap/Helper.html:419(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:205(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:255(span)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:199(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:726(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:727(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:728(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1159(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1160(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1161(span)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:1732(span)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:232(span)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:276(span)
+#: doc/reference/en/LDAP/Conn.html:422(span)
+#: doc/reference/en/file.tutorial.html:301(span)
+#: doc/reference/en/file.tutorial.html:397(span)
+#: doc/reference/en/file.tutorial.html:425(span)
+#: doc/reference/en/file.tutorial.html:426(span)
+#: doc/reference/en/file.tutorial.html:569(span)
+#: doc/reference/en/file.tutorial.html:619(span)
+#: doc/reference/en/file.tutorial.html:666(span)
+msgid "false"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:326(h2)
+#: doc/reference/en/ActiveLdap/LdapError.html:184(h2)
+#: doc/reference/en/ActiveLdap/Ldif.html:469(h2)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:277(h2)
+#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:234(h2)
+#: doc/reference/en/ActiveLdap/Connection.html:307(h2)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:634(h2)
+#: doc/reference/en/ActiveLdap/GetTextSupport.html:124(h2)
+#: doc/reference/en/ActiveLdap/Attributes.html:130(h2)
+#: doc/reference/en/ActiveLdap/Base.html:2065(h2)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:246(h2)
+#: doc/reference/en/ActiveLdap/HumanReadable.html:134(h2)
+#: doc/reference/en/ActiveLdap/Associations.html:175(h2)
+#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:120(h2)
+#: doc/reference/en/ActiveLdap/Configuration.html:159(h2)
+#: doc/reference/en/ActiveLdap/Operations.html:130(h2)
+#: doc/reference/en/ActiveLdap/Adapter/Base.html:796(h2)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:130(h2)
+#: doc/reference/en/ActiveLdap.html:207(h2)
+#: doc/reference/en/Timeout.html:125(h2)
+msgid "Class Method Details"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:330(p)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:361(p)
+#: doc/reference/en/ActiveLdap/Base.html:2022(p)
+#: doc/reference/en/ActiveLdap/Base.html:2069(p)
+#: doc/reference/en/ActiveLdap/Base.html:2119(p)
+#: doc/reference/en/ActiveLdap/Base.html:2200(p)
+#: doc/reference/en/ActiveLdap/Base.html:2354(p)
+#: doc/reference/en/ActiveLdap/Base.html:2516(p)
+#: doc/reference/en/ActiveLdap/Base.html:2666(p)
+#: doc/reference/en/ActiveLdap/Base.html:2716(p)
+#: doc/reference/en/ActiveLdap/Base.html:2809(p)
+#: doc/reference/en/ActiveLdap/Base.html:2834(p)
+#: doc/reference/en/ActiveLdap.html:262(p)
+msgid "+ (<placeholder-1/>) <placeholder-2/>"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:339(pre)
+msgid "11 12 13 14"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:348(span)
+msgid "# File 'lib/active_ldap/log_subscriber.rb', line 11"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:350(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:380(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:409(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:458(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:581(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:620(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:799(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:998(span)
+#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1110(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:305(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:362(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:397(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:455(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:498(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:543(span)
+#: doc/reference/en/ActiveLdap/Acts/Tree.html:586(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:388(span)
+#: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:258(span)
+#: doc/reference/en/ActiveLdap/Connection.html:330(span)
+#: doc/reference/en/ActiveLdap/Connection.html:387(span)
+#: doc/reference/en/ActiveLdap/Connection.html:437(span)
+#: doc/reference/en/ActiveLdap/Connection.html:438(span)
+#: doc/reference/en/ActiveLdap/Connection.html:478(span)
+#: doc/reference/en/ActiveLdap/Connection.html:550(span)
+#: doc/reference/en/ActiveLdap/Connection.html:588(span)
+#: doc/reference/en/ActiveLdap/Connection.html:591(span)
+#: doc/reference/en/ActiveLdap/Connection.html:594(span)
+#: doc/reference/en/ActiveLdap/Connection.html:595(span)
+#: doc/reference/en/ActiveLdap/Connection.html:659(span)
+#: doc/reference/en/ActiveLdap/Connection.html:660(span)
+#: doc/reference/en/ActiveLdap/Connection.html:661(span)
+#: doc/reference/en/ActiveLdap/Connection.html:664(span)
+#: doc/reference/en/ActiveLdap/Schema.html:645(span)
+#: doc/reference/en/ActiveLdap/Schema.html:1066(span)
+#: doc/reference/en/ActiveLdap/Schema.html:1198(span)
+#: doc/reference/en/ActiveLdap/Validations.html:271(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:730(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:774(span)
+#: doc/reference/en/ActiveLdap/DistinguishedName.html:777(span)
+#: doc/reference/en/ActiveLdap/Attributes.html:157(span)
+#: doc/reference/en/ActiveLdap/Base.html:1871(span)
+#: doc/reference/en/ActiveLdap/Base.html:1873(span)
+#: doc/reference/en/ActiveLdap/Base.html:1874(span)
+#: doc/reference/en/ActiveLdap/Base.html:1877(span)
+#: doc/reference/en/ActiveLdap/Base.html:1883(span)
+#: doc/reference/en/ActiveLdap/Base.html:1884(span)
+#: doc/reference/en/ActiveLdap/Base.html:1890(span)
+#: doc/reference/en/ActiveLdap/Base.html:2190(span)
+#: doc/reference/en/ActiveLdap/Base.html:2224(span)
+#: doc/reference/en/ActiveLdap/Base.html:2225(span)
+#: doc/reference/en/ActiveLdap/Base.html:2258(span)
+#: doc/reference/en/ActiveLdap/Base.html:2559(span)
+#: doc/reference/en/ActiveLdap/Base.html:2647(span)
+#: doc/reference/en/ActiveLdap/Base.html:2648(span)
+#: doc/reference/en/ActiveLdap/Base.html:2649(span)
+#: doc/reference/en/ActiveLdap/Base.html:2650(span)
+#: doc/reference/en/ActiveLdap/Base.html:2651(span)
+#: doc/reference/en/ActiveLdap/Base.html:2652(span)
+#: doc/reference/en/ActiveLdap/Base.html:2653(span)
+#: doc/reference/en/ActiveLdap/Base.html:2654(span)
+#: doc/reference/en/ActiveLdap/Base.html:2655(span)
+#: doc/reference/en/ActiveLdap/Base.html:2767(span)
+#: doc/reference/en/ActiveLdap/Base.html:2800(span)
+#: doc/reference/en/ActiveLdap/Base.html:2861(span)
+#: doc/reference/en/ActiveLdap/Base.html:2868(span)
+#: doc/reference/en/ActiveLdap/Base.html:3080(span)
+#: doc/reference/en/ActiveLdap/Base.html:3081(span)
+#: doc/reference/en/ActiveLdap/Base.html:3597(span)
+#: doc/reference/en/ActiveLdap/Base.html:3875(span)
+#: doc/reference/en/ActiveLdap/Base.html:3935(span)
+#: doc/reference/en/ActiveLdap/Base.html:4352(span)
+#: doc/reference/en/ActiveLdap/Base.html:4353(span)
+#: doc/reference/en/ActiveLdap/Base.html:4355(span)
+#: doc/reference/en/ActiveLdap/Base.html:4528(span)
+#: doc/reference/en/ActiveLdap/Base.html:4758(span)
+#: doc/reference/en/ActiveLdap/Base.html:4853(span)
+#: doc/reference/en/ActiveLdap/Base.html:4884(span)
+#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:470(span)
+#: doc/reference/en/ActiveLdap/Ldif/Record.html:451(span)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:638(span)
+#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:531(span)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:269(span)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:363(span)
+#: doc/reference/en/ActiveLdap/HumanReadable.html:158(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:265(span)
+#: doc/reference/en/ActiveLdap/Associations.html:201(span)
+#: doc/reference/en/ActiveLdap/Associations.html:244(span)
+#: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:150(span)
+#: doc/reference/en/ActiveLdap/Configuration.html:182(span)
+#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:361(span)
+msgid "self"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:352(span)
+msgid "rt"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:351(span)
@@ -19191,52 +20687,6 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:461(span)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:462(span)
 msgid "event"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:458(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:581(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:397(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:388(span)
-#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:491(span)
-#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:494(span)
-#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:499(span)
-#: doc/reference/en/ActiveLdap/Connection.html:387(span)
-#: doc/reference/en/ActiveLdap/Connection.html:437(span)
-#: doc/reference/en/ActiveLdap/Connection.html:438(span)
-#: doc/reference/en/ActiveLdap/Connection.html:478(span)
-#: doc/reference/en/ActiveLdap/Connection.html:550(span)
-#: doc/reference/en/ActiveLdap/Connection.html:588(span)
-#: doc/reference/en/ActiveLdap/Connection.html:591(span)
-#: doc/reference/en/ActiveLdap/Connection.html:594(span)
-#: doc/reference/en/ActiveLdap/Connection.html:595(span)
-#: doc/reference/en/ActiveLdap/Connection.html:659(span)
-#: doc/reference/en/ActiveLdap/Connection.html:660(span)
-#: doc/reference/en/ActiveLdap/Connection.html:661(span)
-#: doc/reference/en/ActiveLdap/Connection.html:664(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:730(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:777(span)
-#: doc/reference/en/ActiveLdap/Base.html:3081(span)
-#: doc/reference/en/ActiveLdap/Base.html:3597(span)
-#: doc/reference/en/ActiveLdap/Base.html:3935(span)
-#: doc/reference/en/ActiveLdap/Base.html:4528(span)
-#: doc/reference/en/ActiveLdap/Base.html:4758(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:470(span)
-#: doc/reference/en/ActiveLdap/Ldif/Record.html:451(span)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:638(span)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:363(span)
-#: doc/reference/en/ActiveLdap/Associations.html:244(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1698(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:361(span)
-#: doc/reference/en/file.tutorial.html:126(span)
-#: doc/reference/en/file.tutorial.html:168(span)
-#: doc/reference/en/file.tutorial.html:241(span)
-#: doc/reference/en/file.tutorial.html:270(span)
-#: doc/reference/en/file.tutorial.html:311(span)
-#: doc/reference/en/file.tutorial.html:525(span)
-#: doc/reference/en/file.tutorial.html:532(span)
-#: doc/reference/en/file.tutorial.html:736(span)
-#: doc/reference/en/file.tutorial.html:745(span)
-msgid "class"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:458(span)
@@ -20064,101 +21514,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:497(span)
 msgid "# File 'lib/active_ldap/log_subscriber.rb', line 42"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:500(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:795(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:871(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:917(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:923(span)
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:927(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:309(span)
-#: doc/reference/en/ActiveLdap/GetText/Parser.html:259(span)
-#: doc/reference/en/ActiveLdap/GetText/Parser.html:307(span)
-#: doc/reference/en/ActiveLdap/GetText/Parser.html:363(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:437(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:521(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:603(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:674(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:810(span)
-#: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:881(span)
-#: doc/reference/en/ActiveLdap/Connection.html:474(span)
-#: doc/reference/en/ActiveLdap/Connection.html:519(span)
-#: doc/reference/en/ActiveLdap/GetTextSupport.html:156(span)
-#: doc/reference/en/ActiveLdap/Xml/Serializer.html:262(span)
-#: doc/reference/en/ActiveLdap/Base.html:2424(span)
-#: doc/reference/en/ActiveLdap/Base.html:2576(span)
-#: doc/reference/en/ActiveLdap/Base.html:2578(span)
-#: doc/reference/en/ActiveLdap/Base.html:3499(span)
-#: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:208(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:542(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:603(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:606(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:614(span)
-#: doc/reference/en/ActiveLdap/Command.html:226(span)
-#: doc/reference/en/ActiveLdap/Populate.html:214(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:228(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:324(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:396(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:345(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:350(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:355(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:470(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:472(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:480(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:178(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:199(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:199(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:736(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:941(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:943(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:945(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:947(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:949(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:951(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1266(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1271(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1419(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1423(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1425(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1695(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:115(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:121(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:127(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:88(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:94(span)
-#: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:100(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:455(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:546(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:548(span)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:159(span)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Integer.html:226(span)
-#: doc/reference/en/ActiveLdap.html:248(span)
-#: doc/reference/en/LDAP/Conn.html:255(span)
-#: doc/reference/en/LDAP/Conn.html:258(span)
-#: doc/reference/en/LDAP/Conn.html:260(span)
-#: doc/reference/en/file.tutorial.html:122(span)
-#: doc/reference/en/file.tutorial.html:126(span)
-#: doc/reference/en/file.tutorial.html:168(span)
-#: doc/reference/en/file.tutorial.html:241(span)
-#: doc/reference/en/file.tutorial.html:270(span)
-#: doc/reference/en/file.tutorial.html:311(span)
-#: doc/reference/en/file.tutorial.html:525(span)
-#: doc/reference/en/file.tutorial.html:532(span)
-#: doc/reference/en/file.tutorial.html:553(span)
-#: doc/reference/en/file.tutorial.html:565(span)
-#: doc/reference/en/file.tutorial.html:568(span)
-#: doc/reference/en/file.tutorial.html:603(span)
-#: doc/reference/en/file.tutorial.html:615(span)
-#: doc/reference/en/file.tutorial.html:618(span)
-#: doc/reference/en/file.tutorial.html:650(span)
-#: doc/reference/en/file.tutorial.html:662(span)
-#: doc/reference/en/file.tutorial.html:665(span)
-#: doc/reference/en/file.tutorial.html:736(span)
-#: doc/reference/en/file.tutorial.html:745(span)
-#: doc/reference/en/file.tutorial.html:756(span)
-#: doc/reference/en/Timeout.html:159(span)
-msgid "::"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:522(h3)
@@ -22394,20 +23749,6 @@ msgid "klass"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:620(span)
-#: doc/reference/en/ActiveLdap/GetText/Parser.html:363(span)
-#: doc/reference/en/file.tutorial.html:126(span)
-#: doc/reference/en/file.tutorial.html:168(span)
-#: doc/reference/en/file.tutorial.html:241(span)
-#: doc/reference/en/file.tutorial.html:270(span)
-#: doc/reference/en/file.tutorial.html:311(span)
-#: doc/reference/en/file.tutorial.html:525(span)
-#: doc/reference/en/file.tutorial.html:532(span)
-#: doc/reference/en/file.tutorial.html:736(span)
-#: doc/reference/en/file.tutorial.html:745(span)
-msgid "&lt;"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:620(span)
 #: doc/reference/en/ActiveLdap/Connection.html:431(span)
 #: doc/reference/en/ActiveLdap/Schema.html:887(span)
 #: doc/reference/en/ActiveLdap/LdifInvalid.html:386(span)
@@ -23956,18 +25297,6 @@ msgstr ""
 msgid "salt"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/UserPassword/Salt.html:159(span)
-#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:173(span)
-#: doc/reference/en/ActiveLdap/Ldif/Attributes.html:175(span)
-#: doc/reference/en/ActiveLdap/Ldif/Scanner.html:407(span)
-#: doc/reference/en/ActiveLdap/Command.html:218(span)
-#: doc/reference/en/ActiveLdap/Populate.html:264(span)
-#: doc/reference/en/ActiveLdap/Populate.html:315(span)
-#: doc/reference/en/ActiveLdap/Helper.html:427(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:230(span)
-msgid "\"\""
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/UserPassword/Salt.html:160(span)
 msgid "times"
 msgstr ""
@@ -24714,271 +26043,6 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:374(span)
 #: doc/reference/en/file.tutorial.html:421(span)
 msgid ":base"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Acts/Tree.html:400(span)
-#: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:144(span)
-#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:339(span)
-#: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:369(span)
-#: doc/reference/en/ActiveLdap/DistinguishedName.html:570(span)
-#: doc/reference/en/ActiveLdap/GetTextSupport.html:159(span)
-#: doc/reference/en/ActiveLdap/Xml/Serializer.html:262(span)
-#: doc/reference/en/ActiveLdap/Base.html:1992(span)
-#: doc/reference/en/ActiveLdap/Base.html:2607(span)
-#: doc/reference/en/ActiveLdap/Base.html:2608(span)
-#: doc/reference/en/ActiveLdap/Base.html:2609(span)
-#: doc/reference/en/ActiveLdap/Base.html:3484(span)
-#: doc/reference/en/ActiveLdap/Base.html:3488(span)
-#: doc/reference/en/ActiveLdap/Base.html:3626(span)
-#: doc/reference/en/ActiveLdap/Base.html:3655(span)
-#: doc/reference/en/ActiveLdap/Base.html:4343(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:586(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:587(span)
-#: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:588(span)
-#: doc/reference/en/ActiveLdap/Ldif/Record.html:483(span)
-#: doc/reference/en/ActiveLdap/Ldif/Attribute.html:299(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:610(span)
-#: doc/reference/en/ActiveLdap/Populate.html:202(span)
-#: doc/reference/en/ActiveLdap/Populate.html:263(span)
-#: doc/reference/en/ActiveLdap/Populate.html:264(span)
-#: doc/reference/en/ActiveLdap/Populate.html:265(span)
-#: doc/reference/en/ActiveLdap/Populate.html:266(span)
-#: doc/reference/en/ActiveLdap/Populate.html:314(span)
-#: doc/reference/en/ActiveLdap/Populate.html:315(span)
-#: doc/reference/en/ActiveLdap/Populate.html:316(span)
-#: doc/reference/en/ActiveLdap/Helper.html:427(span)
-#: doc/reference/en/ActiveLdap/Helper.html:448(span)
-#: doc/reference/en/ActiveLdap/Helper.html:452(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:282(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:287(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:416(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:421(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:144(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyNameRecordLoadable.html:146(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:151(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable.html:164(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:225(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:279(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:280(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:281(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:282(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:287(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:288(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:289(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:290(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:291(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:400(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:401(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:402(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:403(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:404(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:405(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:406(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:412(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:414(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:338(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:339(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:340(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:341(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:342(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:463(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:464(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:465(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:466(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:467(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:106(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:107(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:108(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:377(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:412(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:452(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:487(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:521(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:564(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:565(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:566(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:567(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:568(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:609(span)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:610(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1019(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1626(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1627(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1628(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1629(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:1630(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:403(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:405(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:476(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:516(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:560(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:562(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:610(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:612(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:663(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:664(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:665(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:666(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:667(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:727(span)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:728(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:106(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:107(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:108(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:417(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:490(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:538(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:539(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:541(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:545(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:585(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:623(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:625(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:626(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:676(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:677(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:678(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:679(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:680(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:683(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:684(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:685(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:737(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:738(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:739(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:740(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:741(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:744(span)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:745(span)
-#: doc/reference/en/file.tutorial.html:105(span)
-#: doc/reference/en/file.tutorial.html:106(span)
-#: doc/reference/en/file.tutorial.html:107(span)
-#: doc/reference/en/file.tutorial.html:117(span)
-#: doc/reference/en/file.tutorial.html:122(span)
-#: doc/reference/en/file.tutorial.html:126(span)
-#: doc/reference/en/file.tutorial.html:136(span)
-#: doc/reference/en/file.tutorial.html:137(span)
-#: doc/reference/en/file.tutorial.html:140(span)
-#: doc/reference/en/file.tutorial.html:141(span)
-#: doc/reference/en/file.tutorial.html:144(span)
-#: doc/reference/en/file.tutorial.html:145(span)
-#: doc/reference/en/file.tutorial.html:148(span)
-#: doc/reference/en/file.tutorial.html:149(span)
-#: doc/reference/en/file.tutorial.html:169(span)
-#: doc/reference/en/file.tutorial.html:170(span)
-#: doc/reference/en/file.tutorial.html:171(span)
-#: doc/reference/en/file.tutorial.html:233(span)
-#: doc/reference/en/file.tutorial.html:234(span)
-#: doc/reference/en/file.tutorial.html:235(span)
-#: doc/reference/en/file.tutorial.html:236(span)
-#: doc/reference/en/file.tutorial.html:241(span)
-#: doc/reference/en/file.tutorial.html:242(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:249(span)
-#: doc/reference/en/file.tutorial.html:250(span)
-#: doc/reference/en/file.tutorial.html:251(span)
-#: doc/reference/en/file.tutorial.html:252(span)
-#: doc/reference/en/file.tutorial.html:256(span)
-#: doc/reference/en/file.tutorial.html:262(span)
-#: doc/reference/en/file.tutorial.html:266(span)
-#: doc/reference/en/file.tutorial.html:271(span)
-#: doc/reference/en/file.tutorial.html:274(span)
-#: doc/reference/en/file.tutorial.html:275(span)
-#: doc/reference/en/file.tutorial.html:278(span)
-#: doc/reference/en/file.tutorial.html:279(span)
-#: doc/reference/en/file.tutorial.html:300(span)
-#: doc/reference/en/file.tutorial.html:301(span)
-#: doc/reference/en/file.tutorial.html:302(span)
-#: doc/reference/en/file.tutorial.html:303(span)
-#: doc/reference/en/file.tutorial.html:312(span)
-#: doc/reference/en/file.tutorial.html:315(span)
-#: doc/reference/en/file.tutorial.html:316(span)
-#: doc/reference/en/file.tutorial.html:319(span)
-#: doc/reference/en/file.tutorial.html:320(span)
-#: doc/reference/en/file.tutorial.html:326(span)
-#: doc/reference/en/file.tutorial.html:327(span)
-#: doc/reference/en/file.tutorial.html:328(span)
-#: doc/reference/en/file.tutorial.html:329(span)
-#: doc/reference/en/file.tutorial.html:330(span)
-#: doc/reference/en/file.tutorial.html:331(span)
-#: doc/reference/en/file.tutorial.html:347(span)
-#: doc/reference/en/file.tutorial.html:354(span)
-#: doc/reference/en/file.tutorial.html:355(span)
-#: doc/reference/en/file.tutorial.html:360(span)
-#: doc/reference/en/file.tutorial.html:361(span)
-#: doc/reference/en/file.tutorial.html:374(span)
-#: doc/reference/en/file.tutorial.html:375(span)
-#: doc/reference/en/file.tutorial.html:376(span)
-#: doc/reference/en/file.tutorial.html:396(span)
-#: doc/reference/en/file.tutorial.html:397(span)
-#: doc/reference/en/file.tutorial.html:419(span)
-#: doc/reference/en/file.tutorial.html:420(span)
-#: doc/reference/en/file.tutorial.html:421(span)
-#: doc/reference/en/file.tutorial.html:422(span)
-#: doc/reference/en/file.tutorial.html:423(span)
-#: doc/reference/en/file.tutorial.html:424(span)
-#: doc/reference/en/file.tutorial.html:425(span)
-#: doc/reference/en/file.tutorial.html:426(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:533(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:568(span)
-#: doc/reference/en/file.tutorial.html:569(span)
-#: doc/reference/en/file.tutorial.html:618(span)
-#: doc/reference/en/file.tutorial.html:619(span)
-#: doc/reference/en/file.tutorial.html:665(span)
-#: doc/reference/en/file.tutorial.html:666(span)
-#: doc/reference/en/file.tutorial.html:682(span)
-#: doc/reference/en/file.tutorial.html:683(span)
-#: doc/reference/en/file.tutorial.html:685(span)
-#: doc/reference/en/file.tutorial.html:686(span)
-#: doc/reference/en/file.tutorial.html:687(span)
-#: doc/reference/en/file.tutorial.html:688(span)
-#: doc/reference/en/file.tutorial.html:690(span)
-#: doc/reference/en/file.tutorial.html:691(span)
-#: doc/reference/en/file.tutorial.html:692(span)
-#: doc/reference/en/file.tutorial.html:703(span)
-#: doc/reference/en/file.tutorial.html:714(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-#: doc/reference/en/file.tutorial.html:746(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-#: doc/reference/en/file.tutorial.html:766(span)
-#: doc/reference/en/file.tutorial.html:767(span)
-#: doc/reference/en/file.tutorial.html:768(span)
-#: doc/reference/en/file.tutorial.html:769(span)
-#: doc/reference/en/file.tutorial.html:776(span)
-#: doc/reference/en/file.tutorial.html:777(span)
-#: doc/reference/en/file.tutorial.html:778(span)
-#: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:785(span)
-#: doc/reference/en/file.tutorial.html:786(span)
-#: doc/reference/en/file.tutorial.html:787(span)
-#: doc/reference/en/file.tutorial.html:788(span)
-#: doc/reference/en/file.tutorial.html:789(span)
-#: doc/reference/en/file.tutorial.html:790(span)
-#: doc/reference/en/file.tutorial.html:791(span)
-#: doc/reference/en/file.tutorial.html:792(span)
-#: doc/reference/en/file.tutorial.html:835(span)
-#: doc/reference/en/file.tutorial.html:836(span)
-#: doc/reference/en/file.tutorial.html:837(span)
-#: doc/reference/en/file.tutorial.html:838(span)
-#: doc/reference/en/file.tutorial.html:846(span)
-#: doc/reference/en/file.tutorial.html:847(span)
-msgid "&gt;"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:410(p)
@@ -29357,33 +30421,6 @@ msgid "output"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema.html:785(span)
-#: doc/reference/en/ActiveLdap/Command.html:223(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:821(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:852(span)
-#: doc/reference/en/ActiveLdap/Adapter/Base.html:883(span)
-#: doc/reference/en/file.tutorial.html:105(span)
-#: doc/reference/en/file.tutorial.html:117(span)
-#: doc/reference/en/file.tutorial.html:523(span)
-#: doc/reference/en/file.tutorial.html:548(span)
-#: doc/reference/en/file.tutorial.html:549(span)
-#: doc/reference/en/file.tutorial.html:550(span)
-#: doc/reference/en/file.tutorial.html:551(span)
-#: doc/reference/en/file.tutorial.html:598(span)
-#: doc/reference/en/file.tutorial.html:599(span)
-#: doc/reference/en/file.tutorial.html:600(span)
-#: doc/reference/en/file.tutorial.html:601(span)
-#: doc/reference/en/file.tutorial.html:645(span)
-#: doc/reference/en/file.tutorial.html:646(span)
-#: doc/reference/en/file.tutorial.html:647(span)
-#: doc/reference/en/file.tutorial.html:648(span)
-#: doc/reference/en/file.tutorial.html:727(span)
-#: doc/reference/en/file.tutorial.html:728(span)
-#: doc/reference/en/file.tutorial.html:729(span)
-#: doc/reference/en/file.tutorial.html:754(span)
-msgid "require"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Schema.html:785(span)
 msgid "'pp'"
 msgstr ""
 
@@ -31236,61 +32273,6 @@ msgstr ""
 msgid "VALID_LDAP_MAPPING_OPTIONS ="
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Base.html:122(span)
-#: doc/reference/en/ActiveLdap/Base.html:2607(span)
-#: doc/reference/en/ActiveLdap/Base.html:2647(span)
-#: doc/reference/en/ActiveLdap/Base.html:3790(span)
-#: doc/reference/en/ActiveLdap/Populate.html:263(span)
-#: doc/reference/en/ActiveLdap/Populate.html:314(span)
-#: doc/reference/en/file.tutorial.html:169(span)
-#: doc/reference/en/file.tutorial.html:194(span)
-#: doc/reference/en/file.tutorial.html:242(span)
-#: doc/reference/en/file.tutorial.html:271(span)
-#: doc/reference/en/file.tutorial.html:312(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-msgid ":dn_attribute"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Base.html:122(span)
-#: doc/reference/en/ActiveLdap/Base.html:2607(span)
-#: doc/reference/en/ActiveLdap/Base.html:2649(span)
-#: doc/reference/en/ActiveLdap/Populate.html:264(span)
-#: doc/reference/en/ActiveLdap/Populate.html:315(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:88(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:281(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:289(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:377(span)
-#: doc/reference/en/file.tutorial.html:170(span)
-#: doc/reference/en/file.tutorial.html:195(span)
-#: doc/reference/en/file.tutorial.html:242(span)
-#: doc/reference/en/file.tutorial.html:271(span)
-#: doc/reference/en/file.tutorial.html:312(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:533(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-#: doc/reference/en/file.tutorial.html:746(span)
-msgid ":prefix"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Base.html:123(span)
-#: doc/reference/en/ActiveLdap/Base.html:2608(span)
-#: doc/reference/en/ActiveLdap/Base.html:2651(span)
-#: doc/reference/en/ActiveLdap/Populate.html:266(span)
-#: doc/reference/en/ActiveLdap/Populate.html:316(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:89(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:378(span)
-#: doc/reference/en/file.tutorial.html:170(span)
-#: doc/reference/en/file.tutorial.html:242(span)
-#: doc/reference/en/file.tutorial.html:271(span)
-#: doc/reference/en/file.tutorial.html:312(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:533(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-#: doc/reference/en/file.tutorial.html:746(span)
-msgid ":classes"
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Base.html:123(span)
 #: doc/reference/en/ActiveLdap/Base.html:2652(span)
 msgid ":recommended_classes"
@@ -32610,18 +33592,6 @@ msgstr "例:"
 
 #: doc/reference/en/ActiveLdap/Base.html:2607(span)
 #: doc/reference/en/file.tutorial.html:242(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:271(span)
-#: doc/reference/en/file.tutorial.html:278(span)
-#: doc/reference/en/file.tutorial.html:320(span)
-#: doc/reference/en/file.tutorial.html:375(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-msgid "'uid'"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Base.html:2607(span)
-#: doc/reference/en/file.tutorial.html:242(span)
 #: doc/reference/en/file.tutorial.html:526(span)
 #: doc/reference/en/file.tutorial.html:737(span)
 msgid "'ou=People'"
@@ -32636,12 +33606,6 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:737(span)
 #: doc/reference/en/file.tutorial.html:746(span)
 msgid "'top'"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Base.html:2608(span)
-#: doc/reference/en/file.tutorial.html:526(span)
-#: doc/reference/en/file.tutorial.html:737(span)
-msgid "'posixAccount'"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Base.html:2609(span)
@@ -36844,11 +37808,6 @@ msgstr ""
 msgid "LDAP_ENV"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:469(span)
-#: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:470(span)
-msgid "Rails"
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:470(span)
 msgid "env"
 msgstr ""
@@ -38026,11 +38985,6 @@ msgid "dc_class"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Populate.html:266(span)
-#: doc/reference/en/ActiveLdap/Populate.html:316(span)
-msgid "\"top\""
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Populate.html:266(span)
 msgid "\"dcObject\""
 msgstr ""
 
@@ -38083,10 +39037,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Populate.html:314(span)
 msgid "\"ou\""
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Populate.html:316(span)
-msgid "\"organizationalUnit\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedName/Parser.html:6(title)
@@ -40602,102 +41552,14 @@ msgstr ""
 msgid ":class"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:88(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:96(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:331(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:457(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:275(span)
-#: doc/reference/en/file.tutorial.html:279(span)
-#: doc/reference/en/file.tutorial.html:316(span)
-#: doc/reference/en/file.tutorial.html:320(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid ":class_name"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:332(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:458(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:274(span)
-#: doc/reference/en/file.tutorial.html:278(span)
-#: doc/reference/en/file.tutorial.html:315(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid ":foreign_key"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:333(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:459(span)
-#: doc/reference/en/file.tutorial.html:275(span)
-#: doc/reference/en/file.tutorial.html:316(span)
-#: doc/reference/en/file.tutorial.html:320(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid ":primary_key"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:89(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:334(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:341(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:344(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:279(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-msgid ":many"
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:93(dt)
 msgid "VALID_HAS_MANY_OPTIONS ="
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:97(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:466(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:469(span)
-#: doc/reference/en/file.tutorial.html:319(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-msgid ":wrap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:119(strong)
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:218(strong)
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:235(span)
 msgid "associated_class"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:140(strong)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:247(strong)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:253(p)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:328(span)
-#: doc/reference/en/file.tutorial.html:219(h5)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:274(span)
-#: doc/reference/en/file.tutorial.html:278(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-msgid "belongs_to"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:140(a)
@@ -40707,22 +41569,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:153(p)
 msgid "belongs_to."
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:164(strong)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:374(strong)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:380(p)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:454(span)
-#: doc/reference/en/file.tutorial.html:305(h5)
-#: doc/reference/en/file.tutorial.html:315(span)
-#: doc/reference/en/file.tutorial.html:319(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid "has_many"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:177(p)
@@ -40763,27 +41609,6 @@ msgid ""
 "entry covered by class |:class_name|."
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:278(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-msgid ":groups"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:265(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
-msgid "\"Group\""
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
-#: doc/reference/en/file.tutorial.html:319(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:779(span)
-msgid "\"memberUid\""
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:266(span)
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:400(span)
 msgid "# Group#memberUid"
@@ -40803,19 +41628,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:270(span)
 msgid "# dn attribute value is used by default"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:271(span)
-#: doc/reference/en/file.tutorial.html:274(span)
-msgid ":primary_group"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:273(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:393(span)
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:394(span)
-#: doc/reference/en/file.tutorial.html:779(span)
-msgid "\"gidNumber\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:272(span)
@@ -41006,13 +41818,6 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
-#: doc/reference/en/file.tutorial.html:315(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid ":primary_members"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:392(span)
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
 #: doc/reference/en/file.tutorial.html:316(span)
 #: doc/reference/en/file.tutorial.html:320(span)
@@ -41034,13 +41839,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:398(span)
 msgid "# :foreign_key =&gt; \"gidNumber\" # Group#gidNumber"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:399(span)
-#: doc/reference/en/file.tutorial.html:319(span)
-#: doc/reference/en/file.tutorial.html:534(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-msgid ":members"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:411(pre)
@@ -45109,14 +45907,6 @@ msgid ""
 "A Ruby implementation: <placeholder-1/> 1.8.x, 1.9.1 or <placeholder-2/>"
 msgstr "Ruby実装: <placeholder-1/> 1.8.x または 1.9.1 または <placeholder-2/>"
 
-#: doc/reference/en/file.tutorial.html:91(a)
-msgid "Ruby/<placeholder-1/>"
-msgstr ""
-
-#: doc/reference/en/file.tutorial.html:91(a)
-msgid "Net::<placeholder-1/>"
-msgstr ""
-
 #: doc/reference/en/file.tutorial.html:91(li)
 msgid ""
 "A <placeholder-1/> library: <placeholder-2/> (for Ruby), <placeholder-3/> "
@@ -45160,15 +45950,6 @@ msgstr ""
 
 #: doc/reference/en/file.tutorial.html:104(span)
 msgid "rubygems"
-msgstr ""
-
-#: doc/reference/en/file.tutorial.html:105(span)
-#: doc/reference/en/file.tutorial.html:117(span)
-#: doc/reference/en/file.tutorial.html:549(span)
-#: doc/reference/en/file.tutorial.html:599(span)
-#: doc/reference/en/file.tutorial.html:646(span)
-#: doc/reference/en/file.tutorial.html:727(span)
-msgid "'active_ldap'"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:103(pre)
@@ -45233,23 +46014,6 @@ msgstr ""
 "次に、ActiveLdap::Base のサブクラスを作成します。これを拡張クラスと呼びます。"
 "この拡張クラスを、 base 以下に存在する <placeholder-1/> の Group オブジェクト"
 "群とマッピングしてみましょう。"
-
-#: doc/reference/en/file.tutorial.html:126(span)
-#: doc/reference/en/file.tutorial.html:136(span)
-#: doc/reference/en/file.tutorial.html:140(span)
-#: doc/reference/en/file.tutorial.html:168(span)
-#: doc/reference/en/file.tutorial.html:233(span)
-#: doc/reference/en/file.tutorial.html:311(span)
-#: doc/reference/en/file.tutorial.html:326(span)
-#: doc/reference/en/file.tutorial.html:347(span)
-#: doc/reference/en/file.tutorial.html:354(span)
-#: doc/reference/en/file.tutorial.html:360(span)
-#: doc/reference/en/file.tutorial.html:532(span)
-#: doc/reference/en/file.tutorial.html:745(span)
-#: doc/reference/en/file.tutorial.html:756(span)
-#: doc/reference/en/file.tutorial.html:776(span)
-msgid "Group"
-msgstr ""
 
 #: doc/reference/en/file.tutorial.html:130(p)
 msgid ""
@@ -45441,13 +46205,6 @@ msgstr "以下は ldap_mapping を更に詳細に記述した Group クラスで
 #: doc/reference/en/file.tutorial.html:533(span)
 #: doc/reference/en/file.tutorial.html:746(span)
 msgid "'ou=Groups'"
-msgstr ""
-
-#: doc/reference/en/file.tutorial.html:170(span)
-#: doc/reference/en/file.tutorial.html:312(span)
-#: doc/reference/en/file.tutorial.html:533(span)
-#: doc/reference/en/file.tutorial.html:746(span)
-msgid "'posixGroup'"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:171(span)
@@ -45740,14 +46497,6 @@ msgstr ""
 msgid "'Group'"
 msgstr ""
 
-#: doc/reference/en/file.tutorial.html:243(span)
-#: doc/reference/en/file.tutorial.html:279(span)
-#: doc/reference/en/file.tutorial.html:527(span)
-#: doc/reference/en/file.tutorial.html:738(span)
-#: doc/reference/en/file.tutorial.html:747(span)
-msgid "'memberUid'"
-msgstr ""
-
 #: doc/reference/en/file.tutorial.html:246(p)
 msgid ""
 "Now, class User will have a method called ‘groups’ which will retrieve all "
@@ -45846,16 +46595,6 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:273(span)
 msgid "# Associate with primary belonged group"
 msgstr "# プライマリで所属しているグループと関連付け"
-
-#: doc/reference/en/file.tutorial.html:274(span)
-#: doc/reference/en/file.tutorial.html:275(span)
-#: doc/reference/en/file.tutorial.html:315(span)
-#: doc/reference/en/file.tutorial.html:316(span)
-#: doc/reference/en/file.tutorial.html:360(span)
-#: doc/reference/en/file.tutorial.html:535(span)
-#: doc/reference/en/file.tutorial.html:748(span)
-msgid "'gidNumber'"
-msgstr ""
 
 #: doc/reference/en/file.tutorial.html:277(span)
 msgid "# Associate with all belonged groups"
@@ -46155,12 +46894,6 @@ msgstr ""
 
 #: doc/reference/en/file.tutorial.html:376(span)
 msgid "\"uid=root,ou=People,dc=dataspill,dc=org\""
-msgstr ""
-
-#: doc/reference/en/file.tutorial.html:376(span)
-#: doc/reference/en/file.tutorial.html:779(span)
-#: doc/reference/en/file.tutorial.html:847(span)
-msgid "\"cn\""
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:376(span)
@@ -46664,10 +47397,6 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:601(span)
 #: doc/reference/en/file.tutorial.html:648(span)
 msgid "'objects/group'"
-msgstr ""
-
-#: doc/reference/en/file.tutorial.html:526(span)
-msgid "'person'"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:530(p)
@@ -47454,9 +48183,9 @@ msgstr ""
 #: doc/reference/en/_index.html:170(small)
 #: doc/reference/en/_index.html:191(small)
 #: doc/reference/en/_index.html:198(small)
-#: doc/reference/en/_index.html:212(small)
+#: doc/reference/en/_index.html:205(small)
 #: doc/reference/en/_index.html:219(small)
-#: doc/reference/en/_index.html:248(small)
+#: doc/reference/en/_index.html:234(small)
 #: doc/reference/en/_index.html:298(small)
 #: doc/reference/en/_index.html:389(small)
 #: doc/reference/en/_index.html:403(small)
@@ -47487,7 +48216,7 @@ msgstr ""
 #: doc/reference/en/_index.html:846(small)
 #: doc/reference/en/_index.html:853(small)
 #: doc/reference/en/_index.html:972(small)
-#: doc/reference/en/_index.html:1008(small)
+#: doc/reference/en/_index.html:1001(small)
 #: doc/reference/en/_index.html:1015(small)
 #: doc/reference/en/_index.html:1029(small)
 #: doc/reference/en/_index.html:1036(small)
@@ -47523,7 +48252,7 @@ msgstr ""
 
 #: doc/reference/en/_index.html:149(small)
 #: doc/reference/en/_index.html:184(small)
-#: doc/reference/en/_index.html:205(small)
+#: doc/reference/en/_index.html:212(small)
 #: doc/reference/en/_index.html:305(small)
 #: doc/reference/en/_index.html:452(small)
 #: doc/reference/en/_index.html:523(small)
@@ -47531,7 +48260,7 @@ msgstr ""
 #: doc/reference/en/_index.html:896(small)
 #: doc/reference/en/_index.html:910(small)
 #: doc/reference/en/_index.html:917(small)
-#: doc/reference/en/_index.html:1072(small)
+#: doc/reference/en/_index.html:1065(small)
 #: doc/reference/en/_index.html:1146(small)
 #: doc/reference/en/_index.html:1217(small)
 msgid "(ActiveLdap::Ldif)"
@@ -47546,8 +48275,8 @@ msgid "(ActiveLdap::Operations::LDIF)"
 msgstr ""
 
 #: doc/reference/en/_index.html:177(small)
-#: doc/reference/en/_index.html:594(small)
-#: doc/reference/en/_index.html:1001(small)
+#: doc/reference/en/_index.html:587(small)
+#: doc/reference/en/_index.html:1008(small)
 #: doc/reference/en/_index.html:1252(small)
 #: doc/reference/en/_index.html:1259(small)
 msgid "(ActiveLdap::Schema)"
@@ -47557,14 +48286,22 @@ msgstr ""
 msgid "B"
 msgstr ""
 
-#: doc/reference/en/_index.html:234(small)
+#: doc/reference/en/_index.html:241(small)
 #: doc/reference/en/_index.html:1086(small)
 #: doc/reference/en/_index.html:1189(small)
 #: doc/reference/en/_index.html:1274(small)
 msgid "(ActiveLdap::Adapter::Ldap::Method)"
 msgstr ""
 
-#: doc/reference/en/_index.html:241(small)
+#: doc/reference/en/_index.html:248(small)
+#: doc/reference/en/_index.html:777(small)
+#: doc/reference/en/_index.html:784(small)
+#: doc/reference/en/_index.html:818(small)
+#: doc/reference/en/_index.html:958(small)
+msgid "(ActiveLdap::Adapter)"
+msgstr ""
+
+#: doc/reference/en/_index.html:255(small)
 #: doc/reference/en/_index.html:276(small)
 #: doc/reference/en/_index.html:283(small)
 #: doc/reference/en/_index.html:480(small)
@@ -47583,14 +48320,6 @@ msgstr ""
 msgid "(ActiveLdap::Schema::Syntaxes)"
 msgstr ""
 
-#: doc/reference/en/_index.html:255(small)
-#: doc/reference/en/_index.html:777(small)
-#: doc/reference/en/_index.html:784(small)
-#: doc/reference/en/_index.html:818(small)
-#: doc/reference/en/_index.html:958(small)
-msgid "(ActiveLdap::Adapter)"
-msgstr ""
-
 #: doc/reference/en/_index.html:262(small)
 #: doc/reference/en/_index.html:269(small)
 #: doc/reference/en/_index.html:312(small)
@@ -47607,40 +48336,40 @@ msgid "C"
 msgstr ""
 
 #: doc/reference/en/_index.html:319(small)
-msgid "(ActiveLdap::Connection)"
-msgstr ""
-
-#: doc/reference/en/_index.html:326(small)
 msgid "(ActiveLdap::ObjectClass)"
 msgstr ""
 
+#: doc/reference/en/_index.html:326(small)
+msgid "(ActiveLdap::Callbacks)"
+msgstr ""
+
 #: doc/reference/en/_index.html:333(small)
-msgid "(ActiveLdap::HumanReadable)"
+msgid "(ActiveLdap::Associations)"
 msgstr ""
 
 #: doc/reference/en/_index.html:340(small)
-msgid "(ActiveLdap::Railties::ControllerRuntime)"
-msgstr ""
-
-#: doc/reference/en/_index.html:347(small)
 #: doc/reference/en/_index.html:965(small)
 msgid "(ActiveLdap::Attributes)"
 msgstr ""
 
-#: doc/reference/en/_index.html:354(small)
+#: doc/reference/en/_index.html:347(small)
 msgid "(ActiveLdap::Configuration)"
 msgstr ""
 
-#: doc/reference/en/_index.html:361(small)
+#: doc/reference/en/_index.html:354(small)
 msgid "(ActiveLdap::Acts::Tree)"
 msgstr ""
 
+#: doc/reference/en/_index.html:361(small)
+msgid "(ActiveLdap::Connection)"
+msgstr ""
+
 #: doc/reference/en/_index.html:368(small)
-msgid "(ActiveLdap::Callbacks)"
+msgid "(ActiveLdap::HumanReadable)"
 msgstr ""
 
 #: doc/reference/en/_index.html:375(small)
-msgid "(ActiveLdap::Associations)"
+msgid "(ActiveLdap::Railties::ControllerRuntime)"
 msgstr ""
 
 #: doc/reference/en/_index.html:396(small)
@@ -47672,7 +48401,7 @@ msgstr ""
 msgid "E"
 msgstr ""
 
-#: doc/reference/en/_index.html:587(small)
+#: doc/reference/en/_index.html:594(small)
 msgid "(Net::LDAP)"
 msgstr ""
 
@@ -47700,7 +48429,7 @@ msgstr ""
 msgid "L"
 msgstr ""
 
-#: doc/reference/en/_index.html:804(small)
+#: doc/reference/en/_index.html:799(small)
 msgid "(Net)"
 msgstr ""
 
@@ -47739,11 +48468,11 @@ msgid "P"
 msgstr ""
 
 #: doc/reference/en/_index.html:1058(small)
-msgid "(ActiveLdap::GetText)"
+msgid "(ActiveLdap::DistinguishedName)"
 msgstr ""
 
-#: doc/reference/en/_index.html:1065(small)
-msgid "(ActiveLdap::DistinguishedName)"
+#: doc/reference/en/_index.html:1072(small)
+msgid "(ActiveLdap::GetText)"
 msgstr ""
 
 #: doc/reference/en/_index.html:1126(li)

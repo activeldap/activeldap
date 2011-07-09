@@ -1,6 +1,6 @@
 h1. ActiveLdap
 
-A ruby library for object-oriented LDAP interction.
+A ruby library for object-oriented LDAP interface.
 
 * Copyright (C) 2004-2006 Will Drewry _<will@alum.bu.edu>_
 * Copyright (C) 2006-2011 Kouhei Sutou _<kou@clear-code.com>_
@@ -20,16 +20,24 @@ h2. Prerequisites
 
 - Ruby intepreter :=
 One of them:
-* "Ruby":http://www.ruby-lang.org (1.8.x or 1.9.1)
-* "JRuby":http://jruby.codehaus.org/ =:
+* "Ruby":http://www.ruby-lang.org (1.8.x or 1.9.x)
+* "JRuby":http://www.jruby.org/
+
+See the above links for installation.
+=:
 - LDAP client :=
 JRuby doesn't need to install new library because JRuby
 has builtin LDAP support. Ruby users need one of them:
+
 * "Ruby/LDAP":http://rubyforge.org/projects/ruby-ldap/
-* "Net::LDAP":http://rubyforge.org/projects/net-ldap/ =:
+* "Net::LDAP":http://rubyforge.org/projects/net-ldap/
+
+See the above links for installation.
+=:
 - ActiveModel :=
 A toolkit for building modeling frameworks like Active
-Record and Active Resource. =:
+Record and Active Resource.
+=:
 
 h2. Notes
 
