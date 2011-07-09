@@ -218,6 +218,7 @@ namespace :reference do
 
       desc "Translates documents to #{language}."
       task language => [po_file, reference_base_dir, *html_files] do
+        commands = []
         doc_en_dir.find do |path|
           base_path = path.relative_path_from(doc_en_dir)
           translated_path = "#{translate_doc_dir}/#{base_path}"
@@ -227,13 +228,16 @@ namespace :reference do
           end
           case path.extname
           when ".html"
-            sh("xml2po --keep-entities " +
-               "--po-file #{po_file} --language #{language} " +
-               "#{path} > #{translated_path} &")
+            command = "xml2po --keep-entities " +
+              "--po-file #{po_file} --language #{language} " +
+              "#{path} > #{translated_path} &"
+            commands << command
           else
             cp(path.to_s, translated_path, :preserve => true)
           end
         end
+        commands << "wait"
+        sh(commands.join("\n"))
       end
     end
   end
