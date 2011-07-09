@@ -61,7 +61,7 @@ require "active_ldap"</pre>
 
 	<h2 id="activeldap-fabrication-about">ActiveLdap Fabrication</h2>
 	<p>
-	  ActiveLdap FabricationはFabrication用のActiveLdapアダプタです。これを使うとActiveLdapの代替フィクスチャーシステムとしてFabricationを使えるようになります。
+	  ActiveLdap FabricationはFabricationのActiveLdapアダプタです。これを使うとActiveLdapの代替フィクスチャーシステムとしてFabricationを使えるようになります。
 	</p>
 
 	<h3 id="activeldap-fabrication-latest">ActiveLdap Fabrication: 最新リリース</h3>
@@ -111,7 +111,7 @@ require "active_ldap"</pre>
         <h2>ActiveLdap Fabricationについて</h2>
 	<ul>
 	  <li class="menu-reference">
-            <a href="/activeldap-fabricaion/ja/">リファレンス</a>
+            <a href="/activeldap-fabrication/ja/">リファレンス</a>
           </li>
         </ul>
       </div>
