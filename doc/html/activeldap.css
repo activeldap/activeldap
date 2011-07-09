@@ -156,14 +156,19 @@ ul.menu li#menu-tutorial
   background: url(tutorial.png) no-repeat;
 }
 
+ul.menu li#menu-rails
+{
+  background: url(rails-mini.png) no-repeat;
+}
+
 ul.menu li#menu-install
 {
   background: url(install.png) no-repeat;
 }
 
-ul.menu li#menu-developer
+ul.menu li#menu-development
 {
-  background: url(developer.png) no-repeat;
+  background: url(development.png) no-repeat;
 }
 
 div.content
