@@ -55,23 +55,6 @@
           <pre class="code">gem "activeldap"
 require "activeldap"</pre>
         </p>
-
-	<h2 id="developer">開発者向け情報</h2>
-        <p>
-	  ActiveLdapはRubyでもっと便利にLDAPを操作できるようにするため、開発に参加してくれる人を募集しています。
-          以下は開発に必要となる情報です。
-        </p>
-
-	<h3 id="repository">リポジトリ</h3>
-	<p>
-	  <a href="https://github.com/activeldap/">GitHub上のgitリポジトリ</a>を利用しています。ソースコードは以下のように取得できます。
-        </p>
-        <dl>
-          <dt><a href="https://github.com/activeldap/activeldap/">activeldap</a></dt>
-          <dd><pre class="command">% git clone https://github.com/activeldap/activeldap.git</pre></dd>
-          <dt><a href="https://github.com/activeldap/al-admin/">al-admin</a></dt>
-          <dd><pre class="command">% git clone https://github.com/activeldap/al-admin.git</pre></dd>
-        </dl>
       </div>
 
       <div class="sidebar">

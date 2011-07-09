@@ -1,10 +1,30 @@
 h1. Development
 
+Here is information for developers.
+
 h2. Repository
 
-We are using
-"GitHub":https://github.com/activeldap/activeldap as the
-official repository.
+ActiveLdap uses ["git repository on
+GitHub":https://github.com/activeldap]. Here is a
+list to get each source code.
+
+- "activeldap":https://github.com/activeldap/activeldap :=
+<pre class="command">
+% git clone https://github.com/activeldap/activeldap.git
+</pre>
+=:
+- "al-admin":https://github.com/activeldap/al-admin :=
+<pre class="command">
+% git clone https://github.com/activeldap/al-admin.git
+</pre>
+=:
+
+h2. Issues
+
+ActiveLdap uses "Issues on
+GitHub":https://github.com/activeldap/activeldap/issues for
+issue tracking. Please submit a issue when you find an
+issue.
 
 h2. Rails 3 support
 
