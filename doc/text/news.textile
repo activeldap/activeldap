@@ -1,6 +1,6 @@
-h1. NEWS
+h1. News
 
-h2. 3.1.0: 2011-07-08
+h2(#3-1-0). 3.1.0: 2011-07-09
 
 * Supported Rails 3.1.0.rc4.
   [Ryan Tandy, Narihiro Nakamura, Hidetoshi Yoshimoto]
