@@ -32,10 +32,9 @@ Here is design about Rails 3 support.
 
 h3. must
 
-* We target to Rails 3.1.0. (Yes, it's not released yet
-  but it will be released before we support Rails 3.x.)
-* We update the documentation and ensure that the procedure
-  for including ActiveLdap in a Rails 3 project is correct.
+* We add active_ldap/test_help.rb to support ActiveLdap fixture.
+We don't write same codes into test_helper.rb like
+http://ruby-activeldap.rubyforge.org/activeldap-fabrication/en/#Install
 
 h3. may
 
@@ -44,7 +43,12 @@ h3. may
 * We support OmniAuth. (instead of Warden)
 
 h3. DONE
+
 * We don't support Rails 3.0.x.
 * We provide active_ldap/railtie to initialize ActiveLdap.
 * We remove ActiveRecord dependency.
 * We depend on ActiveModel instead of ActiveRecord.
+* We target to Rails 3.1.0. (Yes, it's not released yet
+  but it will be released before we support Rails 3.x.)
+* We update the documentation and ensure that the procedure
+  for including ActiveLdap in a Rails 3 project is correct.
