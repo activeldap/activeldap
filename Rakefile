@@ -94,26 +94,6 @@ task :yard do
   end
 end
 
-def windows?(platform=nil)
-  platform ||= RUBY_PLATFORM
-  platform =~ /mswin(?!ce)|mingw|cygwin|bccwin/
-end
-
-def collect_binary_files(binary_dir)
-  binary_files = []
-  Find.find(binary_dir) do |name|
-    next unless File.file?(name)
-    next if /\.zip\z/i =~ name
-    binary_files << name
-  end
-  binary_files
-end
-
-relative_vendor_dir = "vendor"
-relative_binary_dir = File.join("vendor", "local")
-vendor_dir = File.join(base_dir, relative_vendor_dir)
-binary_dir = File.join(base_dir, relative_binary_dir)
-
 include ERB::Util
 
 def apply_template(content, paths, templates, language)
