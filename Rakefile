@@ -75,7 +75,7 @@ YARD::Rake::YardocTask.new do |task|
   task.options += ["--output-dir", doc_en_dir.to_s]
   task.options += ["--charset", "utf-8"]
   template_files = FileList["lib/rails/generators/**/templates/*.rb"]
-  task.files += FileList["lib/**/*.rb"] - template_files
+  task.files += FileList["lib/**/*.rb"] - template_files - ["README.textile"]
 end
 
 task :yard do
@@ -225,7 +225,7 @@ namespace :reference do
           when ".html"
             sh("xml2po --keep-entities " +
                "--po-file #{po_file} --language #{language} " +
-               "#{path} > #{translated_path}")
+               "#{path} > #{translated_path} &")
           else
             cp(path.to_s, translated_path, :preserve => true)
           end
