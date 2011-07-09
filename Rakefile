@@ -17,6 +17,8 @@ base_dir = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(base_dir, 'lib'))
 require 'active_ldap'
 
+project_name = "ActiveLdap"
+
 ENV["VERSION"] ||= ActiveLdap::VERSION
 version = ENV["VERSION"]
 spec = nil
@@ -65,7 +67,7 @@ doc_en_dir = reference_base_dir + "en"
 html_base_dir = Pathname.new("doc/html")
 html_reference_dir = html_base_dir + spec.name
 YARD::Rake::YardocTask.new do |task|
-  task.options += ["--title", "#{spec.name} - #{version}"]
+  task.options += ["--title", project_name]
   task.options += ["--charset", "UTF-8"]
   task.options += ["--readme", "README.textile"]
   task.options += ["--files", "doc/text/**/*"]

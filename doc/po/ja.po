@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
-"POT-Creation-Date: 2011-07-09 13:07+0900\n"
-"PO-Revision-Date: 2011-07-09 13:05+0900\n"
+"POT-Creation-Date: 2011-07-09 13:25+0900\n"
+"PO-Revision-Date: 2011-07-09 13:29+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: doc/reference/en/file.news.html:6(title)
-msgid "File: news &mdash; activeldap - 3.1.0"
-msgstr ""
+msgid "File: news &mdash; ActiveLdap"
+msgstr "ファイル: お知らせ &mdash; ActiveLdap"
 
 #: doc/reference/en/file.news.html:17(script)
 #: doc/reference/en/file.development.html:17(script)
@@ -205,11 +205,11 @@ msgstr ""
 #: doc/reference/en/index.html:36(a) doc/reference/en/file.README.html:36(a)
 #: doc/reference/en/file.tutorial.html:36(a)
 msgid "Index"
-msgstr ""
+msgstr "索引"
 
 #: doc/reference/en/file.news.html:37(span)
 msgid "File: news"
-msgstr ""
+msgstr "ファイル: お知らせ"
 
 #: doc/reference/en/file.news.html:40(span)
 #: doc/reference/en/file.development.html:40(span)
@@ -1683,7 +1683,7 @@ msgstr ""
 #: doc/reference/en/Timeout.html:42(a) doc/reference/en/_index.html:38(a)
 #: doc/reference/en/LDAP.html:42(a)
 msgid "no frames"
-msgstr ""
+msgstr "フレーム無し"
 
 #: doc/reference/en/file.news.html:40(span)
 #: doc/reference/en/file.development.html:40(span)
@@ -3152,7 +3152,7 @@ msgstr ""
 #: doc/reference/en/Timeout.html:47(a) doc/reference/en/_index.html:43(a)
 #: doc/reference/en/LDAP.html:47(a)
 msgid "Class List"
-msgstr ""
+msgstr "クラス一覧"
 
 #: doc/reference/en/file.news.html:47(a)
 #: doc/reference/en/file.development.html:47(a)
@@ -3319,7 +3319,7 @@ msgstr ""
 #: doc/reference/en/Timeout.html:49(a) doc/reference/en/_index.html:45(a)
 #: doc/reference/en/LDAP.html:49(a)
 msgid "Method List"
-msgstr ""
+msgstr "メソッド一覧"
 
 #: doc/reference/en/file.news.html:49(a)
 #: doc/reference/en/file.development.html:49(a)
@@ -3485,14 +3485,14 @@ msgstr ""
 #: doc/reference/en/Timeout.html:51(a) doc/reference/en/file_list.html:28(h1)
 #: doc/reference/en/_index.html:47(a) doc/reference/en/LDAP.html:51(a)
 msgid "File List"
-msgstr ""
+msgstr "ファイル一覧"
 
 #: doc/reference/en/file.news.html:57(h1)
 msgid "News"
-msgstr ""
+msgstr "お知らせ"
 
 #: doc/reference/en/file.news.html:58(h2)
-msgid "3.1.0: 2011-07-08"
+msgid "3.1.0: 2011-07-09"
 msgstr ""
 
 #: doc/reference/en/file.news.html:60(li)
@@ -3500,10 +3500,11 @@ msgid ""
 "Supported Rails 3.1.0.rc4. [Ryan Tandy, Narihiro Nakamura, Hidetoshi "
 "Yoshimoto]"
 msgstr ""
+"Rails 3.1.0.rc4対応。 [Ryan Tandy, Narihiro Nakamura, Hidetoshi Yoshimoto]"
 
 #: doc/reference/en/file.news.html:62(li)
 msgid "Removed ActiveRecord dependency and added ActiveModel dependency."
-msgstr ""
+msgstr "ActiveRecord依存をなくしてActiveModelに依存するようにした。"
 
 #: doc/reference/en/file.news.html:63(span)
 msgid "YARD"
@@ -3512,6 +3513,7 @@ msgstr ""
 #: doc/reference/en/file.news.html:63(li)
 msgid "Used <placeholder-1/> instead of RDoc as documentation sysytem."
 msgstr ""
+"ドキュメントシステムとしてRDocの代わりに<placeholder-1/>を使うようにした。"
 
 #: doc/reference/en/file.news.html:65(h2)
 msgid "1.2.4: 2011-05-13"
@@ -5554,12 +5556,12 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/file.development.html:6(title)
-msgid "File: development &mdash; activeldap - 3.1.0"
-msgstr ""
+msgid "File: development &mdash; ActiveLdap"
+msgstr "ファイル: 開発 &mdash; ActiveLdap"
 
 #: doc/reference/en/file.development.html:37(span)
 msgid "File: development"
-msgstr ""
+msgstr "ファイル: 開発"
 
 #: doc/reference/en/file.development.html:57(h1)
 msgid "Development"
@@ -5578,7 +5580,6 @@ msgid "git repository on GitHub"
 msgstr "GitHub上のgitリポジトリ"
 
 #: doc/reference/en/file.development.html:60(p)
-#, fuzzy
 msgid ""
 "ActiveLdap uses <placeholder-1/>. Here is a list to get each source code."
 msgstr ""
@@ -5706,15 +5707,15 @@ msgid "We depend on ActiveModel instead of ActiveRecord."
 msgstr "ActiveRecordの代わりにActiveModelを使う。"
 
 #: doc/reference/en/top-level-namespace.html:6(title)
-msgid "Top Level Namespace &mdash; activeldap - 3.1.0"
-msgstr ""
+msgid "Top Level Namespace &mdash; ActiveLdap"
+msgstr "トップレベルネームスペース &mdash; ActiveLdap"
 
 #: doc/reference/en/top-level-namespace.html:39(span)
 #: doc/reference/en/top-level-namespace.html:59(h1)
 #: doc/reference/en/class_list.html:41(a)
 #: doc/reference/en/class_list.html:42(small)
 msgid "Top Level Namespace"
-msgstr ""
+msgstr "トップレベルネームスペース"
 
 #: doc/reference/en/top-level-namespace.html:77(h2)
 #: doc/reference/en/Net/LDAP.html:95(h2)
@@ -5778,7 +5779,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:99(strong)
 #: doc/reference/en/ActiveLdap.html:90(strong)
 msgid "Modules:"
-msgstr ""
+msgstr "モジュール:"
 
 #: doc/reference/en/top-level-namespace.html:81(a)
 #: doc/reference/en/method_list.html:974(small)
@@ -5971,7 +5972,8 @@ msgstr ""
 #: doc/reference/en/file.tutorial.html:665(span)
 #: doc/reference/en/file.tutorial.html:736(span)
 #: doc/reference/en/file.tutorial.html:745(span)
-#: doc/reference/en/_index.html:100(a)
+#: doc/reference/en/frames.html:7(title) doc/reference/en/_index.html:6(title)
+#: doc/reference/en/_index.html:55(h1) doc/reference/en/_index.html:100(a)
 msgid "ActiveLdap"
 msgstr ""
 
@@ -6018,25 +6020,25 @@ msgstr ""
 #: doc/reference/en/class_list.html:31(a)
 #: doc/reference/en/file_list.html:31(a)
 msgid "Classes"
-msgstr ""
+msgstr "クラス一覧"
 
 #: doc/reference/en/method_list.html:33(a)
 #: doc/reference/en/class_list.html:33(a)
 #: doc/reference/en/file_list.html:33(a)
 msgid "Methods"
-msgstr ""
+msgstr "メソッド一覧"
 
 #: doc/reference/en/method_list.html:35(a)
 #: doc/reference/en/class_list.html:35(a)
 #: doc/reference/en/file_list.html:35(a)
 msgid "Files"
-msgstr ""
+msgstr "ファイル一覧"
 
 #: doc/reference/en/method_list.html:38(div)
 #: doc/reference/en/class_list.html:38(div)
 #: doc/reference/en/file_list.html:38(div)
 msgid "Search: <input type=\"text\"/>"
-msgstr ""
+msgstr "検索: <input type=\"text\"/>"
 
 #: doc/reference/en/method_list.html:44(a)
 msgid "#+"
@@ -6044,19 +6046,19 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:46(small)
 #: doc/reference/en/method_list.html:54(small)
-#: doc/reference/en/method_list.html:70(small)
+#: doc/reference/en/method_list.html:62(small)
 #: doc/reference/en/method_list.html:94(small)
-#: doc/reference/en/method_list.html:134(small)
+#: doc/reference/en/method_list.html:150(small)
 #: doc/reference/en/method_list.html:710(small)
-#: doc/reference/en/method_list.html:1510(small)
+#: doc/reference/en/method_list.html:1518(small)
 #: doc/reference/en/method_list.html:1550(small)
-#: doc/reference/en/method_list.html:1734(small)
-#: doc/reference/en/method_list.html:1998(small)
+#: doc/reference/en/method_list.html:1726(small)
+#: doc/reference/en/method_list.html:2238(small)
 #: doc/reference/en/method_list.html:3158(small)
 #: doc/reference/en/method_list.html:3190(small)
 #: doc/reference/en/method_list.html:3278(small)
 #: doc/reference/en/method_list.html:4046(small)
-#: doc/reference/en/method_list.html:4166(small)
+#: doc/reference/en/method_list.html:4158(small)
 #: doc/reference/en/method_list.html:4230(small)
 #: doc/reference/en/method_list.html:4406(small)
 #: doc/reference/en/class_list.html:42(small)
@@ -6075,11 +6077,11 @@ msgstr ""
 msgid "#&lt;&lt;"
 msgstr ""
 
-#: doc/reference/en/method_list.html:62(small)
-#: doc/reference/en/method_list.html:126(small)
+#: doc/reference/en/method_list.html:70(small)
+#: doc/reference/en/method_list.html:134(small)
 #: doc/reference/en/method_list.html:366(small)
 #: doc/reference/en/method_list.html:1414(small)
-#: doc/reference/en/method_list.html:2038(small)
+#: doc/reference/en/method_list.html:2062(small)
 #: doc/reference/en/method_list.html:3118(small)
 #: doc/reference/en/class_list.html:42(small)
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord.html:78(li)
@@ -6087,27 +6089,27 @@ msgid "ActiveLdap::Ldif::ModifyRecord"
 msgstr ""
 
 #: doc/reference/en/method_list.html:78(small)
-#: doc/reference/en/method_list.html:118(small)
+#: doc/reference/en/method_list.html:1174(small)
 #: doc/reference/en/method_list.html:1406(small)
-#: doc/reference/en/method_list.html:2294(small)
-#: doc/reference/en/method_list.html:3182(small)
-#: doc/reference/en/method_list.html:3326(small)
-#: doc/reference/en/method_list.html:4158(small)
-#: doc/reference/en/method_list.html:4582(small)
-#: doc/reference/en/class_list.html:42(small)
-#: doc/reference/en/ActiveLdap/Ldif.html:74(li)
-msgid "ActiveLdap::Ldif"
-msgstr ""
-
-#: doc/reference/en/method_list.html:86(small)
-#: doc/reference/en/method_list.html:1134(small)
-#: doc/reference/en/method_list.html:1390(small)
 #: doc/reference/en/method_list.html:1614(small)
 #: doc/reference/en/method_list.html:3414(small)
 #: doc/reference/en/method_list.html:3454(small)
 #: doc/reference/en/method_list.html:4014(small)
 #: doc/reference/en/ActiveLdap/Association/Collection.html:76(li)
 msgid "ActiveLdap::Association::Collection"
+msgstr ""
+
+#: doc/reference/en/method_list.html:86(small)
+#: doc/reference/en/method_list.html:158(small)
+#: doc/reference/en/method_list.html:1390(small)
+#: doc/reference/en/method_list.html:2110(small)
+#: doc/reference/en/method_list.html:3182(small)
+#: doc/reference/en/method_list.html:3326(small)
+#: doc/reference/en/method_list.html:4182(small)
+#: doc/reference/en/method_list.html:4582(small)
+#: doc/reference/en/class_list.html:42(small)
+#: doc/reference/en/ActiveLdap/Ldif.html:74(li)
+msgid "ActiveLdap::Ldif"
 msgstr ""
 
 #: doc/reference/en/method_list.html:92(a)
@@ -6117,30 +6119,30 @@ msgid "#&lt;=&gt;"
 msgstr ""
 
 #: doc/reference/en/method_list.html:102(small)
-#: doc/reference/en/method_list.html:390(small)
-#: doc/reference/en/method_list.html:1246(small)
-#: doc/reference/en/method_list.html:1526(small)
-#: doc/reference/en/method_list.html:1726(small)
-#: doc/reference/en/method_list.html:1886(small)
-#: doc/reference/en/method_list.html:2270(small)
-#: doc/reference/en/method_list.html:2878(small)
-#: doc/reference/en/method_list.html:4142(small)
-#: doc/reference/en/ActiveLdap/Schema/Entry.html:74(li)
-msgid "ActiveLdap::Schema::Entry"
+#: doc/reference/en/method_list.html:622(small)
+#: doc/reference/en/method_list.html:1838(small)
+#: doc/reference/en/method_list.html:2206(small)
+#: doc/reference/en/method_list.html:2542(small)
+#: doc/reference/en/method_list.html:3054(small)
+#: doc/reference/en/method_list.html:4150(small)
+#: doc/reference/en/method_list.html:4278(small)
+#: doc/reference/en/method_list.html:4470(small)
+#: doc/reference/en/method_list.html:4518(small)
+#: doc/reference/en/ActiveLdap/Schema/Syntax.html:76(li)
+msgid "ActiveLdap::Schema::Syntax"
 msgstr ""
 
 #: doc/reference/en/method_list.html:110(small)
-#: doc/reference/en/method_list.html:622(small)
-#: doc/reference/en/method_list.html:1838(small)
-#: doc/reference/en/method_list.html:2230(small)
-#: doc/reference/en/method_list.html:2542(small)
-#: doc/reference/en/method_list.html:3038(small)
-#: doc/reference/en/method_list.html:4150(small)
-#: doc/reference/en/method_list.html:4334(small)
-#: doc/reference/en/method_list.html:4486(small)
-#: doc/reference/en/method_list.html:4510(small)
-#: doc/reference/en/ActiveLdap/Schema/Syntax.html:76(li)
-msgid "ActiveLdap::Schema::Syntax"
+#: doc/reference/en/method_list.html:390(small)
+#: doc/reference/en/method_list.html:1246(small)
+#: doc/reference/en/method_list.html:1510(small)
+#: doc/reference/en/method_list.html:1734(small)
+#: doc/reference/en/method_list.html:1886(small)
+#: doc/reference/en/method_list.html:2278(small)
+#: doc/reference/en/method_list.html:2894(small)
+#: doc/reference/en/method_list.html:4142(small)
+#: doc/reference/en/ActiveLdap/Schema/Entry.html:74(li)
+msgid "ActiveLdap::Schema::Entry"
 msgstr ""
 
 #: doc/reference/en/method_list.html:116(a)
@@ -6168,12 +6170,12 @@ msgstr ""
 msgid "#=="
 msgstr ""
 
-#: doc/reference/en/method_list.html:142(small)
+#: doc/reference/en/method_list.html:118(small)
 #: doc/reference/en/method_list.html:342(small)
 #: doc/reference/en/method_list.html:742(small)
 #: doc/reference/en/method_list.html:982(small)
-#: doc/reference/en/method_list.html:1206(small)
-#: doc/reference/en/method_list.html:2262(small)
+#: doc/reference/en/method_list.html:1198(small)
+#: doc/reference/en/method_list.html:2310(small)
 #: doc/reference/en/method_list.html:2766(small)
 #: doc/reference/en/method_list.html:2774(small)
 #: doc/reference/en/method_list.html:2830(small)
@@ -6182,60 +6184,60 @@ msgstr ""
 msgid "ActiveLdap::Ldif::ChangeRecord"
 msgstr ""
 
-#: doc/reference/en/method_list.html:150(small)
-#: doc/reference/en/method_list.html:334(small)
-#: doc/reference/en/method_list.html:478(small)
-#: doc/reference/en/method_list.html:534(small)
-#: doc/reference/en/method_list.html:1198(small)
-#: doc/reference/en/method_list.html:1686(small)
-#: doc/reference/en/method_list.html:2342(small)
-#: doc/reference/en/method_list.html:3126(small)
-#: doc/reference/en/method_list.html:3430(small)
-#: doc/reference/en/method_list.html:4198(small)
-#: doc/reference/en/method_list.html:4254(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:74(li)
-msgid "ActiveLdap::Ldif::ModifyRecord::Operation"
-msgstr ""
-
-#: doc/reference/en/method_list.html:158(small)
+#: doc/reference/en/method_list.html:126(small)
 #: doc/reference/en/method_list.html:1046(small)
-#: doc/reference/en/method_list.html:2110(small)
+#: doc/reference/en/method_list.html:2014(small)
 #: doc/reference/en/method_list.html:4006(small)
-#: doc/reference/en/method_list.html:4030(small)
-#: doc/reference/en/method_list.html:4214(small)
+#: doc/reference/en/method_list.html:4022(small)
+#: doc/reference/en/method_list.html:4190(small)
 #: doc/reference/en/method_list.html:4270(small)
-#: doc/reference/en/method_list.html:4566(small)
+#: doc/reference/en/method_list.html:4558(small)
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:74(li)
 msgid "ActiveLdap::Ldif::ChangeRecord::Control"
 msgstr ""
 
+#: doc/reference/en/method_list.html:142(small)
+#: doc/reference/en/method_list.html:334(small)
+#: doc/reference/en/method_list.html:478(small)
+#: doc/reference/en/method_list.html:518(small)
+#: doc/reference/en/method_list.html:1206(small)
+#: doc/reference/en/method_list.html:1686(small)
+#: doc/reference/en/method_list.html:2246(small)
+#: doc/reference/en/method_list.html:3126(small)
+#: doc/reference/en/method_list.html:3430(small)
+#: doc/reference/en/method_list.html:4214(small)
+#: doc/reference/en/method_list.html:4262(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:74(li)
+msgid "ActiveLdap::Ldif::ModifyRecord::Operation"
+msgstr ""
+
 #: doc/reference/en/method_list.html:166(small)
-#: doc/reference/en/method_list.html:510(small)
+#: doc/reference/en/method_list.html:526(small)
 #: doc/reference/en/method_list.html:1318(small)
-#: doc/reference/en/method_list.html:2214(small)
+#: doc/reference/en/method_list.html:2302(small)
 #: doc/reference/en/method_list.html:4038(small)
-#: doc/reference/en/method_list.html:4190(small)
+#: doc/reference/en/method_list.html:4166(small)
 #: doc/reference/en/ActiveLdap/Ldif/Record.html:74(li)
 #: doc/reference/en/ActiveLdap/Ldif/ContentRecord.html:144(a)
 msgid "ActiveLdap::Ldif::Record"
 msgstr ""
 
 #: doc/reference/en/method_list.html:174(small)
-#: doc/reference/en/method_list.html:222(small)
+#: doc/reference/en/method_list.html:206(small)
 #: doc/reference/en/method_list.html:230(small)
-#: doc/reference/en/method_list.html:246(small)
+#: doc/reference/en/method_list.html:238(small)
 #: doc/reference/en/method_list.html:262(small)
 #: doc/reference/en/method_list.html:270(small)
 #: doc/reference/en/method_list.html:486(small)
 #: doc/reference/en/method_list.html:494(small)
-#: doc/reference/en/method_list.html:526(small)
+#: doc/reference/en/method_list.html:510(small)
 #: doc/reference/en/method_list.html:542(small)
 #: doc/reference/en/method_list.html:550(small)
 #: doc/reference/en/method_list.html:558(small)
 #: doc/reference/en/method_list.html:566(small)
 #: doc/reference/en/method_list.html:574(small)
 #: doc/reference/en/method_list.html:582(small)
-#: doc/reference/en/method_list.html:646(small)
+#: doc/reference/en/method_list.html:662(small)
 #: doc/reference/en/method_list.html:766(small)
 #: doc/reference/en/method_list.html:774(small)
 #: doc/reference/en/method_list.html:822(small)
@@ -6250,19 +6252,19 @@ msgstr ""
 #: doc/reference/en/method_list.html:1358(small)
 #: doc/reference/en/method_list.html:1366(small)
 #: doc/reference/en/method_list.html:1398(small)
-#: doc/reference/en/method_list.html:1518(small)
-#: doc/reference/en/method_list.html:1566(small)
-#: doc/reference/en/method_list.html:1590(small)
+#: doc/reference/en/method_list.html:1526(small)
+#: doc/reference/en/method_list.html:1558(small)
+#: doc/reference/en/method_list.html:1582(small)
 #: doc/reference/en/method_list.html:1718(small)
 #: doc/reference/en/method_list.html:1742(small)
 #: doc/reference/en/method_list.html:1798(small)
 #: doc/reference/en/method_list.html:1894(small)
 #: doc/reference/en/method_list.html:1990(small)
-#: doc/reference/en/method_list.html:2126(small)
+#: doc/reference/en/method_list.html:2342(small)
 #: doc/reference/en/method_list.html:2366(small)
 #: doc/reference/en/method_list.html:2374(small)
 #: doc/reference/en/method_list.html:2462(small)
-#: doc/reference/en/method_list.html:2670(small)
+#: doc/reference/en/method_list.html:2678(small)
 #: doc/reference/en/method_list.html:2710(small)
 #: doc/reference/en/method_list.html:2718(small)
 #: doc/reference/en/method_list.html:2854(small)
@@ -6271,7 +6273,7 @@ msgstr ""
 #: doc/reference/en/method_list.html:3238(small)
 #: doc/reference/en/method_list.html:3246(small)
 #: doc/reference/en/method_list.html:3342(small)
-#: doc/reference/en/method_list.html:3502(small)
+#: doc/reference/en/method_list.html:3494(small)
 #: doc/reference/en/method_list.html:3510(small)
 #: doc/reference/en/method_list.html:3662(small)
 #: doc/reference/en/method_list.html:3686(small)
@@ -6282,10 +6284,10 @@ msgstr ""
 #: doc/reference/en/method_list.html:3782(small)
 #: doc/reference/en/method_list.html:3814(small)
 #: doc/reference/en/method_list.html:4070(small)
-#: doc/reference/en/method_list.html:4086(small)
+#: doc/reference/en/method_list.html:4078(small)
 #: doc/reference/en/method_list.html:4094(small)
 #: doc/reference/en/method_list.html:4134(small)
-#: doc/reference/en/method_list.html:4206(small)
+#: doc/reference/en/method_list.html:4222(small)
 #: doc/reference/en/method_list.html:4238(small)
 #: doc/reference/en/method_list.html:4438(small)
 #: doc/reference/en/method_list.html:4446(small)
@@ -6305,14 +6307,14 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:182(small)
 #: doc/reference/en/method_list.html:1606(small)
-#: doc/reference/en/method_list.html:2150(small)
+#: doc/reference/en/method_list.html:2326(small)
 #: doc/reference/en/method_list.html:2614(small)
 #: doc/reference/en/method_list.html:2622(small)
 #: doc/reference/en/method_list.html:3270(small)
 #: doc/reference/en/method_list.html:3350(small)
 #: doc/reference/en/method_list.html:3446(small)
-#: doc/reference/en/method_list.html:3494(small)
-#: doc/reference/en/method_list.html:3966(small)
+#: doc/reference/en/method_list.html:3502(small)
+#: doc/reference/en/method_list.html:3974(small)
 #: doc/reference/en/method_list.html:3982(small)
 #: doc/reference/en/ActiveLdap/Association/Collection.html:293(a)
 #: doc/reference/en/ActiveLdap/Association/Collection.html:301(a)
@@ -6328,8 +6330,8 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:190(small)
 #: doc/reference/en/method_list.html:198(small)
-#: doc/reference/en/method_list.html:238(small)
-#: doc/reference/en/method_list.html:1942(small)
+#: doc/reference/en/method_list.html:246(small)
+#: doc/reference/en/method_list.html:1950(small)
 #: doc/reference/en/method_list.html:2870(small)
 #: doc/reference/en/method_list.html:3574(small)
 msgid "ActiveLdap::GetTextFallback::Translation"
@@ -6340,6 +6342,11 @@ msgid "#Nn_"
 msgstr ""
 
 #: doc/reference/en/method_list.html:204(a)
+#: doc/reference/en/method_list.html:220(a)
+msgid "#[]"
+msgstr ""
+
+#: doc/reference/en/method_list.html:212(a)
 #: doc/reference/en/ActiveLdap/Schema.html:959(span)
 #: doc/reference/en/ActiveLdap/Base.html:694(strong)
 #: doc/reference/en/ActiveLdap/Base.html:3094(strong)
@@ -6353,22 +6360,17 @@ msgstr ""
 msgid "[]"
 msgstr ""
 
-#: doc/reference/en/method_list.html:206(small)
+#: doc/reference/en/method_list.html:214(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::Schema::Syntaxes"
 msgstr ""
 
-#: doc/reference/en/method_list.html:212(a)
-#: doc/reference/en/method_list.html:220(a)
-msgid "#[]"
-msgstr ""
-
-#: doc/reference/en/method_list.html:214(small)
+#: doc/reference/en/method_list.html:222(small)
 #: doc/reference/en/method_list.html:750(small)
 #: doc/reference/en/method_list.html:758(small)
-#: doc/reference/en/method_list.html:846(small)
+#: doc/reference/en/method_list.html:838(small)
 #: doc/reference/en/method_list.html:1502(small)
-#: doc/reference/en/method_list.html:2206(small)
+#: doc/reference/en/method_list.html:2134(small)
 #: doc/reference/en/method_list.html:2558(small)
 #: doc/reference/en/method_list.html:3230(small)
 #: doc/reference/en/method_list.html:3622(small)
@@ -6392,9 +6394,9 @@ msgid "#_initialize"
 msgstr ""
 
 #: doc/reference/en/method_list.html:254(small)
-#: doc/reference/en/method_list.html:2318(small)
+#: doc/reference/en/method_list.html:2190(small)
 #: doc/reference/en/method_list.html:3142(small)
-#: doc/reference/en/method_list.html:4222(small)
+#: doc/reference/en/method_list.html:4206(small)
 #: doc/reference/en/LDAP/Mod.html:74(li)
 msgid "LDAP::Mod"
 msgstr ""
@@ -6423,17 +6425,17 @@ msgstr ""
 #: doc/reference/en/method_list.html:414(small)
 #: doc/reference/en/method_list.html:798(small)
 #: doc/reference/en/method_list.html:806(small)
-#: doc/reference/en/method_list.html:918(small)
+#: doc/reference/en/method_list.html:926(small)
 #: doc/reference/en/method_list.html:942(small)
 #: doc/reference/en/method_list.html:966(small)
 #: doc/reference/en/method_list.html:1062(small)
 #: doc/reference/en/method_list.html:1574(small)
 #: doc/reference/en/method_list.html:2382(small)
 #: doc/reference/en/method_list.html:3358(small)
-#: doc/reference/en/method_list.html:3398(small)
-#: doc/reference/en/method_list.html:3462(small)
+#: doc/reference/en/method_list.html:3390(small)
+#: doc/reference/en/method_list.html:3478(small)
 #: doc/reference/en/method_list.html:3518(small)
-#: doc/reference/en/method_list.html:3646(small)
+#: doc/reference/en/method_list.html:3654(small)
 #: doc/reference/en/method_list.html:3806(small)
 #: doc/reference/en/method_list.html:3854(small)
 #: doc/reference/en/method_list.html:3998(small)
@@ -6445,7 +6447,7 @@ msgid "#adapter"
 msgstr ""
 
 #: doc/reference/en/method_list.html:286(small)
-#: doc/reference/en/method_list.html:2166(small)
+#: doc/reference/en/method_list.html:2262(small)
 #: doc/reference/en/ActiveLdap/AdapterNotFound.html:78(li)
 msgid "ActiveLdap::AdapterNotFound"
 msgstr ""
@@ -6459,27 +6461,53 @@ msgid "#add"
 msgstr ""
 
 #: doc/reference/en/method_list.html:294(small)
-#: doc/reference/en/method_list.html:662(small)
-#: doc/reference/en/method_list.html:686(small)
-#: doc/reference/en/method_list.html:734(small)
-#: doc/reference/en/method_list.html:902(small)
-#: doc/reference/en/method_list.html:934(small)
+#: doc/reference/en/method_list.html:638(small)
+#: doc/reference/en/method_list.html:670(small)
+#: doc/reference/en/method_list.html:878(small)
+#: doc/reference/en/method_list.html:1190(small)
+#: doc/reference/en/method_list.html:2758(small)
+#: doc/reference/en/method_list.html:2798(small)
+#: doc/reference/en/method_list.html:3742(small)
+#: doc/reference/en/method_list.html:4358(small)
+#: doc/reference/en/class_list.html:42(small)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:76(li)
+msgid "ActiveLdap::Adapter::Ldap"
+msgstr ""
+
+#: doc/reference/en/method_list.html:302(small)
+#: doc/reference/en/method_list.html:678(small)
+#: doc/reference/en/method_list.html:894(small)
 #: doc/reference/en/method_list.html:1142(small)
+#: doc/reference/en/method_list.html:2750(small)
+#: doc/reference/en/method_list.html:2814(small)
+#: doc/reference/en/method_list.html:3766(small)
+#: doc/reference/en/method_list.html:4366(small)
+#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:76(li)
+msgid "ActiveLdap::Adapter::Jndi"
+msgstr ""
+
+#: doc/reference/en/method_list.html:310(small)
+#: doc/reference/en/method_list.html:654(small)
+#: doc/reference/en/method_list.html:686(small)
+#: doc/reference/en/method_list.html:726(small)
+#: doc/reference/en/method_list.html:886(small)
+#: doc/reference/en/method_list.html:934(small)
+#: doc/reference/en/method_list.html:1182(small)
 #: doc/reference/en/method_list.html:1302(small)
 #: doc/reference/en/method_list.html:1494(small)
-#: doc/reference/en/method_list.html:2070(small)
+#: doc/reference/en/method_list.html:2126(small)
 #: doc/reference/en/method_list.html:2398(small)
 #: doc/reference/en/method_list.html:2430(small)
 #: doc/reference/en/method_list.html:2630(small)
 #: doc/reference/en/method_list.html:2742(small)
-#: doc/reference/en/method_list.html:2798(small)
+#: doc/reference/en/method_list.html:2790(small)
 #: doc/reference/en/method_list.html:2918(small)
 #: doc/reference/en/method_list.html:2934(small)
 #: doc/reference/en/method_list.html:3318(small)
-#: doc/reference/en/method_list.html:3470(small)
+#: doc/reference/en/method_list.html:3462(small)
 #: doc/reference/en/method_list.html:3558(small)
-#: doc/reference/en/method_list.html:3670(small)
-#: doc/reference/en/method_list.html:3750(small)
+#: doc/reference/en/method_list.html:3646(small)
+#: doc/reference/en/method_list.html:3726(small)
 #: doc/reference/en/method_list.html:4350(small)
 #: doc/reference/en/ActiveLdap/Adapter/Jndi.html:343(a)
 #: doc/reference/en/ActiveLdap/Adapter/Base.html:74(li)
@@ -6488,59 +6516,33 @@ msgstr ""
 msgid "ActiveLdap::Adapter::Base"
 msgstr ""
 
-#: doc/reference/en/method_list.html:302(small)
-#: doc/reference/en/method_list.html:638(small)
-#: doc/reference/en/method_list.html:694(small)
-#: doc/reference/en/method_list.html:886(small)
-#: doc/reference/en/method_list.html:1158(small)
+#: doc/reference/en/method_list.html:318(small)
+#: doc/reference/en/method_list.html:646(small)
+#: doc/reference/en/method_list.html:702(small)
+#: doc/reference/en/method_list.html:910(small)
+#: doc/reference/en/method_list.html:1166(small)
 #: doc/reference/en/method_list.html:2726(small)
-#: doc/reference/en/method_list.html:2814(small)
-#: doc/reference/en/method_list.html:3766(small)
+#: doc/reference/en/method_list.html:2822(small)
+#: doc/reference/en/method_list.html:3750(small)
 #: doc/reference/en/method_list.html:4342(small)
-#: doc/reference/en/class_list.html:42(small)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap.html:76(li)
-msgid "ActiveLdap::Adapter::Ldap"
+#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:76(li)
+msgid "ActiveLdap::Adapter::NetLdap"
 msgstr ""
 
-#: doc/reference/en/method_list.html:310(small)
-#: doc/reference/en/method_list.html:670(small)
-#: doc/reference/en/method_list.html:862(small)
-#: doc/reference/en/method_list.html:1174(small)
+#: doc/reference/en/method_list.html:326(small)
+#: doc/reference/en/method_list.html:694(small)
+#: doc/reference/en/method_list.html:734(small)
+#: doc/reference/en/method_list.html:1158(small)
+#: doc/reference/en/method_list.html:2054(small)
 #: doc/reference/en/method_list.html:2734(small)
 #: doc/reference/en/method_list.html:2806(small)
-#: doc/reference/en/method_list.html:3734(small)
-#: doc/reference/en/method_list.html:4358(small)
-#: doc/reference/en/ActiveLdap/Adapter/Jndi.html:76(li)
-msgid "ActiveLdap::Adapter::Jndi"
-msgstr ""
-
-#: doc/reference/en/method_list.html:318(small)
-#: doc/reference/en/method_list.html:702(small)
-#: doc/reference/en/method_list.html:726(small)
-#: doc/reference/en/method_list.html:1182(small)
-#: doc/reference/en/method_list.html:2046(small)
-#: doc/reference/en/method_list.html:2750(small)
-#: doc/reference/en/method_list.html:2822(small)
 #: doc/reference/en/method_list.html:3582(small)
-#: doc/reference/en/method_list.html:3726(small)
+#: doc/reference/en/method_list.html:3758(small)
 #: doc/reference/en/method_list.html:3846(small)
 #: doc/reference/en/method_list.html:4374(small)
 #: doc/reference/en/class_list.html:42(small)
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:74(li)
 msgid "ActiveLdap::Adapter::JndiConnection"
-msgstr ""
-
-#: doc/reference/en/method_list.html:326(small)
-#: doc/reference/en/method_list.html:654(small)
-#: doc/reference/en/method_list.html:678(small)
-#: doc/reference/en/method_list.html:894(small)
-#: doc/reference/en/method_list.html:1150(small)
-#: doc/reference/en/method_list.html:2758(small)
-#: doc/reference/en/method_list.html:2790(small)
-#: doc/reference/en/method_list.html:3742(small)
-#: doc/reference/en/method_list.html:4366(small)
-#: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:76(li)
-msgid "ActiveLdap::Adapter::NetLdap"
 msgstr ""
 
 #: doc/reference/en/method_list.html:332(a)
@@ -6564,7 +6566,7 @@ msgstr ""
 #: doc/reference/en/method_list.html:350(small)
 #: doc/reference/en/method_list.html:782(small)
 #: doc/reference/en/method_list.html:1470(small)
-#: doc/reference/en/method_list.html:1910(small)
+#: doc/reference/en/method_list.html:1942(small)
 #: doc/reference/en/method_list.html:3374(small)
 #: doc/reference/en/method_list.html:3438(small)
 #: doc/reference/en/class_list.html:42(small)
@@ -6625,12 +6627,12 @@ msgid "#all_names"
 msgstr ""
 
 #: doc/reference/en/method_list.html:406(small)
-#: doc/reference/en/method_list.html:2102(small)
-#: doc/reference/en/method_list.html:2678(small)
+#: doc/reference/en/method_list.html:2046(small)
+#: doc/reference/en/method_list.html:2670(small)
 #: doc/reference/en/method_list.html:2862(small)
-#: doc/reference/en/method_list.html:2902(small)
-#: doc/reference/en/method_list.html:2974(small)
-#: doc/reference/en/method_list.html:3102(small)
+#: doc/reference/en/method_list.html:2910(small)
+#: doc/reference/en/method_list.html:2966(small)
+#: doc/reference/en/method_list.html:3094(small)
 #: doc/reference/en/method_list.html:3334(small)
 #: doc/reference/en/method_list.html:3678(small)
 #: doc/reference/en/ActiveLdap/EntryAttribute.html:74(li)
@@ -6646,7 +6648,7 @@ msgid "#ancestors"
 msgstr ""
 
 #: doc/reference/en/method_list.html:422(small)
-#: doc/reference/en/method_list.html:1966(small)
+#: doc/reference/en/method_list.html:1974(small)
 #: doc/reference/en/method_list.html:3150(small)
 #: doc/reference/en/method_list.html:3166(small)
 #: doc/reference/en/method_list.html:3534(small)
@@ -6711,33 +6713,33 @@ msgid "#attribute"
 msgstr ""
 
 #: doc/reference/en/method_list.html:462(small)
-#: doc/reference/en/method_list.html:2134(small)
-#: doc/reference/en/method_list.html:4558(small)
-#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:78(li)
-msgid "ActiveLdap::AttributeValueInvalid"
-msgstr ""
-
-#: doc/reference/en/method_list.html:470(small)
 #: doc/reference/en/method_list.html:502(small)
-#: doc/reference/en/method_list.html:518(small)
+#: doc/reference/en/method_list.html:534(small)
 #: doc/reference/en/method_list.html:1310(small)
 #: doc/reference/en/method_list.html:1374(small)
 #: doc/reference/en/method_list.html:1478(small)
 #: doc/reference/en/method_list.html:1598(small)
 #: doc/reference/en/method_list.html:1662(small)
 #: doc/reference/en/method_list.html:1902(small)
-#: doc/reference/en/method_list.html:2254(small)
+#: doc/reference/en/method_list.html:2286(small)
 #: doc/reference/en/method_list.html:2486(small)
 #: doc/reference/en/method_list.html:2494(small)
 #: doc/reference/en/method_list.html:2518(small)
-#: doc/reference/en/method_list.html:2910(small)
+#: doc/reference/en/method_list.html:2902(small)
 #: doc/reference/en/method_list.html:3078(small)
 #: doc/reference/en/method_list.html:3086(small)
-#: doc/reference/en/method_list.html:3094(small)
+#: doc/reference/en/method_list.html:3102(small)
 #: doc/reference/en/method_list.html:3486(small)
 #: doc/reference/en/class_list.html:42(small)
 #: doc/reference/en/ActiveLdap/Schema.html:74(li)
 msgid "ActiveLdap::Schema"
+msgstr ""
+
+#: doc/reference/en/method_list.html:470(small)
+#: doc/reference/en/method_list.html:2086(small)
+#: doc/reference/en/method_list.html:4566(small)
+#: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:78(li)
+msgid "ActiveLdap::AttributeValueInvalid"
 msgstr ""
 
 #: doc/reference/en/method_list.html:484(a)
@@ -6842,10 +6844,6 @@ msgid "base"
 msgstr ""
 
 #: doc/reference/en/method_list.html:564(a)
-msgid "#base="
-msgstr ""
-
-#: doc/reference/en/method_list.html:572(a)
 #: doc/reference/en/ActiveLdap/Base.html:247(strong)
 #: doc/reference/en/ActiveLdap/Base.html:872(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2171(strong)
@@ -6853,6 +6851,10 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Base.html:3409(strong)
 #: doc/reference/en/ActiveLdap/Base.html:3429(span)
 msgid "base="
+msgstr ""
+
+#: doc/reference/en/method_list.html:572(a)
+msgid "#base="
 msgstr ""
 
 #: doc/reference/en/method_list.html:580(a)
@@ -6888,28 +6890,28 @@ msgstr ""
 #: doc/reference/en/method_list.html:614(small)
 #: doc/reference/en/method_list.html:1294(small)
 #: doc/reference/en/method_list.html:1758(small)
-#: doc/reference/en/method_list.html:1774(small)
-#: doc/reference/en/method_list.html:2030(small)
-#: doc/reference/en/method_list.html:3062(small)
+#: doc/reference/en/method_list.html:1782(small)
+#: doc/reference/en/method_list.html:2230(small)
+#: doc/reference/en/method_list.html:3046(small)
 #: doc/reference/en/method_list.html:3286(small)
 #: doc/reference/en/method_list.html:3862(small)
 #: doc/reference/en/method_list.html:3926(small)
 #: doc/reference/en/method_list.html:3950(small)
 #: doc/reference/en/method_list.html:3958(small)
-#: doc/reference/en/method_list.html:4022(small)
-#: doc/reference/en/method_list.html:4294(small)
+#: doc/reference/en/method_list.html:4030(small)
+#: doc/reference/en/method_list.html:4286(small)
 #: doc/reference/en/method_list.html:4502(small)
-#: doc/reference/en/method_list.html:4518(small)
+#: doc/reference/en/method_list.html:4510(small)
 #: doc/reference/en/ActiveLdap/Schema/Attribute.html:76(li)
 msgid "ActiveLdap::Schema::Attribute"
 msgstr ""
 
 #: doc/reference/en/method_list.html:606(small)
-#: doc/reference/en/method_list.html:2238(small)
-#: doc/reference/en/method_list.html:2894(small)
+#: doc/reference/en/method_list.html:2150(small)
+#: doc/reference/en/method_list.html:2886(small)
 #: doc/reference/en/method_list.html:4054(small)
 #: doc/reference/en/method_list.html:4062(small)
-#: doc/reference/en/method_list.html:4262(small)
+#: doc/reference/en/method_list.html:4254(small)
 #: doc/reference/en/method_list.html:4574(small)
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:74(li)
 msgid "ActiveLdap::Adapter::JndiConnection::ModifyRecord"
@@ -6928,8 +6930,8 @@ msgid "#binary_value?"
 msgstr ""
 
 #: doc/reference/en/method_list.html:630(small)
-#: doc/reference/en/method_list.html:1422(small)
-#: doc/reference/en/method_list.html:3006(small)
+#: doc/reference/en/method_list.html:1430(small)
+#: doc/reference/en/method_list.html:3030(small)
 msgid "ActiveLdap::Ldif::Attribute"
 msgstr ""
 
@@ -7026,12 +7028,12 @@ msgstr ""
 msgid "#column"
 msgstr ""
 
-#: doc/reference/en/method_list.html:838(small)
-#: doc/reference/en/method_list.html:2014(small)
+#: doc/reference/en/method_list.html:846(small)
+#: doc/reference/en/method_list.html:2174(small)
 #: doc/reference/en/method_list.html:2534(small)
 #: doc/reference/en/method_list.html:2550(small)
 #: doc/reference/en/method_list.html:2926(small)
-#: doc/reference/en/method_list.html:3302(small)
+#: doc/reference/en/method_list.html:3310(small)
 #: doc/reference/en/ActiveLdap/LdifInvalid.html:78(li)
 msgid "ActiveLdap::LdifInvalid"
 msgstr ""
@@ -7062,21 +7064,21 @@ msgstr ""
 msgid "#connect"
 msgstr ""
 
-#: doc/reference/en/method_list.html:870(small)
+#: doc/reference/en/method_list.html:862(small)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:76(li)
 msgid "ActiveLdap::Adapter::Ldap::Method::Plain"
 msgstr ""
 
-#: doc/reference/en/method_list.html:878(small)
-#: doc/reference/en/method_list.html:3886(small)
-#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:76(li)
-msgid "ActiveLdap::Adapter::Ldap::Method::SSL"
-msgstr ""
-
-#: doc/reference/en/method_list.html:910(small)
+#: doc/reference/en/method_list.html:870(small)
 #: doc/reference/en/method_list.html:3902(small)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:76(li)
 msgid "ActiveLdap::Adapter::Ldap::Method::TLS"
+msgstr ""
+
+#: doc/reference/en/method_list.html:902(small)
+#: doc/reference/en/method_list.html:3894(small)
+#: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:76(li)
+msgid "ActiveLdap::Adapter::Ldap::Method::SSL"
 msgstr ""
 
 #: doc/reference/en/method_list.html:916(a)
@@ -7084,14 +7086,14 @@ msgstr ""
 msgid "#connected?"
 msgstr ""
 
-#: doc/reference/en/method_list.html:926(small)
+#: doc/reference/en/method_list.html:918(small)
 #: doc/reference/en/method_list.html:950(small)
 #: doc/reference/en/method_list.html:958(small)
-#: doc/reference/en/method_list.html:1558(small)
-#: doc/reference/en/method_list.html:1950(small)
-#: doc/reference/en/method_list.html:3390(small)
+#: doc/reference/en/method_list.html:1566(small)
+#: doc/reference/en/method_list.html:1918(small)
+#: doc/reference/en/method_list.html:3398(small)
 #: doc/reference/en/method_list.html:3526(small)
-#: doc/reference/en/method_list.html:3654(small)
+#: doc/reference/en/method_list.html:3670(small)
 #: doc/reference/en/method_list.html:3822(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::Connection"
@@ -7139,8 +7141,8 @@ msgid "#count"
 msgstr ""
 
 #: doc/reference/en/method_list.html:998(small)
-#: doc/reference/en/method_list.html:1582(small)
-#: doc/reference/en/method_list.html:3758(small)
+#: doc/reference/en/method_list.html:1590(small)
+#: doc/reference/en/method_list.html:3734(small)
 msgid "ActiveLdap::Operations::Common"
 msgstr ""
 
@@ -7150,8 +7152,8 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:1006(small)
 #: doc/reference/en/method_list.html:1038(small)
-#: doc/reference/en/method_list.html:1166(small)
-#: doc/reference/en/method_list.html:1262(small)
+#: doc/reference/en/method_list.html:1150(small)
+#: doc/reference/en/method_list.html:1254(small)
 #: doc/reference/en/method_list.html:3598(small)
 #: doc/reference/en/method_list.html:3614(small)
 #: doc/reference/en/method_list.html:4414(small)
@@ -7209,7 +7211,7 @@ msgstr ""
 #: doc/reference/en/method_list.html:3830(small)
 #: doc/reference/en/method_list.html:3870(small)
 #: doc/reference/en/method_list.html:3878(small)
-#: doc/reference/en/method_list.html:4470(small)
+#: doc/reference/en/method_list.html:4486(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::UserPassword"
 msgstr ""
@@ -7227,6 +7229,10 @@ msgid "#default_configuration"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1084(a)
+msgid "#default_search_attribute"
+msgstr ""
+
+#: doc/reference/en/method_list.html:1092(a)
 #: doc/reference/en/ActiveLdap/Base.html:352(strong)
 #: doc/reference/en/ActiveLdap/Base.html:956(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2356(strong)
@@ -7235,10 +7241,6 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Base.html:3596(span)
 #: doc/reference/en/ActiveLdap/Base.html:3597(span)
 msgid "default_search_attribute"
-msgstr ""
-
-#: doc/reference/en/method_list.html:1092(a)
-msgid "#default_search_attribute"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1100(a)
@@ -7276,10 +7278,10 @@ msgstr ""
 msgid "#delete"
 msgstr ""
 
-#: doc/reference/en/method_list.html:1190(small)
+#: doc/reference/en/method_list.html:1134(small)
 #: doc/reference/en/method_list.html:1222(small)
 #: doc/reference/en/method_list.html:1230(small)
-#: doc/reference/en/method_list.html:1270(small)
+#: doc/reference/en/method_list.html:1262(small)
 #: doc/reference/en/method_list.html:1286(small)
 msgid "ActiveLdap::Operations::Delete"
 msgstr ""
@@ -7314,7 +7316,7 @@ msgid "#delete_old_rdn?"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1238(small)
-#: doc/reference/en/method_list.html:2062(small)
+#: doc/reference/en/method_list.html:2038(small)
 #: doc/reference/en/method_list.html:2950(small)
 #: doc/reference/en/method_list.html:2958(small)
 #: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:78(li)
@@ -7331,8 +7333,8 @@ msgstr ""
 msgid "#destroy"
 msgstr ""
 
-#: doc/reference/en/method_list.html:1254(small)
-#: doc/reference/en/method_list.html:2158(small)
+#: doc/reference/en/method_list.html:1270(small)
+#: doc/reference/en/method_list.html:2030(small)
 #: doc/reference/en/method_list.html:4246(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::Callbacks"
@@ -7366,17 +7368,17 @@ msgid "#dn"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1334(small)
-#: doc/reference/en/method_list.html:2190(small)
-#: doc/reference/en/method_list.html:3198(small)
-#: doc/reference/en/ActiveLdap/DistinguishedName/Parser.html:74(li)
-msgid "ActiveLdap::DistinguishedName::Parser"
+#: doc/reference/en/method_list.html:2022(small)
+#: doc/reference/en/method_list.html:3302(small)
+#: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:78(li)
+msgid "ActiveLdap::DistinguishedNameInvalid"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1342(small)
-#: doc/reference/en/method_list.html:2310(small)
-#: doc/reference/en/method_list.html:3310(small)
-#: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:78(li)
-msgid "ActiveLdap::DistinguishedNameInvalid"
+#: doc/reference/en/method_list.html:2102(small)
+#: doc/reference/en/method_list.html:3206(small)
+#: doc/reference/en/ActiveLdap/DistinguishedName/Parser.html:74(li)
+msgid "ActiveLdap::DistinguishedName::Parser"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1348(a)
@@ -7398,7 +7400,7 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:1382(small)
 #: doc/reference/en/method_list.html:2590(small)
-#: doc/reference/en/method_list.html:4078(small)
+#: doc/reference/en/method_list.html:4086(small)
 #: doc/reference/en/method_list.html:4102(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::Operations::LDIF"
@@ -7416,8 +7418,8 @@ msgstr ""
 msgid "#encode"
 msgstr ""
 
-#: doc/reference/en/method_list.html:1430(small)
-#: doc/reference/en/method_list.html:2966(small)
+#: doc/reference/en/method_list.html:1422(small)
+#: doc/reference/en/method_list.html:2974(small)
 msgid "ActiveLdap::Ldif::Attributes"
 msgstr ""
 
@@ -7453,7 +7455,7 @@ msgid "#entry"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1486(small)
-#: doc/reference/en/method_list.html:2222(small)
+#: doc/reference/en/method_list.html:2334(small)
 #: doc/reference/en/ActiveLdap/EntryInvalid.html:78(li)
 msgid "ActiveLdap::EntryInvalid"
 msgstr ""
@@ -7492,11 +7494,6 @@ msgid "escape_value"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1556(a)
-#: doc/reference/en/method_list.html:1572(a)
-msgid "#establish_connection"
-msgstr ""
-
-#: doc/reference/en/method_list.html:1564(a)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:286(strong)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:844(strong)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:866(span)
@@ -7507,6 +7504,11 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Base.html:2385(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2419(span)
 msgid "establish_connection"
+msgstr ""
+
+#: doc/reference/en/method_list.html:1564(a)
+#: doc/reference/en/method_list.html:1572(a)
+msgid "#establish_connection"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1580(a)
@@ -7529,8 +7531,8 @@ msgid "#extract_all_in_schema"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1622(small)
-#: doc/reference/en/method_list.html:2174(small)
-#: doc/reference/en/method_list.html:3206(small)
+#: doc/reference/en/method_list.html:2006(small)
+#: doc/reference/en/method_list.html:3198(small)
 #: doc/reference/en/method_list.html:3990(small)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:74(li)
 msgid "ActiveLdap::GetText::Parser"
@@ -7608,7 +7610,7 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:1750(small)
 #: doc/reference/en/method_list.html:1766(small)
-#: doc/reference/en/method_list.html:1782(small)
+#: doc/reference/en/method_list.html:1774(small)
 #: doc/reference/en/method_list.html:1790(small)
 #: doc/reference/en/method_list.html:1806(small)
 #: doc/reference/en/method_list.html:1814(small)
@@ -7801,34 +7803,34 @@ msgstr ""
 msgid "included"
 msgstr ""
 
-#: doc/reference/en/method_list.html:1918(small)
-msgid "ActiveLdap::ActionController::LdapBenchmarking"
+#: doc/reference/en/method_list.html:1910(small)
+#: doc/reference/en/class_list.html:42(small)
+msgid "ActiveLdap::Operations"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1926(small)
 #: doc/reference/en/class_list.html:42(small)
-msgid "ActiveLdap::Configuration"
+msgid "ActiveLdap::HumanReadable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1934(small)
 #: doc/reference/en/class_list.html:42(small)
-msgid "ActiveLdap::Attributes"
+msgid "ActiveLdap::Configuration"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1958(small)
 #: doc/reference/en/class_list.html:42(small)
-msgid "ActiveLdap::HumanReadable"
+msgid "ActiveLdap::Attributes"
 msgstr ""
 
-#: doc/reference/en/method_list.html:1974(small)
+#: doc/reference/en/method_list.html:1966(small)
 #: doc/reference/en/ActiveLdap/Generators/ModelGenerator.html:89(a)
 #: doc/reference/en/ActiveLdap/Generators/ModelGenerator.html:155(a)
 msgid "ActiveLdap::GetTextSupport"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1982(small)
-#: doc/reference/en/class_list.html:42(small)
-msgid "ActiveLdap::Operations"
+msgid "ActiveLdap::ActionController::LdapBenchmarking"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1988(a)
@@ -7891,68 +7893,17 @@ msgstr ""
 msgid "#initialize"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2006(small)
-#: doc/reference/en/method_list.html:4174(small)
-#: doc/reference/en/ActiveLdap/Xml/Serializer.html:74(li)
-msgid "ActiveLdap::Xml::Serializer"
+#: doc/reference/en/method_list.html:1998(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:76(li)
+msgid "ActiveLdap::Ldif::ModifyRecord::AddOperation"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2022(small)
-#: doc/reference/en/method_list.html:2886(small)
-#: doc/reference/en/ActiveLdap/UnknownAttribute.html:78(li)
-msgid "ActiveLdap::UnknownAttribute"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2054(small)
-#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:78(li)
-msgid "ActiveLdap::Ldif::AddRecord"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2078(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:76(li)
-msgid "ActiveLdap::Ldif::ModifyRecord::DeleteOperation"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2086(small)
-#: doc/reference/en/method_list.html:3974(small)
-#: doc/reference/en/ActiveLdap/NotImplemented.html:78(li)
-msgid "ActiveLdap::NotImplemented"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2094(small)
+#: doc/reference/en/method_list.html:2070(small)
 #: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:78(li)
 msgid "ActiveLdap::Ldif::DeleteRecord"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2118(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:76(li)
-msgid "ActiveLdap::Ldif::ModifyRecord::ReplaceOperation"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2142(small)
-#: doc/reference/en/method_list.html:4182(small)
-#: doc/reference/en/class_list.html:42(small)
-#: doc/reference/en/ActiveLdap/Xml.html:74(li)
-msgid "ActiveLdap::Xml"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2182(small)
-#: doc/reference/en/method_list.html:2638(small)
-#: doc/reference/en/method_list.html:2654(small)
-#: doc/reference/en/method_list.html:3110(small)
-#: doc/reference/en/method_list.html:3478(small)
-#: doc/reference/en/method_list.html:3550(small)
-#: doc/reference/en/method_list.html:3566(small)
-#: doc/reference/en/ActiveLdap/LogSubscriber.html:76(li)
-msgid "ActiveLdap::LogSubscriber"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2198(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:80(li)
-msgid "ActiveLdap::Ldif::ModifyRDNRecord"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2246(small)
+#: doc/reference/en/method_list.html:2078(small)
 #: doc/reference/en/method_list.html:2662(small)
 #: doc/reference/en/method_list.html:2846(small)
 #: doc/reference/en/method_list.html:3934(small)
@@ -7961,33 +7912,84 @@ msgstr ""
 msgid "ActiveLdap::Schema::ObjectClass"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2278(small)
+#: doc/reference/en/method_list.html:2094(small)
 #: doc/reference/en/method_list.html:2526(small)
 #: doc/reference/en/method_list.html:3174(small)
 #: doc/reference/en/ActiveLdap/Ldif/Parser.html:74(li)
 msgid "ActiveLdap::Ldif::Parser"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2286(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:80(li)
-msgid "ActiveLdap::Ldif::ModifyDNRecord"
+#: doc/reference/en/method_list.html:2118(small)
+#: doc/reference/en/method_list.html:3966(small)
+#: doc/reference/en/ActiveLdap/NotImplemented.html:78(li)
+msgid "ActiveLdap::NotImplemented"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2302(small)
+#: doc/reference/en/method_list.html:2142(small)
+#: doc/reference/en/method_list.html:2638(small)
+#: doc/reference/en/method_list.html:2654(small)
+#: doc/reference/en/method_list.html:3110(small)
+#: doc/reference/en/method_list.html:3470(small)
+#: doc/reference/en/method_list.html:3550(small)
+#: doc/reference/en/method_list.html:3566(small)
+#: doc/reference/en/ActiveLdap/LogSubscriber.html:76(li)
+msgid "ActiveLdap::LogSubscriber"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2158(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:76(li)
+msgid "ActiveLdap::Ldif::ModifyRecord::DeleteOperation"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2166(small)
+#: doc/reference/en/method_list.html:4198(small)
+#: doc/reference/en/class_list.html:42(small)
+#: doc/reference/en/ActiveLdap/Xml.html:74(li)
+msgid "ActiveLdap::Xml"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2182(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:80(li)
+msgid "ActiveLdap::Ldif::ModifyRDNRecord"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2198(small)
+#: doc/reference/en/method_list.html:2358(small)
+#: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:78(li)
+msgid "ActiveLdap::DistinguishedNameInputInvalid"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2214(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:76(li)
+msgid "ActiveLdap::Ldif::ModifyRecord::ReplaceOperation"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2222(small)
+#: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:78(li)
+msgid "ActiveLdap::Ldif::AddRecord"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2254(small)
 #: doc/reference/en/method_list.html:2350(small)
 #: doc/reference/en/Net/LDAP/Entry.html:74(li)
 msgid "Net::LDAP::Entry"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2326(small)
-#: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:76(li)
-msgid "ActiveLdap::Ldif::ModifyRecord::AddOperation"
+#: doc/reference/en/method_list.html:2270(small)
+#: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:80(li)
+msgid "ActiveLdap::Ldif::ModifyDNRecord"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2334(small)
-#: doc/reference/en/method_list.html:2358(small)
-#: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:78(li)
-msgid "ActiveLdap::DistinguishedNameInputInvalid"
+#: doc/reference/en/method_list.html:2294(small)
+#: doc/reference/en/method_list.html:4174(small)
+#: doc/reference/en/ActiveLdap/Xml/Serializer.html:74(li)
+msgid "ActiveLdap::Xml::Serializer"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2318(small)
+#: doc/reference/en/method_list.html:2878(small)
+#: doc/reference/en/ActiveLdap/UnknownAttribute.html:78(li)
+msgid "ActiveLdap::UnknownAttribute"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2348(a)
@@ -7999,6 +8001,10 @@ msgid "#input"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2364(a)
+msgid "#inspect"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2372(a)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:463(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:451(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:242(span)
@@ -8018,10 +8024,6 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Adapter/Ldap.html:742(span)
 #: doc/reference/en/LDAP/Mod.html:327(span)
 msgid "inspect"
-msgstr ""
-
-#: doc/reference/en/method_list.html:2372(a)
-msgid "#inspect"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2380(a)
@@ -8168,24 +8170,24 @@ msgid "#load"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2566(small)
-msgid "ActiveLdap::Operations::LDIF::ContentRecordLoadable"
+msgid "ActiveLdap::Operations::LDIF::ModifyNameRecordLoadable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2574(small)
-msgid "ActiveLdap::Operations::LDIF::DeleteRecordLoadable"
+msgid "ActiveLdap::Operations::LDIF::ContentRecordLoadable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2582(small)
+msgid "ActiveLdap::Operations::LDIF::DeleteRecordLoadable"
+msgstr ""
+
+#: doc/reference/en/method_list.html:2598(small)
 #: doc/reference/en/class_list.html:42(small)
 msgid "ActiveLdap::Operations::LDIF::ModifyRecordLoadable"
 msgstr ""
 
-#: doc/reference/en/method_list.html:2598(small)
-msgid "ActiveLdap::Operations::LDIF::AddRecordLoadable"
-msgstr ""
-
 #: doc/reference/en/method_list.html:2606(small)
-msgid "ActiveLdap::Operations::LDIF::ModifyNameRecordLoadable"
+msgid "ActiveLdap::Operations::LDIF::AddRecordLoadable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:2612(a)
@@ -8405,40 +8407,40 @@ msgstr ""
 msgid "#normalize_value"
 msgstr ""
 
+#: doc/reference/en/method_list.html:3006(small)
+#: doc/reference/en/method_list.html:4318(small)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:76(li)
+msgid "ActiveLdap::Schema::Syntaxes::GeneralizedTime"
+msgstr ""
+
 #: doc/reference/en/method_list.html:3014(small)
-#: doc/reference/en/method_list.html:4310(small)
+#: doc/reference/en/method_list.html:4294(small)
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Integer.html:76(li)
 msgid "ActiveLdap::Schema::Syntaxes::Integer"
 msgstr ""
 
 #: doc/reference/en/method_list.html:3022(small)
-#: doc/reference/en/method_list.html:4278(small)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/DistinguishedName.html:76(li)
-msgid "ActiveLdap::Schema::Syntaxes::DistinguishedName"
-msgstr ""
-
-#: doc/reference/en/method_list.html:3030(small)
-#: doc/reference/en/method_list.html:4286(small)
-#: doc/reference/en/method_list.html:4494(small)
+#: doc/reference/en/method_list.html:4326(small)
+#: doc/reference/en/method_list.html:4478(small)
 #: doc/reference/en/method_list.html:4526(small)
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Base.html:74(li)
 msgid "ActiveLdap::Schema::Syntaxes::Base"
 msgstr ""
 
-#: doc/reference/en/method_list.html:3046(small)
+#: doc/reference/en/method_list.html:3038(small)
 #: doc/reference/en/method_list.html:4302(small)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:76(li)
-msgid "ActiveLdap::Schema::Syntaxes::GeneralizedTime"
-msgstr ""
-
-#: doc/reference/en/method_list.html:3054(small)
-#: doc/reference/en/method_list.html:4318(small)
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/BitString.html:76(li)
 msgid "ActiveLdap::Schema::Syntaxes::BitString"
 msgstr ""
 
+#: doc/reference/en/method_list.html:3062(small)
+#: doc/reference/en/method_list.html:4310(small)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/DistinguishedName.html:76(li)
+msgid "ActiveLdap::Schema::Syntaxes::DistinguishedName"
+msgstr ""
+
 #: doc/reference/en/method_list.html:3070(small)
-#: doc/reference/en/method_list.html:4326(small)
+#: doc/reference/en/method_list.html:4334(small)
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:76(li)
 msgid "ActiveLdap::Schema::Syntaxes::Boolean"
 msgstr ""
@@ -8677,14 +8679,14 @@ msgid "#reset"
 msgstr ""
 
 #: doc/reference/en/method_list.html:3460(a)
-#: doc/reference/en/method_list.html:3468(a)
+#: doc/reference/en/method_list.html:3476(a)
 #: doc/reference/en/ActiveLdap/Adapter/Jndi.html:329(a)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap.html:346(a)
 #: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:356(a)
 msgid "#reset_runtime"
 msgstr ""
 
-#: doc/reference/en/method_list.html:3476(a)
+#: doc/reference/en/method_list.html:3468(a)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:115(strong)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:332(strong)
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:350(span)
@@ -8771,7 +8773,7 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:3590(small)
 #: doc/reference/en/method_list.html:3606(small)
-#: doc/reference/en/method_list.html:4478(small)
+#: doc/reference/en/method_list.html:4494(small)
 #: doc/reference/en/method_list.html:4542(small)
 #: doc/reference/en/method_list.html:4550(small)
 msgid "ActiveLdap::Validations"
@@ -8813,6 +8815,10 @@ msgid "#scope"
 msgstr ""
 
 #: doc/reference/en/method_list.html:3692(a)
+msgid "#scope="
+msgstr ""
+
+#: doc/reference/en/method_list.html:3700(a)
 #: doc/reference/en/ActiveLdap/Base.html:551(strong)
 #: doc/reference/en/ActiveLdap/Base.html:1514(strong)
 #: doc/reference/en/ActiveLdap/Base.html:2780(strong)
@@ -8820,10 +8826,6 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Base.html:4509(strong)
 #: doc/reference/en/ActiveLdap/Base.html:4527(span)
 msgid "scope="
-msgstr ""
-
-#: doc/reference/en/method_list.html:3700(a)
-msgid "#scope="
 msgstr ""
 
 #: doc/reference/en/method_list.html:3708(a)
@@ -8934,7 +8936,7 @@ msgstr ""
 msgid "#ssl?"
 msgstr ""
 
-#: doc/reference/en/method_list.html:3894(small)
+#: doc/reference/en/method_list.html:3886(small)
 #: doc/reference/en/method_list.html:3910(small)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:74(li)
 msgid "ActiveLdap::Adapter::Ldap::Method::Base"
@@ -9048,18 +9050,18 @@ msgstr ""
 
 #: doc/reference/en/method_list.html:4110(small)
 msgid ""
-"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::"
-"ReplaceOperationModifiable"
+"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::DeleteOperationModifiable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:4118(small)
 msgid ""
-"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::AddOperationModifiable"
+"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::"
+"ReplaceOperationModifiable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:4126(small)
 msgid ""
-"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::DeleteOperationModifiable"
+"ActiveLdap::Operations::LDIF::ModifyRecordLoadable::AddOperationModifiable"
 msgstr ""
 
 #: doc/reference/en/method_list.html:4132(a)
@@ -11209,7 +11211,7 @@ msgid "Mod"
 msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:6(title)
-msgid "Class: Net::LDAP::Entry &mdash; activeldap - 3.1.0"
+msgid "Class: Net::LDAP::Entry &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/Net/LDAP/Entry.html:17(script)
@@ -16467,7 +16469,7 @@ msgid "alias"
 msgstr ""
 
 #: doc/reference/en/Net/LDAP.html:6(title)
-msgid "Class: Net::LDAP &mdash; activeldap - 3.1.0"
+msgid "Class: Net::LDAP &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/Net/LDAP.html:17(script)
@@ -17520,13 +17522,13 @@ msgstr ""
 
 #: doc/reference/en/index.html:6(title)
 #: doc/reference/en/file.README.html:6(title)
-msgid "File: README &mdash; activeldap - 3.1.0"
-msgstr ""
+msgid "File: README &mdash; ActiveLdap"
+msgstr "ファイル: はじめに &mdash; ActiveLdap"
 
 #: doc/reference/en/index.html:37(span)
 #: doc/reference/en/file.README.html:37(span)
 msgid "File: README"
-msgstr ""
+msgstr "ファイル: はじめに"
 
 #: doc/reference/en/index.html:58(p) doc/reference/en/file.README.html:58(p)
 msgid "A ruby library for object-oriented <placeholder-1/> interction."
@@ -17662,7 +17664,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ActionController.html:6(title)
-msgid "Module: ActiveLdap::ActionController &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::ActionController &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ActionController.html:36(a)
@@ -17697,7 +17699,7 @@ msgid "lib/active_ldap/action_controller/ldap_benchmarking.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:6(title)
-msgid "Class: ActiveLdap::LogSubscriber &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::LogSubscriber &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:59(h1)
@@ -20234,7 +20236,7 @@ msgid "!"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Escape.html:6(title)
-msgid "Module: ActiveLdap::Escape &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Escape &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Escape.html:59(h1)
@@ -20385,7 +20387,7 @@ msgid "\"*\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Compatible.html:6(title)
-msgid "Module: ActiveLdap::Compatible &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Compatible &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Compatible.html:36(a)
@@ -21121,7 +21123,7 @@ msgid "}"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LdapError.html:6(title)
-msgid "Exception: ActiveLdap::LdapError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::LdapError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LdapError.html:59(h1)
@@ -21481,7 +21483,7 @@ msgid "const_get"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:6(title)
-msgid "Module: ActiveLdap::Connection::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Connection::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:59(h1)
@@ -23791,7 +23793,7 @@ msgid "object_id"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UserPassword/Salt.html:6(title)
-msgid "Module: ActiveLdap::UserPassword::Salt &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::UserPassword::Salt &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UserPassword/Salt.html:36(a)
@@ -23979,7 +23981,7 @@ msgid "rand"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif.html:6(title)
-msgid "Class: ActiveLdap::Ldif &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif.html:59(h1)
@@ -24425,7 +24427,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:6(title)
-msgid "Module: ActiveLdap::Acts::Tree &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Acts::Tree &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:36(a)
@@ -25382,7 +25384,7 @@ msgid "-"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:6(title)
-msgid "Module: ActiveLdap::Acts::Tree::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Acts::Tree::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:17(script)
@@ -25774,7 +25776,7 @@ msgid "merge"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:6(title)
-msgid "Exception: ActiveLdap::AttributeValueInvalid &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::AttributeValueInvalid &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:59(h1)
@@ -25945,7 +25947,7 @@ msgid "Returns the value of attribute value"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:6(title)
-msgid "Class: ActiveLdap::GetText::Parser &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::GetText::Parser &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:36(a)
@@ -26474,9 +26476,7 @@ msgid "read"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/StrongAuthenticationRequired.html:6(title)
-msgid ""
-"Exception: ActiveLdap::StrongAuthenticationRequired &mdash; activeldap - "
-"3.1.0"
+msgid "Exception: ActiveLdap::StrongAuthenticationRequired &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/StrongAuthenticationRequired.html:59(h1)
@@ -26525,7 +26525,7 @@ msgid "Method Summary"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators.html:6(title)
-msgid "Module: ActiveLdap::Generators &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Generators &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators.html:36(a)
@@ -26557,7 +26557,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryAlreadyExist.html:6(title)
-msgid "Exception: ActiveLdap::EntryAlreadyExist &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::EntryAlreadyExist &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryAlreadyExist.html:59(h1)
@@ -26569,7 +26569,7 @@ msgid "ActiveLdap::EntryAlreadyExist"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railtie.html:6(title)
-msgid "Class: ActiveLdap::Railtie &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Railtie &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railtie.html:36(a)
@@ -26600,8 +26600,7 @@ msgid "lib/active_ldap/railtie.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railties/ControllerRuntime.html:6(title)
-msgid ""
-"Module: ActiveLdap::Railties::ControllerRuntime &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Railties::ControllerRuntime &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railties/ControllerRuntime.html:59(h1)
@@ -26645,7 +26644,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Railties/ControllerRuntime/ClassMethods.html:6(title)
 msgid ""
 "Module: ActiveLdap::Railties::ControllerRuntime::ClassMethods &mdash; "
-"activeldap - 3.1.0"
+"ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railties/ControllerRuntime/ClassMethods.html:59(h1)
@@ -26699,7 +26698,7 @@ msgid "to_f"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:6(title)
-msgid "Module: ActiveLdap::Persistence &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Persistence &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:59(h1)
@@ -26952,8 +26951,7 @@ msgid "\"#{dn_attribute}=#{DN.escape_value(new_dn_value)}\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:6(title)
-msgid ""
-"Module: ActiveLdap::GetTextFallback::Translation &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::GetTextFallback::Translation &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextFallback/Translation.html:59(h1)
@@ -27189,7 +27187,7 @@ msgid "-1"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextFallback.html:6(title)
-msgid "Module: ActiveLdap::GetTextFallback &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::GetTextFallback &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextFallback.html:59(h1)
@@ -27269,9 +27267,7 @@ msgid "# File 'lib/active_ldap/get_text_fallback.rb', line 12"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:6(title)
-msgid ""
-"Exception: ActiveLdap::DistinguishedNameInputInvalid &mdash; activeldap - "
-"3.1.0"
+msgid "Exception: ActiveLdap::DistinguishedNameInputInvalid &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:36(a)
@@ -27358,8 +27354,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 128"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:6(title)
-msgid ""
-"Module: ActiveLdap::ObjectClass::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::ObjectClass::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:59(h1)
@@ -27386,8 +27381,7 @@ msgid "required_classes"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:6(title)
-msgid ""
-"Module: ActiveLdap::HumanReadable::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::HumanReadable::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:59(h1)
@@ -27957,7 +27951,7 @@ msgid "\"LDAP|Syntax|#{id}\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts.html:6(title)
-msgid "Module: ActiveLdap::Acts &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Acts &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts.html:59(h1)
@@ -27965,7 +27959,7 @@ msgid "Module: ActiveLdap::Acts"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter.html:6(title)
-msgid "Module: ActiveLdap::Adapter &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Adapter &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter.html:59(h1)
@@ -27995,8 +27989,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators/ScaffoldGenerator.html:6(title)
-msgid ""
-"Class: ActiveLdap::Generators::ScaffoldGenerator &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Generators::ScaffoldGenerator &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators/ScaffoldGenerator.html:59(h1)
@@ -28037,8 +28030,7 @@ msgid "'config/ldap.yml'"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators/ModelGenerator.html:6(title)
-msgid ""
-"Class: ActiveLdap::Generators::ModelGenerator &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Generators::ModelGenerator &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Generators/ModelGenerator.html:36(a)
@@ -28099,7 +28091,7 @@ msgid "\"#{file_name}.rb\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:6(title)
-msgid "Module: ActiveLdap::Attributes::Normalizable &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Attributes::Normalizable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:36(a)
@@ -28575,7 +28567,7 @@ msgid "# File 'lib/active_ldap/attributes.rb', line 88"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:6(title)
-msgid "Module: ActiveLdap::Attributes::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Attributes::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:59(h1)
@@ -28730,7 +28722,7 @@ msgid "v"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection.html:6(title)
-msgid "Module: ActiveLdap::Connection &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Connection &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection.html:59(h1)
@@ -28949,7 +28941,7 @@ msgid "# File 'lib/active_ldap/connection.rb', line 225"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AuthenticationError.html:6(title)
-msgid "Exception: ActiveLdap::AuthenticationError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::AuthenticationError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AuthenticationError.html:59(h1)
@@ -28965,7 +28957,7 @@ msgid "An exception raised when user authentication fails"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema.html:6(title)
-msgid "Class: ActiveLdap::Schema &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema.html:59(h1)
@@ -29753,7 +29745,7 @@ msgid "# File 'lib/active_ldap/schema.rb', line 26"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DeleteError.html:6(title)
-msgid "Exception: ActiveLdap::DeleteError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::DeleteError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DeleteError.html:59(h1)
@@ -29769,7 +29761,7 @@ msgid "An exception raised when an ActiveLdap delete action fails"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Validations.html:6(title)
-msgid "Module: ActiveLdap::Validations &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Validations &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Validations.html:36(a)
@@ -29894,7 +29886,7 @@ msgid "# File 'lib/active_ldap/validations.rb', line 33"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LdifInvalid.html:6(title)
-msgid "Exception: ActiveLdap::LdifInvalid &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::LdifInvalid &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LdifInvalid.html:59(h1)
@@ -30108,7 +30100,7 @@ msgid "Returns the value of attribute reason"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:6(title)
-msgid "Class: ActiveLdap::DistinguishedName &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::DistinguishedName &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:59(h1)
@@ -30875,7 +30867,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextSupport.html:6(title)
-msgid "Module: ActiveLdap::GetTextSupport &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::GetTextSupport &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetTextSupport.html:59(h1)
@@ -31015,7 +31007,7 @@ msgid "\"active-ldap\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes.html:6(title)
-msgid "Module: ActiveLdap::Attributes &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Attributes &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Attributes.html:59(h1)
@@ -31031,7 +31023,7 @@ msgid "# File 'lib/active_ldap/attributes.rb', line 3"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/TimeoutError.html:6(title)
-msgid "Exception: ActiveLdap::TimeoutError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::TimeoutError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/TimeoutError.html:59(h1)
@@ -31047,7 +31039,7 @@ msgid "An exception raised when a connection action fails due to a timeout"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Xml/Serializer.html:6(title)
-msgid "Class: ActiveLdap::Xml::Serializer &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Xml::Serializer &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Xml/Serializer.html:59(h1)
@@ -31210,7 +31202,7 @@ msgid "serialize_attribute_values"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Base.html:6(title)
-msgid "Class: ActiveLdap::Base &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Base &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Base.html:36(a)
@@ -34067,7 +34059,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 875"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AdapterNotSpecified.html:6(title)
-msgid "Exception: ActiveLdap::AdapterNotSpecified &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::AdapterNotSpecified &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AdapterNotSpecified.html:59(h1)
@@ -34079,8 +34071,7 @@ msgid "ActiveLdap::AdapterNotSpecified"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:6(title)
-msgid ""
-"Exception: ActiveLdap::DistinguishedNameInvalid &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::DistinguishedNameInvalid &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameInvalid.html:59(h1)
@@ -34144,7 +34135,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 136"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClassError.html:6(title)
-msgid "Exception: ActiveLdap::ObjectClassError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::ObjectClassError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClassError.html:36(a)
@@ -34171,7 +34162,7 @@ msgid "An exception raised when an objectClass is not defined in the schema"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association.html:6(title)
-msgid "Module: ActiveLdap::Association &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Association &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association.html:59(h1)
@@ -34207,7 +34198,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AdapterNotFound.html:6(title)
-msgid "Exception: ActiveLdap::AdapterNotFound &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::AdapterNotFound &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AdapterNotFound.html:59(h1)
@@ -34266,7 +34257,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 244"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/OperationNotPermitted.html:6(title)
-msgid "Exception: ActiveLdap::OperationNotPermitted &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::OperationNotPermitted &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/OperationNotPermitted.html:59(h1)
@@ -34278,7 +34269,7 @@ msgid "ActiveLdap::OperationNotPermitted"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/NotImplemented.html:6(title)
-msgid "Exception: ActiveLdap::NotImplemented &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::NotImplemented &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/NotImplemented.html:59(h1)
@@ -34348,7 +34339,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 269"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ModifyRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord.html:59(h1)
@@ -34641,7 +34632,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ModifyDNRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyDNRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:59(h1)
@@ -34786,8 +34777,7 @@ msgid "\"moddn\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:6(title)
-msgid ""
-"Class: ActiveLdap::Ldif::ChangeRecord::Control &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ChangeRecord::Control &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord/Control.html:59(h1)
@@ -35003,7 +34993,7 @@ msgid "\"\\n\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Attributes.html:6(title)
-msgid "Module: ActiveLdap::Ldif::Attributes &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Ldif::Attributes &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Attributes.html:59(h1)
@@ -35044,7 +35034,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 21"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Record.html:6(title)
-msgid "Class: ActiveLdap::Ldif::Record &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::Record &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Record.html:59(h1)
@@ -35145,7 +35135,7 @@ msgid "to_s_content"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Attribute.html:6(title)
-msgid "Module: ActiveLdap::Ldif::Attribute &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Ldif::Attribute &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Attribute.html:59(h1)
@@ -35311,7 +35301,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 74"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Scanner.html:6(title)
-msgid "Class: ActiveLdap::Ldif::Scanner &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::Scanner &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Scanner.html:59(h1)
@@ -35645,7 +35635,7 @@ msgid "sub_result"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ModifyNameRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyNameRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:59(h1)
@@ -35742,7 +35732,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 794"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ChangeRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ChangeRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:59(h1)
@@ -35949,9 +35939,7 @@ msgid "\"modrdn\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:6(title)
-msgid ""
-"Class: ActiveLdap::Ldif::ModifyRecord::AddOperation &mdash; activeldap - "
-"3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyRecord::AddOperation &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/AddOperation.html:59(h1)
@@ -35984,8 +35972,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:6(title)
 msgid ""
-"Class: ActiveLdap::Ldif::ModifyRecord::ReplaceOperation &mdash; activeldap - "
-"3.1.0"
+"Class: ActiveLdap::Ldif::ModifyRecord::ReplaceOperation &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/ReplaceOperation.html:59(h1)
@@ -36019,8 +36006,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:6(title)
 msgid ""
-"Class: ActiveLdap::Ldif::ModifyRecord::DeleteOperation &mdash; activeldap - "
-"3.1.0"
+"Class: ActiveLdap::Ldif::ModifyRecord::DeleteOperation &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/DeleteOperation.html:59(h1)
@@ -36048,8 +36034,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 916"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:6(title)
-msgid ""
-"Class: ActiveLdap::Ldif::ModifyRecord::Operation &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyRecord::Operation &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRecord/Operation.html:59(h1)
@@ -36169,7 +36154,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 895"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Parser.html:6(title)
-msgid "Class: ActiveLdap::Ldif::Parser &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::Parser &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/Parser.html:59(h1)
@@ -36280,7 +36265,7 @@ msgid "parse_records"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::AddRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::AddRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/AddRecord.html:59(h1)
@@ -36314,7 +36299,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 773"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ContentRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ContentRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ContentRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ContentRecord.html:59(h1)
@@ -36337,7 +36322,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::DeleteRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::DeleteRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:59(h1)
@@ -36371,7 +36356,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 779"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:6(title)
-msgid "Class: ActiveLdap::Ldif::ModifyRDNRecord &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Ldif::ModifyRDNRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Ldif/ModifyRDNRecord.html:59(h1)
@@ -36401,7 +36386,7 @@ msgid "# File 'lib/active_ldap/ldif.rb', line 829"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryAttribute.html:6(title)
-msgid "Class: ActiveLdap::EntryAttribute &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::EntryAttribute &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryAttribute.html:59(h1)
@@ -36628,7 +36613,7 @@ msgid "# File 'lib/active_ldap/entry_attribute.rb', line 67"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:6(title)
-msgid "Module: ActiveLdap::Callbacks::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Callbacks::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Callbacks/ClassMethods.html:59(h1)
@@ -36720,7 +36705,7 @@ msgid "caller"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/SaveError.html:6(title)
-msgid "Exception: ActiveLdap::SaveError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::SaveError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/SaveError.html:59(h1)
@@ -36736,8 +36721,7 @@ msgid "An exception raised when an ActiveLdap save action failes"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:6(title)
-msgid ""
-"Module: ActiveLdap::Configuration::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Configuration::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:59(h1)
@@ -37121,8 +37105,7 @@ msgid "CONNECTION_CONFIGURATION_KEYS"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AttributeAssignmentError.html:6(title)
-msgid ""
-"Exception: ActiveLdap::AttributeAssignmentError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::AttributeAssignmentError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/AttributeAssignmentError.html:59(h1)
@@ -37139,7 +37122,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryNotSaved.html:6(title)
-msgid "Exception: ActiveLdap::EntryNotSaved &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::EntryNotSaved &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryNotSaved.html:59(h1)
@@ -37151,9 +37134,7 @@ msgid "ActiveLdap::EntryNotSaved"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameNotSetError.html:6(title)
-msgid ""
-"Exception: ActiveLdap::DistinguishedNameNotSetError &mdash; activeldap - "
-"3.1.0"
+msgid "Exception: ActiveLdap::DistinguishedNameNotSetError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedNameNotSetError.html:59(h1)
@@ -37165,7 +37146,7 @@ msgid "ActiveLdap::DistinguishedNameNotSetError"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryNotFound.html:6(title)
-msgid "Exception: ActiveLdap::EntryNotFound &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::EntryNotFound &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryNotFound.html:59(h1)
@@ -37177,7 +37158,7 @@ msgid "ActiveLdap::EntryNotFound"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClass.html:6(title)
-msgid "Module: ActiveLdap::ObjectClass &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::ObjectClass &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ObjectClass.html:59(h1)
@@ -37294,7 +37275,7 @@ msgid "assert_object_classes"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UserPassword.html:6(title)
-msgid "Module: ActiveLdap::UserPassword &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::UserPassword &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UserPassword.html:36(a)
@@ -37643,7 +37624,7 @@ msgid "generated_password"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Command.html:6(title)
-msgid "Module: ActiveLdap::Command &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Command &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Command.html:59(h1)
@@ -37924,7 +37905,7 @@ msgid "\"/bin/stty echo\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConnectionError.html:6(title)
-msgid "Exception: ActiveLdap::ConnectionError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::ConnectionError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConnectionError.html:59(h1)
@@ -37940,7 +37921,7 @@ msgid "An exception raised when the LDAP conenction fails"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Populate.html:6(title)
-msgid "Module: ActiveLdap::Populate &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Populate &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Populate.html:59(h1)
@@ -38109,7 +38090,7 @@ msgid "\"organizationalUnit\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedName/Parser.html:6(title)
-msgid "Class: ActiveLdap::DistinguishedName::Parser &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::DistinguishedName::Parser &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/DistinguishedName/Parser.html:59(h1)
@@ -38244,7 +38225,7 @@ msgid "/\\s*\\,\\s*/"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Error.html:6(title)
-msgid "Exception: ActiveLdap::Error &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::Error &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Error.html:59(h1)
@@ -38281,7 +38262,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConfigurationError.html:6(title)
-msgid "Exception: ActiveLdap::ConfigurationError &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::ConfigurationError &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConfigurationError.html:59(h1)
@@ -38297,7 +38278,7 @@ msgid "An exception raised when there is a problem with Base.connect arguments"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryInvalid.html:6(title)
-msgid "Exception: ActiveLdap::EntryInvalid &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::EntryInvalid &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/EntryInvalid.html:59(h1)
@@ -38359,7 +38340,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 226"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Collection.html:6(title)
-msgid "Class: ActiveLdap::Association::Collection &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::Collection &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Collection.html:59(h1)
@@ -38452,8 +38433,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/BelongsToMany.html:6(title)
-msgid ""
-"Class: ActiveLdap::Association::BelongsToMany &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::BelongsToMany &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/BelongsToMany.html:59(h1)
@@ -38483,7 +38463,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:6(title)
-msgid "Class: ActiveLdap::Association::Proxy &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::Proxy &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:59(h1)
@@ -38708,7 +38688,7 @@ msgid "# File 'lib/active_ldap/association/proxy.rb', line 46"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasMany.html:6(title)
-msgid "Class: ActiveLdap::Association::HasMany &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::HasMany &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasMany.html:36(a)
@@ -38732,7 +38712,7 @@ msgid "lib/active_ldap/association/has_many.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Children.html:6(title)
-msgid "Class: ActiveLdap::Association::Children &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::Children &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/Children.html:59(h1)
@@ -38748,7 +38728,7 @@ msgid "lib/active_ldap/association/children.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasManyWrap.html:6(title)
-msgid "Class: ActiveLdap::Association::HasManyWrap &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::HasManyWrap &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasManyWrap.html:59(h1)
@@ -38764,8 +38744,7 @@ msgid "lib/active_ldap/association/has_many_wrap.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasManyUtils.html:6(title)
-msgid ""
-"Module: ActiveLdap::Association::HasManyUtils &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Association::HasManyUtils &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/HasManyUtils.html:59(h1)
@@ -38777,7 +38756,7 @@ msgid "lib/active_ldap/association/has_many_utils.rb"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/BelongsTo.html:6(title)
-msgid "Class: ActiveLdap::Association::BelongsTo &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Association::BelongsTo &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Association/BelongsTo.html:59(h1)
@@ -38848,7 +38827,7 @@ msgid "# File 'lib/active_ldap/association/belongs_to.rb', line 22"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConnectionNotSetup.html:6(title)
-msgid "Exception: ActiveLdap::ConnectionNotSetup &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::ConnectionNotSetup &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ConnectionNotSetup.html:59(h1)
@@ -38860,7 +38839,7 @@ msgid "ActiveLdap::ConnectionNotSetup"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Helper.html:6(title)
-msgid "Module: ActiveLdap::Helper &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Helper &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Helper.html:59(h1)
@@ -39189,7 +39168,7 @@ msgid "# File 'lib/active_ldap/helper.rb', line 23"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railties.html:6(title)
-msgid "Module: ActiveLdap::Railties &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Railties &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Railties.html:59(h1)
@@ -39197,7 +39176,7 @@ msgid "Module: ActiveLdap::Railties"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/HumanReadable.html:6(title)
-msgid "Module: ActiveLdap::HumanReadable &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::HumanReadable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/HumanReadable.html:59(h1)
@@ -39213,7 +39192,7 @@ msgid "# File 'lib/active_ldap/human_readable.rb', line 3"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Callbacks.html:6(title)
-msgid "Module: ActiveLdap::Callbacks &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Callbacks &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Callbacks.html:59(h1)
@@ -39360,7 +39339,7 @@ msgid ":touch"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UnknownAttribute.html:6(title)
-msgid "Exception: ActiveLdap::UnknownAttribute &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::UnknownAttribute &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/UnknownAttribute.html:59(h1)
@@ -39433,7 +39412,7 @@ msgid "# File 'lib/active_ldap/base.rb', line 252"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Find.html:6(title)
-msgid "Module: ActiveLdap::Operations::Find &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations::Find &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Find.html:36(a)
@@ -39596,7 +39575,7 @@ msgid "# File 'lib/active_ldap/operations.rb', line 245"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:6(title)
-msgid "Module: ActiveLdap::Operations::Delete &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations::Delete &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:59(h1)
@@ -39781,8 +39760,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:6(title)
 msgid ""
-"Module: ActiveLdap::Operations::LDIF::DeleteRecordLoadable &mdash; "
-"activeldap - 3.1.0"
+"Module: ActiveLdap::Operations::LDIF::DeleteRecordLoadable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:59(h1)
@@ -39842,7 +39820,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyNameRecordLoadable.html:6(title)
 msgid ""
 "Module: ActiveLdap::Operations::LDIF::ModifyNameRecordLoadable &mdash; "
-"activeldap - 3.1.0"
+"ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyNameRecordLoadable.html:59(h1)
@@ -39860,7 +39838,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/DeleteOperationModifiable.html:6(title)
 msgid ""
 "Module: ActiveLdap::Operations::LDIF::ModifyRecordLoadable::"
-"DeleteOperationModifiable &mdash; activeldap - 3.1.0"
+"DeleteOperationModifiable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/DeleteOperationModifiable.html:17(script)
@@ -39912,7 +39890,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/AddOperationModifiable.html:6(title)
 msgid ""
 "Module: ActiveLdap::Operations::LDIF::ModifyRecordLoadable::"
-"AddOperationModifiable &mdash; activeldap - 3.1.0"
+"AddOperationModifiable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/AddOperationModifiable.html:59(h1)
@@ -39942,7 +39920,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/ReplaceOperationModifiable.html:6(title)
 msgid ""
 "Module: ActiveLdap::Operations::LDIF::ModifyRecordLoadable::"
-"ReplaceOperationModifiable &mdash; activeldap - 3.1.0"
+"ReplaceOperationModifiable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable/ReplaceOperationModifiable.html:59(h1)
@@ -39967,8 +39945,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:6(title)
 msgid ""
-"Module: ActiveLdap::Operations::LDIF::AddRecordLoadable &mdash; activeldap - "
-"3.1.0"
+"Module: ActiveLdap::Operations::LDIF::AddRecordLoadable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:59(h1)
@@ -39985,8 +39962,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable.html:6(title)
 msgid ""
-"Module: ActiveLdap::Operations::LDIF::ModifyRecordLoadable &mdash; "
-"activeldap - 3.1.0"
+"Module: ActiveLdap::Operations::LDIF::ModifyRecordLoadable &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable.html:59(h1)
@@ -40028,7 +40004,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ContentRecordLoadable.html:6(title)
 msgid ""
 "Module: ActiveLdap::Operations::LDIF::ContentRecordLoadable &mdash; "
-"activeldap - 3.1.0"
+"ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ContentRecordLoadable.html:59(h1)
@@ -40044,7 +40020,7 @@ msgid "# File 'lib/active_ldap/operations.rb', line 405"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF.html:6(title)
-msgid "Module: ActiveLdap::Operations::LDIF &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations::LDIF &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/LDIF.html:59(h1)
@@ -40102,7 +40078,7 @@ msgid "# File 'lib/active_ldap/operations.rb', line 389"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Common.html:6(title)
-msgid "Module: ActiveLdap::Operations::Common &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations::Common &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Common.html:59(h1)
@@ -40420,7 +40396,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Update.html:6(title)
-msgid "Module: ActiveLdap::Operations::Update &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations::Update &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Update.html:59(h1)
@@ -40603,8 +40579,7 @@ msgid "/[=\\(\\)&amp;\\|]/"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:6(title)
-msgid ""
-"Module: ActiveLdap::Associations::ClassMethods &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Associations::ClassMethods &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations/ClassMethods.html:59(h1)
@@ -41181,7 +41156,7 @@ msgid "# File 'lib/active_ldap/associations.rb', line 21"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations.html:6(title)
-msgid "Module: ActiveLdap::Associations &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Associations &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Associations.html:59(h1)
@@ -41236,8 +41211,7 @@ msgid "\"@#{association}\""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/RequiredAttributeMissed.html:6(title)
-msgid ""
-"Exception: ActiveLdap::RequiredAttributeMissed &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::RequiredAttributeMissed &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/RequiredAttributeMissed.html:59(h1)
@@ -41250,8 +41224,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:6(title)
 msgid ""
-"Module: ActiveLdap::ActionController::LdapBenchmarking &mdash; activeldap - "
-"3.1.0"
+"Module: ActiveLdap::ActionController::LdapBenchmarking &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/ActionController/LdapBenchmarking.html:59(h1)
@@ -41296,7 +41269,7 @@ msgid ":rendering_runtime"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Configuration.html:6(title)
-msgid "Module: ActiveLdap::Configuration &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Configuration &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Configuration.html:59(h1)
@@ -41319,7 +41292,7 @@ msgid "# File 'lib/active_ldap/configuration.rb', line 20"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations.html:6(title)
-msgid "Module: ActiveLdap::Operations &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Operations &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations.html:59(h1)
@@ -41335,8 +41308,7 @@ msgid "# File 'lib/active_ldap/operations.rb', line 4"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:6(title)
-msgid ""
-"Class: ActiveLdap::Adapter::Ldap::Method::Base &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Ldap::Method::Base &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:59(h1)
@@ -41381,8 +41353,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap.rb', line 21"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:6(title)
-msgid ""
-"Class: ActiveLdap::Adapter::Ldap::Method::Plain &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Ldap::Method::Plain &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Plain.html:59(h1)
@@ -41406,8 +41377,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap.rb', line 47"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:6(title)
-msgid ""
-"Class: ActiveLdap::Adapter::Ldap::Method::TLS &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Ldap::Method::TLS &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:59(h1)
@@ -41432,8 +41402,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap.rb', line 41"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:6(title)
-msgid ""
-"Class: ActiveLdap::Adapter::Ldap::Method::SSL &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Ldap::Method::SSL &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:59(h1)
@@ -41454,7 +41423,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap.rb', line 31"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method.html:6(title)
-msgid "Module: ActiveLdap::Adapter::Ldap::Method &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Adapter::Ldap::Method &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method.html:59(h1)
@@ -41462,7 +41431,7 @@ msgid "Module: ActiveLdap::Adapter::Ldap::Method"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Jndi.html:6(title)
-msgid "Class: ActiveLdap::Adapter::Jndi &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Jndi &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Jndi.html:36(a)
@@ -41889,7 +41858,7 @@ msgid ":unbind"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Base.html:6(title)
-msgid "Class: ActiveLdap::Adapter::Base &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Base &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Base.html:59(h1)
@@ -42601,7 +42570,7 @@ msgid "# File 'lib/active_ldap/adapter/base.rb', line 100"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap.html:6(title)
-msgid "Class: ActiveLdap::Adapter::Ldap &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::Ldap &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/Ldap.html:59(h1)
@@ -42738,7 +42707,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap.rb', line 63"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:6(title)
-msgid "Class: ActiveLdap::Adapter::JndiConnection &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::JndiConnection &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:59(h1)
@@ -43177,8 +43146,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:6(title)
 msgid ""
-"Class: ActiveLdap::Adapter::JndiConnection::ModifyRecord &mdash; activeldap "
-"- 3.1.0"
+"Class: ActiveLdap::Adapter::JndiConnection::ModifyRecord &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection/ModifyRecord.html:59(h1)
@@ -43320,8 +43288,7 @@ msgid "# File 'lib/active_ldap/adapter/jndi_connection.rb', line 59"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:6(title)
-msgid ""
-"Module: ActiveLdap::Adapter::JndiConnection::Scope &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Adapter::JndiConnection::Scope &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection/Scope.html:59(h1)
@@ -43353,7 +43320,7 @@ msgid "SUBTREE_SCOPE"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:6(title)
-msgid "Class: ActiveLdap::Adapter::NetLdap &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Adapter::NetLdap &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Adapter/NetLdap.html:59(h1)
@@ -43499,7 +43466,7 @@ msgid "# Net::LDAP doesn't implement unbind."
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Xml.html:6(title)
-msgid "Class: ActiveLdap::Xml &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Xml &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Xml.html:36(a)
@@ -43545,7 +43512,7 @@ msgid "# File 'lib/active_ldap/xml.rb', line 116"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Entry.html:6(title)
-msgid "Class: ActiveLdap::Schema::Entry &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Entry &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Entry.html:59(h1)
@@ -43652,7 +43619,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:6(title)
-msgid "Module: ActiveLdap::Schema::Syntaxes &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap::Schema::Syntaxes &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes.html:59(h1)
@@ -43734,7 +43701,7 @@ msgid "SYNTAXES"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Attribute.html:6(title)
-msgid "Class: ActiveLdap::Schema::Attribute &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Attribute &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Attribute.html:59(h1)
@@ -43876,8 +43843,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/BitString.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::BitString &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::BitString &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/BitString.html:59(h1)
@@ -43949,8 +43915,7 @@ msgid "/\\A'([01]*)'B\\z/"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/CountryString.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::CountryString &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::CountryString &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/CountryString.html:59(h1)
@@ -43962,7 +43927,7 @@ msgid "ActiveLdap::Schema::Syntaxes::CountryString"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/JPEG.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntaxes::JPEG &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::JPEG &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/JPEG.html:59(h1)
@@ -43974,9 +43939,7 @@ msgid "ActiveLdap::Schema::Syntaxes::JPEG"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/DirectoryString.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::DirectoryString &mdash; activeldap - "
-"3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::DirectoryString &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/DirectoryString.html:59(h1)
@@ -43988,9 +43951,7 @@ msgid "ActiveLdap::Schema::Syntaxes::DirectoryString"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::GeneralizedTime &mdash; activeldap - "
-"3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::GeneralizedTime &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/GeneralizedTime.html:59(h1)
@@ -44181,8 +44142,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/DistinguishedName.html:6(title)
 msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::DistinguishedName &mdash; activeldap - "
-"3.1.0"
+"Class: ActiveLdap::Schema::Syntaxes::DistinguishedName &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/DistinguishedName.html:59(h1)
@@ -44207,8 +44167,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NameAndOptionalUID.html:6(title)
 msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::NameAndOptionalUID &mdash; activeldap - "
-"3.1.0"
+"Class: ActiveLdap::Schema::Syntaxes::NameAndOptionalUID &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NameAndOptionalUID.html:59(h1)
@@ -44220,7 +44179,7 @@ msgid "ActiveLdap::Schema::Syntaxes::NameAndOptionalUID"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Base.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntaxes::Base &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::Base &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Base.html:59(h1)
@@ -44278,9 +44237,7 @@ msgid "validate_normalized_value"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/PrintableString.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::PrintableString &mdash; activeldap - "
-"3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::PrintableString &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/PrintableString.html:59(h1)
@@ -44292,8 +44249,7 @@ msgid "ActiveLdap::Schema::Syntaxes::PrintableString"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/PostalAddress.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::PostalAddress &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::PostalAddress &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/PostalAddress.html:59(h1)
@@ -44305,7 +44261,7 @@ msgid "ActiveLdap::Schema::Syntaxes::PostalAddress"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/OID.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntaxes::OID &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::OID &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/OID.html:59(h1)
@@ -44317,7 +44273,7 @@ msgid "ActiveLdap::Schema::Syntaxes::OID"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Integer.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntaxes::Integer &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::Integer &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Integer.html:36(a)
@@ -44345,7 +44301,7 @@ msgid "# File 'lib/active_ldap/schema/syntaxes.rb', line 248"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntaxes::Boolean &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::Boolean &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/Boolean.html:59(h1)
@@ -44383,8 +44339,7 @@ msgid "# File 'lib/active_ldap/schema/syntaxes.rb', line 81"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/OtherMailbox.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::OtherMailbox &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::OtherMailbox &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/OtherMailbox.html:59(h1)
@@ -44396,9 +44351,7 @@ msgid "ActiveLdap::Schema::Syntaxes::OtherMailbox"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/TelephoneNumber.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::TelephoneNumber &mdash; activeldap - "
-"3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::TelephoneNumber &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/TelephoneNumber.html:59(h1)
@@ -44410,8 +44363,7 @@ msgid "ActiveLdap::Schema::Syntaxes::TelephoneNumber"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NumericString.html:6(title)
-msgid ""
-"Class: ActiveLdap::Schema::Syntaxes::NumericString &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntaxes::NumericString &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntaxes/NumericString.html:59(h1)
@@ -44423,7 +44375,7 @@ msgid "ActiveLdap::Schema::Syntaxes::NumericString"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/ObjectClass.html:6(title)
-msgid "Class: ActiveLdap::Schema::ObjectClass &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::ObjectClass &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/ObjectClass.html:59(h1)
@@ -44488,7 +44440,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:6(title)
-msgid "Class: ActiveLdap::Schema::Syntax &mdash; activeldap - 3.1.0"
+msgid "Class: ActiveLdap::Schema::Syntax &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema/Syntax.html:59(h1)
@@ -44585,8 +44537,7 @@ msgid ""
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/RequiredObjectClassMissed.html:6(title)
-msgid ""
-"Exception: ActiveLdap::RequiredObjectClassMissed &mdash; activeldap - 3.1.0"
+msgid "Exception: ActiveLdap::RequiredObjectClassMissed &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/RequiredObjectClassMissed.html:59(h1)
@@ -44598,7 +44549,7 @@ msgid "ActiveLdap::RequiredObjectClassMissed"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap.html:6(title)
-msgid "Module: ActiveLdap &mdash; activeldap - 3.1.0"
+msgid "Module: ActiveLdap &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap.html:59(h1)
@@ -44781,7 +44732,7 @@ msgid ":GetTextFallback"
 msgstr ""
 
 #: doc/reference/en/Net.html:6(title)
-msgid "Module: Net &mdash; activeldap - 3.1.0"
+msgid "Module: Net &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/Net.html:59(h1)
@@ -44789,7 +44740,7 @@ msgid "Module: Net"
 msgstr ""
 
 #: doc/reference/en/LDAP/Conn.html:6(title)
-msgid "Class: LDAP::Conn &mdash; activeldap - 3.1.0"
+msgid "Class: LDAP::Conn &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/LDAP/Conn.html:59(h1)
@@ -44924,7 +44875,7 @@ msgid "search_ext"
 msgstr ""
 
 #: doc/reference/en/LDAP/Mod.html:6(title)
-msgid "Class: LDAP::Mod &mdash; activeldap - 3.1.0"
+msgid "Class: LDAP::Mod &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/LDAP/Mod.html:59(h1)
@@ -45035,7 +44986,7 @@ msgid "# File 'lib/active_ldap/adapter/ldap_ext.rb', line 13"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:6(title)
-msgid "File: tutorial &mdash; activeldap - 3.1.0"
+msgid "File: tutorial &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/file.tutorial.html:37(span)
@@ -47413,13 +47364,8 @@ msgstr ""
 "ケージについて興奮しています。また、私以上に、人々の助けになることを見たいと"
 "思っています。"
 
-#: doc/reference/en/frames.html:7(title) doc/reference/en/_index.html:6(title)
-#: doc/reference/en/_index.html:55(h1)
-msgid "activeldap - 3.1.0"
-msgstr ""
-
 #: doc/reference/en/Timeout.html:6(title)
-msgid "Module: Timeout &mdash; activeldap - 3.1.0"
+msgid "Module: Timeout &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/Timeout.html:59(h1)
@@ -47485,15 +47431,15 @@ msgstr ""
 
 #: doc/reference/en/_index.html:57(h1)
 msgid "Alphabetic Index"
-msgstr ""
+msgstr "アルファベット順の索引"
 
 #: doc/reference/en/_index.html:59(h2)
 msgid "File Listing"
-msgstr ""
+msgstr "ファイル一覧"
 
 #: doc/reference/en/_index.html:78(h2)
 msgid "Namespace Listing A-Z"
-msgstr ""
+msgstr "A-Z順のネームスペース一覧"
 
 #: doc/reference/en/_index.html:89(li)
 msgid "A"
@@ -47508,9 +47454,9 @@ msgstr ""
 #: doc/reference/en/_index.html:170(small)
 #: doc/reference/en/_index.html:191(small)
 #: doc/reference/en/_index.html:198(small)
-#: doc/reference/en/_index.html:205(small)
+#: doc/reference/en/_index.html:212(small)
 #: doc/reference/en/_index.html:219(small)
-#: doc/reference/en/_index.html:234(small)
+#: doc/reference/en/_index.html:248(small)
 #: doc/reference/en/_index.html:298(small)
 #: doc/reference/en/_index.html:389(small)
 #: doc/reference/en/_index.html:403(small)
@@ -47541,7 +47487,7 @@ msgstr ""
 #: doc/reference/en/_index.html:846(small)
 #: doc/reference/en/_index.html:853(small)
 #: doc/reference/en/_index.html:972(small)
-#: doc/reference/en/_index.html:1001(small)
+#: doc/reference/en/_index.html:1008(small)
 #: doc/reference/en/_index.html:1015(small)
 #: doc/reference/en/_index.html:1029(small)
 #: doc/reference/en/_index.html:1036(small)
@@ -47577,7 +47523,7 @@ msgstr ""
 
 #: doc/reference/en/_index.html:149(small)
 #: doc/reference/en/_index.html:184(small)
-#: doc/reference/en/_index.html:212(small)
+#: doc/reference/en/_index.html:205(small)
 #: doc/reference/en/_index.html:305(small)
 #: doc/reference/en/_index.html:452(small)
 #: doc/reference/en/_index.html:523(small)
@@ -47585,7 +47531,7 @@ msgstr ""
 #: doc/reference/en/_index.html:896(small)
 #: doc/reference/en/_index.html:910(small)
 #: doc/reference/en/_index.html:917(small)
-#: doc/reference/en/_index.html:1058(small)
+#: doc/reference/en/_index.html:1072(small)
 #: doc/reference/en/_index.html:1146(small)
 #: doc/reference/en/_index.html:1217(small)
 msgid "(ActiveLdap::Ldif)"
@@ -47600,8 +47546,8 @@ msgid "(ActiveLdap::Operations::LDIF)"
 msgstr ""
 
 #: doc/reference/en/_index.html:177(small)
-#: doc/reference/en/_index.html:587(small)
-#: doc/reference/en/_index.html:1008(small)
+#: doc/reference/en/_index.html:594(small)
+#: doc/reference/en/_index.html:1001(small)
 #: doc/reference/en/_index.html:1252(small)
 #: doc/reference/en/_index.html:1259(small)
 msgid "(ActiveLdap::Schema)"
@@ -47611,15 +47557,14 @@ msgstr ""
 msgid "B"
 msgstr ""
 
-#: doc/reference/en/_index.html:241(small)
-#: doc/reference/en/_index.html:777(small)
-#: doc/reference/en/_index.html:784(small)
-#: doc/reference/en/_index.html:818(small)
-#: doc/reference/en/_index.html:958(small)
-msgid "(ActiveLdap::Adapter)"
+#: doc/reference/en/_index.html:234(small)
+#: doc/reference/en/_index.html:1086(small)
+#: doc/reference/en/_index.html:1189(small)
+#: doc/reference/en/_index.html:1274(small)
+msgid "(ActiveLdap::Adapter::Ldap::Method)"
 msgstr ""
 
-#: doc/reference/en/_index.html:248(small)
+#: doc/reference/en/_index.html:241(small)
 #: doc/reference/en/_index.html:276(small)
 #: doc/reference/en/_index.html:283(small)
 #: doc/reference/en/_index.html:480(small)
@@ -47639,10 +47584,11 @@ msgid "(ActiveLdap::Schema::Syntaxes)"
 msgstr ""
 
 #: doc/reference/en/_index.html:255(small)
-#: doc/reference/en/_index.html:1086(small)
-#: doc/reference/en/_index.html:1189(small)
-#: doc/reference/en/_index.html:1274(small)
-msgid "(ActiveLdap::Adapter::Ldap::Method)"
+#: doc/reference/en/_index.html:777(small)
+#: doc/reference/en/_index.html:784(small)
+#: doc/reference/en/_index.html:818(small)
+#: doc/reference/en/_index.html:958(small)
+msgid "(ActiveLdap::Adapter)"
 msgstr ""
 
 #: doc/reference/en/_index.html:262(small)
@@ -47661,19 +47607,19 @@ msgid "C"
 msgstr ""
 
 #: doc/reference/en/_index.html:319(small)
-msgid "(ActiveLdap::HumanReadable)"
-msgstr ""
-
-#: doc/reference/en/_index.html:326(small)
 msgid "(ActiveLdap::Connection)"
 msgstr ""
 
-#: doc/reference/en/_index.html:333(small)
+#: doc/reference/en/_index.html:326(small)
 msgid "(ActiveLdap::ObjectClass)"
 msgstr ""
 
+#: doc/reference/en/_index.html:333(small)
+msgid "(ActiveLdap::HumanReadable)"
+msgstr ""
+
 #: doc/reference/en/_index.html:340(small)
-msgid "(ActiveLdap::Associations)"
+msgid "(ActiveLdap::Railties::ControllerRuntime)"
 msgstr ""
 
 #: doc/reference/en/_index.html:347(small)
@@ -47682,19 +47628,19 @@ msgid "(ActiveLdap::Attributes)"
 msgstr ""
 
 #: doc/reference/en/_index.html:354(small)
-msgid "(ActiveLdap::Callbacks)"
-msgstr ""
-
-#: doc/reference/en/_index.html:361(small)
 msgid "(ActiveLdap::Configuration)"
 msgstr ""
 
-#: doc/reference/en/_index.html:368(small)
+#: doc/reference/en/_index.html:361(small)
 msgid "(ActiveLdap::Acts::Tree)"
 msgstr ""
 
+#: doc/reference/en/_index.html:368(small)
+msgid "(ActiveLdap::Callbacks)"
+msgstr ""
+
 #: doc/reference/en/_index.html:375(small)
-msgid "(ActiveLdap::Railties::ControllerRuntime)"
+msgid "(ActiveLdap::Associations)"
 msgstr ""
 
 #: doc/reference/en/_index.html:396(small)
@@ -47726,7 +47672,7 @@ msgstr ""
 msgid "E"
 msgstr ""
 
-#: doc/reference/en/_index.html:594(small)
+#: doc/reference/en/_index.html:587(small)
 msgid "(Net::LDAP)"
 msgstr ""
 
@@ -47792,11 +47738,11 @@ msgstr ""
 msgid "P"
 msgstr ""
 
-#: doc/reference/en/_index.html:1065(small)
+#: doc/reference/en/_index.html:1058(small)
 msgid "(ActiveLdap::GetText)"
 msgstr ""
 
-#: doc/reference/en/_index.html:1072(small)
+#: doc/reference/en/_index.html:1065(small)
 msgid "(ActiveLdap::DistinguishedName)"
 msgstr ""
 
@@ -47841,7 +47787,7 @@ msgid "X"
 msgstr ""
 
 #: doc/reference/en/LDAP.html:6(title)
-msgid "Module: LDAP &mdash; activeldap - 3.1.0"
+msgid "Module: LDAP &mdash; ActiveLdap"
 msgstr ""
 
 #: doc/reference/en/LDAP.html:59(h1)
