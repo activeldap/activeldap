@@ -42,7 +42,7 @@ Jeweler::Tasks.new do |_spec|
                         "TODO"]
   spec.test_files = FileList['test/test_*.rb']
   spec.description = <<-EOF
-    'ActiveLdap' is a ruby extension library which provides a clean
+    'ActiveLdap' is a ruby library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
     by ActiveRecord. This is not nearly as clean or as flexible as
     ActiveRecord, but it is still trivial to define new objects and manipulate

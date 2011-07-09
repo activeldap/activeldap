@@ -7,8 +7,8 @@ A ruby library for object-oriented LDAP interface.
 
 h2. Description
 
-'ActiveLdap' is a ruby extension library which provides a
-clean objected oriented interface to LDAP library.  It was
+'ActiveLdap' is a ruby library which provides a clean
+objected oriented interface to LDAP library.  It was
 inspired by ActivRecord. This is not nearly as clean or as
 flexible as ActiveRecord, but it is still trivial to define
 new objects and manipulate them with minimal difficulty.
