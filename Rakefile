@@ -51,6 +51,10 @@ Jeweler::Tasks.new do |_spec|
   spec.license = "Ruby's or GPLv2 or later"
 end
 
+Rake::Task["release"].prerequisites.clear
+Jeweler::RubygemsDotOrgTasks.new do
+end
+
 Rake::TestTask.new(:test) do |test|
   test.libs << "lib"
   test.libs << "test"
