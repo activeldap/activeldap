@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # === activeldap - an OO-interface to LDAP objects inspired by ActiveRecord
 # Author: Will Drewry <will@alum.bu.edu>
-# License: See LICENSE and COPYING.txt
+# License: See LICENSE and COPYING
 # Copyright 2004-2006 Will Drewry <will@alum.bu.edu>
 # Some portions Copyright 2006 Google Inc
 #

@@ -48,6 +48,7 @@ Jeweler::Tasks.new do |_spec|
     ActiveRecord, but it is still trivial to define new objects and manipulate
     them with minimal difficulty.
   EOF
+  spec.license = "Ruby's or GPLv2 or later"
 end
 
 Rake::TestTask.new(:test) do |test|
