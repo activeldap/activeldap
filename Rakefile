@@ -96,7 +96,7 @@ end
 
 include ERB::Util
 
-def apply_template(content, paths, templates, language)
+def apply_template(content, paths, templates, project_name, language)
   content = content.sub(/lang="en"/, "lang=\"#{language}\"")
 
   title = nil
@@ -268,6 +268,7 @@ namespace :reference do
               content = apply_template(File.read(path.to_s),
                                        paths,
                                        templates,
+                                       spec.name,
                                        language)
               File.open(prepared_path.to_s, "w") do |file|
                 file.print(content)
