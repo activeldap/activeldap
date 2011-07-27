@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
  
   s.add_dependency "ruby-ldap"
  
-  s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.textile TODO)
-  s.executables  = ['active_ldap']
+  s.files        = Dir.glob("{lib}/**/*") + %w(LICENSE README.textile TODO)
   s.require_path = 'lib'
 end
