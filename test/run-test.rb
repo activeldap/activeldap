@@ -10,6 +10,8 @@ $LOAD_PATH.unshift(File.join(top_dir))
 $LOAD_PATH.unshift(File.join(top_dir, "lib"))
 $LOAD_PATH.unshift(File.join(top_dir, "test"))
 
+require "rubygems"
+require "bundler/setup"
 
 require "test/unit"
 require "test/unit/notify"
