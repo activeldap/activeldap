@@ -45,7 +45,7 @@ h2. Notes
 
 h2. Rails
 
-See "Rails":files.rails.html page for Rails integration.
+See "Rails":file.rails.html page for Rails integration.
 
 h2. Licence
 
@@ -135,3 +135,4 @@ list, please point out.
 * rbq: A bug report.
 * Narihiro Nakamura: Rails 3 support.
 * Hidetoshi Yoshimoto: Rails 3 support.
+* warden: A bug report.
