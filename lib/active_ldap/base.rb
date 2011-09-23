@@ -755,13 +755,6 @@ module ActiveLdap
     end
     alias_method(:exists?, :exist?)
 
-    # new_entry?
-    #
-    # Return whether the entry is new entry in LDAP or not
-    def new_entry?
-      @new_entry
-    end
-
     # dn
     #
     # Return the authoritative dn

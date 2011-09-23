@@ -1,5 +1,11 @@
 module ActiveLdap
   module Persistence
+    # new_entry?
+    #
+    # Return whether the entry is new entry in LDAP or not
+    def new_entry?
+      @new_entry
+    end
 
     # destroy
     #
