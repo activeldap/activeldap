@@ -136,3 +136,4 @@ list, please point out.
 * Narihiro Nakamura: Rails 3 support.
 * Hidetoshi Yoshimoto: Rails 3 support.
 * warden: A bug report.
+* bklier: A bug fix.

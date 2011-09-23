@@ -7,6 +7,11 @@ module ActiveLdap
       @new_entry
     end
 
+    # Return whether the entry is saved entry or not.
+    def persisted?
+      not new_entry?
+    end
+
     # destroy
     #
     # Delete this entry from LDAP
