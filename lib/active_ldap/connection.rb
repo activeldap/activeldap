@@ -220,13 +220,9 @@ module ActiveLdap
           end
         end
       end
-      
-      def gem_available?(gemname)
-        if Gem::Specification.methods.include?(:find_all_by_name) 
-          not Gem::Specification.find_all_by_name(gemname).empty?
-        else
-          Gem.available?(gemname)
-        end
+
+      def gem_available?(name)
+        not Gem::Specification.find_all_by_name(name).empty?
       end
     end
 
