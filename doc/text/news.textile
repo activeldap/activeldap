@@ -1,5 +1,19 @@
 h1. News
 
+h2(#3-1-1). 3.1.1: 2011-11-03
+
+* Supported Rails 3.1.1.
+* [GitHub:#9] Fixed a typo in document. [warden]
+* [GitHub:#11] Added persisted?. [bklier]
+* [GitHub:#16] Supported 4 or more bytes salt for SSHA and SMD5.
+  [Alex Tomlins]
+
+h3. Thanks
+
+* warden
+* bklier
+* Alex Tomlins
+
 h2(#3-1-0). 3.1.0: 2011-07-09
 
 * Supported Rails 3.1.0.rc4.
