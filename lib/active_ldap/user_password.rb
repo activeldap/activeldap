@@ -8,7 +8,8 @@ module ActiveLdap
     module_function
     def valid?(password, hashed_password)
       unless /^\{([A-Z][A-Z\d]+)\}/ =~ hashed_password
-        raise ArgumentError, _("Invalid hashed password: %s") % hashed_password
+        # Plain text password
+        return hashed_password == password
       end
       type = $1
       hashed_password_without_type = $POSTMATCH
@@ -48,8 +49,8 @@ module ActiveLdap
     end
 
     def smd5(password, salt=nil)
-      if salt and salt.size != 4
-        raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
+      if salt and salt.size < 4
+        raise ArgumentError, _("salt size must be >= 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
       md5_hash_with_salt = "#{Digest::MD5.digest(password + salt)}#{salt}"
@@ -57,7 +58,7 @@ module ActiveLdap
     end
 
     def extract_salt_for_smd5(smd5ed_password)
-      Base64.decode64(smd5ed_password)[-4, 4]
+      extract_salt_at_pos(smd5ed_password, 16)
     end
 
     def sha(password)
@@ -65,8 +66,8 @@ module ActiveLdap
     end
 
     def ssha(password, salt=nil)
-      if salt and salt.size != 4
-        raise ArgumentError, _("salt size must be == 4: %s") % salt.inspect
+      if salt and salt.size < 4
+        raise ArgumentError, _("salt size must be >= 4: %s") % salt.inspect
       end
       salt ||= Salt.generate(4)
       sha1_hash_with_salt = "#{Digest::SHA1.digest(password + salt)}#{salt}"
@@ -74,7 +75,12 @@ module ActiveLdap
     end
 
     def extract_salt_for_ssha(sshaed_password)
-      extract_salt_for_smd5(sshaed_password)
+      extract_salt_at_pos(sshaed_password, 20)
+    end
+
+    def extract_salt_at_pos(hashed_password, position)
+      salt = Base64.decode64(hashed_password)[position..-1]
+      salt == '' ? nil : salt
     end
 
     module Salt
