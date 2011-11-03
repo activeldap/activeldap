@@ -211,13 +211,21 @@ module ActiveLdap
             end
           end
           if !ruby_ldap_available and Object.const_defined?(:Gem)
-            ruby_ldap_available = Gem.available?("ruby-ldap")
+            ruby_ldap_available = gem_available?("ruby-ldap")
           end
           if ruby_ldap_available
             "ldap"
           else
             "net-ldap"
           end
+        end
+      end
+      
+      def gem_available?(gemname)
+        if Gem::Specification.methods.include?(:find_all_by_name) 
+          not Gem::Specification.find_all_by_name(gemname).empty?
+        else
+          Gem.available?(gemname)
         end
       end
     end
