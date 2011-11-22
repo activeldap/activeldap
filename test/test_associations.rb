@@ -420,11 +420,11 @@ EOX
           assert_equal([], group.members.to_a)
           assert_equal([], group.member_uid(true))
 
-          group.members = [user1]
+          group.members = [user1, user2]
 
           assert group.new_entry?
-          assert_equal([user1.uid], group.members.map {|x| x.uid })
-          assert_equal(user1.uid, group.member_uid)
+          assert_equal([user1.uid, user2.uid].sort, group.members.map {|x| x.uid }.sort)
+          assert_equal([user1.uid, user2.uid].sort, group.member_uid(true).sort)
 
           group.members = [user2]
 

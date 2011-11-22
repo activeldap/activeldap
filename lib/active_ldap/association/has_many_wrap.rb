@@ -64,7 +64,7 @@ module ActiveLdap
 
         flatten_deeper(entries).each do |entry|
           infect_connection(entry)
-          result &&= insert_entry(entry)
+          insert_entry(entry) or result = false
           @target << entry
         end
 
