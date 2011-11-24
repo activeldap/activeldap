@@ -411,6 +411,43 @@ EOX
     end
   end
 
+  def test_has_many_wrap_assign_new_entry
+    make_temporary_user do |user1, |
+      make_temporary_user do |user2, |
+        ensure_delete_group('test_new_group') do |cn|
+          group = @group_class.new(:cn => cn, :gid_number => default_gid)
+
+          assert_equal([], group.members.to_a)
+          assert_equal([], group.member_uid(true))
+
+          group.members = [user1, user2]
+
+          assert group.new_entry?
+          assert_equal([user1.uid, user2.uid].sort, group.members.map {|x| x.uid }.sort)
+          assert_equal([user1.uid, user2.uid].sort, group.member_uid(true).sort)
+
+          group.members = [user2]
+
+          assert group.new_entry?
+          assert_equal([user2.uid], group.members.map {|x| x.uid })
+          assert_equal(user2.uid, group.member_uid)
+
+          group.members << user1
+
+          assert group.new_entry?
+          assert_equal([user1.uid, user2.uid].sort, group.members.map {|x| x.uid }.sort)
+          assert_equal([user1.uid, user2.uid].sort, group.member_uid.sort)
+
+          assert(group.save)
+
+          group = @group_class.find(cn)
+          assert_equal([user1.uid, user2.uid].sort, group.members.map {|x| x.uid }.sort)
+          assert_equal([user1.uid, user2.uid].sort, group.member_uid.sort)
+        end
+      end
+    end
+  end
+
   def test_has_many_validation
     group_class = Class.new(ActiveLdap::Base)
     group_class.ldap_mapping :prefix => "ou=Groups",

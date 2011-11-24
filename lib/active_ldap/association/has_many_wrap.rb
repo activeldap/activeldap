@@ -18,7 +18,7 @@ module ActiveLdap
         new_value = (old_value + current_value).uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value
-          @owner.save
+          @owner.save unless @owner.new_entry?
         end
       end
 
@@ -34,7 +34,7 @@ module ActiveLdap
         new_value = new_value.uniq.sort
         if old_value != new_value
           @owner[@options[:wrap]] = new_value
-          @owner.save
+          @owner.save unless @owner.new_entry?
         end
       end
 
@@ -56,6 +56,19 @@ module ActiveLdap
 
       def foreign_key
         @options[:primary_key_name] || foreign_class.dn_attribute
+      end
+
+      def add_entries(*entries)
+        result = true
+        load_target
+
+        flatten_deeper(entries).each do |entry|
+          infect_connection(entry)
+          insert_entry(entry) or result = false
+          @target << entry
+        end
+
+        result && self
       end
     end
   end
