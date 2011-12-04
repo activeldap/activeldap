@@ -23,6 +23,7 @@ module ActiveLdap
           target_attributes.each do |key, values|
             values = normalize_values(values).sort_by {|value, _| value}
             if @schema.attribute(key).single_value?
+              next if values.empty?
               serialize_attribute_value(xml, key, *values[0])
             else
               serialize_attribute_values(xml, key, values)

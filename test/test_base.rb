@@ -1077,6 +1077,30 @@ EOX
 </sample>
 EOX
     end
+
+    def test_single_value
+      make_temporary_user do |user, password|
+        only = [:dn, :uidNumber]
+        assert_equal(<<-EOX, user.to_xml(:root => "user", :only => only))
+<user>
+  <dn>#{user.dn}</dn>
+  <uidNumber>#{user.uid_number}</uidNumber>
+</user>
+EOX
+      end
+    end
+
+    def test_single_value_nil
+      make_temporary_user do |user, password|
+        only = [:dn, :uidNumber]
+        user.uid_number = nil
+        assert_equal(<<-EOX, user.to_xml(:root => "user", :only => only))
+<user>
+  <dn>#{user.dn}</dn>
+</user>
+EOX
+      end
+    end
   end
 
   def test_save
