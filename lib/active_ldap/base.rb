@@ -885,8 +885,18 @@ module ActiveLdap
     # Do not let URL/form hackers supply the keys.
     def attributes=(new_attributes)
       return if new_attributes.blank?
+      assign_attributes(new_attributes)
+    end
+
+    def assign_attributes(new_attributes, options={})
+      return if new_attributes.blank?
+
       _schema = _local_entry_attribute = nil
-      targets = remove_attributes_protected_from_mass_assignment(new_attributes)
+      if options[:without_protection]
+        targets = new_attributes
+      else
+        targets = sanitize_for_mass_assignment(new_attributes, options[:role])
+      end
       targets.each do |key, value|
         setter = "#{key}="
         unless respond_to?(setter)

@@ -51,6 +51,7 @@ require 'active_ldap/callbacks'
 
 ActiveLdap::Base.class_eval do
   include ActiveLdap::Associations
+  include ActiveModel::MassAssignmentSecurity
   include ActiveLdap::Attributes
   include ActiveLdap::Configuration
   include ActiveLdap::Connection
