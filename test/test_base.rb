@@ -158,11 +158,11 @@ class TestBase < Test::Unit::TestCase
     _dc_class = dc_class("ou=base")
 
     root1 = _ou_class.create("root1")
-    child1 = _ou_class.create(:ou => "child1", :parent => root1)
-    child2 = _ou_class.create(:ou => "child2", :parent => root1)
-    domain = _dc_class.create(:dc => "domain", :o => "domain", :parent => root1)
-    child3 = _ou_class.create(:ou => "child3", :parent => root1)
-    root2 = _ou_class.create("root2")
+    _ou_class.create(:ou => "child1", :parent => root1)
+    _ou_class.create(:ou => "child2", :parent => root1)
+    _dc_class.create(:dc => "domain", :o => "domain", :parent => root1)
+    _ou_class.create(:ou => "child3", :parent => root1)
+    _ou_class.create("root2")
     assert_equal(["base",
                   "root1", "child1", "child2", "domain", "child3",
                   "root2"],
@@ -181,11 +181,11 @@ class TestBase < Test::Unit::TestCase
     _dc_class = dc_class("ou=base")
 
     root1 = _ou_class.create("root1")
-    child1 = _ou_class.create(:ou => "child1", :parent => root1)
-    child2 = _ou_class.create(:ou => "child2", :parent => root1)
-    domain = _dc_class.create(:dc => "domain", :o => "domain", :parent => root1)
-    child3 = _ou_class.create(:ou => "child3", :parent => root1)
-    root2 = _ou_class.create("root2")
+    _ou_class.create(:ou => "child1", :parent => root1)
+    _ou_class.create(:ou => "child2", :parent => root1)
+    _dc_class.create(:dc => "domain", :o => "domain", :parent => root1)
+    _ou_class.create(:ou => "child3", :parent => root1)
+    _ou_class.create("root2")
     assert_equal(["base",
                   "root1", "child1", "child2", "domain", "child3",
                   "root2"],
@@ -201,9 +201,9 @@ class TestBase < Test::Unit::TestCase
     make_ou("base")
     _ou_class = ou_class("ou=base")
     root1 = _ou_class.create("root1")
-    child1 = _ou_class.create(:ou => "child1", :parent => root1)
-    child2 = _ou_class.create(:ou => "child2", :parent => root1)
-    root2 = _ou_class.create("root2")
+    _ou_class.create(:ou => "child1", :parent => root1)
+    _ou_class.create(:ou => "child2", :parent => root1)
+    _ou_class.create("root2")
     assert_equal(["base", "root1", "child1", "child2", "root2"],
                  _ou_class.find(:all).collect(&:ou))
     _ou_class.delete_all(:base => root1.dn)
@@ -221,11 +221,11 @@ class TestBase < Test::Unit::TestCase
 
     root1 = _ou_class.create("root1")
     child1 = _ou_class.create(:ou => "child1", :parent => root1)
-    domain1 = domain_class.create(:dc => "domain1", :parent => child1)
-    grandchild1 = _ou_class.create(:ou => "grandchild1", :parent => child1)
+    domain_class.create(:dc => "domain1", :parent => child1)
+    _ou_class.create(:ou => "grandchild1", :parent => child1)
     child2 = _ou_class.create(:ou => "child2", :parent => root1)
-    domain2 = domain_class.create(:dc => "domain2", :parent => child2)
-    root2 = _ou_class.create("root2")
+    domain_class.create(:dc => "domain2", :parent => child2)
+    _ou_class.create("root2")
 
     entry_class = Class.new(ActiveLdap::Base)
     entry_class.ldap_mapping :prefix => "ou=base",
@@ -583,7 +583,7 @@ class TestBase < Test::Unit::TestCase
   end
 
   def test_new_with_invalid_argument
-    user = @user_class.new
+    @user_class.new
     assert_raises(ArgumentError) do
       @user_class.new(100)
     end

@@ -167,6 +167,7 @@ module ActiveLdap
 
       def reset_runtime
         active_connections.inject(0) do |result, (name, connection)|
+          _ = name # for suppress a warning on Ruby 1.9.3
           result + connection.reset_runtime
         end
       end

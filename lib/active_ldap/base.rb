@@ -1281,6 +1281,7 @@ module ActiveLdap
         @base_value = nil
         attr, value = bases[0].to_a[0]
         @dn_attribute = attr
+        _ = value # for suppress a warning on Ruby 1.9.3
       else
         new_name ||= @dn_attribute || dn_attribute_of_class
         new_name = to_real_attribute_name(new_name)

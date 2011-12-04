@@ -21,7 +21,7 @@ module Command
           unless io.closed?
             io.fcntl(Fcntl::F_SETFD, Fcntl::FD_CLOEXEC)
           end
-        rescue SystemCallError,IOError => e
+        rescue SystemCallError, IOError
         end
       end
     end
@@ -35,7 +35,7 @@ module Command
     return java_run(cmd, *args, &block) if Object.respond_to?(:java)
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
-    pid = exit_status = nil
+    pid = nil
     Thread.exclusive do
       verbose = $VERBOSE
       # ruby(>=1.8)'s fork terminates other threads with warning messages
@@ -43,7 +43,6 @@ module Command
       pid = fork do
         $VERBOSE = verbose
         detach_io
-        out = STDERR.dup
         STDIN.reopen(in_r)
         in_r.close
         STDOUT.reopen(out_w)

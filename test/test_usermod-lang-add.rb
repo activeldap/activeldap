@@ -33,7 +33,6 @@ class TestUsermodLangAdd < Test::Unit::TestCase
   def assert_usermod_lang_add_successfully(name, cn, uid, *args, &block)
     _wrap_assertion do
       assert(@user_class.exists?(name))
-      previous_classes = @user_class.find(name).classes
       args.concat([name, cn, uid])
       assert_equal([true, ""], run_command(*args, &block))
       assert(@user_class.exists?(name))

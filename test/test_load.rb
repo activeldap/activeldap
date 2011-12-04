@@ -29,7 +29,6 @@ class TestLoad < Test::Unit::TestCase
 
       record.add_operation(:delete, "DisplayName", [], {})
 
-      original_sn = user.sn
       new_sn = ["New SN1", "New SN2"]
       record.add_operation(:replace, "sn", [], {"sn" => new_sn})
 

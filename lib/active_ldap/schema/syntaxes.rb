@@ -224,11 +224,11 @@ module ActiveLdap
         def validate_normalized_value(value, original_value)
           match_data = FORMAT.match(value)
           if match_data
-            year, month, day, hour, minute, second, fraction, time_zone =
-              match_data.to_a[1..-1]
+            date_data = match_data.to_a[1..-1]
             missing_components = []
-            %w(year month day hour minute second).each do |component|
-              missing_components << component unless eval(component)
+            required_components = %w(year month day hour minute second)
+            required_components.each_with_index do |component, i|
+              missing_components << component unless date_data[i]
             end
             if missing_components.empty?
               nil

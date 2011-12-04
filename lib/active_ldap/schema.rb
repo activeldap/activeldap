@@ -12,6 +12,7 @@ module ActiveLdap
     def ids(group)
       ensure_parse(group)
       info, ids, aliases = ensure_schema_info(group)
+      _ = info = aliases # for suppress a warning on Ruby 1.9.3
       ids.keys
     end
 
@@ -54,6 +55,7 @@ module ActiveLdap
 
       # Initialize anything that is required
       info, ids, aliases = ensure_schema_info(group)
+      _ = info # for suppress a warning on Ruby 1.9.3
       id, name = determine_id_or_name(id_or_name, aliases)
 
       # Check already parsed options first
