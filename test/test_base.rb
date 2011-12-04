@@ -876,9 +876,10 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  def test_to_xml
-    ou = ou_class.new("Sample")
-    assert_equal(<<-EOX, ou.to_xml(:root => "ou"))
+  class TestToXML < self
+    def test_root
+      ou = ou_class.new("Sample")
+      assert_equal(<<-EOX, ou.to_xml(:root => "ou"))
 <ou>
   <dn>#{ou.dn}</dn>
   <objectClasses type="array">
@@ -890,8 +891,11 @@ class TestBase < Test::Unit::TestCase
   </ous>
 </ou>
 EOX
+    end
 
-    assert_equal(<<-EOX, ou.to_xml)
+    def test_default
+      ou = ou_class.new("Sample")
+      assert_equal(<<-EOX, ou.to_xml)
 <anonymous>
   <dn>#{ou.dn}</dn>
   <objectClasses type="array">
@@ -903,10 +907,12 @@ EOX
   </ous>
 </anonymous>
 EOX
+    end
 
-    make_temporary_user do |user, password|
-      xml = normalize_attributes_order(user.to_xml(:root => "user"))
-      assert_equal(<<-EOX, xml)
+    def test_complex
+      make_temporary_user do |user, password|
+        xml = normalize_attributes_order(user.to_xml(:root => "user"))
+        assert_equal(<<-EOX, xml)
 <user>
   <dn>#{user.dn}</dn>
   <cns type="array">
@@ -939,12 +945,13 @@ EOX
   </userPasswords>
 </user>
 EOX
+      end
     end
-  end
 
-  def test_to_xml_except
-    ou = ou_class.new("Sample")
-    assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => [:objectClass]))
+    def test_except
+      ou = ou_class.new("Sample")
+      except = [:objectClass]
+      assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => except))
 <sample>
   <dn>#{ou.dn}</dn>
   <ous type="array">
@@ -952,23 +959,26 @@ EOX
   </ous>
 </sample>
 EOX
+    end
 
-    except = [:dn, :object_class]
-    assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => except))
+    def test_except_dn
+      ou = ou_class.new("Sample")
+      except = [:dn, :object_class]
+      assert_equal(<<-EOX, ou.to_xml(:root => "sample", :except => except))
 <sample>
   <ous type="array">
     <ou>Sample</ou>
   </ous>
 </sample>
 EOX
-  end
+    end
 
-  def test_to_xml_escape
-    make_temporary_user do |user, password|
-      sn = user.sn
-      user.sn = "<#{sn}>"
-      except = [:jpeg_photo, :user_certificate]
-      assert_equal(<<-EOX, user.to_xml(:root => "user", :except => except))
+    def test_escape
+      make_temporary_user do |user, password|
+        sn = user.sn
+        user.sn = "<#{sn}>"
+        except = [:jpeg_photo, :user_certificate]
+        assert_equal(<<-EOX, user.to_xml(:root => "user", :except => except))
 <user>
   <dn>#{user.dn}</dn>
   <cns type="array">
@@ -995,16 +1005,16 @@ EOX
   </userPasswords>
 </user>
 EOX
+      end
     end
-  end
 
-  def test_to_xml_type_ldif
-    make_temporary_user do |user, password|
-      sn = user.sn
-      user.sn = "<#{sn}>"
-      except = [:jpeg_photo, :user_certificate]
-      options = {:root => "user", :except => except, :type => :ldif}
-      assert_equal(<<-EOX, user.to_xml(options))
+    def test_type_ldif
+      make_temporary_user do |user, password|
+        sn = user.sn
+        user.sn = "<#{sn}>"
+        except = [:jpeg_photo, :user_certificate]
+        options = {:root => "user", :except => except, :type => :ldif}
+        assert_equal(<<-EOX, user.to_xml(options))
 <user>
   <dn>#{user.dn}</dn>
   <cn>#{user.cn}</cn>
@@ -1021,13 +1031,13 @@ EOX
   <userPassword>#{user.user_password}</userPassword>
 </user>
 EOX
+      end
     end
-  end
 
-  def test_to_xml_nil
-    ou = ou_class.new("Sample")
-    ou.description = [nil]
-    assert_equal(<<-EOX, ou.to_xml(:root => "sample"))
+    def test_nil
+      ou = ou_class.new("Sample")
+      ou.description = [nil]
+      assert_equal(<<-EOX, ou.to_xml(:root => "sample"))
 <sample>
   <dn>#{ou.dn}</dn>
   <objectClasses type="array">
@@ -1039,6 +1049,7 @@ EOX
   </ous>
 </sample>
 EOX
+    end
   end
 
   def test_save
