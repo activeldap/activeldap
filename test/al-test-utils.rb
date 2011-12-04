@@ -365,8 +365,8 @@ module AlTestUtils
     def setup
       super
       @fakeroot = "fakeroot"
-      @ruby = File.join(::Config::CONFIG["bindir"],
-                        ::Config::CONFIG["RUBY_INSTALL_NAME"])
+      @ruby = File.join(::RbConfig::CONFIG["bindir"],
+                        ::RbConfig::CONFIG["RUBY_INSTALL_NAME"])
       @top_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
       @examples_dir = File.join(@top_dir, "examples")
       @lib_dir = File.join(@top_dir, "lib")
