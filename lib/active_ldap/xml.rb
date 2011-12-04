@@ -34,13 +34,29 @@ module ActiveLdap
       private
       def target_attributes
         except_dn = false
-        attributes = @attributes.dup
-        (@options[:except] || []).each do |name|
-          if name == "dn"
-            except_dn = true
-          else
-            attributes.delete(name)
+        only = @options[:only] || []
+        except = @options[:except] || []
+        if !only.empty?
+          attributes = []
+          except_dn = true
+          only.each do |name|
+            if name == "dn"
+              except_dn = false
+            elsif @attributes.has_key?(name)
+              attributes << [name, @attributes[name]]
+            end
           end
+        elsif !except.empty?
+          attributes = @attributes.dup
+          except.each do |name|
+            if name == "dn"
+              except_dn = true
+            else
+              attributes.delete(name)
+            end
+          end
+        else
+          attributes = @attributes.dup
         end
         attributes = attributes.sort_by {|key, values| key}
         attributes.unshift(["dn", [@dn]]) unless except_dn

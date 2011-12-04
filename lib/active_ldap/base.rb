@@ -912,9 +912,10 @@ module ActiveLdap
       options = options.dup
       options[:root] ||= (self.class.name || '').underscore
       options[:root] = 'anonymous' if options[:root].blank?
-      except = options[:except]
-      if except
-        options[:except] = except.collect do |name|
+      [:only, :except].each do |attribute_names_key|
+        names = options[attribute_names_key]
+        next if names.nil?
+        options[attribute_names_key] = names.collect do |name|
           if name.to_s.downcase == "dn"
             "dn"
           else

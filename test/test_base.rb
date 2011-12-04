@@ -973,6 +973,33 @@ EOX
 EOX
     end
 
+    def test_only
+      ou = ou_class.new("Sample")
+      only = [:objectClass]
+      assert_equal(<<-EOX, ou.to_xml(:root => "sample", :only => only))
+<sample>
+  <objectClasses type="array">
+    <objectClass>organizationalUnit</objectClass>
+    <objectClass>top</objectClass>
+  </objectClasses>
+</sample>
+EOX
+    end
+
+    def test_only_dn
+      ou = ou_class.new("Sample")
+      only = [:dn, :object_class]
+      assert_equal(<<-EOX, ou.to_xml(:root => "sample", :only => only))
+<sample>
+  <dn>#{ou.dn}</dn>
+  <objectClasses type="array">
+    <objectClass>organizationalUnit</objectClass>
+    <objectClass>top</objectClass>
+  </objectClasses>
+</sample>
+EOX
+    end
+
     def test_escape
       make_temporary_user do |user, password|
         sn = user.sn
