@@ -6,7 +6,7 @@ require 'active_ldap/ldif'
 module ActiveLdap
   class Xml
     class Serializer
-      PRINTABLE_STRING = /[\x20-\x7e\w\s]*/
+      PRINTABLE_STRING = /[\x20-\x7e\t\r\n]*/n
 
       def initialize(dn, attributes, schema, options={})
         @dn = dn
