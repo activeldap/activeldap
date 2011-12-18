@@ -282,6 +282,7 @@ module ActiveLdap
   class Base
     include GetTextSupport
     include ActiveModel::AttributeMethods
+    include ActiveModel::Dirty
     public :_
 
     if Object.const_defined?(:Reloadable)
@@ -808,7 +809,9 @@ module ActiveLdap
 
     attribute_method_suffix '=', '?', '_before_type_cast'
     def attribute=(attr, *args)
-      return set_attribute(attr, args.first)
+      value = args.first
+      send("#{attr}_will_change!") unless value == get_attribute(attr)
+      return set_attribute(attr, value)
     end
 
     def attribute?(attr, *args)
@@ -1110,8 +1113,15 @@ module ActiveLdap
       classes, attributes = extract_object_class(attributes)
       self.classes = classes
       self.dn = dn
-      self.attributes = attributes
+      initialize_attributes attributes
+
       yield self if block_given?
+    end
+
+    def initialize_attributes(new_attributes)
+      sanitize_for_mass_assignment(new_attributes).each do |key, value|
+        set_attribute(key, value)
+      end
     end
 
     def instantiate(args)
