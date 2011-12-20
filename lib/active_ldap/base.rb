@@ -281,6 +281,8 @@ module ActiveLdap
   # by extension classes.
   class Base
     include GetTextSupport
+    include ActiveModel::AttributeMethods
+    include ActiveModel::Dirty
     public :_
 
     if Object.const_defined?(:Reloadable)
@@ -424,7 +426,19 @@ module ActiveLdap
         self.sort_by = options[:sort_by]
         self.order = options[:order]
 
+        all_attrs = connection.entry_attribute(required_classes + recommended_classes).all_names
+        define_attribute_methods all_attrs # ActiveModel::AttributeMethods
+        define_getters all_attrs
+
         public_class_method :new
+      end
+
+      def define_getters(attrs)
+        attrs.each do |attr|
+          define_method attr do
+            return get_attribute(attr)
+          end
+        end
       end
 
       # Base.base
@@ -793,64 +807,22 @@ module ActiveLdap
       self.class.default_search_attribute
     end
 
-    # method_missing
-    #
-    # If a given method matches an attribute or an attribute alias
-    # then call the appropriate method.
-    # TODO: Determine if it would be better to define each allowed method
-    #       using class_eval instead of using method_missing.  This would
-    #       give tab completion in irb.
-    def method_missing(name, *args, &block)
-      key = name.to_s
-      case key
-      when /=$/
-        real_key = $PREMATCH
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size != 1
-            raise ArgumentError,
-                    _("wrong number of arguments (%d for 1)") % args.size
-          end
-          return set_attribute(real_key, *args, &block)
-        end
-      when /(?:(_before_type_cast)|(\?))?$/
-        real_key = $PREMATCH
-        before_type_cast = !$1.nil?
-        query = !$2.nil?
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size > 1
-            raise ArgumentError,
-              _("wrong number of arguments (%d for 1)") % args.size
-          end
-          if before_type_cast
-            return get_attribute_before_type_cast(real_key, *args)[1]
-          elsif query
-            return get_attribute_as_query(real_key, *args)
-          else
-            return get_attribute(real_key, *args)
-          end
-        end
-      end
-      super
+    attribute_method_suffix '=', '?', '_before_type_cast'
+    def attribute=(attr, *args)
+      value = args.first
+      send("#{attr}_will_change!") unless value == get_attribute(attr)
+      return set_attribute(attr, value)
     end
 
-    # Add available attributes to the methods
-    def methods(inherited_too=true)
-      target_names = entry_attribute.all_names
-      target_names -= ['objectClass', 'objectClass'.underscore]
-      super + target_names.uniq.collect do |x|
-        [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
-      end.flatten
+    def attribute?(attr, *args)
+      return get_attribute_as_query(attr, args.first)
+    end
+
+    def attribute_before_type_cast(attr, *args)
+      return get_attribute_before_type_cast(attr, *args)[1]
     end
 
     alias_method :respond_to_without_attributes?, :respond_to?
-    def respond_to?(name, include_priv=false)
-      return true if super
-
-      name = name.to_s
-      return true if have_attribute?(name, ["objectClass"])
-      return false if /(?:=|\?|_before_type_cast)$/ !~ name
-      have_attribute?($PREMATCH, ["objectClass"])
-    end
 
     # Updates a given attribute and saves immediately
     def update_attribute(name, value)
@@ -1141,8 +1113,15 @@ module ActiveLdap
       classes, attributes = extract_object_class(attributes)
       self.classes = classes
       self.dn = dn
-      self.attributes = attributes
+      initialize_attributes attributes
+
       yield self if block_given?
+    end
+
+    def initialize_attributes(new_attributes)
+      sanitize_for_mass_assignment(new_attributes).each do |key, value|
+        set_attribute(key, value)
+      end
     end
 
     def instantiate(args)
