@@ -793,65 +793,6 @@ module ActiveLdap
       self.class.default_search_attribute
     end
 
-    # method_missing
-    #
-    # If a given method matches an attribute or an attribute alias
-    # then call the appropriate method.
-    # TODO: Determine if it would be better to define each allowed method
-    #       using class_eval instead of using method_missing.  This would
-    #       give tab completion in irb.
-    def method_missing(name, *args, &block)
-      key = name.to_s
-      case key
-      when /=$/
-        real_key = $PREMATCH
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size != 1
-            raise ArgumentError,
-                    _("wrong number of arguments (%d for 1)") % args.size
-          end
-          return set_attribute(real_key, *args, &block)
-        end
-      when /(?:(_before_type_cast)|(\?))?$/
-        real_key = $PREMATCH
-        before_type_cast = !$1.nil?
-        query = !$2.nil?
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size > 1
-            raise ArgumentError,
-              _("wrong number of arguments (%d for 1)") % args.size
-          end
-          if before_type_cast
-            return get_attribute_before_type_cast(real_key, *args)[1]
-          elsif query
-            return get_attribute_as_query(real_key, *args)
-          else
-            return get_attribute(real_key, *args)
-          end
-        end
-      end
-      super
-    end
-
-    # Add available attributes to the methods
-    def methods(inherited_too=true)
-      target_names = entry_attribute.all_names
-      target_names -= ['objectClass', 'objectClass'.underscore]
-      super + target_names.uniq.collect do |x|
-        [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
-      end.flatten
-    end
-
-    alias_method :respond_to_without_attributes?, :respond_to?
-    def respond_to?(name, include_priv=false)
-      return true if super
-
-      name = name.to_s
-      return true if have_attribute?(name, ["objectClass"])
-      return false if /(?:=|\?|_before_type_cast)$/ !~ name
-      have_attribute?($PREMATCH, ["objectClass"])
-    end
-
     # Updates a given attribute and saves immediately
     def update_attribute(name, value)
       send("#{name}=", value)

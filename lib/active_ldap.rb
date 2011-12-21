@@ -32,6 +32,7 @@ require 'active_ldap/persistence'
 
 require 'active_ldap/associations'
 require 'active_ldap/attributes'
+require 'active_ldap/attribute_methods'
 require 'active_ldap/configuration'
 require 'active_ldap/connection'
 require 'active_ldap/operations'
@@ -53,6 +54,7 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Associations
   include ActiveModel::MassAssignmentSecurity
   include ActiveLdap::Attributes
+  include ActiveLdap::AttributeMethods
   include ActiveLdap::Configuration
   include ActiveLdap::Connection
   include ActiveLdap::Operations
