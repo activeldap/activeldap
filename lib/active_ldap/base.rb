@@ -887,23 +887,6 @@ module ActiveLdap
     end
     alias_method :has_attribute?, :have_attribute?
 
-    def reload
-      clear_association_cache
-      _, attributes = search(:value => id).find do |_dn, _attributes|
-        dn == _dn
-      end
-      if attributes.nil?
-        raise EntryNotFound, _("Can't find DN '%s' to reload") % dn
-      end
-
-      @ldap_data.update(attributes)
-      classes, attributes = extract_object_class(attributes)
-      self.classes = classes
-      self.attributes = attributes
-      @new_entry = false
-      self
-    end
-
     def [](name, force_array=false)
       if name == "dn"
         array_of(dn, force_array)

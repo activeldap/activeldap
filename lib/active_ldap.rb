@@ -37,6 +37,7 @@ require 'active_ldap/attribute_methods/query'
 require 'active_ldap/attribute_methods/before_type_cast'
 require 'active_ldap/attribute_methods/read'
 require 'active_ldap/attribute_methods/write'
+require 'active_ldap/attribute_methods/dirty'
 require 'active_ldap/configuration'
 require 'active_ldap/connection'
 require 'active_ldap/operations'
@@ -75,6 +76,7 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Validations
   include ActiveLdap::Callbacks
   include ActiveLdap::HumanReadable
+  include ActiveLdap::AttributeMethods::Dirty
 end
 
 unless defined?(ACTIVE_LDAP_CONNECTION_ADAPTERS)
