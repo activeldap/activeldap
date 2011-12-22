@@ -50,9 +50,8 @@ class TestReflection < Test::Unit::TestCase
 
     make_temporary_user do |user, password|
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
-      attributes -= ["objectClass"]
+      attributes = (attributes - ["objectClass"]).map(&:to_sym)
       assert_equal([], attributes - user.methods)
-      assert_equal([], attributes - user.methods(false))
 
       assert_methods_with_only_required_classes(user, attributes)
     end
@@ -60,17 +59,15 @@ class TestReflection < Test::Unit::TestCase
     make_temporary_user do |user, password|
       user.remove_class("inetOrgPerson")
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
-      attributes -= ["objectClass"]
+      attributes = (attributes - ["objectClass"]).map(&:to_sym)
       assert_equal([], attributes - user.methods)
-      assert_equal([], attributes - user.methods(false))
 
       assert_methods_with_only_required_classes(user, attributes)
     end
 
     make_temporary_user do |user, password|
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
-      attributes -= ["objectClass"]
-      attributes = attributes.collect {|x| x.downcase}
+      attributes = attributes.map(&:downcase).map(&:to_sym)
       assert_not_equal([], attributes - user.methods)
       assert_not_equal([], attributes - user.methods(false))
 
@@ -86,9 +83,8 @@ class TestReflection < Test::Unit::TestCase
     make_temporary_user do |user, password|
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
       attributes -= ["objectClass"]
-      attributes = attributes.collect(&:underscore)
+      attributes = attributes.collect(&:underscore).map(&:to_sym)
       assert_equal([], attributes - user.methods)
-      assert_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
@@ -103,9 +99,8 @@ class TestReflection < Test::Unit::TestCase
       user.remove_class("inetOrgPerson")
       attributes = user.must.collect(&:name) + user.may.collect(&:name)
       attributes -= ["objectClass"]
-      attributes = attributes.collect(&:underscore)
+      attributes = attributes.collect(&:underscore).map(&:to_sym)
       assert_equal([], attributes - user.methods)
-      assert_equal([], attributes - user.methods(false))
 
       normalize_attributes_list = Proc.new do |*attributes_list|
         attributes_list.collect do |attrs|
@@ -136,16 +131,14 @@ class TestReflection < Test::Unit::TestCase
         yield(old_attributes, required_attributes)
     end
 
+    [old_attributes, required_attributes].map{|a| a.map!(&:to_sym)}
+
     object.replace_class(object.class.required_classes)
 
     assert_equal([],
                  old_attributes -
                    (attributes - object.methods - required_attributes) -
                     required_attributes)
-    assert_equal([],
-                 old_attributes -
-                   (attributes - object.methods(false) - required_attributes) -
-                   required_attributes)
   end
 
   def assert_respond_to(object, name)

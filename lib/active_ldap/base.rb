@@ -793,65 +793,6 @@ module ActiveLdap
       self.class.default_search_attribute
     end
 
-    # method_missing
-    #
-    # If a given method matches an attribute or an attribute alias
-    # then call the appropriate method.
-    # TODO: Determine if it would be better to define each allowed method
-    #       using class_eval instead of using method_missing.  This would
-    #       give tab completion in irb.
-    def method_missing(name, *args, &block)
-      key = name.to_s
-      case key
-      when /=$/
-        real_key = $PREMATCH
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size != 1
-            raise ArgumentError,
-                    _("wrong number of arguments (%d for 1)") % args.size
-          end
-          return set_attribute(real_key, *args, &block)
-        end
-      when /(?:(_before_type_cast)|(\?))?$/
-        real_key = $PREMATCH
-        before_type_cast = !$1.nil?
-        query = !$2.nil?
-        if have_attribute?(real_key, ['objectClass'])
-          if args.size > 1
-            raise ArgumentError,
-              _("wrong number of arguments (%d for 1)") % args.size
-          end
-          if before_type_cast
-            return get_attribute_before_type_cast(real_key, *args)[1]
-          elsif query
-            return get_attribute_as_query(real_key, *args)
-          else
-            return get_attribute(real_key, *args)
-          end
-        end
-      end
-      super
-    end
-
-    # Add available attributes to the methods
-    def methods(inherited_too=true)
-      target_names = entry_attribute.all_names
-      target_names -= ['objectClass', 'objectClass'.underscore]
-      super + target_names.uniq.collect do |x|
-        [x, "#{x}=", "#{x}?", "#{x}_before_type_cast"]
-      end.flatten
-    end
-
-    alias_method :respond_to_without_attributes?, :respond_to?
-    def respond_to?(name, include_priv=false)
-      return true if super
-
-      name = name.to_s
-      return true if have_attribute?(name, ["objectClass"])
-      return false if /(?:=|\?|_before_type_cast)$/ !~ name
-      have_attribute?($PREMATCH, ["objectClass"])
-    end
-
     # Updates a given attribute and saves immediately
     def update_attribute(name, value)
       send("#{name}=", value)
@@ -945,23 +886,6 @@ module ActiveLdap
       !real_name.nil? and !except.include?(real_name)
     end
     alias_method :has_attribute?, :have_attribute?
-
-    def reload
-      clear_association_cache
-      _, attributes = search(:value => id).find do |_dn, _attributes|
-        dn == _dn
-      end
-      if attributes.nil?
-        raise EntryNotFound, _("Can't find DN '%s' to reload") % dn
-      end
-
-      @ldap_data.update(attributes)
-      classes, attributes = extract_object_class(attributes)
-      self.classes = classes
-      self.attributes = attributes
-      @new_entry = false
-      self
-    end
 
     def [](name, force_array=false)
       if name == "dn"
@@ -1192,80 +1116,6 @@ module ActiveLdap
       @connection ||= nil
       @_hashing = false
       clear_connection_based_cache
-    end
-
-    # get_attribute
-    #
-    # Return the value of the attribute called by method_missing?
-    def get_attribute(name, force_array=false)
-      name, value = get_attribute_before_type_cast(name, force_array)
-      return value if name.nil?
-      attribute = schema.attribute(name)
-      type_cast(attribute, value)
-    end
-
-    def type_cast(attribute, value)
-      case value
-      when Hash
-        result = {}
-        value.each do |option, val|
-          result[option] = type_cast(attribute, val)
-        end
-        if result.size == 1 and result.has_key?("binary")
-          result["binary"]
-        else
-          result
-        end
-      when Array
-        value.collect do |val|
-          type_cast(attribute, val)
-        end
-      else
-        attribute.type_cast(value)
-      end
-    end
-
-    def get_attribute_before_type_cast(name, force_array=false)
-      name = to_real_attribute_name(name)
-
-      value = @data[name]
-      value = [] if value.nil?
-      [name, array_of(value, force_array)]
-    end
-
-    def get_attribute_as_query(name, force_array=false)
-      name, value = get_attribute_before_type_cast(name, force_array)
-      if force_array
-        value.collect {|x| !false_value?(x)}
-      else
-        !false_value?(value)
-      end
-    end
-
-    def false_value?(value)
-      value.nil? or value == false or value == [] or
-        value == "false" or value == "FALSE" or value == ""
-    end
-
-    # set_attribute
-    #
-    # Set the value of the attribute called by method_missing?
-    def set_attribute(name, value)
-      real_name = to_real_attribute_name(name)
-      _dn_attribute = nil
-      valid_dn_attribute = true
-      begin
-        _dn_attribute = dn_attribute
-      rescue DistinguishedNameInvalid
-        valid_dn_attribute = false
-      end
-      if valid_dn_attribute and real_name == _dn_attribute
-        real_name, value = register_new_dn_attribute(real_name, value)
-      end
-      raise UnknownAttribute.new(name) if real_name.nil?
-
-      @data[real_name] = value
-      @simplified_data = nil
     end
 
     def register_new_dn_attribute(name, value)
