@@ -30,9 +30,20 @@ module ActiveLdap
       if new_classes.sort != classes.sort
         set_attribute('objectClass', new_classes)
         clear_object_class_based_cache
+        redefine_attribute_methods(new_classes)
       end
     end
     alias_method(:classes=, :replace_class)
+
+    # using ActiveModel::AttributeMethods
+    def redefine_attribute_methods(classes)
+      self.class.undefine_attribute_methods
+
+      target_names = entry_attribute.all_names.uniq
+      target_names -= ['objectClass', 'objectClass'.underscore]
+
+      self.class.define_attribute_methods target_names
+    end
 
     def classes
       (get_attribute('objectClass', true) || []).dup
