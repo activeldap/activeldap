@@ -1,5 +1,5 @@
 host: 127.0.0.1
-base: dc=bench,dc=localcomain
+base: dc=bench,dc=local
 method: :tls
-bind_dn: cn=user-name,dc=localdomain
+bind_dn: cn=admin,dc=local
 password: secret
