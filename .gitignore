@@ -7,3 +7,4 @@
 /doc/po/*.pot
 /pkg/
 /*.gemspec
+/benchmark/config.yaml
