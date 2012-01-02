@@ -7,7 +7,11 @@ require "benchmark"
 
 include ActiveLdap::GetTextSupport
 
-argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|
+argv = ARGV.dup
+unless argv.include?("--config")
+  argv.unshift("--config", File.join(base, "config.yaml"))
+end
+argv, opts, options = ActiveLdap::Command.parse_options(argv) do |opts, options|
   options.prefix = "ou=People"
 
   opts.on("--prefix=PREFIX",
