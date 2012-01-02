@@ -133,27 +133,7 @@ rescue LoadError
 end
 
 def populate_base
-  suffixes = []
-  ActiveLdap::Base.base.split(/,/).reverse_each do |suffix|
-    prefix = suffixes.join(",")
-    suffixes.unshift(suffix)
-    name, value = suffix.split(/=/, 2)
-    next unless name == "dc"
-    dc_class = Class.new(ActiveLdap::Base)
-    dc_class.ldap_mapping :dn_attribute => "dc",
-                          :prefix => "",
-                          :scope => :base,
-                          :classes => ["top", "dcObject", "organization"]
-    dc_class.instance_variable_set("@base", prefix)
-    next if dc_class.exists?(value, :prefix => "dc=#{value}")
-    dc = dc_class.new(value)
-    dc.o = dc.dc
-    begin
-      dc.save
-    rescue ActiveLdap::OperationNotPermitted
-    end
-  end
-
+  ActiveLdap::Populate.ensure_base
   if ActiveLdap::Base.search.empty?
     raise "Can't populate #{ActiveLdap::Base.base}"
   end
