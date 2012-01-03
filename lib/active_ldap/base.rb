@@ -1065,9 +1065,24 @@ module ActiveLdap
       classes, attributes = extract_object_class(attributes)
       self.classes = classes
       self.dn = dn
-      self.attributes = attributes
+      initialize_attributes(attributes)
       yield self if block_given?
     end
+
+    def initialize_attributes(attributes)
+      _schema = _local_entry_attribute = nil
+      targets = sanitize_for_mass_assignment(attributes)
+      targets.each do |key, value|
+        unless have_attribute?(key)
+          _schema ||= schema
+          attribute = _schema.attribute(key)
+          _local_entry_attribute ||= local_entry_attribute
+          _local_entry_attribute.register(attribute)
+        end
+        set_attribute(key, value)
+      end
+    end
+    private :initialize_attributes
 
     def instantiate(args)
       dn, attributes, options = args

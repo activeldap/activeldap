@@ -28,16 +28,6 @@ module ActiveLdap
         end
       end
 
-      module ClassMethods
-        # dirty/clear hack
-        # only place that we can ovveride and hook to clear the new record
-        def find_every(options)
-          super.each do |result|
-            result.changed_attributes.clear
-          end
-        end
-      end
-
     protected
       def attribute=(attr, val)
         attribute_will_change!(attr) unless val == get_attribute(attr)
