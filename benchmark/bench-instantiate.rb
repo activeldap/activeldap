@@ -76,7 +76,7 @@ def main(do_populate)
   end
 
   Benchmark.bmbm(20) do |x|
-    n = 10
+    n = 100
     GC.start
     x.report("search 100 entries") do
       n.times {ALUser.search}
