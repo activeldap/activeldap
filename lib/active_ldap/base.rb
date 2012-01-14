@@ -344,8 +344,9 @@ module ActiveLdap
         end
       end
 
-      # Connect and bind to LDAP creating a class variable for use by
-      # all ActiveLdap objects.
+      # Set LDAP connection configuration up. It doesn't connect
+      # and bind to LDAP server. A connection to LDAP server is
+      # created when it's needed.
       #
       # == +config+
       # +config+ must be a hash that may contain any of the following fields:
