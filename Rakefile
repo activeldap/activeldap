@@ -2,6 +2,8 @@
 
 require 'thread'
 require 'find'
+require 'pathname'
+require 'erb'
 
 require 'rubygems'
 require 'bundler/setup'
@@ -13,43 +15,11 @@ require "yard"
 
 $KCODE = "u" if RUBY_VERSION < "1.9"
 
-base_dir = File.expand_path(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(base_dir, 'lib'))
-require 'active_ldap'
-
 project_name = "ActiveLdap"
 
-ENV["VERSION"] ||= ActiveLdap::VERSION
-version = ENV["VERSION"]
-spec = nil
-Jeweler::Tasks.new do |_spec|
-  spec = _spec
-  spec.name = 'activeldap'
-  spec.version = version.dup
-  spec.rubyforge_project = 'ruby-activeldap'
-  spec.authors = ['Will Drewry', 'Kouhei Sutou']
-  spec.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
-  spec.summary = 'ActiveLdap is a object-oriented API to LDAP'
-  spec.homepage = 'http://ruby-activeldap.rubyforge.org/'
-  spec.files = FileList["lib/**/*",
-                        "{benchmark,examples,po}/**/*",
-                        "bin/*",
-                        "doc/text/**/*",
-                        "COPYING",
-                        "Gemfile",
-                        "LICENSE",
-                        "README.textile",
-                        "TODO"]
-  spec.test_files = FileList['test/test_*.rb']
-  spec.description = <<-EOF
-    'ActiveLdap' is a ruby library which provides a clean
-    objected oriented interface to the Ruby/LDAP library.  It was inspired
-    by ActiveRecord. This is not nearly as clean or as flexible as
-    ActiveRecord, but it is still trivial to define new objects and manipulate
-    them with minimal difficulty.
-  EOF
-  spec.license = "Ruby's or GPLv2 or later"
-end
+gemspec_file = Pathname.new(__FILE__).dirname + "activeldap.gemspec"
+spec = eval(gemspec_file.read)
+Jeweler::Tasks.new(spec)
 
 Rake::Task["release"].prerequisites.clear
 Jeweler::RubygemsDotOrgTasks.new do

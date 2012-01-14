@@ -6,5 +6,4 @@
 /doc/html/activeldap/
 /doc/po/*.pot
 /pkg/
-/*.gemspec
 /benchmark/config.yaml

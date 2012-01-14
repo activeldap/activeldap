@@ -2,8 +2,9 @@ require "rubygems"
 require "active_model"
 require "active_support/core_ext"
 
+require "active_ldap/version"
+
 module ActiveLdap
-  VERSION = "3.1.2"
   autoload :Command, "active_ldap/command"
 end
 
