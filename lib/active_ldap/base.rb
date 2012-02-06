@@ -900,12 +900,6 @@ module ActiveLdap
       set_attribute(name, value)
     end
 
-    def each
-      @data.each do |key, values|
-        yield(key.dup, values.dup)
-      end
-    end
-
     def bind(config_or_password={}, config_or_ignore=nil, &block)
       if config_or_password.is_a?(String)
         config = (config_or_ignore || {}).merge(:password => config_or_password)
