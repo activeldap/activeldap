@@ -698,10 +698,7 @@ module ActiveLdap
     # Returns true if the +comparison_object+ is the same object, or is of
     # the same type and has the same dn.
     def ==(comparison_object)
-      comparison_object.equal?(self) or
-        (comparison_object.instance_of?(self.class) and
-         comparison_object.dn == dn and
-         !comparison_object.new_entry?)
+      comparison_object.equal?(self) or self.hash == comparison_object.hash
     end
 
     # Delegates to ==
