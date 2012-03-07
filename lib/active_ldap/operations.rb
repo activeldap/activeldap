@@ -22,7 +22,7 @@ module ActiveLdap
     module Common
       VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
                               :classes, :scope, :limit, :attributes,
-                              :sort_by, :order, :connection, :base]
+                              :sort_by, :order, :connection, :base, :offset]
 
       def search(options={}, &block)
         validate_search_options(options)
@@ -280,6 +280,7 @@ module ActiveLdap
         sort_by = options.delete(:sort_by) || self.sort_by
         order = options.delete(:order) || self.order
         limit = options.delete(:limit) if sort_by or order
+        offset = options.delete(:offset) || offset
         options[:attributes] |= ["objectClass"] if options[:attributes]
 
         results = search(options).collect do |dn, attrs|
@@ -295,6 +296,7 @@ module ActiveLdap
         end
 
         results.reverse! if normalize_sort_order(order || "ascend") == :descend
+        results = results[offset, results.size] if offset
         results = results[0, limit] if limit
         results
       end
