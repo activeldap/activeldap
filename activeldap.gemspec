@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   EOF
   spec.license = "Ruby's or GPLv2 or later"
 
-  spec.add_dependency("activemodel", ["~> 3.1.0"])
+  spec.add_dependency("activemodel", ["~> 3.1"])
   spec.add_dependency("locale")
   spec.add_dependency("fast_gettext")
   spec.add_dependency("gettext_i18n_rails")
