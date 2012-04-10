@@ -3,10 +3,6 @@ module ActiveLdap
     module Read
       extend ActiveSupport::Concern
 
-      included do
-        attribute_method_suffix ''
-      end
-
     protected
       def attribute(attr, *args)
         return get_attribute(attr, args.first)
