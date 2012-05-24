@@ -30,6 +30,9 @@ Gem::Specification.new do |spec|
                                   "README.textile",
                                   "TODO")
   spec.files.delete_if {|file| /\.yaml\z/ =~ File.basename(file)}
+  spec.test_files = collect_files.call("test/**/*.rb",
+                                       "test/config.yaml.sample",
+                                       "test/**/*.ldif")
   spec.description = <<-EOF
     'ActiveLdap' is a ruby library which provides a clean
     objected oriented interface to the Ruby/LDAP library.  It was inspired
