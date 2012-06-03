@@ -65,13 +65,13 @@ module ActiveLdap
         values = []
         options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
-	  normalized_attributes = {}
+	        normalized_attributes = {}
           attrs.each do |key, _value|
               if attributes_filter.include?(key) || attributes_filter.include?('*')
                    normalized_attribute, normalized_value = normalize_attribute_options(key, _value)
                    attributes[normalized_attribute] ||= []
-		   attributes[normalized_attribute].concat(normalized_value)
-	      else
+		              attributes[normalized_attribute].concat(normalized_value)
+	            else
                 next
               end
           end
