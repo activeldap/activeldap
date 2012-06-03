@@ -31,6 +31,7 @@ module ActiveLdap
         filter = options[:filter]
         prefix = options[:prefix]
         classes = options[:classes]
+	attributes_filter = options[:attributes]
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
 
@@ -60,16 +61,19 @@ module ActiveLdap
           :sort_by => options[:sort_by] || sort_by,
           :order => options[:order] || order,
         }
-
         options[:connection] ||= connection
         values = []
         options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
+	  normalized_attributes = {}
           attrs.each do |key, _value|
-            normalized_attr, normalized_value =
-              normalize_attribute_options(key, _value)
-            attributes[normalized_attr] ||= []
-            attributes[normalized_attr].concat(normalized_value)
+              if attributes_filter.include?(key) || attributes_filter.include?('*')
+                   normalized_attribute, normalized_value = normalize_attribute_options(key, _value)
+                   attributes[normalized_attribute] ||= []
+		   attributes[normalized_attribute].concat(normalized_value)
+	      else
+                next
+              end
           end
           values << [dn, attributes]
         end
@@ -281,8 +285,8 @@ module ActiveLdap
         order = options.delete(:order) || self.order
         limit = options.delete(:limit) if sort_by or order
         offset = options.delete(:offset) || offset
-        options[:attributes] |= ["objectClass"] if options[:attributes]
-
+	options[:attributes] = options.delete(:attributes) || ['*']
+	options[:attributes] |= ['objectClass']
         results = search(options).collect do |dn, attrs|
           instantiate([dn, attrs, {:connection => options[:connection]}])
         end
