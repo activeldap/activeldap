@@ -67,7 +67,7 @@ module ActiveLdap
           attributes = {}
           normalized_attributes = {}
           attrs.each do |key, _value|
-            if attributes_filter.nil? || attributes_filter.include?(key) || attributes_filter.include?('*')
+            if attributes_filter.nil? or attributes_filter.include?(key) or attributes_filter.include?('*')
               normalized_attribute, normalized_value = normalize_attribute_options(key, _value)
               attributes[normalized_attribute] ||= []
               attributes[normalized_attribute].concat(normalized_value)
