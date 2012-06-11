@@ -57,7 +57,7 @@ module ActiveLdap
           :scope => options[:scope] || scope,
           :filter => filter,
           :limit => options[:limit],
-          :attributes => options[:attributes],
+          :attributes => requested_attributes,
           :sort_by => options[:sort_by] || sort_by,
           :order => options[:order] || order,
         }
