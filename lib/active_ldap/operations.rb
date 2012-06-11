@@ -63,10 +63,12 @@ module ActiveLdap
         }
         options[:connection] ||= connection
         values = []
+        requested_all_attributes =
+          (requested_attributes.nil? or requested_attributes.include?('*'))
         options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
           attrs.each do |key, _value|
-            if requested_attributes.nil? or requested_attributes.include?(key) or requested_attributes.include?('*')
+            if requested_all_attributes or requested_attributes.include?(key)
               normalized_attribute, normalized_value = normalize_attribute_options(key, _value)
               attributes[normalized_attribute] ||= []
               attributes[normalized_attribute].concat(normalized_value)
