@@ -31,7 +31,7 @@ module ActiveLdap
         filter = options[:filter]
         prefix = options[:prefix]
         classes = options[:classes]
-        attributes_filter = options[:attributes]
+        required_attributes = options[:attributes]
 
         value = value.first if value.is_a?(Array) and value.first.size == 1
 
@@ -66,7 +66,7 @@ module ActiveLdap
         options[:connection].search(search_options) do |dn, attrs|
           attributes = {}
           attrs.each do |key, _value|
-            if attributes_filter.nil? or attributes_filter.include?(key) or attributes_filter.include?('*')
+            if required_attributes.nil? or required_attributes.include?(key) or required_attributes.include?('*')
               normalized_attribute, normalized_value = normalize_attribute_options(key, _value)
               attributes[normalized_attribute] ||= []
               attributes[normalized_attribute].concat(normalized_value)
