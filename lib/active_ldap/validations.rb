@@ -41,11 +41,11 @@ module ActiveLdap
     end
 
     def save(*)
-      valid? ? super: false
+      valid? ? super : false
     end
 
     def save!(*)
-      valid? ? super: raise(EntryInvalid.new(self))
+      valid? ? super : raise(EntryInvalid.new(self))
     end
 
     private
