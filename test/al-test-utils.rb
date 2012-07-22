@@ -17,7 +17,6 @@ module AlTestUtils
     base.class_eval do
       include ActiveLdap::GetTextSupport
       include Utilities
-      include Assertions
       include Config
       include Connection
       include Populate
@@ -30,16 +29,6 @@ module AlTestUtils
   module Utilities
     def dn(string)
       ActiveLdap::DN.parse(string)
-    end
-  end
-
-  module Assertions
-    def assert_true(actual, *args)
-      assert_equal(true, actual, *args)
-    end
-
-    def assert_false(actual, *args)
-      assert_equal(false, actual, *args)
     end
   end
 
