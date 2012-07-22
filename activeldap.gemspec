@@ -44,7 +44,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("activemodel", ["~> 3.2.6"])
   spec.add_dependency("locale")
-  spec.add_dependency("fast_gettext")
+  spec.add_dependency("gettext")
   spec.add_dependency("gettext_i18n_rails")
 
   spec.add_development_dependency("ruby-ldap")

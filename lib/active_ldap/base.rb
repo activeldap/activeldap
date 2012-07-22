@@ -281,6 +281,7 @@ module ActiveLdap
   # by extension classes.
   class Base
     include GetTextSupport
+    public :gettext
     public :_
 
     if Object.const_defined?(:Reloadable)

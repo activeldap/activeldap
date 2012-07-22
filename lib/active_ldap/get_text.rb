@@ -1,9 +1,20 @@
-if Object.const_defined?(:FastGettext)
-  ActiveLdap.const_set("GetText", FastGettext)
-end
+require "gettext"
 
-unless ActiveLdap.const_defined?(:GetText)
-  require 'active_ldap/get_text_fallback'
-end
+module ActiveLdap
+  class << self
+    def get_text_supported?
+      true
+    end
+  end
 
-require 'active_ldap/get_text_support'
+  module GetTextSupport
+    class << self
+      def included(base)
+        base.class_eval do
+          include(GetText)
+          bindtextdomain("active-ldap")
+        end
+      end
+    end
+  end
+end

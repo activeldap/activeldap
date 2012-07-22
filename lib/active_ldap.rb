@@ -14,11 +14,6 @@ else
   require 'active_ldap/timeout_stub'
 end
 
-begin
-  require "locale"
-  require "fast_gettext"
-rescue LoadError
-end
 require 'active_ldap/get_text'
 
 require 'active_ldap/compatible'
