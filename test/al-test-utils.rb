@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test-unit'
 
 require 'erb'
 require 'yaml'
