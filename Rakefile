@@ -8,7 +8,7 @@ require 'erb'
 require 'rubygems'
 require 'bundler/setup'
 
-require 'jeweler'
+require 'bundler/gem_helper'
 require 'rake/testtask'
 require "rake/clean"
 require "yard"
@@ -17,13 +17,9 @@ $KCODE = "u" if RUBY_VERSION < "1.9"
 
 project_name = "ActiveLdap"
 
-gemspec_file = Pathname.new(__FILE__).dirname + "activeldap.gemspec"
-spec = eval(gemspec_file.read)
-Jeweler::Tasks.new(spec)
-
-Rake::Task["release"].prerequisites.clear
-Jeweler::RubygemsDotOrgTasks.new do
-end
+helper = Bundler::GemHelper.new(base_dir)
+helper.install
+spec = helper.gemspec
 
 Rake::TestTask.new(:test) do |test|
   test.libs << "lib"
