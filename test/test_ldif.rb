@@ -4,7 +4,6 @@ require 'al-test-utils'
 
 class TestLDIF < Test::Unit::TestCase
   include ActiveLdap::GetTextSupport
-  include AlTestUtils::Assertions
   include AlTestUtils::Config
   include AlTestUtils::ExampleFile
 
