@@ -15,7 +15,7 @@ module ActiveLdap
 
     protected
 
-    # ovveriding ActiveModel::AttributeMethods
+    # overiding ActiveModel::AttributeMethods
     def attribute_method?(method_name)
       have_attribute?(method_name, ['objectClass'])
     end
