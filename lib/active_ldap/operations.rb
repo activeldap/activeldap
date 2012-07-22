@@ -8,7 +8,9 @@ module ActiveLdap
           extend(Find)
           extend(LDIF)
           extend(Delete)
+          extend(ClassOnlyDelete)
           extend(Update)
+          extend(ClassOnlyUpdate)
 
           include(Common)
           include(Find)
@@ -487,13 +489,6 @@ module ActiveLdap
     end
 
     module Delete
-      def destroy(targets, options={})
-        targets = [targets] unless targets.is_a?(Array)
-        targets.each do |target|
-          find(target, options).destroy
-        end
-      end
-
       def destroy_all(options_or_filter=nil, deprecated_options=nil)
         if deprecated_options.nil?
           if options_or_filter.is_a?(String)
@@ -509,24 +504,6 @@ module ActiveLdap
           target.dn
         end.each do |target|
           target.destroy
-        end
-      end
-
-      def delete(targets, options={})
-        targets = [targets] unless targets.is_a?(Array)
-        targets = targets.collect do |target|
-          ensure_dn_attribute(ensure_base(target))
-        end
-        delete_entry(targets, options)
-      end
-
-      def delete_entry(dn, options={})
-        options[:connection] ||= connection
-        begin
-          options[:connection].delete(dn, options)
-        rescue Error
-          format = _("Failed to delete LDAP entry: <%s>: %s")
-          raise DeleteError.new(format % [dn.inspect, $!.message])
         end
       end
 
@@ -546,6 +523,33 @@ module ActiveLdap
           dn.upcase.reverse
         end.reverse
 
+        delete_entry(targets, options)
+      end
+
+      def delete_entry(dn, options={})
+        options[:connection] ||= connection
+        begin
+          options[:connection].delete(dn, options)
+        rescue Error
+          format = _("Failed to delete LDAP entry: <%s>: %s")
+          raise DeleteError.new(format % [dn.inspect, $!.message])
+        end
+      end
+    end
+
+    module ClassOnlyDelete
+      def destroy(targets, options={})
+        targets = [targets] unless targets.is_a?(Array)
+        targets.each do |target|
+          find(target, options).destroy
+        end
+      end
+
+      def delete(targets, options={})
+        targets = [targets] unless targets.is_a?(Array)
+        targets = targets.collect do |target|
+          ensure_dn_attribute(ensure_base(target))
+        end
         delete_entry(targets, options)
       end
     end
@@ -574,21 +578,6 @@ module ActiveLdap
                                         new_superior, options)
       end
 
-      def update(dn, attributes, options={})
-        if dn.is_a?(Array)
-          i = -1
-          dns = dn
-          dns.collect do |_dn|
-            i += 1
-            update(_dn, attributes[i], options)
-          end
-        else
-          object = find(dn, options)
-          object.update_attributes(attributes)
-          object
-        end
-      end
-
       def update_all(attributes, filter=nil, options={})
         search_options = options.dup
         if filter
@@ -611,6 +600,23 @@ module ActiveLdap
         conn = options[:connection]
         targets.each do |dn|
           conn.modify(dn, unnormalized_attributes, options)
+        end
+      end
+    end
+
+    module ClassOnlyUpdate
+      def update(dn, attributes, options={})
+        if dn.is_a?(Array)
+          i = -1
+          dns = dn
+          dns.collect do |_dn|
+            i += 1
+            update(_dn, attributes[i], options)
+          end
+        else
+          object = find(dn, options)
+          object.update_attributes(attributes)
+          object
         end
       end
     end

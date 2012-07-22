@@ -7,30 +7,35 @@ module ActiveLdap
 
       # Attempts to +save+ the record and clears changed attributes if successful.
       def save(*) #:nodoc:
-        if status = super
-          changed_attributes.clear
+        succeeded = super
+        if succeeded
+          @previously_changed = changes
+          @changed_attributes.clear
         end
-        status
+        succeeded
       end
 
       # Attempts to <tt>save!</tt> the record and clears changed attributes if successful.
       def save!(*) #:nodoc:
-        if status = super
-          changed_attributes.clear
+        super.tap do
+          @previously_changed = changes
+          @changed_attributes.clear
         end
-        status
       end
 
       # <tt>reload</tt> the record and clears changed attributes.
       def reload(*) #:nodoc:
         super.tap do
-          changed_attributes.clear
+          @previously_changed.clear
+          @changed_attributes.clear
         end
       end
 
     protected
-      def attribute=(attr, val)
-        attribute_will_change!(attr) unless val == get_attribute(attr)
+      def set_attribute(name, value)
+        if name != "objectClass"
+          attribute_will_change!(name) unless value == get_attribute(name)
+        end
         super
       end
     end

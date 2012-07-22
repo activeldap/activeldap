@@ -934,6 +934,9 @@ module ActiveLdap
     def clear_object_class_based_cache
       @entry_attribute = nil
       @real_names = {}
+      @changed_attributes.reject! do |key, _|
+        not attribute_method?(key)
+      end
     end
 
     def schema
@@ -1076,6 +1079,7 @@ module ActiveLdap
         end
         set_attribute(key, value)
       end
+      @changed_attributes.clear
     end
     private :initialize_attributes
 
@@ -1125,6 +1129,8 @@ module ActiveLdap
       @dn_split_value = nil
       @connection ||= nil
       @_hashing = false
+      @previously_changed = []
+      @changed_attributes = {}
       clear_connection_based_cache
     end
 

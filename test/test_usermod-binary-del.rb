@@ -26,7 +26,7 @@ class TestUsermodBinaryDel < Test::Unit::TestCase
     make_temporary_user(:simple => true) do |user, password|
       user.add_class("strongAuthenticationUser")
       user.user_certificate = certificate
-      assert(user.save)
+      assert_true(user.save)
       assert_usermod_binary_del_successfully(user.uid, "New #{user.cn}",
                                              user.uid_number.to_i + 100)
     end
