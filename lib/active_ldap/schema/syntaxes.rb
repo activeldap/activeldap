@@ -180,10 +180,10 @@ module ActiveLdap
           return value if value.nil? or value.is_a?(Time)
           match_data = FORMAT.match(value)
           if match_data
-            required_components = match_data.to_a[1, 6]
+            required_components = match_data.to_a[1, 5]
             return value if required_components.any?(&:nil?)
-            year, month, day, hour, minute, second =
-              required_components.collect(&:to_i)
+            year, month, day, hour, minute = required_components.collect(&:to_i)
+            second = match_data[-3].to_i
             fraction = match_data[-2]
             fraction = fraction.to_f if fraction
             time_zone = match_data[-1]
@@ -226,7 +226,7 @@ module ActiveLdap
           if match_data
             date_data = match_data.to_a[1..-1]
             missing_components = []
-            required_components = %w(year month day hour minute second)
+            required_components = %w(year month day hour minute)
             required_components.each_with_index do |component, i|
               missing_components << component unless date_data[i]
             end

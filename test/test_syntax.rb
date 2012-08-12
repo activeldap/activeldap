@@ -117,6 +117,11 @@ class TestSyntax < Test::Unit::TestCase
                          "19941216103212.345+0900")
       end
 
+      def test_year_month_day_hour_minute
+        assert_type_cast(Time.parse("2008/01/07 03:46:00"),
+                         "200801070346")
+      end
+
       def test_before_posix_time
         time_can_handle_before_posix_time = false
         begin
@@ -162,6 +167,10 @@ class TestSyntax < Test::Unit::TestCase
           assert_valid("20080107034615,123-0900")
         end
 
+        def test_year_month_day_hour_minute
+          assert_valid("199412161032")
+        end
+
         private
         def assert_valid(value)
           super(value, syntax_name)
@@ -171,14 +180,14 @@ class TestSyntax < Test::Unit::TestCase
       class TestInvalid < self
         def test_year_only
           value = "1994"
-          params = [value.inspect, %w(month day hour minute second).join(", ")]
+          params = [value.inspect, %w(month day hour minute).join(", ")]
           assert_invalid(_("%s has missing components: %s") % params,
                          value)
         end
 
-        def test_year_month_day_hour_minute
-          value = "199412161032"
-          params = [value.inspect, %w(second).join(", ")]
+        def test_year_month_day_hour_only
+          value = "1994121610"
+          params = [value.inspect, %w(minute).join(", ")]
           assert_invalid(_("%s has missing components: %s") % params,
                          value)
         end
