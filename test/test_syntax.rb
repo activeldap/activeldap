@@ -123,7 +123,7 @@ class TestSyntax < Test::Unit::TestCase
   end
 
   def test_integer_type_cast
-    assert_type_cast_without_validation(nil, nil, "Generalized Time")
+    assert_type_cast_without_validation(nil, nil, "Integer")
     assert_type_cast(1321, "1321", "Integer")
   end
 
