@@ -91,33 +91,47 @@ class TestSyntax < Test::Unit::TestCase
     assert_dn_type_cast("cn=test", 'Distinguished Name')
   end
 
-  def test_generalized_time_type_cast
-    assert_type_cast_without_validation(nil, nil, "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32:12"), "19941216103212",
-                     "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32:12Z"), "19941216103212Z",
-                     "Generalized Time")
-    assert_type_cast(Time.parse("1994/12/16 10:32:12.345 +09:00"),
-                     "19941216103212.345+0900",
-                     "Generalized Time")
-    begin
-      Time.utc(1601)
-      assert_type_cast(Time.utc(1601, 1, 1, 0, 4, 17),
-                       "16010101000417.0Z",
-                       "Generalized Time")
-    rescue ArgumentError
-      assert_type_cast(Time.at(0),
-                       "16010101000417.0Z",
-                       "Generalized Time")
-    end
+  class TestGeneralizedTime < self
+    class TestTypeCast < self
+      def test_nil
+        assert_type_cast_without_validation(nil, nil, "Generalized Time")
+      end
 
-    begin
-      Time.at(-1)
-    rescue ArgumentError
-      if $!.message == "argument out of range"
-        assert_type_cast(Time.parse("1969/12/31 23:59:59 +00:00"),
-                         "19691231235959+0000",
-                         "Generalized Time")
+      def test_timezone_none
+        assert_type_cast(Time.parse("1994/12/16 10:32:12"),
+                         "19941216103212")
+      end
+
+      def test_timezone_Z
+        assert_type_cast(Time.parse("1994/12/16 10:32:12Z"),
+                         "19941216103212Z")
+      end
+
+      def test_timezon
+        assert_type_cast(Time.parse("1994/12/16 10:32:12.345 +09:00"),
+                         "19941216103212.345+0900")
+      end
+
+      def test_before_posix_time
+        time_can_handle_before_posix_time = false
+        begin
+          Time.utc(1601)
+          time_can_handle_before_posix_time = true
+        rescue ArgumentError
+        end
+
+        if time_can_handle_before_posix_time
+          assert_type_cast(Time.utc(1601, 1, 1, 0, 4, 17),
+                           "16010101000417.0Z")
+        else
+          assert_type_cast(Time.at(0),
+                           "16010101000417.0Z")
+        end
+      end
+
+      private
+      def assert_type_cast(type_casted_value, original_value)
+        super(type_casted_value, original_value, "Generalized Time")
       end
     end
   end
