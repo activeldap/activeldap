@@ -1,5 +1,8 @@
+require "locale"
 require 'active_ldap'
 require 'rails'
+
+Locale.init(:driver => :cgi)
 
 module ActiveLdap
   class Railtie < Rails::Railtie
