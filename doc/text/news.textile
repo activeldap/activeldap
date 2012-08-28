@@ -1,5 +1,43 @@
 h1. News
 
+h2(#3-1-1). 3.2.0: 2011-08-29
+
+* [GitHUb:#39] Supported Rails 3.2.8. [Reported by Ben Langfeld]
+* [GitHub:#13] Don't use deprecated Gem.available?. [Patch by sailesh]
+* [GitHub:#19] Supported new entry by @ha_many :wrap@. [Patch by Alex Tomlins]
+* Supported @:only@ option in XML output.
+* [GitHub:#14] Supported nil as single value. [Reported by n3llyb0y]
+* [GitHub:#20] Supported ActiveModel::MassAssignmentSecurity.
+  [Reported by mihu]
+* [GitHub:#24] Supported Ruby 1.9 style Hash syntax in generator.
+  [Patch by ursm]
+* [GitHub:#25][GitHub:#39] Supported ActiveMode;::Dirty.
+  [Patch by mihu][Reported by Ben Langfeld]
+* [GitHub:#26] Improved speed for dirty. [Patch by mihu]
+* [GitHub:#28] Improved speed for initialization. [Patch by mihu]
+* [GitHub:#29] Added .gemspec. [Suggested by mklappstuhl]
+* [GitHub:#34] Removed an unused method. [Patch by mihu]
+* [GitHub:#37] Improved will_paginate support. [Patch by Craig White]
+* [GitHub:#40] Added missing test files to .gemspec. [Reported by Vít Ondruch]
+* [GitHub:#41] Improved speed for find. [Patch by unixmechanic]
+* Changed i18n backend to gettext from fast_gettext again.
+* [GitHub:#42] Fixed a bug that optional second is required for GeneralizedTime.
+  [Reported by masche842]
+
+h3. Thanks
+
+* sailesh
+* Alex Tomlins
+* n3llyb0y
+* mihu
+* ursm
+* Ben Langfeld
+* mklappstuhl
+* Craig White
+* Vít Ondruch
+* unixmechanic
+* masche842
+
 h2(#3-1-1). 3.1.1: 2011-11-03
 
 * Supported Rails 3.1.1.
