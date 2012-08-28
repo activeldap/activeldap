@@ -2,7 +2,7 @@ h1. News
 
 h2(#3-2-0). 3.2.0: 2012-08-29
 
-* [GitHUb:#39] Supported Rails 3.2.8. [Reported by Ben Langfeld]
+* [GitHub:#39] Supported Rails 3.2.8. [Reported by Ben Langfeld]
 * [GitHub:#13] Don't use deprecated Gem.available?. [Patch by sailesh]
 * [GitHub:#19] Supported new entry by @ha_many :wrap@. [Patch by Alex Tomlins]
 * Supported @:only@ option in XML output.
@@ -11,7 +11,7 @@ h2(#3-2-0). 3.2.0: 2012-08-29
   [Reported by mihu]
 * [GitHub:#24] Supported Ruby 1.9 style Hash syntax in generator.
   [Patch by ursm]
-* [GitHub:#25][GitHub:#39] Supported ActiveMode;::Dirty.
+* [GitHub:#25][GitHub:#39] Supported ActiveModel::Dirty.
   [Patch by mihu][Reported by Ben Langfeld]
 * [GitHub:#26] Improved speed for dirty. [Patch by mihu]
 * [GitHub:#28] Improved speed for initialization. [Patch by mihu]
