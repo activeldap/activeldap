@@ -17,6 +17,8 @@ $KCODE = "u" if RUBY_VERSION < "1.9"
 
 project_name = "ActiveLdap"
 
+base_dir = File.dirname(__FILE__)
+
 helper = Bundler::GemHelper.new(base_dir)
 helper.install
 spec = helper.gemspec
