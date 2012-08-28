@@ -272,7 +272,7 @@ task :publish => ["html:publish", "reference:publish"]
 
 desc "Tag the current revision."
 task :tag do
-  sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
+  sh("git", "tag", "-a", version, "-m", "release #{spec.version}!!!")
 end
 
 # vim: syntax=ruby
