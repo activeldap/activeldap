@@ -23,6 +23,8 @@ helper = Bundler::GemHelper.new(base_dir)
 helper.install
 spec = helper.gemspec
 
+version = spec.version.to_s
+
 Rake::TestTask.new(:test) do |test|
   test.libs << "lib"
   test.libs << "test"
@@ -272,7 +274,7 @@ task :publish => ["html:publish", "reference:publish"]
 
 desc "Tag the current revision."
 task :tag do
-  sh("git", "tag", "-a", version, "-m", "release #{spec.version}!!!")
+  sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
 end
 
 # vim: syntax=ruby
