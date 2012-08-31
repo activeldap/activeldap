@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
-"POT-Creation-Date: 2012-08-28 22:09+0900\n"
-"PO-Revision-Date: 2012-08-28 22:08+0900\n"
+"POT-Creation-Date: 2012-08-31 22:22+0900\n"
+"PO-Revision-Date: 2012-08-31 22:22+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -164,21 +164,20 @@ msgstr "ファイル: お知らせ"
 #: doc/reference/en/ActiveLdap/Persistence.html:40(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:368(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:369(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:686(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:718(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:779(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:700(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:732(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:793(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:40(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:239(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
@@ -1510,21 +1509,20 @@ msgstr "フレーム無し"
 #: doc/reference/en/ActiveLdap/Persistence.html:40(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:368(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:369(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:686(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:718(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:700(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:732(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:796(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:40(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:239(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
@@ -3067,56 +3065,79 @@ msgid "News"
 msgstr "お知らせ"
 
 #: doc/reference/en/file.news.html:65(h2)
-msgid "3.2.0: 2012-08-29"
+msgid "3.2.1: 2012-08-31"
 msgstr ""
 
 #: doc/reference/en/file.news.html:67(li)
+msgid ""
+"Fixed a bug that ActiveLdap::Base#delete doesn’t work. [Reported by Craig "
+"White]"
+msgstr "ActiveLdap::Base#deleteが動かない問題を修正。 [Craig Whiteさんが報告]"
+
+#: doc/reference/en/file.news.html:70(h3)
+#: doc/reference/en/file.news.html:98(h3)
+#: doc/reference/en/file.news.html:120(h3)
+#: doc/reference/en/file.news.html:154(h3) doc/reference/en/index.html:111(h2)
+#: doc/reference/en/file.README.html:111(h2)
+msgid "Thanks"
+msgstr "感謝"
+
+#: doc/reference/en/file.news.html:72(li)
+#: doc/reference/en/file.news.html:107(li)
+msgid "Craig White"
+msgstr "Craig Whiteさん"
+
+#: doc/reference/en/file.news.html:74(h2)
+msgid "3.2.0: 2012-08-29"
+msgstr ""
+
+#: doc/reference/en/file.news.html:76(li)
 msgid "[GitHub:#39] Supported Rails 3.2.8. [Reported by Ben Langfeld]"
 msgstr "[GitHub:#39] 3.2.8対応 [Ben Langfeldさんが報告]"
 
-#: doc/reference/en/file.news.html:68(li)
+#: doc/reference/en/file.news.html:77(li)
 msgid "[GitHub:#13] Don’t use deprecated Gem.available?. [Patch by sailesh]"
 msgstr ""
 "[GitHub:#13] 非推奨のGem.available?を使わないようにした。 [saileshさんがパッ"
 "チ提供]"
 
-#: doc/reference/en/file.news.html:69(code)
+#: doc/reference/en/file.news.html:78(code)
 msgid "ha_many :wrap"
 msgstr ""
 
-#: doc/reference/en/file.news.html:69(li)
+#: doc/reference/en/file.news.html:78(li)
 msgid ""
 "[GitHub:#19] Supported new entry by <placeholder-1/>. [Patch by Alex Tomlins]"
 msgstr ""
 "[GitHub:#19] <placeholder-1/>で新しいエントリを追加できるようにした。 [Alex "
 "Tomlinsさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:70(code)
+#: doc/reference/en/file.news.html:79(code)
 msgid ":only"
 msgstr ""
 
-#: doc/reference/en/file.news.html:70(span)
-#: doc/reference/en/file.news.html:271(span)
+#: doc/reference/en/file.news.html:79(span)
+#: doc/reference/en/file.news.html:280(span)
 msgid "XML"
 msgstr ""
 
-#: doc/reference/en/file.news.html:70(li)
+#: doc/reference/en/file.news.html:79(li)
 msgid "Supported <placeholder-1/> option in <placeholder-2/> output."
 msgstr "<placeholder-2/>出力で<placeholder-1/>オプションを使えるようにした。"
 
-#: doc/reference/en/file.news.html:71(li)
+#: doc/reference/en/file.news.html:80(li)
 msgid "[GitHub:#14] Supported nil as single value. [Reported by n3llyb0y]"
 msgstr ""
 "[GitHub:#14] single valueな値にnilを使えるようにした。 [n3llyb0yさんが報告]"
 
-#: doc/reference/en/file.news.html:72(li)
+#: doc/reference/en/file.news.html:81(li)
 msgid ""
 "[GitHub:#20] Supported ActiveModel::MassAssignmentSecurity. [Reported by "
 "mihu]"
 msgstr ""
 "[GitHub:#20] ActiveModel::MassAssignmentSecurity対応。 [mihuさんが報告]"
 
-#: doc/reference/en/file.news.html:74(li)
+#: doc/reference/en/file.news.html:83(li)
 msgid ""
 "[GitHub:#24] Supported Ruby 1.9 style Hash syntax in generator. [Patch by "
 "ursm]"
@@ -3124,7 +3145,7 @@ msgstr ""
 "[GitHub:#24] ジェネレーターでRuby 1.9スタイルのHashの構文を使えるようにし"
 "た。 [ursmさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:76(li)
+#: doc/reference/en/file.news.html:85(li)
 msgid ""
 "[GitHub:#25][GitHub:#39] Supported ActiveModel::Dirty. [Patch by mihu]"
 "[Reported by Ben Langfeld]"
@@ -3132,42 +3153,42 @@ msgstr ""
 "[GitHub:#25][GitHub:#39] ActiveModel::Dirty対応。 [mihuさんがパッチ提供][Ben "
 "Langfeldさんが報告]"
 
-#: doc/reference/en/file.news.html:78(li)
+#: doc/reference/en/file.news.html:87(li)
 msgid "[GitHub:#26] Improved speed for dirty. [Patch by mihu]"
 msgstr "[GitHub:#26] dirtyを高速化した。 [mihuさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:79(li)
+#: doc/reference/en/file.news.html:88(li)
 msgid "[GitHub:#28] Improved speed for initialization. [Patch by mihu]"
 msgstr "[GitHub:#28] 初期化処理を高速化した。 [mihuさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:80(li)
+#: doc/reference/en/file.news.html:89(li)
 msgid "[GitHub:#29] Added .gemspec. [Suggested by mklappstuhl]"
 msgstr "[GitHub:#29] .gemspecを追加した。 [mklappstuhlさんが提案]"
 
-#: doc/reference/en/file.news.html:81(li)
+#: doc/reference/en/file.news.html:90(li)
 msgid "[GitHub:#34] Removed an unused method. [Patch by mihu]"
 msgstr "[GitHub:#34] 使っていないメソッドを削除した。 [mihuさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:82(li)
+#: doc/reference/en/file.news.html:91(li)
 msgid "[GitHub:#37] Improved will_paginate support. [Patch by Craig White]"
 msgstr ""
 "[GitHub:#37] will_paginateサポートを強化した。 [Craig Whiteさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:83(li)
+#: doc/reference/en/file.news.html:92(li)
 msgid ""
 "[GitHub:#40] Added missing test files to .gemspec. [Reported by Vít Ondruch]"
 msgstr ""
 "[GitHub:#40] .gemspecにテストファイルを追加した。 [Vít Ondruchさんが報告]"
 
-#: doc/reference/en/file.news.html:84(li)
+#: doc/reference/en/file.news.html:93(li)
 msgid "[GitHub:#41] Improved speed for find. [Patch by unixmechanic]"
 msgstr "[GitHub:#41] findを高速化した。 [unixmechanicさんがパッチ提供]"
 
-#: doc/reference/en/file.news.html:85(li)
+#: doc/reference/en/file.news.html:94(li)
 msgid "Changed i18n backend to gettext from fast_gettext again."
 msgstr "国際化のバックエンドをfast_gettextからgettextにした。"
 
-#: doc/reference/en/file.news.html:86(li)
+#: doc/reference/en/file.news.html:95(li)
 msgid ""
 "[GitHub:#42] Fixed a bug that optional second is required for "
 "GeneralizedTime. [Reported by masche842]"
@@ -3175,79 +3196,68 @@ msgstr ""
 "[GitHub:#42] GeneralizedTimeで省略可能な秒の値を必須の値として扱っていた問題"
 "を修正した。 [masche842さんが報告]"
 
-#: doc/reference/en/file.news.html:89(h3)
-#: doc/reference/en/file.news.html:111(h3)
-#: doc/reference/en/file.news.html:145(h3) doc/reference/en/index.html:111(h2)
-#: doc/reference/en/file.README.html:111(h2)
-msgid "Thanks"
-msgstr "感謝"
-
-#: doc/reference/en/file.news.html:91(li)
+#: doc/reference/en/file.news.html:100(li)
 msgid "sailesh"
 msgstr "saileshさん"
 
-#: doc/reference/en/file.news.html:92(li)
-#: doc/reference/en/file.news.html:115(li)
+#: doc/reference/en/file.news.html:101(li)
+#: doc/reference/en/file.news.html:124(li)
 msgid "Alex Tomlins"
 msgstr "Alex Tomlinsさん"
 
-#: doc/reference/en/file.news.html:93(li)
+#: doc/reference/en/file.news.html:102(li)
 msgid "n3llyb0y"
 msgstr "n3llyb0yさん"
 
-#: doc/reference/en/file.news.html:94(li)
+#: doc/reference/en/file.news.html:103(li)
 msgid "mihu"
 msgstr "mihuさん"
 
-#: doc/reference/en/file.news.html:95(li)
+#: doc/reference/en/file.news.html:104(li)
 msgid "ursm"
 msgstr "ursmさん"
 
-#: doc/reference/en/file.news.html:96(li)
+#: doc/reference/en/file.news.html:105(li)
 msgid "Ben Langfeld"
 msgstr "Ben Langfeldさん"
 
-#: doc/reference/en/file.news.html:97(li)
+#: doc/reference/en/file.news.html:106(li)
 msgid "mklappstuhl"
 msgstr "mklappstuhlさん"
 
-#: doc/reference/en/file.news.html:98(li)
-msgid "Craig White"
-msgstr "Craig Whiteさん"
-
-#: doc/reference/en/file.news.html:99(li)
+#: doc/reference/en/file.news.html:108(li)
 msgid "Vít Ondruch"
 msgstr "Vít Ondruchさん"
 
-#: doc/reference/en/file.news.html:100(li)
+#: doc/reference/en/file.news.html:109(li)
 msgid "unixmechanic"
 msgstr "unixmechanicさん"
 
-#: doc/reference/en/file.news.html:101(li)
+#: doc/reference/en/file.news.html:110(li)
 msgid "masche842"
 msgstr "masche842さん"
 
-#: doc/reference/en/file.news.html:103(h2)
+#: doc/reference/en/file.news.html:112(h2)
 msgid "3.1.1: 2011-11-03"
 msgstr ""
 
-#: doc/reference/en/file.news.html:105(li)
+#: doc/reference/en/file.news.html:114(li)
 msgid "Supported Rails 3.1.1."
 msgstr "Rails 3.1.1対応。"
 
-#: doc/reference/en/file.news.html:106(li)
+#: doc/reference/en/file.news.html:115(li)
 msgid "[GitHub:#9] Fixed a typo in document. [warden]"
 msgstr "[GitHub:#9] ドキュメント中の誤字を修正。 [wardenさん]"
 
-#: doc/reference/en/file.news.html:107(li)
+#: doc/reference/en/file.news.html:116(li)
 msgid "[GitHub:#11] Added persisted?. [bklier]"
 msgstr "[GitHub:#11] persisted?メソッドを追加。 [bklierさん]"
 
-#: doc/reference/en/file.news.html:108(span)
+#: doc/reference/en/file.news.html:117(span)
 msgid "SSHA"
 msgstr ""
 
-#: doc/reference/en/file.news.html:108(li)
+#: doc/reference/en/file.news.html:117(li)
 msgid ""
 "[GitHub:#16] Supported 4 or more bytes salt for <placeholder-1/> and SMD5. "
 "[Alex Tomlins]"
@@ -3255,125 +3265,125 @@ msgstr ""
 "[GitHub:#16] <placeholder-1/>とSMD5における4バイト以上のsaltに対応。 [Alex "
 "Tomlinsさん]"
 
-#: doc/reference/en/file.news.html:113(li)
+#: doc/reference/en/file.news.html:122(li)
 msgid "warden"
 msgstr "wardenさん"
 
-#: doc/reference/en/file.news.html:114(li)
+#: doc/reference/en/file.news.html:123(li)
 msgid "bklier"
 msgstr "bklierさん"
 
-#: doc/reference/en/file.news.html:117(h2)
+#: doc/reference/en/file.news.html:126(h2)
 msgid "3.1.0: 2011-07-09"
 msgstr ""
 
-#: doc/reference/en/file.news.html:119(li)
+#: doc/reference/en/file.news.html:128(li)
 msgid ""
 "Supported Rails 3.1.0.rc4. [Ryan Tandy, Narihiro Nakamura, Hidetoshi "
 "Yoshimoto]"
 msgstr ""
 "Rails 3.1.0.rc4対応。 [Ryan Tandy, Narihiro Nakamura, Hidetoshi Yoshimoto]"
 
-#: doc/reference/en/file.news.html:121(li)
+#: doc/reference/en/file.news.html:130(li)
 msgid "Removed ActiveRecord dependency and added ActiveModel dependency."
 msgstr "ActiveRecord依存をなくしてActiveModelに依存するようにした。"
 
-#: doc/reference/en/file.news.html:122(span)
+#: doc/reference/en/file.news.html:131(span)
 msgid "YARD"
 msgstr ""
 
-#: doc/reference/en/file.news.html:122(li)
+#: doc/reference/en/file.news.html:131(li)
 msgid "Used <placeholder-1/> instead of RDoc as documentation sysytem."
 msgstr ""
 "ドキュメントシステムとしてRDocの代わりに<placeholder-1/>を使うようにした。"
 
-#: doc/reference/en/file.news.html:124(h2)
+#: doc/reference/en/file.news.html:133(h2)
 msgid "1.2.4: 2011-05-13"
 msgstr ""
 
-#: doc/reference/en/file.news.html:126(li)
+#: doc/reference/en/file.news.html:135(li)
 msgid ""
 "Splited AL-Admin into other repository: https://github.com/activeldap/al-"
 "admin"
 msgstr ""
 
-#: doc/reference/en/file.news.html:127(li)
+#: doc/reference/en/file.news.html:136(li)
 msgid ""
 "[GitHub:#2] Fixed “path po cound not be found” error by fast_gettext. [rbq]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:130(h2)
+#: doc/reference/en/file.news.html:139(h2)
 msgid "1.2.3: 2011-04-30"
 msgstr ""
 
-#: doc/reference/en/file.news.html:132(li)
+#: doc/reference/en/file.news.html:141(li)
 msgid "[#40] Ignored nil value attribute. [christian.pennafort]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:134(li)
+#: doc/reference/en/file.news.html:143(li)
 msgid "[#48] Escaped “:” in filter value. [planetmcd]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:136(li)
+#: doc/reference/en/file.news.html:145(li)
 msgid "Added missing rubygems require. [spoidar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:138(li)
+#: doc/reference/en/file.news.html:147(li)
 msgid "Used fast_gettext instead of gettext. [Peter Fern]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:140(li)
+#: doc/reference/en/file.news.html:149(li)
 msgid "Supported Rails 2.3.11. [Kris Wehner]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:142(li)
+#: doc/reference/en/file.news.html:151(li)
 msgid "Fixed wrong assertion in test. [Ryan Tandy]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:147(li)
+#: doc/reference/en/file.news.html:156(li)
 msgid "christian.pennafort"
 msgstr ""
 
-#: doc/reference/en/file.news.html:148(li)
+#: doc/reference/en/file.news.html:157(li)
 msgid "planetmcd"
 msgstr ""
 
-#: doc/reference/en/file.news.html:149(li)
+#: doc/reference/en/file.news.html:158(li)
 msgid "spoidar"
 msgstr ""
 
-#: doc/reference/en/file.news.html:150(li)
+#: doc/reference/en/file.news.html:159(li)
 msgid "Peter Fern"
 msgstr ""
 
-#: doc/reference/en/file.news.html:151(li)
+#: doc/reference/en/file.news.html:160(li)
 msgid "Kris Wehner"
 msgstr ""
 
-#: doc/reference/en/file.news.html:152(li)
+#: doc/reference/en/file.news.html:161(li)
 msgid "Ryan Tandy"
 msgstr ""
 
-#: doc/reference/en/file.news.html:154(h2)
+#: doc/reference/en/file.news.html:163(h2)
 msgid "1.2.2: 2010-07-04"
 msgstr ""
 
-#: doc/reference/en/file.news.html:156(li)
+#: doc/reference/en/file.news.html:165(li)
 msgid "Supported ActiveRecord 2.3.8 and Rails 2.3.8."
 msgstr ""
 
-#: doc/reference/en/file.news.html:157(li)
+#: doc/reference/en/file.news.html:166(li)
 msgid "[#37] Fixed gem dependencies in Rakefile. [zachwily]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:158(li)
+#: doc/reference/en/file.news.html:167(li)
 msgid ""
 "Fixed a bug that setting ‘false’ but ‘nil’ is returned. [Hideyuki Yasuda]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:159(span)
-#: doc/reference/en/file.news.html:269(span)
-#: doc/reference/en/file.news.html:323(span)
+#: doc/reference/en/file.news.html:168(span)
+#: doc/reference/en/file.news.html:278(span)
+#: doc/reference/en/file.news.html:332(span)
 #: doc/reference/en/class_list.html:48(a)
 #: doc/reference/en/ActiveLdap/Ldif/Parser.html:289(span)
 #: doc/reference/en/ActiveLdap/Ldif/Parser.html:407(span)
@@ -3393,29 +3403,29 @@ msgstr ""
 msgid "LDIF"
 msgstr ""
 
-#: doc/reference/en/file.news.html:159(li)
+#: doc/reference/en/file.news.html:168(li)
 msgid ""
 "Supported non-String attribute value as <placeholder-1/> value. [Matt Mencel]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:160(span)
-#: doc/reference/en/file.news.html:213(span)
-#: doc/reference/en/file.news.html:344(span)
-#: doc/reference/en/file.news.html:364(span)
-#: doc/reference/en/file.news.html:369(span)
-#: doc/reference/en/file.news.html:405(span)
-#: doc/reference/en/file.news.html:407(span)
-#: doc/reference/en/file.news.html:409(span)
-#: doc/reference/en/file.news.html:467(span)
-#: doc/reference/en/file.news.html:488(span)
-#: doc/reference/en/file.news.html:511(span)
-#: doc/reference/en/file.news.html:518(span)
-#: doc/reference/en/file.news.html:526(span)
-#: doc/reference/en/file.news.html:537(span)
-#: doc/reference/en/file.news.html:548(span)
-#: doc/reference/en/file.news.html:561(span)
-#: doc/reference/en/file.news.html:567(span)
-#: doc/reference/en/file.news.html:619(span)
+#: doc/reference/en/file.news.html:169(span)
+#: doc/reference/en/file.news.html:222(span)
+#: doc/reference/en/file.news.html:353(span)
+#: doc/reference/en/file.news.html:373(span)
+#: doc/reference/en/file.news.html:378(span)
+#: doc/reference/en/file.news.html:414(span)
+#: doc/reference/en/file.news.html:416(span)
+#: doc/reference/en/file.news.html:418(span)
+#: doc/reference/en/file.news.html:476(span)
+#: doc/reference/en/file.news.html:497(span)
+#: doc/reference/en/file.news.html:520(span)
+#: doc/reference/en/file.news.html:527(span)
+#: doc/reference/en/file.news.html:535(span)
+#: doc/reference/en/file.news.html:546(span)
+#: doc/reference/en/file.news.html:557(span)
+#: doc/reference/en/file.news.html:570(span)
+#: doc/reference/en/file.news.html:576(span)
+#: doc/reference/en/file.news.html:628(span)
 #: doc/reference/en/top-level-namespace.html:88(a)
 #: doc/reference/en/class_list.html:48(a)
 #: doc/reference/en/class_list.html:48(small)
@@ -3515,15 +3525,15 @@ msgstr ""
 msgid "LDAP"
 msgstr ""
 
-#: doc/reference/en/file.news.html:160(li)
+#: doc/reference/en/file.news.html:169(li)
 msgid ""
 "Worked with a <placeholder-1/> server that uses ‘objectclass’ not "
 "‘objectClass’ as objectClass attribute name. [Tim Hermans]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:162(span)
-#: doc/reference/en/file.news.html:407(span)
-#: doc/reference/en/file.news.html:418(span)
+#: doc/reference/en/file.news.html:171(span)
+#: doc/reference/en/file.news.html:416(span)
+#: doc/reference/en/file.news.html:427(span)
 #: doc/reference/en/index.html:101(span) doc/reference/en/index.html:186(span)
 #: doc/reference/en/file.README.html:101(span)
 #: doc/reference/en/file.README.html:186(span)
@@ -3534,146 +3544,146 @@ msgstr ""
 msgid "SASL"
 msgstr ""
 
-#: doc/reference/en/file.news.html:162(li)
+#: doc/reference/en/file.news.html:171(li)
 msgid ""
 "[#41] Provide <placeholder-1/>-option support, primarily for authzid "
 "[Anthony M. Martinez]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:164(li)
+#: doc/reference/en/file.news.html:173(li)
 msgid "[#43] Error with to_xml [ilusi0n.x]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:165(li)
+#: doc/reference/en/file.news.html:174(li)
 msgid "[#44] Accept ‘0’ and ‘1’ as boolean value [projekttabla]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:166(li)
+#: doc/reference/en/file.news.html:175(li)
 msgid ""
 "[#27429] Fixed inverted validatation by validate_excluded_classes [Marc "
 "Dequènes]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:168(li)
+#: doc/reference/en/file.news.html:177(li)
 msgid ""
 "Supported DN attribute value for assosiation replacement. [Jörg Herzinger]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:171(h2)
+#: doc/reference/en/file.news.html:180(h2)
 msgid "1.2.1: 2009-12-15"
 msgstr ""
 
-#: doc/reference/en/file.news.html:173(li)
+#: doc/reference/en/file.news.html:182(li)
 msgid "Supported ActiveRecord 2.3.5 and Rails 2.3.5."
 msgstr ""
 
-#: doc/reference/en/file.news.html:174(li)
+#: doc/reference/en/file.news.html:183(li)
 msgid "Supported GetText 2.1.0 and Locale 2.0.5."
 msgstr ""
 
-#: doc/reference/en/file.news.html:175(li)
+#: doc/reference/en/file.news.html:184(li)
 msgid "belongs_to(:many) support DN attribute."
 msgstr ""
 
-#: doc/reference/en/file.news.html:176(li)
+#: doc/reference/en/file.news.html:185(li)
 msgid ""
 "[#31] ActiveLdap::Base#attributes returns data that reflects schema "
 "definition. [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:178(li)
+#: doc/reference/en/file.news.html:187(li)
 msgid "blocks DN attribute change by mass assignment with :id =&gt; …."
 msgstr ""
 
-#: doc/reference/en/file.news.html:179(li)
+#: doc/reference/en/file.news.html:188(li)
 msgid "[#35] fix has_many association is broken. [culturespy]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:180(li)
+#: doc/reference/en/file.news.html:189(li)
 msgid "Supported nested attribute options. [Hideyuki Yasuda]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:182(h2)
+#: doc/reference/en/file.news.html:191(h2)
 msgid "1.2.0: 2009-09-22"
 msgstr ""
 
-#: doc/reference/en/file.news.html:184(li)
+#: doc/reference/en/file.news.html:193(li)
 msgid "Supported ActiveRecord 2.3.4 and Rails 2.3.4."
 msgstr ""
 
-#: doc/reference/en/file.news.html:185(span)
+#: doc/reference/en/file.news.html:194(span)
 msgid "IMCOMPATIBLE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:185(li)
+#: doc/reference/en/file.news.html:194(li)
 msgid ""
 "[<placeholder-1/>] [#23932] Inconsistant DN handling in object attributes "
 "[Marc Dequènes] (ActiveLdap::Base#dn and ActiveLdap::Base#base return "
 "ActiveLdap::DN not String)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:189(li)
+#: doc/reference/en/file.news.html:198(li)
 msgid ""
 "[#26824] support operational attributes detection [Marc Dequènes] (added "
 "ActiveLdap::Schema::Attribute#directory_operation?)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:191(li)
+#: doc/reference/en/file.news.html:200(li)
 msgid "[#27] Error saving an ActiveLDAP user [brad@lucky-dip.net]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:192(li)
+#: doc/reference/en/file.news.html:201(li)
 msgid ""
 "[#29] Raised on modify_rdn_entry when rdn already exists [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:193(li)
+#: doc/reference/en/file.news.html:202(li)
 msgid "Added ActiveLdap::DN.parent."
 msgstr ""
 
-#: doc/reference/en/file.news.html:194(span)
+#: doc/reference/en/file.news.html:203(span)
 msgid "DTI"
 msgstr ""
 
-#: doc/reference/en/file.news.html:195(span)
-#: doc/reference/en/file.news.html:330(span)
+#: doc/reference/en/file.news.html:204(span)
+#: doc/reference/en/file.news.html:339(span)
 #: doc/reference/en/file.tutorial.html:98(span)
 msgid "JNDI"
 msgstr ""
 
-#: doc/reference/en/file.news.html:194(li)
+#: doc/reference/en/file.news.html:203(li)
 msgid ""
 "Supported renaming an entry. Renaming other <placeholder-1/> is only "
 "supported by <placeholder-2/> backend."
 msgstr ""
 
-#: doc/reference/en/file.news.html:197(h2)
+#: doc/reference/en/file.news.html:206(h2)
 msgid "1.1.0: 2009-07-18"
 msgstr ""
 
-#: doc/reference/en/file.news.html:199(li)
+#: doc/reference/en/file.news.html:208(li)
 msgid "Improved tutorial. [Kazuaki Takase]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:202(span)
-#: doc/reference/en/file.news.html:243(span)
-#: doc/reference/en/file.news.html:334(span)
-#: doc/reference/en/file.news.html:345(span)
-#: doc/reference/en/file.news.html:369(span)
-#: doc/reference/en/file.news.html:371(span)
-#: doc/reference/en/file.news.html:374(span)
-#: doc/reference/en/file.news.html:419(span)
-#: doc/reference/en/file.news.html:458(span)
-#: doc/reference/en/file.news.html:459(span)
-#: doc/reference/en/file.news.html:469(span)
-#: doc/reference/en/file.news.html:470(span)
-#: doc/reference/en/file.news.html:471(span)
-#: doc/reference/en/file.news.html:473(span)
-#: doc/reference/en/file.news.html:474(span)
-#: doc/reference/en/file.news.html:475(span)
-#: doc/reference/en/file.news.html:476(span)
-#: doc/reference/en/file.news.html:477(span)
-#: doc/reference/en/file.news.html:507(span)
+#: doc/reference/en/file.news.html:211(span)
+#: doc/reference/en/file.news.html:252(span)
+#: doc/reference/en/file.news.html:343(span)
+#: doc/reference/en/file.news.html:354(span)
+#: doc/reference/en/file.news.html:378(span)
+#: doc/reference/en/file.news.html:380(span)
+#: doc/reference/en/file.news.html:383(span)
+#: doc/reference/en/file.news.html:428(span)
+#: doc/reference/en/file.news.html:467(span)
+#: doc/reference/en/file.news.html:468(span)
+#: doc/reference/en/file.news.html:478(span)
+#: doc/reference/en/file.news.html:479(span)
+#: doc/reference/en/file.news.html:480(span)
+#: doc/reference/en/file.news.html:482(span)
+#: doc/reference/en/file.news.html:483(span)
+#: doc/reference/en/file.news.html:484(span)
+#: doc/reference/en/file.news.html:485(span)
+#: doc/reference/en/file.news.html:486(span)
+#: doc/reference/en/file.news.html:516(span)
 #: doc/reference/en/index.html:119(span) doc/reference/en/index.html:136(span)
 #: doc/reference/en/index.html:139(span) doc/reference/en/index.html:149(span)
 #: doc/reference/en/index.html:161(span) doc/reference/en/index.html:162(span)
@@ -3688,36 +3698,36 @@ msgstr ""
 msgid "API"
 msgstr ""
 
-#: doc/reference/en/file.news.html:204(li)
+#: doc/reference/en/file.news.html:213(li)
 msgid "[#26] Supported to_xml for associations. [achemze]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:205(li)
+#: doc/reference/en/file.news.html:214(li)
 msgid ""
 "ActiveLdap::Base.delete_all(filter=nil, options={}) → ActiveLdap::Base."
 "delete_all(filter_or_options={}). Sure, old method signature is also still "
 "supported."
 msgstr ""
 
-#: doc/reference/en/file.news.html:208(li)
+#: doc/reference/en/file.news.html:217(li)
 msgid ""
 "belongs_to(:many) with :foreign_key is deprecated. Use :primary_key instead "
 "of :foreign_key. [Kazuaki Takase]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:210(li)
+#: doc/reference/en/file.news.html:219(li)
 msgid ""
 "Means of has_many’s :primary_key and :foreign_key are inverted. [Kazuaki "
 "Takase]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:212(li)
+#: doc/reference/en/file.news.html:221(li)
 msgid ""
 "[experimental] Added ldap_field ActionView helper to generate form fileds "
 "for a <placeholder-1/> entry."
 msgstr ""
 
-#: doc/reference/en/file.news.html:202(li)
+#: doc/reference/en/file.news.html:211(li)
 msgid ""
 "<placeholder-1/>: <ul><placeholder-2/>\n"
 "\t\t\t<placeholder-3/>\n"
@@ -3726,79 +3736,79 @@ msgid ""
 "\t\t\t<placeholder-6/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:215(li)
+#: doc/reference/en/file.news.html:224(li)
 msgid "Suppressed needless attributes updating."
 msgstr ""
 
-#: doc/reference/en/file.news.html:200(li)
+#: doc/reference/en/file.news.html:209(li)
 msgid ""
 "Improvements: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:219(li)
+#: doc/reference/en/file.news.html:228(li)
 msgid "Re-supported GetText."
 msgstr ""
 
-#: doc/reference/en/file.news.html:220(li)
+#: doc/reference/en/file.news.html:229(li)
 msgid "ActiveRecord 2.3.2 is only supported."
 msgstr ""
 
-#: doc/reference/en/file.news.html:217(li)
+#: doc/reference/en/file.news.html:226(li)
 msgid ""
 "Dependencies: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:223(h2)
+#: doc/reference/en/file.news.html:232(h2)
 msgid "1.0.9"
 msgstr ""
 
-#: doc/reference/en/file.news.html:225(li)
+#: doc/reference/en/file.news.html:234(li)
 msgid "Added documents in Japanese. [Kazuaki Takase]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:228(li)
+#: doc/reference/en/file.news.html:237(li)
 msgid "[#20] [Ruby 1.9 Support] :: Running Tests [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:226(li)
+#: doc/reference/en/file.news.html:235(li)
 msgid "Supported Ruby 1.9.1. <ul><placeholder-1/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:232(li)
+#: doc/reference/en/file.news.html:241(li)
 msgid "[#18] [Rails 2.3 Support] :: Running WEBrick Hangs [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:230(li)
+#: doc/reference/en/file.news.html:239(li)
 msgid "Supported Rails 2.3.2. <ul><placeholder-1/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:236(li)
+#: doc/reference/en/file.news.html:245(li)
 msgid "Fixed blank values detection. [David Morton]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:237(li)
+#: doc/reference/en/file.news.html:246(li)
 msgid "[#22] Ruby 1.8.6 p287 :: Undefined methods [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:238(li)
+#: doc/reference/en/file.news.html:247(li)
 msgid "Fixed gem loading. [Tiago Fernandes]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:239(li)
+#: doc/reference/en/file.news.html:248(li)
 msgid "Fixed DN change via #base=. [David Morton]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:240(li)
+#: doc/reference/en/file.news.html:249(li)
 msgid "Fixed infinite retry on timeout."
 msgstr ""
 
-#: doc/reference/en/file.news.html:241(li)
+#: doc/reference/en/file.news.html:250(li)
 msgid "Fixed needless reconnection."
 msgstr ""
 
-#: doc/reference/en/file.news.html:234(li)
+#: doc/reference/en/file.news.html:243(li)
 msgid ""
 "Bug fixes: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
@@ -3808,68 +3818,68 @@ msgid ""
 "\t\t<placeholder-6/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:245(li)
+#: doc/reference/en/file.news.html:254(li)
 msgid ""
 "Removed needless instance methods: #prefix=, #dn_attribute=, #sort_by=, "
 "#order=, #required_classes=, #recommended_classes= and #excluded_classes. "
 "[David Morton]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:248(li)
+#: doc/reference/en/file.news.html:257(li)
 msgid "Removed obsolete scafoold_al generator."
 msgstr ""
 
-#: doc/reference/en/file.news.html:249(li)
+#: doc/reference/en/file.news.html:258(li)
 msgid "Reduced default :retry_limit."
 msgstr ""
 
-#: doc/reference/en/file.news.html:250(li)
+#: doc/reference/en/file.news.html:259(li)
 msgid "Supported association as parameter. [Joe Francis]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:251(li)
+#: doc/reference/en/file.news.html:260(li)
 msgid "Normalized schema attribute name. [Tim Hermans]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:252(li)
+#: doc/reference/en/file.news.html:261(li)
 msgid ""
 "Suppressed AuthenticationError → ConnectionError conversion on reconnection. "
 "[Kazuaki Takase]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:254(li)
+#: doc/reference/en/file.news.html:263(li)
 msgid "Added ActiveLdap::Schema#dump."
 msgstr ""
 
-#: doc/reference/en/file.news.html:255(li)
+#: doc/reference/en/file.news.html:264(li)
 msgid ""
 "ActiveLdap::Base.establish_connection → ActiveLdap::Base.setup_connection."
 msgstr ""
 
-#: doc/reference/en/file.news.html:257(li)
+#: doc/reference/en/file.news.html:266(li)
 msgid "Supported ActiveLdap::Base.find(:last)."
 msgstr ""
 
-#: doc/reference/en/file.news.html:260(li)
+#: doc/reference/en/file.news.html:269(li)
 msgid "ActiveLdap::Base.first"
 msgstr ""
 
-#: doc/reference/en/file.news.html:261(li)
+#: doc/reference/en/file.news.html:270(li)
 msgid "ActiveLdap::Base.last"
 msgstr ""
 
-#: doc/reference/en/file.news.html:262(li)
+#: doc/reference/en/file.news.html:271(li)
 msgid "ActiveLdap::Base.all"
 msgstr ""
 
-#: doc/reference/en/file.news.html:258(li)
+#: doc/reference/en/file.news.html:267(li)
 msgid ""
 "Added convenient methods: <ul><placeholder-1/>\n"
 "\t\t\t<placeholder-2/>\n"
 "\t\t\t<placeholder-3/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:243(li)
+#: doc/reference/en/file.news.html:252(li)
 msgid ""
 "<placeholder-1/> improvements: <ul><placeholder-2/>\n"
 "\t\t<placeholder-3/>\n"
@@ -3883,28 +3893,28 @@ msgid ""
 "\t\t<placeholder-11/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:266(h2)
+#: doc/reference/en/file.news.html:275(h2)
 msgid "1.0.2"
 msgstr ""
 
-#: doc/reference/en/file.news.html:268(li)
+#: doc/reference/en/file.news.html:277(li)
 msgid "Removed Base64 module use."
 msgstr ""
 
-#: doc/reference/en/file.news.html:269(li)
+#: doc/reference/en/file.news.html:278(li)
 msgid "Improved <placeholder-1/> parser."
 msgstr ""
 
-#: doc/reference/en/file.news.html:270(li)
+#: doc/reference/en/file.news.html:279(li)
 msgid "Improved scheme parser."
 msgstr ""
 
-#: doc/reference/en/file.news.html:271(li)
+#: doc/reference/en/file.news.html:280(li)
 msgid "Supported Base64 in <placeholder-1/> serialization."
 msgstr ""
 
-#: doc/reference/en/file.news.html:272(span)
-#: doc/reference/en/file.news.html:554(span)
+#: doc/reference/en/file.news.html:281(span)
+#: doc/reference/en/file.news.html:563(span)
 #: doc/reference/en/class_list.html:48(a)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:104(a)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/TLS.html:37(span)
@@ -3914,113 +3924,113 @@ msgstr ""
 msgid "TLS"
 msgstr ""
 
-#: doc/reference/en/file.news.html:272(li)
+#: doc/reference/en/file.news.html:281(li)
 msgid "Supported <placeholder-1/> options."
 msgstr ""
 
-#: doc/reference/en/file.news.html:273(li)
+#: doc/reference/en/file.news.html:282(li)
 msgid "Supported ActiveRecord 2.2.2."
 msgstr ""
 
-#: doc/reference/en/file.news.html:274(li)
+#: doc/reference/en/file.news.html:283(li)
 msgid "Supported Ruby on Rails 2.2.2."
 msgstr ""
 
-#: doc/reference/en/file.news.html:275(li)
+#: doc/reference/en/file.news.html:284(li)
 msgid ""
 "Used rails/init.rb and rails_generators/ directory structure convention for "
 "Rails and gem. rails/ directory will be removed after 1.0.2 is released."
 msgstr ""
 
-#: doc/reference/en/file.news.html:277(li)
+#: doc/reference/en/file.news.html:286(li)
 msgid "AL-Admin migrated to Ruby on Rails 2.2.2 form 2.0.2."
 msgstr ""
 
-#: doc/reference/en/file.news.html:278(li)
+#: doc/reference/en/file.news.html:287(li)
 msgid "Improved ActiveDirectory integration."
 msgstr ""
 
-#: doc/reference/en/file.news.html:279(li)
+#: doc/reference/en/file.news.html:288(li)
 msgid "Accepted :class_name for belong_to and has_many option."
 msgstr ""
 
-#: doc/reference/en/file.news.html:280(li)
+#: doc/reference/en/file.news.html:289(li)
 msgid "Improved default port guess."
 msgstr ""
 
-#: doc/reference/en/file.news.html:283(li)
+#: doc/reference/en/file.news.html:292(li)
 msgid "[#4] ModifyRecord#load doesn’t operate atomic. [gwarf12]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:284(li)
+#: doc/reference/en/file.news.html:293(li)
 msgid "[#5] to_xml supports :except option. [baptiste.grenier]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:285(li)
+#: doc/reference/en/file.news.html:294(li)
 msgid "[#6] to_xml uses ActiveResource format. [baptiste.grenier]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:286(li)
+#: doc/reference/en/file.news.html:295(li)
 msgid ""
 "Out of ranged GeneralizedTime uses Time.at(0) as fallback value. [Richard "
 "Nicholas]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:288(span)
+#: doc/reference/en/file.news.html:297(span)
 #: doc/reference/en/index.html:163(span)
 #: doc/reference/en/file.README.html:163(span)
 msgid "NISHIYAMA"
 msgstr ""
 
-#: doc/reference/en/file.news.html:288(li)
+#: doc/reference/en/file.news.html:297(li)
 msgid "ActiveLdap::Base#to_s uses #to_ldif. [Kazuhiro <placeholder-1/>]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:289(li)
+#: doc/reference/en/file.news.html:298(li)
 msgid "Fixed excess prefix extraction. [Grzegorz Marszałek]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:290(li)
+#: doc/reference/en/file.news.html:299(li)
 msgid "Skiped read only attribute validation. [しまさわらさん]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:291(li)
+#: doc/reference/en/file.news.html:300(li)
 msgid "Treated \"\" as empty value. [Ted Lepich]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:292(li)
+#: doc/reference/en/file.news.html:301(li)
 msgid ""
 "[#9][#16] Reduced raising when DN value is invalid. [danger1986][Alexey."
 "Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:294(li)
+#: doc/reference/en/file.news.html:303(li)
 msgid "[#10][#12] Fixed needless ‘,’ is appeared. [michael.j.konopka]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:295(li)
+#: doc/reference/en/file.news.html:304(li)
 msgid "[#11] Required missing ‘active_ldap/user_password’. [michael.j.konopka]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:296(li)
+#: doc/reference/en/file.news.html:305(li)
 msgid ""
 "[#13] Returned entries if has_many :wrap has nonexistent entry. [ingersoll]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:298(li)
+#: doc/reference/en/file.news.html:307(li)
 msgid "[#15] Fixed type error on computing DN. [ery.lee]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:299(li)
+#: doc/reference/en/file.news.html:308(li)
 msgid "“&gt;=” filter operator doesn’t work. [id:dicdak]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:300(li)
+#: doc/reference/en/file.news.html:309(li)
 msgid ""
 "[#17] ActiveLdap::Base.create doesn’t raise exception. [Alexey.Chebotar]"
 msgstr ""
 
-#: doc/reference/en/file.news.html:281(li)
+#: doc/reference/en/file.news.html:290(li)
 msgid ""
 "Bug fixes: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
@@ -4039,46 +4049,46 @@ msgid ""
 "\t\t<placeholder-15/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:303(h2)
+#: doc/reference/en/file.news.html:312(h2)
 msgid "1.0.1"
 msgstr ""
 
-#: doc/reference/en/file.news.html:305(li)
+#: doc/reference/en/file.news.html:314(li)
 msgid "Fixed GetText integration."
 msgstr ""
 
-#: doc/reference/en/file.news.html:306(li)
+#: doc/reference/en/file.news.html:315(li)
 msgid ""
 "Fixed ActiveLdap::Base.find with ActiveLdap::DN. (Reported by Jeremy Pruitt)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:307(li)
+#: doc/reference/en/file.news.html:316(li)
 msgid "Fixed associated bugs. (Reported by CultureSpy)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:308(li)
+#: doc/reference/en/file.news.html:317(li)
 msgid ""
 "Supported ActiveLdap::Base#attribute_present? with nonexistence attribute. "
 "(Reported by Matt Mencel)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:310(li)
+#: doc/reference/en/file.news.html:319(li)
 msgid "Added ActiveLdap::Base#.to_ldif_record."
 msgstr ""
 
-#: doc/reference/en/file.news.html:311(li)
+#: doc/reference/en/file.news.html:320(li)
 msgid "Improved inspect."
 msgstr ""
 
-#: doc/reference/en/file.news.html:312(li)
+#: doc/reference/en/file.news.html:321(li)
 msgid "Supported ActiveSupport 2.1.0."
 msgstr ""
 
-#: doc/reference/en/file.news.html:314(h2)
+#: doc/reference/en/file.news.html:323(h2)
 msgid "1.0.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:316(span)
+#: doc/reference/en/file.news.html:325(span)
 #: doc/reference/en/index.html:101(span)
 #: doc/reference/en/file.README.html:101(span)
 #: doc/reference/en/file.tutorial.html:459(span)
@@ -4087,142 +4097,142 @@ msgstr ""
 msgid "GSSAPI"
 msgstr ""
 
-#: doc/reference/en/file.news.html:316(li)
+#: doc/reference/en/file.news.html:325(li)
 msgid ""
 "Fixed <placeholder-1/> auth failure. [#18764] (Reported by Lennon Day-"
 "Reynolds)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:317(li)
+#: doc/reference/en/file.news.html:326(li)
 msgid "Supported Symbol as :dn_attribute_value. [#18921] (Requested by Nobody)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:318(li)
+#: doc/reference/en/file.news.html:327(li)
 msgid "Improved DN attribute detection. (Reported by Iain Pople)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:319(li)
+#: doc/reference/en/file.news.html:328(li)
 msgid "Avoided unnecesally modify operation. (Reported by Tilo)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:321(h2)
+#: doc/reference/en/file.news.html:330(h2)
 msgid "0.10.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:323(li)
+#: doc/reference/en/file.news.html:332(li)
 msgid "Implemented <placeholder-1/> parser."
 msgstr ""
 
-#: doc/reference/en/file.news.html:326(li)
+#: doc/reference/en/file.news.html:335(li)
 msgid "Added some validations."
 msgstr ""
 
-#: doc/reference/en/file.news.html:327(span)
+#: doc/reference/en/file.news.html:336(span)
 msgid "SINGLE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:327(span)
+#: doc/reference/en/file.news.html:336(span)
 msgid "VALUE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:327(li)
+#: doc/reference/en/file.news.html:336(li)
 msgid ""
 "Fixed <placeholder-1/>-<placeholder-2/> validation. [#17763] (Reported by "
 "Naoto Morishima)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:324(li)
+#: doc/reference/en/file.news.html:333(li)
 msgid ""
 "Improved validation: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:330(li)
+#: doc/reference/en/file.news.html:339(li)
 msgid "Supported <placeholder-1/> as backend."
 msgstr ""
 
-#: doc/reference/en/file.news.html:331(li)
+#: doc/reference/en/file.news.html:340(li)
 msgid "Improved auto reconnection."
 msgstr ""
 
-#: doc/reference/en/file.news.html:332(li)
+#: doc/reference/en/file.news.html:341(li)
 msgid "Supported Rails 2.0.2."
 msgstr ""
 
-#: doc/reference/en/file.news.html:333(li)
+#: doc/reference/en/file.news.html:342(li)
 msgid "Improved performance. (4x)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:334(span)
-#: doc/reference/en/file.news.html:369(span)
-#: doc/reference/en/file.news.html:371(span)
-#: doc/reference/en/file.news.html:374(span)
-#: doc/reference/en/file.news.html:469(span)
-#: doc/reference/en/file.news.html:470(span)
-#: doc/reference/en/file.news.html:471(span)
+#: doc/reference/en/file.news.html:343(span)
+#: doc/reference/en/file.news.html:378(span)
+#: doc/reference/en/file.news.html:380(span)
+#: doc/reference/en/file.news.html:383(span)
+#: doc/reference/en/file.news.html:478(span)
+#: doc/reference/en/file.news.html:479(span)
+#: doc/reference/en/file.news.html:480(span)
 msgid "CHANGE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:334(li)
+#: doc/reference/en/file.news.html:343(li)
 msgid ""
 "[<placeholder-1/> <placeholder-2/>]: removed “‘binary’ =&gt;” from getter "
 "result."
 msgstr ""
 
-#: doc/reference/en/file.news.html:336(code)
+#: doc/reference/en/file.news.html:345(code)
 msgid ""
 "e.g.: before: user.user_certificate # =&gt; {\"binary\" =&gt; “…”} now: user."
 "user_certificate # =&gt; “…”"
 msgstr ""
 
-#: doc/reference/en/file.news.html:343(li)
+#: doc/reference/en/file.news.html:352(li)
 msgid "Added :excluded_classed ldap_mapping option."
 msgstr ""
 
-#: doc/reference/en/file.news.html:344(li)
+#: doc/reference/en/file.news.html:353(li)
 msgid "Logged operation time used for <placeholder-1/> operation."
 msgstr ""
 
-#: doc/reference/en/file.news.html:347(span)
-#: doc/reference/en/file.news.html:349(span)
+#: doc/reference/en/file.news.html:356(span)
+#: doc/reference/en/file.news.html:358(span)
 msgid "XXX"
 msgstr ""
 
-#: doc/reference/en/file.news.html:347(li)
+#: doc/reference/en/file.news.html:356(li)
 msgid ""
 "Accepted non String value for find(:value =&gt; <placeholder-1/>). "
 "(Suggested by Marc Dequèn)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:349(li)
+#: doc/reference/en/file.news.html:358(li)
 msgid ""
 "Accepted DN as ActiveLdap::Base.new(<placeholder-1/>). (Reported by Jeremy "
 "Pruitt)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:351(li)
+#: doc/reference/en/file.news.html:360(li)
 msgid ""
 "Treated empty password for smiple bind as anonymous bind. (Suggested by "
 "Bodaniel Jeans)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:353(li)
+#: doc/reference/en/file.news.html:362(li)
 msgid ""
 "Ensured adding “objectClass” for find’s :attribute value. [#16946] "
 "(Suggested by Nobody)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:355(li)
+#: doc/reference/en/file.news.html:364(li)
 msgid "Fixed a GeneralizedTime type casting bug. (Reported by Bodaniel Jeanes)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:357(li)
+#: doc/reference/en/file.news.html:366(li)
 msgid ""
 "Supported :base and :prefix search/find option value escaping. (Suggested by "
 "David Morton)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:345(li)
+#: doc/reference/en/file.news.html:354(li)
 msgid ""
 "Improved <placeholder-1/>: <ul><placeholder-2/>\n"
 "\t\t<placeholder-3/>\n"
@@ -4232,84 +4242,84 @@ msgid ""
 "\t\t<placeholder-7/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:361(h2)
+#: doc/reference/en/file.news.html:370(h2)
 msgid "0.9.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:363(li)
+#: doc/reference/en/file.news.html:372(li)
 msgid "Improved DN handling."
 msgstr ""
 
-#: doc/reference/en/file.news.html:364(li)
+#: doc/reference/en/file.news.html:373(li)
 msgid "Supported attribute value validation by <placeholder-1/> schema."
 msgstr ""
 
-#: doc/reference/en/file.news.html:365(li)
+#: doc/reference/en/file.news.html:374(li)
 msgid "Changed RubyGems name: ruby-activeldap → activeldap."
 msgstr ""
 
-#: doc/reference/en/file.news.html:366(li)
+#: doc/reference/en/file.news.html:375(li)
 msgid "Removed Log4r dependency."
 msgstr ""
 
-#: doc/reference/en/file.news.html:369(li)
+#: doc/reference/en/file.news.html:378(li)
 msgid ""
 "[<placeholder-1/> <placeholder-2/>]: establish_connection doesn’t connect "
 "<placeholder-3/> server."
 msgstr ""
 
-#: doc/reference/en/file.news.html:367(li)
+#: doc/reference/en/file.news.html:376(li)
 msgid "Supported lazy connection establishing. <ul><placeholder-1/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:371(li)
+#: doc/reference/en/file.news.html:380(li)
 msgid ""
 "[<placeholder-1/> <placeholder-2/>]: Removed ActiveLdap::"
 "Base#establish_connection."
 msgstr ""
 
-#: doc/reference/en/file.news.html:372(li)
+#: doc/reference/en/file.news.html:381(li)
 msgid ""
 "Added ActiveLdap::Base#bind. (use this instead of #establish_connection)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:373(li)
+#: doc/reference/en/file.news.html:382(li)
 msgid "Supported implicit acts_as_tree."
 msgstr ""
 
-#: doc/reference/en/file.news.html:374(li)
+#: doc/reference/en/file.news.html:383(li)
 msgid "[<placeholder-1/> <placeholder-2/>]: Supported type casting."
 msgstr ""
 
-#: doc/reference/en/file.news.html:375(li)
+#: doc/reference/en/file.news.html:384(li)
 msgid "Supported :uri option in configuration."
 msgstr ""
 
-#: doc/reference/en/file.news.html:378(li)
+#: doc/reference/en/file.news.html:387(li)
 msgid "Followed Rails 2.0 changes."
 msgstr ""
 
-#: doc/reference/en/file.news.html:381(span)
+#: doc/reference/en/file.news.html:390(span)
 msgid "URL"
 msgstr ""
 
-#: doc/reference/en/file.news.html:381(li)
+#: doc/reference/en/file.news.html:390(li)
 msgid "Supported lang parameter in <placeholder-1/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:382(li)
+#: doc/reference/en/file.news.html:391(li)
 msgid "Improved design a bit. (Please someone help us!)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:383(li)
+#: doc/reference/en/file.news.html:392(li)
 msgid "Supported schema inspection."
 msgstr ""
 
-#: doc/reference/en/file.news.html:384(li)
+#: doc/reference/en/file.news.html:393(li)
 msgid "Supported objectClass modifiation."
 msgstr ""
 
-#: doc/reference/en/file.news.html:379(li)
+#: doc/reference/en/file.news.html:388(li)
 msgid ""
 "AL-Admin: <ul><placeholder-1/>\n"
 "\t\t\t<placeholder-2/>\n"
@@ -4317,120 +4327,120 @@ msgid ""
 "\t\t\t<placeholder-4/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:388(span)
+#: doc/reference/en/file.news.html:397(span)
 #: doc/reference/en/ActiveLdap/Command.html:242(span)
 #: doc/reference/en/LDAP/Mod.html:252(span)
 msgid "VERSION"
 msgstr ""
 
-#: doc/reference/en/file.news.html:388(li)
+#: doc/reference/en/file.news.html:397(li)
 msgid "Added ActiveLdap::<placeholder-1/> check."
 msgstr ""
 
-#: doc/reference/en/file.news.html:389(li)
+#: doc/reference/en/file.news.html:398(li)
 msgid "Added model_active_ldap generator."
 msgstr ""
 
-#: doc/reference/en/file.news.html:390(li)
+#: doc/reference/en/file.news.html:399(li)
 msgid "Renamed scaffold_al generator to scaffold_active_ldap."
 msgstr ""
 
-#: doc/reference/en/file.news.html:386(li)
+#: doc/reference/en/file.news.html:395(li)
 msgid ""
 "Rails plugin: <ul><placeholder-1/>\n"
 "\t\t\t<placeholder-2/>\n"
 "\t\t\t<placeholder-3/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:376(li)
+#: doc/reference/en/file.news.html:385(li)
 msgid ""
 "Improved Rails integration: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
 "\t\t<placeholder-3/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:394(h2)
+#: doc/reference/en/file.news.html:403(h2)
 msgid "0.8.3"
 msgstr ""
 
-#: doc/reference/en/file.news.html:396(li)
+#: doc/reference/en/file.news.html:405(li)
 msgid "Added AL-Admin Sample Rails app"
 msgstr ""
 
-#: doc/reference/en/file.news.html:397(li)
+#: doc/reference/en/file.news.html:406(li)
 msgid "Added Ruby-GetText-Package support"
 msgstr ""
 
-#: doc/reference/en/file.news.html:398(li)
+#: doc/reference/en/file.news.html:407(li)
 msgid "Added a Rails plugin"
 msgstr ""
 
-#: doc/reference/en/file.news.html:399(li)
+#: doc/reference/en/file.news.html:408(li)
 msgid "Improved schema handling"
 msgstr ""
 
-#: doc/reference/en/file.news.html:400(li)
+#: doc/reference/en/file.news.html:409(li)
 msgid "Improved performance"
 msgstr ""
 
-#: doc/reference/en/file.news.html:401(li)
+#: doc/reference/en/file.news.html:410(li)
 msgid "Many bug fixes"
 msgstr ""
 
-#: doc/reference/en/file.news.html:403(h2)
+#: doc/reference/en/file.news.html:412(h2)
 msgid "0.8.2"
 msgstr ""
 
-#: doc/reference/en/file.news.html:407(li)
+#: doc/reference/en/file.news.html:416(li)
 msgid ""
 "supported <placeholder-1/> Digest-MD5 authentication with Net::"
 "<placeholder-2/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:405(li)
+#: doc/reference/en/file.news.html:414(li)
 msgid "Added Net::<placeholder-1/> support! <ul><placeholder-2/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:411(li)
+#: doc/reference/en/file.news.html:420(li)
 msgid "improved Sun DS support."
 msgstr ""
 
-#: doc/reference/en/file.news.html:412(li)
+#: doc/reference/en/file.news.html:421(li)
 msgid "improved ActiveDirectory support. Thanks to Ernie Miller!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:413(li)
+#: doc/reference/en/file.news.html:422(li)
 msgid "improved Fedora-DS support. Thanks to Daniel Pfile!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:409(li)
+#: doc/reference/en/file.news.html:418(li)
 msgid ""
 "improved <placeholder-1/> server support: <ul><placeholder-2/>\n"
 "\t\t<placeholder-3/>\n"
 "\t\t<placeholder-4/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:417(li)
+#: doc/reference/en/file.news.html:426(li)
 msgid "improved DN handling. Thanks to James Hughes!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:418(li)
+#: doc/reference/en/file.news.html:427(li)
 msgid "improved <placeholder-1/> bind."
 msgstr ""
 
-#: doc/reference/en/file.news.html:419(li)
+#: doc/reference/en/file.news.html:428(li)
 msgid "improved old <placeholder-1/> check."
 msgstr ""
 
-#: doc/reference/en/file.news.html:420(li)
+#: doc/reference/en/file.news.html:429(li)
 msgid "improved schema handling. Thanks to Christoph Lipp!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:421(li)
+#: doc/reference/en/file.news.html:430(li)
 msgid "improved filter notification."
 msgstr ""
 
-#: doc/reference/en/file.news.html:415(li)
+#: doc/reference/en/file.news.html:424(li)
 msgid ""
 "improved existing functions: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
@@ -4439,43 +4449,43 @@ msgid ""
 "\t\t<placeholder-5/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:425(li)
+#: doc/reference/en/file.news.html:434(li)
 msgid "updated Rails realted documenation. Thanks to James Hughes!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:426(li)
+#: doc/reference/en/file.news.html:435(li)
 msgid ""
 "updated documentation for the changes between 0.7.1 and 0.8.0. Thanks to "
 "Buzz Chopra!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:423(li)
+#: doc/reference/en/file.news.html:432(li)
 msgid ""
 "updated documents: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:431(li)
+#: doc/reference/en/file.news.html:440(li)
 msgid "added scaffold_al generator for Rails."
 msgstr ""
 
-#: doc/reference/en/file.news.html:432(li)
+#: doc/reference/en/file.news.html:441(li)
 msgid "added required_classes to default filter value. Thanks to Jeff Hall!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:433(li)
+#: doc/reference/en/file.news.html:442(li)
 msgid "added :recommended_classes option to ldap_mapping."
 msgstr ""
 
-#: doc/reference/en/file.news.html:434(li)
+#: doc/reference/en/file.news.html:443(li)
 msgid "added :sort_by and :order options to find."
 msgstr ""
 
-#: doc/reference/en/file.news.html:435(li)
+#: doc/reference/en/file.news.html:444(li)
 msgid "added ActiveLdap::Base#to_param for ActionController."
 msgstr ""
 
-#: doc/reference/en/file.news.html:429(li)
+#: doc/reference/en/file.news.html:438(li)
 msgid ""
 "added new features: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
@@ -4484,286 +4494,286 @@ msgid ""
 "\t\t<placeholder-5/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:439(li)
+#: doc/reference/en/file.news.html:448(li)
 msgid "fixed rake install/uninstall."
 msgstr ""
 
-#: doc/reference/en/file.news.html:440(li)
+#: doc/reference/en/file.news.html:449(li)
 msgid "fixed typos. Thanks to Nobody!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:441(li)
+#: doc/reference/en/file.news.html:450(li)
 msgid "fixed required_classes initialization. Thanks to James Hughes!"
 msgstr ""
 
-#: doc/reference/en/file.news.html:437(li)
+#: doc/reference/en/file.news.html:446(li)
 msgid ""
 "fixed some bugs: <ul><placeholder-1/>\n"
 "\t\t<placeholder-2/>\n"
 "\t\t<placeholder-3/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:444(h2)
+#: doc/reference/en/file.news.html:453(h2)
 msgid "0.8.1"
 msgstr ""
 
-#: doc/reference/en/file.news.html:446(li)
+#: doc/reference/en/file.news.html:455(li)
 msgid "used Dependencies.load_paths."
 msgstr ""
 
-#: doc/reference/en/file.news.html:447(li)
+#: doc/reference/en/file.news.html:456(li)
 msgid "check whether attribute name is available or not."
 msgstr ""
 
-#: doc/reference/en/file.news.html:448(li)
+#: doc/reference/en/file.news.html:457(li)
 msgid ""
 "added test for find(:first, :attribute =&gt; ‘xxx’, :value =&gt; ‘yyy’)."
 msgstr ""
 
-#: doc/reference/en/file.news.html:449(li)
+#: doc/reference/en/file.news.html:458(li)
 msgid "supported ActiveSupport 1.4.0."
 msgstr ""
 
-#: doc/reference/en/file.news.html:450(span)
+#: doc/reference/en/file.news.html:459(span)
 #: doc/reference/en/file_list.html:49(a) doc/reference/en/_index.html:67(a)
 msgid "README"
 msgstr ""
 
-#: doc/reference/en/file.news.html:450(li)
+#: doc/reference/en/file.news.html:459(li)
 msgid ""
 "make the dual licensing of ruby-activeldap clear in the <placeholder-1/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:451(li)
+#: doc/reference/en/file.news.html:460(li)
 msgid "followed edge Rails: don’t use Reloadable::Subclasses if doesn’t need."
 msgstr ""
 
-#: doc/reference/en/file.news.html:452(li)
+#: doc/reference/en/file.news.html:461(li)
 msgid "added examples/."
 msgstr ""
 
-#: doc/reference/en/file.news.html:453(li)
+#: doc/reference/en/file.news.html:462(li)
 msgid "removed debug code."
 msgstr ""
 
-#: doc/reference/en/file.news.html:454(span)
+#: doc/reference/en/file.news.html:463(span)
 msgid "MUST"
 msgstr ""
 
-#: doc/reference/en/file.news.html:454(span)
+#: doc/reference/en/file.news.html:463(span)
 msgid "MAY"
 msgstr ""
 
-#: doc/reference/en/file.news.html:454(li)
+#: doc/reference/en/file.news.html:463(li)
 msgid ""
 "normalized attribute name to support wrong attribute names in <placeholder-1/"
 ">/<placeholder-2/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:455(li)
+#: doc/reference/en/file.news.html:464(li)
 msgid "supported getting dn value by Base#[]."
 msgstr ""
 
-#: doc/reference/en/file.news.html:456(li)
+#: doc/reference/en/file.news.html:465(li)
 msgid "test/test_userls.rb: followed userls changes."
 msgstr ""
 
-#: doc/reference/en/file.news.html:457(li)
+#: doc/reference/en/file.news.html:466(li)
 msgid "update the doc href."
 msgstr ""
 
-#: doc/reference/en/file.news.html:458(li)
+#: doc/reference/en/file.news.html:467(li)
 msgid ""
 "provide a dumb example of how to use the old association(return_objects) "
 "style <placeholder-1/> with the new awesome <placeholder-2/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:459(li)
+#: doc/reference/en/file.news.html:468(li)
 msgid "followed new <placeholder-1/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:460(li)
+#: doc/reference/en/file.news.html:469(li)
 msgid "removed a finished task: support Reloadable::Subclasses."
 msgstr ""
 
-#: doc/reference/en/file.news.html:462(h2)
+#: doc/reference/en/file.news.html:471(h2)
 msgid "0.8.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:464(li)
+#: doc/reference/en/file.news.html:473(li)
 msgid "Makefile/gemspec system replaced with Rakefile + Hoe"
 msgstr ""
 
-#: doc/reference/en/file.news.html:465(li)
+#: doc/reference/en/file.news.html:474(li)
 msgid "Bugfix: Allow base to be empty"
 msgstr ""
 
-#: doc/reference/en/file.news.html:466(li)
+#: doc/reference/en/file.news.html:475(li)
 msgid ""
 "Add support for Date, DateTime, and Time objects (patch from Patrick Cole)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:467(li)
+#: doc/reference/en/file.news.html:476(li)
 msgid ""
 "Add support for a :filter argument to override the default attr=val "
 "<placeholder-1/> search filter in find_all() and find() (patch from Patrick "
 "Cole)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:468(li)
+#: doc/reference/en/file.news.html:477(li)
 msgid ""
 "Add Base#update_attributes(hash) method which does bulk updates to "
 "attributes (patch from Patrick Cole) and saves immediately"
 msgstr ""
 
-#: doc/reference/en/file.news.html:469(li)
+#: doc/reference/en/file.news.html:478(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: #attributes now returns a Hash of "
 "attribute_name =&gt; clone(attribute_val)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:470(li)
+#: doc/reference/en/file.news.html:479(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: #attribute_names now returns an "
 "alphabetically sorted list of attribute names"
 msgstr ""
 
-#: doc/reference/en/file.news.html:471(li)
+#: doc/reference/en/file.news.html:480(li)
 msgid "<placeholder-1/> <placeholder-2/>;"
 msgstr ""
 
-#: doc/reference/en/file.news.html:472(li)
+#: doc/reference/en/file.news.html:481(li)
 msgid ""
 "Added attributes=() as the implementation for update_attributes(hash) "
 "(without autosave)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:473(span)
-#: doc/reference/en/file.news.html:474(span)
-#: doc/reference/en/file.news.html:475(span)
-#: doc/reference/en/file.news.html:476(span)
-#: doc/reference/en/file.news.html:477(span)
+#: doc/reference/en/file.news.html:482(span)
+#: doc/reference/en/file.news.html:483(span)
+#: doc/reference/en/file.news.html:484(span)
+#: doc/reference/en/file.news.html:485(span)
+#: doc/reference/en/file.news.html:486(span)
 msgid "TRANSITION"
 msgstr ""
 
-#: doc/reference/en/file.news.html:473(li)
+#: doc/reference/en/file.news.html:482(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: Base#write is now deprecated. Please use "
 "Base#save"
 msgstr ""
 
-#: doc/reference/en/file.news.html:474(li)
+#: doc/reference/en/file.news.html:483(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: Added SaveError exception (which is a "
 "subclass of WriteError for now)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:475(li)
+#: doc/reference/en/file.news.html:484(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: Base.connect() is now deprecated. Please "
 "use Base.establish_connection()"
 msgstr ""
 
-#: doc/reference/en/file.news.html:476(li)
+#: doc/reference/en/file.news.html:485(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: Base.close() is now deprecated. Please "
 "use Base.remove_connection()"
 msgstr ""
 
-#: doc/reference/en/file.news.html:477(li)
+#: doc/reference/en/file.news.html:486(li)
 msgid ""
 "<placeholder-1/> <placeholder-2/>: :bind_format and :user of Base."
 "establish_connection() are now deprecated. Please use :bind_dn"
 msgstr ""
 
-#: doc/reference/en/file.news.html:478(li)
+#: doc/reference/en/file.news.html:487(li)
 msgid ""
 "Added update_attribute(name, value) to update one attribute and save "
 "immediately"
 msgstr ""
 
-#: doc/reference/en/file.news.html:479(li)
+#: doc/reference/en/file.news.html:488(li)
 msgid "#delete → #destroy"
 msgstr ""
 
-#: doc/reference/en/file.news.html:480(li)
+#: doc/reference/en/file.news.html:489(li)
 msgid "Base.destroy_all"
 msgstr ""
 
-#: doc/reference/en/file.news.html:481(li)
+#: doc/reference/en/file.news.html:490(li)
 msgid "Base.delete(id) &amp; Base.delete_all(filter)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:482(li)
+#: doc/reference/en/file.news.html:491(li)
 msgid "add Base.exists?(dnattr_val)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:483(li)
+#: doc/reference/en/file.news.html:492(li)
 msgid "attr_protected"
 msgstr ""
 
-#: doc/reference/en/file.news.html:484(li)
+#: doc/reference/en/file.news.html:493(li)
 msgid ""
 "Base.update(dnattr_val, attributes_hash) – instantiate, update, save, return"
 msgstr ""
 
-#: doc/reference/en/file.news.html:485(li)
+#: doc/reference/en/file.news.html:494(li)
 msgid "Base.update_all(updates_hash, filter)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:486(li)
+#: doc/reference/en/file.news.html:495(li)
 msgid "attribute_present?(attribute) – if not empty/nil"
 msgstr ""
 
-#: doc/reference/en/file.news.html:487(li)
+#: doc/reference/en/file.news.html:496(li)
 msgid "has_attribute?(attr_name) – if in hash"
 msgstr ""
 
-#: doc/reference/en/file.news.html:488(li)
+#: doc/reference/en/file.news.html:497(li)
 msgid "reload() (refetch from <placeholder-1/>)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:489(li)
+#: doc/reference/en/file.news.html:498(li)
 msgid "make save() return false on fail"
 msgstr ""
 
-#: doc/reference/en/file.news.html:490(li)
+#: doc/reference/en/file.news.html:499(li)
 msgid "make save!() raise EntryNotSaved exception"
 msgstr ""
 
-#: doc/reference/en/file.news.html:491(li)
+#: doc/reference/en/file.news.html:500(li)
 msgid "to_xml()"
 msgstr ""
 
-#: doc/reference/en/file.news.html:494(li)
+#: doc/reference/en/file.news.html:503(li)
 msgid "make @@active_connections and name them by"
 msgstr ""
 
-#: doc/reference/en/file.news.html:492(li)
+#: doc/reference/en/file.news.html:501(li)
 msgid "clear_active_connections!() — Conn per class <ul><placeholder-1/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:496(li)
+#: doc/reference/en/file.news.html:505(li)
 msgid "base_class() (just return the ancestor)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:499(li)
+#: doc/reference/en/file.news.html:508(li)
 msgid "add_objectclass"
 msgstr ""
 
-#: doc/reference/en/file.news.html:500(li)
+#: doc/reference/en/file.news.html:509(li)
 msgid "remove_objectclass"
 msgstr ""
 
-#: doc/reference/en/file.news.html:501(li)
+#: doc/reference/en/file.news.html:510(li)
 msgid "replace_objectclass"
 msgstr ""
 
-#: doc/reference/en/file.news.html:502(li)
+#: doc/reference/en/file.news.html:511(li)
 msgid "disallow direct objectclass access?"
 msgstr ""
 
-#: doc/reference/en/file.news.html:497(li)
+#: doc/reference/en/file.news.html:506(li)
 msgid ""
 "Separate ObjectClass changes to live in ActiveLDAP::ObjectClass "
 "<ul><placeholder-1/>\n"
@@ -4772,200 +4782,200 @@ msgid ""
 "\t\t<placeholder-4/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:504(li)
+#: doc/reference/en/file.news.html:513(li)
 msgid "support ActiveRecord::Validations."
 msgstr ""
 
-#: doc/reference/en/file.news.html:505(li)
+#: doc/reference/en/file.news.html:514(li)
 msgid "support ActiveRecord::Callbacks."
 msgstr ""
 
-#: doc/reference/en/file.news.html:506(li)
+#: doc/reference/en/file.news.html:515(li)
 msgid ""
 "rename to ActiveLdap from ActiveLDAP to integrate RoR easily and enforce "
 "many <placeholder-1/> changes."
 msgstr ""
 
-#: doc/reference/en/file.news.html:509(h2)
+#: doc/reference/en/file.news.html:518(h2)
 msgid "0.7.4"
 msgstr ""
 
-#: doc/reference/en/file.news.html:511(li)
+#: doc/reference/en/file.news.html:520(li)
 msgid ""
 "Bugfix: do not base <placeholder-1/>::PrettyError on RuntimeError due to "
 "rescue evaluation."
 msgstr ""
 
-#: doc/reference/en/file.news.html:512(li)
+#: doc/reference/en/file.news.html:521(li)
 msgid "Bugfix: :return_objects was overriding :objects in find and find_all"
 msgstr ""
 
-#: doc/reference/en/file.news.html:513(li)
+#: doc/reference/en/file.news.html:522(li)
 msgid "Rollup exception code into smaller space reusing similar code."
 msgstr ""
 
-#: doc/reference/en/file.news.html:515(h2)
+#: doc/reference/en/file.news.html:524(h2)
 msgid "0.7.3"
 msgstr ""
 
-#: doc/reference/en/file.news.html:517(li)
+#: doc/reference/en/file.news.html:526(li)
 msgid "Made has_many and belongs_to use :return_objects value"
 msgstr ""
 
-#: doc/reference/en/file.news.html:518(li)
+#: doc/reference/en/file.news.html:527(li)
 msgid ""
 "Force generation of <placeholder-1/> constants on import – currently broken"
 msgstr ""
 
-#: doc/reference/en/file.news.html:520(h2)
+#: doc/reference/en/file.news.html:529(h2)
 msgid "0.7.2"
 msgstr ""
 
-#: doc/reference/en/file.news.html:522(li)
+#: doc/reference/en/file.news.html:531(li)
 msgid "Stopped overriding Conn.schema in ldap/schema – now use schema2"
 msgstr ""
 
-#: doc/reference/en/file.news.html:523(li)
+#: doc/reference/en/file.news.html:532(li)
 msgid ""
 "Fix attributes being deleted when changing between objectclasses with shared "
 "attributes"
 msgstr ""
 
-#: doc/reference/en/file.news.html:524(li)
+#: doc/reference/en/file.news.html:533(li)
 msgid "Added schema attribute case insensitivity"
 msgstr ""
 
-#: doc/reference/en/file.news.html:525(li)
+#: doc/reference/en/file.news.html:534(li)
 msgid "Added case insensitivity to the attribute methods."
 msgstr ""
 
-#: doc/reference/en/file.news.html:526(li)
+#: doc/reference/en/file.news.html:535(li)
 msgid ""
 "Added <placeholder-1/> scope override support to ldap_mapping via :scope "
 "argument. (ldap_mapping :scope =&gt; <placeholder-2/>::LDAP_SCOPE_SUBTREE, …)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:527(li)
+#: doc/reference/en/file.news.html:536(li)
 msgid ""
 "Fixed the bug where Klass.find() return nil (default arg for find/find_all "
 "now ‘*’)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:528(li)
+#: doc/reference/en/file.news.html:537(li)
 msgid ""
 "Added :return_objects to Base.connect()/configuration.rb — When true, sets "
 "the default behavior in Base.find/find_all to return objects instead of just "
 "the dnattr string."
 msgstr ""
 
-#: doc/reference/en/file.news.html:529(li)
+#: doc/reference/en/file.news.html:538(li)
 msgid "Hid away several exposed private class methods (do_bind, etc)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:530(li)
+#: doc/reference/en/file.news.html:539(li)
 msgid "Undefined dnattr for a class now raises a ConfigurationError"
 msgstr ""
 
-#: doc/reference/en/file.news.html:531(li)
+#: doc/reference/en/file.news.html:540(li)
 msgid "Centralized all connection management code where possible"
 msgstr ""
 
-#: doc/reference/en/file.news.html:532(li)
+#: doc/reference/en/file.news.html:541(li)
 msgid ""
 "Added Base.can_reconnect? which returns true if never connected or below "
 "the :retries limit"
 msgstr ""
 
-#: doc/reference/en/file.news.html:533(li)
+#: doc/reference/en/file.news.html:542(li)
 msgid ""
 "Added block support to Base.connection to ensure “safe” connection usage. "
 "This is not just for internal library use. If you need to do something fancy "
 "with the connection object, use Base.connection do |conn| …"
 msgstr ""
 
-#: doc/reference/en/file.news.html:534(li)
+#: doc/reference/en/file.news.html:543(li)
 msgid "Fixed object instantiation in Base#initialize when using full DNs"
 msgstr ""
 
-#: doc/reference/en/file.news.html:535(li)
+#: doc/reference/en/file.news.html:544(li)
 msgid ""
 "Added :parent_class option to ldap_mapping which allows for object.parent() "
 "to return an instantiated object using the parent DN. (ldap_mapping :"
 "parent_class =&gt; String, …)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:536(li)
+#: doc/reference/en/file.news.html:545(li)
 msgid ""
 "Fixed reconnect bug in Base#initialize (didn’t respect infinite retries)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:537(li)
+#: doc/reference/en/file.news.html:546(li)
 msgid ""
 "Added(*) :timeout argument to allow timeouts on hanging <placeholder-1/> "
 "connections"
 msgstr ""
 
-#: doc/reference/en/file.news.html:538(li)
+#: doc/reference/en/file.news.html:547(li)
 msgid ""
 "Added(*) :retry_on_timeout boolean option to allow disabling retries on "
 "timeouts"
 msgstr ""
 
-#: doc/reference/en/file.news.html:539(li)
+#: doc/reference/en/file.news.html:548(li)
 msgid "Added TimeoutError"
 msgstr ""
 
-#: doc/reference/en/file.news.html:540(span)
+#: doc/reference/en/file.news.html:549(span)
 msgid "SIGALRM"
 msgstr ""
 
-#: doc/reference/en/file.news.html:540(li)
+#: doc/reference/en/file.news.html:549(li)
 msgid ""
 "Added(*) a forking timeout using <placeholder-1/> to interrupt handling."
 msgstr ""
 
-#: doc/reference/en/file.news.html:541(li)
+#: doc/reference/en/file.news.html:550(li)
 msgid "(*) Only works when RUBY_PLATFORM has “linux” in it"
 msgstr ""
 
-#: doc/reference/en/file.news.html:543(h2)
+#: doc/reference/en/file.news.html:552(h2)
 msgid "0.7.1"
 msgstr ""
 
-#: doc/reference/en/file.news.html:545(li)
+#: doc/reference/en/file.news.html:554(li)
 msgid "Fix broken -W0 arg in activeldap.rb"
 msgstr ""
 
-#: doc/reference/en/file.news.html:546(li)
+#: doc/reference/en/file.news.html:555(li)
 msgid "attribute_method=: ’’ and nil converted to ldap-pleasing [] values"
 msgstr ""
 
-#: doc/reference/en/file.news.html:547(li)
+#: doc/reference/en/file.news.html:556(li)
 msgid "Added checks in write and search for connection down (to reconnect)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:548(li)
+#: doc/reference/en/file.news.html:557(li)
 msgid ""
 "Fixed broken idea of <placeholder-1/>::err2string exceptions. Instead took "
 "errcodes from ldap.c in Ruby/<placeholder-2/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:550(h2)
+#: doc/reference/en/file.news.html:559(h2)
 msgid "0.7.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:552(li)
+#: doc/reference/en/file.news.html:561(li)
 msgid ""
 "ConnectionError thrown from #initialize when there is no connection and "
 "retry limit was exceeded"
 msgstr ""
 
-#: doc/reference/en/file.news.html:553(li)
+#: doc/reference/en/file.news.html:562(li)
 msgid ""
 "ConnectionError thrown when retries exceeded when no connection was created"
 msgstr ""
 
-#: doc/reference/en/file.news.html:554(span)
+#: doc/reference/en/file.news.html:563(span)
 #: doc/reference/en/class_list.html:48(a)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/Base.html:104(a)
 #: doc/reference/en/ActiveLdap/Adapter/Ldap/Method/SSL.html:37(span)
@@ -4974,265 +4984,265 @@ msgstr ""
 msgid "SSL"
 msgstr ""
 
-#: doc/reference/en/file.news.html:554(li)
+#: doc/reference/en/file.news.html:563(li)
 msgid ""
 "Separated connection types: <placeholder-1/>, <placeholder-2/>, and plain "
 "using :method"
 msgstr ""
 
-#: doc/reference/en/file.news.html:555(li)
+#: doc/reference/en/file.news.html:564(li)
 msgid "Localized reconnect logic into Base.reconnect(force=false)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:556(span)
+#: doc/reference/en/file.news.html:565(span)
 msgid "SIMPLE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:556(li)
+#: doc/reference/en/file.news.html:565(li)
 msgid ""
 "Fixed password_block evaluation bug in do_bind() which broke <placeholder-1/"
 "> re-binds and broke reconnect"
 msgstr ""
 
-#: doc/reference/en/file.news.html:557(li)
+#: doc/reference/en/file.news.html:566(li)
 msgid "Add support for config[:sasl_quiet] in Base.connect"
 msgstr ""
 
-#: doc/reference/en/file.news.html:558(li)
+#: doc/reference/en/file.news.html:567(li)
 msgid ""
 "(Delayed a case sensitivity patch for object classes and attributes due to "
 "weird errors)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:559(li)
+#: doc/reference/en/file.news.html:568(li)
 msgid ""
 "Add :retry_wait to Base.connect to determine the timeout before retrying a "
 "connection"
 msgstr ""
 
-#: doc/reference/en/file.news.html:560(li)
+#: doc/reference/en/file.news.html:569(li)
 msgid ""
 "Fixed ActiveLDAP::Base.create_object() – classes were enclosed in quotes"
 msgstr ""
 
-#: doc/reference/en/file.news.html:561(span)
-#: doc/reference/en/file.news.html:587(span)
+#: doc/reference/en/file.news.html:570(span)
+#: doc/reference/en/file.news.html:596(span)
 msgid "ONELEVEL"
 msgstr ""
 
-#: doc/reference/en/file.news.html:561(li)
+#: doc/reference/en/file.news.html:570(li)
 msgid ""
 "Added :ldap_scope Base.connect() argument to allow risk-seeking users to "
 "change the <placeholder-1/> scope to something other than <placeholder-2/>."
 msgstr ""
 
-#: doc/reference/en/file.news.html:562(li)
+#: doc/reference/en/file.news.html:571(li)
 msgid ""
 "Cleaned up Configuration.rb to supply all default values for ActiveLDAP::"
 "Base.connect() and to use a constant instead of overriding class variables "
 "for no good reason."
 msgstr ""
 
-#: doc/reference/en/file.news.html:563(li)
+#: doc/reference/en/file.news.html:572(li)
 msgid ""
 "Added scrubbing for :base argument into Base.connect() to make sure a ’ "
 "doesn’t get evaluated."
 msgstr ""
 
-#: doc/reference/en/file.news.html:564(li)
+#: doc/reference/en/file.news.html:573(li)
 msgid "Refactored Base.connect(). It is now much cleaner and easier to follow."
 msgstr ""
 
-#: doc/reference/en/file.news.html:565(li)
+#: doc/reference/en/file.news.html:574(li)
 msgid ""
 "Moved schema retrieval to after bind in case a server requires privileges to "
 "access it."
 msgstr ""
 
-#: doc/reference/en/file.news.html:566(li)
+#: doc/reference/en/file.news.html:575(li)
 msgid ""
 "Reworked the bind process to be a little prettier. A lot of work to do here "
 "still."
 msgstr ""
 
-#: doc/reference/en/file.news.html:567(li)
+#: doc/reference/en/file.news.html:576(li)
 msgid ""
 "Added <placeholder-1/>::err2exception(errno) which is the groundwork of a "
 "coming overhaul in user friendly error handling."
 msgstr ""
 
-#: doc/reference/en/file.news.html:568(li)
+#: doc/reference/en/file.news.html:577(li)
 msgid ""
 "Added support for Base::connect(.., :password =&gt; String, …) to avoid "
 "stupid Proc.new ’foo’ crap"
 msgstr ""
 
-#: doc/reference/en/file.news.html:569(li)
+#: doc/reference/en/file.news.html:578(li)
 msgid ""
 "Add :store_password option. When this is set, :password is not cleared and :"
 "password_block is not re-evaluated on each rebind."
 msgstr ""
 
-#: doc/reference/en/file.news.html:571(h2)
+#: doc/reference/en/file.news.html:580(h2)
 msgid "0.6.0"
 msgstr ""
 
-#: doc/reference/en/file.news.html:573(li)
+#: doc/reference/en/file.news.html:582(li)
 msgid "Disallow blank DN attribute values on initialization"
 msgstr ""
 
-#: doc/reference/en/file.news.html:574(li)
+#: doc/reference/en/file.news.html:583(li)
 msgid "Fix bug reported by Maik Schmidt regarding object creation"
 msgstr ""
 
-#: doc/reference/en/file.news.html:575(li)
+#: doc/reference/en/file.news.html:584(li)
 msgid "Added error checking to disallow DN attribute value changes"
 msgstr ""
 
-#: doc/reference/en/file.news.html:576(li)
+#: doc/reference/en/file.news.html:585(li)
 msgid "Added AttributeAssignmentError (for above)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:577(li)
+#: doc/reference/en/file.news.html:586(li)
 msgid "Import() and initialize() no longer call attribute_method=()"
 msgstr ""
 
-#: doc/reference/en/file.news.html:578(li)
+#: doc/reference/en/file.news.html:587(li)
 msgid "Added error condition if connection fails inside initialize()"
 msgstr ""
 
-#: doc/reference/en/file.news.html:579(li)
+#: doc/reference/en/file.news.html:588(li)
 msgid "Changes examples and tests to use “dc=localdomain”"
 msgstr ""
 
-#: doc/reference/en/file.news.html:580(li)
+#: doc/reference/en/file.news.html:589(li)
 msgid "has_many() entries no longer return nil when empty"
 msgstr ""
 
-#: doc/reference/en/file.news.html:582(h2)
+#: doc/reference/en/file.news.html:591(h2)
 msgid "0.5.9"
 msgstr ""
 
-#: doc/reference/en/file.news.html:584(li)
+#: doc/reference/en/file.news.html:593(li)
 msgid "Change default base to dc=localdomain (as per Debian default)."
 msgstr ""
 
-#: doc/reference/en/file.news.html:585(li)
+#: doc/reference/en/file.news.html:594(li)
 msgid "schema2.rb:attr() now returns [] instead of ’’ when empty."
 msgstr ""
 
-#: doc/reference/en/file.news.html:586(li)
+#: doc/reference/en/file.news.html:595(li)
 msgid ""
 "Lookup of new objects does not put dnattr()=value into the Base on lookup."
 msgstr ""
 
-#: doc/reference/en/file.news.html:587(span)
+#: doc/reference/en/file.news.html:596(span)
 msgid "SUBTREE"
 msgstr ""
 
-#: doc/reference/en/file.news.html:587(li)
+#: doc/reference/en/file.news.html:596(li)
 msgid ""
 "Scope is now use <placeholder-1/> instead of <placeholder-2/> as it broke "
 "object boundaries."
 msgstr ""
 
-#: doc/reference/en/file.news.html:588(li)
+#: doc/reference/en/file.news.html:597(li)
 msgid "Fixed @max_retries misuse."
 msgstr ""
 
-#: doc/reference/en/file.news.html:589(li)
+#: doc/reference/en/file.news.html:598(li)
 msgid "Added do_connect retries."
 msgstr ""
 
-#: doc/reference/en/file.news.html:590(li)
+#: doc/reference/en/file.news.html:599(li)
 msgid "Fixed find and find_all for the case – find_all(‘*’)."
 msgstr ""
 
-#: doc/reference/en/file.news.html:591(li)
+#: doc/reference/en/file.news.html:600(li)
 msgid "Fixed broken creation of objects from anonymous classes."
 msgstr ""
 
-#: doc/reference/en/file.news.html:592(li)
+#: doc/reference/en/file.news.html:601(li)
 msgid "Fixed broken use of ldap_mapping with anonymous classes."
 msgstr ""
 
-#: doc/reference/en/file.news.html:594(h2)
+#: doc/reference/en/file.news.html:603(h2)
 msgid "0.5.8: Bugfix galore"
 msgstr ""
 
-#: doc/reference/en/file.news.html:596(li)
+#: doc/reference/en/file.news.html:605(li)
 msgid "Allow nil “prefix”"
 msgstr ""
 
-#: doc/reference/en/file.news.html:597(li)
+#: doc/reference/en/file.news.html:606(li)
 msgid "Fixed the dup bug with Anonymous patch."
 msgstr ""
 
-#: doc/reference/en/file.news.html:598(li)
+#: doc/reference/en/file.news.html:607(li)
 msgid "(maybe) Fixed stale connection problems by attempting reconn/bind."
 msgstr ""
 
-#: doc/reference/en/file.news.html:599(li)
+#: doc/reference/en/file.news.html:608(li)
 msgid "Hiding redefine warnings (for now)"
 msgstr ""
 
-#: doc/reference/en/file.news.html:601(h2)
+#: doc/reference/en/file.news.html:610(h2)
 msgid "0.5.7"
 msgstr ""
 
-#: doc/reference/en/file.news.html:603(code)
+#: doc/reference/en/file.news.html:612(code)
 msgid "data.default = [] bug that daniel"
 msgstr ""
 
-#: doc/reference/en/file.news.html:603(li)
+#: doc/reference/en/file.news.html:612(li)
 msgid ""
 "Fixed the <placeholder-1/>nightrunner.com pointed out (and partially "
 "patched)."
 msgstr ""
 
-#: doc/reference/en/file.news.html:606(h2)
+#: doc/reference/en/file.news.html:615(h2)
 msgid "0.5.6"
 msgstr ""
 
-#: doc/reference/en/file.news.html:608(li)
+#: doc/reference/en/file.news.html:617(li)
 msgid "Added support for foreign_key =&gt; ‘dn’ in has_many."
 msgstr ""
 
-#: doc/reference/en/file.news.html:610(h2)
+#: doc/reference/en/file.news.html:619(h2)
 msgid "0.5.5"
 msgstr ""
 
-#: doc/reference/en/file.news.html:612(li)
+#: doc/reference/en/file.news.html:621(li)
 msgid "Remove @@logger.debug entries during build"
 msgstr ""
 
-#: doc/reference/en/file.news.html:613(li)
+#: doc/reference/en/file.news.html:622(li)
 msgid "Building -debug and regular gems and tarballs"
 msgstr ""
 
-#: doc/reference/en/file.news.html:615(h2)
+#: doc/reference/en/file.news.html:624(h2)
 msgid "0.5.4"
 msgstr ""
 
-#: doc/reference/en/file.news.html:619(li)
+#: doc/reference/en/file.news.html:628(li)
 msgid ""
 "Speeds up find and find_all by not accessing <placeholder-1/> multiple times "
 "for data we already have."
 msgstr ""
 
-#: doc/reference/en/file.news.html:617(li)
+#: doc/reference/en/file.news.html:626(li)
 msgid ""
 "Added Base#import to streamline the Base.find and Base.find_all methods "
 "<ul><placeholder-1/></ul>"
 msgstr ""
 
-#: doc/reference/en/file.news.html:622(li)
+#: doc/reference/en/file.news.html:631(li)
 msgid ""
 "Added tests/benchmark which is a slightly modified version of excellent "
 "benchmarking code contributed by Ollivier Robert"
 msgstr ""
 
-#: doc/reference/en/file.news.html:616(ul)
+#: doc/reference/en/file.news.html:625(ul)
 msgid ""
 "<placeholder-1/>\n"
 "\t<placeholder-2/>-_-AT-_- keltia.freenix.fr&gt;. 0.5.3 Changed "
@@ -7341,7 +7351,7 @@ msgid "#error_message"
 msgstr ""
 
 #: doc/reference/en/method_list.html:1514(a)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:168(strong)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:660(strong)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:683(span)
@@ -8408,7 +8418,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:336(strong)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:367(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:368(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:190(strong)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:698(strong)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:717(span)
@@ -9952,7 +9962,7 @@ msgid "EntryInvalid"
 msgstr ""
 
 #: doc/reference/en/class_list.html:48(a)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
 #: doc/reference/en/ActiveLdap/EntryNotFound.html:37(span)
 #: doc/reference/en/ActiveLdap/Error.html:110(a)
 #: doc/reference/en/ActiveLdap/Adapter/Base.html:966(span)
@@ -9962,7 +9972,7 @@ msgid "EntryNotFound"
 msgstr ""
 
 #: doc/reference/en/class_list.html:48(a)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
 #: doc/reference/en/ActiveLdap/EntryNotSaved.html:37(span)
 #: doc/reference/en/ActiveLdap/Error.html:110(a)
 #: doc/reference/en/ActiveLdap.html:101(a) doc/reference/en/_index.html:627(a)
@@ -10752,10 +10762,10 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:718(tt)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:390(tt)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:410(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:487(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:511(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:543(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:565(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:501(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:525(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:557(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:579(tt)
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:158(tt)
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:178(tt)
 #: doc/reference/en/ActiveLdap/Connection.html:367(tt)
@@ -11261,11 +11271,11 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Persistence.html:342(tt)
 #: doc/reference/en/ActiveLdap/Persistence.html:382(tt)
 #: doc/reference/en/ActiveLdap/Persistence.html:412(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:442(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:597(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:653(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:697(tt)
-#: doc/reference/en/ActiveLdap/Persistence.html:731(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:456(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:611(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:667(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:711(tt)
+#: doc/reference/en/ActiveLdap/Persistence.html:745(tt)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:79(li)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:258(tt)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:136(tt)
@@ -12071,8 +12081,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:116(small)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:410(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:97(small)
-#: doc/reference/en/ActiveLdap/Persistence.html:511(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:565(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:525(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:579(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:110(small)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:150(small)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:97(small)
@@ -12769,14 +12779,14 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:431(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:366(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:401(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:475(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:532(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:586(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:629(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:686(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:718(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:767(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:489(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:546(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:600(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:643(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:700(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:732(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:781(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:239(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:288(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:157(span)
@@ -13135,8 +13145,8 @@ msgstr ""
 #: doc/reference/en/Net/LDAP/Entry.html:271(span)
 #: doc/reference/en/Net/LDAP/Entry.html:273(span)
 #: doc/reference/en/ActiveLdap/Escape.html:208(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:686(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:718(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:700(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:732(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:381(span)
 #: doc/reference/en/ActiveLdap/Validations.html:253(span)
 #: doc/reference/en/ActiveLdap/Validations.html:283(span)
@@ -13294,19 +13304,20 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:371(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:368(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:370(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:477(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:640(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:641(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:642(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:775(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:777(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:440(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:445(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:654(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:655(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:656(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:789(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:791(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:239(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:240(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:422(span)
@@ -14603,20 +14614,21 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Persistence.html:372(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:373(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:403(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:433(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:478(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:534(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:588(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:633(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:636(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:644(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:688(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:721(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:722(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:778(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:785(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:444(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:447(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:492(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:548(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:602(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:647(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:650(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:658(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:702(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:735(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:736(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:792(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:797(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:799(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:800(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:242(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:290(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:160(span)
@@ -15536,17 +15548,18 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:377(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:369(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:779(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:781(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:441(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:793(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:795(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:502(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:758(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:761(span)
@@ -16391,13 +16404,13 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:568(h3)
 #: doc/reference/en/ActiveLdap/Persistence.html:340(h3)
 #: doc/reference/en/ActiveLdap/Persistence.html:380(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:440(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:485(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:541(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:595(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:651(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:695(h3)
-#: doc/reference/en/ActiveLdap/Persistence.html:729(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:454(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:499(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:555(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:609(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:665(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:709(h3)
+#: doc/reference/en/ActiveLdap/Persistence.html:743(h3)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:134(h3)
 #: doc/reference/en/ActiveLdap/Generators/ScaffoldGenerator.html:152(h3)
 #: doc/reference/en/ActiveLdap/Generators/ModelGenerator.html:167(h3)
@@ -16600,15 +16613,15 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:374(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:376(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:432(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:634(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:640(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:641(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:648(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:654(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:655(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:158(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:159(span)
@@ -18178,7 +18191,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:328(span)
 #: doc/reference/en/ActiveLdap/AttributeValueInvalid.html:272(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
 #: doc/reference/en/ActiveLdap/Validations.html:254(span)
 #: doc/reference/en/ActiveLdap/Validations.html:284(span)
@@ -18247,7 +18259,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:100(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:740(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:370(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:642(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:656(span)
 #: doc/reference/en/ActiveLdap/Validations.html:254(span)
 #: doc/reference/en/ActiveLdap/Ldif/Attribute.html:245(span)
 #: doc/reference/en/ActiveLdap/EntryAttribute.html:699(span)
@@ -18342,10 +18354,10 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:515(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:560(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:603(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:640(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:641(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:643(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:654(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:655(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:657(span)
 #: doc/reference/en/ActiveLdap/Connection.html:350(span)
 #: doc/reference/en/ActiveLdap/Connection.html:409(span)
 #: doc/reference/en/ActiveLdap/Connection.html:460(span)
@@ -18479,9 +18491,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:321(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:324(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:374(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:470(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:503(span)
@@ -18829,7 +18841,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/LdapError.html:216(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:607(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:412(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:506(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:509(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:514(span)
@@ -18958,7 +18970,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:372(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:373(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:375(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:719(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:733(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:503(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:379(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:514(span)
@@ -19118,8 +19130,8 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:481(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:467(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
 #: doc/reference/en/ActiveLdap/Schema.html:877(span)
 #: doc/reference/en/ActiveLdap/LdifInvalid.html:388(span)
@@ -19247,9 +19259,10 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:459(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:463(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:368(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:634(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:771(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:774(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:439(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:648(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:785(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:788(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:423(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:462(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:466(span)
@@ -19473,7 +19486,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1038(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:414(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:466(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:776(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:790(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:464(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:550(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:556(span)
@@ -19574,7 +19587,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:609(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:951(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:471(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:470(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:560(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:640(span)
@@ -19655,8 +19668,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:323(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:471(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:155(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:442(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:470(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:502(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:560(span)
@@ -19908,7 +19922,6 @@ msgid "\\e[0m"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:509(pre)
-#: doc/reference/en/ActiveLdap/Persistence.html:391(pre)
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:789(pre)
 msgid "42 43 44"
 msgstr ""
@@ -20018,8 +20031,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/LogSubscriber.html:544(p)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:712(p)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:404(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:505(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:559(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:519(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:573(p)
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:172(p)
 #: doc/reference/en/ActiveLdap/Connection.html:381(p)
 #: doc/reference/en/ActiveLdap/Schema.html:935(p)
@@ -20469,7 +20482,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/UserPassword/Salt.html:173(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:323(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:155(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:440(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:502(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:758(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:765(span)
@@ -20654,8 +20668,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:370(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:376(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:158(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:470(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:640(span)
@@ -20883,8 +20897,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:370(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:376(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:158(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:761(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:434(span)
@@ -21577,6 +21591,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1081(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1152(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1197(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:441(span)
 #: doc/reference/en/ActiveLdap/Connection.html:168(strong)
 #: doc/reference/en/ActiveLdap/Connection.html:409(span)
 #: doc/reference/en/ActiveLdap/Connection.html:419(strong)
@@ -21802,8 +21817,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1044(span)
 #: doc/reference/en/ActiveLdap/Ldif.html:252(strong)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:412(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:632(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:774(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:646(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:788(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:553(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:506(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:509(span)
@@ -21982,9 +21997,9 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1080(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:467(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:374(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:241(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:294(span)
 #: doc/reference/en/ActiveLdap/Connection.html:541(span)
@@ -22060,7 +22075,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1232(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:413(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:262(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:775(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:789(span)
 #: doc/reference/en/ActiveLdap/DistinguishedNameInputInvalid.html:239(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:423(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:466(span)
@@ -22301,9 +22316,9 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:740(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:371(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:477(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:781(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:445(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:795(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:798(span)
 #: doc/reference/en/ActiveLdap/Attributes/ClassMethods.html:219(span)
 #: doc/reference/en/ActiveLdap/Base.html:135(span)
 #: doc/reference/en/ActiveLdap/Base.html:1793(span)
@@ -22525,7 +22540,7 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:832(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1149(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1155(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:634(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:648(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:423(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:466(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:469(span)
@@ -22576,8 +22591,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1151(span)
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1155(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:468(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:294(span)
 #: doc/reference/en/ActiveLdap/Schema.html:877(span)
 #: doc/reference/en/ActiveLdap/Validations.html:284(span)
@@ -23029,8 +23044,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:959(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:149(strong)
 #: doc/reference/en/ActiveLdap/Persistence.html:412(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:491(span)
 #: doc/reference/en/ActiveLdap/Base.html:1809(span)
 #: doc/reference/en/ActiveLdap/Ldif/ChangeRecord.html:651(span)
 #: doc/reference/en/ActiveLdap/Ldif/DeleteRecord.html:230(span)
@@ -23375,7 +23390,7 @@ msgid "@@active_connections"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Connection/ClassMethods.html:1292(pre)
-#: doc/reference/en/ActiveLdap/Persistence.html:576(pre)
+#: doc/reference/en/ActiveLdap/Persistence.html:590(pre)
 msgid "11 12 13"
 msgstr ""
 
@@ -23965,8 +23980,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:411(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:516(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:560(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
 #: doc/reference/en/ActiveLdap/DistinguishedName.html:423(strong)
 msgid "parent"
 msgstr ""
@@ -24130,7 +24145,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:415(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:156(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 #: doc/reference/en/ActiveLdap/Ldif/Attribute.html:242(span)
 #: doc/reference/en/ActiveLdap/Operations/Find.html:129(strong)
 #: doc/reference/en/ActiveLdap/Operations/Find.html:242(span)
@@ -24180,7 +24195,8 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:415(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:156(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:441(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:763(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:353(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:383(span)
@@ -24440,8 +24456,8 @@ msgid "or"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:459(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:441(span)
 #: doc/reference/en/ActiveLdap/Base.html:1798(span)
 #: doc/reference/en/ActiveLdap/Populate.html:218(span)
@@ -24474,12 +24490,11 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:462(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:471(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:369(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:476(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:632(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:646(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
 #: doc/reference/en/ActiveLdap/Connection.html:460(span)
 #: doc/reference/en/ActiveLdap/Connection.html:576(span)
 #: doc/reference/en/ActiveLdap/Connection.html:615(span)
@@ -24605,7 +24620,7 @@ msgid ":clear_association_cache"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:464(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:630(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:644(span)
 #: doc/reference/en/ActiveLdap/Associations.html:160(strong)
 #: doc/reference/en/ActiveLdap/Associations.html:233(strong)
 #: doc/reference/en/ActiveLdap/Associations.html:255(span)
@@ -24631,9 +24646,9 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:470(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:171(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:442(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:451(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:475(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:456(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:465(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:489(span)
 #: doc/reference/en/ActiveLdap/Callbacks.html:136(strong)
 #: doc/reference/en/ActiveLdap/Callbacks.html:218(strong)
 #: doc/reference/en/ActiveLdap/Callbacks.html:248(span)
@@ -24649,17 +24664,17 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:470(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:195(strong)
 #: doc/reference/en/ActiveLdap/Persistence.html:402(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:487(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:496(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:532(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:587(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:501(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:510(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:546(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:601(span)
 #: doc/reference/en/ActiveLdap/Validations.html:338(span)
 #: doc/reference/en/ActiveLdap/Association/BelongsTo.html:239(span)
 msgid "new_entry?"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:471(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 #: doc/reference/en/ActiveLdap/Connection.html:456(span)
 #: doc/reference/en/ActiveLdap/Base.html:1108(strong)
 #: doc/reference/en/ActiveLdap/Base.html:1809(span)
@@ -24670,7 +24685,7 @@ msgid "dn_attribute"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:471(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:552(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:852(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:918(span)
@@ -24696,9 +24711,9 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree.html:472(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:265(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:653(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:662(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:686(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:667(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:676(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:700(span)
 #: doc/reference/en/ActiveLdap/Validations.html:113(strong)
 #: doc/reference/en/ActiveLdap/Validations.html:234(strong)
 #: doc/reference/en/ActiveLdap/Validations.html:253(span)
@@ -24855,8 +24870,8 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:155(span)
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:156(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:431(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:432(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:438(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:502(span)
 #: doc/reference/en/ActiveLdap/HumanReadable/ClassMethods.html:503(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:381(span)
@@ -25070,6 +25085,7 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Acts/Tree/ClassMethods.html:156(span)
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:264(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
 #: doc/reference/en/ActiveLdap/Connection.html:689(span)
 #: doc/reference/en/ActiveLdap/Ldif/Record.html:497(span)
 #: doc/reference/en/ActiveLdap/Configuration/ClassMethods.html:639(span)
@@ -25414,13 +25430,13 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:320(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:368(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:369(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:634(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:641(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:648(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:655(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:548(span)
 #: doc/reference/en/ActiveLdap/Attributes/Normalizable.html:550(span)
 #: doc/reference/en/ActiveLdap/Schema.html:202(strong)
@@ -25631,8 +25647,8 @@ msgid "@extract_schema"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/GetText/Parser.html:376(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:640(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:654(span)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:105(strong)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:136(strong)
 #: doc/reference/en/ActiveLdap/ObjectClass/ClassMethods.html:157(span)
@@ -25884,8 +25900,8 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Persistence.html:127(strong)
 #: doc/reference/en/ActiveLdap/Persistence.html:382(strong)
 #: doc/reference/en/ActiveLdap/Persistence.html:401(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:687(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:719(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:701(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:733(span)
 msgid "create_or_update"
 msgstr ""
 
@@ -25898,19 +25914,20 @@ msgid "new_entry?."
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:219(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:543(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:586(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:439(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:557(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:600(span)
 msgid "persisted?"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:234(p)
-#: doc/reference/en/ActiveLdap/Persistence.html:552(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:566(p)
 msgid "Return whether the entry is saved entry or not."
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:243(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:597(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:629(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:611(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:643(span)
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:260(strong)
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:662(strong)
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:682(span)
@@ -25927,8 +25944,8 @@ msgid "save."
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:289(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:697(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:718(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:711(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:732(span)
 #: doc/reference/en/ActiveLdap/Validations.html:135(strong)
 #: doc/reference/en/ActiveLdap/Validations.html:264(strong)
 #: doc/reference/en/ActiveLdap/Validations.html:283(span)
@@ -25944,9 +25961,9 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:311(strong)
 #: doc/reference/en/ActiveLdap/Persistence.html:402(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:731(strong)
-#: doc/reference/en/ActiveLdap/Persistence.html:767(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:745(strong)
+#: doc/reference/en/ActiveLdap/Persistence.html:781(span)
 #: doc/reference/en/ActiveLdap/Command.html:233(span)
 #: doc/reference/en/ActiveLdap/Operations/ClassOnlyUpdate.html:105(strong)
 #: doc/reference/en/ActiveLdap/Operations/ClassOnlyUpdate.html:136(strong)
@@ -25956,28 +25973,28 @@ msgid "update"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:351(pre)
-msgid "46 47 48 49 50 51 52 53"
+msgid "53 54 55 56 57 58 59 60"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:364(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 46"
+msgid "# File 'lib/active_ldap/persistence.rb', line 53"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
 msgid "prepare_data_for_saving"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
 #: doc/reference/en/ActiveLdap/Persistence.html:368(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
 msgid "data"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:367(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:768(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
 msgid "ldap_data"
 msgstr ""
 
@@ -25994,73 +26011,116 @@ msgid "add_entry"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:370(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:477(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:533(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:642(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:445(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:547(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:656(span)
 #: doc/reference/en/ActiveLdap/Base.html:1793(span)
 msgid "@new_entry"
 msgstr ""
 
+#: doc/reference/en/ActiveLdap/Persistence.html:391(pre)
+#: doc/reference/en/ActiveLdap/Callbacks.html:238(pre)
+msgid "49 50 51"
+msgstr ""
+
 #: doc/reference/en/ActiveLdap/Persistence.html:399(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 42"
+msgid "# File 'lib/active_ldap/persistence.rb', line 49"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Persistence.html:421(pre)
-#: doc/reference/en/ActiveLdap/Schema.html:952(pre)
-#: doc/reference/en/ActiveLdap/ObjectClass.html:402(pre)
-#: doc/reference/en/ActiveLdap/Helper.html:603(pre)
-#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Base.html:297(pre)
-msgid "23 24 25"
+msgid "23 24 25 26 27 28 29 30 31 32"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:429(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:436(span)
 msgid "# File 'lib/active_ldap/persistence.rb', line 23"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:453(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:440(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+msgid "default_options"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Persistence.html:441(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:266(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:268(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:241(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF.html:242(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:97(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:431(span)
+#: doc/reference/en/ActiveLdap/Operations/Common.html:435(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:229(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:230(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:269(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:270(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:302(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:303(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:372(span)
+#: doc/reference/en/ActiveLdap/Operations/Update.html:373(span)
+msgid ":connection"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Persistence.html:443(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:127(strong)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:230(span)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:240(strong)
+#: doc/reference/en/ActiveLdap/Operations/Delete.html:265(span)
+#: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:156(span)
+#: doc/reference/en/ActiveLdap/Operations/ClassOnlyDelete.html:186(span)
+msgid "delete_entry"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Persistence.html:446(span)
+msgid "freeze"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Persistence.html:467(p)
 msgid "Delete this entry from LDAP"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:464(pre)
+#: doc/reference/en/ActiveLdap/Persistence.html:478(pre)
 msgid "18 19 20 21"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:473(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:487(span)
 msgid "# File 'lib/active_ldap/persistence.rb', line 18"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:498(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:490(span)
+msgid "# TODO: support deleting relations"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Persistence.html:512(p)
 msgid "Return whether the entry is new entry in LDAP or not"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:522(pre)
+#: doc/reference/en/ActiveLdap/Persistence.html:536(pre)
 msgid "6 7 8"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:530(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:544(span)
 msgid "# File 'lib/active_ldap/persistence.rb', line 6"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:584(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:598(span)
 msgid "# File 'lib/active_ldap/persistence.rb', line 11"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:587(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:601(span)
 #: doc/reference/en/ActiveLdap/Association/Proxy.html:544(span)
 #: doc/reference/en/ActiveLdap/Adapter/JndiConnection.html:614(span)
 #: doc/reference/en/LDAP/Conn.html:423(span)
 msgid "not"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:606(pre)
-msgid "76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91"
+#: doc/reference/en/ActiveLdap/Persistence.html:620(pre)
+msgid "83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:627(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 76"
+#: doc/reference/en/ActiveLdap/Persistence.html:641(span)
+msgid "# File 'lib/active_ldap/persistence.rb', line 83"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 #: doc/reference/en/ActiveLdap/Populate.html:216(span)
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:224(span)
 #: doc/reference/en/ActiveLdap/Operations/LDIF.html:242(span)
@@ -26093,7 +26153,7 @@ msgstr ""
 msgid "search"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 #: doc/reference/en/ActiveLdap/Helper.html:468(span)
 #: doc/reference/en/ActiveLdap/Helper.html:472(span)
 #: doc/reference/en/ActiveLdap/Operations/Find.html:307(span)
@@ -26107,8 +26167,8 @@ msgstr ""
 msgid ":value"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:632(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:646(span)
 #: doc/reference/en/ActiveLdap/Operations/ClassOnlyUpdate.html:170(span)
 #: doc/reference/en/ActiveLdap/Operations/ClassOnlyUpdate.html:172(span)
 #: doc/reference/en/ActiveLdap/Adapter/Jndi.html:385(span)
@@ -26142,68 +26202,68 @@ msgstr ""
 msgid "_dn"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:631(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:645(span)
 msgid "_attributes"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:635(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:649(span)
 msgid "Can't find DN '%s' to reload"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:638(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:652(span)
 msgid "@ldap_data"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:639(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:653(span)
 #: doc/reference/en/ActiveLdap/Base.html:1802(span)
 msgid "extract_object_class"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:664(p)
+#: doc/reference/en/ActiveLdap/Persistence.html:678(p)
 msgid ""
 "Save and validate this object into LDAP either adding or replacing "
 "attributes TODO: Relative DN support"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:676(pre)
-msgid "32 33 34"
+#: doc/reference/en/ActiveLdap/Persistence.html:690(pre)
+msgid "39 40 41"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:684(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 32"
+#: doc/reference/en/ActiveLdap/Persistence.html:698(span)
+msgid "# File 'lib/active_ldap/persistence.rb', line 39"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:706(pre)
-msgid "36 37 38 39 40"
+#: doc/reference/en/ActiveLdap/Persistence.html:720(pre)
+msgid "43 44 45 46 47"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:716(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 36"
+#: doc/reference/en/ActiveLdap/Persistence.html:730(span)
+msgid "# File 'lib/active_ldap/persistence.rb', line 43"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:720(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:734(span)
 msgid "entry %s can't be saved"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:740(pre)
-msgid "55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74"
+#: doc/reference/en/ActiveLdap/Persistence.html:754(pre)
+msgid "62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:765(span)
-msgid "# File 'lib/active_ldap/persistence.rb', line 55"
+#: doc/reference/en/ActiveLdap/Persistence.html:779(span)
+msgid "# File 'lib/active_ldap/persistence.rb', line 62"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:771(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:780(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:785(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:794(span)
 msgid "new_dn_value"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:769(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:783(span)
 msgid "collect_modified_attributes"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
 #: doc/reference/en/ActiveLdap/Operations/LDIF/AddRecordLoadable.html:164(span)
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyRecordLoadable.html:175(span)
 #: doc/reference/en/ActiveLdap/Operations/Update.html:127(strong)
@@ -26212,30 +26272,30 @@ msgstr ""
 msgid "modify_entry"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:770(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:779(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:784(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:793(span)
 msgid "@original_dn"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:772(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:774(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:786(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:788(span)
 msgid "old_dn_base"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:774(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:777(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:788(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:791(span)
 msgid "new_dn_base"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:773(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:787(span)
 msgid "clone"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:775(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:777(span)
-#: doc/reference/en/ActiveLdap/Persistence.html:782(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:789(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:791(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:796(span)
 #: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:247(span)
 #: doc/reference/en/ActiveLdap/Ldif/ModifyDNRecord.html:248(span)
 #: doc/reference/en/ActiveLdap/Ldif/ModifyNameRecord.html:149(strong)
@@ -26256,7 +26316,7 @@ msgstr ""
 msgid "new_superior"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Persistence.html:779(span)
+#: doc/reference/en/ActiveLdap/Persistence.html:793(span)
 #: doc/reference/en/ActiveLdap/Operations/LDIF/ModifyNameRecordLoadable.html:157(span)
 #: doc/reference/en/ActiveLdap/Operations/Update.html:149(strong)
 #: doc/reference/en/ActiveLdap/Operations/Update.html:280(strong)
@@ -28298,6 +28358,13 @@ msgstr ""
 #: doc/reference/en/ActiveLdap/Schema.html:919(h3)
 #: doc/reference/en/ActiveLdap/Schema.html:1306(h3)
 msgid "- (<placeholder-1/>) <placeholder-2/>(group, name)"
+msgstr ""
+
+#: doc/reference/en/ActiveLdap/Schema.html:952(pre)
+#: doc/reference/en/ActiveLdap/ObjectClass.html:402(pre)
+#: doc/reference/en/ActiveLdap/Helper.html:603(pre)
+#: doc/reference/en/ActiveLdap/Schema/Syntaxes/Base.html:297(pre)
+msgid "23 24 25"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Schema.html:960(span)
@@ -36169,10 +36236,6 @@ msgstr "<placeholder-1/>とは何か"
 msgid "touch"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Callbacks.html:238(pre)
-msgid "49 50 51"
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Callbacks.html:246(span)
 msgid "# File 'lib/active_ldap/callbacks.rb', line 49"
 msgstr ""
@@ -36459,15 +36522,6 @@ msgid ""
 "nil)"
 msgstr ""
 
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:127(strong)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:230(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:240(strong)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:265(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF/DeleteRecordLoadable.html:156(span)
-#: doc/reference/en/ActiveLdap/Operations/ClassOnlyDelete.html:186(span)
-msgid "delete_entry"
-msgstr ""
-
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:127(a)
 msgid "- (Object) <placeholder-1/>(dn, options = {})"
 msgstr ""
@@ -36541,24 +36595,6 @@ msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:263(span)
 msgid "# File 'lib/active_ldap/operations.rb', line 529"
-msgstr ""
-
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:266(span)
-#: doc/reference/en/ActiveLdap/Operations/Delete.html:268(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:241(span)
-#: doc/reference/en/ActiveLdap/Operations/LDIF.html:242(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:97(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:431(span)
-#: doc/reference/en/ActiveLdap/Operations/Common.html:435(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:229(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:230(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:269(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:270(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:302(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:303(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:372(span)
-#: doc/reference/en/ActiveLdap/Operations/Update.html:373(span)
-msgid ":connection"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap/Operations/Delete.html:270(span)
@@ -41293,7 +41329,7 @@ msgid "VERSION ="
 msgstr ""
 
 #: doc/reference/en/ActiveLdap.html:123(span)
-msgid "3.2.0"
+msgid "3.2.1"
 msgstr ""
 
 #: doc/reference/en/ActiveLdap.html:125(dt)
