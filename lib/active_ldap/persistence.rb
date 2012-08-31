@@ -16,8 +16,8 @@ module ActiveLdap
     #
     # Delete this entry from LDAP
     def destroy
-      self.class.delete(dn)
-      @new_entry = true
+      # TODO: support deleting relations
+      delete
     end
 
     def delete(options={})
