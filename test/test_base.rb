@@ -833,6 +833,24 @@ class TestBase < Test::Unit::TestCase
         end
       end
     end
+
+    class TestInstance < self
+      def test_no_options
+        make_temporary_user do |user,|
+          assert(@user_class.exists?(user.uid))
+          user.delete
+          assert(!@user_class.exists?(user.uid))
+        end
+      end
+
+      def test_frozen
+        make_temporary_user do |user,|
+          assert_false(user.frozen?)
+          user.delete
+          assert_true(user.frozen?)
+        end
+      end
+    end
   end
 
   def test_inherit_base

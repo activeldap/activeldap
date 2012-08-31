@@ -21,7 +21,14 @@ module ActiveLdap
     end
 
     def delete(options={})
-      super(dn, options)
+      if persisted?
+        default_options = {
+          :connection => connection,
+        }
+        self.class.delete_entry(dn, default_options.merge(options))
+      end
+      @new_entry = true
+      freeze
     end
 
     # save
