@@ -20,6 +20,10 @@ project_name = "ActiveLdap"
 base_dir = File.dirname(__FILE__)
 
 helper = Bundler::GemHelper.new(base_dir)
+def helper.version_tag
+  version
+end
+
 helper.install
 spec = helper.gemspec
 
@@ -271,10 +275,5 @@ end
 
 desc "Upload document and HTML to rubyforge."
 task :publish => ["html:publish", "reference:publish"]
-
-desc "Tag the current revision."
-task :tag do
-  sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
-end
 
 # vim: syntax=ruby
