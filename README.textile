@@ -137,3 +137,4 @@ list, please point out.
 * Hidetoshi Yoshimoto: Rails 3 support.
 * warden: A bug report.
 * bklier: A bug fix.
+* Craig White: Bug reports.
