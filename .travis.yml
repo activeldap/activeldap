@@ -8,3 +8,7 @@ rvm:
 notifications:
   recipients:
     - kou@cozmixng.org
+before_install:
+  - travis/before_install.sh
+before_script:
+  - travis/before_script.sh
