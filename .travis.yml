@@ -4,7 +4,7 @@ rvm:
   - rbx
   - ree
   - jruby
-  - ruby-head
+#  - ruby-head
 notifications:
   recipients:
     - kou@cozmixng.org
