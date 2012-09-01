@@ -66,7 +66,10 @@ module ActiveLdap
           message = _("parent must be an entry or parent DN: %s") % entry.inspect
           raise ArgumentError, message
         end
-	destroy unless new_entry?
+        unless new_entry?
+          self.class.delete_entry(dn, :connection => connection)
+          @new_entry = true
+        end
         self.dn = "#{dn_attribute}=#{id},#{base}"
         save
       end
