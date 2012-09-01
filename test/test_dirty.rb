@@ -81,4 +81,18 @@ class TestDirty < Test::Unit::TestCase
       end
     end
   end
+
+  class TestDNChange
+    def test_direct_base_use
+      leaf = ActiveLdap::Base.create
+      leaf.add_class("organizationalUnit")
+      leaf_dn = "ou=addressbook,#{user.dn}"
+      leaf.dn = leaf_dn
+      begin
+        leaf.save
+      ensure
+        ActiveLdap::Base.delete_entry(leaf_dn) if leaf.exists?
+      end
+    end
+  end
 end
