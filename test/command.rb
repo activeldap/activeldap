@@ -32,6 +32,7 @@ module Command
     if args.any? {|x| x.nil?}
       raise ArgumentError, "args has nil: #{args.inspect}"
     end
+    args = args.collect {|arg| arg.to_s}
     return java_run(cmd, *args, &block) if Object.respond_to?(:java)
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
@@ -48,7 +49,7 @@ module Command
         STDOUT.reopen(out_w)
         STDERR.reopen(out_w)
         out_w.close
-        exec(cmd, *args.collect {|arg| arg.to_s})
+        exec(cmd, args)
         exit!(-1)
       end
       $VERBOSE = verbose
