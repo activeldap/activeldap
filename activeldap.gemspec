@@ -47,8 +47,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency("gettext")
   spec.add_dependency("gettext_i18n_rails")
 
-  spec.add_development_dependency("ruby-ldap")
-  spec.add_development_dependency("net-ldap")
   spec.add_development_dependency("bundler")
   spec.add_development_dependency("rake")
   spec.add_development_dependency("test-unit")
