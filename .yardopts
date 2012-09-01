@@ -1,0 +1,6 @@
+--title ActiveLdap
+--charset UTF-8
+--readme README.textile
+--files doc/text/**/*
+--output-dir doc/reference/en
+--exclude /templates/

@@ -42,14 +42,6 @@ doc_en_dir = reference_base_dir + "en"
 html_base_dir = Pathname.new("doc/html")
 html_reference_dir = html_base_dir + spec.name
 YARD::Rake::YardocTask.new do |task|
-  task.options += ["--title", project_name]
-  task.options += ["--charset", "UTF-8"]
-  task.options += ["--readme", "README.textile"]
-  task.options += ["--files", "doc/text/**/*"]
-  task.options += ["--output-dir", doc_en_dir.to_s]
-  task.options += ["--charset", "utf-8"]
-  template_files = FileList["lib/rails/generators/**/templates/*.rb"]
-  task.files += FileList["lib/**/*.rb"] - template_files - ["README.textile"]
 end
 
 task :yard do

@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.files = collect_files.call("lib/**/*",
                                   "{benchmark,examples,po}/**/*",
                                   "bin/*",
+                                  ".yardopts",
                                   "doc/text/**/*",
                                   "COPYING",
                                   "Gemfile",
