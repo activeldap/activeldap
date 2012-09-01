@@ -15,6 +15,8 @@ require "yard"
 
 $KCODE = "u" if RUBY_VERSION < "1.9"
 
+task :default => :test
+
 project_name = "ActiveLdap"
 
 base_dir = File.dirname(__FILE__)
@@ -28,12 +30,6 @@ helper.install
 spec = helper.gemspec
 
 version = spec.version.to_s
-
-Rake::TestTask.new(:test) do |test|
-  test.libs << "lib"
-  test.libs << "test"
-  test.pattern = "test/**/test_*.rb"
-end
 
 begin
   require "gettext_i18n_rails/tasks"
@@ -275,5 +271,10 @@ end
 
 desc "Upload document and HTML to rubyforge."
 task :publish => ["html:publish", "reference:publish"]
+
+desc "Run tests"
+task :test do
+  ruby("-I", "lib", "test/run-test.rb")
+end
 
 # vim: syntax=ruby
