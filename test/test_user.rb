@@ -198,7 +198,8 @@ class TestUser < Test::Unit::TestCase
       assert_nothing_raised() { user.save! }
 
       user = @user_class.find(user.uid)
-      assert_equal(cn, user.cn,
+      assert_equal(cn.sort_by {|value| value.to_s},
+                   user.cn.sort_by {|value| value.to_s},
                    'Making sure a modify with mixed subtypes works')
     end
   end
