@@ -49,7 +49,7 @@ module Command
         STDOUT.reopen(out_w)
         STDERR.reopen(out_w)
         out_w.close
-        exec(cmd, args)
+        exec(cmd, *args)
         exit!(-1)
       end
       $VERBOSE = verbose
