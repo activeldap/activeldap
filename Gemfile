@@ -9,4 +9,7 @@ group :test do
   platforms :mri_18, :mri_19 do
     gem "ruby-ldap"
   end
+  platforms :jruby do
+    gem "jruby-openssl"
+  end
 end
