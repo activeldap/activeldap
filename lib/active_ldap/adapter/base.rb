@@ -581,7 +581,7 @@ module ActiveLdap
           begin
             connect(options)
             break
-          rescue AuthenticationError
+          rescue AuthenticationError, Timeout::Error
             raise
           rescue => detail
             @logger.error do
