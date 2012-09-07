@@ -83,3 +83,4 @@ ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
   require "active_ldap/adapter/#{adapter}"
 end
 
+require "active_ldap/entry"
