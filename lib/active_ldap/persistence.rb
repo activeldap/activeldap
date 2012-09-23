@@ -44,6 +44,7 @@ module ActiveLdap
       unless create_or_update
         raise EntryNotSaved, _("entry %s can't be saved") % dn
       end
+      true
     end
 
     def create_or_update
