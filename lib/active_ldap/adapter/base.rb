@@ -336,7 +336,7 @@ module ActiveLdap
       def sasl_bind(bind_dn, options={})
         # Get all SASL mechanisms
         mechanisms = operation(options) do
-          root_dse_values("supportedSASLMechanisms")
+          root_dse_values("supportedSASLMechanisms", options)
         end
 
         if options.has_key?(:sasl_quiet)
@@ -579,6 +579,7 @@ module ActiveLdap
           options[:reconnect_attempts] = 0 if force
           options[:reconnect_attempts] += 1 if retry_limit >= 0
           begin
+            options[:try_reconnect] = false
             connect(options)
             break
           rescue AuthenticationError, Timeout::Error
@@ -633,10 +634,17 @@ module ActiveLdap
 
       def root_dse(attrs, options={})
         found_attributes = nil
+        if options.has_key?(:try_reconnect)
+           try_reconnect = options[:try_reconnect]
+        else
+           try_reconnect = true
+        end 
+        
         search(:base => "",
                :scope => :base,
                :attributes => attrs,
-               :limit => 1) do |dn, attributes|
+               :limit => 1,
+               :try_reconnect => try_reconnect) do |dn, attributes|
           found_attributes = attributes
         end
         found_attributes
