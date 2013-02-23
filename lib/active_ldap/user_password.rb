@@ -7,7 +7,7 @@ module ActiveLdap
   module UserPassword
     module_function
     def valid?(password, hashed_password)
-      unless /^\{([A-Z][A-Z\d]+)\}/ =~ hashed_password
+      unless /^\{([A-Za-z][A-Za-z\d]+)\}/ =~ hashed_password
         # Plain text password
         return hashed_password == password
       end
