@@ -170,7 +170,7 @@ module ActiveLdap
 
     def validate_ldap_values
       entry_attribute.schemata.each do |name, attribute|
-        value = self[name]
+        value = attribute.binary? ? self[name].try(:force_encoding, 'ASCII-8BIT') : self[name]
         next if self.class.blank_value?(value)
         validate_ldap_value(attribute, name, value)
       end
