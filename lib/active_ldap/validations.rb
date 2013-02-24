@@ -171,7 +171,8 @@ module ActiveLdap
     def validate_ldap_values
       entry_attribute.schemata.each do |name, attribute|
         value = self[name]
-        if value and attribute.binary?
+        # Is it really proper location for setting encoding?
+        if attribute.binary? and value.respond_to?(:force_encoding)
           value.force_encoding("ASCII-8BIT")
         end
         next if self.class.blank_value?(value)
