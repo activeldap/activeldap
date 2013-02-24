@@ -4,6 +4,8 @@ rvm:
   - rbx
   - jruby
 #  - ruby-head
+env:
+  - JRUBY_OPTS="-Xcext.enabled=true"
 notifications:
   recipients:
     - kou@cozmixng.org
