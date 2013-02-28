@@ -84,4 +84,4 @@ ACTIVE_LDAP_CONNECTION_ADAPTERS.each do |adapter|
 end
 
 require "active_ldap/entry"
-require 'active_ldap/railtie' if defined?(Rails)
+require "active_ldap/railtie" if defined?(Rails)
