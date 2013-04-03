@@ -552,7 +552,7 @@ module ActiveLdap
         when Hash
           normalize_hash_value(value, have_binary_mark)
         else
-          if value.blank?
+          if value.to_s.blank?
             value = []
           else
             value = send_to_syntax(value, :normalize_value, value)

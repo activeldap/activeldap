@@ -20,7 +20,7 @@ module ActiveLdap
         when nil
           true
         else
-          value.blank?
+          value.to_s.blank?
         end
       end
 
