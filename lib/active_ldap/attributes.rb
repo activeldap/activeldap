@@ -17,7 +17,7 @@ module ActiveLdap
           value.all? {|val| blank_value?(val)}
         when String
           /\A\s*\z/ === value
-        when TrueClass, FalseClass
+        when true, false
           false
         when nil
           true
