@@ -137,7 +137,11 @@ class TestAttributes < Test::Unit::TestCase
       end
 
       def test_have_blank_element
-        assert_blank_value({"name" => nil})
+        assert_not_blank_value({"name" => nil, "age" => 29})
+      end
+
+      def test_all_blank_elements
+        assert_blank_value({"name" => nil, "age" => nil})
       end
     end
   end
