@@ -114,4 +114,31 @@ class TestAttributes < Test::Unit::TestCase
   def assert_unnormalize_attribute(expected, name, value)
     assert_equal(expected, ActiveLdap::Base.unnormalize_attribute(name, value))
   end
+
+  class TestBlankValue < self
+    private
+    def assert_blank_value(value)
+      assert_true(ActiveLdap::Base.blank_value?(value),
+                  "value: <#{value.inspect}>")
+    end
+
+    def assert_not_blank_value(value)
+      assert_false(ActiveLdap::Base.blank_value?(value),
+                   "value: <#{value.inspect}")
+    end
+
+    class TestHash < self
+      def test_empty
+        assert_blank_value({})
+      end
+
+      def test_have_elements
+        assert_not_blank_value({"name" => "Taro", "age" => 29})
+      end
+
+      def test_have_blank_element
+        assert_blank_value({"name" => nil})
+      end
+    end
+  end
 end
