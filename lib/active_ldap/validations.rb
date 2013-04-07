@@ -147,7 +147,7 @@ module ActiveLdap
           next if required_attribute.read_only?
           next if _validation_skip_attributes.include?(real_name)
 
-          value = @data[real_name] || []
+          value = @data[real_name]
           next unless self.class.blank_value?(value)
 
           _schema ||= schema
