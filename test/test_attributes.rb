@@ -124,7 +124,7 @@ class TestAttributes < Test::Unit::TestCase
 
     def assert_not_blank_value(value)
       assert_false(ActiveLdap::Base.blank_value?(value),
-                   "value: <#{value.inspect}")
+                   "value: <#{value.inspect}>")
     end
 
     class TestHash < self
