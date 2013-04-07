@@ -162,5 +162,19 @@ class TestAttributes < Test::Unit::TestCase
         assert_blank_value([nil, nil])
       end
     end
+
+    class TestString < self
+      def test_empty
+        assert_blank_value("")
+      end
+
+      def test_only_spaces
+        assert_not_blank_value(" \t\n")
+      end
+
+      def test_have_non_spaces
+        assert_not_blank_value("Taro")
+      end
+    end
   end
 end
