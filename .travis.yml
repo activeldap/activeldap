@@ -3,7 +3,7 @@ rvm:
   - 1.9.3
   - 2.0.0
   - rbx
-  - jruby
+#  - jruby
 #  - ruby-head
 env:
   - JRUBY_OPTS="-Xcext.enabled=true"
