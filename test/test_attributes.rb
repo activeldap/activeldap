@@ -144,5 +144,23 @@ class TestAttributes < Test::Unit::TestCase
         assert_blank_value({"name" => nil, "age" => nil})
       end
     end
+
+    class TestArray < self
+      def test_empty
+        assert_blank_value([])
+      end
+
+      def test_have_elements
+        assert_not_blank_value(["Taro", "Jiro"])
+      end
+
+      def test_have_blank_element
+        assert_not_blank_value(["Taro", nil])
+      end
+
+      def test_all_blank_elements
+        assert_blank_value([nil, nil])
+      end
+    end
   end
 end
