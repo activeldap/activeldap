@@ -169,7 +169,7 @@ class TestAttributes < Test::Unit::TestCase
       end
 
       def test_only_spaces
-        assert_not_blank_value(" \t\n")
+        assert_blank_value(" \t\n")
       end
 
       def test_have_non_spaces
