@@ -176,5 +176,15 @@ class TestAttributes < Test::Unit::TestCase
         assert_not_blank_value("Taro")
       end
     end
+
+    class TestBoolean < self
+      def test_true
+        assert_not_blank_value(true)
+      end
+
+      def test_false
+        assert_not_blank_value(true)
+      end
+    end
   end
 end
