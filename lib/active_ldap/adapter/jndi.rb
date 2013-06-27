@@ -89,6 +89,8 @@ module ActiveLdap
       def execute(method, info=nil, *args, &block)
         name = (info || {}).delete(:name) || method
         log(name, info) {@connection.send(method, *args, &block)}
+      rescue JndiConnection::CommunicationException => e
+        raise ActiveLdap::ConnectionError.new(e.getMessage())
       rescue JndiConnection::NamingException
         if /\[LDAP: error code (\d+) - ([^\]]+)\]/ =~ $!.to_s
           message = $2
