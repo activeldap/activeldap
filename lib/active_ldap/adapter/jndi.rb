@@ -28,6 +28,10 @@ module ActiveLdap
         end
       end
 
+      def connecting?
+        super and @connection.bound?
+      end
+
       def unbind(options={})
         super do
           execute(:unbind)
