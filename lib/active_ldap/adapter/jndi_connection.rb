@@ -26,6 +26,7 @@ module ActiveLdap
       StartTlsRequest = ldap.StartTlsRequest
       Control = ldap.Control
 
+      CommunicationException = naming.CommunicationException
       NamingException = naming.NamingException
       NameNotFoundException = naming.NameNotFoundException
 
