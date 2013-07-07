@@ -33,10 +33,10 @@ module ActiveLdap
       
       def ldap_mapping(indent='  ')
         mapping = "ldap_mapping "
-        mapping_options = [key_value(:dn_attribute, options[:dn_attribute].dump)]
-        mapping_options << key_value(:prefix, prefix.dump)
+        mapping_options = ["dn_attribute: #{options[:dn_attribute].dump}"]
+        mapping_options << "prefix: #{prefix.dump}"
         if options[:classes]
-          mapping_options << key_value(:classes, options[:classes].inspect)
+          mapping_options << "classes: #{options[:classes].inspect}"
         end
         mapping_options = mapping_options.join(",\n#{indent}#{' ' * mapping.size}")
         "#{indent}#{mapping}#{mapping_options}"
