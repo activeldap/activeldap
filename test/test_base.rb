@@ -75,14 +75,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  def test_not_rename_by_mass_update
-    make_temporary_user(:simple => true) do |user,|
-      original_id = user.id
-      assert_true(user.update_attributes(:id => "user2"))
-      assert_equal(original_id, user.id)
-    end
-  end
-
   def test_attributes
     make_temporary_group do |group|
       assert_equal({
