@@ -36,8 +36,8 @@ module ActiveLdap
     module ClassMethods
       def instantiate_with_callbacks(record)
         object = instantiate_without_callbacks(record)
-        object.send(:_run_find_callbacks)
-        object.send(:_run_initialize_callbacks)
+        object.run_callbacks(:find)
+        object.run_callbacks(:initialize)
         object
       end
     end
