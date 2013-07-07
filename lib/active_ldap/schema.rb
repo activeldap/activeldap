@@ -88,6 +88,7 @@ module ActiveLdap
     end
 
     def attribute(name)
+      name = name.to_s if name.is_a?(Symbol)
       cache([:attribute, name]) do
         Attribute.new(name, self)
       end
