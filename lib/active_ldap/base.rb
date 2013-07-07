@@ -682,13 +682,7 @@ module ActiveLdap
         attributes = attributes.clone
         classes = extract_object_class!(attributes)
         self.classes = classes | initial_classes
-        normalized_attributes = {}
-        attributes.each do |key, value|
-          real_key = to_real_attribute_name(key) || key
-          normalized_attributes[real_key] = value
-        end
-        self.dn = normalized_attributes.delete(dn_attribute)
-        self.attributes = normalized_attributes
+        self.attributes = attributes
       else
         format = _("'%s' must be either nil, DN value as ActiveLdap::DN, " \
                    "String or Array or attributes as Hash")
@@ -1041,6 +1035,21 @@ module ActiveLdap
       classes
     end
 
+    def remove_dn_attribute!(attributes)
+      _dn_attribute = dn_attribute
+      attributes.keys.each do |key|
+        case key
+        when "id", :id, "dn", :dn
+          attributes.delete(key)
+        else
+          normalized_key = to_real_attribute_name(key) || key
+          if normalized_key == _dn_attribute
+            attributes.delete(key)
+          end
+        end
+      end
+    end
+
     def init_base
       init_instance_variables
     end
@@ -1060,6 +1069,7 @@ module ActiveLdap
       classes = extract_object_class!(attributes)
       self.classes = classes
       self.dn = dn
+      remove_dn_attribute!(attributes)
       initialize_attributes(attributes)
       yield self if block_given?
     end
