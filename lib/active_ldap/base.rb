@@ -1177,6 +1177,7 @@ module ActiveLdap
 
     def split_dn_value(value)
       dn_value = relative_dn_value = nil
+      value = value.first if value.is_a?(Array) and value.size == 1
       dn_value = value if value.is_a?(DN)
       begin
         dn_value ||= DN.parse(value)
