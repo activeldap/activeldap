@@ -71,6 +71,7 @@ class TestAttributes < Test::Unit::TestCase
                                                  {"phonetic" => ["やまだ"]}]}])
   end
 
+  class TestMassAssignment < self
   def test_attr_protected
     user = @user_class.new(:uid => "XXX")
     assert_equal("XXX", user.uid)
@@ -104,6 +105,7 @@ class TestAttributes < Test::Unit::TestCase
     assert_equal("XXX", user.uid)
     assert_nil(user.sn)
     assert_equal("Common Name", user.cn)
+  end
   end
 
   private
