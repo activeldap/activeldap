@@ -157,20 +157,20 @@ class TestAttributes < Test::Unit::TestCase
       assert_equal("Alice", alice.cn)
     end
 
-  def test_forbid_object_class
-    classes = @user_class.required_classes + ["inetOrgPerson"]
-    user = @user_class.new(:uid => "XXX", :object_class => classes)
-    assert_equal(["inetOrgPerson"],
-                 user.classes -  @user_class.required_classes)
+    def test_forbid_object_class
+      classes = @user_class.required_classes + ["inetOrgPerson"]
+      user = @user_class.new(:uid => "XXX", :object_class => classes)
+      assert_equal(["inetOrgPerson"],
+                   user.classes -  @user_class.required_classes)
 
-    user = @user_class.new(:uid => "XXX", :object_class => ['inetOrgPerson'])
-    assert_equal(["inetOrgPerson"],
-                 user.classes -  @user_class.required_classes)
+      user = @user_class.new(:uid => "XXX", :object_class => ['inetOrgPerson'])
+      assert_equal(["inetOrgPerson"],
+                   user.classes -  @user_class.required_classes)
 
-    user = @user_class.new("XXX")
-    assert_equal([], user.classes -  @user_class.required_classes)
-    user.attributes = {:object_class => classes}
-    assert_equal([], user.classes -  @user_class.required_classes)
-  end
+      user = @user_class.new("XXX")
+      assert_equal([], user.classes -  @user_class.required_classes)
+      user.attributes = {:object_class => classes}
+      assert_equal([], user.classes -  @user_class.required_classes)
+    end
   end
 end
