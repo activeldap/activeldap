@@ -17,22 +17,6 @@ class TestAttributes < Test::Unit::TestCase
     assert_nil(user.__send__(:to_real_attribute_name, "objectclass", false))
   end
 
-  def test_protect_object_class_from_mass_assignment
-    classes = @user_class.required_classes + ["inetOrgPerson"]
-    user = @user_class.new(:uid => "XXX", :object_class => classes)
-    assert_equal(["inetOrgPerson"],
-                 user.classes -  @user_class.required_classes)
-
-    user = @user_class.new(:uid => "XXX", :object_class => ['inetOrgPerson'])
-    assert_equal(["inetOrgPerson"],
-                 user.classes -  @user_class.required_classes)
-
-    user = @user_class.new("XXX")
-    assert_equal([], user.classes -  @user_class.required_classes)
-    user.attributes = {:object_class => classes}
-    assert_equal([], user.classes -  @user_class.required_classes)
-  end
-
   def test_normalize_attribute
     assert_normalize_attribute(["usercertificate", [{"binary" => []}]],
                                "userCertificate",
@@ -172,5 +156,21 @@ class TestAttributes < Test::Unit::TestCase
       alice = @user_class.new(attributes)
       assert_equal("Alice", alice.cn)
     end
+
+  def test_forbid_object_class
+    classes = @user_class.required_classes + ["inetOrgPerson"]
+    user = @user_class.new(:uid => "XXX", :object_class => classes)
+    assert_equal(["inetOrgPerson"],
+                 user.classes -  @user_class.required_classes)
+
+    user = @user_class.new(:uid => "XXX", :object_class => ['inetOrgPerson'])
+    assert_equal(["inetOrgPerson"],
+                 user.classes -  @user_class.required_classes)
+
+    user = @user_class.new("XXX")
+    assert_equal([], user.classes -  @user_class.required_classes)
+    user.attributes = {:object_class => classes}
+    assert_equal([], user.classes -  @user_class.required_classes)
+  end
   end
 end
