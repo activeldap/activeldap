@@ -679,7 +679,8 @@ module ActiveLdap
         self.classes = initial_classes
         self.dn = attributes
       when Hash
-        classes, attributes = extract_object_class(attributes)
+        attributes = attributes.clone
+        classes = extract_object_class!(attributes)
         self.classes = classes | initial_classes
         normalized_attributes = {}
         attributes.each do |key, value|
@@ -1028,18 +1029,16 @@ module ActiveLdap
       @local_entry_attribute ||= connection.entry_attribute([])
     end
 
-    def extract_object_class(attributes)
+    def extract_object_class!(attributes)
       classes = []
-      attrs = {}
-      attributes.each do |key, value|
-        key = key.to_s
-        if /\Aobject_?class\z/i =~ key
-          classes.concat(value.to_a)
-        else
-          attrs[key] = value
+      attributes.keys.each do |key|
+        string_key = key.to_s
+        if /\Aobject_?class\z/i =~ string_key
+          classes.concat(attributes[key].to_a)
+          attributes.delete(key)
         end
       end
-      [classes, attributes]
+      classes
     end
 
     def init_base
@@ -1057,7 +1056,8 @@ module ActiveLdap
       @new_entry = false
       @dn_is_base = false
       @ldap_data = attributes
-      classes, attributes = extract_object_class(attributes)
+      attributes = attributes.clone
+      classes = extract_object_class!(attributes)
       self.classes = classes
       self.dn = dn
       initialize_attributes(attributes)

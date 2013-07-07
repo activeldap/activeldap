@@ -91,7 +91,7 @@ module ActiveLdap
       end
 
       @ldap_data.update(attributes)
-      classes, attributes = extract_object_class(attributes)
+      classes = extract_object_class!(attributes)
       self.classes = classes
       self.attributes = attributes
       @new_entry = false
