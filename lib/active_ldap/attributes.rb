@@ -140,35 +140,26 @@ module ActiveLdap
     end
 
     private
-    def sanitize_for_mass_assignment(attributes, role=nil)
-      role ||= :default
-      authorizer = mass_assignment_authorizer(role)
-      black_list_p =
-        authorizer.is_a?(ActiveModel::MassAssignmentSecurity::BlackList)
-
-      always_needless_attributes = {}
-      needless_attributes = {}
-
+    def sanitize_for_mass_assignment(new_attributes)
       _dn_attribute = nil
       begin
         _dn_attribute = dn_attribute_with_fallback
       rescue DistinguishedNameInvalid
       end
+      always_needless_attributes = {}
       [_dn_attribute, 'objectClass'].compact.each do |name|
         always_needless_attributes[to_real_attribute_name(name)] = true
       end
-      authorizer.each do |name|
-        needless_attributes[to_real_attribute_name(name)] = black_list_p
-      end
 
-      sanitized_attributes = attributes.collect do |key, value|
+      sanitized_attributes = new_attributes.collect do |key, value|
         key = _dn_attribute if ["id", "dn"].include?(key.to_s)
         [to_real_attribute_name(key) || key, value]
       end
       sanitized_attributes = sanitized_attributes.reject do |key, value|
-        always_needless_attributes[key] or needless_attributes[key]
+        always_needless_attributes[key]
       end
-      sanitized_attributes
+
+      super(sanitized_attributes)
     end
 
     def normalize_attribute_name(name)

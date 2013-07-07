@@ -55,7 +55,7 @@ ActiveLdap::Base.class_eval do
   include ActiveLdap::Persistence
 
   include ActiveLdap::Associations
-  include ActiveModel::MassAssignmentSecurity
+  include ActiveModel::ForbiddenAttributesProtection
   include ActiveLdap::Attributes
   include ActiveLdap::AttributeMethods
   include ActiveLdap::AttributeMethods::BeforeTypeCast
