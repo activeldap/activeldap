@@ -3,7 +3,7 @@ h1. ActiveLdap
 A ruby library for object-oriented LDAP interface.
 
 * Copyright (C) 2004-2006 Will Drewry _<will@alum.bu.edu>_
-* Copyright (C) 2006-2011 Kouhei Sutou _<kou@clear-code.com>_
+* Copyright (C) 2006-2013 Kouhei Sutou _<kou@clear-code.com>_
 
 h2. Description
 
@@ -20,7 +20,7 @@ h2. Prerequisites
 
 - Ruby intepreter :=
 One of them:
-* "Ruby":http://www.ruby-lang.org (1.8.x or 1.9.x)
+* "Ruby":http://www.ruby-lang.org (1.9.3 or 2.0.x)
 * "JRuby":http://www.jruby.org/
 
 See the above links for installation.
