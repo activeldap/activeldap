@@ -1,5 +1,53 @@
 h1. News
 
+h2(#4-0-0). 4.0.0: 2013-07-08
+
+h3. Improvements
+
+* [activeldap-discuss] Added {ActiveLdap::Entry} for convenient.
+  [Suggested by Craig White]
+* [GitHub:#45] Ensured that {ActiveLdap::Persistence#save!} returns
+  true on success. But you should use {ActiveLdap::Persistence#save}
+  to determine success or failure by return value.
+  [Reported by Suggested by Erik M Jacobs]
+* [GitHub:#52] Improved binary data handling on Ruby 1.9.3.
+  [Patch by Carl P. Corliss]
+* [GitHub:#53] Supported lower case hashed password.
+  [Patch by jpiotro3]
+* [GitHub:#51] Supported implicit railtie load by
+  @require "active_ldap"@.
+  [Patch by mperrando]
+* [GitHub:#62] Improved JNDI communication error handling.
+  [Patch by Ryosuke Yamazaki]
+* [GitHub:#61] Supported Rails 4. Dropped Rails 3 support.
+  [Patch by superscott]
+
+h3. Fixes
+
+* [GitHub:#44] Fixed a typo in document.
+  [Patch by Vaucher Philippe]
+* [GitHub:#50] Fixed a stack overflow during SASL bind to a
+  unresponsive LDAP server.
+  [Patch by pwillred]
+* [GitHub:#54] Fixed a link in document.
+  [Patch by marco]
+* [GitHub:#57] Fixed a wrong blank value detection for "false".
+  [Reported by Robin Doer]
+
+h3. Thanks
+
+* Craig White
+* Vaucher Philippe
+* Erik M Jacobs
+* pwillred
+* Carl P. Corliss
+* jpiotro3
+* marco
+* mperrando
+* Robin Doer
+* Ryosuke Yamazaki
+* superscott
+
 h2(#3-2-2). 3.2.2: 2012-09-01
 
 * Supported entry creation by direct ActiveLdap::Base use.
