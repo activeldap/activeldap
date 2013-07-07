@@ -72,40 +72,40 @@ class TestAttributes < Test::Unit::TestCase
   end
 
   class TestMassAssignment < self
-  def test_attr_protected
-    user = @user_class.new(:uid => "XXX")
-    assert_equal("XXX", user.uid)
-    user.attributes = {:uid => "ZZZ"}
-    assert_equal("XXX", user.uid)
+    def test_attr_protected
+      user = @user_class.new(:uid => "XXX")
+      assert_equal("XXX", user.uid)
+      user.attributes = {:uid => "ZZZ"}
+      assert_equal("XXX", user.uid)
 
-    user = @user_class.new(:sn => "ZZZ")
-    assert_equal("ZZZ", user.sn)
+      user = @user_class.new(:sn => "ZZZ")
+      assert_equal("ZZZ", user.sn)
 
-    user = @user_class.new(:uid => "XXX", :sn => "ZZZ")
-    assert_equal("XXX", user.uid)
-    assert_equal("ZZZ", user.sn)
+      user = @user_class.new(:uid => "XXX", :sn => "ZZZ")
+      assert_equal("XXX", user.uid)
+      assert_equal("ZZZ", user.sn)
 
-    @user_class.attr_protected :sn
-    user = @user_class.new(:sn => "ZZZ")
-    assert_nil(user.sn)
+      @user_class.attr_protected :sn
+      user = @user_class.new(:sn => "ZZZ")
+      assert_nil(user.sn)
 
-    sub_user_class = Class.new(@user_class)
-    sub_user_class.ldap_mapping :dn_attribute => "uid"
-    user = sub_user_class.new(:uid => "XXX", :sn => "ZZZ")
-    assert_equal("XXX", user.uid)
-    assert_nil(user.sn)
+      sub_user_class = Class.new(@user_class)
+      sub_user_class.ldap_mapping :dn_attribute => "uid"
+      user = sub_user_class.new(:uid => "XXX", :sn => "ZZZ")
+      assert_equal("XXX", user.uid)
+      assert_nil(user.sn)
 
-    sub_user_class.attr_protected :cn
-    user = sub_user_class.new(:uid => "XXX", :sn => "ZZZ", :cn => "Common Name")
-    assert_equal("XXX", user.uid)
-    assert_nil(user.sn)
-    assert_nil(user.cn)
+      sub_user_class.attr_protected :cn
+      user = sub_user_class.new(:uid => "XXX", :sn => "ZZZ", :cn => "Common Name")
+      assert_equal("XXX", user.uid)
+      assert_nil(user.sn)
+      assert_nil(user.cn)
 
-    user = @user_class.new(:uid => "XXX", :sn => "ZZZ", :cn => "Common Name")
-    assert_equal("XXX", user.uid)
-    assert_nil(user.sn)
-    assert_equal("Common Name", user.cn)
-  end
+      user = @user_class.new(:uid => "XXX", :sn => "ZZZ", :cn => "Common Name")
+      assert_equal("XXX", user.uid)
+      assert_nil(user.sn)
+      assert_equal("Common Name", user.cn)
+    end
   end
 
   private
