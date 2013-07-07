@@ -1177,8 +1177,8 @@ module ActiveLdap
 
     def split_dn_value(value)
       dn_value = relative_dn_value = nil
+      dn_value = value if value.is_a?(DN)
       begin
-        dn_value = value if value.is_a?(DN)
         dn_value ||= DN.parse(value)
       rescue DistinguishedNameInvalid
         begin
