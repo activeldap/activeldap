@@ -831,15 +831,11 @@ module ActiveLdap
       assign_attributes(new_attributes)
     end
 
-    def assign_attributes(new_attributes, options={})
+    def assign_attributes(new_attributes)
       return if new_attributes.blank?
 
       _schema = _local_entry_attribute = nil
-      if options[:without_protection]
-        targets = new_attributes
-      else
-        targets = sanitize_for_mass_assignment(new_attributes, options[:role])
-      end
+      targets = sanitize_for_mass_assignment(new_attributes)
       targets.each do |key, value|
         setter = "#{key}="
         unless respond_to?(setter)
