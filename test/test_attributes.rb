@@ -173,11 +173,10 @@ class TestAttributes < Test::Unit::TestCase
       assert_equal([], user.classes -  @user_class.required_classes)
     end
 
-    def test_not_rename
+    def test_rename
       make_temporary_user(:simple => true) do |user,|
-        original_id = user.id
         assert_true(user.update_attributes(:id => "user2"))
-        assert_equal(original_id, user.id)
+        assert_equal("user2", user.id)
       end
     end
   end
