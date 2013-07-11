@@ -142,7 +142,7 @@ module ActiveLdap
         result = log(name, info) do
           begin
             @connection.send(method, *args, &block)
-          rescue Errno::EPIPE
+          rescue Errno::EPIPE, Errno::ECONNRESET
             raise ConnectionError, "#{$!.class}: #{$!.message}"
           end
         end
