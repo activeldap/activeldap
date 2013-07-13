@@ -1,15 +1,15 @@
 # -*- ruby -*-
 
-require 'thread'
-require 'find'
-require 'pathname'
-require 'erb'
+require "thread"
+require "find"
+require "pathname"
+require "erb"
 
-require 'rubygems'
-require 'bundler/setup'
+require "rubygems"
+require "bundler/setup"
 
-require 'bundler/gem_helper'
-require 'rake/testtask'
+require "bundler/gem_helper"
+require "rake/testtask"
 require "rake/clean"
 require "yard"
 
