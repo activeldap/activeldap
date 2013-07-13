@@ -43,10 +43,10 @@
 
 	<h3 id="activeldap-latest">ActiveLdap: 最新リリース</h3>
 	<p>
-	  2012-09-01にリリースされた<a href="activeldap/ja/file.news.html#3-2-2">3.2.2</a>が最新リリースです。
+	  2013-07-13にリリースされた<a href="activeldap/ja/file.news.html#4-0-0">4.0.0</a>が最新リリースです。
         </p>
 	<p>
-	  このバージョンはRails 3.2.8に対応しています。
+	  このバージョンはRails 4.0.0に対応しています。
         </p>
 	<h3 id="activeldap-install">ActiveLdap: インストール</h3>
         <p>
