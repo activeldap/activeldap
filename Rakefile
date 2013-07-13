@@ -4,6 +4,7 @@ require "thread"
 require "find"
 require "pathname"
 require "erb"
+require "yaml"
 
 require "rubygems"
 require "bundler/setup"
