@@ -1,6 +1,6 @@
 h1. News
 
-h2(#4-0-0). 4.0.0: 2013-07-08
+h2(#4-0-0). 4.0.0: 2013-07-13
 
 h3. Improvements
 
@@ -21,7 +21,8 @@ h3. Improvements
   [Patch by Ryosuke Yamazaki]
 * [GitHub:#61] Supported Rails 4. Dropped Rails 3 support.
   [Patch by superscott]
-
+* [GitHub:#63] Handled Errno::ECONNRESET as connection in
+  net-ldap adapter [Patch by mpoornima]
 h3. Fixes
 
 * [GitHub:#44] Fixed a typo in document.
@@ -47,6 +48,7 @@ h3. Thanks
 * Robin Doer
 * Ryosuke Yamazaki
 * superscott
+* mpoornima
 
 h2(#3-2-2). 3.2.2: 2012-09-01
 
