@@ -13,7 +13,7 @@ module ActiveLdap
       @must = []
       @may = []
       @object_classes = []
-      register(schema.attribute('objectClass'))
+      register(schema.attribute('objectClass')) if schema
       object_classes.each do |objc|
         # get all attributes for the class
         object_class = schema.object_class(objc)
@@ -54,6 +54,10 @@ module ActiveLdap
       else
         nil
       end
+    end
+
+    def exist?(name)
+      not normalize(name).nil?
     end
 
     def all_names
