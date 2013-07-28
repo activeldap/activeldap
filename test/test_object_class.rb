@@ -71,4 +71,23 @@ class TestObjectClass < Test::Unit::TestCase
       assert_raises(TypeError) {group.add_class(:posixAccount)}
     end
   end
+
+  class TestRemoveClass < self
+    def test_clear_existing_attributes
+      make_temporary_user(:simple => true) do |user, password|
+        user.add_class("inetOrgPerson")
+        user.given_name = "new given name"
+
+        original_attributes = user.attributes
+        user.remove_class("inetOrgPerson")
+        new_attributes = user.attributes
+        original_attributes.delete("objectClass")
+        removed_attributes = original_attributes.reject do |key, value|
+          value == new_attributes[key]
+        end
+        assert_equal({"givenName" => "new given name"},
+                     removed_attributes)
+      end
+    end
+  end
 end

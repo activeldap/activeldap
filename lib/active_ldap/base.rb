@@ -931,6 +931,17 @@ module ActiveLdap
       end
     end
 
+    def clear_removed_attributes_data(removed_attributes)
+      return if removed_attributes.empty?
+      removed_entry_attribute = EntryAttribute.new(nil, [])
+      removed_attributes.each do |attribute|
+        removed_entry_attribute.register(attribute)
+      end
+      @data.reject! do |key, _|
+        removed_entry_attribute.exist?(key)
+      end
+    end
+
     def schema
       @schema ||= super
     end

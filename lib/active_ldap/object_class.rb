@@ -28,8 +28,12 @@ module ActiveLdap
       new_classes = target_classes.flatten.compact.uniq
       assert_object_classes(new_classes)
       if new_classes.sort != classes.sort
+        original_attributes = must + may
         set_attribute('objectClass', new_classes)
         clear_object_class_based_cache
+        new_attributes = must + may
+        removed_attributes = original_attributes - new_attributes
+        clear_removed_attributes_data(removed_attributes)
       end
     end
     alias_method(:classes=, :replace_class)
