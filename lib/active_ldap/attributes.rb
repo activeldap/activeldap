@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*- 
 module ActiveLdap
   module Attributes
     def self.included(base)
