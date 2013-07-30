@@ -174,6 +174,8 @@ module ActiveLdap
         # Is it really proper location for setting encoding?
         if attribute.binary? and value.respond_to?(:force_encoding)
           value.force_encoding("ASCII-8BIT")
+        elsif value.is_a?(String)
+          value.try(:encode!, value.encoding,  value.encoding, :invalid => :replace)
         end
         next if self.class.blank_value?(value)
         validate_ldap_value(attribute, name, value)
