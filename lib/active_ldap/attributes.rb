@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*- 
 module ActiveLdap
   module Attributes
     def self.included(base)
@@ -17,7 +16,7 @@ module ActiveLdap
         when Array
           value.all? {|val| blank_value?(val)}
         when String
-          /\A\s*\z/ === value.try(:encode!, value.encoding,  value.encoding, :invalid => :replace)
+          /\A\s*\z/ === value
         when true, false
           false
         when nil
