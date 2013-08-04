@@ -94,7 +94,7 @@ module ActiveLdap
 
       # has_many
       #
-      # This defines a method for an extension class expand an 
+      # This defines a method for an extension class expand an
       # existing multi-element attribute into ActiveLdap objects.
       # This discards any calls which result in entries that
       # don't exist in LDAP!
