@@ -638,8 +638,8 @@ module ActiveLdap
            try_reconnect = options[:try_reconnect]
         else
            try_reconnect = true
-        end 
-        
+        end
+
         search(:base => "",
                :scope => :base,
                :attributes => attrs,
