@@ -20,6 +20,10 @@ module ActiveLdap
         PRINTABLE_CHARACTER = /[#{printable_character_source}]/ #
         UNPRINTABLE_CHARACTER = /[^#{printable_character_source}]/ #
 
+        def binary?
+          false
+        end
+
         def type_cast(value)
           value
         end
@@ -362,6 +366,19 @@ module ActiveLdap
             return _("%s has no mailbox") % original_value.inspect
           end
 
+          nil
+        end
+      end
+
+      class OctetString < Base
+        SYNTAXES["1.3.6.1.4.1.1466.115.121.1.40"] = self
+
+        def binary?
+          true
+        end
+
+        private
+        def validate_normalized_value(value, original_value)
           nil
         end
       end

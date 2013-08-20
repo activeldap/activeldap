@@ -325,7 +325,12 @@ module ActiveLdap
         super(id, schema, "ldapSyntaxes")
         @id = id
         @name = nil if @name == @id
-        @validator = Syntaxes[@id]
+        @built_in_syntax = Syntaxes[@id]
+      end
+
+      def binary?
+        return true if @built_in_syntax and @built_in_syntax.binary?
+        binary_transfer_required? or !human_readable?
       end
 
       def binary_transfer_required?
@@ -341,24 +346,24 @@ module ActiveLdap
       end
 
       def validate(value)
-        if @validator
-          @validator.validate(value)
+        if @built_in_syntax
+          @built_in_syntax.validate(value)
         else
           nil
         end
       end
 
       def type_cast(value)
-        if @validator
-          @validator.type_cast(value)
+        if @built_in_syntax
+          @built_in_syntax.type_cast(value)
         else
           value
         end
       end
 
       def normalize_value(value)
-        if @validator
-          @validator.normalize_value(value)
+        if @built_in_syntax
+          @built_in_syntax.normalize_value(value)
         else
           value
         end
@@ -413,8 +418,8 @@ module ActiveLdap
 
       # binary?
       #
-      # Returns true if the given attribute's syntax
-      # is X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
+      # Returns true if the given attribute's syntax is binary syntax,
+      # X-NOT-HUMAN-READABLE or X-BINARY-TRANSFER-REQUIRED
       def binary?
         @binary
       end
@@ -503,7 +508,7 @@ module ActiveLdap
         @syntax = @schema.ldap_syntax(@syntax) if @syntax
         if @syntax
           @binary_required = @syntax.binary_transfer_required?
-          @binary = (@binary_required or !@syntax.human_readable?)
+          @binary = @syntax.binary?
           @derived_syntax = @syntax
         else
           @binary_required = false
