@@ -7,7 +7,7 @@ h2. Install
 To install, simply add the following code to your Gemfile:
 
 <pre>
-gem 'activeldap'
+gem 'activeldap', :require => 'active_ldap/railtie'
 </pre>
 
 You should also depend on an LDAP adapter such as Net::LDAP
@@ -19,13 +19,6 @@ gem 'ruby-ldap'
 
 Bundler will install the gems automatically when you run
 'bundle install'.
-
-You also need to include the ActiveLdap railtie in
-config/application.rb, after the other railties:
-
-<pre>
-require "active_ldap/railtie"
-</pre>
 
 h2. Configuration
 
