@@ -119,9 +119,6 @@ module ActiveLdap
 
       def modify_rdn(dn, new_rdn, delete_old_rdn, new_superior, options={})
         super do |_dn, _new_rdn, _delete_old_rdn, _new_superior|
-          if _new_superior
-            raise NotImplemented.new(_("modify RDN with new superior"))
-          end
           info = {
             :name => "modify: RDN",
             :dn => _dn,
@@ -132,7 +129,8 @@ module ActiveLdap
           execute(:rename, info,
                   :olddn => _dn,
                   :newrdn => _new_rdn,
-                  :delete_attributes => _delete_old_rdn)
+                  :delete_attributes => _delete_old_rdn,
+                  :new_superior => _new_superior)
         end
       end
 

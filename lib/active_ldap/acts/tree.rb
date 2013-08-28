@@ -56,9 +56,9 @@ module ActiveLdap
 
       def parent=(entry)
         if entry.is_a?(String) or entry.is_a?(DN)
-          base = entry
+          base = entry.to_s
         elsif entry.respond_to?(:dn)
-          base = entry.dn
+          base = entry.dn.to_s
           if entry.respond_to?(:clear_association_cache)
             entry.clear_association_cache
           end
@@ -66,12 +66,20 @@ module ActiveLdap
           message = _("parent must be an entry or parent DN: %s") % entry.inspect
           raise ArgumentError, message
         end
+
         unless new_entry?
-          self.class.delete_entry(dn, :connection => connection)
-          @new_entry = true
+          begin
+            self.class.modify_rdn_entry(dn, "#{dn_attribute}=#{id}",
+                                        true, base,
+                                        :connection => connection)
+          rescue NotImplemented
+            self.class.delete_entry(dn, :connection => connection)
+            @new_entry = true
+          end
         end
+
         self.dn = "#{dn_attribute}=#{id},#{base}"
-        save
+        save if new_entry?
       end
     end
   end
