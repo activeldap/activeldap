@@ -90,15 +90,15 @@ class TestBase < Test::Unit::TestCase
     make_ou("sub,ou=users")
     make_temporary_user(:simple => true) do |user,|
       user.id = "user2,ou=sub,#{@user_class.base}"
-        assert_true(user.save)
+      assert_true(user.save)
 
-        found_user = nil
-        assert_nothing_raised do
-          found_user = @user_class.find("user2")
-        end
-        base = @user_class.base
-        assert_equal("#{@user_class.dn_attribute}=user2,ou=sub,#{base}",
-                     found_user.dn.to_s)
+      found_user = nil
+      assert_nothing_raised do
+        found_user = @user_class.find("user2")
+      end
+      base = @user_class.base
+      assert_equal("#{@user_class.dn_attribute}=user2,ou=sub,#{base}",
+                   found_user.dn.to_s)
     end
   end
 
