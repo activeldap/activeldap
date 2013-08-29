@@ -70,7 +70,7 @@ module ActiveLdap
           if old_dn_base == new_dn_base
             new_superior = nil
           else
-            new_superior = new_dn_base
+            new_superior = new_dn_base.to_s
           end
           modify_rdn_entry(@original_dn,
                            "#{dn_attribute}=#{DN.escape_value(new_dn_value)}",
