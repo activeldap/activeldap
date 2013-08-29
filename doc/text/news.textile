@@ -1,5 +1,31 @@
 h1. News
 
+h2(#4-0-1). 4.0.1: 2013-08-29
+
+h3. Improvements
+
+* Added ActiveLdap::EntryAttribute#exist?.
+* [GitHub:#66] Improved Active Directory support.
+  Binary data can be validated correctly. [Reported by Nowhere Man]
+* [GitHub:#6][GitHub:#69] Improved setup description in tutorial.
+  [Reported by Radosław Antoniuk] [Patch by Francisco Miguel Biete]
+* [GitHub:#56] Supported moving sub-tree. It requires Ruby/LDAP 0.9.13 or later,
+  JRuby or net-ldap 0.5.0 or later. (net-ldap 0.5.0 isn't released yet.)
+  [Reported by Jean-François Rioux]
+
+h3. Fixes
+
+* [GitHub:#65] Removed removed attributes values by removing
+  objectClasses. [Reported by mbab]
+
+h3. Thanks
+
+* mbab
+* Nowhere Man
+* Radosław Antoniuk
+* Francisco Miguel Biete
+* Jean-François Rioux
+
 h2(#4-0-0). 4.0.0: 2013-07-13
 
 h3. Improvements
