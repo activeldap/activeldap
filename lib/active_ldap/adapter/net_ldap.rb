@@ -145,9 +145,13 @@ module ActiveLdap
           end
         end
         message = nil
-        if result.is_a?(Hash)
+        case result
+        when Hash
           message = result[:errorMessage]
           result = result[:resultCode]
+        when Net::LDAP::PDU
+          message = result.error_message
+          result = result.result_code
         end
         unless result.zero?
           klass = LdapError::ERRORS[result]
