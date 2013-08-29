@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
 "POT-Creation-Date: 2011-11-20 22:17+0900\n"
-"PO-Revision-Date: 2013-08-29 19:50+0900\n"
+"PO-Revision-Date: 2013-08-29 20:41+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,14 +12,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../README.textile:1
-#, fuzzy
 msgid "h1. ActiveLdap"
-msgstr "では何故 ActiveLdap なのか？"
+msgstr ""
 
 #: ../../README.textile:3
-#, fuzzy
 msgid "A ruby library for object-oriented LDAP interface."
-msgstr "Ruby用オブジェクト指向<placeholder-1/>インターフェイス。"
+msgstr "Ruby用オブジェクト指向LDAPインターフェイス。"
 
 #: ../../README.textile:5
 msgid ""
@@ -28,19 +26,17 @@ msgid ""
 msgstr ""
 
 #: ../../README.textile:8
-#, fuzzy
 msgid "h2. Description"
-msgstr "説明"
+msgstr "h2. 説明"
 
 #: ../../README.textile:10
-#, fuzzy
 msgid ""
 "'ActiveLdap' is a ruby library which provides a clean\n"
 "objected oriented interface to LDAP library.  It was\n"
 "inspired by ActiveRecord. This is not nearly as clean or as\n"
 "flexible as ActiveRecord, but it is still trivial to define\n"
 "new objects and manipulate them with minimal difficulty."
-msgstr "‘ActiveLdap’は<placeholder-1/>ライブラリをきれいなオブジェクト指向APIで利用するためのライブラリです。ActiveRecordにインスパイアされています。ActiveRecordほどきれいさや柔軟性がないかもしれませんが、ほとんど同じように新しいオブジェクトを作ったり操作したりできます。"
+msgstr "'ActiveLdap'はLDAPライブラリをきれいなオブジェクト指向APIで利用するためのライブラリです。ActiveRecordにインスパイアされています。ActiveRecordほどきれいさや柔軟性がないかもしれませんが、ほとんど同じように新しいオブジェクトを作ったり操作したりできます。"
 
 #: ../../README.textile:16
 msgid ""
@@ -49,9 +45,8 @@ msgid ""
 msgstr ""
 
 #: ../../README.textile:19
-#, fuzzy
 msgid "h2. Prerequisites"
-msgstr "必要なもの"
+msgstr "h2. 必要なもの"
 
 #: ../../README.textile:21
 msgid ""
@@ -89,9 +84,8 @@ msgid ""
 msgstr "Active RecordやActive Resoruceなどモデルフレームワークを作るためのツールキット。"
 
 #: ../../README.textile:42
-#, fuzzy
 msgid "h2. Notes"
-msgstr "注意"
+msgstr "h2. 注意"
 
 #: ../../README.textile:44
 msgid "* Only GSSAPI SASL support exists due to Ruby/LDAP limitations"
@@ -107,9 +101,8 @@ msgid "See \"Rails\":doc/text/rails.textile page for Rails integration."
 msgstr "Railsと一緒に使う方法は<placeholder-1/>ページを見てください。"
 
 #: ../../README.textile:50
-#, fuzzy
 msgid "h2. Licence"
-msgstr "ライセンス"
+msgstr "h2. ライセンス"
 
 #: ../../README.textile:52
 msgid ""
