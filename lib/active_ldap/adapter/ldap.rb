@@ -163,7 +163,7 @@ module ActiveLdap
             :new_superior => _new_superior,
             :delete_old_rdn => _delete_old_rdn
           }
-          if _new_superior
+          if rename_available_p
             execute(:rename, info,
                     _dn, _new_rdn, _new_superior, _delete_old_rdn, [], [])
           else
