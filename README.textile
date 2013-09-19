@@ -45,7 +45,8 @@ h2. Notes
 
 h2. Rails
 
-See "Rails":doc/text/rails.textile page for Rails integration.
+See "Rails":file.rails.html (doc/text/rails.textile in the repository)
+page for Rails integration.
 
 h2. Licence
 
