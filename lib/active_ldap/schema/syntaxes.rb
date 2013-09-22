@@ -429,6 +429,17 @@ module ActiveLdap
           super
         end
       end
+
+      class ObjectSecurityDescriptor < OctetString
+        # @see http://tools.ietf.org/html/draft-armijo-ldap-syntax-00
+        #   Object-Security-Descriptor: 1.2.840.113556.1.4.907
+        #
+        #   Encoded as an Octet-String (OID 1.3.6.1.4.1.1466.115.121.1.40)
+        #
+        # @see http://msdn.microsoft.com/en-us/library/cc223229.aspx
+        #   String(NT-Sec-Desc) 1.2.840.113556.1.4.907
+        SYNTAXES["1.2.840.113556.1.4.907"] = self
+      end
     end
   end
 end
