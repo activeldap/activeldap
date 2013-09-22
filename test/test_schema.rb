@@ -556,4 +556,77 @@ class TestSchema < Test::Unit::TestCase
     attribute_hash[:syntax] = syntax.id if syntax
     assert_equal(expected, attribute_hash)
   end
+
+  class TestAttribute < self
+    class TestApplyEncoding < self
+      class TestNotBinary < self
+        def setup
+          super
+          uid_schema =
+            "( 0.9.2342.19200300.100.1.1 NAME ( 'uid' 'userid' ) " +
+            "DESC 'RFC1274: user identifier' EQUALITY caseIgnoreMatch " +
+            "SUBSTR caseIgnoreSubstringsMatch " +
+            "SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256} )"
+          entries = {
+            "attributeTypes" => [uid_schema],
+          }
+          schema = ActiveLdap::Schema.new(entries)
+          @attribute = schema.attribute("uid")
+        end
+
+        def test_do_nothing
+          value = ""
+          value.force_encoding("UTF-8")
+          @attribute.apply_encoding(value)
+          assert_equal(Encoding::UTF_8, value.encoding)
+        end
+      end
+
+      class TestBinary < self
+        def setup
+          super
+          jpeg_schema =
+            "( 1.3.6.1.4.1.1466.115.121.1.28 DESC 'JPEG' " +
+            "X-NOT-HUMAN-READABLE 'TRUE' )"
+          jpeg_photo_schema =
+            "( 0.9.2342.19200300.100.1.60 NAME 'jpegPhoto' " +
+            "DESC 'RFC2798: a JPEG image' SYNTAX " +
+            "1.3.6.1.4.1.1466.115.121.1.28 )"
+          entries = {
+            "attributeTypes" => [jpeg_photo_schema],
+            "ldapSyntaxes" => [jpeg_schema],
+          }
+          schema = ActiveLdap::Schema.new(entries)
+          @attribute = schema.attribute("jpegPhoto")
+        end
+
+        def test_string
+          value = ""
+          value.force_encoding("UTF-8")
+          @attribute.apply_encoding(value)
+          assert_equal(Encoding::ASCII_8BIT, value.encoding)
+        end
+
+        def test_array
+          values = [""]
+          values.each do |value|
+            value.force_encoding("UTF-8")
+          end
+          @attribute.apply_encoding(values)
+          assert_equal([Encoding::ASCII_8BIT],
+                       values.collect(&:encoding))
+        end
+
+        def test_hash
+          values = {:binary => ""}
+          values.each_value do |value|
+            value.force_encoding("UTF-8")
+          end
+          @attribute.apply_encoding(values)
+          assert_equal([Encoding::ASCII_8BIT],
+                       values.each_value.collect(&:encoding))
+        end
+      end
+    end
+  end
 end

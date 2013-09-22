@@ -424,6 +424,26 @@ module ActiveLdap
         @binary
       end
 
+      # Sets binary encoding to value if the given attribute's syntax
+      # is binary syntax. Does nothing otherwise.
+      # @return [void]
+      def apply_encoding(value)
+        return unless binary?
+        case value
+        when Hash
+          value.each_value do |sub_value|
+            apply_encoding(sub_value)
+          end
+        when Array
+          value.each do |sub_value|
+            apply_encoding(sub_value)
+          end
+        else
+          return unless value.respond_to?(:force_encoding)
+          value.force_encoding("ASCII-8BIT")
+        end
+      end
+
       # binary_required?
       #
       # Returns true if the value MUST be transferred in binary
