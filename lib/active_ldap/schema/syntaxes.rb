@@ -278,6 +278,10 @@ module ActiveLdap
       class JPEG < Base
         SYNTAXES["1.3.6.1.4.1.1466.115.121.1.28"] = self
 
+        def binary?
+          true
+        end
+
         private
         def validate_normalized_value(value, original_value)
           if value.unpack("n")[0] == 0xffd8
