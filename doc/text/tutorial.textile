@@ -420,9 +420,7 @@ irb> Group.find(:all, :filter => {:cn => 'dev*', :guid => 1 }).collect {|group| 
 => ["develop", "developers", "sys", "sysadmin"]
 </pre>
 
-You can build complex queries combining the hash syntax with arrays and @:or@ and @:and@ operators
-
-retrieving all users whose name contains 'john' or cn ends with 'smith' or contains 'liz'
+You can build complex queries combining the hash syntax with arrays and @:or@ and @:and@ operators retrieving all users whose name contains 'john' or cn ends with 'smith' or contains 'liz'
 
 <pre>
 irb> User.find(:all, filter: [:or, [:or, { :cn => '*smith', :name => '*john*'} ], { cn: '*liz*' }]).collect(&:cn)
