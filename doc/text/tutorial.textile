@@ -404,31 +404,31 @@ It is also possible to override :attribute and :value by specifying :filter. Thi
 argument allows the direct specification of a LDAP filter to retrieve objects by.
 
 h5. Using the :filter option
- 
- The filter option lets you pass in an ldap query string. 
- For example retrieving all groups with cn wich starts with @'dev'@ and has @guid@ == 1:
- 
- <pre>
- irb> Group.find(:all, :filter => '(&(cn=dev*)(guid=1))').collect {|group| group.cn}
- => ["develop"]
- </pre>
- 
- It also allows a hash like sintax (sparing you the need to write the query by hand ):
- 
- <pre>
- irb> Group.find(:all, :filter => {:cn => 'dev*', :guid => 1 }).collect {|group| group.cn}
- => ["develop", "developers", "sys", "sysadmin"]
- </pre>
- 
- You can build complex queries combining the hash syntax with arrays and @:or@ and @:and@ operators
- 
- retrieving all users whose name contains 'john' or cn ends with 'smith' or contains 'liz'
- 
- <pre>
- irb> User.find(:all, filter: [:or, [:or, { :cn => '*smith', :name => '*john*'} ], { cn: '*liz*' }]).collect(&:cn)
- => ['john.smith', 'jane.smith', 'john tha ripper', 'liz.taylor', ...]
- </pre>
- 
+
+The filter option lets you pass in an ldap query string.
+For example retrieving all groups with cn wich starts with @'dev'@ and has @guid@ == 1:
+
+<pre>
+irb> Group.find(:all, :filter => '(&(cn=dev*)(guid=1))').collect {|group| group.cn}
+=> ["develop"]
+</pre>
+
+It also allows a hash like sintax (sparing you the need to write the query by hand ):
+
+<pre>
+irb> Group.find(:all, :filter => {:cn => 'dev*', :guid => 1 }).collect {|group| group.cn}
+=> ["develop", "developers", "sys", "sysadmin"]
+</pre>
+
+You can build complex queries combining the hash syntax with arrays and @:or@ and @:and@ operators
+
+retrieving all users whose name contains 'john' or cn ends with 'smith' or contains 'liz'
+
+<pre>
+irb> User.find(:all, filter: [:or, [:or, { :cn => '*smith', :name => '*john*'} ], { cn: '*liz*' }]).collect(&:cn)
+=> ['john.smith', 'jane.smith', 'john tha ripper', 'liz.taylor', ...]
+</pre>
+
 h4. .search
 
 .search is a class method that is accessible from any subclass of Base, and Base.
