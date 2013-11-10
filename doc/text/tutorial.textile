@@ -405,7 +405,7 @@ argument allows the direct specification of a LDAP filter to retrieve objects by
 
 h5. Using the :filter option
 
-The filter option lets you pass in an ldap query string.
+The filter option lets you pass in an LDAP query string.
 For example retrieving all groups with cn wich starts with @'dev'@ and has @guid@ == 1:
 
 <pre>
