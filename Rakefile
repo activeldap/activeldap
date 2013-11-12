@@ -28,10 +28,12 @@ spec = helper.gemspec
 
 version = spec.version.to_s
 
-begin
-  require "gettext_i18n_rails/tasks"
-rescue LoadError
-  puts "gettext_i18n_rails is not installed, you probably should run 'rake gems:install' or 'bundle install'."
+require "gettext/tools/task"
+GetText::Tools::Task.define do |task|
+  task.spec = spec
+  task.files -= Dir.glob("test/**/*.rb")
+  # TODO: Re-support extracting messages from LDAP schema by
+  # ActiveLdap::GetText::Parser.
 end
 
 Packnga::DocumentTask.new(spec) do |task|
