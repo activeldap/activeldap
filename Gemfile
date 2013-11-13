@@ -6,7 +6,7 @@ gemspec
 
 group :test do
   gem "net-ldap"
-  platforms :mri_18, :mri_19 do
+  platforms :mri do
     gem "ruby-ldap"
   end
   platforms :jruby do
