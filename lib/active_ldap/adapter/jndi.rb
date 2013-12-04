@@ -94,8 +94,7 @@ module ActiveLdap
         name = (info || {}).delete(:name) || method
         log(name, info) {@connection.send(method, *args, &block)}
       rescue JndiConnection::CommunicationException, JndiConnection::ServiceUnavailableException => e
-        @connection.unbind if @connection
-        @disconnected = true
+        disconnect! if connecting?
 
         raise ActiveLdap::ConnectionError.new(e.getMessage())
       rescue JndiConnection::NamingException
@@ -105,8 +104,7 @@ module ActiveLdap
           klass ||= ActiveLdap::LdapError
           raise klass, message
         elsif /LDAP response read timed out/ =~ $!.to_s
-          @connection.unbind if @connection
-          @disconnected = true
+          disconnect! if connecting?
 
           raise Timeout::Error.new($!.to_s)
         end
