@@ -42,10 +42,6 @@ module ActiveLdap
       end
     end
 
-    def initialize(*) #:nodoc:
-      run_callbacks(:initialize) { super }
-    end
-
     def destroy #:nodoc:
       run_callbacks(:destroy) { super }
     end
