@@ -6,7 +6,7 @@ class TestCallback < Test::Unit::TestCase
   priority :must
 
   priority :normal
-  def test_callback_after_find_and_after_initialize
+  def test_find
     make_temporary_group do |group|
       found_entries = []
       initialized_entries = []
