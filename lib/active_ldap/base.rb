@@ -689,6 +689,7 @@ module ActiveLdap
         raise ArgumentError, format % attributes.inspect
       end
       yield self if block_given?
+      run_callbacks :initialize unless _initialize_callbacks.empty?
     end
 
     # Returns true if the +comparison_object+ is the same object, or is of
