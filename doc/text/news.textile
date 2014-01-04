@@ -85,6 +85,7 @@ h3. Improvements
   [Patch by superscott]
 * [GitHub:#63] Handled Errno::ECONNRESET as connection in
   net-ldap adapter [Patch by mpoornima]
+
 h3. Fixes
 
 * [GitHub:#44] Fixed a typo in document.
