@@ -233,13 +233,6 @@ module ActiveLdap
         end
       end
 
-      def log_info(name, runtime_in_seconds, info=nil)
-        return unless @logger
-        return unless @logger.debug?
-        message = "LDAP: #{name} (#{'%.1f' % (runtime_in_seconds * 1000)}ms)"
-        @logger.debug(format_log_entry(message, info))
-      end
-
       private
       def ensure_port(method)
         if method == :ssl
@@ -659,43 +652,13 @@ module ActiveLdap
       end
 
       def log(name, info=nil)
-        if block_given?
-          result = nil
-          @instrumenter.instrument("log_info.active_ldap",
-                                   :info => info,
-                                   :name => name) do
-            result = yield
-          end
-          result
-        else
-          log_info(name, 0, info)
-          nil
+        result = nil
+        payload = {:name => name}
+        payload[:info] = info if info
+        @instrumenter.instrument("log_info.active_ldap", payload) do
+          result = yield if block_given?
         end
-      rescue Exception
-        log_info("#{name}: FAILED", 0,
-                 (info || {}).merge(:error => $!.class.name,
-                                    :error_message => $!.message))
-        raise
-      end
-
-      def format_log_entry(message, info=nil)
-        if ActiveLdap::Base.colorize_logging
-          if @@row_even
-            message_color, dump_color = "4;36;1", "0;1"
-          else
-            @@row_even = true
-            message_color, dump_color = "4;35;1", "0"
-          end
-          @@row_even = !@@row_even
-
-          log_entry = "  \e[#{message_color}m#{message}\e[0m"
-          log_entry << ": \e[#{dump_color}m#{info.inspect}\e[0m" if info
-          log_entry
-        else
-          log_entry = message
-          log_entry += ": #{info.inspect}" if info
-          log_entry
-        end
+        result
       end
 
       def ensure_dn_string(dn)

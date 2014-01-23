@@ -23,7 +23,9 @@ module ActiveLdap
       return unless logger.debug?
 
       payload = event.payload
-      name = 'LDAP: %s (%.1fms)' % [payload[:name], event.duration]
+      label = payload[:name]
+      label += ": FAILED" if payload[:info][:exception]
+      name = 'LDAP: %s (%.1fms)' % [label, event.duration]
       info = payload[:info].inspect
 
       if odd?
