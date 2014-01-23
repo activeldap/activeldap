@@ -15,7 +15,7 @@ module ActiveLdap
 
     def initialize
       super
-      @odd_or_even = false
+      @odd = false
     end
 
     def log_info(event)
@@ -27,16 +27,17 @@ module ActiveLdap
       info = payload[:info].inspect
 
       if odd?
-        name_color, dump_color = "4;36;1", "0;1"
+        name = color(name, CYAN, true)
+        info = color(info, nil, true)
       else
-        name_color, dump_color = "4;35;1", "0"
+        name = color(name, MAGENTA, true)
       end
 
-      debug "  \e[#{name_color}m#{name}\e[0m: \e[#{dump_color}m#{info}\e[0m"
+      debug "  #{name} #{info}"
     end
 
     def odd?
-      @odd_or_even = !@odd_or_even
+      @odd = !@odd
     end
 
     def logger
