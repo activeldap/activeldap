@@ -668,10 +668,11 @@ module ActiveLdap
       def log(name, info=nil)
         if block_given?
           result = nil
-          @instrumenter.instrument(
-            "log_info.active_ldap",
-            :info => info,
-            :name => name) { result = yield }
+          @instrumenter.instrument("log_info.active_ldap",
+                                   :info => info,
+                                   :name => name) do
+            result = yield
+          end
           result
         else
           log_info(name, 0, info)
