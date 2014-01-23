@@ -19,9 +19,7 @@ module ActiveLdap
 
       @@row_even = true
 
-      attr_reader :runtime
       def initialize(configuration={})
-        @runtime = 0
         @connection = nil
         @disconnected = false
         @bound = false
@@ -34,11 +32,6 @@ module ActiveLdap
           instance_variable_set("@#{name}", configuration[name])
         end
         @instrumenter = ActiveSupport::Notifications.instrumenter
-      end
-
-      def reset_runtime
-        runtime, @runtime = @runtime, 0
-        runtime
       end
 
       def connect(options={})
