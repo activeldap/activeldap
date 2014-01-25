@@ -1,8 +1,7 @@
-require 'benchmark'
-
 require 'active_ldap/schema'
 require 'active_ldap/entry_attribute'
 require 'active_ldap/ldap_error'
+require 'active_ldap/supported_control'
 
 module ActiveLdap
   module Adapter
@@ -139,6 +138,11 @@ module ActiveLdap
 
       def naming_contexts
         root_dse_values('namingContexts')
+      end
+
+      def supported_control
+        @supported_control ||=
+          SupportedControl.new(root_dse_values("supportedControl"))
       end
 
       def entry_attribute(object_classes)
@@ -631,7 +635,8 @@ module ActiveLdap
                :scope => :base,
                :attributes => attrs,
                :limit => 1,
-               :try_reconnect => try_reconnect) do |dn, attributes|
+               :try_reconnect => try_reconnect,
+               :use_paged_results => false) do |dn, attributes|
           found_attributes = attributes
         end
         found_attributes
