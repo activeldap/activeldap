@@ -71,13 +71,13 @@ module LDAP
       critical = true
 
       loop do
-        ber_string = LDAP::Control.encode( page_size, cookie)
-        control = LDAP::Control.new( LDAP::LDAP_CONTROL_PAGEDRESULTS, ber_string, critical)
+        ber_string = LDAP::Control.encode(page_size, cookie)
+        control = LDAP::Control.new(LDAP::LDAP_CONTROL_PAGEDRESULTS, ber_string, critical)
 
         search_ext(base, scope, filter, attributes,
                                false, [control], nil, 0, 0, limit || 0, &block)
 
-        control = find_paged_results_control( @controls )
+        control = find_paged_results_control(@controls)
         if control then
           returned_size, cookie = control.decode
           page_size = returned_size.to_i if returned_size.to_i > 0
