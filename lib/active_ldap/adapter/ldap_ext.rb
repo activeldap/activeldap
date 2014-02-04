@@ -78,14 +78,14 @@ module LDAP
                                false, [control], nil, 0, 0, limit || 0, &block)
 
         control = find_paged_results_control(@controls)
-        if control then
+        if control
           returned_size, cookie = control.decode
           page_size = returned_size.to_i if returned_size.to_i > 0
         else
           break
         end
 
-        if cookie.empty? then
+        if cookie.empty?
           break
         end
       end
@@ -99,7 +99,7 @@ module LDAP
       limit             = options[:limit]
       use_paged_results = options[:use_paged_results]
       if @@have_search_ext
-        if use_paged_results then
+        if use_paged_results
           paged_search(base, scope, filter, attributes, limit, &block)
         else
           search_ext(base, scope, filter, attributes,
