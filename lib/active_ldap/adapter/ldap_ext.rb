@@ -1,6 +1,7 @@
 require 'ldap'
 require 'ldap/ldif'
 require 'ldap/schema'
+require 'ldap/control'
 
 module LDAP
   unless const_defined?(:LDAP_OPT_ERROR_NUMBER)
@@ -57,10 +58,49 @@ module LDAP
       @@have_search_ext = false
     end
 
-    def search_with_limit(base, scope, filter, attributes, limit, &block)
-      if @@have_search_ext
+    def paged_results_ctl(ctls)
+      ctls.each do |ctl|
+        return ctl if ctl.oid == LDAP::LDAP_CONTROL_PAGEDRESULTS
+      end
+
+      nil
+    end
+
+    def paged_search(base, scope, filter, attributes, limit, &block)
+      # work around a bug with openldap
+      page_size = 126
+      cookie = ''
+      critical = true
+
+      loop do
+        ber_string = LDAP::Control.encode( page_size, cookie)
+        control = LDAP::Control.new( LDAP::LDAP_CONTROL_PAGEDRESULTS, ber_string, critical)
+
         search_ext(base, scope, filter, attributes,
-                   false, nil, nil, 0, 0, limit || 0, &block)
+                               false, [control], nil, 0, 0, limit || 0, &block)
+
+        control = paged_results_ctl( @controls )
+        if control then
+          returned_size, cookie = control.decode
+          page_size = returned_size.to_i if returned_size.to_i > 0
+        else
+          break
+        end
+     
+        if cookie.empty? then
+          break
+        end
+     end
+    end
+
+    def search_with_limit(base, scope, filter, attributes, limit, paged_results, &block)
+      if @@have_search_ext
+        if paged_results then
+          paged_search(base, scope, filter, attributes, limit, &block)
+        else
+          search_ext(base, scope, filter, attributes,
+                     false, nil, nil, 0, 0, limit || 0, &block)
+        end
       else
         i = 0
         search(base, scope, filter, attributes) do |entry|
