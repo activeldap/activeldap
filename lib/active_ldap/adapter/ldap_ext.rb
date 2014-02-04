@@ -86,7 +86,7 @@ module LDAP
         else
           break
         end
-     
+
         if cookie.empty? then
           break
         end
