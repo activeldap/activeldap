@@ -90,7 +90,7 @@ module LDAP
         if cookie.empty? then
           break
         end
-     end
+      end
     end
 
     def search_with_limit(base, scope, filter, attributes, limit, paged_results, &block)
