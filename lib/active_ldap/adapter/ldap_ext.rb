@@ -58,12 +58,10 @@ module LDAP
       @@have_search_ext = false
     end
 
-    def paged_results_ctl(ctls)
-      ctls.each do |ctl|
-        return ctl if ctl.oid == LDAP::LDAP_CONTROL_PAGEDRESULTS
+    def find_paged_results_control(controls)
+      controls.find do |control|
+        control.oid == LDAP::LDAP_CONTROL_PAGEDRESULTS
       end
-
-      nil
     end
 
     def paged_search(base, scope, filter, attributes, limit, &block)
@@ -79,7 +77,7 @@ module LDAP
         search_ext(base, scope, filter, attributes,
                                false, [control], nil, 0, 0, limit || 0, &block)
 
-        control = paged_results_ctl( @controls )
+        control = find_paged_results_control( @controls )
         if control then
           returned_size, cookie = control.decode
           page_size = returned_size.to_i if returned_size.to_i > 0
