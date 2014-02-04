@@ -72,7 +72,9 @@ module LDAP
 
       loop do
         ber_string = LDAP::Control.encode(page_size, cookie)
-        control = LDAP::Control.new(LDAP::LDAP_CONTROL_PAGEDRESULTS, ber_string, critical)
+        control = LDAP::Control.new(LDAP::LDAP_CONTROL_PAGEDRESULTS,
+                                    ber_string,
+                                    critical)
 
         search_ext(base, scope, filter, attributes,
                    false, [control], nil, 0, 0, limit, &block)
