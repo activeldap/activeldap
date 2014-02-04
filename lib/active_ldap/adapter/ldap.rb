@@ -55,8 +55,10 @@ module ActiveLdap
           uri = construct_uri(host, port, method.ssl?)
           with_start_tls = method.start_tls?
           info = {:uri => uri, :with_start_tls => with_start_tls}
-          [log("connect", info) {method.connect(host, port)},
-           uri, with_start_tls]
+          connection = log("connect", info) do
+            method.connect(host, port)
+          end
+          [connection, uri, with_start_tls]
         end
       end
 
