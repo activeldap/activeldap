@@ -1,7 +1,7 @@
-require 'ldap'
-require 'ldap/ldif'
-require 'ldap/schema'
-require 'ldap/control'
+require "ldap"
+require "ldap/ldif"
+require "ldap/schema"
+require "ldap/control"
 
 module LDAP
   unless const_defined?(:LDAP_OPT_ERROR_NUMBER)
@@ -67,7 +67,7 @@ module LDAP
     def paged_search(base, scope, filter, attributes, limit, &block)
       # work around a bug with openldap
       page_size = 126
-      cookie = ''
+      cookie = ""
       critical = true
 
       loop do
