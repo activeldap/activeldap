@@ -75,7 +75,7 @@ module LDAP
         control = LDAP::Control.new(LDAP::LDAP_CONTROL_PAGEDRESULTS, ber_string, critical)
 
         search_ext(base, scope, filter, attributes,
-                               false, [control], nil, 0, 0, limit || 0, &block)
+                   false, [control], nil, 0, 0, limit, &block)
 
         control = find_paged_results_control(@controls)
         break if control.nil?
@@ -92,21 +92,21 @@ module LDAP
       scope             = options[:scope]
       filter            = options[:filter]
       attributes        = options[:attributes]
-      limit             = options[:limit]
+      limit             = options[:limit] || 0
       use_paged_results = options[:use_paged_results]
       if @@have_search_ext
         if use_paged_results
           paged_search(base, scope, filter, attributes, limit, &block)
         else
           search_ext(base, scope, filter, attributes,
-                     false, nil, nil, 0, 0, limit || 0, &block)
+                     false, nil, nil, 0, 0, limit, &block)
         end
       else
         i = 0
         search(base, scope, filter, attributes) do |entry|
           i += 1
           block.call(entry)
-          break if limit and limit <= i
+          break if 0 < limit and limit <= i
         end
       end
     end
