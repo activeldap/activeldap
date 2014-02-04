@@ -93,9 +93,15 @@ module LDAP
       end
     end
 
-    def search_with_limit(base, scope, filter, attributes, limit, paged_results, &block)
+    def search_full(options, &block)
+      base              = options[:base]
+      scope             = options[:scope]
+      filter            = options[:filter]
+      attributes        = options[:attributes]
+      limit             = options[:limit]
+      use_paged_results = options[:use_paged_results]
       if @@have_search_ext
-        if paged_results then
+        if use_paged_results then
           paged_search(base, scope, filter, attributes, limit, &block)
         else
           search_ext(base, scope, filter, attributes,

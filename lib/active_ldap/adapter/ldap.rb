@@ -86,16 +86,21 @@ module ActiveLdap
           begin
             use_paged_results = options[:use_paged_results]
             if use_paged_results or use_paged_results.nil?
-              paged_results_supported = supported_control.paged_results?
-            else
-              paged_results_supported = false
+              use_paged_results = supported_control.paged_results?
             end
             info = {
               :base => base, :scope => scope_name(scope),
               :filter => filter, :attributes => attrs, :limit => limit,
             }
-            execute(:search_with_limit,
-                    info, base, scope, filter, attrs, limit, paged_results_supported) do |entry|
+            options = {
+              :base              => base,
+              :scope             => scope,
+              :filter            => filter,
+              :attributes        => attrs,
+              :limit             => limit,
+              :use_paged_results => use_paged_results
+            }
+            execute(:search_full, info, options) do |entry|
               attributes = {}
               entry.attrs.each do |attr|
                 value = entry.vals(attr)
