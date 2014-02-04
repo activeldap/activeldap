@@ -82,12 +82,18 @@ module ActiveLdap
       def search(options={})
         super(options) do |base, scope, filter, attrs, limit|
           begin
+            use_paged_results = options[:use_paged_results]
+            if use_paged_results or use_paged_results.nil?
+              paged_results_supported = supported_control.paged_results?
+            else
+              paged_results_supported = false
+            end
             info = {
               :base => base, :scope => scope_name(scope),
               :filter => filter, :attributes => attrs, :limit => limit,
             }
             execute(:search_with_limit,
-                    info, base, scope, filter, attrs, limit) do |entry|
+                    info, base, scope, filter, attrs, limit, paged_results_supported) do |entry|
               attributes = {}
               entry.attrs.each do |attr|
                 value = entry.vals(attr)
