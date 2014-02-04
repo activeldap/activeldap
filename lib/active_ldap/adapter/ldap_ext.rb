@@ -78,16 +78,11 @@ module LDAP
                                false, [control], nil, 0, 0, limit || 0, &block)
 
         control = find_paged_results_control(@controls)
-        if control
-          returned_size, cookie = control.decode
-          page_size = returned_size.to_i if returned_size.to_i > 0
-        else
-          break
-        end
+        break if control.nil?
+        returned_size, cookie = control.decode
+        page_size = returned_size.to_i if returned_size.to_i > 0
 
-        if cookie.empty?
-          break
-        end
+        break if cookie.empty?
       end
     end
 
