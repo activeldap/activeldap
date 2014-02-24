@@ -6,8 +6,6 @@ Locale.init(:driver => :cgi)
 
 module ActiveLdap
   class Railtie < Rails::Railtie
-    config.app_generators.orm :active_ldap
-
     initializer "active_ldap.setup_connection" do
       ldap_configuration_file = Rails.root.join('config', 'ldap.yml')
       if File.exist?(ldap_configuration_file)
