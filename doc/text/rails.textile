@@ -1,6 +1,6 @@
 h1. Rails
 
-ActiveLdap supports Rails 3.1.
+ActiveLdap supports Rails 3.1+.
 
 h2. Install
 
@@ -30,7 +30,7 @@ connection configurations per environment. Similarly, the
 ldap.yml file allows configurations to be set for
 development, test, and production environments.
 
-You can generate 'config/ldap.yml' by the follwoing command:
+You can generate 'config/ldap.yml' by the following command:
 
 <pre class="command">
 % script/rails generate active_ldap:scaffold
@@ -54,13 +54,17 @@ When your application starts up,
 ActiveLdap::Base.setup_connection will be called with the
 parameters specified for your current environment.
 
+You can replace default orm generators with gems one
+to skip active_ldap prefix in 'config/application.rb':
+<pre>config.app_generators.orm :active_ldap</pre>
+
 h2. Model
 
 You can generate a User model that represents entries under
 ou=Users by the following command:
 
 <pre class="command">
-% script/rails generate model User --dn-attribute uid --classes person PosixAccount
+% script/rails generate active_ldap:model User --dn-attribute uid --classes person PosixAccount
 </pre>
 
 It generates the following app/model/user.rb:
@@ -125,7 +129,7 @@ end
 You can also generate a Ou model by the following command:
 
 <pre class="command">
-% script/rails generate model Ou --prefix '' --classes organizationalUnit
+% script/rails generate active_ldap:model Ou --prefix '' --classes organizationalUnit
 </pre>
 
 <pre>
