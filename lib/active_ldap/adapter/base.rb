@@ -579,7 +579,7 @@ module ActiveLdap
             @logger.error do
               _("Reconnect to server failed: %s\n" \
                 "Reconnect to server failed backtrace:\n" \
-                "%s") % [detail.exception, detail.backtrace.join("\n")]
+                "%s") % [detail.message, detail.backtrace.join("\n")]
             end
             # Do not loop if forced
             raise ConnectionError, detail.message if force
