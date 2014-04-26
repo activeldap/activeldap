@@ -23,7 +23,7 @@ module ActiveLdap
       end
 
       def delete_entries(entries)
-          _foreign_class = foreign_class
+        _foreign_class = foreign_class
         entries.each do |entry|
           entry = _foreign_class.find(entry) unless entry.is_a?(_foreign_class)
           old_value = entry[@options[:many], true]
