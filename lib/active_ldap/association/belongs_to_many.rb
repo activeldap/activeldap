@@ -4,9 +4,13 @@ module ActiveLdap
   module Association
     class BelongsToMany < Collection
       private
-      def insert_entry(entry)
+      def normalize_entry(entry)
         _foreign_class = foreign_class
         entry = _foreign_class.find(entry) unless entry.is_a?(_foreign_class)
+        entry
+      end
+
+      def insert_entry(entry)
         old_value = entry[@options[:many], true]
         primary_key_name = @options[:primary_key_name]
         if primary_key_name == "dn"

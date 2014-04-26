@@ -294,6 +294,24 @@ EOX
     end
   end
 
+  def test_belongs_to_many_add_by_dn_attribute
+    make_temporary_group do |group1|
+      make_temporary_group do |group2|
+        make_temporary_user do |user,|
+          user.update_attribute(:cn, "new #{user.cn}")
+
+          user.groups = [group1]
+          assert_equal([group1.id].sort,
+                       user.groups.collect {|g| g.id}.sort)
+
+          user.groups << group2.id
+          assert_equal([group1.id, group2.id].sort,
+                       user.groups.collect {|g| g.id}.sort)
+        end
+      end
+    end
+  end
+
   def test_belongs_to_many_delete
     make_temporary_group do |group1|
       make_temporary_group do |group2|

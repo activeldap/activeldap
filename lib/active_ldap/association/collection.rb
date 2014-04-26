@@ -71,6 +71,10 @@ module ActiveLdap
         end.flatten
       end
 
+      def normalize_entry(entry)
+        entry
+      end
+
       def insert_entry(entry)
         entry[@options[:foreign_key_name]] = @owner[@options[:local_key_name]]
         entry.save
@@ -81,6 +85,7 @@ module ActiveLdap
         load_target
 
         flatten_deeper(entries).each do |entry|
+          entry = normalize_entry(entry)
           unless @owner.new_entry?
             infect_connection(entry)
             result &&= insert_entry(entry)
