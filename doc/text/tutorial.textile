@@ -313,15 +313,6 @@ Relation is resolved by searching entries of :class_name class with :foreign_key
 
 :many is used for an object belongs to many objects. All of matched objects are treated as belonged objects.
 
-In addition, you can do simple membership tests by doing the following:
-
-<pre>
-irb> me.groups.member? 'root'
-=> false
-irb> me.groups.member? 'develop'
-=> true
-</pre>
-
 h5. has_many
 
 This method is the opposite of belongs_to. Instead of checking other objects in
