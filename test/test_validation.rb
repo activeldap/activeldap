@@ -5,7 +5,38 @@ class TestValidation < Test::Unit::TestCase
   include AlTestUtils
   include ActiveLdap::Helper
 
+  class TestAttributeMethod < self
+    priority :must
+
+    priority :normal
+    def test_symbol
+      assert_true(@user_class.attribute_method?(:cn))
+    end
+
+    def test_string
+      assert_true(@user_class.attribute_method?("cn"))
+    end
+
+    def test_upper_case
+      assert_true(@user_class.attribute_method?(:CN))
+    end
+
+    def test_mixed_case
+      assert_true(@user_class.attribute_method?(:Cn))
+    end
+
+    def test_snake_case
+      assert_true(@user_class.attribute_method?(:common_name))
+    end
+
+    def test_full_name
+      assert_true(@user_class.attribute_method?(:commonName))
+    end
+  end
+
   priority :must
+
+  priority :normal
   def test_octet_string
     make_temporary_user(:simple => true) do |user,|
       utf8_encoded_binary_value = "\xff".force_encoding("UTF-8")
@@ -15,7 +46,6 @@ class TestValidation < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_rename_duplicated
     make_temporary_user(:simple => true) do |user1,|
       make_temporary_user(:simple => true) do |user2,|

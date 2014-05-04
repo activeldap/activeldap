@@ -2,7 +2,20 @@ module ActiveLdap
   module Validations
     extend ActiveSupport::Concern
     include ActiveModel::Validations
-    
+
+    module ClassMethods
+      def attribute_method?(attribute)
+        normalized_attribute = entry_attribute.normalize(attribute)
+        normalized_attribute and normalized_attribute != "objectClass"
+      end
+
+      private
+      def entry_attribute
+        @entry_attribute ||=
+          connection.entry_attribute(classes.collect(&:name))
+      end
+    end
+
     included do
       alias_method :new_record?, :new_entry?
       class << self
