@@ -47,7 +47,10 @@ class TestConnection < Test::Unit::TestCase
         raise
       end
     end
-    assert_equal("Unknown key: bind_format", exception.message)
+    expected_message = "Unknown key: :bind_format. Valid keys are: "
+    valid_keys = ActiveLdap::Adapter::Base::VALID_ADAPTER_CONFIGURATION_KEYS
+    expected_message << valid_keys.collect(&:inspect).join(", ")
+    assert_equal(expected_message, exception.message)
   end
 
   def test_can_reconnect?
