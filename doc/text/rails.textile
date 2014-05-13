@@ -1,6 +1,6 @@
 h1. Rails
 
-ActiveLdap supports Rails 3.1+.
+ActiveLdap supports Rails 4.0 or later.
 
 h2. Install
 
