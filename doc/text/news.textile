@@ -1,5 +1,42 @@
 h1. News
 
+h2(#4-0-3). 4.0.3: 2014-05-15
+
+h3. Improvements
+
+* Supported stopping colorize logging by @config.colorize_logging = false@.
+  [GitHub:#81] [Reported by nengxu]
+* Supported PagedResults defined in RFC 2696 in the net-ldap adapter.
+  [activeldap-discuss] Paged results
+  [Suggested by Aaron Knister]
+* Supported PagedResults defined in RFC 2696 in the ldap adapter.
+  [GitHub#83] [Patch by Aaron Knister]
+* Stopped to override ORM generator by default.
+  [GitHub#87] [Patch by Josef Šimánek]
+* Supported Rails 4.1.0.
+  [GitHub#90] [Patch by Francisco Miguel Biete]
+* document: Removed obsoleted description.
+  [activeldap-discuss] [Reported by Jarod Watkins]
+* Supported @ActiveLdap::Base.attribute_method?@ .
+  [GitHub#92] [Reported by Renaud Chaput]
+
+h3. Fixes
+
+* Fixed a bug that @belongs_to :many@ 's inconsistent behavior.
+  You get DN attribute when you add an entry by DN attribute to
+  belongs_to :many collection. It should return entry object instead of
+  DN attribute. Because loaded collection returns entry objects.
+  [activeldap-discuss] [Reported by Jarod Watkins]
+
+h3. Thanks
+
+* nengxu
+* Aaron Knister
+* Josef Šimánek
+* Francisco Miguel Biete
+* Jarod Watkins
+* Renaud Chaput
+
 h2(#4-0-2). 4.0.2: 2014-01-04
 
 h3. Improvements
