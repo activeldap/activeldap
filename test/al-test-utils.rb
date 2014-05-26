@@ -82,7 +82,7 @@ module AlTestUtils
     @@certificate = nil
     def certificate
       return @@certificate if @@certificate
-      if File.exists?(certificate_path)
+      if File.exist?(certificate_path)
         @@certificate = read_binary_file(certificate_path)
         return @@certificate
       end
