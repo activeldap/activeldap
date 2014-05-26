@@ -658,8 +658,10 @@ module ActiveLdap
 
       def log(name, info=nil)
         result = nil
-        payload = {:name => name}
-        payload[:info] = info if info
+        payload = {
+          :name => name,
+          :info => info || {},
+        }
         @instrumenter.instrument("log_info.active_ldap", payload) do
           result = yield if block_given?
         end

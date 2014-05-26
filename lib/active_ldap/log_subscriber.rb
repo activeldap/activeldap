@@ -23,19 +23,20 @@ module ActiveLdap
       return unless logger.debug?
 
       payload = event.payload
+      info = payload[:info] || {}
       label = payload[:name]
-      label += ": FAILED" if payload[:info][:exception]
+      label += ": FAILED" if info[:exception]
       name = 'LDAP: %s (%.1fms)' % [label, event.duration]
-      info = payload[:info].inspect
+      inspected_info = info.inspect
 
       if odd?
         name = color(name, CYAN, true)
-        info = color(info, nil, true)
+        inspected_info = color(inspected_info, nil, true)
       else
         name = color(name, MAGENTA, true)
       end
 
-      debug "  #{name} #{info}"
+      debug "  #{name} #{inspected_info}"
     end
 
     def odd?
