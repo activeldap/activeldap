@@ -24,7 +24,7 @@ module ActiveLdap
 
       payload = event.payload
       label = payload[:name]
-      label += ": FAILED" if payload[:info][:exception]
+      label += ": FAILED" if !payload[:info].nil? && payload[:info][:exception]
       name = 'LDAP: %s (%.1fms)' % [label, event.duration]
       info = payload[:info].inspect
 
