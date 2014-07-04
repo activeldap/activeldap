@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Will Drewry', 'Kouhei Sutou']
   spec.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
   spec.summary = 'ActiveLdap is a object-oriented API to LDAP'
-  spec.homepage = 'http://ruby-activeldap.rubyforge.org/'
+  spec.homepage = 'http://activeldap.github.io/'
   spec.files = collect_files.call("lib/**/*",
                                   "{benchmark,examples,po}/**/*",
                                   "bin/*",
