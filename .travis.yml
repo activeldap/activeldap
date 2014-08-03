@@ -9,7 +9,7 @@ env:
   - JRUBY_OPTS="-Xcext.enabled=true"
 notifications:
   recipients:
-    - ruby-activeldap-commit@rubyforge.org
+    - activeldap-commit@googlegroups.com
 before_install:
   - travis/before_install.sh
 before_script:
