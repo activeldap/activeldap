@@ -14,7 +14,7 @@ flexible as ActiveRecord, but it is still trivial to define
 new objects and manipulate them with minimal difficulty.
 
 For example and usage - read the
-"document":http://ruby-activeldap.rubyforge.org/.
+"document":http://activeldap.github.io/.
 
 h2. Prerequisites
 
@@ -29,8 +29,8 @@ See the above links for installation.
 JRuby doesn't need to install new library because JRuby
 has builtin LDAP support. Ruby users need one of them:
 
-* "Ruby/LDAP":http://rubyforge.org/projects/ruby-ldap/
-* "Net::LDAP":http://rubyforge.org/projects/net-ldap/
+* "Ruby/LDAP":http://ruby-ldap.sourceforge.net/
+* "Net::LDAP":http://rubyldap.com/
 
 See the above links for installation.
 =:
