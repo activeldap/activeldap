@@ -25,6 +25,8 @@ end
 
 ActiveLdap::Base.setup_connection(:password_block => pwb,
                                   :allow_anonymous => false)
+ActiveLdap::Populate.ensure_base
+ActiveLdap::Populate.ensure_ou(User.prefix)
 
 if User.exists?(name)
   $stderr.puts("User #{name} already exists.")
