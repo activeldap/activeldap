@@ -656,8 +656,6 @@ module ActiveLdap
     self.recommended_classes = []
     self.excluded_classes = []
 
-    include Enumerable
-
     ### All instance methods, etc
 
     # new
