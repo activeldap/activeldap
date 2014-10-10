@@ -811,7 +811,7 @@ class TestBase < Test::Unit::TestCase
                           :classes => ["top", "organizationalUnit"])
     assert_equal(["ou=Groups,#{current_configuration['base']}",
                   "ou=Users,#{current_configuration['base']}"],
-                 ou_class.find(:all).collect(&:dn).sort)
+                 ou_class.find(:all).collect(&:dn).collect(&:to_s).sort)
   end
 
   def test_ldap_mapping_validation
