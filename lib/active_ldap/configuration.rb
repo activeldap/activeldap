@@ -176,7 +176,7 @@ module ActiveLdap
             end
             extensions[name] = {
               :critical => critical,
-              :value => CGI.unescape(value),
+              :value => CGI.unescape(value || ""),
             }
           end
           extensions
