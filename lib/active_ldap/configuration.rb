@@ -45,6 +45,7 @@ module ActiveLdap
     DEFAULT_CONFIG[:timeout] = 0 # in seconds; 0 <= Never timeout
     # Whether or not to retry on timeouts
     DEFAULT_CONFIG[:retry_on_timeout] = true
+    DEFAULT_CONFIG[:follow_referrals] = true
 
     DEFAULT_CONFIG[:logger] = nil
 

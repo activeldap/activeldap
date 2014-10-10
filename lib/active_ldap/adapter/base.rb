@@ -26,6 +26,7 @@ module ActiveLdap
         :store_password,
         :scope,
         :sasl_options,
+        :follow_referrals,
       ]
 
       @@row_even = true
@@ -36,12 +37,14 @@ module ActiveLdap
         @bound = false
         @bind_tried = false
         @entry_attributes = {}
+        @follow_referrals = nil
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
         @configuration.assert_valid_keys(VALID_ADAPTER_CONFIGURATION_KEYS)
         VALID_ADAPTER_CONFIGURATION_KEYS.each do |name|
           instance_variable_set("@#{name}", configuration[name])
         end
+        @follow_referrals = true if @follow_referrals.nil?
         @instrumenter = ActiveSupport::Notifications.instrumenter
       end
 
@@ -255,6 +258,15 @@ module ActiveLdap
           URI::LDAPS::DEFAULT_PORT
         else
           URI::LDAP::DEFAULT_PORT
+        end
+      end
+
+      def follow_referrals?(options={})
+        option_follow_referrals = options[:follow_referrals]
+        if option_follow_referrals.nil?
+          @follow_referrals
+        else
+          option_follow_referrals
         end
       end
 

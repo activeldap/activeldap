@@ -189,6 +189,9 @@ module ActiveLdap
       def prepare_connection(options={})
         operation(options) do
           @connection.set_option(LDAP::LDAP_OPT_PROTOCOL_VERSION, 3)
+          unless follow_referrals?(options)
+            @connection.set_option(LDAP::LDAP_OPT_REFERRALS, 0)
+          end
         end
       end
 
