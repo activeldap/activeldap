@@ -12,16 +12,27 @@ module ActiveLdap
         name, value = rdn.to_a[0]
         prefix = suffixes.join(",")
         suffixes.unshift("#{name}=#{value}")
-        next unless name == "dc"
         begin
-          ensure_dc(value, prefix, base_class)
+          case name.downcase
+          when "dc"
+            ensure_dc(value, prefix, base_class)
+          when "ou"
+            ensure_ou(value,
+                      :base => prefix,
+                      :base_class => base_class)
+          end
         rescue ActiveLdap::OperationNotPermitted
         end
       end
     end
 
-    def ensure_ou(name, base_class=nil)
-      base_class ||= Base
+    def ensure_ou(name, options={})
+      if options.is_a?(Class)
+        base_class = options
+        options = {}
+      else
+        base_class = options[:base_class] || Base
+      end
       name = name.to_s if name.is_a?(DN)
       name = name.gsub(/\Aou\s*=\s*/i, '')
 
@@ -29,6 +40,7 @@ module ActiveLdap
       ou_class.ldap_mapping(:dn_attribute => "ou",
                             :prefix => "",
                             :classes => ["top", "organizationalUnit"])
+      ou_class.base = options[:base]
       return if ou_class.exist?(name)
       ou_class.new(name).save!
     end
