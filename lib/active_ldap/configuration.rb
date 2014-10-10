@@ -99,7 +99,7 @@ module ActiveLdap
       def remove_connection_related_configuration(config)
         config.reject do |key, value|
           CONNECTION_CONFIGURATION_KEYS.include?(key)
-	end
+        end
       end
 
       def merge_configuration(user_configuration, target=self)
