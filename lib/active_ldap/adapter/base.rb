@@ -8,13 +8,25 @@ module ActiveLdap
     class Base
       include GetTextSupport
 
-      VALID_ADAPTER_CONFIGURATION_KEYS = [:host, :port, :method, :timeout,
-                                          :retry_on_timeout, :retry_limit,
-                                          :retry_wait, :bind_dn, :password,
-                                          :password_block, :try_sasl,
-                                          :sasl_mechanisms, :sasl_quiet,
-                                          :allow_anonymous, :store_password,
-                                          :scope, :sasl_options]
+      VALID_ADAPTER_CONFIGURATION_KEYS = [
+        :host,
+        :port,
+        :method,
+        :timeout,
+        :retry_on_timeout,
+        :retry_limit,
+        :retry_wait,
+        :bind_dn,
+        :password,
+        :password_block,
+        :try_sasl,
+        :sasl_mechanisms,
+        :sasl_quiet,
+        :allow_anonymous,
+        :store_password,
+        :scope,
+        :sasl_options,
+      ]
 
       @@row_even = true
 
