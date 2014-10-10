@@ -1,3 +1,5 @@
+require "English"
+require "cgi"
 require 'uri'
 begin
   require 'uri/ldaps'
@@ -135,12 +137,49 @@ module ActiveLdap
           raise ConfigurationError.new(_("not a LDAP URI: %s") % uri.to_s)
         end
 
-        uri_configuration = {:port => uri.port}
-        uri_configuration[:host] = uri.host if uri.host
-        uri_configuration[:bind_dn] = uri.dn if uri.dn
-        uri_configuration[:scope] = uri.scope if uri.scope
-        uri_configuration[:method] = :ssl if uri.is_a?(URI::LDAPS)
-        uri_configuration.merge(configuration)
+        merger = URIConfigurationMerger.new(uri)
+        merger.merge(configuration)
+      end
+
+      class URIConfigurationMerger
+        def initialize(uri)
+          @uri = uri
+        end
+
+        def merge(configuration)
+          uri_configuration = {:port => @uri.port}
+          uri_configuration[:host] = @uri.host if @uri.host
+          uri_configuration[:base] = @uri.dn if @uri.dn
+          extensions = parse_extensions
+          bindname_extension = extensions["bindname"]
+          if bindname_extension
+            uri_configuration[:bind_dn] = bindname_extension[:value]
+            uri_configuration[:allow_anonymous] = !bindname_extension[:critical]
+          end
+          uri_configuration[:scope] = @uri.scope if @uri.scope
+          uri_configuration[:method] = :ssl if @uri.is_a?(URI::LDAPS)
+          uri_configuration.merge(configuration)
+        end
+
+        private
+        def parse_extensions
+          extensions = {}
+          (@uri.extensions || "").split(",").collect do |extension|
+            name, value = extension.split("=", 2)
+            case name
+            when /\A!/
+              critical = true
+              name = $POSTMATCH
+            else
+              critical = false
+            end
+            extensions[name] = {
+              :critical => critical,
+              :value => CGI.unescape(value),
+            }
+          end
+          extensions
+        end
       end
     end
   end
