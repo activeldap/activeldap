@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ActiveLdap 3.1.0\n"
-"PO-Revision-Date: 2014-01-04 14:18+0900\n"
+"PO-Revision-Date: 2014-10-11 14:48+0900\n"
 "Last-Translator: Kouhei Sutou <kou@clear-code.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 msgid ""
 "For example and usage - read the\n"
-"\"document\":http://ruby-activeldap.rubyforge.org/."
+"\"document\":http://activeldap.github.io/."
 msgstr ""
 
 msgid "h2. Prerequisites"
@@ -61,8 +61,8 @@ msgstr ""
 "ずれかが必要です:"
 
 msgid ""
-"* \"Ruby/LDAP\":http://rubyforge.org/projects/ruby-ldap/\n"
-"* \"Net::LDAP\":http://rubyforge.org/projects/net-ldap/"
+"* \"Ruby/LDAP\":http://ruby-ldap.sourceforge.net/\n"
+"* \"Net::LDAP\":http://rubyldap.com/"
 msgstr ""
 
 #, fuzzy
@@ -101,15 +101,12 @@ msgid ""
 "or (at your option) any later version."
 msgstr ""
 
-#, fuzzy
 msgid "Please see the file LICENSE for the terms of the licence."
-msgstr "ライセンス条項については<placeholder-1/>ファイルを見てください。"
+msgstr "ライセンス条項についてはLICENSEファイルを見てください。"
 
-#, fuzzy
 msgid "h2. Thanks"
-msgstr "感謝"
+msgstr "h2. 感謝"
 
-#, fuzzy
 msgid ""
 "This list may not be correct. If you notice mistakes of this\n"
 "list, please point out."
@@ -195,23 +192,22 @@ msgid ""
 "* Craig White: Bug reports."
 msgstr ""
 
-#, fuzzy
 msgid "h1. Development"
-msgstr "開発"
+msgstr "h1. 開発"
 
 msgid "Here is information for developers."
 msgstr "開発者向け情報です。"
 
-#, fuzzy
 msgid "h2. Repository"
-msgstr "リポジトリ"
+msgstr "h2. リポジトリ"
 
-#, fuzzy
 msgid ""
 "ActiveLdap uses [\"git repository on\n"
 "GitHub\":https://github.com/activeldap]. Here is a\n"
 "list to get each source code."
-msgstr "ActiveLdapは<placeholder-1/>を利用しています。ソースコードは以下のように取得できます。"
+msgstr ""
+"ActiveLdapは[\"GitHub上のGitリポジトリー\":https://github.com/activeldap]を利用しています。ソースコードは"
+"以下のように取得できます。"
 
 msgid ""
 "- \"activeldap\":https://github.com/activeldap/activeldap :=\n"
@@ -226,9 +222,8 @@ msgid ""
 "=:"
 msgstr ""
 
-#, fuzzy
 msgid "h2. Issues"
-msgstr "不具合・要望"
+msgstr "h2. 不具合・要望"
 
 #, fuzzy
 msgid ""
@@ -280,11 +275,103 @@ msgstr ""
 msgid "h1. News"
 msgstr "h1. おしらせ"
 
-msgid "h2(#4-0-2). 4.0.2: 2014-01-04"
+msgid "h2(#release-4-0-4). 4.0.4: 2014-10-11"
 msgstr ""
 
 msgid "h3. Improvements"
 msgstr "h3. 改良"
+
+msgid ""
+"* Migrated to commit mail mailing list to \"Google\n"
+"  Groups\":https://groups.google.com/forum/?hl=ja#!forum/activeldap-commit\n"
+"  from RubyForge. Thanks to RubyForge! RubyForge was very helpful!\n"
+"* Update project homepage URL in README.\n"
+"  [GitHub#103] [Patch by Adam Whittingham]\n"
+"* Removed needless @Enumerable@ inclusion in @ActiveLdap::Base@.\n"
+"  [GitHub#104] [Patch by Murray Steele]\n"
+"* {ActiveLdap::Populate.ensure_base}: Supported ou entry creation in base DN.\n"
+"* Added @follow_referrals@ configuration. You can disable auto\n"
+"  referrals following by specifying @false@. It is useful when you\n"
+"  can't access referrals."
+msgstr ""
+
+msgid "  This configuration is enabled by default."
+msgstr ""
+
+msgid "  This configuration works only with ruby-ldap adapter."
+msgstr ""
+
+msgid "  [GitHub#99] [Suggested by hadmut]"
+msgstr ""
+
+msgid ""
+"* Supported @bindname@ extension in LDAP URL such as\n"
+"  @ldap://host/dc=base,dc=name????bindname=cn%3Dadmin%2Cdc%3Dexample%2Cdc%3Dco"
+"m%3F@."
+msgstr ""
+
+msgid "h3. Fixes"
+msgstr "h3. 修正"
+
+msgid ""
+"* Fixed a bug logging is failed on removing a connection.\n"
+"  [GitHub#94] [Reported by Francisco Miguel Biete]\n"
+"* Fixed homepage URL in RubyGems.\n"
+"  [GitHub#95] [Patch by Vít Ondruch]\n"
+"* Fixed a bug that DN in LDAP URL is used as bind DN not base DN."
+msgstr ""
+
+msgid "h3. Thanks"
+msgstr "h3. 感謝"
+
+msgid ""
+"* Francisco Miguel Biete\n"
+"* Vít Ondruch\n"
+"* Adam Whittingham\n"
+"* Murray Steele\n"
+"* hadmut"
+msgstr ""
+
+msgid "h2(#4-0-3). 4.0.3: 2014-05-15"
+msgstr ""
+
+msgid ""
+"* Supported stopping colorize logging by @config.colorize_logging = false@.\n"
+"  [GitHub:#81] [Reported by nengxu]\n"
+"* Supported PagedResults defined in RFC 2696 in the net-ldap adapter.\n"
+"  [activeldap-discuss] Paged results\n"
+"  [Suggested by Aaron Knister]\n"
+"* Supported PagedResults defined in RFC 2696 in the ldap adapter.\n"
+"  [GitHub#83] [Patch by Aaron Knister]\n"
+"* Stopped to override ORM generator by default.\n"
+"  [GitHub#87] [Patch by Josef Šimánek]\n"
+"* Supported Rails 4.1.0.\n"
+"  [GitHub#90] [Patch by Francisco Miguel Biete]\n"
+"* document: Removed obsoleted description.\n"
+"  [activeldap-discuss] [Reported by Jarod Watkins]\n"
+"* Supported @ActiveLdap::Base.attribute_method?@ .\n"
+"  [GitHub#92] [Reported by Renaud Chaput]"
+msgstr ""
+
+msgid ""
+"* Fixed a bug that @belongs_to :many@ 's inconsistent behavior.\n"
+"  You get DN attribute when you add an entry by DN attribute to\n"
+"  belongs_to :many collection. It should return entry object instead of\n"
+"  DN attribute. Because loaded collection returns entry objects.\n"
+"  [activeldap-discuss] [Reported by Jarod Watkins]"
+msgstr ""
+
+msgid ""
+"* nengxu\n"
+"* Aaron Knister\n"
+"* Josef Šimánek\n"
+"* Francisco Miguel Biete\n"
+"* Jarod Watkins\n"
+"* Renaud Chaput"
+msgstr ""
+
+msgid "h2(#4-0-2). 4.0.2: 2014-01-04"
+msgstr ""
 
 msgid ""
 "* Supported sub-tree moving by all adapters.\n"
@@ -303,12 +390,6 @@ msgid ""
 "* Supported retry on timeout on JNDI adapter.\n"
 "  [GitHub:#77] [Patch by Ryosuke Yamazaki]"
 msgstr ""
-
-msgid "h3. Thanks"
-msgstr "h3. 感謝"
-
-msgid "h3. Fixes"
-msgstr "h3. 修正"
 
 msgid ""
 "* Removed needless newlines generated by @pack(\"m\")@.\n"
@@ -376,20 +457,8 @@ msgid ""
 "* [GitHub:#61] Supported Rails 4. Dropped Rails 3 support.\n"
 "  [Patch by superscott]\n"
 "* [GitHub:#63] Handled Errno::ECONNRESET as connection in\n"
-"  net-ldap adapter [Patch by mpoornima]\n"
-"h3. Fixes"
+"  net-ldap adapter [Patch by mpoornima]"
 msgstr ""
-
-msgid ""
-"* Supported entry creation by direct ActiveLdap::Base use.\n"
-"  [Reported by Craig White]\n"
-"* Started to use Travis CI."
-msgstr ""
-"* 直接ActiveLdap::Baseを使ったエントリ作成をサポート。 [Craig Whiteさんが報告]\n"
-"* Travis CIの使用を開始。"
-
-msgid "* Craig White"
-msgstr "* Craig Whiteさん"
 
 msgid ""
 "* [GitHub:#44] Fixed a typo in document.\n"
@@ -402,11 +471,6 @@ msgid ""
 "* [GitHub:#57] Fixed a wrong blank value detection for \"false\".\n"
 "  [Reported by Robin Doer]"
 msgstr ""
-
-msgid ""
-"* Fixed a bug that ActiveLdap::Base#delete doesn't work.\n"
-"  [Reported by Craig White]"
-msgstr "* ActiveLdap::Base#deleteが動かない問題を修正。 [Craig Whiteさんが報告]"
 
 msgid ""
 "* Craig White\n"
@@ -426,8 +490,24 @@ msgstr ""
 msgid "h2(#3-2-2). 3.2.2: 2012-09-01"
 msgstr ""
 
+msgid ""
+"* Supported entry creation by direct ActiveLdap::Base use.\n"
+"  [Reported by Craig White]\n"
+"* Started to use Travis CI."
+msgstr ""
+"* 直接ActiveLdap::Baseを使ったエントリ作成をサポート。 [Craig Whiteさんが報告]\n"
+"* Travis CIの使用を開始。"
+
+msgid "* Craig White"
+msgstr "* Craig Whiteさん"
+
 msgid "h2(#3-2-1). 3.2.1: 2012-08-31"
 msgstr ""
+
+msgid ""
+"* Fixed a bug that ActiveLdap::Base#delete doesn't work.\n"
+"  [Reported by Craig White]"
+msgstr "* ActiveLdap::Base#deleteが動かない問題を修正。 [Craig Whiteさんが報告]"
 
 msgid "h2(#3-2-0). 3.2.0: 2012-08-29"
 msgstr ""
@@ -1467,7 +1547,8 @@ msgstr ""
 msgid "h1. Rails"
 msgstr ""
 
-msgid "ActiveLdap supports Rails 3.1."
+#, fuzzy
+msgid "ActiveLdap supports Rails 4.0 or later."
 msgstr "ActiveLdapはRails 3.1に対応しています。"
 
 #, fuzzy
@@ -1521,7 +1602,8 @@ msgstr ""
 "p.ymlファイルにはdevelopment, test, production環境用の設定を保存します。"
 
 #, fuzzy
-msgid "You can generate 'config/ldap.yml' by the follwoing command:"
+#, fuzzy
+msgid "You can generate 'config/ldap.yml' by the following command:"
 msgstr "以下のコマンドで‘config/ldap.yml’を生成できます:"
 
 msgid ""
@@ -1558,6 +1640,12 @@ msgid ""
 "parameters specified for your current environment."
 msgstr "アプリケーション起動時、現在の環境のパラメータを使ってActiveLdap::Base.setup_connectionが自動的に実行されます。"
 
+msgid ""
+"You can replace default orm generators with gems one\n"
+"to skip active_ldap prefix in 'config/application.rb':\n"
+"<pre>config.app_generators.orm :active_ldap</pre>"
+msgstr ""
+
 msgid "h2. Model"
 msgstr ""
 
@@ -1569,8 +1657,8 @@ msgstr "ou=Users以下のエントリを表現するUserモデルを以下のコ
 
 msgid ""
 "<pre class=\"command\">\n"
-"% script/rails generate model User --dn-attribute uid --classes person PosixAc"
-"count\n"
+"% script/rails generate active_ldap:model User --dn-attribute uid --classes pe"
+"rson PosixAccount\n"
 "</pre>"
 msgstr ""
 
@@ -1653,7 +1741,8 @@ msgstr "以下のコマンドでOuモデルも生成できます:"
 
 msgid ""
 "<pre class=\"command\">\n"
-"% script/rails generate model Ou --prefix '' --classes organizationalUnit\n"
+"% script/rails generate active_ldap:model Ou --prefix '' --classes organizatio"
+"nalUnit\n"
 "</pre>"
 msgstr ""
 
@@ -2275,18 +2364,6 @@ msgid ""
 "e treated as belonged objects."
 msgstr ":many は所属先が複数の場合に利用します。検索の結果マッチしたすべてのオブジェクトが所属先として扱われます。"
 
-msgid "In addition, you can do simple membership tests by doing the following:"
-msgstr "尚、:many を利用していると、メンバーシップテストも下記のように行えます。"
-
-msgid ""
-"<pre>\n"
-"irb> me.groups.member? 'root'\n"
-"=> false\n"
-"irb> me.groups.member? 'develop'\n"
-"=> true\n"
-"</pre>"
-msgstr ""
-
 msgid "h5. has_many"
 msgstr ""
 
@@ -2454,20 +2531,6 @@ msgid ""
 "uid@ == 1:"
 msgstr ""
 
-#, fuzzy
-msgid ""
-".search is a class method that is accessible from any subclass of Base, and Ba"
-"se.\n"
-"It lets the user perform an arbitrary search against the current LDAP connecti"
-"on\n"
-"irrespetive of LDAP mapping data.  This is meant to be useful as a utility met"
-"hod\n"
-"to cover 80% of the cases where a user would want to use Base.connection direc"
-"tly."
-msgstr ""
-".search は ActiveLdap::Base か、そのサブクラスから呼び出し可能なクラスメソッドです。拡張クラスと LDAPツリーとのマッピングを無"
-"視して検索することができます。直接Base.connection を利用してもよいですが、このメソッドを利用すれば8割の目的は達成できるでしょう。"
-
 msgid ""
 "<pre>\n"
 "irb> Group.find(:all, :filter => '(&(cn=dev*)(guid=1))').collect {|group| grou"
@@ -2503,25 +2566,22 @@ msgid ""
 "</pre>"
 msgstr ""
 
-#, fuzzy
-msgid ""
-"valid? is a method that verifies that all attributes that are required by the\n"
-"objects current objectClasses are populated."
-msgstr "valid? はインスタンスメソッドです。オブジェクトクラスで必要とされる属性が備わっているか検査します。真偽値を返します。"
-
 msgid "h4. .search"
 msgstr ""
 
 #, fuzzy
 msgid ""
-"save is a method that writes any changes to an object back to the LDAP server."
-"\n"
-"It automatically handles the addition of new objects, and the modification of\n"
-"existing ones."
+".search is a class method that is accessible from any subclass of Base, and Ba"
+"se.\n"
+"It lets the user perform an arbitrary search against the current LDAP connecti"
+"on\n"
+"irrespetive of LDAP mapping data.  This is meant to be useful as a utility met"
+"hod\n"
+"to cover 80% of the cases where a user would want to use Base.connection direc"
+"tly."
 msgstr ""
-"save は <placeholder-1/> オブジェクトの変更を保存するためのインスタンスメソッドです。実行すると、レシーバのオブジェクトに加えられてい"
-"た変更が LDAP サーバに反映されます。新しいオブジェクトか、既存のオブジェクトかを自動判別し、新規オブジェクトならLDAPサーバに追加します。既存のもの"
-"ならば更新します。"
+".search は ActiveLdap::Base か、そのサブクラスから呼び出し可能なクラスメソッドです。拡張クラスと LDAPツリーとのマッピングを無"
+"視して検索することができます。直接Base.connection を利用してもよいですが、このメソッドを利用すれば8割の目的は達成できるでしょう。"
 
 msgid ""
 "<pre>\n"
@@ -2531,12 +2591,6 @@ msgid ""
 "\"0\"]}]\n"
 "</pre>"
 msgstr ""
-
-#, fuzzy
-msgid ""
-"exists? is a simple method which returns true is the current object exists in\n"
-"LDAP, or false if it does not."
-msgstr "exists? はシンプルなクラスメソッドです。ある :dn_attribute を持つオブジェクトが存在するか検査したい時に利用します。"
 
 msgid ""
 "You can specify the :filter, :base, :scope, and :attributes, but they all have"
@@ -2555,6 +2609,45 @@ msgstr ""
 
 #, fuzzy
 msgid ""
+"valid? is a method that verifies that all attributes that are required by the\n"
+"objects current objectClasses are populated."
+msgstr "valid? はインスタンスメソッドです。オブジェクトクラスで必要とされる属性が備わっているか検査します。真偽値を返します。"
+
+msgid "h4. #save"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"save is a method that writes any changes to an object back to the LDAP server."
+"\n"
+"It automatically handles the addition of new objects, and the modification of\n"
+"existing ones."
+msgstr ""
+"save は <placeholder-1/> オブジェクトの変更を保存するためのインスタンスメソッドです。実行すると、レシーバのオブジェクトに加えられてい"
+"た変更が LDAP サーバに反映されます。新しいオブジェクトか、既存のオブジェクトかを自動判別し、新規オブジェクトならLDAPサーバに追加します。既存のもの"
+"ならば更新します。"
+
+msgid "h4. .exists?"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"exists? is a simple method which returns true is the current object exists in\n"
+"LDAP, or false if it does not."
+msgstr "exists? はシンプルなクラスメソッドです。ある :dn_attribute を持つオブジェクトが存在するか検査したい時に利用します。"
+
+msgid ""
+"<pre>\n"
+"irb> User.exists?(\"dshadsadsa\")\n"
+"=> false\n"
+"</pre>"
+msgstr ""
+
+msgid "h3. ActiveLdap::Base"
+msgstr ""
+
+#, fuzzy
+msgid ""
 "ActiveLdap::Base has come up a number of times in the examples above.  Every\n"
 "time, it was being used as the super class for the wrapper objects. While this"
 "\n"
@@ -2567,9 +2660,6 @@ msgstr ""
 msgid "h4. What is it?"
 msgstr "これは何か"
 
-msgid "h4. #save"
-msgstr ""
-
 #, fuzzy
 msgid ""
 "ActiveLdap::Base is the heart of ActiveLdap.  It does all the schema\n"
@@ -2579,7 +2669,7 @@ msgstr ""
 "ActiveLdap::Base は ActiveLdap の心臓部です。属性を setter/getter にマッピングしたり、バリデーションを行うための"
 "スキーマ解析を行います。同時に、LDAPサーバとの接続の管理も行います。"
 
-msgid "h4. .exists?"
+msgid "h5. setup_connection"
 msgstr ""
 
 #, fuzzy
@@ -2593,13 +2683,6 @@ msgstr ""
 "に匿名接続を行いたいでしょうし、時にはユーザ証明とともにTLSを利用した接続をしたいでしょう。Base.setup_connection はそれらを実現しま"
 "す。"
 
-msgid ""
-"<pre>\n"
-"irb> User.exists?(\"dshadsadsa\")\n"
-"=> false\n"
-"</pre>"
-msgstr ""
-
 #, fuzzy
 msgid ""
 "By default, if you call any subclass of Base, such as Group, it will call\n"
@@ -2611,12 +2694,6 @@ msgstr ""
 "Group のような、Base を親に持つサブクラスをコールした際、まだ接続が確立していなければ、Base.setup_connection で設定した情報"
 "をもとに接続しようと試みます。あなたのサーバが匿名バインドを許していて、かつ読み取り専用でのアクセスを行いたいのなら、多くを設定する必要はないでしょう。以下"
 "にパラメータつきの setup_connection の例を示します。"
-
-msgid "h3. ActiveLdap::Base"
-msgstr ""
-
-msgid "h5. setup_connection"
-msgstr ""
 
 msgid ""
 "<pre>\n"
@@ -2693,6 +2770,13 @@ msgstr ""
 msgid "* Connect to host:port using :method"
 msgstr "host:port にたいして、:method での接続を行います"
 
+msgid ""
+"* If bind_dn and password_block/password, attempt to bind with credentials.\n"
+"* If that fails or no password_block and anonymous allowed, attempt to bind\n"
+"  anonymously.\n"
+"* If that fails, error out."
+msgstr ""
+
 #, fuzzy
 msgid ""
 "On connect, the configuration options passed in are stored\n"
@@ -2701,9 +2785,21 @@ msgid ""
 "configuration.rb"
 msgstr "接続の際、渡された設定オプションはクラス変数の中に格納されます。このさい、指定されていないオプションはデフォルト値が適用されます。"
 
+msgid "h5. connection"
+msgstr ""
+
+msgid "Base.connection returns the ActiveLdap::Connection object."
+msgstr "Base.connection は ActiveLdasp::Connection オブジェクトを返します"
+
 #, fuzzy
 msgid "h3. Exceptions"
 msgstr "例外クラス"
+
+msgid "There are a few custom exceptions used in ActiveLdap. They are detailed below."
+msgstr "ActiveLdap は幾つかのカスタマイズした例外クラスを扱います。以下にそれを示します。"
+
+msgid "h4. DeleteError"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -2711,11 +2807,7 @@ msgid ""
 "information that was passed up during the error."
 msgstr "LDAPオブジェクトの削除に失敗した際、この例外が発生します。エラー発生時の <placeholder-1/> エラーメッセージが含まれます。"
 
-msgid ""
-"* If bind_dn and password_block/password, attempt to bind with credentials.\n"
-"* If that fails or no password_block and anonymous allowed, attempt to bind\n"
-"  anonymously.\n"
-"* If that fails, error out."
+msgid "h4. SaveError"
 msgstr ""
 
 #, fuzzy
@@ -2730,6 +2822,9 @@ msgstr ""
 "<placeholder-1/> オブジェクトの追加または更新に問題があった場合に発生する例外です。LDAPサーバのログや <placeholder-2/>"
 " などによる通信解析によってより詳しい情報が得られるかもしれません。"
 
+msgid "h4. AuthenticationError"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "This exception is raised during Base.setup_connection if no valid authenticati"
@@ -2737,11 +2832,8 @@ msgid ""
 "succeeded."
 msgstr "この例外は setup_connection で :method による指定された認証が成功しなかった場合に発生します。"
 
-msgid "h5. connection"
+msgid "h4. ConnectionError"
 msgstr ""
-
-msgid "Base.connection returns the ActiveLdap::Connection object."
-msgstr "Base.connection は ActiveLdasp::Connection オブジェクトを返します"
 
 #, fuzzy
 msgid ""
@@ -2753,10 +2845,7 @@ msgstr ""
 "この例外は setup_connection で指定された接続が確立できなかった場合に発生します。setup_connection のパラメータや、ネットワ"
 "ークの導通を確認してみてください。ちゃんとリクエストが投げられている場合、<placeholder-2/>サーバのログも確認してみてください。"
 
-msgid "There are a few custom exceptions used in ActiveLdap. They are detailed below."
-msgstr "ActiveLdap は幾つかのカスタマイズした例外クラスを扱います。以下にそれを示します。"
-
-msgid "h4. DeleteError"
+msgid "h4. ObjectClassError"
 msgstr ""
 
 #, fuzzy
@@ -2768,9 +2857,6 @@ msgstr "この例外は、LDAPサーバのスキーマ上で定義されてい�
 #, fuzzy
 msgid "h3. Others"
 msgstr "その他"
-
-msgid "h4. SaveError"
-msgstr ""
 
 #, fuzzy
 msgid ""
@@ -2789,9 +2875,6 @@ msgstr ""
 msgid "h3. Putting it all together"
 msgstr "実際に動作するサンプルコード"
 
-msgid "h4. AuthenticationError"
-msgstr ""
-
 #, fuzzy
 msgid ""
 "Now that all of the components of ActiveLdap have been covered, it's time\n"
@@ -2803,9 +2886,6 @@ msgstr ""
 "ここまでで ActiveLdap のすべてのコンポーネントについて記述しました。さあ、実際に動作するコードを配置するときです！ 以降では、いままで例に挙げて"
 "きた <placeholder-1/> ツリー上の、ユーザとグループを管理するためのスクリプトを順番にセットアップしてきます。"
 
-msgid "h4. ConnectionError"
-msgstr ""
-
 #, fuzzy
 msgid "All of the scripts here are in the package's examples/ directory."
 msgstr "以下に示すサンプルコードは、ActiveLdap ライブラリの examples/ ディレクトリにも配置されています。"
@@ -2813,9 +2893,6 @@ msgstr "以下に示すサンプルコードは、ActiveLdap ライブラリの 
 #, fuzzy
 msgid "h4. Setting up"
 msgstr "準備"
-
-msgid "h4. ObjectClassError"
-msgstr ""
 
 msgid "Create directory for scripts."
 msgstr "まず必要なディレクトリを作成します"
@@ -2829,10 +2906,6 @@ msgstr ""
 
 msgid "In ldapadmin/objects/ create the file user.rb:"
 msgstr "次に、ldapadin/objects/user.rb を作成します。コードは以下のようにしてください。"
-
-#, fuzzy
-msgid "Now let's create a really dumb script for adding users - ldapadmin/useradd:"
-msgstr "早速ユーザを追加するための ldapadmin/useradd スクリプトを作成しましょう。"
 
 msgid ""
 "<pre>\n"
@@ -2867,6 +2940,10 @@ msgstr "これでシンプルな管理タスクのためのスクリプトを書
 
 msgid "h4. Creating LDAP entries"
 msgstr ""
+
+#, fuzzy
+msgid "Now let's create a really dumb script for adding users - ldapadmin/useradd:"
+msgstr "早速ユーザを追加するための ldapadmin/useradd スクリプトを作成しましょう。"
 
 msgid ""
 "<pre>\n"
@@ -2912,10 +2989,6 @@ msgid ""
 "                                  :allow_anonymous => false)"
 msgstr ""
 
-#, fuzzy
-msgid "Now let's create another dumb script for modifying users - ldapadmin/usermod:"
-msgstr "次に、ユーザの属性変更スクリプト ldapadmin/usermod を作成します。"
-
 msgid ""
 "if User.exists?(name)\n"
 "  $stderr.puts(\"User #{name} already exists.\")\n"
@@ -2943,8 +3016,8 @@ msgid "h4. Managing LDAP entries"
 msgstr ""
 
 #, fuzzy
-msgid "Now let's create more one for deleting users - ldapadmin/userdel:"
-msgstr "最後に、ユーザ削除のためのスクリプト ldapadmin/userdel を作成します。"
+msgid "Now let's create another dumb script for modifying users - ldapadmin/usermod:"
+msgstr "次に、ユーザの属性変更スクリプト ldapadmin/usermod を作成します。"
 
 msgid ""
 "unless User.exists?(name)\n"
@@ -2969,15 +3042,15 @@ msgstr ""
 msgid "h4. Removing LDAP entries"
 msgstr ""
 
+#, fuzzy
+msgid "Now let's create more one for deleting users - ldapadmin/userdel:"
+msgstr "最後に、ユーザ削除のためのスクリプト ldapadmin/userdel を作成します。"
+
 msgid ""
 "argv, opts, options = ActiveLdap::Command.parse_options do |opts, options|\n"
 "  opts.banner += \" USER_NAME\"\n"
 "end"
 msgstr ""
-
-#, fuzzy
-msgid "h3. Advanced Topics"
-msgstr "高度な話題"
 
 msgid ""
 "if argv.size == 1\n"
@@ -2987,6 +3060,18 @@ msgid ""
 "  exit 1\n"
 "end"
 msgstr ""
+
+msgid ""
+"User.destroy(name)\n"
+"</pre>"
+msgstr ""
+
+#, fuzzy
+msgid "h3. Advanced Topics"
+msgstr "高度な話題"
+
+msgid "Below are some situation tips and tricks to get the most out of ActiveLdap."
+msgstr "以降では、ActiveLdap を最大限に生かすために、さまざまなシチュエーションで役立つテクニックを紹介していきます。"
 
 #, fuzzy
 msgid "h4. Binary data and other subtypes"
@@ -3002,7 +3087,18 @@ msgstr ""
 "。例を見てみましょう。"
 
 msgid ""
-"User.destroy(name)\n"
+"<pre>\n"
+"irb> user = User.new('drewry')\n"
+"=> ...\n"
+"# This adds a cn entry in lang-en and whatever the server default is.\n"
+"irb> user.cn = [ 'wad', {'lang-en' => ['wad', 'Will Drewry']} ]\n"
+"=> ...\n"
+"irb> user.cn\n"
+"=> [\"wad\", {\"lang-en-us\" => [\"wad\", \"Will Drewry\"]}]\n"
+"# Now let's add a binary X.509 certificate (assume objectClass is correct)\n"
+"irb> user.user_certificate = File.read('example.der')\n"
+"=> ...\n"
+"irb> user.save\n"
 "</pre>"
 msgstr ""
 
@@ -3014,9 +3110,6 @@ msgid ""
 msgstr ""
 "この例には見るべき点が多くあります。順番に見てみましょう。例では、cn に\"wad\"と cn;lang-en-us に [\"wad\", \"Will Drew"
 "ry\"] を追加しています。<placeholder-2/>属性のサブタイプが必要とされるとき、それらのデータは Hash で包む必要があります。"
-
-msgid "Below are some situation tips and tricks to get the most out of ActiveLdap."
-msgstr "以降では、ActiveLdap を最大限に生かすために、さまざまなシチュエーションで役立つテクニックを紹介していきます。"
 
 #, fuzzy
 msgid ""
@@ -3034,17 +3127,7 @@ msgstr ""
 
 msgid ""
 "<pre>\n"
-"irb> user = User.new('drewry')\n"
-"=> ...\n"
-"# This adds a cn entry in lang-en and whatever the server default is.\n"
-"irb> user.cn = [ 'wad', {'lang-en' => ['wad', 'Will Drewry']} ]\n"
-"=> ...\n"
-"irb> user.cn\n"
-"=> [\"wad\", {\"lang-en-us\" => [\"wad\", \"Will Drewry\"]}]\n"
-"# Now let's add a binary X.509 certificate (assume objectClass is correct)\n"
-"irb> user.user_certificate = File.read('example.der')\n"
-"=> ...\n"
-"irb> user.save\n"
+"irb> user.user_certificate = {'binary' => File.read('example.der')}\n"
 "</pre>"
 msgstr ""
 
@@ -3076,6 +3159,12 @@ msgstr ""
 "LDAPv3 で唯一定義されているサブタイプが lang-* と binary の組み合わせです。これらは以下のように Hash をネストさせることで実現で"
 "きます。"
 
+msgid ""
+"<pre>\n"
+"irb> user.cn = [{'lang-ja' => {'binary' => 'some Japanese'}}]\n"
+"</pre>"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "As I understand it, OpenLDAP does not support nested subtypes, but some\n"
@@ -3087,11 +3176,8 @@ msgstr ""
 "/> サーバは対応しているようです。私がアクセスしたのは OpenLDAP のみなので、どなたかこの機能をテストしたなら、どのように動作したかを連絡してもら"
 "えると助かります。"
 
-msgid ""
-"<pre>\n"
-"irb> user.user_certificate = {'binary' => File.read('example.der')}\n"
-"</pre>"
-msgstr ""
+msgid "And that pretty much wraps up this section."
+msgstr "このセクションの他の項目についても同様です。どのように動作したか連絡もらえると助かります。"
 
 #, fuzzy
 msgid "h4. Further integration with your environment aka namespacing"
@@ -3103,15 +3189,6 @@ msgid ""
 "\n"
 "you should put your extension classes inside a custom module."
 msgstr "ActiveLdap を Ruby のインクルードパスに統合したいなら、拡張クラスをカスタムモジュールの中に統合するとよいでしょう。"
-
-msgid ""
-"<pre>\n"
-"irb> user.cn = [{'lang-ja' => {'binary' => 'some Japanese'}}]\n"
-"</pre>"
-msgstr ""
-
-msgid "And that pretty much wraps up this section."
-msgstr "このセクションの他の項目についても同様です。どのように動作したか連絡もらえると助かります。"
 
 msgid "Example:"
 msgstr "例:"
@@ -3147,18 +3224,6 @@ msgstr ""
 msgid "./myldap/group.rb:"
 msgstr ""
 
-#, fuzzy
-msgid "h4. force array results for single values"
-msgstr "単一内容の属性に対する getter アクセスであっても、配列で返すようにする"
-
-#, fuzzy
-msgid ""
-"Even though ActiveLdap attempts to maintain programmatic ease by\n"
-"returning Array values only. By specifying 'true' as an argument to\n"
-"any attribute method you will get back a Array if it is single value.\n"
-"Here's an example:"
-msgstr "属性メソッドの引数に true を渡すことで、その属性の中身が単一の内容であっても配列で返すように挙動を変更することができます。"
-
 msgid ""
 "<pre>\n"
 "module MyLDAP\n"
@@ -3175,14 +3240,44 @@ msgstr ""
 msgid "Now in your local applications, you can call"
 msgstr "こうすれば、あなたのアプリケーションでは以下のように呼び出すことができます。"
 
-#, fuzzy
-msgid "h4. Dynamic attribute crawling"
-msgstr "動的な属性のクローリング"
-
 msgid ""
 "<pre>\n"
 "require 'myldap'"
 msgstr ""
+
+msgid ""
+"MyLDAP::Group.new('foo')\n"
+"...\n"
+"</pre>"
+msgstr ""
+
+msgid "and everything should work well."
+msgstr "すべてのクラスは正しく動作するでしょう。"
+
+#, fuzzy
+msgid "h4. force array results for single values"
+msgstr "単一内容の属性に対する getter アクセスであっても、配列で返すようにする"
+
+#, fuzzy
+msgid ""
+"Even though ActiveLdap attempts to maintain programmatic ease by\n"
+"returning Array values only. By specifying 'true' as an argument to\n"
+"any attribute method you will get back a Array if it is single value.\n"
+"Here's an example:"
+msgstr "属性メソッドの引数に true を渡すことで、その属性の中身が単一の内容であっても配列で返すように挙動を変更することができます。"
+
+msgid ""
+"<pre>\n"
+"irb> user = User.new('drewry')\n"
+"=> ...\n"
+"irb> user.cn(true)\n"
+"=> [\"Will Drewry\"]\n"
+"</pre>"
+msgstr ""
+
+#, fuzzy
+msgid "h4. Dynamic attribute crawling"
+msgstr "動的な属性のクローリング"
 
 #, fuzzy
 msgid ""
@@ -3195,13 +3290,14 @@ msgstr ""
 "利用すれば属性アクセサメソッドの一覧を得ることが可能です。"
 
 msgid ""
-"MyLDAP::Group.new('foo')\n"
-"...\n"
+"<pre>\n"
+"irb> d = Group.new('develop')\n"
+"=> ...\n"
+"irb> d.attribute_names\n"
+"=> [\"gidNumber\", \"cn\", \"memberUid\", \"commonName\", \"description\", \"userPassword"
+"\", \"objectClass\"]\n"
 "</pre>"
 msgstr ""
-
-msgid "and everything should work well."
-msgstr "すべてのクラスは正しく動作するでしょう。"
 
 #, fuzzy
 msgid "h4. Juggling multiple LDAP connections"
@@ -3215,21 +3311,21 @@ msgstr "最後に、クラスごとに別々の <placeholder-1/> コネクショ
 
 msgid ""
 "<pre>\n"
-"irb> user = User.new('drewry')\n"
+"irb> anon_class = Class.new(Base)\n"
 "=> ...\n"
-"irb> user.cn(true)\n"
-"=> [\"Will Drewry\"]\n"
+"irb> anon_class.setup_connection\n"
+"=> ...\n"
+"irb> auth_class = Class.new(Base)\n"
+"=> ...\n"
+"irb> auth_class.setup_connection(:password_block => lambda{'mypass'})\n"
+"=> ...\n"
 "</pre>"
 msgstr ""
 
-msgid ""
-"<pre>\n"
-"irb> d = Group.new('develop')\n"
-"=> ...\n"
-"irb> d.attribute_names\n"
-"=> [\"gidNumber\", \"cn\", \"memberUid\", \"commonName\", \"description\", \"userPassword"
-"\", \"objectClass\"]\n"
-"</pre>"
+msgid "This can be useful for doing authentication tests and other such tricks."
+msgstr "これは認証のテストなどに有効です。"
+
+msgid "h4. :try_sasl"
 msgstr ""
 
 #, fuzzy
@@ -3248,19 +3344,6 @@ msgstr "またこの場合、OpenLDAP 2.1.29 かそれ以上が必要です。�
 #, fuzzy
 msgid "h4. Don't be afraid! [Internals]"
 msgstr "こわがらないでください！"
-
-msgid ""
-"<pre>\n"
-"irb> anon_class = Class.new(Base)\n"
-"=> ...\n"
-"irb> anon_class.setup_connection\n"
-"=> ...\n"
-"irb> auth_class = Class.new(Base)\n"
-"=> ...\n"
-"irb> auth_class.setup_connection(:password_block => lambda{'mypass'})\n"
-"=> ...\n"
-"</pre>"
-msgstr ""
 
 #, fuzzy
 msgid ""
@@ -3292,12 +3375,6 @@ msgid ""
 "* Base.required_classes()\n"
 "* Base.dn_attribute()"
 msgstr "ldap_mapping をコールしたとき、ActiveLdap::Base のいくつかのクラスメソッドがオーバーライドされます。以下のメソッドです。"
-
-msgid "This can be useful for doing authentication tests and other such tricks."
-msgstr "これは認証のテストなどに有効です。"
-
-msgid "h4. :try_sasl"
-msgstr ""
 
 #, fuzzy
 msgid ""
@@ -3339,6 +3416,15 @@ msgstr ""
 "ます。もし、これだけでは十分ではない場合は、本当の属性名を得るためにto_real_attribute_name プライベートメソッドを利用することができま"
 "す。"
 
+msgid ""
+"<pre>\n"
+"irb> User.find(:first).instance_eval do\n"
+"irb>   to_real_attribute_name('commonName')\n"
+"irb> end\n"
+"=> 'cn'\n"
+"</pre>"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "This tells you the name the attribute is stored in behind the scenes (@data).\n"
@@ -3354,6 +3440,13 @@ msgid ""
 "following:"
 msgstr "また例えば、ユーザクラスの属性名のエイリアスを見つけるためには以下のようにするとよいでしょう。"
 
+msgid ""
+"<pre>\n"
+"irb> User.schema.attribute_type 'cn', 'NAME'\n"
+"=> [\"cn\", \"commonName\"]\n"
+"</pre>"
+msgstr ""
+
 #, fuzzy
 msgid "This is discovered automagically from the LDAP server's schema."
 msgstr "これは<placeholder-1/> サーバのスキーマから自動的に発見します。"
@@ -3365,15 +3458,6 @@ msgstr "制限"
 #, fuzzy
 msgid "h3. Speed"
 msgstr "実行速度"
-
-msgid ""
-"<pre>\n"
-"irb> User.find(:first).instance_eval do\n"
-"irb>   to_real_attribute_name('commonName')\n"
-"irb> end\n"
-"=> 'cn'\n"
-"</pre>"
-msgstr ""
 
 #, fuzzy
 msgid ""
@@ -3398,13 +3482,6 @@ msgid ""
 msgstr ""
 "どんなものでも、またすべてのフィードバックやパッチを歓迎します。私はこのパッケージについて興奮しています。また、私以上に、人々の助けになることを見たいと思っ"
 "ています。"
-
-msgid ""
-"<pre>\n"
-"irb> User.schema.attribute_type 'cn', 'NAME'\n"
-"=> [\"cn\", \"commonName\"]\n"
-"</pre>"
-msgstr ""
 
 msgid "Returns list of ancestors, starting from parent until root."
 msgstr ""
@@ -3434,9 +3511,6 @@ msgstr ""
 msgid "a new instance of Base"
 msgstr ""
 
-msgid "Returns the value of attribute runtime"
-msgstr ""
-
 # ActiveLdap::Adapter::Base#reconnect
 msgid ""
 "Attempts to reconnect up to the number of times allowed\n"
@@ -3449,17 +3523,17 @@ msgid ""
 "True is reconnecting is allowed - False if not."
 msgstr ""
 
-msgid "Returns the value of attribute values"
-msgstr ""
-
-msgid "Returns the value of attribute name"
+msgid "Returns the value of attribute type"
 msgstr ""
 
 # @return [ModifyRecord]
 msgid "a new instance of ModifyRecord"
 msgstr ""
 
-msgid "Returns the value of attribute type"
+msgid "Returns the value of attribute values"
+msgstr ""
+
+msgid "Returns the value of attribute name"
 msgstr ""
 
 # @return [JndiConnection]
@@ -3654,21 +3728,20 @@ msgstr ""
 msgid "Returns the value of attribute input"
 msgstr ""
 
-msgid "Returns the value of attribute dn"
+# @return [DistinguishedNameInvalid]
+msgid "a new instance of DistinguishedNameInvalid"
 msgstr ""
 
 msgid "Returns the value of attribute reason"
 msgstr ""
 
-# @return [DistinguishedNameInvalid]
-msgid "a new instance of DistinguishedNameInvalid"
+msgid "Returns the value of attribute dn"
 msgstr ""
 
 msgid "Returns the value of attribute ldif"
 msgstr ""
 
-# @return [LdifInvalid]
-msgid "a new instance of LdifInvalid"
+msgid "Returns the value of attribute line"
 msgstr ""
 
 msgid "Returns the value of attribute column"
@@ -3677,14 +3750,15 @@ msgstr ""
 msgid "Returns the value of attribute nearest"
 msgstr ""
 
-msgid "Returns the value of attribute line"
+# @return [LdifInvalid]
+msgid "a new instance of LdifInvalid"
+msgstr ""
+
+msgid "Returns the value of attribute entry"
 msgstr ""
 
 # @return [EntryInvalid]
 msgid "a new instance of EntryInvalid"
-msgstr ""
-
-msgid "Returns the value of attribute entry"
 msgstr ""
 
 msgid "Returns the value of attribute adapter"
@@ -3698,6 +3772,9 @@ msgstr ""
 msgid "a new instance of UnknownAttribute"
 msgstr ""
 
+msgid "Returns the value of attribute attribute"
+msgstr ""
+
 # @return [AttributeValueInvalid]
 msgid "a new instance of AttributeValueInvalid"
 msgstr ""
@@ -3705,14 +3782,11 @@ msgstr ""
 msgid "Returns the value of attribute value"
 msgstr ""
 
-msgid "Returns the value of attribute attribute"
+msgid "Returns the value of attribute target"
 msgstr ""
 
 # @return [NotImplemented]
 msgid "a new instance of NotImplemented"
-msgstr ""
-
-msgid "Returns the value of attribute target"
 msgstr ""
 
 msgid "Base"
@@ -3957,6 +4031,10 @@ msgid ""
 "settings can be passed in at initialization time."
 msgstr ""
 
+# @return [URIConfigurationMerger]
+msgid "a new instance of URIConfigurationMerger"
+msgstr ""
+
 msgid "Return the schema object"
 msgstr ""
 
@@ -3964,11 +4042,11 @@ msgstr ""
 msgid "a new instance of Parser"
 msgstr ""
 
-# @return [DistinguishedName]
-msgid "a new instance of DistinguishedName"
+msgid "Returns the value of attribute rdns"
 msgstr ""
 
-msgid "Returns the value of attribute rdns"
+# @return [DistinguishedName]
+msgid "a new instance of DistinguishedName"
 msgstr ""
 
 # ActiveLdap::DistinguishedName#to_str
@@ -3978,7 +4056,7 @@ msgstr ""
 msgid "Returns the value of attribute may"
 msgstr ""
 
-msgid "Returns the value of attribute object_classes"
+msgid "Returns the value of attribute must"
 msgstr ""
 
 # @return [EntryAttribute]
@@ -3988,7 +4066,7 @@ msgstr ""
 msgid "Returns the value of attribute schemata"
 msgstr ""
 
-msgid "Returns the value of attribute must"
+msgid "Returns the value of attribute object_classes"
 msgstr ""
 
 msgid "register"
@@ -4004,14 +4082,14 @@ msgstr ""
 msgid "a new instance of Scanner"
 msgstr ""
 
-# @return [Ldif]
-msgid "a new instance of Ldif"
+msgid "Returns the value of attribute version"
 msgstr ""
 
 msgid "Returns the value of attribute records"
 msgstr ""
 
-msgid "Returns the value of attribute version"
+# @return [Ldif]
+msgid "a new instance of Ldif"
 msgstr ""
 
 msgid "Returns the value of attribute attributes"
@@ -4043,14 +4121,14 @@ msgstr ""
 msgid "a new instance of DeleteRecord"
 msgstr ""
 
-# @return [ModifyNameRecord]
-msgid "a new instance of ModifyNameRecord"
-msgstr ""
-
 msgid "Returns the value of attribute new_rdn"
 msgstr ""
 
 msgid "Returns the value of attribute new_superior"
+msgstr ""
+
+# @return [ModifyNameRecord]
+msgid "a new instance of ModifyNameRecord"
 msgstr ""
 
 # @return [ModifyDNRecord]
@@ -4162,24 +4240,24 @@ msgid ""
 " fetch('ldapSyntaxes', '1.3.6.1.4.1.1466.115.121.1.5', 'DESC')"
 msgstr ""
 
-# ActiveLdap::Schema::Entry#description
-msgid "Returns the value of attribute description"
-msgstr ""
-
 # ActiveLdap::Schema::Entry#id
 msgid "Returns the value of attribute id"
+msgstr ""
+
+# ActiveLdap::Schema::Entry#description
+msgid "Returns the value of attribute description"
 msgstr ""
 
 # ActiveLdap::Schema::Entry#aliases
 msgid "Returns the value of attribute aliases"
 msgstr ""
 
-# ActiveLdap::Schema::Syntax#length
-msgid "Returns the value of attribute length"
-msgstr ""
-
 # @return [Syntax]
 msgid "a new instance of Syntax"
+msgstr ""
+
+# ActiveLdap::Schema::Syntax#length
+msgid "Returns the value of attribute length"
 msgstr ""
 
 # ActiveLdap::Schema::Attribute#super_attribute
@@ -4243,12 +4321,16 @@ msgid ""
 "It means that USAGE contains directoryOperation."
 msgstr ""
 
+# @return [ObjectClass]
+msgid "a new instance of ObjectClass"
+msgstr ""
+
 # ActiveLdap::Schema::ObjectClass#super_classes
 msgid "Returns the value of attribute super_classes"
 msgstr ""
 
-# @return [ObjectClass]
-msgid "a new instance of ObjectClass"
+# @return [SupportedControl]
+msgid "a new instance of SupportedControl"
 msgstr ""
 
 msgid "STUB"
