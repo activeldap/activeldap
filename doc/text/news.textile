@@ -1,5 +1,46 @@
 h1. News
 
+h2(#release-4-0-4). 4.0.4: 2014-10-11
+
+h3. Improvements
+
+* Migrated to commit mail mailing list to "Google
+  Groups":https://groups.google.com/forum/?hl=ja#!forum/activeldap-commit
+  from RubyForge. Thanks to RubyForge! RubyForge was very helpful!
+* Update project homepage URL in README.
+  [GitHub#103] [Patch by Adam Whittingham]
+* Removed needless @Enumerable@ inclusion in @ActiveLdap::Base@.
+  [GitHub#104] [Patch by Murray Steele]
+* {ActiveLdap::Populate.ensure_base}: Supported ou entry creation in base DN.
+* Added @follow_referrals@ configuration. You can disable auto
+  referrals following by specifying @false@. It is useful when you
+  can't access referrals.
+
+  This configuration is enabled by default.
+
+  This configuration works only with ruby-ldap adapter.
+
+  [GitHub#99] [Suggested by hadmut]
+
+* Supported @bindname@ extension in LDAP URL such as
+  @ldap://host/dc=base,dc=name????bindname=cn%3Dadmin%2Cdc%3Dexample%2Cdc%3Dcom%3F@.
+
+h3. Fixes
+
+* Fixed a bug logging is failed on removing a connection.
+  [GitHub#94] [Reported by Francisco Miguel Biete]
+* Fixed homepage URL in RubyGems.
+  [GitHub#95] [Patch by Vít Ondruch]
+* Fixed a bug that DN in LDAP URL is used as bind DN not base DN.
+
+h3. Thanks
+
+* Francisco Miguel Biete
+* Vít Ondruch
+* Adam Whittingham
+* Murray Steele
+* hadmut
+
 h2(#4-0-3). 4.0.3: 2014-05-15
 
 h3. Improvements
