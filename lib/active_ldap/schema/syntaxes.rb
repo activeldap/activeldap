@@ -444,6 +444,25 @@ module ActiveLdap
         #   String(NT-Sec-Desc) 1.2.840.113556.1.4.907
         SYNTAXES["1.2.840.113556.1.4.907"] = self
       end
+
+      class UnicodePwd < OctetString
+        # @see http://msdn.microsoft.com/en-us/library/cc220961.aspx
+        #   cn: Unicode-Pwd
+        #   ldapDisplayName: unicodePwd
+        #   attributeId: 1.2.840.113556.1.4.90
+        #   attributeSyntax: 2.5.5.10
+        #   omSyntax: 4
+        #   isSingleValued: TRUE
+        #   schemaIdGuid: bf9679e1-0de6-11d0-a285-00aa003049e2
+        #   systemOnly: FALSE
+        #   searchFlags: 0
+        #   systemFlags: FLAG_SCHEMA_BASE_OBJECT
+        #   schemaFlagsEx: FLAG_ATTR_IS_CRITICAL
+        #
+        # @see http://msdn.microsoft.com/en-us/library/cc223177.aspx
+        #   String(Octet) 2.5.5.10
+        SYNTAXES["1.2.840.113556.1.4.90"] = self
+      end
     end
   end
 end
