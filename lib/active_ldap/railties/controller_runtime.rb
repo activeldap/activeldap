@@ -5,11 +5,11 @@ module ActiveLdap
   module Railties
     module ControllerRuntime #:nodoc:
       extend ActiveSupport::Concern
-      
+
     protected
-      
+
       attr_internal :ldap_runtime
-      
+
       def process_action(action, *args)
         # We also need to reset the runtime before each action
         # because of queries in middleware or in cases we are streaming
@@ -17,7 +17,7 @@ module ActiveLdap
         ActiveLdap::LogSubscriber.reset_runtime
         super
       end
-      
+
       def cleanup_view_runtime
         if ActiveLdap::Base.connected?
           ldap_rt_before_render = ActiveLdap::LogSubscriber.reset_runtime
@@ -29,12 +29,12 @@ module ActiveLdap
           super
         end
       end
-      
+
       def append_info_to_payload(payload)
         super
         payload[:ldap_runtime] = ldap_runtime
       end
-      
+
       module ClassMethods
         def log_process_action(payload)
           messages, ldap_runtime = super, payload[:ldap_runtime]
