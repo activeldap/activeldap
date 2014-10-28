@@ -96,7 +96,7 @@ end
 You can also generate a Group model by the following command:
 
 <pre class="command">
-% script/rails generate model Group --classes PosixGroup
+% script/rails generate active_ldap:model Group --classes PosixGroup
 </pre>
 
 app/model/group.rb:
