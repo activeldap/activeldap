@@ -37,8 +37,8 @@ module ActiveLdap
     end
 
     def extract_salt_for_crypt(crypted_password)
-      if /^\$1\$/ =~ crypted_password
-        $MATCH + $POSTMATCH[0, 8].sub(/\$.*/, '') + "$"
+      if /^\$(1|5|6|2a)\$([a-zA-Z0-9.\/]{,16}\$)?/ =~ crypted_password
+        $MATCH
       else
         crypted_password[0, 2]
       end

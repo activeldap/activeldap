@@ -39,10 +39,13 @@ class TestUserPassword < Test::Unit::TestCase
   def test_extract_salt_for_crypt
     assert_extract_salt(:crypt, "AB", "ABCDE")
     assert_extract_salt(:crypt, "$1", "$1")
-    assert_extract_salt(:crypt, "$1$$", "$1$")
+    assert_extract_salt(:crypt, "$1$", "$1$")
     assert_extract_salt(:crypt, "$1$$", "$1$$")
     assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-    assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefghi$")
+    assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
+    assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
+    assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
+    assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
   end
 
   def test_md5
