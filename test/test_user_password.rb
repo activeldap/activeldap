@@ -25,29 +25,29 @@ class TestUserPassword < Test::Unit::TestCase
   end
 
   sub_test_case("crypt") do
-  def test_encrypt
-    salt = ".WoUoU9f3IlUx9Hh7D/8y.xA6ziklGib"
-    assert_equal("{CRYPT}.W57FZhV52w0s",
-                 ActiveLdap::UserPassword.crypt("password", salt))
+    def test_encrypt
+      salt = ".WoUoU9f3IlUx9Hh7D/8y.xA6ziklGib"
+      assert_equal("{CRYPT}.W57FZhV52w0s",
+                   ActiveLdap::UserPassword.crypt("password", salt))
 
-    password = "PASSWORD"
-    hashed_password = ActiveLdap::UserPassword.crypt(password)
-    salt = hashed_password.sub(/^\{CRYPT\}/, '')
-    assert_equal(hashed_password,
-                 ActiveLdap::UserPassword.crypt(password, salt))
-  end
+      password = "PASSWORD"
+      hashed_password = ActiveLdap::UserPassword.crypt(password)
+      salt = hashed_password.sub(/^\{CRYPT\}/, '')
+      assert_equal(hashed_password,
+                   ActiveLdap::UserPassword.crypt(password, salt))
+    end
 
-  def test_extract_salt_for_crypt
-    assert_extract_salt(:crypt, "AB", "ABCDE")
-    assert_extract_salt(:crypt, "$1", "$1")
-    assert_extract_salt(:crypt, "$1$", "$1$")
-    assert_extract_salt(:crypt, "$1$$", "$1$$")
-    assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-    assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-    assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
-    assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
-    assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
-  end
+    def test_extract_salt_for_crypt
+      assert_extract_salt(:crypt, "AB", "ABCDE")
+      assert_extract_salt(:crypt, "$1", "$1")
+      assert_extract_salt(:crypt, "$1$", "$1$")
+      assert_extract_salt(:crypt, "$1$$", "$1$$")
+      assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
+      assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
+      assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
+      assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
+      assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
+    end
   end
 
   def test_md5
