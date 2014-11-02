@@ -5,6 +5,8 @@ require 'digest/sha1'
 
 module ActiveLdap
   module UserPassword
+    include GetText
+
     module_function
     def valid?(password, hashed_password)
       unless /^\{([A-Za-z][A-Za-z\d]+)\}/ =~ hashed_password
@@ -40,7 +42,15 @@ module ActiveLdap
       if /\A\$(?:1|5|6|2a)\$[a-zA-Z0-9.\/]{,16}\$/ =~ crypted_password
         $MATCH
       else
-        crypted_password[0, 2]
+        salt = crypted_password[0, 2]
+        if salt.size != 2
+          raise ArgumentError, _("salt size must be 2: <%s>") % salt
+        end
+        unless /\A[a-zA-Z0-9.\/]{2}\z/ =~ salt
+          message = _("salt character must be [a-zA-Z0-9./]: <%s>") % salt
+          raise ArgumentError, message
+        end
+        salt
       end
     end
 

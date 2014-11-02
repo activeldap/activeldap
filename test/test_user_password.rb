@@ -38,75 +38,90 @@ class TestUserPassword < Test::Unit::TestCase
     end
 
     sub_test_case("extract_salt") do
-      sub_test_case("ID") do
-        def test_nothing
-          assert_extract_salt(:crypt, "a", "a")
+      sub_test_case("base format") do
+        def test_less
+          message = "salt size must be 2: <a>"
+          assert_raise(ArgumentError.new(message)) do
+            extract_salt(:crypt, "a")
+          end
         end
 
-        def test_incomplete
-          assert_extract_salt(:crypt, "$1", "$1")
+        def test_exact
+          assert_extract_salt(:crypt, "ab", "ab")
         end
 
-        def test_md5
-          assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-        end
-
-        def test_blowfish
-          assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
-        end
-
-        def test_sha256
-          assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
-        end
-
-        def test_sha512
-          assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
+        def test_more
+          assert_extract_salt(:crypt, "ab", "abc")
         end
       end
 
-      sub_test_case("salt") do
-        def test_not_teminated
-          assert_extract_salt(:crypt, "$1", "$1$")
+      sub_test_case("glibc2 format") do
+        sub_test_case("ID") do
+          def test_md5
+            assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
+          end
+
+          def test_blowfish
+            assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
+          end
+
+          def test_sha256
+            assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
+          end
+
+          def test_sha512
+            assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
+          end
         end
 
-        def test_empty
-          assert_extract_salt(:crypt, "$1$$", "$1$$")
-        end
+        sub_test_case("salt") do
+          def test_not_teminated
+            message = "salt character must be [a-zA-Z0-9./]: <$1>"
+            assert_raise(ArgumentError.new(message)) do
+              extract_salt(:crypt, "$1$")
+            end
+          end
 
-        def test_lower_case
-          assert_extract_salt(:crypt, "$1$abc$", "$1$abc$")
-        end
+          def test_empty
+            assert_extract_salt(:crypt, "$1$$", "$1$$")
+          end
 
-        def test_upper_case
-          assert_extract_salt(:crypt, "$1$ABC$", "$1$ABC$")
-        end
+          def test_lower_case
+            assert_extract_salt(:crypt, "$1$abc$", "$1$abc$")
+          end
 
-        def test_digit
-          assert_extract_salt(:crypt, "$1$012$", "$1$012$")
-        end
+          def test_upper_case
+            assert_extract_salt(:crypt, "$1$ABC$", "$1$ABC$")
+          end
 
-        def test_dot
-          assert_extract_salt(:crypt, "$1$...$", "$1$...$")
-        end
+          def test_digit
+            assert_extract_salt(:crypt, "$1$012$", "$1$012$")
+          end
 
-        def test_slash
-          assert_extract_salt(:crypt, "$1$///$", "$1$///$")
-        end
+          def test_dot
+            assert_extract_salt(:crypt, "$1$...$", "$1$...$")
+          end
 
-        def test_mix
-          assert_extract_salt(:crypt, "$1$aA0./$", "$1$aA0./$")
-        end
+          def test_slash
+            assert_extract_salt(:crypt, "$1$///$", "$1$///$")
+          end
 
-        def test_max
-          assert_extract_salt(:crypt,
-                              "$1$0123456789abcdef$",
-                              "$1$0123456789abcdef$")
-        end
+          def test_mix
+            assert_extract_salt(:crypt, "$1$aA0./$", "$1$aA0./$")
+          end
 
-        def test_over
-          assert_extract_salt(:crypt,
-                              "$1",
-                              "$1$0123456789abcdefg$")
+          def test_max
+            assert_extract_salt(:crypt,
+                                "$1$0123456789abcdef$",
+                                "$1$0123456789abcdef$")
+          end
+
+          def test_over
+            message = "salt character must be [a-zA-Z0-9./]: <$1>"
+            assert_raise(ArgumentError.new(message)) do
+              extract_salt(:crypt, "$1$0123456789abcdefg$")
+            end
+          end
         end
       end
     end
@@ -161,10 +176,12 @@ class TestUserPassword < Test::Unit::TestCase
   end
 
   private
+  def extract_salt(type, hashed_password)
+    ActiveLdap::UserPassword.send("extract_salt_for_#{type}",
+                                  hashed_password)
+  end
   def assert_extract_salt(type, expected, hashed_password)
-    actual = ActiveLdap::UserPassword.send("extract_salt_for_#{type}",
-                                           hashed_password)
-    assert_equal(expected, actual)
+    assert_equal(expected, extract_salt(type, hashed_password))
   end
 
   def encode64(string)
