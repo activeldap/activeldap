@@ -24,7 +24,8 @@ class TestUserPassword < Test::Unit::TestCase
     end
   end
 
-  def test_crypt
+  sub_test_case("crypt") do
+  def test_encrypt
     salt = ".WoUoU9f3IlUx9Hh7D/8y.xA6ziklGib"
     assert_equal("{CRYPT}.W57FZhV52w0s",
                  ActiveLdap::UserPassword.crypt("password", salt))
@@ -46,6 +47,7 @@ class TestUserPassword < Test::Unit::TestCase
     assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
     assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
     assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
+  end
   end
 
   def test_md5
