@@ -37,16 +37,78 @@ class TestUserPassword < Test::Unit::TestCase
                    ActiveLdap::UserPassword.crypt(password, salt))
     end
 
-    def test_extract_salt_for_crypt
-      assert_extract_salt(:crypt, "AB", "ABCDE")
-      assert_extract_salt(:crypt, "$1", "$1")
-      assert_extract_salt(:crypt, "$1$", "$1$")
-      assert_extract_salt(:crypt, "$1$$", "$1$$")
-      assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-      assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
-      assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
-      assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
-      assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
+    sub_test_case("extract_salt") do
+      sub_test_case("ID") do
+        def test_nothing
+          assert_extract_salt(:crypt, "a", "a")
+        end
+
+        def test_incomplete
+          assert_extract_salt(:crypt, "$1", "$1")
+        end
+
+        def test_md5
+          assert_extract_salt(:crypt, "$1$abcdefgh$", "$1$abcdefgh$")
+        end
+
+        def test_blowfish
+          assert_extract_salt(:crypt, "$2a$abcdefgh$", "$2a$abcdefgh$")
+        end
+
+        def test_sha256
+          assert_extract_salt(:crypt, "$5$abcdefgh$", "$5$abcdefgh$")
+        end
+
+        def test_sha512
+          assert_extract_salt(:crypt, "$6$abcdefgh$", "$6$abcdefgh$")
+        end
+      end
+
+      sub_test_case("salt") do
+        def test_not_teminated
+          assert_extract_salt(:crypt, "$1", "$1$")
+        end
+
+        def test_empty
+          assert_extract_salt(:crypt, "$1$$", "$1$$")
+        end
+
+        def test_lower_case
+          assert_extract_salt(:crypt, "$1$abc$", "$1$abc$")
+        end
+
+        def test_upper_case
+          assert_extract_salt(:crypt, "$1$ABC$", "$1$ABC$")
+        end
+
+        def test_digit
+          assert_extract_salt(:crypt, "$1$012$", "$1$012$")
+        end
+
+        def test_dot
+          assert_extract_salt(:crypt, "$1$...$", "$1$...$")
+        end
+
+        def test_slash
+          assert_extract_salt(:crypt, "$1$///$", "$1$///$")
+        end
+
+        def test_mix
+          assert_extract_salt(:crypt, "$1$aA0./$", "$1$aA0./$")
+        end
+
+        def test_max
+          assert_extract_salt(:crypt,
+                              "$1$0123456789abcdef$",
+                              "$1$0123456789abcdef$")
+        end
+
+        def test_over
+          assert_extract_salt(:crypt,
+                              "$1",
+                              "$1$0123456789abcdefg$")
+        end
+      end
     end
   end
 
