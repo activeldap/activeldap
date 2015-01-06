@@ -362,9 +362,15 @@ module ActiveLdap
         end
         filter = [:or, *dn_filters]
         filter = [:and, filter, options[:filter]] if options[:filter]
-        result = find_every(options.merge(:filter => filter))
-        if result.size == dns.size
-          result
+        
+        limit = options.delete(:limit)
+        offset = options.delete(:offset)
+        
+        results = find_every(options.merge(:filter => filter))
+        if results.size == dns.size
+          results = offset.blank? ? results : results[offset, results.size]
+          results = limit.blank? ? results : results[0, limit]
+          results
         else
           args = [self.is_a?(Class) ? name : self.class.name,
                   dns.join(", ")]
