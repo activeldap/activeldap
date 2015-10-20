@@ -6,6 +6,7 @@ rvm:
   - ruby-head
 #  - rbx
 #  - jruby
+sudo: true
 env:
   - JRUBY_OPTS="-Xcext.enabled=true"
 notifications:
