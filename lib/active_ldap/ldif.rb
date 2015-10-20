@@ -138,7 +138,7 @@ module ActiveLdap
       end
 
       def read_external_file
-        uri_string = @scanner.scan(URI::ABS_URI)
+        uri_string = @scanner.scan(URI::ABS_URI).chomp
         raise uri_is_missing if uri_string.nil?
         uri = nil
         begin
