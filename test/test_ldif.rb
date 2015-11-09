@@ -1264,7 +1264,7 @@ EOL
 jpegphoto:< |@|INVALID_URI
 EOL
 
-    assert_invalid_ldif("URI is missing or invalid",
+    assert_invalid_ldif("URI is missing",
                         ldif_source, 9, 13, ldif_source_with_error_mark)
   end
 
