@@ -1247,6 +1247,27 @@ uid: hjensen
 EOL
   end
 
+  def test_record_with_external_file_reference_is_invalid
+    ldif_source = <<-EOL
+version: 1
+dn: cn=Horatio Jensen, ou=Product Testing, dc=airius, dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Horatio Jensen
+sn: Jensen
+uid: hjensen
+jpegphoto:< INVALID_URI
+EOL
+
+    ldif_source_with_error_mark = <<-EOL
+jpegphoto:< |@|INVALID_URI
+EOL
+
+    assert_invalid_ldif("URI is missing or invalid",
+                        ldif_source, 9, 13, ldif_source_with_error_mark)
+  end
+
   def test_records_with_option_attributes
     ldif_source = <<-EOL
 version: 1
