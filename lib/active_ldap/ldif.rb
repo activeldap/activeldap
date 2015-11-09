@@ -141,8 +141,8 @@ module ActiveLdap
         uri_string = @scanner.scan(URI::ABS_URI)
         raise uri_is_missing_or_invalid if uri_string.nil?
         uri_string.chomp!
-        uri = nil
 
+        uri = nil
         begin
           uri = URI.parse(uri_string)
         rescue URI::Error
