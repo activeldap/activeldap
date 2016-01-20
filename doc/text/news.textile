@@ -1,5 +1,30 @@
 h1. News
 
+h2(#release-4-0-5). 4.0.5: 2016-01-20
+
+h3. Improvements
+
+* Supported @unicodePwd@ in Active Directory
+  [GitHub#105] [Reported by Laas Toom]
+* Supported Blowfish, SHA-256 and SHA-512 password hash with salt.
+  [GitHub#108] [Patch by Gary Richards]
+* Supported Ruby 2.2.
+  [GitHub#115] [Reported by Jan Zikan]
+  [GitHub#125] [Patch by Bohuslav Blín]
+* Supported Ruby 2.3.
+
+h3. Fixes
+
+* Fixed documentation for @rails generate@.
+  [GitHub#107] [Patch by Gary Richards]
+
+h3. Thanks
+
+* Laas Toom
+* Gary Richards
+* Jan Zikan
+* Bohuslav Blín
+
 h2(#release-4-0-4). 4.0.4: 2014-10-11
 
 h3. Improvements
