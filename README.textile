@@ -20,7 +20,7 @@ h2. Prerequisites
 
 - Ruby intepreter :=
 One of them:
-* "Ruby":http://www.ruby-lang.org (1.9.3 or 2.0.x)
+* "Ruby":http://www.ruby-lang.org (1.9.3, 2.0.x, 2.1.x, 2.2.x, 2.3.0)
 * "JRuby":http://www.jruby.org/
 
 See the above links for installation.
