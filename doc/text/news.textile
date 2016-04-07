@@ -1,5 +1,19 @@
 h1. News
 
+h2(#release-4-0-6). 4.0.6: 2016-04-07
+
+h3. Improvements
+
+* Updated supported Ruby versions.
+  [GitHub#127] [Patch by weicheng]
+* Supported spaces in DN.
+  [GitHub#129] [Patch by belltailjp]
+
+h3. Thanks
+
+* weicheng
+* belltailjp
+
 h2(#release-4-0-5). 4.0.5: 2016-01-20
 
 h3. Improvements
