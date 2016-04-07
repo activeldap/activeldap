@@ -72,6 +72,13 @@ class TestDN < Test::Unit::TestCase
               "dc = \" l o c a l \" , dc = \"+n,\\\"e\\\";t\"")
   end
 
+  def test_parse_dn_with_spaces_in_attribute_value
+    assert_dn([["o", "xxx "], ["dc", "local"]], "o=xxx\\ ,dc=local")
+    assert_dn([["o", " xxx"], ["dc", "local"]], "o=\\ xxx,dc=local")
+    assert_dn([["o", "xxx yyy"], ["dc", "local"]], "o=xxx\\ yyy,dc=local")
+    assert_dn([["o", " xxx "], ["dc", "local"]], "o=\\ xxx\\ ,dc=local")
+  end
+
   def test_parse_dn_in_rfc2253
     assert_dn([
                {"cn" => "Steve Kille"},
