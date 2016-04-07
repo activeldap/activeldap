@@ -62,7 +62,7 @@ module ActiveLdap
 
       HEX_PAIR = "(?:[\\da-fA-F]{2})"
       STRING_CHARS_RE = /[^,=\+<>\#;\\\"]*/ #
-      PAIR_RE = /\\([,=\+<>\#;]|\\|\"|\ |(#{HEX_PAIR}))/ #
+      PAIR_RE = /\\([,=\+<>\#;]|\\|\"| |(#{HEX_PAIR}))/ #
       HEX_STRING_RE = /\#(#{HEX_PAIR}+)/ #
       def scan_attribute_value(scanner)
         if scanner.scan(HEX_STRING_RE)
