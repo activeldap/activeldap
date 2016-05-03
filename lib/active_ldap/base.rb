@@ -329,7 +329,7 @@ module ActiveLdap
     class_local_attr_accessor false, :inheritable_prefix, :inheritable_base
     class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
-    class_local_attr_accessor true, :excluded_classes
+    class_local_attr_accessor true, :excluded_classes, :subclass_map
 
     class << self
       # Hide new in Base
@@ -422,6 +422,10 @@ module ActiveLdap
         self.excluded_classes = options[:excluded_classes]
         self.sort_by = options[:sort_by]
         self.order = options[:order]
+        self.subclass_map = {}
+        if self.superclass.subclass_map and not self.required_classes == ["top"]
+          self.superclass.subclass_map[self.required_classes.map {|c| c.downcase}] = self
+        end
 
         public_class_method :new
       end
@@ -602,6 +606,8 @@ module ActiveLdap
           real_klass = self.class
         end
 
+        objectclasses = attributes["objectClass"].map {|c| c.downcase}
+        real_klass = real_klass.subclass_map[objectclasses] || real_klass
         obj = real_klass.allocate
         conn = options[:connection] || connection
         obj.connection = conn if conn != connection
