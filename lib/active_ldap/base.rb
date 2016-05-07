@@ -1181,7 +1181,9 @@ module ActiveLdap
         _ = value # for suppress a warning on Ruby 1.9.3
       else
         new_name ||= @dn_attribute || dn_attribute_of_class
-        new_name = to_real_attribute_name(new_name)
+        unless self.classes.member? 'extensibleObject'
+          new_name = to_real_attribute_name(new_name)
+        end
         if new_name.nil?
           new_name = @dn_attribute || dn_attribute_of_class
           new_name = to_real_attribute_name(new_name)
@@ -1410,7 +1412,11 @@ module ActiveLdap
       object_classes = find_object_class_values(@ldap_data) || []
       original_attributes =
         connection.entry_attribute(object_classes).names
-      bad_attrs = original_attributes - entry_attribute.names
+      if self.classes.member? 'extensibleObject'
+        bad_attrs = []
+      else
+        bad_attrs = original_attributes - entry_attribute.names
+      end
       data = normalize_data(@data, bad_attrs)
 
       success = yield(data, ldap_data)
