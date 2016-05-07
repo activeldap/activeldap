@@ -329,7 +329,7 @@ module ActiveLdap
     class_local_attr_accessor false, :inheritable_prefix, :inheritable_base
     class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
-    class_local_attr_accessor true, :excluded_classes
+    class_local_attr_accessor true, :excluded_classes, :subclass_map
 
     class << self
       # Hide new in Base
@@ -422,6 +422,10 @@ module ActiveLdap
         self.excluded_classes = options[:excluded_classes]
         self.sort_by = options[:sort_by]
         self.order = options[:order]
+        self.subclass_map = {}
+        if self.superclass.subclass_map and not self.required_classes == ["top"]
+          self.superclass.subclass_map[self.required_classes.map {|c| c.downcase}] = self
+        end
 
         public_class_method :new
       end
@@ -602,6 +606,8 @@ module ActiveLdap
           real_klass = self.class
         end
 
+        objectclasses = attributes["objectClass"].map {|c| c.downcase}
+        real_klass = real_klass.subclass_map[objectclasses] || real_klass
         obj = real_klass.allocate
         conn = options[:connection] || connection
         obj.connection = conn if conn != connection
@@ -1175,12 +1181,15 @@ module ActiveLdap
         _ = value # for suppress a warning on Ruby 1.9.3
       else
         new_name ||= @dn_attribute || dn_attribute_of_class
-        new_name = to_real_attribute_name(new_name)
+        unless self.classes.member? 'extensibleObject'
+          new_name = to_real_attribute_name(new_name)
+        end
         if new_name.nil?
           new_name = @dn_attribute || dn_attribute_of_class
           new_name = to_real_attribute_name(new_name)
         end
         new_bases = bases.empty? ? nil : DN.new(*bases).to_s
+        new_value = DN.escape_value(new_value)
         dn_components = ["#{new_name}=#{new_value}",
                          new_bases,
                          self.class.base.to_s]
@@ -1403,7 +1412,11 @@ module ActiveLdap
       object_classes = find_object_class_values(@ldap_data) || []
       original_attributes =
         connection.entry_attribute(object_classes).names
-      bad_attrs = original_attributes - entry_attribute.names
+      if self.classes.member? 'extensibleObject'
+        bad_attrs = []
+      else
+        bad_attrs = original_attributes - entry_attribute.names
+      end
       data = normalize_data(@data, bad_attrs)
 
       success = yield(data, ldap_data)
