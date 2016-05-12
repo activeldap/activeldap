@@ -32,6 +32,7 @@
 require 'English'
 require 'thread'
 require 'erb'
+require 'set'
 
 module ActiveLdap
   # OO-interface to LDAP assuming pam/nss_ldap-style organization with
@@ -330,6 +331,7 @@ module ActiveLdap
     class_local_attr_accessor true, :dn_attribute, :scope, :sort_by, :order
     class_local_attr_accessor true, :required_classes, :recommended_classes
     class_local_attr_accessor true, :excluded_classes
+    class_local_attr_accessor false, :sub_classes
 
     class << self
       # Hide new in Base
@@ -340,6 +342,7 @@ module ActiveLdap
         sub_class.module_eval do
           include GetTextSupport
         end
+        (self.sub_classes ||= []) << sub_class
       end
 
       # Set LDAP connection configuration up. It doesn't connect
@@ -548,6 +551,20 @@ module ActiveLdap
         defaults.first || name || to_s
       end
 
+      protected
+      def find_real_class(object_classes)
+        (sub_classes || []).each do |sub_class|
+          real_class = sub_class.find_real_class(object_classes)
+          return real_class if real_class
+        end
+
+        if object_classes.superset?(Set.new(classes))
+          self
+        else
+          nil
+        end
+      end
+
       private
       def inspect_attributes(attributes)
         inspected_attribute_names = {}
@@ -594,12 +611,19 @@ module ActiveLdap
       def instantiate(args)
         dn, attributes, options = args
         options ||= {}
-        if self.class == Class
-          klass = self.ancestors[0].to_s.split(':').last
-          real_klass = self.ancestors[0]
+
+        object_classes_raw =
+          attributes["objectClass"] ||
+          attributes["objectclass"] ||
+          []
+        if sub_classes.nil? or object_classes_raw.empty?
+          real_klass = self
         else
-          klass = self.class.to_s.split(':').last
-          real_klass = self.class
+          object_classes = Set.new
+          object_classes_raw.each do |object_class_raw|
+            object_classes << schema.object_class(object_class_raw)
+          end
+          real_klass = find_real_class(object_classes) || self
         end
 
         obj = real_klass.allocate

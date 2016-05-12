@@ -663,6 +663,43 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
+  class TestInstantiate < self
+    class Person < ActiveLdap::Base
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "ou=People",
+                   scope: :one,
+                   classes: ["top", "person"]
+    end
+
+    class OrganizationalPerson < Person
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "",
+                   classes: ["top", "person", "organizationalPerson"]
+    end
+
+    class ResidentialPerson < Person
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "",
+                   classes: ["top", "person", "residentialPerson"]
+    end
+
+    def test_sub_class
+      make_ou("People")
+      residential_person = ResidentialPerson.new(cn: "John Doe",
+                                                 sn: "Doe",
+                                                 street: "123 Main Street",
+                                                 l: "Anytown")
+      residential_person.save!
+      organizational_person = OrganizationalPerson.new(cn: "Jane Smith",
+                                                       sn: "Smith",
+                                                       title: "General Manager")
+      organizational_person.save!
+      people = Person.all
+      assert_equal([ResidentialPerson, OrganizationalPerson],
+                   people.collect(&:class))
+    end
+  end
+
   def test_reload_of_not_exists_entry
     make_temporary_user do |user,|
       assert_nothing_raised do
