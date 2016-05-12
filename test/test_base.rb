@@ -678,47 +678,40 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  class Person < ActiveLdap::Base
-    ldap_mapping dn_attribute: 'cn',
-                 prefix: 'ou=People',
-                 scope: :one,
-                 classes: ['top', 'person']
-  end
-  
-  class OrganizationalPerson < Person
-    ldap_mapping dn_attribute: 'cn',
-                 prefix: '',
-                 classes: ['top', 'person', 'organizationalPerson']
-  end                                             
-  
-  class ResidentialPerson < Person
-    ldap_mapping dn_attribute: 'cn',
-                 prefix: '',
-                 classes: ['top', 'person', 'residentialPerson']
-  end                                             
-  
-  def test_dynamic_object_class
-    make_ou("People")
-    assert_nothing_raised do
-      residential_person = ResidentialPerson.new(cn: 'John Doe',
-                                                 sn: 'Doe',
-                                                 street: '123 Main Street',
-                                                 l: 'Anytown')
+  class TestInstantiate < self
+    class Person < ActiveLdap::Base
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "ou=People",
+                   scope: :one,
+                   classes: ["top", "person"]
+    end
+
+    class OrganizationalPerson < Person
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "",
+                   classes: ["top", "person", "organizationalPerson"]
+    end
+
+    class ResidentialPerson < Person
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "",
+                   classes: ["top", "person", "residentialPerson"]
+    end
+
+    def test_sub_class
+      make_ou("People")
+      residential_person = ResidentialPerson.new(cn: "John Doe",
+                                                 sn: "Doe",
+                                                 street: "123 Main Street",
+                                                 l: "Anytown")
       residential_person.save!
-    end
-    assert_nothing_raised do
-      organizational_person = OrganizationalPerson.new(cn: 'Jane Smith',
-                                                       sn: 'Smith',
-                                                       title: 'General Manager')
+      organizational_person = OrganizationalPerson.new(cn: "Jane Smith",
+                                                       sn: "Smith",
+                                                       title: "General Manager")
       organizational_person.save!
-    end
-    assert_nothing_raised do
-      people = Person.find(:all, '*')
-      classes = people.map {|person| person.class}
-      assert_equal(classes, [ResidentialPerson, OrganizationalPerson])
-      people.each do |person|
-        person.destroy
-      end
+      people = Person.all
+      assert_equal([ResidentialPerson, OrganizationalPerson],
+                   people.collect(&:class))
     end
   end
 
