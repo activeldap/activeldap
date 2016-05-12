@@ -490,6 +490,22 @@ class TestBase < Test::Unit::TestCase
     assert_equal(["one", "two", "three"].sort, ous.sort)
   end
 
+  class TestSpecialCharsInRDN < self
+    class Person < ActiveLdap::Base
+      ldap_mapping classes: ['top', 'person']
+    end
+    
+    def test_dn_attribute_with_special_characters
+      make_ou "People"
+      cn = 'Smith, John'
+      user = Person.new(dn_attribute: "cn",
+                        cn: cn,
+                        sn: "Smith")
+      user.save!
+      assert_equal(cn, user.cn)
+    end
+  end
+  
   def test_initialize_with_recommended_classes
     mapping = {
       :dn_attribute => "cn",
