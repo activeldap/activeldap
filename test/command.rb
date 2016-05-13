@@ -36,22 +36,21 @@ module Command
     return java_run(cmd, *args, &block) if Object.respond_to?(:java)
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
-    pid = nil
-      verbose = $VERBOSE
-      # ruby(>=1.8)'s fork terminates other threads with warning messages
-      $VERBOSE = nil
-      pid = fork do
-        $VERBOSE = verbose
-        detach_io
-        STDIN.reopen(in_r)
-        in_r.close
-        STDOUT.reopen(out_w)
-        STDERR.reopen(out_w)
-        out_w.close
-        exec(cmd, *args)
-        exit!(-1)
-      end
+    verbose = $VERBOSE
+    # ruby(>=1.8)'s fork terminates other threads with warning messages
+    $VERBOSE = nil
+    pid = fork do
       $VERBOSE = verbose
+      detach_io
+      STDIN.reopen(in_r)
+      in_r.close
+      STDOUT.reopen(out_w)
+      STDERR.reopen(out_w)
+      out_w.close
+      exec(cmd, *args)
+      exit!(-1)
+    end
+    $VERBOSE = verbose
     yield(out_r, in_w) if block_given?
     in_r.close unless in_r.closed?
     out_w.close unless out_w.closed?
