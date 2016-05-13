@@ -601,9 +601,13 @@ module ActiveLdap
             raise
           rescue => detail
             @logger.error do
-              _("Reconnect to server failed: %s\n" \
+              _("Reconnect to server failed: %s: %s\n" \
                 "Reconnect to server failed backtrace:\n" \
-                "%s") % [detail.message, detail.backtrace.join("\n")]
+                "%s") % [
+                detail.class,
+                detail.message,
+                detail.backtrace.join("\n"),
+              ]
             end
             # Do not loop if forced
             raise ConnectionError, detail.message if force
