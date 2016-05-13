@@ -197,26 +197,8 @@ module ActiveLdap
         if Object.respond_to?(:java)
           "jndi"
         else
-          ruby_ldap_available = false
-          $LOAD_PATH.each do |path|
-            if File.exist?(File.join(path, "ldap", "ldif.rb"))
-              ruby_ldap_available = true
-              break
-            end
-          end
-          if !ruby_ldap_available and Object.const_defined?(:Gem)
-            ruby_ldap_available = gem_available?("ruby-ldap")
-          end
-          if ruby_ldap_available
-            "ldap"
-          else
-            "net-ldap"
-          end
+          "net-ldap"
         end
-      end
-
-      def gem_available?(name)
-        not Gem::Specification.find_all_by_name(name).empty?
       end
     end
 
