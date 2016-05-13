@@ -37,7 +37,6 @@ module Command
     in_r, in_w = IO.pipe
     out_r, out_w = IO.pipe
     pid = nil
-    Thread.exclusive do
       verbose = $VERBOSE
       # ruby(>=1.8)'s fork terminates other threads with warning messages
       $VERBOSE = nil
@@ -53,7 +52,6 @@ module Command
         exit!(-1)
       end
       $VERBOSE = verbose
-    end
     yield(out_r, in_w) if block_given?
     in_r.close unless in_r.closed?
     out_w.close unless out_w.closed?
