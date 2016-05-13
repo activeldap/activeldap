@@ -8,12 +8,6 @@ module ActiveLdap
   autoload :Command, "active_ldap/command"
 end
 
-if RUBY_PLATFORM.match('linux')
-  require 'active_ldap/timeout'
-else
-  require 'active_ldap/timeout_stub'
-end
-
 require 'active_ldap/get_text'
 
 require 'active_ldap/compatible'
