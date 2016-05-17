@@ -23,7 +23,7 @@ module ActiveLdap
 
     module Common
       VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
-                              :classes, :scope, :limit, :attributes,
+                              :classes, :scope, :deref, :limit, :attributes,
                               :sort_by, :order, :connection, :base, :offset]
 
       def search(options={}, &block)
@@ -57,6 +57,7 @@ module ActiveLdap
         search_options = {
           :base => _base,
           :scope => options[:scope] || scope,
+          :deref => options[:deref],
           :filter => filter,
           :limit => options[:limit],
           :attributes => requested_attributes,
