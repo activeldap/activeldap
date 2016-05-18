@@ -714,14 +714,16 @@ class TestBase < Test::Unit::TestCase
                    classes: ["top", "person"]
     end
     
+    require 'net/ldap'
+    require 'net/ldap/dn'
+
     def makealias(fromdn, to)
       if to.dn
-        first, rest = to.dn.to_s.split(/,/, 2)
-        field, value = first.split(/=/, 2)
-        newdn = "#{first},#{fromdn}"
+        field, value = Net::LDAP::DN.new(to.dn).to_a[0..1]
+        newdn = Net::LDAP::DN.new field, value, fromdn
         Alias.new(:dn_attribute => field,
                   field.to_sym => value,
-                  :dn => newdn,
+                  :dn => newdn.to_s,
                   :aliasedObjectName => to.dn,
                  ).save!
       else

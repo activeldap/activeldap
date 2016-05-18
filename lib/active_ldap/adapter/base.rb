@@ -169,7 +169,7 @@ module ActiveLdap
         filter = parse_filter(options[:filter]) || 'objectClass=*'
         attrs = options[:attributes] || []
         scope = ensure_scope(options[:scope] || @scope)
-        derefkeys = [:never, :always, :search, :find]
+        derefkeys = [:never, :search, :find, :always]
         deref = derefkeys.find_index(options[:deref]) || options[:deref] || 0
         base = options[:base]
         limit = options[:limit] || 0
