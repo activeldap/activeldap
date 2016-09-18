@@ -187,10 +187,15 @@ module ActiveLdap
             fraction = match_data[-2]
             fraction = fraction.to_f if fraction
             time_zone = match_data[-1]
+            arguments = [
+              year, month, day, hour, minute, second, fraction, time_zone,
+              Time.now
+            ]
+            if Time.method(:make_time).arity == 10
+              arguments.unshift(value)
+            end
             begin
-              Time.send(:make_time,
-                        year, month, day, hour, minute, second, fraction,
-                        time_zone, Time.now)
+              Time.send(:make_time, *arguments)
             rescue ArgumentError
               raise if year >= 1700
               out_of_range_messages = ["argument out of range",
