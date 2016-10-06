@@ -47,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("locale")
   spec.add_dependency("gettext")
   spec.add_dependency("gettext_i18n_rails")
+  spec.add_dependency("builder")
 
   spec.add_development_dependency("bundler")
   spec.add_development_dependency("rake")
