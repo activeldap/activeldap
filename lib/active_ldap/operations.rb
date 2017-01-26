@@ -85,6 +85,30 @@ module ActiveLdap
         values
       end
 
+      ##
+      # This method is designed to dump attributes
+      # 
+      # Accepts Strings and Symbols as parameters.
+      #
+      # = Usage
+      #   Subclass.pluck(:dn)
+      #   Subclass.pluck(:sAMAccountName, :mail)
+      # 
+      def pluck(*attribute)
+        attribute = [attribute].flatten.map(&:to_s)
+        attribute.reject!(&:empty?)
+        return [] if attribute.empty?
+        attribute.map!{ |x| x == 'dn' ? 'distinguishedName' : x }
+        result = self.search(
+          attributes: attribute
+        ).collect{ |_, v| 
+          v.values
+           .flatten 
+        }
+        return [] if result.uniq.flatten.empty?
+        result
+      end      
+
       def exist?(dn, options={})
         attr, value, prefix = split_search_value(dn)
 
