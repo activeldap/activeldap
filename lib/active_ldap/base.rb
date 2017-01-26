@@ -425,6 +425,10 @@ module ActiveLdap
         self.excluded_classes = options[:excluded_classes]
         self.sort_by = options[:sort_by]
         self.order = options[:order]
+        self.subclass_map = {}
+        if self.superclass.subclass_map and not self.required_classes == ["top"]
+          self.superclass.subclass_map[self.required_classes.map {|c| c.downcase}] = self
+        end
 
         public_class_method :new
       end
@@ -626,6 +630,10 @@ module ActiveLdap
           real_klass = find_real_class(object_classes) || self
         end
 
+        if attributes["objectClass"]
+          objectclasses = attributes["objectClass"].map {|c| c.downcase}
+          real_klass = real_klass.subclass_map[objectclasses] || real_klass
+        end
         obj = real_klass.allocate
         conn = options[:connection] || connection
         obj.connection = conn if conn != connection
@@ -1205,6 +1213,7 @@ module ActiveLdap
           new_name = to_real_attribute_name(new_name)
         end
         new_bases = bases.empty? ? nil : DN.new(*bases).to_s
+        new_value = DN.escape_value(new_value)
         dn_components = ["#{new_name}=#{new_value}",
                          new_bases,
                          self.class.base.to_s]
