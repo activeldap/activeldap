@@ -75,15 +75,15 @@ module ActiveLdap
           association_class = Association::BelongsTo
           opts[:foreign_key_name] ||= "#{association_id}_id"
 
-          before_save(<<-EOC)
-            if defined?(@#{association_id})
-              association = @#{association_id}
+          before_save do
+            if instance_variable_defined?(:"@#{association_id}")
+              association = instance_variable_get(:"@#{association_id}")
               if association and association.updated?
                 self[association.__send__(:primary_key)] =
-                  association[#{opts[:foreign_key_name].dump}]
+                  association[opts[:foreign_key_name]]
               end
             end
-          EOC
+          end
         end
 
         association_accessor(association_id) do |target|
