@@ -1,5 +1,35 @@
 h1. News
 
+h2(#release-5-1-0). 5.1.0: 2017-05-01
+
+h3. Improvements
+
+* Supported Rails 5.1.0.
+
+* Supported sub class instantiate by objectClass.
+   [GitHub#134][Patch by Chris Garrigues]
+
+* Improved error messages.
+
+* Changed to the default LDAP client to net-ldap from ruby-ldap
+  because ruby-ldap doesn't support timeout.
+
+* Suppressed warnings.
+  [GitHub#146][Reported by jas01]
+
+h3. Fixes
+
+* Added missing dependency.
+  [GitHub#145][Reported by Tom Wardrop]
+
+h3. Thanks
+
+* Chris Garrigues
+
+* Tom Wardrop
+
+* jas01
+
 h2(#release-4-0-6). 4.0.6: 2016-04-07
 
 h3. Improvements
