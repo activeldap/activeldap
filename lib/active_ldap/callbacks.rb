@@ -14,13 +14,12 @@ module ActiveLdap
     included do
       extend ActiveModel::Callbacks
       include ActiveModel::Validations::Callbacks
+      singleton_class.class_eval do
+        prepend CallbackedInstantiatable
+      end
 
       define_model_callbacks :initialize, :find, :touch, :only => :after
       define_model_callbacks :save, :create, :update, :destroy
-
-      class << self
-        alias_method_chain :instantiate, :callbacks
-      end
     end
 
     module ClassMethods
@@ -33,9 +32,9 @@ module ActiveLdap
       end
     end
 
-    module ClassMethods
-      def instantiate_with_callbacks(record)
-        object = instantiate_without_callbacks(record)
+    module CallbackedInstantiatable
+      def instantiate(record)
+        object = super(record)
         object.run_callbacks(:find)
         object.run_callbacks(:initialize)
         object
