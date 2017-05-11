@@ -182,6 +182,7 @@ module ActiveLdap
 
         def type_cast(value)
           return value if value.nil? or value.is_a?(Time)
+          value = insert_optional_attr(value)
           match_data = FORMAT.match(value)
           if match_data
             required_components = match_data.to_a[1, 5]
@@ -225,7 +226,7 @@ module ActiveLdap
               normalized_value + ("%+03d%02d" % value.gmtoff.divmod(3600))
             end
           else
-            value
+            insert_optional_attr(value)
           end
         end
 
@@ -248,6 +249,14 @@ module ActiveLdap
           else
             _("%s is invalid time format") % original_value.inspect
           end
+        end
+
+        def insert_optional_attr(value)
+          match_data = FORMAT.match(value).to_a[1,6]
+          match_data[4] ||= "00"
+          match_data[5] ||= "00"
+          match_data[6] ||= ".0"
+          match_data.join
         end
       end
 
