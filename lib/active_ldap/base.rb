@@ -1205,6 +1205,7 @@ module ActiveLdap
           new_name = to_real_attribute_name(new_name)
         end
         new_bases = bases.empty? ? nil : DN.new(*bases).to_s
+        new_value = DN.escape_value(new_value)
         dn_components = ["#{new_name}=#{new_value}",
                          new_bases,
                          self.class.base.to_s]
