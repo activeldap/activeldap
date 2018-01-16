@@ -291,6 +291,9 @@ module ActiveLdap
         offset = options.delete(:offset) || offset
         options[:attributes] = options.delete(:attributes) || ['*']
         options[:attributes] |= ['objectClass']
+        if options.delete(:include_operational_attributes)
+          options[:attributes] |= ["+"]
+        end
         results = search(options).collect do |dn, attrs|
           instantiate([dn, attrs, {:connection => options[:connection]}])
         end

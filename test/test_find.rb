@@ -63,7 +63,8 @@ class TestFind < Test::Unit::TestCase
 
   def test_find_operational_attributes
     make_temporary_user do |user, password|
-      found_user = @user_class.find(user.uid, :attributes => ["*", "+"])
+      found_user = @user_class.find(user.uid,
+                                    :include_operational_attributes => true)
       assert_equal(Time.now.utc.iso8601,
                    found_user.modify_timestamp.utc.iso8601)
     end
