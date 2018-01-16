@@ -6,9 +6,6 @@ require "pathname"
 require "erb"
 require "yaml"
 
-require "rubygems"
-require "bundler/setup"
-
 require "bundler/gem_helper"
 require "packnga"
 
