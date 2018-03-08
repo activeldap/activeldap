@@ -1,9 +1,11 @@
 module ActiveLdap
   module Populate
     module_function
-    def ensure_base(base_class=nil)
+    def ensure_base(base_class=nil, options={})
       base_class ||= Base
       return unless base_class.search(:scope => :base).empty?
+      dc_base_class = options[:dc_base_class] || base_class
+      ou_base_class = options[:ou_base_class] || base_class
 
       base_dn = DN.parse(base_class.base)
       suffixes = []
@@ -15,11 +17,11 @@ module ActiveLdap
         begin
           case name.downcase
           when "dc"
-            ensure_dc(value, prefix, base_class)
+            ensure_dc(value, prefix, dc_base_class)
           when "ou"
             ensure_ou(value,
                       :base => prefix,
-                      :base_class => base_class)
+                      :base_class => ou_base_class)
           end
         rescue ActiveLdap::OperationNotPermitted
         end
