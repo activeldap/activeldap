@@ -62,6 +62,16 @@ module ActiveLdap
         end
       end
 
+      def connecting?(options={})
+        begin
+          connecting = super
+          bind(options) if connecting
+          connecting
+        rescue Net::LDAP::NoBindResultError, Net::LDAP::LdapError
+          return false
+        end
+      end
+
       def search(options={})
         use_paged_results = options[:use_paged_results]
         if use_paged_results or use_paged_results.nil?

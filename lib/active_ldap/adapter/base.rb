@@ -115,7 +115,7 @@ module ActiveLdap
         yield
       end
 
-      def connecting?
+      def connecting?(options = {})
         !@connection.nil? and !@disconnected
       end
 
@@ -624,7 +624,7 @@ module ActiveLdap
       end
 
       def reconnect_if_need(options={})
-        return if connecting?
+        return if connecting?(options)
         with_timeout(false, options) do
           reconnect(options)
         end
