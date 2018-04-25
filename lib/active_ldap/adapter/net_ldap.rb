@@ -67,7 +67,7 @@ module ActiveLdap
           connecting = super
           bind(options) if connecting
           connecting
-        rescue Net::LDAP::NoBindResultError, Net::LDAP::LdapError
+        rescue Net::LDAP::NoBindResultError, Net::LDAP::LdapError, AuthenticationError, NoMethodError
           return false
         end
       end
