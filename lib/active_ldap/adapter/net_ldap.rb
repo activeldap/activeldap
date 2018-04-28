@@ -151,8 +151,13 @@ module ActiveLdap
         result = log(name, info) do
           begin
             @connection.send(method, *args, &block)
-          rescue Errno::EPIPE, Errno::ECONNRESET
-            raise ConnectionError, "#{$!.class}: #{$!.message}"
+          rescue SystemCallError => error
+            message = "#{error.class}: #{error.message}"
+            raise ConnectionError, message, caller(0) + error.backtrace
+          rescue Net::LDAP::ResponseMissingOrInvalidError => error
+            message = "#{error.class}: #{error.message}"
+            message << ": connection may be timed out"
+            raise ConnectionError, message, caller(0) + error.backtrace
           end
         end
         message = nil
