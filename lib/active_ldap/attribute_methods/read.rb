@@ -8,6 +8,10 @@ module ActiveLdap
         return get_attribute(attr, args.first)
       end
 
+      def _read_attribute(name)
+        get_attribute(name)
+      end
+
       # get_attribute
       #
       # Return the value of the attribute called by method_missing?

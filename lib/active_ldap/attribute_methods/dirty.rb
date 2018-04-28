@@ -9,8 +9,7 @@ module ActiveLdap
       def save(*) #:nodoc:
         succeeded = super
         if succeeded
-          @previously_changed = changes
-          @changed_attributes.clear
+          changes_applied
         end
         succeeded
       end
@@ -18,16 +17,14 @@ module ActiveLdap
       # Attempts to <tt>save!</tt> the record and clears changed attributes if successful.
       def save!(*) #:nodoc:
         super.tap do
-          @previously_changed = changes
-          @changed_attributes.clear
+          changes_applied
         end
       end
 
       # <tt>reload</tt> the record and clears changed attributes.
       def reload(*) #:nodoc:
         super.tap do
-          @previously_changed.clear
-          @changed_attributes.clear
+          clear_changes_information
         end
       end
 
