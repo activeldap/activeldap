@@ -33,8 +33,11 @@ module ActiveLdap
             info = {:uri => uri, :with_start_tls => with_start_tls}
             [log("connect", info) {Net::LDAP::Connection.new(config)},
              uri, with_start_tls]
-          rescue Net::LDAP::LdapError
-            raise ConnectionError, $!.message
+          rescue Net::LDAP::ConnectionError => error
+            raise ConnectionError, error.message
+          rescue Net::LDAP::Error => error
+            message = "#{error.class}: #{error.message}"
+            raise ConnectionError, message, caller(0) + error.backtrace
           end
         end
       end
@@ -50,7 +53,7 @@ module ActiveLdap
       def bind(options={})
         begin
           super
-        rescue Net::LDAP::LdapError
+        rescue Net::LDAP::Error
           raise AuthenticationError, $!.message
         end
       end
