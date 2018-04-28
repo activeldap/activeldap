@@ -28,7 +28,7 @@ module ActiveLdap
         end
       end
 
-    protected
+      private
       def set_attribute(name, value)
         if name and name != "objectClass"
           attribute_will_change!(name) unless value == get_attribute(name)

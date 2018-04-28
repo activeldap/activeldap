@@ -13,8 +13,7 @@ module ActiveLdap
       end.flatten
     end
 
-    protected
-
+    private
     # overiding ActiveModel::AttributeMethods
     def attribute_method?(method_name)
       have_attribute?(method_name, ['objectClass'])

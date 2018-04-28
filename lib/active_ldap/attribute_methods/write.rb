@@ -7,7 +7,7 @@ module ActiveLdap
         attribute_method_suffix '='
       end
 
-    protected
+      private
       def attribute=(attr, *args)
         return set_attribute(attr, args.first)
       end

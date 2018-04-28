@@ -551,7 +551,7 @@ module ActiveLdap
         defaults.first || name || to_s
       end
 
-      protected
+      private
       def find_real_class(object_classes)
         (sub_classes || []).each do |sub_class|
           real_class = sub_class.find_real_class(object_classes)

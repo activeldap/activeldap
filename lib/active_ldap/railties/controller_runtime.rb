@@ -6,8 +6,7 @@ module ActiveLdap
     module ControllerRuntime #:nodoc:
       extend ActiveSupport::Concern
 
-    protected
-
+      private
       attr_internal :ldap_runtime
 
       def process_action(action, *args)

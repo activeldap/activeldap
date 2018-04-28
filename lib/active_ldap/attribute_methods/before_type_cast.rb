@@ -7,7 +7,7 @@ module ActiveLdap
         attribute_method_suffix '_before_type_cast'
       end
 
-    protected
+      private
       def attribute_before_type_cast(attr)
         get_attribute_before_type_cast(attr)[1]
       end

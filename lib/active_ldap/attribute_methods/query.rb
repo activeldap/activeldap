@@ -8,7 +8,7 @@ module ActiveLdap
         attribute_method_suffix '?'
       end
 
-    protected
+      private
       def get_attribute_as_query(name, force_array=false)
         name, value = get_attribute_before_type_cast(name, force_array)
         if force_array

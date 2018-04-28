@@ -3,7 +3,7 @@ module ActiveLdap
     module Read
       extend ActiveSupport::Concern
 
-    protected
+      private
       def attribute(attr, *args)
         return get_attribute(attr, args.first)
       end
