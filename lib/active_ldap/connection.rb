@@ -135,7 +135,7 @@ module ActiveLdap
         end
         config = configuration(key)
         conn = active_connections[key]
-        remove_configuration_by_configuration(config)
+        remove_configuration_by_key(key)
         active_connections.delete_if {|_key, value| value == conn}
         conn.disconnect! if conn
         config

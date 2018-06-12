@@ -91,8 +91,8 @@ module ActiveLdap
         @@defined_configurations
       end
 
-      def remove_configuration_by_configuration(config)
-        @@defined_configurations.delete_if {|key, value| value == config}
+      def remove_configuration_by_key(key)
+        @@defined_configurations.delete(key)
       end
 
       CONNECTION_CONFIGURATION_KEYS = [:uri, :base, :adapter]

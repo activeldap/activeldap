@@ -57,6 +57,40 @@ class TestConnectionPerClass < Test::Unit::TestCase
     assert_equal([sub2_base], sub2_class.find(:all).collect(&:dn))
   end
 
+  def test_multi_same_setup_connections
+    make_ou("Sub")
+    sub_class1 = ou_class("ou=Sub")
+    sub_class2 = ou_class("ou=Sub")
+
+    configuration = current_configuration.symbolize_keys
+    configuration[:scope] = :base
+    current_base = configuration[:base]
+    sub_configuration = configuration.dup
+    sub_base = "ou=Sub,#{current_base}"
+    sub_configuration[:base] = sub_base
+
+    sub_class1.setup_connection(sub_configuration)
+    sub_class2.setup_connection(sub_configuration)
+
+    sub_configuration1 = sub_class1.configuration
+    sub_configuration2 = sub_class2.configuration
+
+    assert_not_nil(sub_configuration1)
+    assert_not_nil(sub_configuration2)
+
+    sub_class1.setup_connection(sub_configuration.dup)
+    sub_class1.prefix = nil
+
+    assert_equal([
+                   sub_configuration1,
+                   sub_configuration2,
+                 ],
+                 [
+                   sub_class1.configuration,
+                   sub_class2.configuration,
+                 ])
+  end
+
   def test_bind
     non_anon_class = ou_class("ou=NonAnonymous")
     anon_class = ou_class("ou=Anonymous")
