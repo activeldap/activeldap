@@ -1,5 +1,16 @@
 h1. News
 
+h2(#release-5-2-1). 5.2.1: 2018-06-13
+
+h3. Fixes
+
+* Fixed a bug that configuration may be removed unexpectedly.
+  [GitHub#155][Reported by Juha Erkkilä]
+
+h3. Thanks
+
+* Juha Erkkilä
+
 h2(#release-5-2-0). 5.2.0: 2018-05-09
 
 h3. Improvements
