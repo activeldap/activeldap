@@ -14,6 +14,7 @@ module ActiveLdap
         :host,
         :port,
         :method,
+        :tls_options,
         :timeout,
         :retry_on_timeout,
         :retry_limit,

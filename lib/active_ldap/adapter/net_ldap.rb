@@ -27,10 +27,8 @@ module ActiveLdap
             :port => port,
           }
           if method
-            config[:encryption] = {
-              :method => method,
-              :tls_options => OpenSSL::SSL::SSLContext::DEFAULT_PARAMS
-            }
+            config[:encryption] = { :method => method }
+            config[:encryption][:tls_options] = @tls_options if @tls_options
           end
           begin
             uri = construct_uri(host, port, method == :simple_tls)
