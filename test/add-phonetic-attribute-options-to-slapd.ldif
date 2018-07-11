@@ -1,5 +1,5 @@
 # Your LDAP server need to accept 'phonetic' attribute option for test.
-# This is a LDIF file for OpenLDAP to do the confiugration.
+# This is a LDIF file for OpenLDAP to do the configuration.
 # You can use this file by the following command linne on Debian GNU/Linux
 # or Ubuntu:
 #   % sudo -H ldapmodify -Y EXTERNAL -H ldapi:/// -f test/add-phonetic-attribute-options-to-slapd.ldif
