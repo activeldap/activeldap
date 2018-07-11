@@ -24,7 +24,7 @@ module ActiveLdap
         end
 
         class SSL < Base
-          def connect(host, port)
+          def connect(host, port, options={})
             LDAP::SSLConn.new(host, port, false)
           end
 
@@ -34,8 +34,35 @@ module ActiveLdap
         end
 
         class TLS < Base
-          def connect(host, port)
-            LDAP::SSLConn.new(host, port, true)
+          def connect(host, port, options={})
+            connection = LDAP::Conn.new(host, port)
+            if connection.get_option(LDAP::LDAP_OPT_PROTOCOL_VERSION) < 3
+              connection.set_option(LDAP::LDAP_OPT_PROTOCOL_VERSION, 3)
+            end
+            tls_options = options[:tls_options]
+            if tls_options and LDAP.const_defined?(:LDAP_OPT_X_TLS_NEWCTX)
+              tls_options.each do |key, value|
+                case key
+                when :verify_mode
+                  case value
+                  when :none, OpenSSL::SSL::SSL_VERIFY_NONE
+                    connection.set_option(LDAP::LDAP_OPT_X_TLS_REQUIRE_CERT,
+                                          LDAP::LDAP_OPT_X_TLS_NEVER)
+                  when :peer, OpenSSL::SSL::SSL_VERIFY_PEER
+                    connection.set_option(LDAP::LDAP_OPT_X_TLS_REQUIRE_CERT,
+                                          LDAP::LDAP_OPT_X_TLS_DEMAND)
+                  end
+                when :verify_hostname
+                  unless value
+                    connection.set_option(LDAP::LDAP_OPT_X_TLS_REQUIRE_CERT,
+                                          LDAP::LDAP_OPT_X_TLS_ALLOW)
+                  end
+                end
+              end
+              connection.set_option(LDAP::LDAP_OPT_X_TLS_NEWCTX, 0)
+            end
+            connection.start_tls
+            connection
           end
 
           def start_tls?
@@ -44,7 +71,7 @@ module ActiveLdap
         end
 
         class Plain < Base
-          def connect(host, port)
+          def connect(host, port, options={})
             LDAP::Conn.new(host, port)
           end
         end
@@ -54,9 +81,13 @@ module ActiveLdap
         super do |host, port, method|
           uri = construct_uri(host, port, method.ssl?)
           with_start_tls = method.start_tls?
-          info = {:uri => uri, :with_start_tls => with_start_tls}
+          info = {
+            :uri => uri,
+            :with_start_tls => with_start_tls,
+            :tls_options => @tls_options,
+          }
           connection = log("connect", info) do
-            method.connect(host, port)
+            method.connect(host, port, :tls_options => @tls_options)
           end
           [connection, uri, with_start_tls]
         end
