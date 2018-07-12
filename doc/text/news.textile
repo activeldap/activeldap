@@ -1,5 +1,16 @@
 h1. News
 
+h2(#release-5-2-2). 5.2.2: 2018-07-12
+
+h3. Improvements
+
+* Added @:tls_options@ option.
+  [GitHub#156][Patch by David Klotz]
+
+h3. Thanks
+
+* David Klotz
+
 h2(#release-5-2-1). 5.2.1: 2018-06-13
 
 h3. Fixes
