@@ -252,6 +252,90 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
+  def test_set_single_valued_attribute_uses_replace
+    make_temporary_user(:simple => true) do |user,|
+      assert_not_nil(user.homeDirectory)
+      assert_not_equal("/home/foo", user.homeDirectory)
+
+      user.homeDirectory = "/home/foo"
+      capture = detect_modify(user) { user.save }
+
+      assert_equal("/home/foo", user.homeDirectory)
+      assert_true(capture[:modified])
+      entries = capture[:entries]
+      assert_equal(1, entries.size)
+
+      assert_equal([:replace, "homeDirectory", {"homeDirectory" => ["/home/foo"]}], entries[0])
+    end
+  end
+
+  def test_set_attribute_uses_add_for_completely_new_value
+    make_temporary_user(:simple => true) do |user,|
+      assert_nil(user.description)
+
+      user.description = "x"
+      capture = detect_modify(user) { user.save }
+
+      assert_equal("x", user.description)
+      assert_true(capture[:modified])
+      entries = capture[:entries]
+      assert_equal(1, entries.size)
+
+      assert_equal([:add, "description", {"description" => ["x"]}], entries[0])
+    end
+  end
+
+  def test_set_attribute_uses_add_for_added_value
+    make_temporary_user(:simple => true) do |user,|
+      user.description = ["a", "b"]
+      assert(user.save)
+
+      user.description = ["a", "b", "c"]
+      capture = detect_modify(user) { user.save }
+
+      assert_equal(["a", "b", "c"], user.description)
+      assert_true(capture[:modified])
+      entries = capture[:entries]
+      assert_equal(1, entries.size)
+
+      assert_equal([:add, "description", {"description" => ["c"]}], entries[0])
+    end
+  end
+
+  def test_set_attribute_uses_delete_for_deleted_value
+    make_temporary_user(:simple => true) do |user,|
+      user.description = ["a", "b", "c"]
+      assert(user.save)
+
+      user.description = ["a", "c"]
+      capture = detect_modify(user) { user.save }
+
+      assert_equal(["a", "c"], user.description)
+      assert_true(capture[:modified])
+      entries = capture[:entries]
+      assert_equal(1, entries.size)
+
+      assert_equal([:delete, "description", {"description" => ["b"]}], entries[0])
+    end
+  end
+
+  def test_set_attribute_uses_delete_for_unset_value
+    make_temporary_user(:simple => true) do |user,|
+      user.description = "x"
+      assert(user.save)
+
+      user.description = nil
+      capture = detect_modify(user) { user.save }
+
+      assert_nil(user.description)
+      assert_true(capture[:modified])
+      entries = capture[:entries]
+      assert_equal(1, entries.size)
+
+      assert_equal([:delete, "description", {"description" => ["x"]}], entries[0])
+    end
+  end
+
   def test_set_attributes_with_a_blank_value_in_values
     make_temporary_user(:simple => true) do |user,|
       user.attributes = {"description" => ["a", "b", ""]}
@@ -355,13 +439,15 @@ class TestBase < Test::Unit::TestCase
   def test_save_with_changes
     make_temporary_user do |user, password|
       user.cn += "!!!"
-      assert_true(detect_modify(user) {user.save})
+      capture = detect_modify(user) { user.save }
+      assert_true(capture[:modified])
     end
   end
 
   def test_save_without_changes
     make_temporary_user do |user, password|
-      assert_false(detect_modify(user) {user.save})
+      capture = detect_modify(user) { user.save }
+      assert_false(capture[:modified])
     end
   end
 
@@ -1189,6 +1275,7 @@ EOX
   private
   def detect_modify(object)
     modify_called = false
+    entries = []
     singleton_class = class << object; self; end
     singleton_class.send(:define_method, :modify_entry) do |*args|
       dn, attributes, options = args
@@ -1197,14 +1284,19 @@ EOX
       modify_detector.instance_variable_set("@called", false)
       def modify_detector.modify(dn, entries, options)
         @called = true
+        @entries = entries
       end
       options[:connection] = modify_detector
       result = super(dn, attributes, options)
       modify_called = modify_detector.instance_variable_get("@called")
+      entries = modify_detector.instance_variable_get("@entries")
       result
     end
     yield
-    modify_called
+    {
+        :modified => modify_called,
+        :entries => entries
+    }
   end
 
   def assert_to_ldif(entry)
