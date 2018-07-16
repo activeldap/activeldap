@@ -1366,13 +1366,20 @@ module ActiveLdap
         next if v == value
 
         if klass.blank_value?(value) and
-            schema.attribute(k).binary_required?
+           schema.attribute(k).binary_required?
           value = [{'binary' => []}]
         end
         if k == _dn_attribute
           new_dn_value = value[0]
         else
-          attributes.push([:replace, k, value])
+          if force_replace?(k)
+            attributes.push([:replace, k, value])
+          else
+            removed_values = v - value
+            added_values = value - v
+            attributes.push([:delete, k, removed_values]) unless removed_values.empty?
+            attributes.push([:add, k, added_values]) unless added_values.empty?
+          end
         end
       end
 
@@ -1386,10 +1393,19 @@ module ActiveLdap
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
-        attributes.push([:replace, k, value])
+        if force_replace?(k)
+          attributes.push([:replace, k, value])
+        else
+          attributes.push([:add, k, value])
+        end
       end
 
       [new_dn_value, attributes]
+    end
+
+    def force_replace?(k)
+      schema.attribute(k).single_value? ||
+        schema.attribute(k).binary? # TODO: this should probably explicitly check for fields with no equality matching rule instead
     end
 
     def collect_all_attributes(data)
