@@ -258,14 +258,18 @@ class TestBase < Test::Unit::TestCase
       assert_not_equal("/home/foo", user.homeDirectory)
 
       user.homeDirectory = "/home/foo"
-      capture = detect_modify(user) { user.save }
-
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [
+                         :replace,
+                         "homeDirectory",
+                         {"homeDirectory" => ["/home/foo"]},
+                       ]
+                     ]
+                   },
+                   detect_modify(user) {user.save})
       assert_equal("/home/foo", user.homeDirectory)
-      assert_true(capture[:modified])
-      entries = capture[:entries]
-      assert_equal(1, entries.size)
-
-      assert_equal([:replace, "homeDirectory", {"homeDirectory" => ["/home/foo"]}], entries[0])
     end
   end
 
@@ -274,14 +278,14 @@ class TestBase < Test::Unit::TestCase
       assert_nil(user.description)
 
       user.description = "x"
-      capture = detect_modify(user) { user.save }
-
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [:add, "description", {"description" => ["x"]}],
+                     ],
+                   },
+                   detect_modify(user) {user.save})
       assert_equal("x", user.description)
-      assert_true(capture[:modified])
-      entries = capture[:entries]
-      assert_equal(1, entries.size)
-
-      assert_equal([:add, "description", {"description" => ["x"]}], entries[0])
     end
   end
 
@@ -291,14 +295,14 @@ class TestBase < Test::Unit::TestCase
       assert(user.save)
 
       user.description = ["a", "b", "c"]
-      capture = detect_modify(user) { user.save }
-
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [:add, "description", {"description" => ["c"]}],
+                     ],
+                   },
+                   capture = detect_modify(user) {user.save})
       assert_equal(["a", "b", "c"], user.description)
-      assert_true(capture[:modified])
-      entries = capture[:entries]
-      assert_equal(1, entries.size)
-
-      assert_equal([:add, "description", {"description" => ["c"]}], entries[0])
     end
   end
 
@@ -308,14 +312,14 @@ class TestBase < Test::Unit::TestCase
       assert(user.save)
 
       user.description = ["a", "c"]
-      capture = detect_modify(user) { user.save }
-
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [:delete, "description", {"description" => ["b"]}],
+                     ],
+                   },
+                   detect_modify(user) {user.save})
       assert_equal(["a", "c"], user.description)
-      assert_true(capture[:modified])
-      entries = capture[:entries]
-      assert_equal(1, entries.size)
-
-      assert_equal([:delete, "description", {"description" => ["b"]}], entries[0])
     end
   end
 
@@ -325,14 +329,14 @@ class TestBase < Test::Unit::TestCase
       assert(user.save)
 
       user.description = nil
-      capture = detect_modify(user) { user.save }
-
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [:delete, "description", {"description" => ["x"]}],
+                     ],
+                   },
+                   detect_modify(user) {user.save})
       assert_nil(user.description)
-      assert_true(capture[:modified])
-      entries = capture[:entries]
-      assert_equal(1, entries.size)
-
-      assert_equal([:delete, "description", {"description" => ["x"]}], entries[0])
     end
   end
 
@@ -438,16 +442,26 @@ class TestBase < Test::Unit::TestCase
 
   def test_save_with_changes
     make_temporary_user do |user, password|
+      cn = user.cn
       user.cn += "!!!"
-      capture = detect_modify(user) { user.save }
-      assert_true(capture[:modified])
+      assert_equal({
+                     :modified => true,
+                     :entries => [
+                       [:delete, "cn", {"cn" => [cn]}],
+                       [:add, "cn", {"cn" => ["#{cn}!!!"]}],
+                     ],
+                   },
+                   detect_modify(user) {user.save})
     end
   end
 
   def test_save_without_changes
     make_temporary_user do |user, password|
-      capture = detect_modify(user) { user.save }
-      assert_false(capture[:modified])
+      assert_equal({
+                     :modified => false,
+                     :entries => [],
+                   },
+                   detect_modify(user) {user.save})
     end
   end
 
@@ -1274,14 +1288,15 @@ EOX
 
   private
   def detect_modify(object)
-    modify_called = false
-    entries = []
+    modify_called = nil
+    entries = nil
     singleton_class = class << object; self; end
     singleton_class.send(:define_method, :modify_entry) do |*args|
       dn, attributes, options = args
       options ||= {}
       modify_detector = Object.new
       modify_detector.instance_variable_set("@called", false)
+      modify_detector.instance_variable_set("@entries", [])
       def modify_detector.modify(dn, entries, options)
         @called = true
         @entries = entries
@@ -1294,8 +1309,8 @@ EOX
     end
     yield
     {
-        :modified => modify_called,
-        :entries => entries
+      :modified => modify_called,
+      :entries => entries,
     }
   end
 
