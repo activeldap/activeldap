@@ -1372,7 +1372,14 @@ module ActiveLdap
         if k == _dn_attribute
           new_dn_value = value[0]
         else
-          attributes.push([:replace, k, value])
+          if (v.size == 1 and value.size == 1) or force_replace?(k)
+            attributes.push([:replace, k, value])
+          else
+            removed_values = v - value
+            added_values = value - v
+            attributes.push([:delete, k, removed_values]) unless removed_values.empty?
+            attributes.push([:add, k, added_values]) unless added_values.empty?
+          end
         end
       end
 
@@ -1386,10 +1393,20 @@ module ActiveLdap
         # Detect subtypes and account for them
         # REPLACE will function like ADD, but doesn't hit EQUALITY problems
         # TODO: Added equality(attr) to Schema
-        attributes.push([:replace, k, value])
+        if force_replace?(k)
+          attributes.push([:replace, k, value])
+        else
+          attributes.push([:add, k, value])
+        end
       end
 
       [new_dn_value, attributes]
+    end
+
+    def force_replace?(k)
+      attribute = schema.attribute(k)
+      attribute.single_value? or
+        attribute.binary? # TODO: this should probably explicitly check for fields with no equality matching rule instead
     end
 
     def collect_all_attributes(data)
