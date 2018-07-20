@@ -1404,8 +1404,9 @@ module ActiveLdap
     end
 
     def force_replace?(k)
-      schema.attribute(k).single_value? or
-        schema.attribute(k).binary? # TODO: this should probably explicitly check for fields with no equality matching rule instead
+      attribute = schema.attribute(k)
+      attribute.single_value? or
+        attribute.binary? # TODO: this should probably explicitly check for fields with no equality matching rule instead
     end
 
     def collect_all_attributes(data)
