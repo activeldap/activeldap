@@ -447,8 +447,7 @@ class TestBase < Test::Unit::TestCase
       assert_equal({
                      :modified => true,
                      :entries => [
-                       [:delete, "cn", {"cn" => [cn]}],
-                       [:add, "cn", {"cn" => ["#{cn}!!!"]}],
+                       [:replace, "cn", {"cn" => ["#{cn}!!!"]}],
                      ],
                    },
                    detect_modify(user) {user.save})

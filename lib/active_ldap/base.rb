@@ -1372,7 +1372,7 @@ module ActiveLdap
         if k == _dn_attribute
           new_dn_value = value[0]
         else
-          if force_replace?(k)
+          if (v.size == 1 and value.size == 1) or force_replace?(k)
             attributes.push([:replace, k, value])
           else
             removed_values = v - value
