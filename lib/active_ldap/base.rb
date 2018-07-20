@@ -1366,7 +1366,7 @@ module ActiveLdap
         next if v == value
 
         if klass.blank_value?(value) and
-           schema.attribute(k).binary_required?
+            schema.attribute(k).binary_required?
           value = [{'binary' => []}]
         end
         if k == _dn_attribute
