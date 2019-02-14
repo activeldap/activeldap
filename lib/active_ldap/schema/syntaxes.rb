@@ -222,7 +222,11 @@ module ActiveLdap
             if value.gmt?
               normalized_value + "Z"
             else
-              normalized_value + ("%+03d%02d" % value.gmtoff.divmod(3600))
+              # for timezones with non-zero minutes, such as IST which is +0530,
+              # divmod(3600) will give wrong value of 1800
+
+              offset = value.gmtoff / 60 # in minutes
+              normalized_value + ("%+03d%02d" % offset.divmod(60))
             end
           else
             value
