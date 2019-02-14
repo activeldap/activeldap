@@ -12,29 +12,25 @@ addons:
 
 rvm:
   - 2.3
-  - 2.4.4
-  - 2.5.1
+  - 2.4
+  - 2.5
   - 2.6
 
 before_script:
   - password="secret"
   - encrypted_password=$(slappasswd -s ${password})
   - |
-    cat <<EOF | sudo ldapmodify -Y EXTERNAL -H ldapi:///
-    version: 1
-    dn: olcDatabase={1}hdb,cn=config
-    changetype: modify
-    replace: olcRootPW
-    olcRootPW: ${encrypted_password}
-    -
-    EOF
+    (echo "version: 1";
+     echo "dn: olcDatabase={1}hdb,cn=config";
+     echo "changetype: modify";
+     echo "replace: olcRootPW";
+     echo "olcRootPW: ${encrypted_password}";
+     echo "-") | sudo ldapmodify -Y EXTERNAL -H ldapi:///
   - sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f test/add-phonetic-attribute-options-to-slapd.ldif
   - base="dc=$(echo get slapd/domain | sudo debconf-communicate slapd | sed -e 's/^0 //' | sed -e 's/^\.//; s/\./,dc=/g')"
   - |
-    cat <<EOF > test/config.yaml
-    test:
-      host: 127.0.0.1
-      base: dc=test,${base}
-      bind_dn: cn=admin,${base}
-      password: ${password}
-    EOF
+    (echo "test:";
+     echo "  host: 127.0.0.1";
+     echo "  base: dc=test,${base}";
+     echo "  bind_dn: cn=admin,${base}";
+     echo "  password: ${password}") > test/config.yaml
