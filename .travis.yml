@@ -21,7 +21,7 @@ before_script:
   - encrypted_password=$(slappasswd -s ${password})
   - |
     (echo "version: 1";
-     echo "dn: olcDatabase={1}hdb,cn=config";
+     echo "dn: olcDatabase={1}mdb,cn=config";
      echo "changetype: modify";
      echo "replace: olcRootPW";
      echo "olcRootPW: ${encrypted_password}";
