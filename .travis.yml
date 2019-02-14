@@ -1,18 +1,40 @@
-rvm:
-  - 2.1
-  - 2.2
-  - 2.3
-  - 2.4.4
-  - 2.5.1
-#  - rbx
-#  - jruby
-sudo: true
-env:
-  - JRUBY_OPTS="-Xcext.enabled=true"
 notifications:
   recipients:
     - activeldap@ml.commit-email.info
-before_install:
-  - travis/before_install.sh
+
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      - ldap-utils
+      - slapd
+
+rvm:
+  - 2.3
+  - 2.4.4
+  - 2.5.1
+  - 2.6
+
 before_script:
-  - travis/before_script.sh
+  - password="secret"
+  - encrypted_password=$(slappasswd -s ${password})
+  - |
+    cat <<EOF | sudo ldapmodify -Y EXTERNAL -H ldapi:///
+    version: 1
+    dn: olcDatabase={1}hdb,cn=config
+    changetype: modify
+    replace: olcRootPW
+    olcRootPW: ${encrypted_password}
+    -
+    EOF
+  - sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f test/add-phonetic-attribute-options-to-slapd.ldif
+  - base="dc=$(echo get slapd/domain | sudo debconf-communicate slapd | sed -e 's/^0 //' | sed -e 's/^\.//; s/\./,dc=/g')"
+  - |
+    cat <<EOF > test/config.yaml
+    test:
+      host: 127.0.0.1
+      base: dc=test,${base}
+      bind_dn: cn=admin,${base}
+      password: ${password}
+    EOF
