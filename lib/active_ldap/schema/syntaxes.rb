@@ -192,11 +192,11 @@ module ActiveLdap
             fraction = fraction.to_f if fraction
             time_zone = match_data[-1]
             arguments = [
-              year, month, day, hour, minute, second, fraction, time_zone,
+              value, year, month, day, hour, minute, second, fraction, time_zone,
               Time.now,
             ]
-            if Time.method(:make_time).arity == 10
-              arguments.unshift(value)
+            if Time.method(:make_time).arity == 11
+              arguments[2, 0] = nil
             end
             begin
               Time.send(:make_time, *arguments)
