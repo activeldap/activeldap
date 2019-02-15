@@ -117,6 +117,11 @@ class TestSyntax < Test::Unit::TestCase
                          "19941216103212.345+0900")
       end
 
+      def test_timezone_difference_with_minutes
+        assert_type_cast(Time.parse("2019-02-13 15:54:23 +0530"),
+                         "20190213155423+0530")
+      end
+
       def test_year_month_day_hour_minute
         assert_type_cast(Time.parse("2008/01/07 03:46:00"),
                          "200801070346")
