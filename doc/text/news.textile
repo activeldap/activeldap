@@ -1,5 +1,23 @@
 h1. News
 
+h2(#release-5-2-3). 5.2.3: 2019-02-15
+
+h3. Improvements
+
+* Changed to use add and delete for modify if it's needed.
+  [GitHub#156][Patch by David Klotz]
+
+* Added support for timezone with munites offset such as @0530@.
+  [GitHub#160][GitHub#161][Patch by Neng Xu]
+
+* Added support for Ruby 2.6.
+
+h3. Thanks
+
+* David Klotz
+
+* Neng Xu
+
 h2(#release-5-2-2). 5.2.2: 2018-07-12
 
 h3. Improvements
