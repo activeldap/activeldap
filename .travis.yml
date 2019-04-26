@@ -15,6 +15,10 @@ rvm:
   - 2.5
   - 2.6
 
+gemfile:
+  - Gemfile.activemodel4
+  - Gemfile.activemodel5
+
 before_script:
   - password="secret"
   - encrypted_password=$(slappasswd -s ${password})

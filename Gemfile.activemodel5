@@ -1,0 +1,6 @@
+# -*- ruby -*-
+
+gemfile = File.join(__dir__, "Gemfile")
+eval(File.read(gemfile), binding, gemfile)
+
+gem "activemodel", "< 6"
