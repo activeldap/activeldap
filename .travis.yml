@@ -10,14 +10,23 @@ addons:
       - ldap-utils
       - slapd
 
-rvm:
-  - 2.4
-  - 2.5
-  - 2.6
-
-gemfile:
-  - Gemfile.activemodel4
-  - Gemfile.activemodel5
+matrix:
+  include:
+    - name: "2.4 & ActiveModel 4"
+      rvm: 2.4
+      gemfile: Gemfile.activemodel4
+    - name: "2.4 & ActiveModel 5"
+      rvm: 2.4
+      gemfile: Gemfile.activemodel5
+    - name: "2.5 & ActiveModel 4"
+      rvm: 2.5
+      gemfile: Gemfile.activemodel4
+    - name: "2.5 & ActiveModel 5"
+      rvm: 2.5
+      gemfile: Gemfile.activemodel5
+    - name: "2.6 & ActiveModel 5"
+      rvm: 2.6
+      gemfile: Gemfile.activemodel5
 
 before_script:
   - password="secret"
