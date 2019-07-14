@@ -15,7 +15,6 @@ Gem::Specification.new do |spec|
 
   spec.name = 'activeldap'
   spec.version = ActiveLdap::VERSION.dup
-  spec.rubyforge_project = 'ruby-activeldap'
   spec.authors = ['Will Drewry', 'Kouhei Sutou']
   spec.email = ['redpig@dataspill.org', 'kou@cozmixng.org']
   spec.summary = 'ActiveLdap is a object-oriented API to LDAP'
