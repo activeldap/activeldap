@@ -4,6 +4,10 @@ source "http://rubygems.org"
 
 gemspec
 
+group :development do
+  gem "RedCloth", platform: :mri
+end
+
 group :test do
   gem "net-ldap"
   platforms :mri do
