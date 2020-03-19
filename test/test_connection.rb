@@ -26,8 +26,9 @@ class TestConnection < Test::Unit::TestCase
     config = current_configuration.merge("host" => "192.168.29.29",
                                          "retry_limit" => 0,
                                          "timeout" => 1)
+    error_class = RUBY_PLATFORM == 'java' ? ActiveLdap::ConnectionError : ActiveLdap::TimeoutError
     ActiveLdap::Base.setup_connection(config)
-    assert_raise(ActiveLdap::TimeoutError) do
+    assert_raise(error_class) do
       ActiveLdap::Base.find(:first)
     end
   end
