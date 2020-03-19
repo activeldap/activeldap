@@ -150,13 +150,13 @@ class TestBase < Test::Unit::TestCase
     _ou_class.create("root2")
     assert_equal(["base",
                   "root1", "child1", "child2", "domain", "child3",
-                  "root2"],
-                 _entry_class.find(:all).collect(&:id))
+                  "root2"].sort,
+                 _entry_class.find(:all).collect(&:id).sort)
     assert_raise(ActiveLdap::DeleteError) do
       root1.destroy_all
     end
-    assert_equal(["base", "root1", "domain", "root2"],
-                 _entry_class.find(:all).collect(&:id))
+    assert_equal(["base", "root1", "domain", "root2"].sort,
+                 _entry_class.find(:all).collect(&:id).sort)
   end
 
   def test_delete_mixed_tree_by_instance
@@ -173,13 +173,13 @@ class TestBase < Test::Unit::TestCase
     _ou_class.create("root2")
     assert_equal(["base",
                   "root1", "child1", "child2", "domain", "child3",
-                  "root2"],
-                 _entry_class.find(:all).collect(&:id))
+                  "root2"].sort,
+                 _entry_class.find(:all).collect(&:id).sort)
     assert_raise(ActiveLdap::DeleteError) do
       root1.delete_all
     end
-    assert_equal(["base", "root1", "domain", "root2"],
-                 _entry_class.find(:all).collect(&:id))
+    assert_equal(["base", "root1", "domain", "root2"].sort,
+                 _entry_class.find(:all).collect(&:id).sort)
   end
 
   def test_delete_tree
@@ -189,8 +189,8 @@ class TestBase < Test::Unit::TestCase
     _ou_class.create(:ou => "child1", :parent => root1)
     _ou_class.create(:ou => "child2", :parent => root1)
     _ou_class.create("root2")
-    assert_equal(["base", "root1", "child1", "child2", "root2"],
-                 _ou_class.find(:all).collect(&:ou))
+    assert_equal(["base", "root1", "child1", "child2", "root2"].sort,
+                 _ou_class.find(:all).collect(&:ou).sort)
     _ou_class.delete_all(:base => root1.dn)
     assert_equal(["base", "root2"],
                  _ou_class.find(:all).collect(&:ou))
@@ -217,11 +217,11 @@ class TestBase < Test::Unit::TestCase
                              :classes => ["top"]
     entry_class.dn_attribute = nil
     assert_equal(["base", "root1", "child1", "domain1", "grandchild1",
-                  "child2", "domain2", "root2"],
-                 entry_class.find(:all).collect(&:id))
+                  "child2", "domain2", "root2"].sort,
+                 entry_class.find(:all).collect(&:id).sort)
     entry_class.delete_all(nil, :base => child2.dn)
-    assert_equal(["base", "root1", "child1", "domain1", "grandchild1", "root2"],
-                 entry_class.find(:all).collect(&:id))
+    assert_equal(["base", "root1", "child1", "domain1", "grandchild1", "root2"].sort,
+                 entry_class.find(:all).collect(&:id).sort)
   end
 
   def test_first
