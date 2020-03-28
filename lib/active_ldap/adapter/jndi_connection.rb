@@ -25,6 +25,8 @@ module ActiveLdap
       Context = naming.Context
       StartTlsRequest = ldap.StartTlsRequest
       Control = ldap.Control
+      PagedResultsControl = ldap.PagedResultsControl
+      PagedResultsResponseControl = ldap.PagedResultsResponseControl
 
       CommunicationException = naming.CommunicationException
       ServiceUnavailableException = naming.ServiceUnavailableException
@@ -108,7 +110,7 @@ module ActiveLdap
         bound?
       end
 
-      def search(base, scope, filter, attrs, limit)
+      def search(base, scope, filter, attrs, limit, use_paged_results = false)
         controls = SearchControls.new
         controls.search_scope = scope
 
@@ -118,14 +120,44 @@ module ActiveLdap
         end
 
         escaped_base = escape_dn(base)
-        @context.search(escaped_base, filter, controls).each do |result|
-          attributes = {}
-          result.attributes.get_all.each do |attribute|
-            attributes[attribute.get_id] = attribute.get_all.collect do |value|
-              value.is_a?(String) ? value : String.from_java_bytes(value)
+        if use_paged_results
+          # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol
+          page_size = 5
+          page_cookie = nil
+          @context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
+        end
+
+        loop do
+          @context.search(escaped_base, filter, controls).each do |result|
+            attributes = {}
+            result.attributes.get_all.each do |attribute|
+              attributes[attribute.get_id] = attribute.get_all.collect do |value|
+                value.is_a?(String) ? value : String.from_java_bytes(value)
+              end
+            end
+
+            yield([result.name_in_namespace, attributes])
+          end
+
+          break unless use_paged_results
+
+          # Find the paged search cookie
+          if res_controls = @context.get_response_controls
+            res_controls.each do |res_control|
+              next unless res_control.is_a? PagedResultsResponseControl
+
+              page_cookie = res_control.get_cookie
+              break
             end
           end
-          yield([result.name_in_namespace, attributes])
+
+          break unless page_cookie
+
+          # Set paged results control so we can keep getting results.
+          puts "==> found paged results cookie: #{page_cookie}"
+          @context.set_request_controls(
+            [PagedResultsControl.new(page_size, page_cookie, Control::CRITICAL)]
+          )
         end
       end
 
