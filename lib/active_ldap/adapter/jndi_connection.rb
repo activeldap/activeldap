@@ -110,7 +110,7 @@ module ActiveLdap
         bound?
       end
 
-      def search(base, scope, filter, attrs, limit, use_paged_results = false)
+      def search(base, scope, filter, attrs, limit, use_paged_results, page_size)
         controls = SearchControls.new
         controls.search_scope = scope
 
@@ -122,7 +122,6 @@ module ActiveLdap
         escaped_base = escape_dn(base)
         if use_paged_results
           # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol
-          page_size = 5
           page_cookie = nil
           @context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
         end
@@ -154,7 +153,6 @@ module ActiveLdap
           break unless page_cookie
 
           # Set paged results control so we can keep getting results.
-          puts "==> found paged results cookie: #{page_cookie}"
           @context.set_request_controls(
             [PagedResultsControl.new(page_size, page_cookie, Control::CRITICAL)]
           )
