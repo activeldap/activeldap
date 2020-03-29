@@ -28,7 +28,7 @@ matrix:
       rvm: 2.6
       gemfile: Gemfile.activemodel5
     - name: "JRuby 9.2 & ActiveModel 5"
-      rvm: jruby-9.2
+      rvm: jruby-9.2.11.1
       gemfile: Gemfile.activemodel5
 
 before_script:
