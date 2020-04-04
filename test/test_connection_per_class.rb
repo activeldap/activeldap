@@ -109,6 +109,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
     assert_raises(ActiveLdap::AuthenticationError) do
       connect(non_anon_class,
               :bind_dn => nil,
+              :port => ActiveLdap::Base.configurations['test']['port'],
               :allow_anonymous => false,
               :retry_limit => 0)
     end
@@ -131,6 +132,7 @@ class TestConnectionPerClass < Test::Unit::TestCase
     assert_nothing_raised do
       connect(anon_class,
               :bind_dn => nil,
+              :port => ActiveLdap::Base.configurations['test']['port'],
               :allow_anonymous => true)
     end
 
