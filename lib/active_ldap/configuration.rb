@@ -103,8 +103,18 @@ module ActiveLdap
         end
       end
 
+      def parent_configuration(target)
+        loop do
+          config = defined_configurations[target.active_connection_key]
+          return config if config
+          break if target == Base
+          target = target.superclass
+        end
+        default_configuration
+      end
+
       def merge_configuration(user_configuration, target=self)
-        configuration = default_configuration
+        configuration = parent_configuration(target).dup
         prepare_configuration(user_configuration).each do |key, value|
           case key
           when :base
