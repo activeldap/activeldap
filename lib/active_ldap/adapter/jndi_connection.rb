@@ -80,19 +80,25 @@ module ActiveLdap
         @port = port
         @method = method
         @timeout = timeout
-        @context = nil
+        @mod_context = nil
+        @search_context = nil
         @tls = nil
+        @search_tls = nil
       end
 
       def unbind
         @tls.close if @tls
         @tls = nil
-        @context.close if @context
-        @context = nil
+        @search_tls.close if @search_tls
+        @search_tls = nil
+        @mod_context.close if @mod_context
+        @mod_context = nil
+        @search_context.close if @search_context
+        @search_context = nil
       end
 
       def bound?
-        not @context.nil?
+        not @mod_context.nil?
       end
 
       def sasl_bind(bind_dn, mechanism, quiet)
@@ -120,14 +126,17 @@ module ActiveLdap
         end
 
         escaped_base = escape_dn(base)
+
         if use_paged_results
           # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol
           page_cookie = nil
-          @context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
+          @search_context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
+        else
+          @search_context.set_request_controls([])
         end
 
         loop do
-          @context.search(escaped_base, filter, controls).each do |result|
+          @search_context.search(escaped_base, filter, controls).each do |result|
             attributes = {}
             result.attributes.get_all.each do |attribute|
               attributes[attribute.get_id] = attribute.get_all.collect do |value|
@@ -141,7 +150,7 @@ module ActiveLdap
           break unless use_paged_results
 
           # Find the paged search cookie
-          if res_controls = @context.get_response_controls
+          if res_controls = @search_context.get_response_controls
             res_controls.each do |res_control|
               next unless res_control.is_a? PagedResultsResponseControl
 
@@ -153,7 +162,7 @@ module ActiveLdap
           break unless page_cookie
 
           # Set paged results control so we can keep getting results.
-          @context.set_request_controls(
+          @search_context.set_request_controls(
             [PagedResultsControl.new(page_size, page_cookie, Control::CRITICAL)]
           )
         end
@@ -165,28 +174,28 @@ module ActiveLdap
           attributes.put(record.to_java_attribute)
         end
         escaped_dn = escape_dn(dn)
-        @context.create_subcontext(escaped_dn, attributes)
+        @mod_context.create_subcontext(escaped_dn, attributes)
       end
 
       def modify(dn, records)
         escaped_dn = escape_dn(dn)
         items = records.collect(&:to_java_modification_item)
-        @context.modify_attributes(escaped_dn, items.to_java(ModificationItem))
+        @mod_context.modify_attributes(escaped_dn, items.to_java(ModificationItem))
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn)
         escaped_dn = escape_dn(dn)
         # should use mutex
         delete_rdn_key = "java.naming.ldap.deleteRDN"
-        @context.add_to_environment(delete_rdn_key, delete_old_rdn.to_s)
-        @context.rename(escaped_dn, new_rdn)
+        @mod_context.add_to_environment(delete_rdn_key, delete_old_rdn.to_s)
+        @mod_context.rename(escaped_dn, new_rdn)
       ensure
-        @context.remove_from_environment(delete_rdn_key)
+        @mod_context.remove_from_environment(delete_rdn_key)
       end
 
       def delete(dn)
         escaped_dn = escape_dn(dn)
-        @context.destroy_subcontext(escaped_dn)
+        @mod_context.destroy_subcontext(escaped_dn)
       end
 
       private
@@ -199,21 +208,33 @@ module ActiveLdap
           'com.sun.jndi.ldap.read.timeout' => (@timeout * 1000).to_i.to_s,
         }
         environment = HashTable.new(environment)
-        context = InitialLdapContext.new(environment, nil)
+
+        # Create a separate context for searching so we can add paged results control if available.
+        @mod_context = InitialLdapContext.new(environment, nil)
+        @search_context = InitialLdapContext.new(environment, nil)
+
         if @method == :start_tls
-          @tls = context.extended_operation(StartTlsRequest.new)
+          @tls = @mod_context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
+          @search_tls = @search_context.extended_operation(StartTlsRequest.new)
+          @search_tls.negotiate
         end
-        context.add_to_environment(Context::SECURITY_AUTHENTICATION,
-                                   authentication)
+
+        @mod_context.add_to_environment(Context::SECURITY_AUTHENTICATION, authentication)
+        @search_context.add_to_environment(Context::SECURITY_AUTHENTICATION, authentication)
+
         if bind_dn
-          context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
+          @mod_context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
+          @search_context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
         end
+
         if password
-          context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
+          @mod_context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
+          @search_context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
         end
-        context.reconnect(nil)
-        @context = context
+
+        @mod_context.reconnect(nil)
+        @search_context.reconnect(nil)
       end
 
       def ldap_uri
