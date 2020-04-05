@@ -96,10 +96,11 @@ module ActiveLdap
         }
 
         attribute = attr || ensure_search_attribute
+        escaped_value = DN.escape_value(value)
         options_for_non_leaf = {
           :attribute => attr,
           :value => value,
-          :prefix => ["#{attribute}=#{value}", prefix].compact.join(","),
+          :prefix => ["#{attribute}=#{escaped_value}", prefix].compact.join(","),
           :limit => 1,
           :scope => :base,
         }

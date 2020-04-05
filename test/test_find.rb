@@ -25,8 +25,6 @@ class TestFind < Test::Unit::TestCase
   end
 
   def test_find_with_special_value_base
-    # TODO: Figure out why this is not working with JRuby
-    pend('Skipping for JRuby for now') if RUBY_PLATFORM == 'java'
     # \5C == '\'
     make_ou("a\\5Cb,ou=Users")
     make_temporary_user(:uid => "user1,ou=a\\5Cb") do |user1,|
