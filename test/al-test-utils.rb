@@ -23,6 +23,7 @@ module AlTestUtils
       include TemporaryEntry
       include CommandSupport
       include MockLogger
+      include Omittable
     end
   end
 
@@ -423,6 +424,13 @@ module AlTestUtils
       yield(mock_logger)
     ensure
       ActiveLdap::Base.logger = original_logger
+    end
+  end
+
+  module Omittable
+    def omit_if_jruby(message=nil)
+      return unless RUBY_PLATFORM == "java"
+      omit(message || "This test is not for JRuby")
     end
   end
 end

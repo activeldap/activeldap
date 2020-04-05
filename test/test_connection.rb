@@ -3,6 +3,7 @@ require 'al-test-utils'
 class TestConnection < Test::Unit::TestCase
   include AlTestUtils::Config
   include AlTestUtils::MockLogger
+  include AlTestUtils::Omittable
 
   def setup
     super
@@ -23,6 +24,8 @@ class TestConnection < Test::Unit::TestCase
   end
 
   def test_retry_limit_0_with_nonexistent_host_with_timeout
+    omit_if_jruby("JNI adapter returns connection error immediately. " +
+                  "So timeout isn't invoked.")
     config = current_configuration.merge("host" => "192.168.29.29",
                                          "retry_limit" => 0,
                                          "timeout" => 1)

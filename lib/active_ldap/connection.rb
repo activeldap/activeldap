@@ -165,11 +165,11 @@ module ActiveLdap
         connection.schema
       end
 
-      private
       def active_connection_key(k=self)
         k.name.blank? ? k.object_id : k.name
       end
 
+      private
       def determine_active_connection_name
         key = active_connection_key
         if active_connections[key] or configuration(key)
