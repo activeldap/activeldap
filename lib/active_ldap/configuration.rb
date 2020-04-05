@@ -104,10 +104,14 @@ module ActiveLdap
       end
 
       def parent_configuration(target)
-        loop do
+        if target.is_a?(Base)
+          target = target.class
+        else
+          target = target.superclass
+        end
+        while target <= Base
           config = defined_configurations[target.active_connection_key]
           return config if config
-          break if target == Base
           target = target.superclass
         end
         default_configuration
