@@ -30,7 +30,6 @@ matrix:
     - name: "JRuby 9.2 & ActiveModel 5"
       env:
         - JRUBY_OPTS='--dev'
-      jdk: openjdk8
       rvm: jruby-9.2.11.1
       gemfile: Gemfile.activemodel5
 
