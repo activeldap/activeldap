@@ -26,6 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run
-        run: >-
-          docker-compose run
+        run: |
+          docker-compose run \
             ${{ matrix.ruby }}-activemodel-${{ matrix.activemodel }}
