@@ -1,0 +1,11 @@
+*
+!/Gemfile
+!/Gemfile.activemodel4
+!/Gemfile.activemodel5
+!/activeldap.gemspec
+!/dockerfiles/add-test-example-org-dc.ldif
+!/dockerfiles/config.yaml
+!/dockerfiles/olc-access-readable-by-all.ldif
+!/dockerfiles/openldap-prepare.sh
+!/lib/active_ldap/version.rb
+!/test/add-phonetic-attribute-options-to-slapd.ldif

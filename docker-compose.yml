@@ -1,0 +1,111 @@
+version: "3.7"
+
+services:
+  openldap:
+    image: osixia/openldap
+    environment:
+      - LDAP_LOG_LEVEL=0
+      - LDAP_TLS_VERIFY_CLIENT=never
+
+  openldap-prepare:
+    build:
+      context: .
+      dockerfile: dockerfiles/openldap-prepare.dockerfile
+    depends_on:
+      - openldap
+
+  ruby-2.4-activemodel-4:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.4
+        GEMFILE: Gemfile.activemodel4
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.4-activemodel-5:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.4
+        GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.5-activemodel-4:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.5
+        GEMFILE: Gemfile.activemodel4
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.5-activemodel-5:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.5
+        GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.6-activemodel-4:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.6
+        GEMFILE: Gemfile.activemodel4
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.6-activemodel-5:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.6
+        GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  ruby-2.7-activemodel5:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.7
+        GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  jruby-9-activemodel5:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: jruby:9
+        GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated

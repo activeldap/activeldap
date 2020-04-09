@@ -1,0 +1,12 @@
+# Your LDAP server needs base dn for test.
+# This is a LDIF file to add a test dc.
+# You can use this file by the following command line on Debian GNU/Linux
+# or Ubuntu:
+#   % sudo -H ldapmodify -Y EXTERNAL -H ldapi:/// -f test/add-test-example-org-ou.ldif
+version: 1
+dn: dc=test,dc=example,dc=org
+changetype: add
+objectClass: dcObject
+objectClass: organization
+dc: test
+o: Test organization

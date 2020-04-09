@@ -40,7 +40,13 @@ module AlTestUtils
       @top_dir = File.expand_path(File.join(@base_dir, ".."))
       @example_dir = File.join(@top_dir, "examples")
       @fixtures_dir = File.join(@base_dir, "fixtures")
-      @config_file = File.join(@base_dir, "config.yaml")
+      current_config_file = File.expand_path("config.yaml")
+      test_config_file = File.join(@base_dir, "config.yaml")
+      if File.exist?(current_config_file)
+        @config_file = current_config_file
+      else
+        @config_file = test_config_file
+      end
       ActiveLdap::Base.configurations = read_config
     end
 

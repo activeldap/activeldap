@@ -1,0 +1,6 @@
+test:
+  host: openldap
+  base: dc=test,dc=example,dc=org
+  method: :plain
+  bind_dn: cn=admin,dc=example,dc=org
+  password: admin
