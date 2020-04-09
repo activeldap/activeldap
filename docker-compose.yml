@@ -86,7 +86,7 @@ services:
     volumes:
       - .:/source:delegated
 
-  ruby-2.7-activemodel5:
+  ruby-2.7-activemodel-5:
     build:
       context: .
       dockerfile: dockerfiles/ruby.dockerfile
@@ -98,7 +98,7 @@ services:
     volumes:
       - .:/source:delegated
 
-  jruby-9-activemodel5:
+  jruby-9-activemodel-5:
     build:
       context: .
       dockerfile: dockerfiles/ruby.dockerfile
