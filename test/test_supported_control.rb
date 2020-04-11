@@ -17,7 +17,7 @@ class TestSupportedControl < Test::Unit::TestCase
     end
 
     def test_false
-      assert_true(paged_results?(ActiveLdap::LdapControls::PAGED_RESULTS))
+      assert_false(paged_results?(ActiveLdap::LdapControls::ASSERTION))
     end
   end
 end
