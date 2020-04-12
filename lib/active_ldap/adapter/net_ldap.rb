@@ -75,11 +75,12 @@ module ActiveLdap
         else
           paged_results_supported = false
         end
-        super(options) do |base, scope, filter, attrs, limit|
+        super(options) do |base, scope, filter, attrs, limit, deref|
           args = {
             :base => base,
             :scope => scope,
             :filter => filter,
+            :deref => deref,
             :attributes => attrs,
             :size => limit,
             :paged_searches_supported => paged_results_supported,

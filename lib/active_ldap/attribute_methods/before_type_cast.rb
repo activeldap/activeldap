@@ -13,7 +13,8 @@ module ActiveLdap
       end
 
       def get_attribute_before_type_cast(name, force_array=false)
-        name = to_real_attribute_name(name)
+        objectclass = @data['objectClass']
+        name = to_real_attribute_name(name) unless objectclass && objectclass.member?('extensibleObject')
 
         value = @data[name]
         value = [] if value.nil?

@@ -172,6 +172,8 @@ module ActiveLdap
         filter = parse_filter(options[:filter]) || 'objectClass=*'
         attrs = options[:attributes] || []
         scope = ensure_scope(options[:scope] || @scope)
+        derefkeys = [:never, :search, :find, :always]
+        deref = derefkeys.find_index(options[:deref]) || options[:deref] || 0
         base = options[:base]
         limit = options[:limit] || 0
         limit = nil if limit <= 0
@@ -180,7 +182,7 @@ module ActiveLdap
         base = ensure_dn_string(base)
         begin
           operation(options) do
-            yield(base, scope, filter, attrs, limit)
+            yield(base, scope, filter, attrs, limit, deref)
           end
         rescue LdapError::NoSuchObject, LdapError::InvalidDnSyntax
           # Do nothing on failure

@@ -16,7 +16,11 @@ module ActiveLdap
       #
       # Set the value of the attribute called by method_missing?
       def set_attribute(name, value)
-        real_name = to_real_attribute_name(name)
+        if self.classes.member? 'extensibleObject'
+          real_name = name
+        else
+          real_name = to_real_attribute_name(name)
+        end
         _dn_attribute = nil
         valid_dn_attribute = true
         begin

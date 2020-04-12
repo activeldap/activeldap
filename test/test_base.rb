@@ -799,6 +799,53 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
+  class TestLdapAlias < self
+    class Alias < ActiveLdap::Base
+      ldap_mapping prefix: '',
+                   classes: ['alias', 'extensibleObject']
+      attr_accessor :dn_attribute # Required to set dn in object
+    end
+
+    class Person < ActiveLdap::Base
+      ldap_mapping dn_attribute: "cn",
+                   prefix: "ou=People",
+                   scope: :one,
+                   classes: ["top", "person"]
+    end
+    
+    require 'net/ldap'
+    require 'net/ldap/dn'
+
+    def makealias(fromdn, to)
+      if to.dn
+        field, value = Net::LDAP::DN.new(to.dn).to_a[0..1]
+        newdn = Net::LDAP::DN.new field, value, fromdn
+        Alias.new(:dn_attribute => field,
+                  field.to_sym => value,
+                  :dn => newdn.to_s,
+                  :aliasedObjectName => to.dn,
+                 ).save!
+      else
+        raise "Can't add alias under #{fromdn} to #{to.inspect} because the latter has no DN"
+      end
+    end
+    
+    def test_ldap_alias
+      make_ou("People")
+      make_ou("Aliases")
+
+      person = Person.new(cn: "John Doe",
+                          sn: "Doe")
+      person.save!
+      makealias("ou=Aliases", person)
+      found_person = Person.find(:first,
+                                 base: "ou=Aliases,dc=deepeddy,dc=com",
+                                 deref: :always,
+                                 scope: :sub)
+      assert_equal person, found_person
+    end
+  end
+
   def test_reload_of_not_exists_entry
     make_temporary_user do |user,|
       assert_nothing_raised do
