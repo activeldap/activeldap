@@ -151,13 +151,12 @@ module ActiveLdap
           break unless use_paged_results
 
           # Find the paged search cookie
-          if res_controls = @context.get_response_controls
-            res_controls.each do |res_control|
-              next unless res_control.is_a? PagedResultsResponseControl
-
-              page_cookie = res_control.get_cookie
-              break
-            end
+          response_controls = @context.get_response_controls
+          break unless response_controls
+          response_controls.each do |response_control|
+            next unless response_control.is_a?(PagedResultsResponseControl)
+            page_cookie = response_control.get_cookie
+            break
           end
 
           break unless page_cookie
