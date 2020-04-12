@@ -280,41 +280,69 @@ module AlTestUtils
       super
       @user_index = 0
       @group_index = 0
+      @temporary_uids = []
+    end
+
+    def teardown
+      @temporary_uids.each do |uid|
+        delete_temporary_user(uid)
+      end
+      super
+    end
+
+    def delete_temporary_user(uid)
+      return unless @user_class.exists?(uid)
+      @user_class.search(:value => uid) do |dn, attribute|
+        @user_class.remove_connection(dn)
+        @user_class.delete(dn)
+      end
+    end
+
+    def build_temporary_user(config={})
+      uid = config[:uid] || "temp-user#{@user_index}"
+      password = config[:password] || "password#{@user_index}"
+      uid_number = config[:uid_number] || default_uid
+      gid_number = config[:gid_number] || default_gid
+      home_directory = config[:home_directory] || "/nonexistent"
+      see_also = config[:see_also]
+      user = nil
+      _wrap_assertion do
+        assert(!@user_class.exists?(uid))
+        assert_raise(ActiveLdap::EntryNotFound) do
+          @user_class.find(uid).dn
+        end
+        user = @user_class.new(uid)
+        assert(user.new_entry?)
+        user.cn = user.uid
+        user.sn = user.uid
+        user.uid_number = uid_number
+        user.gid_number = gid_number
+        user.home_directory = home_directory
+        user.user_password = ActiveLdap::UserPassword.ssha(password)
+        user.see_also = see_also
+        unless config[:simple]
+          user.add_class('shadowAccount', 'inetOrgPerson',
+                         'organizationalPerson')
+          user.user_certificate = certificate
+          user.jpeg_photo = jpeg_photo
+        end
+        user.save
+        assert(!user.new_entry?)
+      end
+      [@user_class.find(user.uid), password]
     end
 
     def make_temporary_user(config={})
       @user_index += 1
-      uid = config[:uid] || "temp-user#{@user_index}"
-      ensure_delete_user(uid) do
-        password = config[:password] || "password#{@user_index}"
-        uid_number = config[:uid_number] || default_uid
-        gid_number = config[:gid_number] || default_gid
-        home_directory = config[:home_directory] || "/nonexistent"
-        see_also = config[:see_also]
-        _wrap_assertion do
-          assert(!@user_class.exists?(uid))
-          assert_raise(ActiveLdap::EntryNotFound) do
-            @user_class.find(uid).dn
-          end
-          user = @user_class.new(uid)
-          assert(user.new_entry?)
-          user.cn = user.uid
-          user.sn = user.uid
-          user.uid_number = uid_number
-          user.gid_number = gid_number
-          user.home_directory = home_directory
-          user.user_password = ActiveLdap::UserPassword.ssha(password)
-          user.see_also = see_also
-          unless config[:simple]
-            user.add_class('shadowAccount', 'inetOrgPerson',
-                           'organizationalPerson')
-            user.user_certificate = certificate
-            user.jpeg_photo = jpeg_photo
-          end
-          user.save
-          assert(!user.new_entry?)
-          yield(@user_class.find(user.uid), password)
+      config = config.merge(uid: config[:uid] || "temp-user#{@user_index}")
+      uid = config[:uid]
+      @temporary_uids << uid
+      if block_given?
+        ensure_delete_user(uid) do
+          yield(*build_temporary_user(config))
         end
+      else
+        build_temporary_user(config)
       end
     end
 
@@ -341,12 +369,8 @@ module AlTestUtils
     def ensure_delete_user(uid)
       yield(uid)
     ensure
-      if @user_class.exists?(uid)
-        @user_class.search(:value => uid) do |dn, attribute|
-          @user_class.remove_connection(dn)
-          @user_class.delete(dn)
-        end
-      end
+      delete_temporary_user(uid)
+      @temporary_uids.delete(uid)
     end
 
     def ensure_delete_group(cn)
