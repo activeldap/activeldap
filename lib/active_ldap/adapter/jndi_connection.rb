@@ -130,22 +130,15 @@ module ActiveLdap
         page_cookie = nil
         if use_paged_results
           # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol
-          @context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
+          @context.set_request_controls([build_paged_results_control(page_size)])
         else
           @context.set_request_controls([])
         end
 
         escaped_base = escape_dn(base)
         loop do
-          @context.search(escaped_base, filter, controls).each do |result|
-            normalized_attributes = {}
-            result.attributes.get_all.each do |attribute|
-              normalized_attributes[attribute.get_id] = attribute.get_all.collect do |value|
-                value.is_a?(String) ? value : String.from_java_bytes(value)
-              end
-            end
-
-            yield([result.name_in_namespace, normalized_attributes])
+          @context.search(escaped_base, filter, controls).each do |search_result|
+            yield(build_raw_search_result(search_result))
           end
 
           break unless use_paged_results
@@ -162,9 +155,9 @@ module ActiveLdap
           break unless page_cookie
 
           # Set paged results control so we can keep getting results.
-          @context.set_request_controls(
-            [PagedResultsControl.new(page_size, page_cookie, Control::CRITICAL)]
-          )
+          paged_results_control =
+            build_paged_results_control(page_size, page_cookie)
+          @context.set_request_controls([paged_results_control])
         end
       end
 
@@ -269,6 +262,20 @@ module ActiveLdap
           escaped_rdn_strings.join("+")
         end
         escaped_rdns.join(",")
+      end
+
+      def build_paged_results_control(page_size, page_cookie=nil)
+        PagedResultsControl.new(page_size, page_cookie, Control::CRITICAL)
+      end
+
+      def build_raw_search_result(search_result)
+        attributes = {}
+        search_result.attributes.get_all.each do |attribute|
+          attributes[attribute.get_id] = attribute.get_all.collect do |value|
+            value.is_a?(String) ? value : String.from_java_bytes(value)
+          end
+        end
+        [search_result.name_in_namespace, attributes]
       end
     end
   end
