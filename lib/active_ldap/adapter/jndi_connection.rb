@@ -207,25 +207,21 @@ module ActiveLdap
           'com.sun.jndi.ldap.read.timeout' => (@timeout * 1000).to_i.to_s,
         }
         environment = HashTable.new(environment)
-
-        @context = InitialLdapContext.new(environment, nil)
-
+        context = InitialLdapContext.new(environment, nil)
         if @method == :start_tls
-          @tls = @mod_context.extended_operation(StartTlsRequest.new)
+          @tls = context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
         end
-
-        @context.add_to_environment(Context::SECURITY_AUTHENTICATION, authentication)
-
+        context.add_to_environment(Context::SECURITY_AUTHENTICATION,
+                                   authentication)
         if bind_dn
-          @context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
+          context.add_to_environment(Context::SECURITY_PRINCIPAL, bind_dn)
         end
-
         if password
-          @context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
+          context.add_to_environment(Context::SECURITY_CREDENTIALS, password)
         end
-
-        @context.reconnect(nil)
+        context.reconnect(nil)
+        @context = context
       end
 
       def ldap_uri
