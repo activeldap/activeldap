@@ -116,35 +116,42 @@ module ActiveLdap
         bound?
       end
 
-      def search(base, scope, filter, attrs, limit, use_paged_results, page_size)
+      def search(options)
+        base = options[:base]
+        scope = options[:scope]
+        filter = options[:filter]
+        attributes = options[:attributes]
+        limit = options[:limit]
+        use_paged_results = options[:use_paged_results]
+
         controls = SearchControls.new
         controls.search_scope = scope
 
         controls.count_limit = limit if limit
-        unless attrs.blank?
-          controls.returning_attributes = attrs.to_java(:string)
+        unless attributes.blank?
+          controls.returning_attributes = attributes.to_java(:string)
         end
 
-        escaped_base = escape_dn(base)
-
+        page_size = 126
+        page_cookie = nil
         if use_paged_results
           # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol
-          page_cookie = nil
           @search_context.set_request_controls([PagedResultsControl.new(page_size, Control::CRITICAL)])
         else
           @search_context.set_request_controls([])
         end
 
+        escaped_base = escape_dn(base)
         loop do
           @search_context.search(escaped_base, filter, controls).each do |result|
-            attributes = {}
+            normalized_attributes = {}
             result.attributes.get_all.each do |attribute|
-              attributes[attribute.get_id] = attribute.get_all.collect do |value|
+              normalized_attributes[attribute.get_id] = attribute.get_all.collect do |value|
                 value.is_a?(String) ? value : String.from_java_bytes(value)
               end
             end
 
-            yield([result.name_in_namespace, attributes])
+            yield([result.name_in_namespace, normalized_attributes])
           end
 
           break unless use_paged_results

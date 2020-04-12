@@ -12,7 +12,6 @@ module ActiveLdap
     end
 
     class Jndi < Base
-      DEFAULT_PAGE_SIZE = 126
       METHOD = {
         :ssl => :ssl,
         :tls => :start_tls,
@@ -48,16 +47,27 @@ module ActiveLdap
 
       def search(options={}, &block)
         super(options) do |base, scope, filter, attrs, limit|
-          page_size = options.fetch :page_size, DEFAULT_PAGE_SIZE
-          use_paged_results = options.fetch(:use_paged_results) { supported_control.paged_results? }
-
+          use_paged_results = options[:use_paged_results]
+          if use_paged_results or use_paged_results.nil?
+            use_paged_results = supported_control.paged_results?
+          end
           info = {
-            :base => base, :scope => scope_name(scope), :filter => filter,
-            :attributes => attrs, :limit => limit,
-            :use_paged_results => use_paged_results, :page_size => page_size
+            base: base,
+            scope: scope_name(scope),
+            filter: filter,
+            attributes: attrs,
+            limit: limit,
+            use_paged_results: use_paged_results,
           }
-
-          execute(:search, info, base, scope, filter, attrs, limit, use_paged_results, page_size, &block)
+          options = {
+            base: base,
+            scope: scope,
+            filter: filter,
+            attributes: attrs,
+            limit: limit,
+            use_paged_results: use_paged_results,
+          }
+          execute(:search, info, options, &block)
         end
       end
 
