@@ -3,7 +3,17 @@ require 'al-test-utils'
 class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
-  priority :must
+  def test_find_paged
+    # The default page size is 126.
+    n_users = 127
+    uids = n_users.times.collect do
+      user, _password = make_temporary_user
+      user.uid
+    end
+    assert_equal(uids.sort,
+                 @user_class.find(:all).collect(&:uid).sort)
+  end
+
   def test_find_with_dn
     make_temporary_user do |user,|
       assert_equal(user.dn, @user_class.find(user.dn).dn)
@@ -11,7 +21,6 @@ class TestFind < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_find_with_special_value_prefix
     # \2C == ','
     make_ou("a\\2Cb,ou=Users")

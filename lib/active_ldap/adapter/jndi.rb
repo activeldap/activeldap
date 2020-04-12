@@ -47,11 +47,27 @@ module ActiveLdap
 
       def search(options={}, &block)
         super(options) do |base, scope, filter, attrs, limit|
+          use_paged_results = options[:use_paged_results]
+          if use_paged_results or use_paged_results.nil?
+            use_paged_results = supported_control.paged_results?
+          end
           info = {
-            :base => base, :scope => scope_name(scope), :filter => filter,
-            :attributes => attrs, :limit => limit,
+            base: base,
+            scope: scope_name(scope),
+            filter: filter,
+            attributes: attrs,
+            limit: limit,
+            use_paged_results: use_paged_results,
           }
-          execute(:search, info, base, scope, filter, attrs, limit, &block)
+          options = {
+            base: base,
+            scope: scope,
+            filter: filter,
+            attributes: attrs,
+            limit: limit,
+            use_paged_results: use_paged_results,
+          }
+          execute(:search, info, options, &block)
         end
       end
 
