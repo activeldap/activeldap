@@ -62,6 +62,18 @@ services:
     volumes:
       - .:/source:delegated
 
+  ruby-2.5-activemodel-6:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.5
+        GEMFILE: Gemfile.activemodel6
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
   ruby-2.6-activemodel-4:
     build:
       context: .
@@ -86,6 +98,18 @@ services:
     volumes:
       - .:/source:delegated
 
+  ruby-2.6-activemodel-6:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.6
+        GEMFILE: Gemfile.activemodel6
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
   ruby-2.7-activemodel-5:
     build:
       context: .
@@ -98,6 +122,18 @@ services:
     volumes:
       - .:/source:delegated
 
+  ruby-2.7-activemodel-6:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:2.7
+        GEMFILE: Gemfile.activemodel6
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
   jruby-9-activemodel-5:
     build:
       context: .
@@ -105,6 +141,18 @@ services:
       args:
         FROM: jruby:9
         GEMFILE: Gemfile.activemodel5
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  jruby-9-activemodel-6:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: jruby:9
+        GEMFILE: Gemfile.activemodel6
     depends_on:
       - openldap-prepare
     volumes:

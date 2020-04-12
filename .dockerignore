@@ -2,6 +2,7 @@
 !/Gemfile
 !/Gemfile.activemodel4
 !/Gemfile.activemodel5
+!/Gemfile.activemodel6
 !/activeldap.gemspec
 !/dockerfiles/add-test-example-org-dc.ldif
 !/dockerfiles/config.yaml

@@ -17,11 +17,12 @@ module ActiveLdap
         if attribute_or_name.is_a?(Schema::Attribute)
           name = attribute_or_name.name
         else
-          attribute = schema.attribute(attribute_or_name.to_s)
+          attribute_name = attribute_or_name.to_s
+          attribute = schema.attribute(attribute_name)
           return nil if attribute.id.nil?
-          if attribute.name == attribute_or_name or
-              attribute.aliases.include?(attribute_or_name.to_s)
-            name = attribute_or_name
+          if attribute.name == attribute_name or
+              attribute.aliases.include?(attribute_name)
+            name = attribute_name
           else
             return nil
           end
