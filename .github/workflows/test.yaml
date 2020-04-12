@@ -20,7 +20,7 @@ jobs:
           - "6"
         exclude:
           - ruby: ruby-2.4
-            activemodel: "7"
+            activemodel: "6"
           - ruby: ruby-2.6
             activemodel: "4"
           - ruby: jruby-9
