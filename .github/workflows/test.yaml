@@ -5,6 +5,31 @@ on:
   - pull_request
 
 jobs:
+  ruby-2.4:
+    name: >-
+      Ruby 2.4 &
+      ActiveModel ${{ matrix.activemodel }} &
+      ${{ matrix.adapter }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 2.4
+        activemodel:
+          - "4"
+          - "5"
+        adapter:
+          - ldap
+          - net-ldap
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run
+        run: |
+          docker-compose run \
+            -e ACTIVE_LDAP_TEST_ADAPTER=${{ matrix.adapter }} \
+            ruby-${{ matrix.ruby }}-activemodel-${{ matrix.activemodel }}
+
   ruby:
     name: >-
       Ruby ${{ matrix.ruby }} &
@@ -14,24 +39,15 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
-          - 2.4
           - 2.5
           - 2.6
           - 2.7
         activemodel:
-          - "4"
           - "5"
           - "6"
         adapter:
           - ldap
           - net-ldap
-        exclude:
-          - ruby: ruby-2.4
-            activemodel: "6"
-          - ruby: ruby-2.6
-            activemodel: "4"
-          - ruby: ruby-2.7
-            activemodel: "4"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
