@@ -3,7 +3,7 @@
 set -exu
 
 retry() {
-  local retry_limit=3
+  local retry_limit=10
   local n_tries=0
   while ! "$@"; do
     n_tries=$[ n_tries + 1 ]
