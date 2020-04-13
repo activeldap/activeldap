@@ -404,6 +404,10 @@ module AlTestUtils
     end
 
     def run_command(*args, &block)
+      if RUBY_VERSION >= "2.7"
+        omit("Need to fix an optional arguments warning in net-ldap: " +
+            "ruby-ldap/ruby-net-ldap/pull/342")
+      end
       file = Tempfile.new("al-command-support")
       file.open
       file.puts(ActiveLdap::Base.configurations["test"].to_yaml)
