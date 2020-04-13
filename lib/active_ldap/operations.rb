@@ -22,9 +22,23 @@ module ActiveLdap
     end
 
     module Common
-      VALID_SEARCH_OPTIONS = [:attribute, :value, :filter, :prefix,
-                              :classes, :scope, :limit, :attributes,
-                              :sort_by, :order, :connection, :base, :offset]
+      VALID_SEARCH_OPTIONS = [
+        :attribute,
+        :value,
+        :filter,
+        :prefix,
+        :classes,
+        :scope,
+        :limit,
+        :attributes,
+        :sort_by,
+        :order,
+        :connection,
+        :base,
+        :offset,
+        :use_paged_results,
+        :page_size,
+      ]
 
       def search(options={}, &block)
         validate_search_options(options)
@@ -62,6 +76,8 @@ module ActiveLdap
           :attributes => requested_attributes,
           :sort_by => options[:sort_by] || sort_by,
           :order => options[:order] || order,
+          :use_paged_results => options[:use_paged_results],
+          :page_size => options[:page_size],
         }
         options[:connection] ||= connection
         values = []

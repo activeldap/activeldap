@@ -69,25 +69,16 @@ module ActiveLdap
       end
 
       def search(options={})
-        use_paged_results = options[:use_paged_results]
-        if use_paged_results or use_paged_results.nil?
-          paged_results_supported = supported_control.paged_results?
-        else
-          paged_results_supported = false
-        end
-        super(options) do |base, scope, filter, attrs, limit|
+        super(options) do |search_options|
+          scope = search_options[:scope]
+          info = search_options.merge(scope: scope_name(scope))
           args = {
-            :base => base,
-            :scope => scope,
-            :filter => filter,
-            :attributes => attrs,
-            :size => limit,
-            :paged_searches_supported => paged_results_supported,
-          }
-          info = {
-            :base => base, :scope => scope_name(scope),
-            :filter => filter, :attributes => attrs, :limit => limit,
-            :paged_results_supported => paged_results_supported,
+            base: search_options[:base],
+            scope: scope,
+            filter: search_options[:filter],
+            attributes: search_options[:attributes],
+            size: search_options[:limit],
+            paged_searcheds_supported: search_options[:paged_results_supported],
           }
           execute(:search, info, args) do |entry|
             attributes = {}

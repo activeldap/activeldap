@@ -65,12 +65,28 @@ module LDAP
       attributes        = options[:attributes]
       limit             = options[:limit] || 0
       use_paged_results = options[:use_paged_results]
+      page_size         = options[:page_size]
       if @@have_search_ext
         if use_paged_results
-          paged_search(base, scope, filter, attributes, limit, &block)
+          paged_search(base,
+                       scope,
+                       filter,
+                       attributes,
+                       limit,
+                       page_size,
+                       &block)
         else
-          search_ext(base, scope, filter, attributes,
-                     false, nil, nil, 0, 0, limit, &block)
+          search_ext(base,
+                     scope,
+                     filter,
+                     attributes,
+                     false,
+                     nil,
+                     nil,
+                     0,
+                     0,
+                     limit,
+                     &block)
         end
       else
         i = 0
@@ -120,27 +136,30 @@ module LDAP
       end
     end
 
-    def paged_search(base, scope, filter, attributes, limit, &block)
-      # work around a bug with openldap
-      page_size = 126
+    def paged_search(base, scope, filter, attributes, limit, page_size, &block)
       cookie = ""
       critical = true
-
       loop do
         ber_string = LDAP::Control.encode(page_size, cookie)
         control = LDAP::Control.new(LDAP::LDAP_CONTROL_PAGEDRESULTS,
                                     ber_string,
                                     critical)
-
-        search_ext(base, scope, filter, attributes,
-                   false, [control], nil, 0, 0, limit, &block)
+        search_ext(base,
+                   scope,
+                   filter,
+                   attributes,
+                   false,
+                   [control],
+                   nil,
+                   0,
+                   0,
+                   limit,
+                   &block)
 
         control = find_paged_results_control(@controls)
         break if control.nil?
-        returned_size, cookie = control.decode
-        returned_size = returned_size.to_i
-        page_size = returned_size if returned_size > 0
 
+        _estimated_result_set_size, cookie = control.decode
         break if cookie.empty?
       end
     end

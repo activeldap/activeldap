@@ -466,5 +466,10 @@ module AlTestUtils
       return unless RUBY_PLATFORM == "java"
       omit(message || "This test is not for JRuby")
     end
+
+    def omit_if_ldap(message=nil)
+      return unless current_configuration[:adapter] == "ldap"
+      omit(message || "This test is not for ruby-ldap")
+    end
   end
 end

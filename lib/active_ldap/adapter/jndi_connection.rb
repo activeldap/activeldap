@@ -117,6 +117,7 @@ module ActiveLdap
         attributes = options[:attributes]
         limit = options[:limit]
         use_paged_results = options[:use_paged_results]
+        page_size = options[:page_size]
 
         controls = SearchControls.new
         controls.search_scope = scope
@@ -126,7 +127,6 @@ module ActiveLdap
           controls.returning_attributes = attributes.to_java(:string)
         end
 
-        page_size = 126
         page_cookie = nil
         if use_paged_results
           # https://devdocs.io/openjdk~8/javax/naming/ldap/pagedresultscontrol

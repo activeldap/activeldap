@@ -24,6 +24,7 @@ class TestConnection < Test::Unit::TestCase
   end
 
   def test_retry_limit_0_with_nonexistent_host_with_timeout
+    omit_if_ldap("this test will take a long time...")
     omit_if_jruby("JNI adapter returns connection error immediately. " +
                   "So timeout isn't invoked.")
     config = current_configuration.merge("host" => "192.168.29.29",

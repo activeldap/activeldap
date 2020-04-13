@@ -4,14 +4,15 @@ class TestFind < Test::Unit::TestCase
   include AlTestUtils
 
   def test_find_paged
-    # The default page size is 126.
-    n_users = 127
+    page_size = 126
+    n_users = page_size + 1
     uids = n_users.times.collect do
       user, _password = make_temporary_user
       user.uid
     end
+    users = @user_class.find(:all, page_size: page_size)
     assert_equal(uids.sort,
-                 @user_class.find(:all).collect(&:uid).sort)
+                 users.collect(&:uid).sort)
   end
 
   def test_find_with_dn

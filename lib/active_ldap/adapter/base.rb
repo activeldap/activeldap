@@ -30,6 +30,8 @@ module ActiveLdap
         :scope,
         :sasl_options,
         :follow_referrals,
+        :use_paged_results,
+        :page_size,
       ]
 
       @@row_even = true
@@ -41,6 +43,7 @@ module ActiveLdap
         @bind_tried = false
         @entry_attributes = {}
         @follow_referrals = nil
+        @page_size = nil
         @configuration = configuration.dup
         @logger = @configuration.delete(:logger)
         @configuration.assert_valid_keys(VALID_ADAPTER_CONFIGURATION_KEYS)
@@ -48,6 +51,7 @@ module ActiveLdap
           instance_variable_set("@#{name}", configuration[name])
         end
         @follow_referrals = true if @follow_referrals.nil?
+        @page_size ||= Configuration::DEFAULT_CONFIG[:page_size]
         @instrumenter = ActiveSupport::Notifications.instrumenter
       end
 
@@ -169,23 +173,39 @@ module ActiveLdap
       end
 
       def search(options={})
-        filter = parse_filter(options[:filter]) || 'objectClass=*'
-        attrs = options[:attributes] || []
-        scope = ensure_scope(options[:scope] || @scope)
         base = options[:base]
+        base = ensure_dn_string(base)
+        attributes = options[:attributes] || []
+        attributes = attributes.to_a # just in case
         limit = options[:limit] || 0
         limit = nil if limit <= 0
+        use_paged_results = options[:use_paged_results]
+        if use_paged_results or use_paged_results.nil?
+          use_paged_results = supported_control.paged_results?
+        end
+        search_options = {
+          base: base,
+          scope: ensure_scope(options[:scope] || @scope),
+          filter: parse_filter(options[:filter]) || 'objectClass=*',
+          attributes: attributes,
+          limit: limit,
+          use_paged_results: use_paged_results,
+          page_size: options[:page_size] || @page_size,
+        }
 
-        attrs = attrs.to_a # just in case
-        base = ensure_dn_string(base)
         begin
           operation(options) do
-            yield(base, scope, filter, attrs, limit)
+            yield(search_options)
           end
-        rescue LdapError::NoSuchObject, LdapError::InvalidDnSyntax
+        rescue LdapError::NoSuchObject, LdapError::InvalidDnSyntax => error
           # Do nothing on failure
           @logger.info do
-            args = [$!.class, $!.message, filter, attrs.inspect]
+            args = [
+              error.class.class,
+              error.message,
+              search_options[:filter],
+              search_options[:attributes].inspect,
+            ]
             _("Ignore error %s(%s): filter %s: attributes: %s") % args
           end
         end

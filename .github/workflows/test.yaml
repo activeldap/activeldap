@@ -1,23 +1,30 @@
 name: Test
+
 on:
   - push
   - pull_request
+
 jobs:
-  test:
-    name: ${{ matrix.ruby }} & ActiveModel ${{ matrix.activemodel }}
+  ruby:
+    name: >-
+      Ruby ${{ matrix.ruby }} &
+      ActiveModel ${{ matrix.activemodel }} &
+      ${{ matrix.adapter }}
     strategy:
       fail-fast: false
       matrix:
         ruby:
-          - ruby-2.4
-          - ruby-2.5
-          - ruby-2.6
-          - ruby-2.7
-          - jruby-9
+          - 2.4
+          - 2.5
+          - 2.6
+          - 2.7
         activemodel:
           - "4"
           - "5"
           - "6"
+        adapter:
+          - ldap
+          - net-ldap
         exclude:
           - ruby: ruby-2.4
             activemodel: "6"
@@ -25,12 +32,29 @@ jobs:
             activemodel: "4"
           - ruby: ruby-2.7
             activemodel: "4"
-          - ruby: jruby-9
-            activemodel: "4"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run
         run: |
           docker-compose run \
-            ${{ matrix.ruby }}-activemodel-${{ matrix.activemodel }}
+            -e ACTIVE_LDAP_TEST_ADAPTER=${{ matrix.adapter }} \
+            ruby-${{ matrix.ruby }}-activemodel-${{ matrix.activemodel }}
+
+  jruby:
+    name: JRuby ${{ matrix.jruby }} & ActiveModel ${{ matrix.activemodel }}
+    strategy:
+      fail-fast: false
+      matrix:
+        jruby:
+          - 9
+        activemodel:
+          - "5"
+          - "6"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run
+        run: |
+          docker-compose run \
+            jruby-${{ matrix.jruby }}-activemodel-${{ matrix.activemodel }}

@@ -48,6 +48,15 @@ module ActiveLdap
     DEFAULT_CONFIG[:retry_on_timeout] = true
     DEFAULT_CONFIG[:follow_referrals] = true
 
+    # 500 is the default size limit value of OpenLDAP 2.4:
+    #   https://openldap.org/doc/admin24/limits.html#Global%20Limits
+    #
+    # We may change this when we find LDAP server that its the default
+    # size limit is smaller than 500.
+    DEFAULT_CONFIG[:page_size] = 500
+    # Whether using paged results if available.
+    DEFAULT_CONFIG[:use_paged_results] = true
+
     DEFAULT_CONFIG[:logger] = nil
 
     module ClassMethods

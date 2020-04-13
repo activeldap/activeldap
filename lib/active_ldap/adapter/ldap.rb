@@ -113,25 +113,11 @@ module ActiveLdap
       end
 
       def search(options={})
-        super(options) do |base, scope, filter, attrs, limit|
+        super(options) do |search_options|
           begin
-            use_paged_results = options[:use_paged_results]
-            if use_paged_results or use_paged_results.nil?
-              use_paged_results = supported_control.paged_results?
-            end
-            info = {
-              :base => base, :scope => scope_name(scope),
-              :filter => filter, :attributes => attrs, :limit => limit,
-            }
-            options = {
-              :base              => base,
-              :scope             => scope,
-              :filter            => filter,
-              :attributes        => attrs,
-              :limit             => limit,
-              :use_paged_results => use_paged_results
-            }
-            execute(:search_full, info, options) do |entry|
+            scope = search_options[:scope]
+            info = search_options.merge(scope: scope_name(scope))
+            execute(:search_full, info, search_options) do |entry|
               attributes = {}
               entry.attrs.each do |attr|
                 value = entry.vals(attr)
@@ -142,7 +128,10 @@ module ActiveLdap
           rescue RuntimeError
             if $!.message == "no result returned by search"
               @logger.debug do
-                args = [filter, attrs.inspect]
+                args = [
+                  search_options[:filter],
+                  search_options[:attributes].inspect,
+                ]
                 _("No matches: filter: %s: attributes: %s") % args
               end
             else
