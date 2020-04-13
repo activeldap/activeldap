@@ -5,7 +5,7 @@ on:
   - pull_request
 
 jobs:
-  ruby-2.4:
+  ruby-24:
     name: >-
       Ruby 2.4 &
       ActiveModel ${{ matrix.activemodel }} &
