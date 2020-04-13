@@ -1,6 +1,8 @@
 --title ActiveLdap
 --charset UTF-8
---readme README.textile
+--readme README.md
+--markup markdown
+--markup-provider kramdown
 --files doc/text/**/*
 --output-dir doc/reference/en
 --exclude /templates/

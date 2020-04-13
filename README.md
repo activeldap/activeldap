@@ -1,11 +1,11 @@
-h1. ActiveLdap
+# ActiveLdap
 
 A ruby library for object-oriented LDAP interface.
 
-* Copyright (C) 2004-2006 Will Drewry _<will@alum.bu.edu>_
-* Copyright (C) 2006-2013 Kouhei Sutou _<kou@clear-code.com>_
+* Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>
+* Copyright (C) 2006-2020 Sutou Kouhei <kou@clear-code.com>
 
-h2. Description
+## Description
 
 'ActiveLdap' is a ruby library which provides a clean
 objected oriented interface to LDAP library.  It was
@@ -14,50 +14,48 @@ flexible as ActiveRecord, but it is still trivial to define
 new objects and manipulate them with minimal difficulty.
 
 For example and usage - read the
-"document":http://activeldap.github.io/.
+[document](https://activeldap.github.io/).
 
-h2. Prerequisites
+## Prerequisites
 
-- Ruby intepreter :=
-One of them:
-* "Ruby":http://www.ruby-lang.org (1.9.3, 2.0.x, 2.1.x, 2.2.x, 2.3.0)
-* "JRuby":http://www.jruby.org/
+### Ruby interpreter
 
-See the above links for installation.
-=:
-- LDAP client :=
-JRuby doesn't need to install new library because JRuby
-has builtin LDAP support. Ruby users need one of them:
-
-* "Ruby/LDAP":http://ruby-ldap.sourceforge.net/
-* "Net::LDAP":http://rubyldap.com/
+  * [Ruby](https://www.ruby-lang.org)
+  * [JRuby](https://www.jruby.org/)
 
 See the above links for installation.
-=:
-- ActiveModel :=
-A toolkit for building modeling frameworks like Active
-Record and Active Resource.
-=:
 
-h2. Notes
+### LDAP client
 
-* Only GSSAPI SASL support exists due to Ruby/LDAP limitations
+JRuby doesn't need to install new library because JRuby has builtin
+LDAP support. Ruby users need one of them:
 
-h2. Rails
+* [Ruby/LDAP](https://rubygems.org/gems/ruby-ldap)
+* [Net::LDAP](https://rubygems.org/gems/net-ldap)
 
-See "Rails":file.rails.html ("doc/text/rails.textile":doc/text/rails.textile
-in the repository and on GitHub) page for Rails integration.
+See the above links for installation.
 
-h2. Licence
+### Active Model
+
+A toolkit for building modeling frameworks like Active Record and
+Active Resource.
+
+## Rails
+
+See [Rails](file.rails.html)
+([doc/text/rails.textile](doc/text/rails.md) in the repository and on
+GitHub) page for Rails integration.
+
+## License
 
 This program is free software; you can redistribute it and/or modify it.  It is
 dual licensed under Ruby's license and under the terms of the GNU General
 Public License as published by the Free Software Foundation; either version 2,
 or (at your option) any later version.
 
-Please see the file LICENSE for the terms of the licence.
+Please see the file LICENSE for the terms of the license.
 
-h2. Thanks
+## Thanks
 
 This list may not be correct. If you notice mistakes of this
 list, please point out.
@@ -70,33 +68,33 @@ list, please point out.
 * James Hughes: Bug reports and advices and documentations.
 * Buzz Chopra: Documentations.
 * Christoph Lipp:
-** Bug reports.
-** Tell us character escape syntax.
+  * Bug reports.
+  * Tell us character escape syntax.
 * Jeff Hall: Bug reports.
 * Ernie Miller: Bug reports and advices.
 * Daniel Pfile: Patches.
 * Jacob Wilkins: Bug reports.
 * Ace Suares:
-** Bug reports.
-** Nederlands translations.
+  * Bug reports.
+  * Nederlands translations.
 * Iain Pople: Bug reports and API improvement ideas.
 * Kevin McCarthy: Patches.
 * Perry Smith: Patches, bug reports and indications.
 * Marc Dequènes: API suggestions.
 * Jeremy Pruitt: Bug reports.
 * Bodaniel Jeanes:
-** A suggestion for behavior on simple bind with empty password.
-** Bug reports.
+  * A suggestion for behavior on simple bind with empty password.
+  * Bug reports.
 * Naoto Morishima: Bug reports.
 * David Morton:
-** An API improvement idea.
-** Bug reports.
+  * An API improvement idea.
+  * Bug reports.
 * Lennon Day-Reynolds: Bug reports.
 * Tilo: A bug report.
 * Matt Mencel: Bug reports.
 * CultureSpy:
-** Bug reports.
-** Bug fixes.
+  * Bug reports.
+  * Bug fixes.
 * gwarf12: A bug report.
 * Baptiste Grenier: API improvement ideas.
 * Richard 3 Nicholas: API improvement ideas.
@@ -131,8 +129,8 @@ list, please point out.
 * spoidar: Rails 3 support.
 * Kris Wehner: Rails 2.3.8 support.
 * Ryan Tandy:
-** A test bug fix.
-** Rails 3 support.
+  * A test bug fix.
+  * Rails 3 support.
 * rbq: A bug report.
 * Narihiro Nakamura: Rails 3 support.
 * Hidetoshi Yoshimoto: Rails 3 support.
