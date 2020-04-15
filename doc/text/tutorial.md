@@ -641,7 +641,6 @@ base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 $LOAD_PATH << File.join(base, "lib")
 $LOAD_PATH << File.join(base, "examples")
 
-require 'rubygems'
 require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
@@ -694,7 +693,6 @@ base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 $LOAD_PATH << File.join(base, "lib")
 $LOAD_PATH << File.join(base, "examples")
 
-require 'rubygems'
 require 'active_ldap'
 require 'objects/user'
 require 'objects/group'
@@ -744,7 +742,6 @@ base = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 $LOAD_PATH << File.join(base, "lib")
 $LOAD_PATH << File.join(base, "examples")
 
-require 'rubygems'
 require 'active_ldap'
 require 'objects/user'
 require 'objects/group'

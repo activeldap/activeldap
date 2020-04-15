@@ -1,4 +1,3 @@
-require "rubygems"
 require "active_model"
 require "active_support/core_ext"
 

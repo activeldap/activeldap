@@ -9,7 +9,6 @@ test_dir = File.join(top_dir, "test")
 $LOAD_PATH.unshift(lib_dir)
 $LOAD_PATH.unshift(test_dir)
 
-require "rubygems"
 require "bundler/setup"
 
 require "test/unit"
