@@ -2,8 +2,6 @@
 
 $VERBOSE = true
 
-$KCODE = 'u' if RUBY_VERSION < "1.9"
-
 base_dir = File.expand_path(File.dirname(__FILE__))
 top_dir = File.expand_path(File.join(base_dir, ".."))
 lib_dir = File.join(top_dir, "lib")
