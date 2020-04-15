@@ -1,5 +1,33 @@
 # News
 
+## 6.0.0: 2020-04-16 {#release-6-0-0}
+
+### Improvements
+
+  * Removed needless `rubyforge_project` from `.gemspec`.
+    [GitHub#167][Patch by Olle Jonsson]
+
+  * Added support for reusing parent configuration for omitted
+    configuration items when creating a connection per class or DN.
+
+  * jndi: Added support for processing DN that includes backslash.
+
+  * jndi: Added a CI job for JRuby 9.
+    [GitHub#170][Patch by Kevin McCormack]
+
+  * jndi: Added support for paged search.
+    [GitHub#171][Patch by Kevin McCormack]
+
+  * Added support for Active Model 6.
+
+  * `search`: Added `:used_paged_results` and `:page_size` options.
+
+### Thanks
+
+  * Olle Jonsson
+
+  * Kevin McCormack
+
 ## 5.2.3: 2019-02-15 {#release-5-2-3}
 
 ### Improvements
