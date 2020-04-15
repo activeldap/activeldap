@@ -8,7 +8,7 @@ jobs:
   ruby:
     name: >-
       Ruby ${{ matrix.ruby }} &
-      ActiveModel ${{ matrix.activemodel }} &
+      Active Model ${{ matrix.activemodel }} &
       ${{ matrix.adapter }}
     strategy:
       fail-fast: false
@@ -33,7 +33,7 @@ jobs:
             ruby-${{ matrix.ruby }}-activemodel-${{ matrix.activemodel }}
 
   jruby:
-    name: JRuby ${{ matrix.jruby }} & ActiveModel ${{ matrix.activemodel }}
+    name: JRuby ${{ matrix.jruby }} & Active Model ${{ matrix.activemodel }}
     strategy:
       fail-fast: false
       matrix:
