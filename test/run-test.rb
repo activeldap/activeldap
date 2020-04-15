@@ -15,7 +15,6 @@ require "rubygems"
 require "bundler/setup"
 
 require "test/unit"
-require "test/unit/notify"
 Test::Unit::Priority.enable
 
 Dir.glob(File.join(test_dir, "**", "test_*.rb")) do |test_file|
