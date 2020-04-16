@@ -182,7 +182,7 @@ module ActiveLdap
         limit = nil if limit <= 0
         use_paged_results = options[:use_paged_results]
         if use_paged_results or use_paged_results.nil?
-          use_paged_results = supported_control.paged_results?
+          use_paged_results = limit != 1 && supported_control.paged_results?
         end
         search_options = {
           base: base,
