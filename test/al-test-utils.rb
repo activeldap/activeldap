@@ -468,7 +468,7 @@ module AlTestUtils
     end
 
     def omit_if_ldap(message=nil)
-      return unless current_configuration[:adapter] == "ldap"
+      return if current_configuration[:adapter] == "ldap"
       omit(message || "This test is not for ruby-ldap")
     end
   end
