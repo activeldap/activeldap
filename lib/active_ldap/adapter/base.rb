@@ -151,8 +151,7 @@ module ActiveLdap
                  :scope => :base,
                  :filter => '(objectClass=subschema)',
                  :attributes => attrs,
-                 :limit => 1,
-                 :use_paged_results => false) do |dn, attributes|
+                 :limit => 1) do |dn, attributes|
             schema = Schema.new(attributes)
           end
           schema || Schema.new([])
@@ -683,8 +682,7 @@ module ActiveLdap
                :scope => :base,
                :attributes => attrs,
                :limit => 1,
-               :try_reconnect => try_reconnect,
-               :use_paged_results => false) do |dn, attributes|
+               :try_reconnect => try_reconnect) do |dn, attributes|
           found_attributes = attributes
         end
         found_attributes
