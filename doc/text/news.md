@@ -1,5 +1,18 @@
 # News
 
+## 6.0.1: 2020-04-21 {#release-6-0-1}
+
+### Improvements
+
+  * Dropped support for Ruby 2.4.
+
+  * Stopped using paged results when we need only one entry.
+    [GitHub#173][Patch by Kevin McCormack]
+
+### Thanks
+
+  * Kevin McCormack
+
 ## 6.0.0: 2020-04-16 {#release-6-0-0}
 
 ### Improvements
