@@ -81,9 +81,10 @@ module ActiveLdap
       end
     end
 
-    def reload
+    def reload(options={})
       clear_association_cache
-      _, attributes = search(:value => id).find do |_dn, _attributes|
+      search_options = options.merge(value: id)
+      _, attributes = search(search_options).find do |_dn, _attributes|
         dn == _dn
       end
       if attributes.nil?
