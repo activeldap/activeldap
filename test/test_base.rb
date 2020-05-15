@@ -383,15 +383,18 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  def test_set_dn_with_unnormalized_dn_attribute_with_forward_slash
+  def test_set_dn_with_unnormalized_dn_attribute_with_forward_slash 
     make_temporary_user do |user,|
-      assert_not_equal(user.dn.to_s, 'uid=temp/user1,ou=Users,ou=test,dc=example,dc=org')
+      new_dn = "uid=temp/user1,#{user.class.base}"
+      assert_not_equal(user.dn.to_s, new_dn)
+
       user.uid = 'temp/user1'
-      assert_equal(user.dn.to_s, 'uid=temp/user1,ou=Users,ou=test,dc=example,dc=org')
+      assert_equal(user.dn.to_s, new_dn)
+
       assert_true(user.save!)
       assert_true(user.class.find(user.uid).update_attributes!(gidNumber: 100069))
     end
-  end
+ end
 
   def test_destroy_with_empty_base_and_prefix_of_class
     make_temporary_user do |user,|
