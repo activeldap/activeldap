@@ -226,7 +226,7 @@ module ActiveLdap
 
       def escape_dn(dn)
         javax.naming.ldap.LdapName.new(dn)
-      rescue Java::JavaxNaming::InvalidNameException
+      rescue Java::JavaLang::IllegalArgumentException, Java::JavaxNaming::InvalidNameException
         dn
       end
 
