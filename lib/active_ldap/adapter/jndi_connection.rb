@@ -136,6 +136,7 @@ module ActiveLdap
         end
 
         escaped_base = escape_dn(base)
+
         loop do
           @context.search(escaped_base, filter, controls).each do |search_result|
             yield(build_raw_search_result(search_result))
@@ -166,26 +167,23 @@ module ActiveLdap
         records.each do |record|
           attributes.put(record.to_java_attribute)
         end
-        escaped_dn = escape_dn(dn)
         @context.set_request_controls([])
-        @context.create_subcontext(escaped_dn, attributes)
+        @context.create_subcontext(escape_dn(dn), attributes)
       end
 
       def modify(dn, records)
-        escaped_dn = escape_dn(dn)
         items = records.collect(&:to_java_modification_item)
         @context.set_request_controls([])
-        @context.modify_attributes(escaped_dn, items.to_java(ModificationItem))
+        @context.modify_attributes(escape_dn(dn), items.to_java(ModificationItem))
       end
 
       def modify_rdn(dn, new_rdn, delete_old_rdn)
-        escaped_dn = escape_dn(dn)
         # should use mutex
         delete_rdn_key = "java.naming.ldap.deleteRDN"
         @context.set_request_controls([])
         begin
           @context.add_to_environment(delete_rdn_key, delete_old_rdn.to_s)
-          @context.rename(escaped_dn, new_rdn)
+          @context.rename(escape_dn(dn), escape_dn(new_rdn))
         ensure
           @context.remove_from_environment(delete_rdn_key)
         end
@@ -230,34 +228,9 @@ module ActiveLdap
       end
 
       def escape_dn(dn)
-        parsed_dn = nil
-        begin
-          parsed_dn = DN.parse(dn)
-        rescue DistinguishedNameInvalid
-          return dn
-        end
-
-        escaped_rdns = parsed_dn.rdns.collect do |rdn|
-          escaped_rdn_strings = rdn.collect do |key, value|
-            escaped_value = DN.escape_value(value)
-            # We may need to escape the followings too:
-            #   * ,
-            #   * =
-            #   * +
-            #   * <
-            #   * >
-            #   * #
-            #   * ;
-            #
-            # See javax.naming.ldap.Rdn.unescapeValue()
-            escaped_value = escaped_value.gsub(/\\\\/) do
-              "\\5C"
-            end
-            "#{key}=#{escaped_value}"
-          end
-          escaped_rdn_strings.join("+")
-        end
-        escaped_rdns.join(",")
+        javax.naming.ldap.LdapName.new(dn)
+      rescue Java::JavaLang::IllegalArgumentException, Java::JavaxNaming::InvalidNameException
+        dn
       end
 
       def build_paged_results_control(page_size, page_cookie=nil)
