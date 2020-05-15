@@ -134,8 +134,11 @@ module ActiveLdap
         else
           @context.set_request_controls([])
         end
+
+        escaped_base = escape_dn(base)
+
         loop do
-          @context.search(escape_dn(base), filter, controls).each do |search_result|
+          @context.search(escaped_base, filter, controls).each do |search_result|
             yield(build_raw_search_result(search_result))
           end
 
