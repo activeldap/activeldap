@@ -1,5 +1,19 @@
 # News
 
+## 6.0.2: 2020-05-19 {#release-6-0-2}
+
+### Improvements
+
+  * Added `options` to {ActiveLdap::Persistance#reload}.
+    [GitHub#176][Reported by Kevin McCormack]
+
+  * jndi: Improved DN escaping.
+    [GitHub#178][Patch by Kevin McCormack]
+
+### Thanks
+
+  * Kevin McCormack
+
 ## 6.0.1: 2020-04-21 {#release-6-0-1}
 
 ### Improvements
