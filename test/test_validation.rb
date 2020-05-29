@@ -37,6 +37,15 @@ class TestValidation < Test::Unit::TestCase
   priority :must
 
   priority :normal
+  def test_validate_false
+    make_temporary_user(:simple => true) do |user,|
+      user.sn = nil
+      assert_raise(ActiveLdap::RequiredAttributeMissed) do
+        user.save(validate: false)
+      end
+    end
+  end
+
   def test_octet_string
     make_temporary_user(:simple => true) do |user,|
       utf8_encoded_binary_value = "\xff".force_encoding("UTF-8")

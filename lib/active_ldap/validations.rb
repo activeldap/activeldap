@@ -53,15 +53,23 @@ module ActiveLdap
       errors.empty? && output
     end
 
-    def save(*)
-      valid? ? super : false
+    def save(**options)
+      perform_validations(options) ? super : false
     end
 
-    def save!(*)
-      valid? ? super : raise(EntryInvalid.new(self))
+    def save!(**options)
+      perform_validations(options) ? super : raise(EntryInvalid.new(self))
     end
 
     private
+    def perform_validations(options)
+      if options[:validate] == false
+        true
+      else
+        valid?(options[:context])
+      end
+    end
+
     def format_validation_message(format, parameters)
       format % parameters
     end
