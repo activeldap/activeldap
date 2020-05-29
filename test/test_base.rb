@@ -122,9 +122,9 @@ class TestBase < Test::Unit::TestCase
 
   def test_operational_attributes
     make_temporary_group do |group|
-      dn, attributes = @group_class.search(:attributes => ["*"])[0]
+      _dn, attributes = @group_class.search(:attributes => ["*"])[0]
       normal_attributes = attributes.keys
-      dn, attributes = @group_class.search(:attributes => ["*", "+"])[0]
+      _dn, attributes = @group_class.search(:attributes => ["*", "+"])[0]
       operational_attributes = attributes.keys - normal_attributes
       operational_attribute = operational_attributes[0]
 
