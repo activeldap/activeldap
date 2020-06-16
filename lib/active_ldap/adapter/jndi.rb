@@ -23,7 +23,8 @@ module ActiveLdap
           uri = construct_uri(host, port, method == :ssl)
           with_start_tls = method == :start_tls
           info = {:uri => uri, :with_start_tls => with_start_tls}
-          [log("connect", info) {JndiConnection.new(host, port, method, @timeout)},
+          [log("connect", info) {JndiConnection.new(host, port, method, @timeout,
+                                                    @follow_referrals)},
            uri, with_start_tls]
         end
       end

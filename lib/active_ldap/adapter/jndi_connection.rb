@@ -75,13 +75,14 @@ module ActiveLdap
         end
       end
 
-      def initialize(host, port, method, timeout)
+      def initialize(host, port, method, timeout, follow_referrals)
         @host = host
         @port = port
         @method = method
         @timeout = timeout
         @context = nil
         @tls = nil
+        @follow_referrals = follow_referrals
       end
 
       def unbind
@@ -203,9 +204,10 @@ module ActiveLdap
           Context::PROVIDER_URL => ldap_uri,
           'com.sun.jndi.ldap.connect.timeout' => (@timeout * 1000).to_i.to_s,
           'com.sun.jndi.ldap.read.timeout' => (@timeout * 1000).to_i.to_s,
+          'java.naming.ldap.derefAliases' => 'never',
+          'java.naming.referral' => @follow_referrals ? 'follow' : 'ignore'
         }
-        environment = HashTable.new(environment)
-        context = InitialLdapContext.new(environment, nil)
+        context = InitialLdapContext.new(HashTable.new(environment), nil)
         if @method == :start_tls
           @tls = context.extended_operation(StartTlsRequest.new)
           @tls.negotiate
