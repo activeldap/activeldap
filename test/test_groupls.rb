@@ -49,6 +49,17 @@ class TestGroupls < Test::Unit::TestCase
     end
   end
 
+  def test_list_group_members_have_group
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+      make_temporary_group_of_names(member: [user1.dn.to_s, user2.dn.to_s]) do |group|
+        assert_equal(user1.class.find(user1.dn, attributes: %w[memberOf]).memberOf.to_s,
+                       group.dn.to_s)
+        end
+      end
+    end
+  end
+
   def test_list_group_have_members_and_primary_members
     make_temporary_group do |group|
       options = {:gid_number => group.gid_number}
