@@ -76,6 +76,23 @@ class TestConnection < Test::Unit::TestCase
     assert(connection.send(:can_reconnect?, :reconnect_attempts => -10))
   end
 
+  def test_follow_referrals_option
+    connector = Class.new(ActiveLdap::Base)
+    connector.setup_connection(
+      current_configuration.merge(:follow_referrals => true)
+    )
+    assert(connector.connection.instance_variable_get("@follow_referrals"))
+    connector.connection.connect
+
+    if connector.connection.is_a? ActiveLdap::Adapter::Jndi
+      context = connector.connection.instance_variable_get("@connection")
+                                    .instance_variable_get("@context")
+      assert_equal(context.environment["java.naming.referral"], "follow")
+    elsif connector.connection.is_a? ActiveLdap::Adapter::NetLdap
+      assert(connector.connection.instance_variable_get('@configuration')[:follow_referrals])
+    end
+  end
+
   priority :low
   def test_retry_limit_0_with_nonexistent_host
     omit("this test will take a long time...")
