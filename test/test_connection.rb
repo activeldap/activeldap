@@ -77,19 +77,25 @@ class TestConnection < Test::Unit::TestCase
   end
 
   def test_follow_referrals_option
-    connector = Class.new(ActiveLdap::Base)
-    connector.setup_connection(
-      current_configuration.merge(:follow_referrals => true)
-    )
-    assert(connector.connection.instance_variable_get("@follow_referrals"))
-    connector.connection.connect
+    [nil, true, false].each do |follow_referrals_value|
+      connector = Class.new(ActiveLdap::Base)
+      connector.setup_connection(
+        current_configuration.merge(:follow_referrals => follow_referrals_value)
+      )
 
-    if connector.connection.is_a? ActiveLdap::Adapter::Jndi
-      context = connector.connection.instance_variable_get("@connection")
-                                    .instance_variable_get("@context")
-      assert_equal(context.environment["java.naming.referral"], "follow")
-    elsif connector.connection.is_a? ActiveLdap::Adapter::NetLdap
-      assert(connector.connection.instance_variable_get('@configuration')[:follow_referrals])
+      value = follow_referrals_value == false ? false : true
+      assert_equal(value, connector.connection.instance_variable_get("@follow_referrals"))
+      connector.connection.connect
+
+      if connector.connection.is_a? ActiveLdap::Adapter::Jndi
+        value = follow_referrals_value == false ? "ignore" : "follow"
+        context = connector.connection.instance_variable_get("@connection")
+                                      .instance_variable_get("@context")
+        assert_equal(value, context.environment["java.naming.referral"])
+      elsif connector.connection.is_a? ActiveLdap::Adapter::NetLdap
+        assert_equal(follow_referrals_value,
+                     connector.connection.instance_variable_get("@configuration")[:follow_referrals])
+      end
     end
   end
 
