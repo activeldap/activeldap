@@ -37,3 +37,11 @@ retry \
     -D cn=admin,cn=config \
     -w config \
     -f olc-access-readable-by-all.ldif
+
+retry \
+  ldapmodify \
+    -ZZ \
+    -H ldap://openldap \
+    -D cn=admin,cn=config \
+    -w config \
+    -f enable-dynamic-groups.ldif

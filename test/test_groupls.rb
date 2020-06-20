@@ -60,6 +60,20 @@ class TestGroupls < Test::Unit::TestCase
     end
   end
 
+  def test_list_group_of_urls_members
+    make_temporary_user do |user1,|
+      make_temporary_user do |user2,|
+        member_url = ["ldap:///#{user1.base.to_s}??one?(objectClass=person)"]
+        make_temporary_group_of_urls(member_url: member_url) do |group|
+        assert_equal(
+          [user1.dn.to_s, user2.dn.to_s],
+          group.class.find(group.dn, attributes: %w[member]).member.map(&:to_s)
+        )
+        end
+      end
+    end
+  end
+
   def test_list_group_have_members_and_primary_members
     make_temporary_group do |group|
       options = {:gid_number => group.gid_number}
