@@ -6,6 +6,7 @@
 !/activeldap.gemspec
 !/dockerfiles/add-test-example-org-dc.ldif
 !/dockerfiles/config.yaml
+!/dockerfiles/enable-dynamic-groups.ldif
 !/dockerfiles/olc-access-readable-by-all.ldif
 !/dockerfiles/openldap-prepare.sh
 !/lib/active_ldap/version.rb
