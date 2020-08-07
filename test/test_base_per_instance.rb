@@ -9,13 +9,45 @@ class TestBasePerInstance < Test::Unit::TestCase
   end
 
   priority :must
+  def test_dn_with_sub_base_first
+    sub_user = @user_class.new(dn: "uid=user1,ou=Sub,#{@user_class.base}",
+                               uid: "user1")
+    # Order is important. #base should be called before #dn.
+    base = sub_user.base.to_s
+    dn = sub_user.dn.to_s
+    assert_equal([
+                   "ou=Sub,#{@user_class.base}",
+                   "uid=user1,ou=Sub,#{@user_class.base}",
+                 ],
+                 [
+                   base,
+                   dn,
+                 ])
+  end
+
+  def test_dn_with_sub_base_last
+    sub_user = @user_class.new(uid: "user1",
+                               dn: "uid=user1,ou=Sub,#{@user_class.base}")
+    # Order is important. #base should be called before #dn.
+    base = sub_user.base.to_s
+    dn = sub_user.dn.to_s
+    assert_equal([
+                   "ou=Sub,#{@user_class.base}",
+                   "uid=user1,ou=Sub,#{@user_class.base}",
+                 ],
+                 [
+                   base,
+                   dn,
+                 ])
+  end
+
+  priority :normal
   def test_set_base
     guest = @user_class.new("guest")
     guest.base = "ou=Sub"
     assert_equal("uid=guest,ou=Sub,#{@user_class.base}", guest.dn)
   end
 
-  priority :normal
   def test_dn_is_base
     entry_class = Class.new(ActiveLdap::Base)
     entry_class.ldap_mapping :prefix => "",

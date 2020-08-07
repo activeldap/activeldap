@@ -851,6 +851,8 @@ module ActiveLdap
 
       _schema = _local_entry_attribute = nil
       targets = sanitize_for_mass_assignment(new_attributes)
+      have_dn = false
+      dn_value = nil
       targets.each do |key, value|
         setter = "#{key}="
         unless respond_to?(setter)
@@ -860,8 +862,15 @@ module ActiveLdap
           _local_entry_attribute ||= local_entry_attribute
           _local_entry_attribute.register(attribute)
         end
-        send(setter, value)
+        case setter
+        when "dn=", "id="
+          have_dn = true
+          dn_value = value
+        else
+          send(setter, value)
+        end
       end
+      self.dn = dn_value if have_dn
     end
 
     def to_ldif_record
@@ -1281,6 +1290,7 @@ module ActiveLdap
     end
 
     def compute_base
+      ensure_update_dn
       base_of_class = self.class.base
       if @base_value.nil?
         base_of_class
