@@ -1,6 +1,6 @@
 # Your LDAP server needs to support StartTLS when you test StartTLS related
 # feature. This is a LDIF file for OpenLDAP to do the configuration.
-# You can use this file by the following command linne on Debian GNU/Linux
+# You can use this file by the following command line on Debian GNU/Linux
 # or Ubuntu:
 #
 #   % sudo usermod -a -G ssl-cert openldap
