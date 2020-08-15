@@ -182,6 +182,7 @@ module AlTestUtils
       populate_ou
       populate_user_class
       populate_group_class
+      populate_group_of_urls_class
       populate_associations
     end
 
@@ -215,7 +216,7 @@ module AlTestUtils
     end
 
     def populate_ou
-      %w(Users Groups).each do |name|
+      %w(Users Groups GroupOfURLsSet).each do |name|
         make_ou(name)
       end
     end
@@ -244,6 +245,14 @@ module AlTestUtils
                                 :scope => :sub,
                                 :classes => ["posixGroup"]
       assign_class_name(@group_class, "Group")
+    end
+
+    def populate_group_of_urls_class
+      @group_of_urls_class = Class.new(ActiveLdap::Base)
+      @group_of_urls_class.ldap_mapping :prefix => "ou=GroupOfURLsSet",
+                                        :scope => :sub,
+                                        :classes => ["groupOfURLs"]
+      assign_class_name(@group_of_urls_class, "GroupOfURLs")
     end
 
     def populate_associations
@@ -280,6 +289,7 @@ module AlTestUtils
       super
       @user_index = 0
       @group_index = 0
+      @group_of_urls_index = 0
       @temporary_uids = []
     end
 
@@ -366,6 +376,25 @@ module AlTestUtils
       end
     end
 
+    def make_temporary_group_of_urls(config={})
+      @group_of_urls_index += 1
+      cn = config[:cn] || "temp-group-of-urls-#{@group_of_urls_index}"
+      ensure_delete_group_of_urls(cn) do
+        _wrap_assertion do
+          assert(!@group_of_urls_class.exists?(cn))
+          assert_raise(ActiveLdap::EntryNotFound) do
+            @group_of_urls_class.find(cn)
+          end
+          group_of_urls = @group_of_urls_class.new(cn)
+          assert(group_of_urls.new_entry?)
+          group_of_urls.member_url = config[:member_url]
+          assert(group_of_urls.save!)
+          assert(!group_of_urls.new_entry?)
+          yield(@group_of_urls_class.find(group_of_urls.cn))
+        end
+      end
+    end
+
     def ensure_delete_user(uid)
       yield(uid)
     ensure
@@ -377,6 +406,12 @@ module AlTestUtils
       yield(cn)
     ensure
       @group_class.delete(cn) if @group_class.exists?(cn)
+    end
+
+    def ensure_delete_group_of_urls(cn)
+      yield(cn)
+    ensure
+      @group_of_urls_class.delete(cn) if @group_of_urls_class.exists?(cn)
     end
 
     def default_uid
@@ -465,6 +500,11 @@ module AlTestUtils
     def omit_if_jruby(message=nil)
       return unless RUBY_PLATFORM == "java"
       omit(message || "This test is not for JRuby")
+    end
+
+    def omit_unless_jruby(message=nil)
+      return if RUBY_PLATFORM == "java"
+      omit(message || "This test is only for JRuby")
     end
 
     def omit_if_ldap(message=nil)

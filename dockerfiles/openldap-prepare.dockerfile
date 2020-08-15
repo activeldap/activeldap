@@ -11,15 +11,17 @@ RUN \
 RUN \
   apt update && \
   apt install -y -V \
-    ldap-utils && \
+    ldap-utils \
+    slapd && \
   apt clean && \
   rm -rf /var/lib/apt/lists/*
 
 RUN echo "TLS_REQCERT never" > /etc/ldap/ldap.conf
 
-COPY test/add-phonetic-attribute-options-to-slapd.ldif /
 COPY dockerfiles/add-test-example-org-dc.ldif /
 COPY dockerfiles/olc-access-readable-by-all.ldif /
 COPY dockerfiles/openldap-prepare.sh /
+COPY test/add-phonetic-attribute-options-to-slapd.ldif /
+COPY test/enable-dynamic-groups.ldif /
 
 ENTRYPOINT ["/openldap-prepare.sh"]

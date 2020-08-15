@@ -10,3 +10,4 @@
 !/dockerfiles/openldap-prepare.sh
 !/lib/active_ldap/version.rb
 !/test/add-phonetic-attribute-options-to-slapd.ldif
+!/test/enable-dynamic-groups.ldif

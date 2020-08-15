@@ -209,15 +209,17 @@ module ActiveLdap
       def prepare_connection(options={})
         operation(options) do
           @connection.set_option(LDAP::LDAP_OPT_PROTOCOL_VERSION, 3)
-          unless follow_referrals?(options)
-            @connection.set_option(LDAP::LDAP_OPT_REFERRALS, 0)
-          end
+          @ldap_follow_referrals = follow_referrals?(options) ? 1 : 0
+          @connection.set_option(LDAP::LDAP_OPT_REFERRALS,
+                                 @ldap_follow_referrals)
         end
       end
 
       def execute(method, info=nil, *args, &block)
         begin
           name = (info || {}).delete(:name) || method
+          @connection.set_option(LDAP::LDAP_OPT_REFERRALS,
+                                 @ldap_follow_referrals)
           log(name, info) {@connection.send(method, *args, &block)}
         rescue LDAP::ResultError
           @connection.assert_error_code
