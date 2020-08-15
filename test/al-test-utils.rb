@@ -181,7 +181,8 @@ module AlTestUtils
       populate_base
       populate_ou
       populate_user_class
-      populate_group_classes
+      populate_group_class
+      populate_group_of_urls_class
       populate_associations
     end
 
@@ -215,7 +216,7 @@ module AlTestUtils
     end
 
     def populate_ou
-      %w(Users Groups).each do |name|
+      %w(Users Groups GroupOfURLsSet).each do |name|
         make_ou(name)
       end
     end
@@ -238,17 +239,19 @@ module AlTestUtils
       assign_class_name(@user_class, "User")
     end
 
-    def populate_group_classes
+    def populate_group_class
       @group_class = Class.new(ActiveLdap::Base)
       @group_class.ldap_mapping :prefix => "ou=Groups",
                                 :scope => :sub,
                                 :classes => ["posixGroup"]
       assign_class_name(@group_class, "Group")
+    end
 
+    def populate_group_of_urls_class
       @group_of_urls_class = Class.new(ActiveLdap::Base)
-      @group_of_urls_class.ldap_mapping :prefix => "ou=Groups",
-                                         :scope => :sub,
-                                         :classes => ["groupOfURLs"]
+      @group_of_urls_class.ldap_mapping :prefix => "ou=GroupOfURLsSet",
+                                        :scope => :sub,
+                                        :classes => ["groupOfURLs"]
       assign_class_name(@group_of_urls_class, "GroupOfURLs")
     end
 
@@ -286,6 +289,7 @@ module AlTestUtils
       super
       @user_index = 0
       @group_index = 0
+      @group_of_urls_index = 0
       @temporary_uids = []
     end
 
@@ -373,20 +377,20 @@ module AlTestUtils
     end
 
     def make_temporary_group_of_urls(config={})
-      @group_index += 1
-      cn = config[:cn] || "temp-group-of-urls-#{@group_index}"
-      ensure_delete_group(cn) do
+      @group_of_urls_index += 1
+      cn = config[:cn] || "temp-group-of-urls-#{@group_of_urls_index}"
+      ensure_delete_group_of_urls(cn) do
         _wrap_assertion do
           assert(!@group_of_urls_class.exists?(cn))
           assert_raise(ActiveLdap::EntryNotFound) do
             @group_of_urls_class.find(cn)
           end
-          group = @group_of_urls_class.new(cn)
-          assert(group.new_entry?)
-          group.member_url = config[:member_url]
-          assert(group.save!)
-          assert(!group.new_entry?)
-          yield(@group_of_urls_class.find(group.cn))
+          group_of_urls = @group_of_urls_class.new(cn)
+          assert(group_of_urls.new_entry?)
+          group_of_urls.member_url = config[:member_url]
+          assert(group_of_urls.save!)
+          assert(!group_of_urls.new_entry?)
+          yield(@group_of_urls_class.find(group_of_urls.cn))
         end
       end
     end
@@ -402,6 +406,11 @@ module AlTestUtils
       yield(cn)
     ensure
       @group_class.delete(cn) if @group_class.exists?(cn)
+    end
+
+    def ensure_delete_group_of_urls(cn)
+      yield(cn)
+    ensure
       @group_of_urls_class.delete(cn) if @group_of_urls_class.exists?(cn)
     end
 

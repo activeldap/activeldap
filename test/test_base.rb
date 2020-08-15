@@ -5,7 +5,36 @@ require 'al-test-utils'
 class TestBase < Test::Unit::TestCase
   include AlTestUtils
 
+  sub_test_case("follow_referrals") do
+    def test_default
+      make_temporary_user do |user1,|
+        make_temporary_user do |user2,|
+          member_url = ["ldap:///#{user1.base.to_s}??one?(objectClass=person)"]
+          make_temporary_group_of_urls(member_url: member_url) do |group_of_urls|
+            assert_equal([user1.dn, user2.dn],
+                         group_of_urls.attributes["member"])
+          end
+        end
+      end
+    end
+
+    def test_false
+      @group_of_urls_class.setup_connection(
+        current_configuration.merge(follow_referrals: false)
+      )
+      make_temporary_user do |user1,|
+        make_temporary_user do |user2,|
+          member_url = ["ldap:///#{user1.base.to_s}??one?(objectClass=person)"]
+          make_temporary_group_of_urls(member_url: member_url) do |group_of_urls|
+            assert_nil(group_of_urls.attributes["member"])
+          end
+        end
+      end
+    end
+  end
+
   priority :must
+  priority :normal
   def test_search_colon_value
     make_temporary_group(:cn => "temp:group") do |group|
       assert_equal("temp:group", group.cn)
@@ -13,7 +42,6 @@ class TestBase < Test::Unit::TestCase
     end
   end
 
-  priority :normal
   def test_lower_case_object_class
     fixture_file = fixture("lower_case_object_class_schema.rb")
     schema_entries = eval(File.read(fixture_file))
@@ -958,7 +986,8 @@ class TestBase < Test::Unit::TestCase
     ou_class.ldap_mapping(:dn_attribute => :ou,
                           :prefix => "",
                           :classes => ["top", "organizationalUnit"])
-    assert_equal(["ou=Groups,#{current_configuration['base']}",
+    assert_equal(["ou=GroupOfURLsSet,#{current_configuration['base']}",
+                  "ou=Groups,#{current_configuration['base']}",
                   "ou=Users,#{current_configuration['base']}"],
                  ou_class.find(:all).collect(&:dn).collect(&:to_s).sort)
   end
