@@ -11,7 +11,8 @@ RUN \
 RUN \
   apt update && \
   apt install -y -V \
-    ldap-utils && \
+    ldap-utils \
+    slapd && \
   apt clean && \
   rm -rf /var/lib/apt/lists/*
 
