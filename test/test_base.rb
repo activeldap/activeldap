@@ -19,6 +19,7 @@ class TestBase < Test::Unit::TestCase
     end
 
     def test_connection_false
+      omit_unless_jruby
       @group_of_urls_class.setup_connection(
         current_configuration.merge(follow_referrals: false)
       )
@@ -33,6 +34,7 @@ class TestBase < Test::Unit::TestCase
     end
 
     def test_connect_false
+      omit_unless_jruby
       connection = @group_of_urls_class.connection
       connection.disconnect!
       connection.connect(follow_referrals: false)
