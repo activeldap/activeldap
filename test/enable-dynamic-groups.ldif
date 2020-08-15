@@ -1,0 +1,22 @@
+# Your LDAP server needs to support dynamic list for test.
+# This is a LDIF file for OpenLDAP to do the configuration.
+# You can use this file by the following command line on Debian GNU/Linux
+# or Ubuntu:
+#
+#   % sudo -H ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/dyngroup.ldif
+#   % sudo -H ldapmodify -Y EXTERNAL -H ldapi:/// -f test/enable-dynamic-groups.ldif
+version: 1
+
+# Enable dynlist module
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: dynlist
+
+# Set up dynlist overlay
+dn: olcOverlay=dynlist,olcDatabase={1}mdb,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcDynamicList
+olcOverlay: dynlist
+olcDlAttrSet: groupOfURLs memberURL member
