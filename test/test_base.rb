@@ -18,10 +18,24 @@ class TestBase < Test::Unit::TestCase
       end
     end
 
-    def test_false
+    def test_connection_false
       @group_of_urls_class.setup_connection(
         current_configuration.merge(follow_referrals: false)
       )
+      make_temporary_user do |user1,|
+        make_temporary_user do |user2,|
+          member_url = ["ldap:///#{user1.base.to_s}??one?(objectClass=person)"]
+          make_temporary_group_of_urls(member_url: member_url) do |group_of_urls|
+            assert_nil(group_of_urls.attributes["member"])
+          end
+        end
+      end
+    end
+
+    def test_connect_false
+      connection = @group_of_urls_class.connection
+      connection.disconnect!
+      connection.connect(follow_referrals: false)
       make_temporary_user do |user1,|
         make_temporary_user do |user2,|
           member_url = ["ldap:///#{user1.base.to_s}??one?(objectClass=person)"]

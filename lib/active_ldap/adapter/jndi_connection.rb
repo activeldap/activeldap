@@ -205,7 +205,7 @@ module ActiveLdap
           'com.sun.jndi.ldap.connect.timeout' => (@timeout * 1000).to_i.to_s,
           'com.sun.jndi.ldap.read.timeout' => (@timeout * 1000).to_i.to_s,
           'java.naming.ldap.derefAliases' => 'never',
-          'java.naming.referral' => @follow_referrals ? 'follow' : 'ignore'
+          'java.naming.referral' => @follow_referrals ? 'follow' : 'ignore',
         }
         context = InitialLdapContext.new(HashTable.new(environment), nil)
         if @method == :start_tls
