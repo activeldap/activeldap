@@ -1,5 +1,24 @@
 # News
 
+## 6.0.3: 2020-08-17 {#release-6-0-3}
+
+### Improvements
+
+  * Added support for `save(validate: false)`.
+    [GitHub#180][Reported by Kevin McCormack]
+
+  * jndi: Added support for follow referrals.
+    [GitHub#182][Patch by Kevin McCormack]
+
+### Fixes
+
+  * Fixed a bug that sub base is ignored in DN specified by `new`.
+    [GitHub#185][Reported by Kevin McCormack]
+
+### Thanks
+
+  * Kevin McCormack
+
 ## 6.0.2: 2020-05-19 {#release-6-0-2}
 
 ### Improvements
