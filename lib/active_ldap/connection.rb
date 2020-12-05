@@ -6,7 +6,7 @@ module ActiveLdap
 
     module ClassMethods
       @@active_connections = {}
-      @@allow_concurrency = false
+      @@allow_concurrency = true
 
       def thread_safe_active_connections
         @@active_connections[Thread.current.object_id] ||= {}
