@@ -60,6 +60,15 @@ to skip `active_ldap prefix` in `config/application.rb`:
 config.app_generators.orm :active_ldap
 ```
 
+Concurrency is now enabled by default to ensure thread safe searches and modifications. This can
+still be disabled if desired.
+
+```ruby
+# config/initializers/active_ldap.rb
+
+ActiveLdap::Base.allow_concurrency = false
+```
+
 ## Model
 
 You can generate a User model that represents entries under
