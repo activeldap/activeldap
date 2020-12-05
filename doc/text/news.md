@@ -1,5 +1,16 @@
 # News
 
+## 6.0.4: 2020-12-06 {#release-6-0-4}
+
+### Improvements
+
+  * Enabled concurrency by default.
+    [GitHub#188][Reported by Kevin McCormack]
+
+### Thanks
+
+  * Kevin McCormack
+
 ## 6.0.3: 2020-08-17 {#release-6-0-3}
 
 ### Improvements
