@@ -1,5 +1,16 @@
 # News
 
+## 6.1.0: 2020-12-24 {#release-6-1-0}
+
+### Improvements
+
+  * Changed to use `:use_paged_results` option value by default.
+    [GitHub#189][Reported by Kevin McCormack]
+
+### Thanks
+
+  * Kevin McCormack
+
 ## 6.0.4: 2020-12-06 {#release-6-0-4}
 
 ### Improvements
