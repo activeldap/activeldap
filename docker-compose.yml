@@ -86,6 +86,18 @@ services:
     volumes:
       - .:/source:delegated
 
+  ruby-3.0-activemodel-6:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: ruby:3.0
+        GEMFILE: Gemfile.activemodel6
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
   jruby-9-activemodel-5:
     build:
       context: .
