@@ -59,6 +59,32 @@ jobs:
           - activemodel: "6"
             adapter: "net-ldap"
             ruby: "3.0"
+
+          # Active Model 7
+          - activemodel: "7"
+            adapter: "ldap"
+            ruby: "2.7"
+          - activemodel: "7"
+            adapter: "net-ldap"
+            ruby: "2.7"
+          - activemodel: "7"
+            adapter: "ldap"
+            ruby: "3.0"
+          - activemodel: "7"
+            adapter: "net-ldap"
+            ruby: "3.0"
+          - activemodel: "7"
+            adapter: "ldap"
+            ruby: "3.1"
+          - activemodel: "7"
+            adapter: "net-ldap"
+            ruby: "3.1"
+          - activemodel: "7"
+            adapter: "ldap"
+            ruby: "3.2"
+          - activemodel: "7"
+            adapter: "net-ldap"
+            ruby: "3.2"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
