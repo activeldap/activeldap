@@ -17,7 +17,9 @@ RUN \
   apt clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN echo "TLS_REQCERT never" > /etc/ldap/ldap.conf
+RUN \
+  mkdir -p /etc/ldap && \
+  echo "TLS_REQCERT never" > /etc/ldap/ldap.conf
 
 RUN mkdir -p /build
 COPY dockerfiles/config.yaml /build/
