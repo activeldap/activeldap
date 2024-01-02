@@ -30,10 +30,10 @@ module ActiveLdap
       inspected_info = info.inspect
 
       if odd?
-        name = color(name, CYAN, true)
-        inspected_info = color(inspected_info, nil, true)
+        name = color(name, CYAN, bold: true)
+        inspected_info = color(inspected_info, nil, bold: true)
       else
-        name = color(name, MAGENTA, true)
+        name = color(name, MAGENTA, bold: true)
       end
 
       debug "  #{name} #{inspected_info}"
