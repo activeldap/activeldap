@@ -1038,10 +1038,10 @@ module ActiveLdap
         elsif value.is_a?(Date) || value.is_a?(Time)
           if value.respond_to?(:to_fs)
             # Support for Rails >= 7.0
-            "#{value.to_fs(:db)}"
+            value.to_fs(:db)
           else
             # Support for Rails < 7.0
-            "#{value.to_s(:db)}"
+            value.to_s(:db)
           end
         else
           value.inspect
