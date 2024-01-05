@@ -1036,7 +1036,13 @@ module ActiveLdap
         if value.is_a?(String) and value.length > 50
           "#{value[0, 50]}...".inspect
         elsif value.is_a?(Date) || value.is_a?(Time)
-          "#{value.to_s(:db)}"
+          if value.respond_to?(:to_fs)
+            # Support for Rails >= 7.0
+            value.to_fs(:db)
+          else
+            # Support for Rails < 7.0
+            value.to_s(:db)
+          end
         else
           value.inspect
         end
