@@ -29,11 +29,19 @@ module ActiveLdap
       name = 'LDAP: %s (%.1fms)' % [label, event.duration]
       inspected_info = info.inspect
 
+      formatting_options = 
+        if ActiveSupport.version >= Gem::Version.new('7.1.0')
+          { bold: true }
+        else
+          # Fallback for ActiveSupport < 7.1.0
+          true
+        end
+
       if odd?
-        name = color(name, CYAN, true)
-        inspected_info = color(inspected_info, nil, true)
+        name = color(name, CYAN, formatting_options)
+        inspected_info = color(inspected_info, nil, formatting_options)
       else
-        name = color(name, MAGENTA, true)
+        name = color(name, MAGENTA, formatting_options)
       end
 
       debug "  #{name} #{inspected_info}"
