@@ -7,8 +7,17 @@ module ActiveLdap
       target_names = entry_attribute.all_names
       target_names -= ['objectClass', 'objectClass'.underscore]
       super + target_names.uniq.collect do |attr|
-        self.class.attribute_method_matchers.collect do |matcher|
-          :"#{matcher.prefix}#{attr}#{matcher.suffix}"
+        method_patterns = 
+          if self.class.respond_to?(:attribute_method_patterns)
+            # Support for ActiveModel >= 7.1.0
+            self.class.attribute_method_patterns
+          else
+            # Support for ActiveModel < 7.1.0
+            self.class.attribute_method_matchers
+          end
+        
+        method_patterns.collect do |pattern|
+          pattern.method_name(attr).to_sym
         end
       end.flatten
     end
