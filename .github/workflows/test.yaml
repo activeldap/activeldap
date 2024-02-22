@@ -102,7 +102,6 @@ jobs:
         jruby:
           - 9
         activemodel:
-          - "5"
           - "6"
     runs-on: ubuntu-latest
     steps:
