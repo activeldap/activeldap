@@ -158,18 +158,6 @@ services:
     volumes:
       - .:/source:delegated
 
-  jruby-9-activemodel-5:
-    build:
-      context: .
-      dockerfile: dockerfiles/ruby.dockerfile
-      args:
-        FROM: jruby:9
-        GEMFILE: Gemfile.activemodel5
-    depends_on:
-      - openldap-prepare
-    volumes:
-      - .:/source:delegated
-
   jruby-9-activemodel-6:
     build:
       context: .
@@ -177,6 +165,18 @@ services:
       args:
         FROM: jruby:9
         GEMFILE: Gemfile.activemodel6
+    depends_on:
+      - openldap-prepare
+    volumes:
+      - .:/source:delegated
+
+  jruby-9-activemodel-7:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        FROM: jruby:9
+        GEMFILE: Gemfile.activemodel7
     depends_on:
       - openldap-prepare
     volumes:
