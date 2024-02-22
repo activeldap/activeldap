@@ -7,7 +7,7 @@ gemspec
 group :test do
   gem "net-ldap"
   platforms :mri do
-    gem "ruby-ldap"
+    gem "ruby-ldap" if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.2.0")
   end
   platforms :jruby do
     gem "jruby-openssl"
