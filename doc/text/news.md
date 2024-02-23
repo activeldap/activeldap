@@ -1,5 +1,19 @@
 # News
 
+## 7.0.0: 2024-02-23 {#release-6-1-1}
+
+### Improvements
+
+  * Added support for Active Model 7.
+    * GH-193
+    * GH-194
+    * GH-195
+    * Patch by J-Verz.
+
+### Thanks
+
+  * J-Verz
+
 ## 6.1.0: 2020-12-24 {#release-6-1-0}
 
 ### Improvements
