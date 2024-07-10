@@ -78,7 +78,7 @@ module ActiveLdap
             filter: search_options[:filter],
             attributes: search_options[:attributes],
             size: search_options[:limit],
-            paged_searcheds_supported: search_options[:paged_results_supported],
+            paged_searches_supported: search_options[:use_paged_results],
           }
           execute(:search, info, args) do |entry|
             attributes = {}
