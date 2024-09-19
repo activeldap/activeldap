@@ -14,26 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Active Model 5
-          - activemodel: "5"
-            adapter: "ldap"
-            ruby: "2.5"
-          - activemodel: "5"
-            adapter: "net-ldap"
-            ruby: "2.5"
-          - activemodel: "5"
-            adapter: "ldap"
-            ruby: "2.6"
-          - activemodel: "5"
-            adapter: "net-ldap"
-            ruby: "2.6"
-          - activemodel: "5"
-            adapter: "ldap"
-            ruby: "2.7"
-          - activemodel: "5"
-            adapter: "net-ldap"
-            ruby: "2.7"
-
           # Active Model 6
           - activemodel: "6"
             adapter: "ldap"
