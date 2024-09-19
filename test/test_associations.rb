@@ -134,10 +134,9 @@ EOX
   end
 
   def test_belongs_to_foreign_key_before_1_1_0
-    ActiveSupport::Deprecation.silence do
-      @group_class.belongs_to :related_users, :many => "seeAlso",
-                              :foreign_key => "dn"
-    end
+    # This reports a warning
+    @group_class.belongs_to :related_users, :many => "seeAlso",
+                            :foreign_key => "dn"
     @group_class.set_associated_class(:related_users, @user_class)
     make_temporary_user do |user,|
       make_temporary_group do |group|
