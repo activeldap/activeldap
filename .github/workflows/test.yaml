@@ -14,32 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Active Model 6
-          - activemodel: "6"
-            adapter: "ldap"
-            ruby: "2.5"
-          - activemodel: "6"
-            adapter: "net-ldap"
-            ruby: "2.5"
-          - activemodel: "6"
-            adapter: "ldap"
-            ruby: "2.6"
-          - activemodel: "6"
-            adapter: "net-ldap"
-            ruby: "2.6"
-          - activemodel: "6"
-            adapter: "ldap"
-            ruby: "2.7"
-          - activemodel: "6"
-            adapter: "net-ldap"
-            ruby: "2.7"
-          - activemodel: "6"
-            adapter: "ldap"
-            ruby: "3.0"
-          - activemodel: "6"
-            adapter: "net-ldap"
-            ruby: "3.0"
-
           # Active Model 7
           - activemodel: "7"
             adapter: "ldap"
@@ -88,7 +62,6 @@ jobs:
         jruby:
           - 9
         activemodel:
-          - "6"
           - "7"
     runs-on: ubuntu-latest
     steps:
