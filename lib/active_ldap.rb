@@ -3,6 +3,8 @@ require "active_support/core_ext"
 
 require "active_ldap/version"
 
+require "active_ldap/deprecator"
+
 module ActiveLdap
   autoload :Command, "active_ldap/command"
 end

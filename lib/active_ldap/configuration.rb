@@ -137,7 +137,7 @@ module ActiveLdap
             if key == :ldap_scope
               message = _(":ldap_scope configuration option is deprecated. " \
                           "Use :scope instead.")
-              ActiveSupport::Deprecation.warn(message)
+              ActiveLdap.deprecator.warn(message)
             end
             target.scope = value
             configuration[:scope] = value

@@ -134,7 +134,7 @@ EOX
   end
 
   def test_belongs_to_foreign_key_before_1_1_0
-    ActiveSupport::Deprecation.silence do
+    ActiveLdap.deprecator.silence do
       @group_class.belongs_to :related_users, :many => "seeAlso",
                               :foreign_key => "dn"
     end

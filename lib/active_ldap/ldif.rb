@@ -559,7 +559,7 @@ module ActiveLdap
         _consumed_source = consumed_source
         return 1 if _consumed_source.empty?
 
-        n = Compatible.string_to_lines(_consumed_source).size
+        n = _consumed_source.lines.size
         n += 1 if _consumed_source[-1, 1] == "\n"
         n
       end

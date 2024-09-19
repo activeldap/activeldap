@@ -28,17 +28,5 @@ module ActiveLdap
         object
       end
     end
-
-    if "".respond_to?(:lines)
-      def string_to_lines(string)
-        string.lines.to_a
-      end
-    else
-      def string_to_lines(string)
-        ary = []
-        string.each_line{|l| ary << l}
-        ary
-      end
-    end
   end
 end
