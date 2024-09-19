@@ -26,7 +26,7 @@ module ActiveLdap
       def method_added(meth)
         super
         if CALLBACKS.include?(meth.to_sym)
-          ActiveSupport::Deprecation.warn("Base##{meth} has been deprecated, please use Base.#{meth} :method instead", caller[0,1])
+          ActiveLdap.deprecator.warn("Base##{meth} has been deprecated, please use Base.#{meth} :method instead", caller[0,1])
           send(meth.to_sym, meth.to_sym)
         end
       end
