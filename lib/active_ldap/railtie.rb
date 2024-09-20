@@ -13,11 +13,7 @@ module ActiveLdap
     initializer "active_ldap.setup_connection" do
       ldap_configuration_file = Rails.root.join('config', 'ldap.yml')
       if File.exist?(ldap_configuration_file)
-        erb = ERB.new(IO.read(ldap_configuration_file))
-        configurations = YAML.respond_to?(:unsafe_load) ?
-                          YAML.unsafe_load(erb.result) :
-                          YAML.load(erb.result)
-        ActiveLdap::Base.configurations = configurations
+        ActiveLdap::Base.configurations = ActiveSupport::ConfigurationFile.parse(ldap_configuration_file)
         ActiveLdap::Base.setup_connection
       else
         ActiveLdap::Base.class_eval do
