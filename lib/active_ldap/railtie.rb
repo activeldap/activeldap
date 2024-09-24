@@ -7,7 +7,7 @@ Locale.init(:driver => :cgi)
 module ActiveLdap
   class Railtie < Rails::Railtie
     initializer "active_ldap.deprecator", before: :load_environment_config do |app|
-      app.deprecators[:active_ldap] = ActiveLdap.deprecator
+      app.deprecators[:active_ldap] = ActiveLdap.deprecator if defined?(app.deprecators)
     end
 
     initializer "active_ldap.setup_connection" do
