@@ -1,6 +1,32 @@
 # News
 
-## 7.0.0: 2024-02-23 {#release-6-1-1}
+## 7.2.0: 2024-09-24 {#release-7-2-0}
+
+### Improvements
+
+  * Added support for Active Model 7.2.
+
+  * Dropped support for Active Model 5.
+
+  * Dropped support for Active Model 6.
+
+  * Added support for Psych 4.
+    * GH-198
+    * Patch by Carlos Palhares.
+
+### Fixes
+
+  * net-ldap: Fixed paged search
+    * GH-197
+    * Patch by Patrick Marchi
+
+### Thanks
+
+  * Patrick Marchi
+
+  * Carlos Palhares
+
+## 7.0.0: 2024-02-23 {#release-7-0-0}
 
 ### Improvements
 
