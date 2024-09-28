@@ -3,7 +3,7 @@
 A ruby library for object-oriented LDAP interface.
 
 * Copyright (C) 2004-2006 Will Drewry <will@alum.bu.edu>
-* Copyright (C) 2006-2020 Sutou Kouhei <kou@clear-code.com>
+* Copyright (C) 2006-2024 Sutou Kouhei <kou@clear-code.com>
 
 ## Description
 
