@@ -1,5 +1,17 @@
 # News
 
+## 7.2.1: 2024-10-02 {#release-7-2-1}
+
+### Fixes
+
+  * Fixed a bug that ActiveLdap doesn't work with Rails 7.0.
+    * GH-200
+    * Patch by Carlos Palhares
+
+### Thanks
+
+  * Carlos Palhares
+
 ## 7.2.0: 2024-09-24 {#release-7-2-0}
 
 ### Improvements
