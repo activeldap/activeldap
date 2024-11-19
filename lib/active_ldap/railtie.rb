@@ -37,5 +37,10 @@ module ActiveLdap
         include ActiveLdap::Railties::ControllerRuntime
       end
     end
+
+    initializer "active_ldap.deprecator", :before => "active_ldap.setup_connection" do |app|
+      require "active_ldap/deprecator"
+      app.deprecators[:active_ldap] = ActiveLdap.deprecator
+    end
   end
 end
