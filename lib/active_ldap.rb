@@ -43,6 +43,8 @@ require 'active_ldap/helper'
 require 'active_ldap/validations'
 require 'active_ldap/callbacks'
 
+require 'active_ldap/deprecator'
+
 
 ActiveLdap::Base.class_eval do
   include ActiveLdap::Persistence
