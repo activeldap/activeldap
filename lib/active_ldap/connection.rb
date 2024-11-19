@@ -97,7 +97,7 @@ module ActiveLdap
         if config.has_key?(:ldap_scope)
           message = _(":ldap_scope connection option is deprecated. " \
                       "Use :scope instead.")
-          ActiveSupport::Deprecation.warn(message)
+          ActiveLdap.deprecator.warn(message)
           config[:scope] ||= config.delete(:ldap_scope)
         end
         config = remove_connection_related_configuration(config)
@@ -156,7 +156,7 @@ module ActiveLdap
           _("ActiveLdap::Connection.establish_connection has been deprecated " \
             "since 1.1.0. " \
             "Please use ActiveLdap::Connection.setup_connection instead.")
-        ActiveSupport::Deprecation.warn(message)
+        ActiveLdap.deprecator.warn(message)
         setup_connection(config)
       end
 
@@ -216,7 +216,7 @@ module ActiveLdap
         _("ActiveLdap::Connection#establish_connection has been deprecated " \
           "since 1.1.0. " \
           "Please use ActiveLdap::Connection#setup_connection instead.")
-      ActiveSupport::Deprecation.warn(message)
+      ActiveLdap.deprecator.warn(message)
       setup_connection(config)
     end
 

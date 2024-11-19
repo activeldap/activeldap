@@ -65,7 +65,7 @@ module ActiveLdap
         if options.has_key?(:ldap_scope)
           message = _(":ldap_scope search option is deprecated. " \
                       "Use :scope instead.")
-          ActiveSupport::Deprecation.warn(message)
+          ActiveLdap.deprecator.warn(message)
           options[:scope] ||= options[:ldap_scope]
         end
         search_options = {

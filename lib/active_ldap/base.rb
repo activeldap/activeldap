@@ -55,7 +55,7 @@ module ActiveLdap
           _("ActiveLdap::ConnectionNotEstablished has been deprecated " \
             "since 1.1.0. " \
             "Please use ActiveLdap::ConnectionNotSetup instead.")
-        ActiveSupport::Deprecation.warn(message)
+        ActiveLdap.deprecator.warn(message)
         const_set("ConnectionNotEstablished", ConnectionNotSetup)
         ConnectionNotEstablished
       else
@@ -391,7 +391,7 @@ module ActiveLdap
           _("ActiveLdap::Base.establish_connection has been deprecated " \
             "since 1.1.0. " \
             "Please use ActiveLdap::Base.setup_connection instead.")
-        ActiveSupport::Deprecation.warn(message)
+        ActiveLdap.deprecator.warn(message)
         setup_connection(config)
       end
 
