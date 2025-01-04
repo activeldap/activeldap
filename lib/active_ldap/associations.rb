@@ -38,8 +38,6 @@ module ActiveLdap
       #  belongs_to :groups, :class_name => "Group",
       #             :many => "memberUid" # Group#memberUid
       #             # :primary_key => "uid" # User#uid
-      #             ## deprecated since 1.1.0. Use :primary_key instead.
-      #             ## :foreign_key => "uid" # User#uid
       #             # dn attribute value is used by default
       #  belongs_to :primary_group, :class_name => "Group",
       #             :foreign_key => "gidNumber", # User#gidNumber
