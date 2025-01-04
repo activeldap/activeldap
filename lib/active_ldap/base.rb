@@ -384,17 +384,6 @@ module ActiveLdap
         nil
       end
 
-      # establish_connection is deprecated since 1.1.0. Please use
-      # setup_connection() instead.
-      def establish_connection(config=nil)
-        message =
-          _("ActiveLdap::Base.establish_connection has been deprecated " \
-            "since 1.1.0. " \
-            "Please use ActiveLdap::Base.setup_connection instead.")
-        ActiveLdap.deprecator.warn(message)
-        setup_connection(config)
-      end
-
       def create(attributes=nil, &block)
         if attributes.is_a?(Array)
           attributes.collect {|attrs| create(attrs, &block)}

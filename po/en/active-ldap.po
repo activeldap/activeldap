@@ -3801,12 +3801,6 @@ msgstr ""
 msgid "not implemented: %s"
 msgstr ""
 
-#: lib/active_ldap/base.rb:382
-msgid ""
-"ActiveLdap::Base.establish_connection has been deprecated since 1.1.0. "
-"Please use ActiveLdap::Base.setup_connection instead."
-msgstr ""
-
 #: lib/active_ldap/base.rb:463
 msgid "scope '%s' must be a Symbol"
 msgstr ""
@@ -3855,12 +3849,6 @@ msgstr ""
 
 #: lib/active_ldap/connection.rb:98
 msgid ":ldap_scope connection option is deprecated. Use :scope instead."
-msgstr ""
-
-#: lib/active_ldap/connection.rb:156
-msgid ""
-"ActiveLdap::Connection.establish_connection has been deprecated since 1.1.0. "
-"Please use ActiveLdap::Connection.setup_connection instead."
 msgstr ""
 
 #: lib/active_ldap/connection.rb:236
