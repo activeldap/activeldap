@@ -237,7 +237,7 @@ group 'develop'. In order to remedy that, we can use belongs_to
 ```text
 irb> class User < ActiveLdap::Base
 irb*   ldap_mapping :dn_attribute => 'uid', :prefix => 'ou=People', :classes => ['top','account']
-irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid', :foreign_key => 'uid'
+irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid', :primary_key => 'uid'
 irb* end
 ```
 
@@ -278,7 +278,7 @@ class User < ActiveLdap::Base
                :class_name => 'Group', :primary_key => 'gidNumber'
 
   # Associate with all belonged groups
-  belongs_to :groups,  :foreign_key => 'uid',
+  belongs_to :groups,  :primary_key => 'uid',
                :class_name => 'Group', :many => 'memberUid',
 end
 ```
@@ -301,11 +301,11 @@ you've already included. If your class is inside of a module,
 be sure to put the whole name, e.g.
 `:class_name => "MyLdapModule::Group"`.
 
-`:many` and `:primary_key` are similar. Both of them specifies attribute name of related object specified by `:foreign_key`. Those values are attribute name that can be used by object of class specified by `:class_name`.
+`:many` and `:foreign_key` are similar. Both of them specifies attribute name of related object specified by `:primary_key`. Those values are attribute name that can be used by object of class specified by `:class_name`.
 
 Relation is resolved by searching entries of `:class_name` class with `:foreign_key` attribute value. Search target attribute for it is `:primary_key` or `:many`. primary_group method in the above example searches Group objects with User object's gidNumber value as Group object's gidNumber value. Matched Group objects are belonged objects.
 
-`:parimary_key` is used for an object just belongs to an object. The first matched object is treated as beloned object.
+`:foreign_key` is used for an object just belongs to an object. The first matched object is treated as belonged object.
 
 `:many` is used for an object belongs to many objects. All of matched objects are treated as belonged objects.
 
