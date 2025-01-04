@@ -3590,14 +3590,6 @@ msgstr ""
 "1.1.0からbelongs_to(:many)の:foreign_keyオプションは非推奨になりました。代わ"
 "りに:primary_keyを使ってください。"
 
-#: lib/active_ldap/associations.rb:136
-msgid ""
-":primary_key and :foreign_key has_many options are inverted their mean since "
-"1.1.0. Please invert them."
-msgstr ""
-"1.1.0からhas_manyの:primary_keyと:foreign_keyオプションの意味が反対になりまし"
-"た。オプションの値を入れかえてください。"
-
 #: lib/active_ldap/ldif.rb:396
 msgid "version spec is missing"
 msgstr "バージョン指定がありません"
