@@ -22,16 +22,6 @@ module ActiveLdap
       define_model_callbacks :save, :create, :update, :destroy
     end
 
-    module ClassMethods
-      def method_added(meth)
-        super
-        if CALLBACKS.include?(meth.to_sym)
-          ActiveLdap.deprecator.warn("Base##{meth} has been deprecated, please use Base.#{meth} :method instead", caller[0,1])
-          send(meth.to_sym, meth.to_sym)
-        end
-      end
-    end
-
     module CallbackedInstantiatable
       def instantiate(record)
         object = super(record)
