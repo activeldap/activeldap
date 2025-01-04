@@ -63,13 +63,6 @@ module ActiveLdap
         }
         if opts[:many]
           association_class = Association::BelongsToMany
-          foreign_key_name = opts[:foreign_key_name]
-          if foreign_key_name
-            message = _(":foreign_key belongs_to(:many) option is " \
-                        "deprecated since 1.1.0. Use :primary_key instead.")
-            ActiveLdap.deprecator.warn(message)
-            opts[:primary_key_name] ||= foreign_key_name
-          end
           opts[:primary_key_name] ||= dn_attribute
         else
           association_class = Association::BelongsTo

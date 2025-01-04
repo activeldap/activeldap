@@ -3569,12 +3569,6 @@ msgstr ""
 msgid "Failed to delete LDAP entry: <%s>: %s"
 msgstr ""
 
-#: lib/active_ldap/associations.rb:68
-msgid ""
-":foreign_key belongs_to(:many) option is deprecated since 1.1.0. Use :"
-"primary_key instead."
-msgstr ""
-
 #: lib/active_ldap/ldif.rb:396
 msgid "version spec is missing"
 msgstr ""

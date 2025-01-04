@@ -3582,14 +3582,6 @@ msgstr "すべての%sを見つけられませんでした: DN (%s)"
 msgid "Failed to delete LDAP entry: <%s>: %s"
 msgstr "LDAPエントリの削除に失敗しました: <%s>: %s"
 
-#: lib/active_ldap/associations.rb:68
-msgid ""
-":foreign_key belongs_to(:many) option is deprecated since 1.1.0. Use :"
-"primary_key instead."
-msgstr ""
-"1.1.0からbelongs_to(:many)の:foreign_keyオプションは非推奨になりました。代わ"
-"りに:primary_keyを使ってください。"
-
 #: lib/active_ldap/ldif.rb:396
 msgid "version spec is missing"
 msgstr "バージョン指定がありません"
