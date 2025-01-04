@@ -3537,10 +3537,6 @@ msgstr ""
 msgid "parent must be an entry or parent DN: %s"
 msgstr ""
 
-#: lib/active_ldap/operations.rb:49
-msgid ":ldap_scope search option is deprecated. Use :scope instead."
-msgstr ""
-
 #: lib/active_ldap/operations.rb:258
 msgid "Invalid order: %s"
 msgstr ""
@@ -3835,10 +3831,6 @@ msgstr ""
 msgid "Attribute %s: Hash must have one key-value pair only: %s"
 msgstr ""
 
-#: lib/active_ldap/connection.rb:98
-msgid ":ldap_scope connection option is deprecated. Use :scope instead."
-msgstr ""
-
 #: lib/active_ldap/connection.rb:236
 msgid "since 1.1.0. "
 msgstr ""
@@ -3939,10 +3931,6 @@ msgstr ""
 
 #: lib/active_ldap/configuration.rb:70
 msgid "%s connection is not configured"
-msgstr ""
-
-#: lib/active_ldap/configuration.rb:110
-msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
 msgstr ""
 
 #: lib/active_ldap/configuration.rb:131

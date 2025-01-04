@@ -133,14 +133,6 @@ module ActiveLdap
           when :base
             # Scrub before inserting
             target.base = value.gsub(/['}{#]/, '')
-          when :scope, :ldap_scope
-            if key == :ldap_scope
-              message = _(":ldap_scope configuration option is deprecated. " \
-                          "Use :scope instead.")
-              ActiveLdap.deprecator.warn(message)
-            end
-            target.scope = value
-            configuration[:scope] = value
           else
             configuration[key] = value
           end
