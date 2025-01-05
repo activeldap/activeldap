@@ -3549,11 +3549,6 @@ msgstr "LDAPサーバへの再接続を諦めました。"
 msgid "parent must be an entry or parent DN: %s"
 msgstr "親はエントリかDNでなければいけません: %s"
 
-#: lib/active_ldap/operations.rb:49
-msgid ":ldap_scope search option is deprecated. Use :scope instead."
-msgstr ""
-":ldap_search検索オプションは廃止予定です。代わりに:scopeを使ってください。"
-
 #: lib/active_ldap/operations.rb:258
 msgid "Invalid order: %s"
 msgstr "不正な順序です: %s"
@@ -3854,11 +3849,6 @@ msgstr "属性%sは単一の値しか持てません: %s"
 msgid "Attribute %s: Hash must have one key-value pair only: %s"
 msgstr "属性 %s: ハッシュはひとつのキー・値のペアしか持ってはいけません: %s"
 
-#: lib/active_ldap/connection.rb:98
-msgid ":ldap_scope connection option is deprecated. Use :scope instead."
-msgstr ""
-":ldap_scope接続オプションは廃止予定です。代わりに:scopeを使ってください。"
-
 #: lib/active_ldap/connection.rb:236
 msgid "since 1.1.0. "
 msgstr "1.1.0から。"
@@ -3960,11 +3950,6 @@ msgstr "'%{file}'を無視します。まず依存関係を解決してくださ
 #: lib/active_ldap/configuration.rb:70
 msgid "%s connection is not configured"
 msgstr "%sの接続は設定されていません"
-
-#: lib/active_ldap/configuration.rb:110
-msgid ":ldap_scope configuration option is deprecated. Use :scope instead."
-msgstr ""
-":ldap_scope設定オプションは廃止予定です。代わりに:scopeを使ってください。"
 
 #: lib/active_ldap/configuration.rb:131
 msgid "invalid URI: %s"
