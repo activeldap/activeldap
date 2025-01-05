@@ -133,23 +133,6 @@ EOX
     end
   end
 
-  def test_belongs_to_foreign_key_before_1_1_0
-    ActiveLdap.deprecator.silence do
-      @group_class.belongs_to :related_users, :many => "seeAlso",
-                              :foreign_key => "dn"
-    end
-    @group_class.set_associated_class(:related_users, @user_class)
-    make_temporary_user do |user,|
-      make_temporary_group do |group|
-        user.see_also = group.dn
-        user.save!
-
-        group = @group_class.find(group.id)
-        assert_equal([user.dn], group.related_users.collect(&:dn))
-      end
-    end
-  end
-
   def test_has_many_wrap_with_nonexistent_entry
     @user_class.has_many :references, :wrap => "seeAlso", :primary_key => "dn"
     @user_class.set_associated_class(:references, @group_class)
