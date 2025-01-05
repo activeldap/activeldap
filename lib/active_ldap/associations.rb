@@ -103,10 +103,6 @@ module ActiveLdap
       #   has_many :primary_members, :class_name => "User",
       #            :primary_key => "gidNumber", # Group#gidNumber
       #            :foreign_key => "gidNumber"  # User#gidNumber
-      #            ## deprecated since 1.1.0. Those options
-      #            ## are inverted.
-      #            # :primary_key => "gidNumber", # User#gidNumber
-      #            # :foreign_key => "gidNumber"  # Group#gidNumber
       #   has_many :members, :class_name => "User",
       #            :wrap => "memberUid" # Group#memberUid
       def has_many(association_id, options = {})
@@ -130,15 +126,6 @@ module ActiveLdap
           association_class = Association::HasMany
           primary_key_name = opts[:primary_key_name]
           foreign_key_name = opts[:foreign_key_name]
-          if primary_key_name != foreign_key_name and
-              primary_key_name != "dn" and
-              !new.have_attribute?(primary_key_name)
-            message = _(":primary_key and :foreign_key has_many options are " \
-                        "inverted their mean since 1.1.0. Please invert them.")
-            ActiveLdap.deprecator.warn(message)
-            opts[:foreign_key_name] = primary_key_name
-            opts[:primary_key_name] = foreign_key_name
-          end
         end
 
         association_accessor(association_id) do |target|

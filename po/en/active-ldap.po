@@ -3575,12 +3575,6 @@ msgid ""
 "primary_key instead."
 msgstr ""
 
-#: lib/active_ldap/associations.rb:136
-msgid ""
-":primary_key and :foreign_key has_many options are inverted their mean since "
-"1.1.0. Please invert them."
-msgstr ""
-
 #: lib/active_ldap/ldif.rb:396
 msgid "version spec is missing"
 msgstr ""
