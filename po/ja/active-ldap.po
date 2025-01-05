@@ -3804,14 +3804,6 @@ msgstr "%sは未知の属性です"
 msgid "not implemented: %s"
 msgstr "未実装です: %s"
 
-#: lib/active_ldap/base.rb:382
-msgid ""
-"ActiveLdap::Base.establish_connection has been deprecated since 1.1.0. "
-"Please use ActiveLdap::Base.setup_connection instead."
-msgstr ""
-"1.1.0からActiveLdap::Base.establish_connectionは非推奨になりました。代わりに"
-"ActiveLdap::Base.setup_connectionを使ってください。"
-
 #: lib/active_ldap/base.rb:463
 msgid "scope '%s' must be a Symbol"
 msgstr "スコープ'%s'はシンボルでなければいけません"
@@ -3866,14 +3858,6 @@ msgstr "属性 %s: ハッシュはひとつのキー・値のペアしか持っ�
 msgid ":ldap_scope connection option is deprecated. Use :scope instead."
 msgstr ""
 ":ldap_scope接続オプションは廃止予定です。代わりに:scopeを使ってください。"
-
-#: lib/active_ldap/connection.rb:156
-msgid ""
-"ActiveLdap::Connection.establish_connection has been deprecated since 1.1.0. "
-"Please use ActiveLdap::Connection.setup_connection instead."
-msgstr ""
-"1.1.0からActiveLdap::Connection.establish_connectionは非推奨になりました。代"
-"わりにActiveLdap::Connection.setup_connectionを使ってください。"
 
 #: lib/active_ldap/connection.rb:236
 msgid "since 1.1.0. "

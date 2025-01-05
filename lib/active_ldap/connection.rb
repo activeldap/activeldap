@@ -151,15 +151,6 @@ module ActiveLdap
         define_configuration(key, merge_configuration(config))
       end
 
-      def establish_connection(config=nil)
-        message =
-          _("ActiveLdap::Connection.establish_connection has been deprecated " \
-            "since 1.1.0. " \
-            "Please use ActiveLdap::Connection.setup_connection instead.")
-        ActiveLdap.deprecator.warn(message)
-        setup_connection(config)
-      end
-
       # Return the schema object
       def schema
         connection.schema
@@ -209,15 +200,6 @@ module ActiveLdap
 
       remove_connection
       self.class.define_configuration(dn, config)
-    end
-
-    def establish_connection(config=nil)
-      message =
-        _("ActiveLdap::Connection#establish_connection has been deprecated " \
-          "since 1.1.0. " \
-          "Please use ActiveLdap::Connection#setup_connection instead.")
-      ActiveLdap.deprecator.warn(message)
-      setup_connection(config)
     end
 
     def remove_connection
