@@ -3772,14 +3772,6 @@ msgstr "このメッセージを表示します"
 msgid "Show version"
 msgstr "バージョンを表示します"
 
-#: lib/active_ldap/base.rb:53
-msgid ""
-"ActiveLdap::ConnectionNotEstablished has been deprecated since 1.1.0. Please "
-"use ActiveLdap::ConnectionNotSetup instead."
-msgstr ""
-"1.1.0からActiveLdap::ConnectionNotEstablishedは非推奨になりました。代わりに"
-"ActiveLdap::ConnectionNotSetupを使ってください。"
-
 #: lib/active_ldap/base.rb:131
 msgid "invalid distinguished name (DN) to parse: %s"
 msgstr "構文解析できない不正な識別名(DN)です: %s"

@@ -48,20 +48,6 @@ module ActiveLdap
 
   class << self
     include GetTextSupport
-    def const_missing(id)
-      case id
-      when :ConnectionNotEstablished
-        message =
-          _("ActiveLdap::ConnectionNotEstablished has been deprecated " \
-            "since 1.1.0. " \
-            "Please use ActiveLdap::ConnectionNotSetup instead.")
-        ActiveLdap.deprecator.warn(message)
-        const_set("ConnectionNotEstablished", ConnectionNotSetup)
-        ConnectionNotEstablished
-      else
-        super
-      end
-    end
   end
 
   class Error < StandardError

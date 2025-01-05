@@ -3757,12 +3757,6 @@ msgstr ""
 msgid "Show version"
 msgstr ""
 
-#: lib/active_ldap/base.rb:53
-msgid ""
-"ActiveLdap::ConnectionNotEstablished has been deprecated since 1.1.0. Please "
-"use ActiveLdap::ConnectionNotSetup instead."
-msgstr ""
-
 #: lib/active_ldap/base.rb:131
 msgid "invalid distinguished name (DN) to parse: %s"
 msgstr ""
