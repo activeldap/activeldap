@@ -133,6 +133,9 @@ module ActiveLdap
           when :base
             # Scrub before inserting
             target.base = value.gsub(/['}{#]/, '')
+          when :scope
+            target.scope = value
+            configuration[:scope] = value
           else
             configuration[key] = value
           end
