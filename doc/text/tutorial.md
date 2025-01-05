@@ -269,7 +269,7 @@ irb> me.groups.each { |group| p group.id };nil
 ```
 
 Now let's talk about the arguments of `belongs_to`. We use the
-following code that extends `Group` group a bit for explain:
+following code that extends `User` a bit:
 
 ```ruby
 class User < ActiveLdap::Base
@@ -287,19 +287,14 @@ end
 
 The first argument is the name of the method you wish to create. In
 this case, we created a method called `groups` and `primary_group`
-using the symbol `:groups` and `:primary_group`. The next collection
+using the symbols `:groups` and `:primary_group`. The next collection
 of arguments are actually a `Hash` (as with `ldap_mapping`).
 
-`:many` is used for an object belongs to many objects. All of matched
-objects are treated as belonged objects.
-
-`:foreign_key` not `:many` is used for an object just belongs to an
-object. The first matched object is treated as belonged object.
-
-If `:many` is specified, `:many` is treated as "related object's
-attribute name". `:primary_key` is treated as "own attribute name".
-They are used to resolve the belong to relation. If `:primary_key` is
-left off of the argument list, it is assumed to be the
+To specify the `groups` association, we use the `:many` option.
+`:many` is used if an object belongs to many objects. All of matched
+objects are treated as belonged objects. `:many` sets the "related object's
+attribute name" and `:primary_key` sets the "own attribute name".
+If `:primary_key` is left off of the argument list, it is assumed to be the
 `dn_attribute`. In the example, `uid` is specified explicitly but we
 can omit it because `uid` is the default value.
 
@@ -309,10 +304,10 @@ is `:primary_key`. The `groups` method in the above example searches
 `Group` objects with `User` object's `uid` value as `Group` object's
 `memberUid` value.
 
-If `:many` isn't specified, `:foreign_key` (not `:primary_key`) is
-treated as "related object's attribute name". `:primary_key` is
-treated as "own attribute name". They are used to resolve the belong
-to relation.
+
+When an object just belongs to an object, `:foreign_key` is used 
+instead of `:many`. The first matched object is treated as the belonged object.
+`:foreign_key`, like `:many`, is treated as "related object's attribute name".
 
 Relation is resolved by searching entries of `:class_name` class
 objects with `:primary_key` attribute value. Search target attribute
