@@ -210,19 +210,19 @@ case, it would be 'ou=Groups'.
 
 This method allows an extension class to make use of other extension classes
 tying objects together across the LDAP tree. Often, user objects will be
-members of, or belong_to, Group objects.
+members of, or belong to, `Group` objects.
 
 ```text
 * dc=dataspill,dc=org
 |+ ou=People,dc=dataspill,dc=org
- \
+\
  |- uid=drewry,ou=People,dc=dataspill,dc=org
-|- ou=Groups,dc=dataspill,dc=org
+ |- ou=Groups,dc=dataspill,dc=org
 ```
 
-
-In the above tree, one such example would be user 'drewry' who is a part of the
-group 'develop'. You can see this by looking at the 'memberUid' field of 'develop'.
+In the above tree, one such example would be user `drewry` who is a
+part of the group `develop`. You can see this by looking at the
+`memberUid` field of `develop`.
 
 ```text
 irb> develop = Group.find('develop')
@@ -231,8 +231,9 @@ irb> develop.memberUid
 => ['drewry', 'builder']
 ```
 
-If we look at the LDAP entry for 'drewry', we do not see any references to
-group 'develop'. In order to remedy that, we can use belongs_to
+If we look at the LDAP entry for `drewry`, we do not see any
+references to group `develop`. In order to remedy that, we can use
+`belongs_to`:
 
 ```text
 irb> class User < ActiveLdap::Base
@@ -241,8 +242,8 @@ irb*   belongs_to :groups, :class_name => 'Group', :many => 'memberUid', :primar
 irb* end
 ```
 
-Now, class User will have a method called 'groups' which will retrieve all
-Group objects that a user is in.
+Now, class `User` will have a method called `groups` which will
+retrieve all `Group` objects that a user is in.
 
 ```text
 irb> me = User.find('drewry')
@@ -256,8 +257,8 @@ irb> me.groups.each { |group| p group.cn };nil
 (Note: nil is just there to make the output cleaner...)
 ```
 
-TIP: If you weren't sure what the distinguished name attribute was for Group,
-you could also do the following:
+TIP: If you weren't sure what the distinguished name attribute was for
+`Group`, you could also do the following:
 
 ```text
 irb> me.groups.each { |group| p group.id };nil
@@ -267,47 +268,61 @@ irb> me.groups.each { |group| p group.id };nil
 => nil
 ```
 
-Now let's talk about the arguments of belongs_to. We use the following code that extends Group group a bit for explain:
+Now let's talk about the arguments of `belongs_to`. We use the
+following code that extends `Group` group a bit for explain:
 
 ```ruby
 class User < ActiveLdap::Base
   ldap_mapping :dn_attribute => 'uid', :prefix => 'People', :classes => ['top','account']
 
+  # Associate with all belonged groups
+  belongs_to :groups, :primary_key => 'uid',
+              :class_name => 'Group', :many => 'memberUid'
+
   # Associate with primary belonged group
   belongs_to :primary_group, :foreign_key => 'gidNumber',
-               :class_name => 'Group', :primary_key => 'gidNumber'
-
-  # Associate with all belonged groups
-  belongs_to :groups,  :primary_key => 'uid',
-               :class_name => 'Group', :many => 'memberUid',
+              :class_name => 'Group', :primary_key => 'gidNumber'
 end
 ```
 
-The first argument is the name of the method you wish to create. In this case, we created a method called primary_group and groups using the symbol :primary_group and :groups. The next collection of arguments are actually a Hash (as with ldap_mapping).
+The first argument is the name of the method you wish to create. In
+this case, we created a method called `groups` and `primary_group`
+using the symbol `:groups` and `:primary_group`. The next collection
+of arguments are actually a `Hash` (as with `ldap_mapping`).
 
-`:foreign_key` tells `belongs_to` what attribute Group objects have that match the related object's attribute. If `:foreign_key` is left off of the argument list, it is assumed to be the dn_attribute.
+`:many` is used for an object belongs to many objects. All of matched
+objects are treated as belonged objects.
 
-In the example, uid is used for :foreign_key. It may confuse you.
+`:foreign_key` not `:many` is used for an object just belongs to an
+object. The first matched object is treated as belonged object.
 
-ActiveLdap uses `:foreign_key` as "own attribute name". So it
-may not be "foreign key". You can consider `:foreign_key` just
-as a relation key.
+If `:many` is specified, `:many` is treated as "related object's
+attribute name". `:primary_key` is treated as "own attribute name".
+They are used to resolve the belong to relation. If `:primary_key` is
+left off of the argument list, it is assumed to be the
+`dn_attribute`. In the example, `uid` is specified explicitly but we
+can omit it because `uid` is the default value.
 
-`:primary_key` is treated as "related object's attribute name"
-as we discussed later.
+Relation is resolved by searching entries of `:class_name` class
+objects with `:many` attribute value. Search target attribute for it
+is `:primary_key`. The `groups` method in the above example searches
+`Group` objects with `User` object's `uid` value as `Group` object's
+`memberUid` value.
 
-`:class_name` should be a string that has the name of a class
-you've already included. If your class is inside of a module,
-be sure to put the whole name, e.g.
-`:class_name => "MyLdapModule::Group"`.
+If `:many` isn't specified, `:foreign_key` (not `:primary_key`) is
+treated as "related object's attribute name". `:primary_key` is
+treated as "own attribute name". They are used to resolve the belong
+to relation.
 
-`:many` and `:foreign_key` are similar. Both of them specifies attribute name of related object specified by `:primary_key`. Those values are attribute name that can be used by object of class specified by `:class_name`.
+Relation is resolved by searching entries of `:class_name` class
+objects with `:primary_key` attribute value. Search target attribute
+for it is `:foreign_key`. The `primary_group` method in the above
+example searches `Group` objects with `User` object's `gidNumber`
+value as `Group` object's `gidNumber` value.
 
-Relation is resolved by searching entries of `:class_name` class with `:foreign_key` attribute value. Search target attribute for it is `:primary_key` or `:many`. primary_group method in the above example searches Group objects with User object's gidNumber value as Group object's gidNumber value. Matched Group objects are belonged objects.
-
-`:foreign_key` is used for an object just belongs to an object. The first matched object is treated as belonged object.
-
-`:many` is used for an object belongs to many objects. All of matched objects are treated as belonged objects.
+`:class_name` should be a string that has the name of a class you've
+already included. If your class is inside of a module, be sure to put
+the whole name, e.g. `:class_name => "MyLdapModule::Group"`.
 
 ##### `has_many`
 
