@@ -306,12 +306,14 @@ is `:primary_key`. The `groups` method in the above example searches
 
 
 When an object just belongs to an object, `:foreign_key` is used 
-instead of `:many`. The first matched object is treated as the belonged object.
-`:foreign_key`, like `:many`, is treated as "related object's attribute name".
+instead of `:many` and the attributes swap meaning:
+`:primary_key` specifies the "related object's attribute name" while
+`:foreign_key` specifies the "own attribute name".
 
 Relation is resolved by searching entries of `:class_name` class
 objects with `:primary_key` attribute value. Search target attribute
-for it is `:foreign_key`. The `primary_group` method in the above
+for it is `:foreign_key`. The first matched object is treated as
+the belonged object. The `primary_group` method in the above
 example searches `Group` objects with `User` object's `gidNumber`
 value as `Group` object's `gidNumber` value.
 
