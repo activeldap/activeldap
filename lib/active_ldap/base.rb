@@ -364,7 +364,7 @@ module ActiveLdap
       # :retry_on_timeout - whether to reconnect when timeouts occur. Defaults
       #   to true
       # See lib/active_ldap/configuration.rb for defaults for each option
-      def setup_connection(config=nil)
+      def setup_connection(config=nil, name: nil)
         super
         ensure_logger
         nil

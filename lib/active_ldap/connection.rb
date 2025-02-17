@@ -135,8 +135,14 @@ module ActiveLdap
         config
       end
 
-      def setup_connection(config=nil)
+      def setup_connection(config=nil, name: nil)
         config = ensure_configuration(config)
+        if name
+          config = config[name.to_s]
+        elsif config.is_a?(Hash) and config.values.all?(Hash)
+          config = config["primary"] || config.values.first
+        end
+
         remove_connection
 
         clear_active_connection_name
