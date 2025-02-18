@@ -135,7 +135,14 @@ module ActiveLdap
         config
       end
 
-      def setup_connection(config=nil, name: nil)
+      def setup_connection(config=nil)
+        if config.is_a?(Hash) and config.size == 1 and config.keys[0] == :name
+          name = config[:name]
+          config = nil
+        else
+          name = nil
+        end
+
         config = ensure_configuration(config)
         if name
           config = config[name.to_s]
