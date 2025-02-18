@@ -150,6 +150,10 @@ module ActiveLdap
           config = config["primary"] || config.values.first
         end
 
+        unless config
+          raise ConnectionError, _("%s connection is not configured") % (name || "primary")
+        end
+
         remove_connection
 
         clear_active_connection_name
