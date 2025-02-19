@@ -106,6 +106,17 @@ class TestConnection < Test::Unit::TestCase
     end
   end
 
+  def test_configuration_with_special_key_as_string
+    config = ActiveLdap::Base.configurations
+    ActiveLdap::Base.configurations[LDAP_ENV] = {"special" => config[LDAP_ENV]}
+    assert_nothing_raised do
+      connect(ActiveLdap::Base, {name: "special"})
+    end
+    assert_nothing_raised do
+      connect(ActiveLdap::Base, {"name" => "special"})
+    end
+  end
+
   def test_configuration_with_special_key_without_ldap_env
     begin
       config = ActiveLdap::Base.configurations
