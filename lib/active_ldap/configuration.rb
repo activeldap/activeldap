@@ -73,7 +73,7 @@ module ActiveLdap
           elsif defined?(Rails)
             config = Rails.env
           else
-            config = {}
+            config = configurations
           end
         end
 

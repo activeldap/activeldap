@@ -100,9 +100,26 @@ class TestConnection < Test::Unit::TestCase
 
   def test_configuration_with_special_key
     config = ActiveLdap::Base.configurations
-    ActiveLdap::Base.configurations[LDAP_ENV] = {"special" =>  config[LDAP_ENV]}
+    ActiveLdap::Base.configurations[LDAP_ENV] = {"special" => config[LDAP_ENV]}
     assert_nothing_raised do
       ActiveLdap::Base.setup_connection(name: :special)
+    end
+  end
+
+  def test_configuration_with_special_key_without_ldap_env
+    begin
+      config = ActiveLdap::Base.configurations
+      ActiveLdap::Base.configurations = {"special" => config[LDAP_ENV]}
+
+      # temporarily undefine LDAP_ENV
+      ldap_env = LDAP_ENV
+      Object.__send__(:remove_const, :LDAP_ENV)
+
+      assert_nothing_raised do
+        ActiveLdap::Base.setup_connection(name: :special)
+      end
+    ensure
+      Object.const_set(:LDAP_ENV, ldap_env)
     end
   end
 
