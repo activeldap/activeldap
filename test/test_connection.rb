@@ -102,7 +102,7 @@ class TestConnection < Test::Unit::TestCase
     config = ActiveLdap::Base.configurations
     ActiveLdap::Base.configurations[LDAP_ENV] = {"special" => config[LDAP_ENV]}
     assert_nothing_raised do
-      ActiveLdap::Base.setup_connection(name: :special)
+      connect(ActiveLdap::Base, {name: :special})
     end
   end
 
@@ -116,7 +116,7 @@ class TestConnection < Test::Unit::TestCase
       Object.__send__(:remove_const, :LDAP_ENV)
 
       assert_nothing_raised do
-        ActiveLdap::Base.setup_connection(name: :special)
+        connect(ActiveLdap::Base, {name: :special})
       end
     ensure
       Object.const_set(:LDAP_ENV, ldap_env)
@@ -127,7 +127,7 @@ class TestConnection < Test::Unit::TestCase
     exception = nil
     assert_raise(ActiveLdap::ConnectionError) do
       begin
-        ActiveLdap::Base.setup_connection(name: :special)
+        connect(ActiveLdap::Base, {name: :special})
       rescue Exception
         exception = $!
         raise
@@ -135,5 +135,11 @@ class TestConnection < Test::Unit::TestCase
     end
     expected_message = "special connection is not configured"
     assert_equal(expected_message, exception.message)
+  end
+
+  private
+  def connect(klass, config)
+    klass.setup_connection(config)
+    klass.connection.connect
   end
 end
