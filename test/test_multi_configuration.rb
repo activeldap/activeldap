@@ -5,7 +5,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
 
   def setup
     super
-    @original_configs = ActiveLdap::Base.configurations
+    @original_configs = ActiveLdap::Base.configurations.dup
   end
 
   def teardown
@@ -77,6 +77,32 @@ class TestMultiConfiguration < Test::Unit::TestCase
     end
     expected_message = "special connection is not configured"
     assert_equal(expected_message, exception.message)
+  end
+
+  def test_configuration_per_class
+    make_ou("Primary")
+    make_ou("Sub")
+    primary_class = ou_class("ou=Primary")
+    sub_class = ou_class("ou=Sub")
+
+    configuration = current_configuration.symbolize_keys
+    configuration[:scope] = :base
+    current_base = configuration[:base]
+    primary_configuration = configuration.dup
+    primary_base = "ou=Primary,#{current_base}"
+    primary_configuration[:base] = primary_base
+    sub_configuration = configuration.dup
+    sub_base = "ou=Sub,#{current_base}"
+    sub_configuration[:base] = sub_base
+
+    ActiveLdap::Base.configurations[LDAP_ENV] = {
+      "primary" => primary_configuration,
+      "sub" => sub_configuration
+    }
+    assert_nothing_raised do
+      connect(primary_class)
+      connect(sub_class, {name: :sub})
+    end
   end
 
   private
