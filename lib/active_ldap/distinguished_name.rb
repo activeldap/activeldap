@@ -80,7 +80,7 @@ module ActiveLdap
       end
 
       def scan_quoted_attribute_value(scanner)
-        result = String.new
+        result = +""
         until scanner.scan(/\"/)
           scanner.scan(/([^\\\"]*)/)
           quoted_strings = scanner[1]
@@ -97,7 +97,7 @@ module ActiveLdap
       end
 
       def scan_not_quoted_attribute_value(scanner)
-        result = String.new
+        result = +""
         until scanner.eos?
           prev_size = result.size
           pairs = collect_pairs(scanner)
@@ -116,7 +116,7 @@ module ActiveLdap
       end
 
       def collect_pairs(scanner)
-        result = String.new
+        result = +""
         while scanner.scan(PAIR_RE)
           if scanner[2]
             result << [scanner[2].hex].pack("C*")
