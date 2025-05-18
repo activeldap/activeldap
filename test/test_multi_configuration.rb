@@ -8,15 +8,18 @@ class TestMultiConfiguration < Test::Unit::TestCase
     super
   end
 
-  def test_configuration_with_no_or_primary_key
-    assert_nothing_raised do
-      ActiveLdap::Base.setup_connection
+  def test_configuration_with_no_key
+    assert do
+      try_connect(ActiveLdap::Base)
     end
+  end
+
+  def test_configuration_with_primary_key
     ActiveLdap::Base.configurations[LDAP_ENV] = {
       "primary" => current_configuration
     }
-    assert_nothing_raised do
-      ActiveLdap::Base.setup_connection
+    assert do
+      try_connect(ActiveLdap::Base)
     end
   end
 
@@ -24,8 +27,8 @@ class TestMultiConfiguration < Test::Unit::TestCase
     ActiveLdap::Base.configurations[LDAP_ENV] = {
       "special" => current_configuration
     }
-    assert_nothing_raised do
-      connect(ActiveLdap::Base, {name: :special})
+    assert do
+      try_connect(ActiveLdap::Base, {name: :special})
     end
   end
 
@@ -33,11 +36,11 @@ class TestMultiConfiguration < Test::Unit::TestCase
     ActiveLdap::Base.configurations[LDAP_ENV] = {
       "special" => current_configuration
     }
-    assert_nothing_raised do
-      connect(ActiveLdap::Base, {name: "special"})
+    assert do
+      try_connect(ActiveLdap::Base, {name: "special"})
     end
-    assert_nothing_raised do
-      connect(ActiveLdap::Base, {"name" => "special"})
+    assert do
+      try_connect(ActiveLdap::Base, {"name" => "special"})
     end
   end
 
@@ -51,8 +54,8 @@ class TestMultiConfiguration < Test::Unit::TestCase
       ldap_env = LDAP_ENV
       Object.__send__(:remove_const, :LDAP_ENV)
 
-      assert_nothing_raised do
-        connect(ActiveLdap::Base, {name: :special})
+      assert do
+        try_connect(ActiveLdap::Base, {name: :special})
       end
     ensure
       Object.const_set(:LDAP_ENV, ldap_env)
@@ -63,7 +66,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
     exception = nil
     assert_raise(ActiveLdap::ConnectionError) do
       begin
-        connect(ActiveLdap::Base, {name: :special})
+        try_connect(ActiveLdap::Base, {name: :special})
       rescue Exception
         exception = $!
         raise
@@ -93,14 +96,13 @@ class TestMultiConfiguration < Test::Unit::TestCase
       "primary" => primary_configuration,
       "sub" => sub_configuration
     }
-    assert_nothing_raised do
-      connect(primary_class)
-      connect(sub_class, {name: :sub})
+    assert do
+      try_connect(primary_class) and try_connect(sub_class, {name: :sub})
     end
   end
 
   private
-  def connect(klass, config = nil)
+  def try_connect(klass, config = nil)
     klass.setup_connection(config)
     klass.connection.connect
   end
