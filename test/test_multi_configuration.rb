@@ -3,14 +3,8 @@ require 'al-test-utils'
 class TestMultiConfiguration < Test::Unit::TestCase
   include AlTestUtils
 
-  def setup
-    super
-    @original_configs = ActiveLdap::Base.configurations.dup
-  end
-
   def teardown
-    ActiveLdap::Base.clear_active_connections!
-    ActiveLdap::Base.configurations = @original_configs
+    ActiveLdap::Base.configurations = read_config
     super
   end
 
@@ -19,7 +13,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
       ActiveLdap::Base.setup_connection
     end
     ActiveLdap::Base.configurations[LDAP_ENV] = {
-      "primary" => @original_configs[LDAP_ENV]
+      "primary" => current_configuration
     }
     assert_nothing_raised do
       ActiveLdap::Base.setup_connection
@@ -28,7 +22,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
 
   def test_configuration_with_special_key
     ActiveLdap::Base.configurations[LDAP_ENV] = {
-      "special" => @original_configs[LDAP_ENV]
+      "special" => current_configuration
     }
     assert_nothing_raised do
       connect(ActiveLdap::Base, {name: :special})
@@ -37,7 +31,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
 
   def test_configuration_with_special_key_as_string
     ActiveLdap::Base.configurations[LDAP_ENV] = {
-      "special" => @original_configs[LDAP_ENV]
+      "special" => current_configuration
     }
     assert_nothing_raised do
       connect(ActiveLdap::Base, {name: "special"})
@@ -50,7 +44,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
   def test_configuration_with_special_key_without_ldap_env
     begin
       ActiveLdap::Base.configurations = {
-        "special" => @original_configs[LDAP_ENV]
+        "special" => ActiveLdap::Base.configurations[LDAP_ENV]
       }
 
       # temporarily undefine LDAP_ENV
