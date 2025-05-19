@@ -3,11 +3,6 @@ require 'al-test-utils'
 class TestMultiConfiguration < Test::Unit::TestCase
   include AlTestUtils
 
-  def teardown
-    ActiveLdap::Base.configurations = read_config
-    super
-  end
-
   def test_configuration_with_no_key
     assert do
       connect(ActiveLdap::Base)
@@ -56,6 +51,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
       end
     ensure
       Object.const_set(:LDAP_ENV, ldap_env)
+      ActiveLdap::Base.configurations = read_config
     end
   end
 
@@ -89,6 +85,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
     assert do
       connect(primary_class) and connect(sub_class, {name: :sub})
     end
+    ActiveLdap::Base.configurations = read_config
   end
 
   private
