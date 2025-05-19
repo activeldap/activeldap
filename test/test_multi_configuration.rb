@@ -75,12 +75,12 @@ class TestMultiConfiguration < Test::Unit::TestCase
     configuration = current_configuration.symbolize_keys
     configuration[:scope] = :base
     current_base = configuration[:base]
+
     primary_configuration = configuration.dup
-    primary_base = "ou=Primary,#{current_base}"
-    primary_configuration[:base] = primary_base
+    primary_configuration[:base] = "ou=Primary,#{current_base}"
+
     sub_configuration = configuration.dup
-    sub_base = "ou=Sub,#{current_base}"
-    sub_configuration[:base] = sub_base
+    sub_configuration[:base] = "ou=Sub,#{current_base}"
 
     ActiveLdap::Base.configurations[LDAP_ENV] = {
       "primary" => primary_configuration,
