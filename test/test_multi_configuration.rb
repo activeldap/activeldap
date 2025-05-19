@@ -63,17 +63,10 @@ class TestMultiConfiguration < Test::Unit::TestCase
   end
 
   def test_configuration_with_special_key_and_missing_config
-    exception = nil
-    assert_raise(ActiveLdap::ConnectionError) do
-      begin
-        connect(ActiveLdap::Base, {name: :special})
-      rescue Exception
-        exception = $!
-        raise
-      end
+    message = "special connection is not configured"
+    assert_raise(ActiveLdap::ConnectionError.new(message)) do
+      connect(ActiveLdap::Base, {name: :special})
     end
-    expected_message = "special connection is not configured"
-    assert_equal(expected_message, exception.message)
   end
 
   def test_configuration_per_class
