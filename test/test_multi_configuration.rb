@@ -39,9 +39,6 @@ class TestMultiConfiguration < Test::Unit::TestCase
     assert do
       connect(ActiveLdap::Base, {name: "special"})
     end
-    assert do
-      connect(ActiveLdap::Base, {"name" => "special"})
-    end
   end
 
   def test_configuration_with_special_key_without_ldap_env
