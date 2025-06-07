@@ -51,7 +51,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
       end
     ensure
       Object.const_set(:LDAP_ENV, ldap_env)
-      ActiveLdap::Base.configurations = read_config
+      # ActiveLdap::Base.configurations = read_config
     end
   end
 
@@ -85,7 +85,7 @@ class TestMultiConfiguration < Test::Unit::TestCase
     assert do
       connect(primary_class) and connect(sub_class, {name: :sub})
     end
-    ActiveLdap::Base.configurations = read_config
+    # ActiveLdap::Base.configurations = read_config
   end
 
   private

@@ -159,9 +159,11 @@ module AlTestUtils
   module Populate
     def setup
       @dumped_data = nil
+      @configurations_on_dump = nil
       super
       begin
         @dumped_data = ActiveLdap::Base.dump(:scope => :sub)
+        @configurations_on_dump = ActiveLdap::Base.configurations.dup
       rescue ActiveLdap::ConnectionError
       end
       ActiveLdap::Base.delete_all(nil, :scope => :sub)
@@ -170,6 +172,7 @@ module AlTestUtils
 
     def teardown
       if @dumped_data
+        ActiveLdap::Base.configurations = @configurations_on_dump
         ActiveLdap::Base.setup_connection
         ActiveLdap::Base.delete_all(nil, :scope => :sub)
         ActiveLdap::Base.load(@dumped_data)
