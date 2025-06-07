@@ -41,6 +41,13 @@ Gem::Specification.new do |spec|
     them with minimal difficulty.
   EOF
   spec.licenses = ["Ruby", "GPL-2.0-or-later"]
+  spec.metadata = {
+    "bug_tracker_uri" => "https://github.com/activeldap/activeldap/issues",
+    "changelog_uri" =>
+      "https://github.com/activeldap/activeldap/blob/#{spec.version}/doc/text/news.md",
+    "homepage_uri" => "https://activeldap.github.io/",
+    "source_code_uri" => "https://github.com/activeldap/activeldap",
+  }
 
   spec.add_dependency("activemodel", [">= 7.0"])
   spec.add_dependency("locale")
