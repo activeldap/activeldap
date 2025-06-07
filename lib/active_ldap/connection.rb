@@ -136,7 +136,24 @@ module ActiveLdap
       end
 
       def setup_connection(config=nil)
+        if config.is_a?(Hash) and config.size == 1 and config.key? :name
+          name = config[:name]
+          config = nil
+        else
+          name = nil
+        end
+
         config = ensure_configuration(config)
+        if name
+          config = config[name.to_s]
+        elsif config.is_a?(Hash) and config.values.all?(Hash)
+          config = config["primary"] || config.values.first
+        end
+
+        unless config
+          raise ConnectionError, _("%s connection is not configured") % (name || "primary")
+        end
+
         remove_connection
 
         clear_active_connection_name

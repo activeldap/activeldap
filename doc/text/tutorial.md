@@ -944,6 +944,32 @@ irb> auth_class.setup_connection(:password_block => lambda{'mypass'})
 
 This can be useful for doing authentication tests and other such tricks.
 
+#### Connecting to multiple different servers simultaneously
+If you use a YAML configuration file, you can also define multiple configurations there and reference them by name. Let's say that your configuration file contains the following:
+```yaml
+primary:
+  host: ldap.example.com
+  base: dc=primary,dc=com
+  bind_dn: cn=admin,dc=primary,dc=com
+my_server:
+  host: ldap.example.com
+  base: dc=example,dc=com
+  bind_dn: cn=admin,dc=example,dc=com
+  password: justanexample
+external_server:
+  host: ldap.external.com
+  base: dc=external,dc=com
+  bind_dn: cn=someone,dc=external,dc=com
+  password: thisisanexample
+```
+
+By passing a keyword argument named `:name` to `setup_connection` you can choose which configuration a certain class should use. When you don't specify a name while multiple configurations exist, the name `primary` is used.
+```ruby
+MyUser.setup_connection(:name => :my_server)
+ExternalUser.setup_connection(:name => :external_server)
+User.setup_connection # will use the configuration under 'primary'
+```
+
 #### :try_sasl
 
 If you have the Ruby/LDAP package with the SASL/GSSAPI patch from Ian
