@@ -1,5 +1,49 @@
 # News
 
+## 7.2.2: 2025-06-08 {#release-7-2-2}
+
+### Improvements
+
+  * Removed deprecated `:primary_key` and `:foreign_key` on
+    `has_many`.
+    * GH-205
+    * GH-206
+    * Patch by J-Verz
+
+  * Removed deprecated `ActiveLdap::ConnectionNotEstabilished`.
+    * GH-205
+    * GH-207
+    * Patch by J-Verz
+
+  * Removed deprecated `estabilish_connection`.
+    * GH-205
+    * GH-208
+    * Patch by J-Verz
+
+  * Removed deprecated `:ldap_scope` configuration option.
+    * GH-205
+    * GH-209
+    * Patch by J-Verz
+
+  * Removed deprecated callback by instance methods on instances.
+    * GH-205
+    * GH-210
+    * Patch by J-Verz
+
+  * Removed deprecated `:foreign_key` on `belongs_to :many`.
+    * GH-205
+    * GH-211
+    * Patch by J-Verz
+
+  * Added support for multiple server configurations.
+    * GH-204
+    * GH-212
+    * Patch by J-Verz
+
+### Thanks
+
+  * J-Verz
+
 ## 7.2.1: 2024-10-02 {#release-7-2-1}
 
 ### Fixes
