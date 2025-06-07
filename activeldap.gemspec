@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
     ActiveRecord, but it is still trivial to define new objects and manipulate
     them with minimal difficulty.
   EOF
-  spec.licenses = ["Ruby's", "GPLv2 or later"]
+  spec.licenses = ["Ruby", "GPL-2.0-or-later"]
 
   spec.add_dependency("activemodel", [">= 7.0"])
   spec.add_dependency("locale")
