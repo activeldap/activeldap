@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:12
 
 RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
