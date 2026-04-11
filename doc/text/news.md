@@ -1,5 +1,17 @@
 # News
 
+## 7.2.3: 2026-04-12 {#release-7-2-3}
+
+### Improvements
+
+  * Suppressed frozen string literal warnings.
+    * GH-213
+    * Patch by Axel Steiner
+
+### Thanks
+
+  * Axel Steiner
+
 ## 7.2.2: 2025-06-08 {#release-7-2-2}
 
 ### Improvements
