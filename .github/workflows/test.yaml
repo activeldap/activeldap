@@ -24,6 +24,9 @@ jobs:
           - activemodel: "7"
             adapter: "net-ldap"
             ruby: "3.4"
+          - activemodel: "7"
+            adapter: "net-ldap"
+            ruby: "4.0"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
