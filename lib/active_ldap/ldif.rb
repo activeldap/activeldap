@@ -9,7 +9,7 @@ module ActiveLdap
       def encode(attributes)
         return "" if attributes.empty?
 
-        result = ""
+        result = +""
         normalize(attributes).sort_by {|name,| name}.each do |name, values|
           values.each do |options, value|
             result << Attribute.encode([name, *options].join(";"), value)
@@ -138,7 +138,7 @@ module ActiveLdap
       end
 
       def read_external_file
-        uri_string = @scanner.scan(URI::ABS_URI)
+        uri_string = @scanner.scan(URI::RFC2396_PARSER.regexp[:ABS_URI])
         raise uri_is_missing if uri_string.nil?
         uri_string.chomp!
 

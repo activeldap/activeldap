@@ -1222,7 +1222,7 @@ jpegphoto:< file://#{jpeg_photo_path}
 EOL
     set_encoding(ldif_source, "utf-8")
 
-    jpeg_photo_attribute = "jpegphoto:: "
+    jpeg_photo_attribute = +"jpegphoto:: "
     value = [jpeg_photo].pack("m").gsub(/\n/, '')
     first_line_value_size = 75 - jpeg_photo_attribute.size
     jpeg_photo_attribute << value[0, first_line_value_size] + "\n"
@@ -1906,6 +1906,6 @@ EOL
   end
 
   def set_encoding(string, encoding)
-    string.force_encoding("utf-8") if string.respond_to?(:force_encoding)
+    string = string.dup.force_encoding("utf-8") if string.respond_to?(:force_encoding)
   end
 end

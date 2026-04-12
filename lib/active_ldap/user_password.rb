@@ -100,7 +100,7 @@ module ActiveLdap
 
       module_function
       def generate(length)
-        salt = ""
+        salt = +""
         length.times {salt << CHARS[rand(CHARS.length)]}
         salt
       end

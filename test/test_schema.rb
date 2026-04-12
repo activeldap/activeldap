@@ -575,7 +575,7 @@ class TestSchema < Test::Unit::TestCase
         end
 
         def test_do_nothing
-          value = ""
+          value = +""
           value.force_encoding("UTF-8")
           @attribute.apply_encoding(value)
           assert_equal(Encoding::UTF_8, value.encoding)
@@ -601,27 +601,21 @@ class TestSchema < Test::Unit::TestCase
         end
 
         def test_string
-          value = ""
+          value = +""
           value.force_encoding("UTF-8")
           @attribute.apply_encoding(value)
           assert_equal(Encoding::ASCII_8BIT, value.encoding)
         end
 
         def test_array
-          values = [""]
-          values.each do |value|
-            value.force_encoding("UTF-8")
-          end
+          values = ["".dup.force_encoding("UTF-8")]
           @attribute.apply_encoding(values)
           assert_equal([Encoding::ASCII_8BIT],
                        values.collect(&:encoding))
         end
 
         def test_hash
-          values = {:binary => ""}
-          values.each_value do |value|
-            value.force_encoding("UTF-8")
-          end
+          values = {:binary => "".dup.force_encoding("UTF-8")}
           @attribute.apply_encoding(values)
           assert_equal([Encoding::ASCII_8BIT],
                        values.each_value.collect(&:encoding))
