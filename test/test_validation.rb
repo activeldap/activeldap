@@ -48,7 +48,7 @@ class TestValidation < Test::Unit::TestCase
 
   def test_octet_string
     make_temporary_user(:simple => true) do |user,|
-      utf8_encoded_binary_value = "\xff".force_encoding("UTF-8")
+      utf8_encoded_binary_value = "\xff".dup.force_encoding("UTF-8")
       user.user_password = utf8_encoded_binary_value
       assert_true(user.save)
       assert_equal([], user.errors.full_messages)
