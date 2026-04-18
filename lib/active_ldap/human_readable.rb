@@ -111,8 +111,6 @@ module ActiveLdap
       end
 
       def human_readable_format(object)
-        join_key = (RUBY_VERSION < "3.4" ?  "=>" : " => ")
-
         case object
         when Array
           "[#{object.collect {|value| human_readable_format(value)}.join(', ')}]"
@@ -120,7 +118,7 @@ module ActiveLdap
           formatted_values = []
           object.each do |key, value|
             formatted_values << [human_readable_format(key),
-                                 human_readable_format(value)].join(join_key)
+                                 human_readable_format(value)].join("=>")
           end
           "{#{formatted_values.join(', ')}}"
         else
