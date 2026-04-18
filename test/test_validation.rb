@@ -186,12 +186,13 @@ class TestValidation < Test::Unit::TestCase
                                       ["User1", "User2"])
     assert_invalid_display_name_value(["User3", "User4"],
                                       [{"lang-en" => ["User3", "User4"]}],
-                                      {"lang-en" => ["User3", "User4"]}.inspect)
+                                      human_readable_format({"lang-en" => ["User3", "User4"]}))
     assert_invalid_display_name_value(["U2", "U3"],
                                       [{"lang-ja" => ["User1"]},
                                        {"lang-en" => ["U2", "U3"]}],
-                                      [{"lang-ja" => "User1"},
-                                       {"lang-en" => ["U2", "U3"]}].inspect)
+                                      human_readable_format(
+                                        [{"lang-ja" => "User1"},
+                                         {"lang-en" => ["U2", "U3"]}]))
   end
 
   def test_validate_required_ldap_values
@@ -272,6 +273,10 @@ class TestValidation < Test::Unit::TestCase
     la_(name).dup
   end
 
+  def human_readable_format(object)
+    ActiveLdap::Base.human_readable_format(object)
+  end
+
   def assert_invalid_value(name, formatted_value, syntax, reason, model, option)
     syntax_description = lsd_(syntax)
     assert_not_nil(syntax_description)
@@ -302,7 +307,8 @@ class TestValidation < Test::Unit::TestCase
 
       reason_params = [invalid_value, _("attribute value is missing")]
       reason = _('%s is invalid distinguished name (DN): %s') % reason_params
-      assert_invalid_value("seeAlso", value.inspect,
+      assert_invalid_value("seeAlso",
+                           human_readable_format(value),
                            "1.3.6.1.4.1.1466.115.121.1.12",
                            reason, user, option)
     end
@@ -318,7 +324,8 @@ class TestValidation < Test::Unit::TestCase
 
       reason_params = [la_("displayName"), invalid_value.inspect]
       reason = _('Attribute %s can only have a single value: %s') % reason_params
-      assert_invalid_value("displayName", formatted_value || value.inspect,
+      formatted_value ||= human_readable_format(value)
+      assert_invalid_value("displayName", formatted_value,
                            "1.3.6.1.4.1.1466.115.121.1.15",
                            reason, user, nil)
     end

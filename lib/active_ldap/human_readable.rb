@@ -118,7 +118,7 @@ module ActiveLdap
           formatted_values = []
           object.each do |key, value|
             formatted_values << [human_readable_format(key),
-                                 human_readable_format(value)].join("=>")
+                                 human_readable_format(value)].join(" => ")
           end
           "{#{formatted_values.join(', ')}}"
         else
