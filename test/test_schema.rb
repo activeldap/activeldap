@@ -608,14 +608,14 @@ class TestSchema < Test::Unit::TestCase
         end
 
         def test_array
-          values = ["".dup.force_encoding("UTF-8")]
+          values = [(+"").force_encoding("UTF-8")]
           @attribute.apply_encoding(values)
           assert_equal([Encoding::ASCII_8BIT],
                        values.collect(&:encoding))
         end
 
         def test_hash
-          values = {:binary => "".dup.force_encoding("UTF-8")}
+          values = {:binary => (+"").force_encoding("UTF-8")}
           @attribute.apply_encoding(values)
           assert_equal([Encoding::ASCII_8BIT],
                        values.each_value.collect(&:encoding))
