@@ -9,7 +9,7 @@ module ActiveLdap
       def encode(attributes)
         return "" if attributes.empty?
 
-        result = ""
+        result = +""
         normalize(attributes).sort_by {|name,| name}.each do |name, values|
           values.each do |options, value|
             result << Attribute.encode([name, *options].join(";"), value)
