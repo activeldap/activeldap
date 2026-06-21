@@ -874,6 +874,10 @@ module ActiveLdap
       XML.new(dn, normalize_data(@data), schema).to_s(options)
     end
 
+    def as_json(options={})
+      self.attributes.as_json(options)
+    end
+
     def to_s
       to_ldif
     end
